@@ -1,0 +1,118 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &100000
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 400000}
+  - 114: {fileID: 11400000}
+  m_Layer: 0
+  m_Name: spiderChampion
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &400000
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -.949549496, y: 6.84197426, z: .0504426956}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef71165c7147b4dcf9f6e270c016c2c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  name: spider
+  spawner: {fileID: 0}
+  ModelName: models/spider/spider
+  HP: 250
+  Damage: 100
+  RunningSpeed: 5
+  ScaleVariation: .200000003
+  Bravery: .600000024
+  Scale: 2.4000001
+  XP: 275
+  MissSound: {fileID: 0}
+  ParticleGetHit: {fileID: 0}
+  ParticleDeath: {fileID: 0}
+  ID: 0
+  AttackSound: {fileID: 0}
+  DeathSound: {fileID: 0}
+  IdleSound: {fileID: 0}
+  RoarSound: {fileID: 0}
+  StepSound: {fileID: 0}
+  LandSound: {fileID: 0}
+  StrikeSound: {fileID: 0}
+  ParticleExplode: {fileID: 0}
+  MotionRadius: 5
+  Armor: 125
+  TreasureData:
+  - TreasureType: 0
+    itemData: {fileID: 0}
+    min: 0
+    max: 0
+    Weight: 0
+  - TreasureType: 0
+    itemData: {fileID: 0}
+    min: 0
+    max: 0
+    Weight: 0
+  - TreasureType: 0
+    itemData: {fileID: 0}
+    min: 0
+    max: 0
+    Weight: 0
+  DamageReactRadius: 3
+  FollowRadius: 18
+  SightRadius: 7
+  ViewAngle: 90
+  Level: 1
+  RealHp: 30
+  RealMp: 0
+  RealDamage: 12
+  RealArmor: 5
+  IsPlayer: 0
+  IsBoss: 0
+  ColliderCenter: 1
+  ColliderRadius: .699999988
+  ColliderHeight: 2
+  Animations: []
+  IsChampion: 0
+  AttackSpeed: 120
+  TextureReplace: {fileID: 2800000, guid: 5dc4ccf4ace544ee1affcb5c9b3bbe11, type: 3}
+  Skills: []
+  Strength: 0
+  Dexterity: 0
+  Magic: 0
+  Defense: 0
+  Exp: 0
+  ApproachDistance: 20
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 100000}
+  m_IsPrefabParent: 1
+  m_IsExploded: 1

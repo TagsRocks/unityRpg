@@ -1,0 +1,154 @@
+fileFormatVersion: 2
+guid: 5485a6137c9a2bf4481ff46a4aada2d3
+ModelImporter:
+  serializedVersion: 16
+  fileIDToRecycleName:
+    100000: ______002
+    100002: ______003
+    100004: ______004
+    100006: anniu_ban
+    100008: ba_shou
+    100010: Bone009
+    100012: Bone010
+    100014: Bone011
+    100016: Bone012
+    100018: Bone017
+    100020: Bone018
+    100022: Bone019
+    100024: Bone021
+    100026: Bone022
+    100028: Bone025
+    100030: Bone028
+    100032: Box001
+    100034: Box002
+    100036: chi_lun
+    100038: Cylinder002
+    100040: dianshi
+    100042: Dummy001
+    100044: Dummy002
+    100046: Dummy003
+    100048: Dummy004
+    100050: Dummy005
+    100052: Dummy006
+    100054: gunzi
+    100056: jiantou
+    100058: //RootNode
+    400000: ______002
+    400002: ______003
+    400004: ______004
+    400006: anniu_ban
+    400008: ba_shou
+    400010: Bone009
+    400012: Bone010
+    400014: Bone011
+    400016: Bone012
+    400018: Bone017
+    400020: Bone018
+    400022: Bone019
+    400024: Bone021
+    400026: Bone022
+    400028: Bone025
+    400030: Bone028
+    400032: Box001
+    400034: Box002
+    400036: chi_lun
+    400038: Cylinder002
+    400040: dianshi
+    400042: Dummy001
+    400044: Dummy002
+    400046: Dummy003
+    400048: Dummy004
+    400050: Dummy005
+    400052: Dummy006
+    400054: gunzi
+    400056: jiantou
+    400058: //RootNode
+    2300000: ______002
+    2300002: anniu_ban
+    2300004: ba_shou
+    2300006: Box001
+    2300008: Box002
+    2300010: chi_lun
+    2300012: Cylinder002
+    2300014: jiantou
+    3300000: ______002
+    3300002: anniu_ban
+    3300004: ba_shou
+    3300006: Box001
+    3300008: Box002
+    3300010: chi_lun
+    3300012: Cylinder002
+    3300014: jiantou
+    4300000: dianshi
+    4300002: gunzi
+    4300004: chi_lun
+    4300006: ______002
+    4300008: ______003
+    4300010: jiantou
+    4300012: anniu_ban
+    4300014: ba_shou
+    4300016: ______004
+    4300018: Cylinder002
+    4300020: Box001
+    4300022: Box002
+    7400000: Take 001
+    9500000: //RootNode
+    11100000: //RootNode
+    13700000: ______003
+    13700002: ______004
+    13700004: dianshi
+    13700006: gunzi
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 2
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+  tangentSpace:
+    normalSmoothAngle: 180
+    splitTangentsAcrossUV: 1
+    normalImportMode: 1
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 1
+  additionalBone: 0
+  userData: 

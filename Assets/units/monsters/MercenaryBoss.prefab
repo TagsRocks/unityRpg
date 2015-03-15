@@ -1,0 +1,126 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &100000
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 400000}
+  - 114: {fileID: 11400000}
+  m_Layer: 0
+  m_Name: MercenaryBoss
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &400000
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: .268077612, y: 1.69926643, z: .036799252}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef71165c7147b4dcf9f6e270c016c2c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  name: 
+  spawner: {fileID: 0}
+  ModelName: 
+  HP: 1200
+  Damage: 140
+  RunningSpeed: 5
+  ScaleVariation: .300000012
+  Bravery: 1
+  Scale: 1
+  XP: 400
+  MissSound: {fileID: 0}
+  ParticleGetHit: {fileID: 0}
+  ParticleDeath: {fileID: 0}
+  ID: 0
+  AttackSound: {fileID: 0}
+  DeathSound: {fileID: 0}
+  IdleSound: {fileID: 0}
+  RoarSound: {fileID: 0}
+  StepSound: {fileID: 0}
+  LandSound: {fileID: 0}
+  StrikeSound: {fileID: 0}
+  ParticleExplode: {fileID: 0}
+  MotionRadius: 4.5
+  Armor: 120
+  TreasureData:
+  - TreasureType: 0
+    itemData: {fileID: 0}
+    min: 0
+    max: 0
+    Weight: 0
+  - TreasureType: 0
+    itemData: {fileID: 0}
+    min: 0
+    max: 0
+    Weight: 0
+  - TreasureType: 0
+    itemData: {fileID: 0}
+    min: 0
+    max: 0
+    Weight: 0
+  DamageReactRadius: 2
+  FollowRadius: 18
+  SightRadius: 7
+  ViewAngle: 90
+  Level: 2
+  IsPlayer: 0
+  IsBoss: 0
+  ColliderCenter: 1
+  ColliderRadius: .5
+  ColliderHeight: 2
+  IsFly: 0
+  FlyColliderCenter: .699999988
+  FlyColliderRadius: .300000012
+  FlyColliderHeight: 1
+  Animations: []
+  IsChampion: 0
+  AttackSpeed: 100
+  TextureReplace: {fileID: 0}
+  Skills:
+  - {fileID: 11400000, guid: fb4f580b1266c4c9f8481927ae4ca7f9, type: 2}
+  - {fileID: 11400000, guid: df898aa67c25a4ab5809ae3c4df4fa42, type: 2}
+  InitStrength: 0
+  InitDexterity: 0
+  InitMagic: 0
+  InitDefense: 0
+  InitExp: 0
+  ApproachDistance: 20
+  AttackRange: 2.5
+  BeHitSpeed: 1
+  unitType: 0
+  missileSkill: {fileID: 0}
+  WalkSpeed: 2
+  Flee: 0
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 100000}
+  m_IsPrefabParent: 1
+  m_IsExploded: 1

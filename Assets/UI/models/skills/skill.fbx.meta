@@ -1,0 +1,132 @@
+fileFormatVersion: 2
+guid: 5c924b28358c04d6c8d6257fc1b03d50
+ModelImporter:
+  serializedVersion: 16
+  fileIDToRecycleName:
+    100000: Armature
+    100002: Armature|SkillBottomBone
+    100004: Armature|SkillRoot
+    100006: Armature|SkillTopBone
+    100008: Armature|tag_bottomskill
+    100010: Armature|tag_topskill
+    100012: Camera
+    100014: Cube
+    100016: HelperSkillRoot
+    100018: Helpertag_bottomskill
+    100020: Helpertag_topskill
+    100022: Lamp
+    100024: Lamp.001
+    100026: Lamp.002
+    100028: obj2
+    100030: //RootNode
+    100032: SkillBottomBone
+    100034: SkillRoot
+    100036: SkillTopBone
+    100038: tag_bottomskill
+    100040: tag_topskill
+    400000: Armature
+    400002: Armature|SkillBottomBone
+    400004: Armature|SkillRoot
+    400006: Armature|SkillTopBone
+    400008: Armature|tag_bottomskill
+    400010: Armature|tag_topskill
+    400012: Camera
+    400014: Cube
+    400016: HelperSkillRoot
+    400018: Helpertag_bottomskill
+    400020: Helpertag_topskill
+    400022: Lamp
+    400024: Lamp.001
+    400026: Lamp.002
+    400028: obj2
+    400030: //RootNode
+    400032: SkillBottomBone
+    400034: SkillRoot
+    400036: SkillTopBone
+    400038: tag_bottomskill
+    400040: tag_topskill
+    2300000: Cube
+    2300002: HelperSkillRoot
+    2300004: Helpertag_bottomskill
+    2300006: Helpertag_topskill
+    2300008: SkillBottomBone
+    2300010: SkillRoot
+    2300012: SkillTopBone
+    2300014: tag_bottomskill
+    2300016: tag_topskill
+    3300000: Cube
+    3300002: HelperSkillRoot
+    3300004: Helpertag_bottomskill
+    3300006: Helpertag_topskill
+    3300008: SkillBottomBone
+    3300010: SkillRoot
+    3300012: SkillTopBone
+    3300014: tag_bottomskill
+    3300016: tag_topskill
+    4300000: obj2
+    4300002: SkillRoot
+    4300004: SkillTopBone
+    4300006: tag_topskill
+    4300008: Helpertag_topskill
+    4300010: HelperSkillRoot
+    4300012: SkillBottomBone
+    4300014: tag_bottomskill
+    4300016: Helpertag_bottomskill
+    4300018: Cube
+    9500000: //RootNode
+    11100000: //RootNode
+    13700000: obj2
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 1
+  additionalBone: 0
+  userData: 

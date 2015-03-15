@@ -1,0 +1,1099 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &100000
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 400000}
+  - 114: {fileID: 11400000}
+  m_Layer: 0
+  m_Name: itemicons1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &400000
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d0c51bb0b6e93049af5e88f93826e3b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  material: {fileID: 2100000, guid: efeb07ae973688d4493efcc075ff3c7c, type: 2}
+  mSprites:
+  - name: kuzilevel1
+    x: 282
+    y: 11
+    width: 66
+    height: 61
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 5
+    paddingRight: 1
+    paddingTop: 6
+    paddingBottom: 5
+  - name: kuzilevel10
+    x: 282
+    y: 135
+    width: 66
+    height: 61
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 5
+    paddingRight: 1
+    paddingTop: 6
+    paddingBottom: 5
+  - name: kuzilevel2
+    x: 349
+    y: 265
+    width: 66
+    height: 61
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 5
+    paddingRight: 1
+    paddingTop: 6
+    paddingBottom: 5
+  - name: kuzilevel3
+    x: 282
+    y: 259
+    width: 66
+    height: 61
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 5
+    paddingRight: 1
+    paddingTop: 6
+    paddingBottom: 5
+  - name: kuzilevel4
+    x: 282
+    y: 321
+    width: 66
+    height: 61
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 5
+    paddingRight: 1
+    paddingTop: 6
+    paddingBottom: 5
+  - name: kuzilevel5
+    x: 349
+    y: 389
+    width: 66
+    height: 61
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 5
+    paddingRight: 1
+    paddingTop: 6
+    paddingBottom: 5
+  - name: kuzilevel6
+    x: 282
+    y: 73
+    width: 66
+    height: 61
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 5
+    paddingRight: 1
+    paddingTop: 6
+    paddingBottom: 5
+  - name: kuzilevel7
+    x: 349
+    y: 451
+    width: 66
+    height: 61
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 5
+    paddingRight: 1
+    paddingTop: 6
+    paddingBottom: 5
+  - name: kuzilevel8
+    x: 282
+    y: 197
+    width: 66
+    height: 61
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 5
+    paddingRight: 1
+    paddingTop: 6
+    paddingBottom: 5
+  - name: kuzilevel9
+    x: 349
+    y: 327
+    width: 66
+    height: 61
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 5
+    paddingRight: 1
+    paddingTop: 6
+    paddingBottom: 5
+  - name: maozilevel1
+    x: 478
+    y: 468
+    width: 71
+    height: 44
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 1
+    paddingTop: 11
+    paddingBottom: 17
+  - name: maozilevel10
+    x: 478
+    y: 198
+    width: 71
+    height: 44
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 1
+    paddingTop: 11
+    paddingBottom: 17
+  - name: maozilevel2
+    x: 478
+    y: 63
+    width: 71
+    height: 44
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 1
+    paddingTop: 11
+    paddingBottom: 17
+  - name: maozilevel3
+    x: 478
+    y: 108
+    width: 71
+    height: 44
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 1
+    paddingTop: 11
+    paddingBottom: 17
+  - name: maozilevel4
+    x: 478
+    y: 333
+    width: 71
+    height: 44
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 1
+    paddingTop: 11
+    paddingBottom: 17
+  - name: maozilevel5
+    x: 478
+    y: 423
+    width: 71
+    height: 44
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 1
+    paddingTop: 11
+    paddingBottom: 17
+  - name: maozilevel6
+    x: 478
+    y: 153
+    width: 71
+    height: 44
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 1
+    paddingTop: 11
+    paddingBottom: 17
+  - name: maozilevel7
+    x: 478
+    y: 378
+    width: 71
+    height: 44
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 1
+    paddingTop: 11
+    paddingBottom: 17
+  - name: maozilevel8
+    x: 478
+    y: 288
+    width: 71
+    height: 44
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 1
+    paddingTop: 11
+    paddingBottom: 17
+  - name: maozilevel9
+    x: 478
+    y: 243
+    width: 71
+    height: 44
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 1
+    paddingTop: 11
+    paddingBottom: 17
+  - name: shoutaolevel1
+    x: 550
+    y: 42
+    width: 41
+    height: 58
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 17
+    paddingRight: 14
+    paddingTop: 7
+    paddingBottom: 7
+  - name: shoutaolevel10
+    x: 550
+    y: 101
+    width: 41
+    height: 58
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 17
+    paddingRight: 14
+    paddingTop: 7
+    paddingBottom: 7
+  - name: shoutaolevel2
+    x: 592
+    y: 396
+    width: 41
+    height: 58
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 17
+    paddingRight: 14
+    paddingTop: 7
+    paddingBottom: 7
+  - name: shoutaolevel3
+    x: 550
+    y: 160
+    width: 41
+    height: 58
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 17
+    paddingRight: 14
+    paddingTop: 7
+    paddingBottom: 7
+  - name: shoutaolevel4
+    x: 676
+    y: 396
+    width: 41
+    height: 58
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 17
+    paddingRight: 14
+    paddingTop: 7
+    paddingBottom: 7
+  - name: shoutaolevel5
+    x: 634
+    y: 396
+    width: 41
+    height: 58
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 17
+    paddingRight: 14
+    paddingTop: 7
+    paddingBottom: 7
+  - name: shoutaolevel6
+    x: 550
+    y: 396
+    width: 41
+    height: 58
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 17
+    paddingRight: 14
+    paddingTop: 7
+    paddingBottom: 7
+  - name: shoutaolevel7
+    x: 550
+    y: 337
+    width: 41
+    height: 58
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 17
+    paddingRight: 14
+    paddingTop: 7
+    paddingBottom: 7
+  - name: shoutaolevel8
+    x: 550
+    y: 278
+    width: 41
+    height: 58
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 17
+    paddingRight: 14
+    paddingTop: 7
+    paddingBottom: 7
+  - name: shoutaolevel9
+    x: 550
+    y: 219
+    width: 41
+    height: 58
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 17
+    paddingRight: 14
+    paddingTop: 7
+    paddingBottom: 7
+  - name: WuQi_bishou1
+    x: 282
+    y: 448
+    width: 66
+    height: 64
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 6
+    paddingTop: 6
+    paddingBottom: 2
+  - name: WuQi_bishou10
+    x: 215
+    y: 383
+    width: 66
+    height: 64
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 6
+    paddingTop: 6
+    paddingBottom: 2
+  - name: WuQi_bishou2
+    x: 215
+    y: 188
+    width: 66
+    height: 64
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 6
+    paddingTop: 6
+    paddingBottom: 2
+  - name: WuQi_bishou3
+    x: 282
+    y: 383
+    width: 66
+    height: 64
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 6
+    paddingTop: 6
+    paddingBottom: 2
+  - name: WuQi_bishou4
+    x: 146
+    y: 46
+    width: 66
+    height: 64
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 6
+    paddingTop: 6
+    paddingBottom: 2
+  - name: WuQi_bishou5
+    x: 215
+    y: 253
+    width: 66
+    height: 64
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 6
+    paddingTop: 6
+    paddingBottom: 2
+  - name: WuQi_bishou6
+    x: 215
+    y: 318
+    width: 66
+    height: 64
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 6
+    paddingTop: 6
+    paddingBottom: 2
+  - name: WuQi_bishou7
+    x: 215
+    y: 58
+    width: 66
+    height: 64
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 6
+    paddingTop: 6
+    paddingBottom: 2
+  - name: WuQi_bishou8
+    x: 215
+    y: 123
+    width: 66
+    height: 64
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 6
+    paddingTop: 6
+    paddingBottom: 2
+  - name: WuQi_bishou9
+    x: 215
+    y: 448
+    width: 66
+    height: 64
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 6
+    paddingTop: 6
+    paddingBottom: 2
+  - name: WuQi_daqiang1
+    x: 73
+    y: 444
+    width: 72
+    height: 68
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 2
+    paddingBottom: 2
+  - name: WuQi_daqiang10
+    x: 0
+    y: 168
+    width: 72
+    height: 68
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 2
+    paddingBottom: 2
+  - name: WuQi_daqiang2
+    x: 0
+    y: 237
+    width: 72
+    height: 68
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 2
+    paddingBottom: 2
+  - name: WuQi_daqiang3
+    x: 0
+    y: 444
+    width: 72
+    height: 68
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 2
+    paddingBottom: 2
+  - name: WuQi_daqiang4
+    x: 73
+    y: 306
+    width: 72
+    height: 68
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 2
+    paddingBottom: 2
+  - name: WuQi_daqiang5
+    x: 0
+    y: 306
+    width: 72
+    height: 68
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 2
+    paddingBottom: 2
+  - name: WuQi_daqiang6
+    x: 0
+    y: 99
+    width: 72
+    height: 68
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 2
+    paddingBottom: 2
+  - name: WuQi_daqiang7
+    x: 0
+    y: 375
+    width: 72
+    height: 68
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 2
+    paddingBottom: 2
+  - name: WuQi_daqiang8
+    x: 73
+    y: 375
+    width: 72
+    height: 68
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 2
+    paddingBottom: 2
+  - name: WuQi_daqiang9
+    x: 0
+    y: 30
+    width: 72
+    height: 68
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 2
+    paddingBottom: 2
+  - name: WuQi_jujian1
+    x: 146
+    y: 111
+    width: 68
+    height: 66
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 4
+    paddingTop: 4
+    paddingBottom: 2
+  - name: WuQi_jujian10
+    x: 146
+    y: 178
+    width: 68
+    height: 66
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 4
+    paddingTop: 4
+    paddingBottom: 2
+  - name: WuQi_jujian2
+    x: 73
+    y: 239
+    width: 68
+    height: 66
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 4
+    paddingTop: 4
+    paddingBottom: 2
+  - name: WuQi_jujian3
+    x: 146
+    y: 379
+    width: 68
+    height: 66
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 4
+    paddingTop: 4
+    paddingBottom: 2
+  - name: WuQi_jujian4
+    x: 146
+    y: 446
+    width: 68
+    height: 66
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 4
+    paddingTop: 4
+    paddingBottom: 2
+  - name: WuQi_jujian5
+    x: 146
+    y: 245
+    width: 68
+    height: 66
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 4
+    paddingTop: 4
+    paddingBottom: 2
+  - name: WuQi_jujian6
+    x: 73
+    y: 172
+    width: 68
+    height: 66
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 4
+    paddingTop: 4
+    paddingBottom: 2
+  - name: WuQi_jujian7
+    x: 73
+    y: 38
+    width: 68
+    height: 66
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 4
+    paddingTop: 4
+    paddingBottom: 2
+  - name: WuQi_jujian8
+    x: 146
+    y: 312
+    width: 68
+    height: 66
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 4
+    paddingTop: 4
+    paddingBottom: 2
+  - name: WuQi_jujian9
+    x: 73
+    y: 105
+    width: 68
+    height: 66
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 4
+    paddingTop: 4
+    paddingBottom: 2
+  - name: xiezilevel1
+    x: 416
+    y: 77
+    width: 48
+    height: 57
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 11
+    paddingRight: 13
+    paddingTop: 8
+    paddingBottom: 7
+  - name: xiezilevel10
+    x: 478
+    y: 5
+    width: 48
+    height: 57
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 11
+    paddingRight: 13
+    paddingTop: 8
+    paddingBottom: 7
+  - name: xiezilevel2
+    x: 746
+    y: 455
+    width: 48
+    height: 57
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 11
+    paddingRight: 13
+    paddingTop: 8
+    paddingBottom: 7
+  - name: xiezilevel3
+    x: 697
+    y: 455
+    width: 48
+    height: 57
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 11
+    paddingRight: 13
+    paddingTop: 8
+    paddingBottom: 7
+  - name: xiezilevel4
+    x: 844
+    y: 455
+    width: 48
+    height: 57
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 11
+    paddingRight: 13
+    paddingTop: 8
+    paddingBottom: 7
+  - name: xiezilevel5
+    x: 550
+    y: 455
+    width: 48
+    height: 57
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 11
+    paddingRight: 13
+    paddingTop: 8
+    paddingBottom: 7
+  - name: xiezilevel6
+    x: 648
+    y: 455
+    width: 48
+    height: 57
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 11
+    paddingRight: 13
+    paddingTop: 8
+    paddingBottom: 7
+  - name: xiezilevel7
+    x: 599
+    y: 455
+    width: 48
+    height: 57
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 11
+    paddingRight: 13
+    paddingTop: 8
+    paddingBottom: 7
+  - name: xiezilevel8
+    x: 795
+    y: 455
+    width: 48
+    height: 57
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 11
+    paddingRight: 13
+    paddingTop: 8
+    paddingBottom: 7
+  - name: xiezilevel9
+    x: 416
+    y: 19
+    width: 48
+    height: 57
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 11
+    paddingRight: 13
+    paddingTop: 8
+    paddingBottom: 7
+  - name: yifulevel1
+    x: 349
+    y: 202
+    width: 61
+    height: 62
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 7
+    paddingRight: 4
+    paddingTop: 5
+    paddingBottom: 5
+  - name: yifulevel10
+    x: 416
+    y: 261
+    width: 61
+    height: 62
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 7
+    paddingRight: 4
+    paddingTop: 5
+    paddingBottom: 5
+  - name: yifulevel2
+    x: 349
+    y: 76
+    width: 61
+    height: 62
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 7
+    paddingRight: 4
+    paddingTop: 5
+    paddingBottom: 5
+  - name: yifulevel3
+    x: 416
+    y: 135
+    width: 61
+    height: 62
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 7
+    paddingRight: 4
+    paddingTop: 5
+    paddingBottom: 5
+  - name: yifulevel4
+    x: 416
+    y: 324
+    width: 61
+    height: 62
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 7
+    paddingRight: 4
+    paddingTop: 5
+    paddingBottom: 5
+  - name: yifulevel5
+    x: 349
+    y: 13
+    width: 61
+    height: 62
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 7
+    paddingRight: 4
+    paddingTop: 5
+    paddingBottom: 5
+  - name: yifulevel6
+    x: 416
+    y: 198
+    width: 61
+    height: 62
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 7
+    paddingRight: 4
+    paddingTop: 5
+    paddingBottom: 5
+  - name: yifulevel7
+    x: 349
+    y: 139
+    width: 61
+    height: 62
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 7
+    paddingRight: 4
+    paddingTop: 5
+    paddingBottom: 5
+  - name: yifulevel8
+    x: 416
+    y: 387
+    width: 61
+    height: 62
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 7
+    paddingRight: 4
+    paddingTop: 5
+    paddingBottom: 5
+  - name: yifulevel9
+    x: 416
+    y: 450
+    width: 61
+    height: 62
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 7
+    paddingRight: 4
+    paddingTop: 5
+    paddingBottom: 5
+  mPixelSize: 1
+  mReplacement: {fileID: 0}
+  mCoordinates: 0
+  sprites: []
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 100000}
+  m_IsPrefabParent: 1
+  m_IsExploded: 1

@@ -1,0 +1,257 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &100000
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 400000}
+  - 114: {fileID: 11400000}
+  m_Layer: 0
+  m_Name: health_player_destroyer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &400000
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -.949549496, y: 6.84197426, z: .0504426956}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d2555dfbc4e349d5a697830493d41c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  InitData: 300
+  AddPerLevel: 60
+  ResetData: 0
+  data:
+  - x: 1
+    y: 300
+  - x: 2
+    y: 360
+  - x: 3
+    y: 420
+  - x: 4
+    y: 480
+  - x: 5
+    y: 540
+  - x: 6
+    y: 600
+  - x: 7
+    y: 660
+  - x: 8
+    y: 720
+  - x: 9
+    y: 780
+  - x: 10
+    y: 840
+  - x: 11
+    y: 900
+  - x: 12
+    y: 960
+  - x: 13
+    y: 1020
+  - x: 14
+    y: 1080
+  - x: 15
+    y: 1140
+  - x: 16
+    y: 1200
+  - x: 17
+    y: 1260
+  - x: 18
+    y: 1320
+  - x: 19
+    y: 1380
+  - x: 20
+    y: 1440
+  - x: 21
+    y: 1500
+  - x: 22
+    y: 1560
+  - x: 23
+    y: 1620
+  - x: 24
+    y: 1680
+  - x: 25
+    y: 1740
+  - x: 26
+    y: 1800
+  - x: 27
+    y: 1860
+  - x: 28
+    y: 1920
+  - x: 29
+    y: 1980
+  - x: 30
+    y: 2040
+  - x: 31
+    y: 2100
+  - x: 32
+    y: 2160
+  - x: 33
+    y: 2220
+  - x: 34
+    y: 2280
+  - x: 35
+    y: 2340
+  - x: 36
+    y: 2400
+  - x: 37
+    y: 2460
+  - x: 38
+    y: 2520
+  - x: 39
+    y: 2580
+  - x: 40
+    y: 2640
+  - x: 41
+    y: 2700
+  - x: 42
+    y: 2760
+  - x: 43
+    y: 2820
+  - x: 44
+    y: 2880
+  - x: 45
+    y: 2940
+  - x: 46
+    y: 3000
+  - x: 47
+    y: 3060
+  - x: 48
+    y: 3120
+  - x: 49
+    y: 3180
+  - x: 50
+    y: 3240
+  - x: 51
+    y: 3300
+  - x: 52
+    y: 3360
+  - x: 53
+    y: 3420
+  - x: 54
+    y: 3480
+  - x: 55
+    y: 3540
+  - x: 56
+    y: 3600
+  - x: 57
+    y: 3660
+  - x: 58
+    y: 3720
+  - x: 59
+    y: 3780
+  - x: 60
+    y: 3840
+  - x: 61
+    y: 3900
+  - x: 62
+    y: 3960
+  - x: 63
+    y: 4020
+  - x: 64
+    y: 4080
+  - x: 65
+    y: 4140
+  - x: 66
+    y: 4200
+  - x: 67
+    y: 4260
+  - x: 68
+    y: 4320
+  - x: 69
+    y: 4380
+  - x: 70
+    y: 4440
+  - x: 71
+    y: 4500
+  - x: 72
+    y: 4560
+  - x: 73
+    y: 4620
+  - x: 74
+    y: 4680
+  - x: 75
+    y: 4740
+  - x: 76
+    y: 4800
+  - x: 77
+    y: 4860
+  - x: 78
+    y: 4920
+  - x: 79
+    y: 4980
+  - x: 80
+    y: 5040
+  - x: 81
+    y: 5100
+  - x: 82
+    y: 5160
+  - x: 83
+    y: 5220
+  - x: 84
+    y: 5280
+  - x: 85
+    y: 5340
+  - x: 86
+    y: 5400
+  - x: 87
+    y: 5460
+  - x: 88
+    y: 5520
+  - x: 89
+    y: 5580
+  - x: 90
+    y: 5640
+  - x: 91
+    y: 5700
+  - x: 92
+    y: 5760
+  - x: 93
+    y: 5820
+  - x: 94
+    y: 5880
+  - x: 95
+    y: 5940
+  - x: 96
+    y: 6000
+  - x: 97
+    y: 6060
+  - x: 98
+    y: 6120
+  - x: 99
+    y: 6180
+  - x: 100
+    y: 6240
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 100000}
+  m_IsPrefabParent: 1
+  m_IsExploded: 1

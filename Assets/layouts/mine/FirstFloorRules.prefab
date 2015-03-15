@@ -1,0 +1,88 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &100000
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 400000}
+  - 114: {fileID: 11400000}
+  m_Layer: 0
+  m_Name: FirstFloorRules
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &400000
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 7.55114508, y: 7.41514969, z: 22.6193981}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73faaba1ff6d74959a117345ef2d308e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: mine
+  TileBasis: 4
+  RequiresExit: 1
+  ChunkWidthBasis: 25
+  ChunkHeightBasis: 25
+  Music: {fileID: 8300000, guid: 71dc48b3e0b40483d8dcaede3f354c4c, type: 3}
+  TorchLight: {fileID: 0}
+  ShadowFade: {fileID: 0}
+  LightMask: {fileID: 0}
+  RimLight: {fileID: 0}
+  Water: {fileID: 0}
+  LightMapRed: 42
+  LightMapGreen: 48
+  LightMapBlue: 39
+  AmbientRed: 152
+  AmbientGreen: 152
+  AmbientBlue: 152
+  DirectionalRed: 70
+  DirectionalGreen: 70
+  DirectionalBlue: 70
+  DirectionalX: 40
+  DirectionalY: 150
+  DirectionalZ: -40
+  DirectionalIntensity: 1.89999998
+  FogRed: 0
+  FogGreen: 0
+  FogBlue: 0
+  FogStart: 24
+  FogEnd: 45
+  LevelParticle: {fileID: 0}
+  MinChunks: 1
+  MaxChunks: 2
+  Randomized: 1
+  Populated: 1
+  ChunkTypes: []
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 100000}
+  m_IsPrefabParent: 1
+  m_IsExploded: 1
