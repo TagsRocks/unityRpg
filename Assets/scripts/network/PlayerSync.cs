@@ -22,6 +22,8 @@ namespace ChuMeng
 		 * Write Message Send To Server
 		 * PlayerManagerment  PhotonView Manager 
 		 */ 
+		int lastGridX = -1;
+		int lastGridZ = -1;
 		public void OnPhotonSerializeView (Packet packet)
 		{
 			if (photonView.IsMine) {
@@ -32,7 +34,12 @@ namespace ChuMeng
 					mv.X = Convert.ToInt32( vxz.x);
 					mv.Y = Util.IntYOffset(transform.position.y);
 					mv.Z = Convert.ToInt32(vxz.y);
+					if(mv.X == lastGridX && mv.Z == lastGridZ) {
+						return;
+					}
 					if(Util.CheckMovable((int)mv.X, (int)mv.Z)) {
+						lastGridX = mv.X;
+						lastGridZ = mv.Z;
 						packet.protoBody = mv.BuildPartial ();
 						return;
 					}else {
