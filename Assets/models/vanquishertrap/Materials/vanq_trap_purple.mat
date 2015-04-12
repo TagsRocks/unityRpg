@@ -9,7 +9,7 @@ Material:
   m_Name: vanq_trap_purple
   m_Shader: {fileID: 4800000, guid: 4acbcff20f5df4d86a4a401694a5cc8a, type: 3}
   m_ShaderKeywords: []
-  m_CustomRenderQueue: 2000
+  m_CustomRenderQueue: 2005
   m_SavedProperties:
     serializedVersion: 2
     m_TexEnvs:
@@ -36,16 +36,8 @@ Material:
         second: {r: 1, g: 1, b: 1, a: 1}
       data:
         first:
-          name: _Ambient
-        second: {r: .867647052, g: .867647052, b: .867647052, a: 1}
-      data:
-        first:
           name: _ShadowColor
         second: {r: 0, g: 0, b: 0, a: 1}
-      data:
-        first:
-          name: _RimColor
-        second: {r: .25999999, g: .189999998, b: .159999996, a: 0}
       data:
         first:
           name: _HighLightDir
@@ -54,3 +46,11 @@ Material:
         first:
           name: _LightDiffuseColor
         second: {r: 1, g: 1, b: 1, a: 1}
+      data:
+        first:
+          name: _Ambient
+        second: {r: .867647052, g: .867647052, b: .867647052, a: 1}
+      data:
+        first:
+          name: _RimColor
+        second: {r: .25999999, g: .189999998, b: .159999996, a: 0}

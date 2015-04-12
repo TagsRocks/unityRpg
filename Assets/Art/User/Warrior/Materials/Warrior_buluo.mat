@@ -41,7 +41,7 @@ Material:
       data:
         first:
           name: _Ambient
-        second: {r: .972549021, g: .949019611, b: .952941179, a: 1}
+        second: {r: 1, g: 1, b: 1, a: 1}
       data:
         first:
           name: _RimColor
