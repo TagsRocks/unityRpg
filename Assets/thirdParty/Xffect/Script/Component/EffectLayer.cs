@@ -802,10 +802,15 @@ public class EffectLayer : MonoBehaviour
 
                 emitter.SetEmitPosition(node);
                 float nodeLife = 0;
-                if (IsNodeLifeLoop)
+                float realNodeLife = 0;
+                if (IsNodeLifeLoop) {
                     nodeLife = -1;
-                else
+                    realNodeLife = Random.Range(NodeLifeMin, NodeLifeMax); 
+                }
+                else {
                     nodeLife = Random.Range(NodeLifeMin, NodeLifeMax);
+                    realNodeLife = nodeLife;
+                }
                 Vector3 oriDir = emitter.GetEmitRotation(node);
                 float speed = OriSpeed;
                 if (IsRandomSpeed)
@@ -813,7 +818,7 @@ public class EffectLayer : MonoBehaviour
                     speed = Random.Range(SpeedMin, SpeedMax);
                 }
                 node.Init(oriDir.normalized, speed, nodeLife, Random.Range(OriRotationMin, OriRotationMax),
-                    Random.Range(OriScaleXMin, OriScaleXMax), Random.Range(OriScaleYMin, OriScaleYMax),Color1, UVTopLeft, UVDimension, OriScaleZ);
+                    Random.Range(OriScaleXMin, OriScaleXMax), Random.Range(OriScaleYMin, OriScaleYMax),Color1, UVTopLeft, UVDimension, OriScaleZ, realNodeLife);
             }
             else
                 continue;
@@ -1057,15 +1062,20 @@ public class EffectLayer : MonoBehaviour
 
                 node.SetLocalPosition(pos);
                 float nodeLife = 0;
-                if (IsNodeLifeLoop)
+                float realLife = 0;
+                if (IsNodeLifeLoop) {
                     nodeLife = -1;
-                else
+                    realLife = Random.Range(NodeLifeMin, NodeLifeMax);
+                }
+                else {
                     nodeLife = Random.Range(NodeLifeMin, NodeLifeMax);
+                    realLife = nodeLife;
+                }
                 Vector3 oriDir = emitter.GetEmitRotation(node);
 
                 
                 node.Init(oriDir.normalized, OriSpeed, nodeLife, Random.Range(OriRotationMin, OriRotationMax),
-                    Random.Range(OriScaleXMin, OriScaleXMax), Random.Range(OriScaleYMin, OriScaleYMax), Color1, UVTopLeft, UVDimension, OriScaleZ);
+                    Random.Range(OriScaleXMin, OriScaleXMax), Random.Range(OriScaleYMin, OriScaleYMax), Color1, UVTopLeft, UVDimension, OriScaleZ, realLife);
                 
                 ret = node;
             }

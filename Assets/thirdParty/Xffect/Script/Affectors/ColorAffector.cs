@@ -111,7 +111,7 @@ namespace Xft{
 			
             if (IsNodeLife)
             {
-                gradualLen = Node.GetLifeTime();
+                gradualLen = Node.GetRealLife();
             }
 			
             if (gradualLen <= 0f)// warning.

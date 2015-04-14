@@ -84,6 +84,7 @@ namespace Xft
 
         protected Vector3 OriDirection;
         protected float LifeTime;
+        protected float RealLifeTime;
         protected int OriRotateAngle;
         protected float OriScaleX;
         protected float OriScaleY;
@@ -119,11 +120,12 @@ namespace Xft
             return AffectorList;
         }
 
-        public void Init(Vector3 oriDir, float speed, float life, int oriRot, float oriScaleX, float oriScaleY, Color oriColor, Vector2 oriLowerUv, Vector2 oriUVDimension, float oriScaleZ)
+        public void Init(Vector3 oriDir, float speed, float life, int oriRot, float oriScaleX, float oriScaleY, Color oriColor, Vector2 oriLowerUv, Vector2 oriUVDimension, float oriScaleZ, float realLife)
         {
             //OriDirection = ClientTrans.TransformDirection(oriDir);
             OriDirection = oriDir;
             LifeTime = life;
+            RealLifeTime = realLife;
             OriRotateAngle = oriRot;
             OriScaleX = oriScaleX;
             OriScaleY = oriScaleY;
@@ -206,7 +208,9 @@ namespace Xft
             return LifeTime;
         }
   
-        
+        public float GetRealLife() {
+            return RealLifeTime;
+        }
         
         public void SetLocalPosition(Vector3 pos)
         {

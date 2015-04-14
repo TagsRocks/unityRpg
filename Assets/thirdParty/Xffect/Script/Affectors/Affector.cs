@@ -124,7 +124,7 @@ namespace Xft
                 float tlen = Node.Owner.RotateCurveTime;
                 if (tlen < 0f)
                 {
-                    tlen = Node.GetLifeTime();
+                    tlen = Node.GetRealLife();
                 }
                 
                 float t = time / tlen;
@@ -232,7 +232,7 @@ namespace Xft
             float framerate;
             if (UVTime <= 0f)
             {
-                framerate = Node.GetLifeTime() / Frames.frames.Length;
+                framerate = Node.GetRealLife() / Frames.frames.Length;
             }
             else
             {
@@ -339,7 +339,7 @@ namespace Xft
                 float tlen = Node.Owner.ScaleCurveTime;
                 if (tlen < 0f)
                 {
-                    tlen = Node.GetLifeTime();
+                    tlen = Node.GetRealLife();
                 }
                 
                 float t = time / tlen;

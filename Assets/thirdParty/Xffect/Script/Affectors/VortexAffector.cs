@@ -87,7 +87,7 @@ namespace Xft
 				if (MType == MAGTYPE.Curve) {
 					float totalTime = VortexTime;
 					if(VortexTime == -1) {
-						totalTime = Node.GetLifeTime();
+						totalTime = Node.GetRealLife();
 					}
 					magnitude = VortexCurve.Evaluate (time/totalTime) * Magnitude;
 				}else
@@ -120,7 +120,7 @@ namespace Xft
 				if (MType == MAGTYPE.Curve) {
 					float totalTime = VortexTime;
 					if(VortexTime == -1) {
-						totalTime = Node.GetLifeTime();
+						totalTime = Node.GetRealLife();
 					}
 
 					magnitude = VortexCurve.Evaluate (time/totalTime)*Magnitude;

@@ -345,5 +345,76 @@
                 ]
             }
         ]
+    }, 
+    {
+        "stackName": "BASEOBJECT", 
+        "children": [
+            {
+                "WORLD ORIENTATION": true, 
+                "NAME": "drops", 
+                "VISIBLE": true, 
+                "RENDER STYLE": "Additive", 
+                "TEXTURE": "media/particles/textures/object/drop.dds", 
+                "children": [], 
+                "stackName": "PROPERTIES", 
+                "DESCRIPTOR": "Particle", 
+                "RENDER TYPE": "Billboard Forward Camera", 
+                "PARENTID": "-1", 
+                "ID": "-1268181280131182114"
+            }, 
+            {
+                "stackName": "CHILDREN", 
+                "children": [
+                    {
+                        "stackName": "BASEOBJECT", 
+                        "children": [
+                            {
+                                "stackName": "PROPERTIES", 
+                                "DESCRIPTOR": "Color", 
+                                "NAME": "Color2", 
+                                "PARENTID": "-1268181280131182114", 
+                                "COLOR OVER TIME": "0,0,0,0,0.819608,0.119529,0.752941,0.752941,0.752941,0.819608", 
+                                "ID": "-1268181275836214818", 
+                                "children": []
+                            }, 
+                            {
+                                "stackName": "CHILDREN", 
+                                "children": []
+                            }
+                        ]
+                    }, 
+                    {
+                        "stackName": "BASEOBJECT", 
+                        "children": [
+                            {
+                                "POSITIONZ": 0.0, 
+                                "POSITIONX": 0.0, 
+                                "POSITIONY": 15.0, 
+                                "ANGLE": "0,0", 
+                                "NAME": "Emitter1", 
+                                "TYPE OF EMITTER": "Circle", 
+                                "WIDTH": "0,0.3", 
+                                "children": [], 
+                                "stackName": "PROPERTIES", 
+                                "DESCRIPTOR": "Emitter", 
+                                "MAX RADIUS": "0,0.2", 
+                                "FIXED_": false, 
+                                "SCALE ON LAUNCH": "0,0.2", 
+                                "PARENTID": "-1268181280131182114", 
+                                "EMIT RATE": "1,0,5", 
+                                "VELOCITY": "0,-15", 
+                                "PARTICLE LIFE": "0,1", 
+                                "ID": "-1268181271541247522", 
+                                "MIN RADIUS": "0,0"
+                            }, 
+                            {
+                                "stackName": "CHILDREN", 
+                                "children": []
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
     }
 ]

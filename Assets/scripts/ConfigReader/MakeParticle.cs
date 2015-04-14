@@ -57,14 +57,7 @@ public class MakeParticle : MonoBehaviour
             }
 
             effectLayer.Material = mat;
-            var renderType = jobj ["RENDER TYPE"].Value;
-            if (renderType == "Billboard Up")
-            {
-                effectLayer.RenderType = 0;
-                effectLayer.SpriteType = (int)Xft.STYPE.BILLBOARD_UP;
-            } else
-            {
-            }
+
             SetProp(effectLayer, jobj);
             //Modifier
             var child = GetChildren(n);
@@ -92,9 +85,11 @@ public class MakeParticle : MonoBehaviour
 
                     Debug.Log("Rotate Config " + modData.ToString());
                     SetRotate(effectLayer, modData);
-                }else if(modType == "Scale") {
+                } else if (modType == "Scale")
+                {
                     SetScale(effectLayer, modData);
-                }else if(modType == "Texture Animation") {
+                } else if (modType == "Texture Animation")
+                {
                     SetAni(effectLayer, modData);
                 }
             }
@@ -102,50 +97,99 @@ public class MakeParticle : MonoBehaviour
         }
     }
 
-    void SetProp(EffectLayer effectLayer, JSONClass modData) {
-        var fw = modData["FRAMES WIDE"].AsInt;
-        var fh = modData["FRAMES HIGH"].AsInt;
-        if(fw > 0) {
+    void SetProp(EffectLayer effectLayer, JSONClass modData)
+    {
+        var fw = modData ["FRAMES WIDE"].AsInt;
+        var fh = modData ["FRAMES HIGH"].AsInt;
+        if (fw > 0)
+        {
             Debug.Log("Set UV");
             effectLayer.UVType = 1;
             effectLayer.Cols = fw;
             effectLayer.Rows = fh;
             
         }
+
+        var renderType = modData ["RENDER TYPE"].Value;
+        if (renderType == "Billboard Up")
+        {
+            effectLayer.RenderType = 0;
+            effectLayer.SpriteType = (int)Xft.STYPE.BILLBOARD_UP;
+        } else
+        {
+        }
+
     }
-    void SetScale(EffectLayer effectLayer, JSONClass modData) {
-        var fix = modData["FIXED"].AsBool;
-        if(fix) {
+
+    void SetScale(EffectLayer effectLayer, JSONClass modData)
+    {
+        var fix = modData ["FIXED"].AsBool;
+        if (fix)
+        {
             effectLayer.ScaleType = RSTYPE.CURVE01;
             effectLayer.UseSameScaleCurve = true;
 
-            var scale = ConvertToFloat(modData["X"].Value);
-            int count = (int)scale[0];
+            var scale = ConvertToFloat(modData ["X"].Value);
+            //scale[0]  2  curve  3 straight
+            int count = (scale.Length-1)/2;
             float x = 0;
             float value = 0;
             float max = 1;
-            for(int i = 1; i < scale.Length; i++) {
-                if((i-1)%2 == 0) {
-                    x = scale[i];
-                }else {
-                    value = scale[i];
-                    if(Mathf.Abs(value) > max) {
+            for (int i = 1; i < scale.Length; i++)
+            {
+                if ((i - 1) % 2 == 0)
+                {
+                    x = scale [i];
+                } else
+                {
+                    value = scale [i];
+                    if (Mathf.Abs(value) > max)
+                    {
                         max = Mathf.Abs(value);
                     }
                 }
             }
             effectLayer.MaxScaleCalue = max;
-            
-            for(int i = 1; i < scale.Length; i++) {
-                if((i-1)%2 == 0) {
-                    x = scale[i];
-                }else {
-                    value = scale[i];
-                    effectLayer.ScaleXCurveNew.AddKey(new Keyframe(x, value/max)); 
+            var ks = new Keyframe[count];
+            int c = 0;
+            for (int i = 1; i < scale.Length; i++)
+            {
+                if ((i - 1) % 2 == 0)
+                {
+                    x = scale [i];
+                } else
+                {
+                    value = scale [i];
+                    Debug.Log("Add Scale Node " + value / max);
+                    ks [c] = new Keyframe(x, value / max);
+                    c++;
+                    /*
+                    var ret = effectLayer.ScaleXCurveNew.AddKey(new Keyframe(x, value/max)); 
+                    if(ret == -1) {
+                        
+                    }
+                    if(i == 2) {
+
+                        var key = effectLayer.ScaleXCurveNew[0];
+                        key.time = x;
+                        key.value = value/max;
+
+                    }else if(i == scale.Length-1) {
+                        var key = effectLayer.ScaleXCurveNew[effectLayer.ScaleXCurveNew.length-1];
+                        key.time = x;
+                        key.value = value/max;
+
+                    }else {
+
+                    }
+                    */
                 }
             }
+            effectLayer.ScaleXCurveNew = new AnimationCurve(ks);
+            effectLayer.ScaleWrapMode = WRAP_TYPE.LOOP;
         }
     }
+
     void SetRotate(EffectLayer effectLayer, JSONClass modData)
     {
         var rotate = ConvertToFloat(modData ["STARTING ROTATION"].Value.Split(','));
@@ -157,25 +201,36 @@ public class MakeParticle : MonoBehaviour
             effectLayer.OriRotationMin = (int)rotate [1];
             effectLayer.OriRotationMax = (int)rotate [2];
         }
+        var speed = ConvertToFloat(modData["ROTATION SPEED"].Value);
+        if((int)speed[0] == 1) {
+            float min = speed[1];
+            float max = speed[2];
+            effectLayer.RotateType = RSTYPE.RANDOM;
+            effectLayer.RotateSpeedMin = min;
+            effectLayer.RotateSpeedMax = max;
+        }
     }
 
-    void SetAni(EffectLayer effectLayer, JSONClass modData) {
-        var fnum = effectLayer.Cols*effectLayer.Rows;
-        var speed = ConvertToFloat(modData["ANIMATION SPEED"].Value);
-        var uvTime = fnum*1.0f/speed[1];
+    void SetAni(EffectLayer effectLayer, JSONClass modData)
+    {
+        var fnum = effectLayer.Cols * effectLayer.Rows;
+        var speed = ConvertToFloat(modData ["ANIMATION SPEED"].Value);
+        var uvTime = fnum * 1.0f / speed [1];
         effectLayer.UVTime = uvTime;
 
     }
 
     void SetEmit(EffectLayer effectLayer, bool forever, float[] rate, JSONClass modData)
     {
-        int rateType = (int)rate[0];
-        int rateMin = (int)rate[1];
-        if(rateType == 0) {
+        int rateType = (int)rate [0];
+        int rateMin = (int)rate [1];
+        if (rateType == 0)
+        {
             effectLayer.EmitRate = rateMin;
             effectLayer.MaxENodes = rateMin;
-        }else {
-            int rateMax = (int)rate[2];
+        } else
+        {
+            int rateMax = (int)rate [2];
             effectLayer.EmitRate = rateMax;
             effectLayer.MaxENodes = rateMax;
         }
@@ -184,37 +239,85 @@ public class MakeParticle : MonoBehaviour
         {
             effectLayer.IsNodeLifeLoop = true;
             effectLayer.IsBurstEmit = true;
-        } else
+        } else {
+            effectLayer.IsNodeLifeLoop = false;
+            effectLayer.IsBurstEmit = false;
+        }
+
         {
-            var life = ConvertToFloat(modData["PARTICLE LIFE"].Value);
-            if((int)life[0] == 1) {
-                effectLayer.IsNodeLifeLoop = false;
-                effectLayer.IsBurstEmit = false;
-                effectLayer.NodeLifeMin = life[1];
-                effectLayer.NodeLifeMax = life[2];
+            var life = ConvertToFloat(modData ["PARTICLE LIFE"].Value);
+            int lifeType = (int)life [0];
+            if (lifeType == 1)
+            {
+                //effectLayer.IsNodeLifeLoop = false;
+                //effectLayer.IsBurstEmit = false;
+                effectLayer.NodeLifeMin = life [1];
+                effectLayer.NodeLifeMax = life [2];
                 effectLayer.EmitDuration = 1;
                 effectLayer.EmitLoop = -1;
                 effectLayer.EmitDelay = 0;
+
+            } else if (lifeType == 0)
+            {
+                //effectLayer.IsNodeLifeLoop = false;
+                //effectLayer.IsBurstEmit = false;
+                effectLayer.NodeLifeMin = life [1];
+                effectLayer.NodeLifeMax = life [1];
+                effectLayer.EmitDuration = 1;
+                effectLayer.EmitLoop = -1;
+                effectLayer.EmitDelay = 0;
+
             }
         }
 
 
 
-        var emitType = modData["TYPE OF EMITTER"].Value;
-        if(emitType == "Circle") {
+        var emitType = modData ["TYPE OF EMITTER"].Value;
+        if (emitType == "Circle")
+        {
             effectLayer.EmitType = 3;
             effectLayer.UseRandomCircle = true;
-            effectLayer.CircleRadiusMin = ConvertToFloat( modData["MIN RADIUS"].Value.Split(','))[1];
-            effectLayer.CircleRadiusMax = ConvertToFloat( modData["MAX RADIUS"].Value.Split(','))[1];
+            effectLayer.CircleRadiusMin = ConvertToFloat(modData ["MIN RADIUS"].Value.Split(',')) [1];
+            effectLayer.CircleRadiusMax = ConvertToFloat(modData ["MAX RADIUS"].Value.Split(',')) [1];
+        }else if(emitType == "SphereSurface") {
+            effectLayer.EmitType = 2;
+            effectLayer.Radius = modData["RADIUS"].AsFloat;
         }
-        var scaleData = ConvertToFloat(modData["SCALE ON LAUNCH"].Value.Split(','));
-        effectLayer.RandomOriScale = true;
-        effectLayer.OriScaleXMin = scaleData[1];
-        effectLayer.OriScaleXMax = scaleData[2];
-        effectLayer.OriScaleYMin = scaleData[1];
-        effectLayer.OriScaleYMax = scaleData[2];
+            
+        var scaleData = ConvertToFloat(modData ["SCALE ON LAUNCH"].Value.Split(','));
+        var scaType = (int)scaleData [0];
+        if (scaType == 1)
+        {
+            effectLayer.RandomOriScale = true;
+            effectLayer.OriScaleXMin = scaleData [1];
+            effectLayer.OriScaleXMax = scaleData [2];
+            effectLayer.OriScaleYMin = scaleData [1];
+            effectLayer.OriScaleYMax = scaleData [2];
+        }else if(scaType == 0) {
+            effectLayer.RandomOriScale = false;
+            effectLayer.OriScaleXMin = effectLayer.OriScaleXMax = scaleData[1];
+            effectLayer.OriScaleYMin = effectLayer.OriScaleYMax = scaleData[1];
+        }
 
+        var posx = modData ["POSITIONX"].AsFloat;
+        var posy = modData ["POSITIONY"].AsFloat;
+        var posz = modData ["POSITIONZ"].AsFloat;
+        effectLayer.EmitPoint = new Vector3(posx, posy, posz);
+        if (modData ["WIDTH"].Value != "")
+        {
+            var width = ConvertToFloat(modData ["WIDTH"].Value);
+            if ((int)width [0] == 0)
+            {
+                effectLayer.SpriteWidth = width [1];
+            }
+        }
 
+        var velocity = ConvertToFloat(modData ["VELOCITY"].Value);
+        if ((int)velocity [0] == 0)
+        {
+            effectLayer.OriSpeed = velocity [1];
+            effectLayer.OriVelocityAxis = Vector3.up;
+        }
     }
 
     void SetColor(EffectLayer layer, float[] f)
@@ -223,6 +326,7 @@ public class MakeParticle : MonoBehaviour
         layer.ColorParam = new ColorParameter();
         layer.ColorParam.Colors.Clear();
         layer.ColorAffectorEnable = true;
+        layer.ColorGradualType = COLOR_GRADUAL_TYPE.LOOP;
         float time = 0;
         float r, g, b, a;
         r = g = b = a = 0;
@@ -252,9 +356,12 @@ public class MakeParticle : MonoBehaviour
 
         }
     }
-    float[] ConvertToFloat(string s) {
+
+    float[] ConvertToFloat(string s)
+    {
         return ConvertToFloat(s.Split(','));
     }
+
     float[] ConvertToFloat(string[] s)
     {
         float[] f = new float[s.Length];
