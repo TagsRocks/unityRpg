@@ -111,7 +111,7 @@ public class MakeParticle : MonoBehaviour
         }
 
         var renderType = modData ["RENDER TYPE"].Value;
-        if (renderType == "Billboard Up")
+        if (renderType == "Billboard Up" || renderType == "Billboard Up Camera" || renderType == "Billboard Forward")
         {
             effectLayer.RenderType = 0;
             effectLayer.SpriteType = (int)Xft.STYPE.BILLBOARD_UP;
@@ -119,6 +119,56 @@ public class MakeParticle : MonoBehaviour
         {
         }
 
+        var isLight = modData ["IS LIGHT"].AsBool;
+        if (isLight)
+        {
+            effectLayer.gameObject.layer = (int)ChuMeng.GameLayer.Light;
+        }
+    }
+
+    void SetRandomScaleCurve(EffectLayer effectLayer, float[] scale)
+    {
+        int count = (scale.Length - 1) / 3;
+        float x = 0;
+        float value = 0;
+        float max = 1;
+
+        for (int i = 1; i < scale.Length; i++)
+        {
+            var mod = (i-1)%3;
+            if (mod == 0)
+            {
+                x = scale [i];
+            } else if(mod == 1)
+            {
+                value = scale [i];
+                if (Mathf.Abs(value) > max)
+                {
+                    max = Mathf.Abs(value);
+                }
+            }
+        }
+
+        effectLayer.MaxScaleCalue = max;
+        var ks = new Keyframe[count];
+        int c = 0;
+        for (int i = 1; i < scale.Length; i++)
+        {
+            var mod = (i-1)%3;
+            if (mod == 0)
+            {
+                x = scale [i];
+            } else if(mod == 1)
+            {
+                value = scale [i];
+                Debug.Log("Add Scale Node " + value / max);
+                ks [c] = new Keyframe(x, value / max);
+                c++;
+
+            }
+        }
+        effectLayer.ScaleXCurveNew = new AnimationCurve(ks);
+        effectLayer.ScaleWrapMode = WRAP_TYPE.LOOP;
     }
 
     void SetScale(EffectLayer effectLayer, JSONClass modData)
@@ -130,40 +180,46 @@ public class MakeParticle : MonoBehaviour
             effectLayer.UseSameScaleCurve = true;
 
             var scale = ConvertToFloat(modData ["X"].Value);
-            //scale[0]  2  curve  3 straight
-            int count = (scale.Length-1)/2;
-            float x = 0;
-            float value = 0;
-            float max = 1;
-            for (int i = 1; i < scale.Length; i++)
+            int scaType = (int)scale [0];
+            if (scaType == 4)
             {
-                if ((i - 1) % 2 == 0)
+                SetRandomScaleCurve(effectLayer, scale);
+            } else
+            {
+                //scale[0]  2  curve  3 straight
+                int count = (scale.Length - 1) / 2;
+                float x = 0;
+                float value = 0;
+                float max = 1;
+                for (int i = 1; i < scale.Length; i++)
                 {
-                    x = scale [i];
-                } else
-                {
-                    value = scale [i];
-                    if (Mathf.Abs(value) > max)
+                    if ((i - 1) % 2 == 0)
                     {
-                        max = Mathf.Abs(value);
+                        x = scale [i];
+                    } else
+                    {
+                        value = scale [i];
+                        if (Mathf.Abs(value) > max)
+                        {
+                            max = Mathf.Abs(value);
+                        }
                     }
                 }
-            }
-            effectLayer.MaxScaleCalue = max;
-            var ks = new Keyframe[count];
-            int c = 0;
-            for (int i = 1; i < scale.Length; i++)
-            {
-                if ((i - 1) % 2 == 0)
+                effectLayer.MaxScaleCalue = max;
+                var ks = new Keyframe[count];
+                int c = 0;
+                for (int i = 1; i < scale.Length; i++)
                 {
-                    x = scale [i];
-                } else
-                {
-                    value = scale [i];
-                    Debug.Log("Add Scale Node " + value / max);
-                    ks [c] = new Keyframe(x, value / max);
-                    c++;
-                    /*
+                    if ((i - 1) % 2 == 0)
+                    {
+                        x = scale [i];
+                    } else
+                    {
+                        value = scale [i];
+                        Debug.Log("Add Scale Node " + value / max);
+                        ks [c] = new Keyframe(x, value / max);
+                        c++;
+                        /*
                     var ret = effectLayer.ScaleXCurveNew.AddKey(new Keyframe(x, value/max)); 
                     if(ret == -1) {
                         
@@ -183,28 +239,34 @@ public class MakeParticle : MonoBehaviour
 
                     }
                     */
+                    }
                 }
+                effectLayer.ScaleXCurveNew = new AnimationCurve(ks);
+                effectLayer.ScaleWrapMode = WRAP_TYPE.LOOP;
             }
-            effectLayer.ScaleXCurveNew = new AnimationCurve(ks);
-            effectLayer.ScaleWrapMode = WRAP_TYPE.LOOP;
         }
     }
 
     void SetRotate(EffectLayer effectLayer, JSONClass modData)
     {
-        var rotate = ConvertToFloat(modData ["STARTING ROTATION"].Value.Split(','));
-
-        if ((int)(rotate [0]) == 1)
+        var rotValue = modData ["STARTING ROTATION"].Value;
+        if (rotValue != "")
         {
-            Debug.Log("rate value " + rotate [0]);
-            effectLayer.RandomOriRot = true;
-            effectLayer.OriRotationMin = (int)rotate [1];
-            effectLayer.OriRotationMax = (int)rotate [2];
+            var rotate = ConvertToFloat(rotValue);
+
+            if ((int)(rotate [0]) == 1)
+            {
+                Debug.Log("rate value " + rotate [0]);
+                effectLayer.RandomOriRot = true;
+                effectLayer.OriRotationMin = (int)rotate [1];
+                effectLayer.OriRotationMax = (int)rotate [2];
+            }
         }
-        var speed = ConvertToFloat(modData["ROTATION SPEED"].Value);
-        if((int)speed[0] == 1) {
-            float min = speed[1];
-            float max = speed[2];
+        var speed = ConvertToFloat(modData ["ROTATION SPEED"].Value);
+        if ((int)speed [0] == 1)
+        {
+            float min = speed [1];
+            float max = speed [2];
             effectLayer.RotateType = RSTYPE.RANDOM;
             effectLayer.RotateSpeedMin = min;
             effectLayer.RotateSpeedMax = max;
@@ -239,7 +301,8 @@ public class MakeParticle : MonoBehaviour
         {
             effectLayer.IsNodeLifeLoop = true;
             effectLayer.IsBurstEmit = true;
-        } else {
+        } else
+        {
             effectLayer.IsNodeLifeLoop = false;
             effectLayer.IsBurstEmit = false;
         }
@@ -279,9 +342,10 @@ public class MakeParticle : MonoBehaviour
             effectLayer.UseRandomCircle = true;
             effectLayer.CircleRadiusMin = ConvertToFloat(modData ["MIN RADIUS"].Value.Split(',')) [1];
             effectLayer.CircleRadiusMax = ConvertToFloat(modData ["MAX RADIUS"].Value.Split(',')) [1];
-        }else if(emitType == "SphereSurface") {
+        } else if (emitType == "SphereSurface")
+        {
             effectLayer.EmitType = 2;
-            effectLayer.Radius = modData["RADIUS"].AsFloat;
+            effectLayer.Radius = modData ["RADIUS"].AsFloat;
         }
             
         var scaleData = ConvertToFloat(modData ["SCALE ON LAUNCH"].Value.Split(','));
@@ -293,10 +357,11 @@ public class MakeParticle : MonoBehaviour
             effectLayer.OriScaleXMax = scaleData [2];
             effectLayer.OriScaleYMin = scaleData [1];
             effectLayer.OriScaleYMax = scaleData [2];
-        }else if(scaType == 0) {
+        } else if (scaType == 0)
+        {
             effectLayer.RandomOriScale = false;
-            effectLayer.OriScaleXMin = effectLayer.OriScaleXMax = scaleData[1];
-            effectLayer.OriScaleYMin = effectLayer.OriScaleYMax = scaleData[1];
+            effectLayer.OriScaleXMin = effectLayer.OriScaleXMax = scaleData [1];
+            effectLayer.OriScaleYMin = effectLayer.OriScaleYMax = scaleData [1];
         }
 
         var posx = modData ["POSITIONX"].AsFloat;

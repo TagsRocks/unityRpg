@@ -23,6 +23,7 @@ namespace ChuMeng
 		PlayerCamera = 12,
 		UICamera = 5,
 		Npc = 13,
+        Light = 11,
 	}
 
 	public class GameTag
