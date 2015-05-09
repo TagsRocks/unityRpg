@@ -1,7 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.IO;
+#if UNITY_EDITOR
 using UnityEditor;
+#endif
 
 public class AdjustTexture : MonoBehaviour {
     public string directoryName;
@@ -9,6 +11,7 @@ public class AdjustTexture : MonoBehaviour {
     public bool Adjust;
 
     public void AdjustMethod() {
+#if UNITY_EDITOR
         var texDir = Path.Combine(Application.dataPath,  directoryName);
         var resDir = new DirectoryInfo(texDir);
         FileInfo[] fileInfo = resDir.GetFiles("*.png", SearchOption.AllDirectories);
@@ -28,6 +31,7 @@ public class AdjustTexture : MonoBehaviour {
         }
         AssetDatabase.StopAssetEditing();
         AssetDatabase.Refresh();
+#endif
     }
 
 	// Use this for initialization

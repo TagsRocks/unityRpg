@@ -15,6 +15,8 @@ public class MakeParticle : MonoBehaviour
     public bool
         Make;
 
+    
+    #if UNITY_EDITOR
     public void MakeMethod()
     {
         var md = Resources.LoadAssetAtPath("Assets/Config/" + configFile + ".json", typeof(TextAsset)) as TextAsset;
@@ -502,4 +504,5 @@ public class MakeParticle : MonoBehaviour
     }
 
     public static string DefaultMatPath = "Examples/Materials/default.mat";
+#endif
 }
