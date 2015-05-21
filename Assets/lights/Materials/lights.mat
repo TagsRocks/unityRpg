@@ -7,7 +7,7 @@ Material:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: lights
-  m_Shader: {fileID: 4800000, guid: 83dd23cd3afd245408a217dac590ac70, type: 3}
+  m_Shader: {fileID: 4800000, guid: 24d5c22ee04ab4f5d9b4313c5d1a9685, type: 3}
   m_ShaderKeywords: []
   m_CustomRenderQueue: -1
   m_SavedProperties:
@@ -17,39 +17,12 @@ Material:
         first:
           name: _MainTex
         second:
-          m_Texture: {fileID: 2800000, guid: 309ba4b003e4d43ca82de6f1f391a3ef, type: 3}
+          m_Texture: {fileID: 2800000, guid: 9f1600fef554b42cf8d673bd9bb5155b, type: 3}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
-      data:
-        first:
-          name: _GradientTex
-        second:
-          m_Texture: {fileID: 0}
-          m_Scale: {x: 1, y: 1}
-          m_Offset: {x: 0, y: 0}
-    m_Floats:
-      data:
-        first:
-          name: _Enhence
-        second: 2
-      data:
-        first:
-          name: _UVAnimX
-        second: 0
-      data:
-        first:
-          name: _UVAnimY
-        second: 0
+    m_Floats: {}
     m_Colors:
       data:
         first:
           name: _Color
-        second: {r: 1, g: 1, b: 1, a: 1}
-      data:
-        first:
-          name: _Ambient
-        second: {r: .897058845, g: .897058845, b: .897058845, a: 1}
-      data:
-        first:
-          name: _Emissive
-        second: {r: 1, g: 1, b: 1, a: 1}
+        second: {r: .588235021, g: .588235021, b: .588235021, a: 1}
