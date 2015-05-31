@@ -38,7 +38,7 @@ namespace ChuMeng {
 
 		public static CopyController copyController;
 		void Awake() {
-			gameObject.newName = "CopyController";
+			gameObject.name = "CopyController";
 			copyController = this;
 			DontDestroyOnLoad (gameObject);
 		}

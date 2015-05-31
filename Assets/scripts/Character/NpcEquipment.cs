@@ -136,7 +136,7 @@ namespace ChuMeng
 		}
 		public void InitDefaultEquip ()
 		{
-			Log.Sys ("Initial default equip "+gameObject.newName);
+			Log.Sys ("Initial default equip "+gameObject.name);
 			//return;
 			if (defaultChest == null) {
 				if (attribute.ObjUnitData.GetIsPlayer ()) {
@@ -247,7 +247,7 @@ namespace ChuMeng
 		public void InitFakeEquip ()
 		{
 			if (IsFakeObject) {
-				Log.Sys("Intial Fake Equip "+gameObject.newName);
+				Log.Sys("Intial Fake Equip "+gameObject.name);
 				var obj = ObjectManager.objectManager.GetLocalPlayer (photonView.GetLocalId ());
 				if (obj != null) {
 					var equip = obj.GetComponent<NpcEquipment> ();
@@ -258,7 +258,7 @@ namespace ChuMeng
 					UnwieldEquip (ItemData.EquipPosition.GLOVES);
 					UnwieldEquip (ItemData.EquipPosition.TROUSERS);
 
-					Log.Sys ("Player Fake Equip is " + " " + obj.newName + " " + equip);
+					Log.Sys ("Player Fake Equip is " + " " + obj.name + " " + equip);
 					WieldEquip (equip.WeaponData);
 					WieldEquip (equip.ChestData);
 					WieldEquip (equip.HelmData);

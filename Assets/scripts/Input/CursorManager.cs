@@ -12,7 +12,7 @@ namespace ChuMeng
 					var g = new GameObject();
 					_cursor = g.AddComponent<CursorManager>();
 					DontDestroyOnLoad(g);
-					g.newName = "CursorManager";
+					g.name = "CursorManager";
 				}
 				return _cursor;
 			}

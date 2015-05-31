@@ -191,7 +191,7 @@ namespace KBEngine
 		}
 		void Start() {
 			//localId = LocalID++;
-			Log.Sys ("Implement Local ID "+localId+" "+gameObject.newName);
+			Log.Sys ("Implement Local ID "+localId+" "+gameObject.name);
 		}
 		void Awake ()
 		{

@@ -9,7 +9,9 @@ GameObject:
   m_Component:
   - 4: {fileID: 400000}
   - 114: {fileID: 11400002}
+  - 114: {fileID: 11400004}
   - 114: {fileID: 11400000}
+  - 114: {fileID: 11400006}
   m_Layer: 0
   m_Name: kbengine
   m_TagString: Untagged
@@ -37,10 +39,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 100000}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d21f9eaef76384c6fbb74fd4ce210e19, type: 3}
+  m_Script: {fileID: 11500000, guid: d2afb57cbcbb64b3bb3463720ea50d01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  debug: 0
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -53,13 +54,43 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   updateInterval: 55
-  updateIntervalOnSerialize: 5000
-  url: 10.1.2.223
+  updateIntervalOnSerialize: 1000
+  url: 10.1.2.222
   port: 17000
   testUrl: 127.0.0.1
   testPort: 20000
   debug: 1
   heartBeat: 8
+--- !u!114 &11400004
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d21f9eaef76384c6fbb74fd4ce210e19, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  debug: 0
+--- !u!114 &11400006
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9c96de35f85d40b0906a6e481012bfb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lightMap: {fileID: 8400000, guid: 5a3cade6b6da442f3aee87a019eb109f, type: 2}
+  camPos: {x: 0, y: 0, z: 0}
+  ambient: {x: 1, y: 1, z: 1}
+  lightMask: {fileID: 2800000, guid: 0f68bc94fc73f4b2cae2633ae2c09dac, type: 3}
+  lightCoff: 3
+  testAmbient: {r: 1, g: 1, b: 1, a: 0}
+  InitAmbient: 0
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

@@ -231,7 +231,14 @@ namespace ChuMeng
 			MyEventSystem.myEventSystem.PushEvent (evt);
 
 			NetDebug.netDebug.AddConsole ("PlayerEnterWorld Event");
-			//关闭选择人物 界面等
+
+            if(NetDebug.netDebug.IsWuDi){
+                var aff = new Affix(){effectType=Affix.EffectType.DefenseAdd};
+                aff.Duration = 9999;
+                player.GetComponent<BuffComponent>().AddBuff(aff);
+            }
+			
+            //关闭选择人物 界面等
 		}
 		public void WorldChangeScene(int sceneId, bool isRelive) {
 			StartCoroutine (ChangeScene(sceneId, isRelive));

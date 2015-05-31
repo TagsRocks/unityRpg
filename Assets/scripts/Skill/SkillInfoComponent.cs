@@ -49,7 +49,7 @@ namespace ChuMeng
 
 		public void SetRandomActive ()
 		{
-			Log.AI ("SetRandomActive " + gameObject.newName);
+			Log.AI ("SetRandomActive " + gameObject.name);
 			var rd = Random.Range (0, 100);
 			var skList = attribute.ObjUnitData.GetSkillList ();
 			Log.AI ("skList is " + skList.Count);

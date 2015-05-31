@@ -17,7 +17,7 @@ namespace ChuMeng {
 
 			el.OriRotationMin = (int)(el.OriRotationMin+ ydeg);
 			el.OriRotationMax = (int)(el.OriRotationMax+ ydeg);
-			Log.AI ("Adjust Effect Layer emitPoint and rotation "+gameObjectnewNamee+" "+ydeg);
+			Log.AI ("Adjust Effect Layer emitPoint and rotation "+gameObject.name+" "+ydeg);
 		}
 
 	}

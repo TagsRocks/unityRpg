@@ -143,8 +143,10 @@ namespace ChuMeng
 				if(d.isCritical) {
 					isCritical = true;
 				}
-				GetAttr ().DoHurt (d.Damage, d.isCritical);
-
+                if(NetDebug.netDebug.IsWuDi && aiCharacter.attribute.gameObject == ObjectManager.objectManager.GetMyPlayer()){
+                }else {
+				    GetAttr ().DoHurt (d.Damage, d.isCritical);
+                }
 				if (d.ShowHit) {
 					shit = true;
 				}

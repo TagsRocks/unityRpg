@@ -29,7 +29,7 @@ namespace ChuMeng
 			for (int i = 0; i < Length; i++) {
 				var obj = NGUITools.AddChild(itemParent,item);
 				obj.SetActive(true);
-				obj.newName = i.ToString();
+				obj.name = i.ToString();
 				//itemcontentset(list[i],obj);
 				UIEventListener.Get(obj.gameObject).onClick = clickListItem;
 			}
@@ -43,7 +43,7 @@ namespace ChuMeng
 
 		void clickListItem(GameObject btn)
 		{
-			Debug.Log ("btn click :"+btn.newName);
+			Debug.Log ("btn click :"+btn.name);
 		}
 
 		private void initrightpannel()
@@ -62,11 +62,11 @@ namespace ChuMeng
 
 		void btnClick(GameObject btn)
 		{
-			Debug.Log ("right  btn click :"+btn.newName);
-			if(btn.newName == "StartButton")
+			Debug.Log ("right  btn click :"+btn.name);
+			if(btn.name == "StartButton")
 			{
 				combatChallenge();
-			}else if(btn.newName == "Ranking")
+			}else if(btn.name == "Ranking")
 			{
 				gotoRangPage();
 			}

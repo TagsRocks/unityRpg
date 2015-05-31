@@ -20,7 +20,7 @@ public class ShadowComponent : MonoBehaviour {
 		if (shadowPlane == null) {
 			GameObject p = GameObject.CreatePrimitive (PrimitiveType.Plane);
 			shadowPlane = p;
-			p.newName = "shadowPlane";
+			p.name = "shadowPlane";
 			p.transform.parent = transform;
 			p.transform.localScale = Vector3.one;
 			p.transform.localRotation = Quaternion.identity;

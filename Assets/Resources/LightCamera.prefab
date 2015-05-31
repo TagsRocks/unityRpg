@@ -55,7 +55,7 @@ Camera:
     serializedVersion: 2
     m_Bits: 2304
   m_RenderingPath: -1
-  m_TargetTexture: {fileID: 8400000, guid: 41115f8108ac349e4b77b5de6c47a02b, type: 2}
+  m_TargetTexture: {fileID: 8400000, guid: 5a3cade6b6da442f3aee87a019eb109f, type: 2}
   m_TargetDisplay: 0
   m_HDR: 0
   m_OcclusionCulling: 1
@@ -72,6 +72,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4147e83d7810642ff8327e96c4af917c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CamPos: {x: 0, y: 0, z: -5}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

@@ -167,7 +167,7 @@ namespace ChuMeng
 			//Current Scene Height
 
 			//var AStar = GameObject.Find ("AStar").GetComponent<AstarPath> ();
-			var AStar = AstarPath.newActive;
+			var AStar = AstarPath.active;
 			//Scene Height Data 
 			var gridGraph = AStar.graphs [0] as Pathfinding.GridGraph;
 			var gridIndex = (int)(z) * gridGraph.width + (int)(x);
@@ -384,7 +384,7 @@ namespace ChuMeng
 			Log.Sys ("DialogPlayer is " + job.ToString ());
 			//var fakeObject = Instantiate (Resources.Load<GameObject> ("DialogPlayer/" + job.ToString ())) as GameObject;
 			var fakeObject = SelectChar.ConstructChar (job);
-			fakeObject.newName = fakeObject.newName + "_fake";
+			fakeObject.name = fakeObject.name + "_fake";
 
 
 			fakeObject.SetActive (false);
@@ -435,7 +435,7 @@ namespace ChuMeng
 			
 			NetDebug.netDebug.AddConsole ("Init Player tag layer transform");
 			NGUITools.AddMissingComponent<NpcAttribute> (player);
-			NGUITools.AddMissingComponent<PlayerMoveController> (player);
+			NGUITools.AddMissingComponent<PlayerAIController> (player);
 			player.tag = "Player";
 			player.layer = (int)GameLayer.Npc;
 			player.transform.parent = transform;
@@ -451,7 +451,7 @@ namespace ChuMeng
 			player.GetComponent<NpcEquipment> ().InitDefaultEquip ();
 			player.GetComponent<NpcEquipment> ().InitPlayerEquipmentFromBackPack ();
 			
-			player.newName = "player_me";
+			player.name = "player_me";
 			
 			ObjectManager.objectManager.AddObject (SaveGame.saveGame.selectChar.PlayerId, view);
 			
@@ -549,7 +549,7 @@ namespace ChuMeng
 
 
 				NGUITools.AddMissingComponent<NpcAttribute> (player);
-				NGUITools.AddMissingComponent<PlayerMoveController> (player);
+				NGUITools.AddMissingComponent<PlayerAIController> (player);
 				player.tag = "Player";
 				player.layer = (int)GameLayer.Npc;
 				//NGUITools.AddMissingComponent<PhysicComponent>(player);
@@ -558,7 +558,7 @@ namespace ChuMeng
 				player.GetComponent<NpcAttribute> ().SetObjUnitData (udata);
 				player.GetComponent<NpcEquipment> ().InitDefaultEquip ();
 
-				player.newName = "player_" + vp.UnitId.Id;
+				player.name = "player_" + vp.UnitId.Id;
 				player.transform.parent = gameObject.transform;
 				
 				

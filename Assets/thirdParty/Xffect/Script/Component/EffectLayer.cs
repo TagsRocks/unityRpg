@@ -1,4 +1,4 @@
-﻿//----------------------------------------------
+//----------------------------------------------
 //            Xffect Editor
 // Copyright © 2012- Shallway Studio
 // http://shallway.net
@@ -360,10 +360,12 @@ public class EffectLayer : MonoBehaviour
     public bool IsSine = false;
     public float SineFreq = 1;
 
-    public bool SineAffectorEnable = false;
-    public float SineMagnitude = 1;
-    public float SineFreqTime = 1;
-    public float SineFreqDist = 1;
+
+    public bool SineAffectorEnable = false;
+    public Vector3 SineForce = Vector3.up;
+    public bool ModifyPos = true;// change position or speed
+    public float SineMaxFreq = 5;
+    public float SineMinFreq = 1;
 
     //AirField Affector
     public bool AirAffectorEnable = false;
@@ -636,9 +638,10 @@ public class EffectLayer : MonoBehaviour
         
         if(SineAffectorEnable) {
             Affector aft;
-            aft = new SineAffector(SineMagnitude, SineFreqTime, SineFreqDist, node);
+            aft = new Xft.SineAffector(SineForce, ModifyPos, SineMaxFreq, SineMinFreq, node);
             AffectorList.Add(aft);
         }
+
 
         if (AirAffectorEnable)
         {

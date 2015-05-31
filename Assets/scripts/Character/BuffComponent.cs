@@ -26,7 +26,7 @@ namespace ChuMeng {
 		public void AddBuff (Affix affix, GameObject attacker = null)
 		{
 			if (affix != null) {
-				Log.Sys ("AddBuff is "+gameObject.newName+" " + affix.effectType);
+				Log.Sys ("AddBuff is "+gameObject.name+" " + affix.effectType);
 
 				var eft = BuffManager.buffManager.GetBuffInstance (affix.effectType);
 				var buff = (IEffect)Activator.CreateInstance (eft);

@@ -138,9 +138,9 @@ namespace ChuMeng
 
 			//bag.GetComponent<UIPanel> ().depth = (int)UIDepth.Window+stack.Count*10+1;
 			stack.Add (bag);
-			Log.GUI ("Push UI "+bag.newName);
+			Log.GUI ("Push UI "+bag.name);
 			foreach(GameObject g in stack) {
-				Log.GUI("Stack UI is "+g.newName);
+				Log.GUI("Stack UI is "+g.name);
 			}
 			return bag;
 		}
@@ -167,9 +167,9 @@ namespace ChuMeng
 				p.depth = (int)UIDepth.Window+100+1+(p.depth-oldDepth);
 			}
 			
-			Log.GUI ("Push Notify UI "+bag.newName);
+			Log.GUI ("Push Notify UI "+bag.name);
 			foreach(GameObject g in stack) {
-				Log.GUI("Stack UI is "+g.newName);
+				Log.GUI("Stack UI is "+g.name);
 			}
 			return bag;
 		}

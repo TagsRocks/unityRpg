@@ -24,7 +24,7 @@ namespace ChuMeng
 
 			items = new List<GameObject> ();
 			shopItem = GetName ("shopprioove");
-			shopItem.newName = "0";
+			shopItem.name = "0";
 			items.Add (shopItem);
 
 			SetCallback ("top up", OnCharge);
@@ -101,7 +101,7 @@ namespace ChuMeng
 			int c = items.Count;
 			while (items.Count < goods.Count) {
 				var item = NGUITools.AddChild(shopItem.transform.parent.gameObject, shopItem);
-				item.newName = c.ToString();
+				item.name = c.ToString();
 				items.Add(item);
 				c++;
 			}

@@ -68,8 +68,8 @@ public class AuctionUI : IUserInterface {
 
 	private void btnClick(GameObject btn)
 	{
-		Debug.Log ("btnClick:"+btn.newName);
-		switch (btn.newName) 
+		Debug.Log ("btnClick:"+btn.name);
+		switch (btn.name) 
 		{
 			case "CloseBtn":
 				break;
@@ -164,7 +164,7 @@ public class AuctionUI : IUserInterface {
 		for (int i = 0; i < auctionFace.tableList.Count; i++) {
 			var obj = NGUITools.AddChild(Table,Util.FindChildRecursive(Table.transform, "Quest1").gameObject);
 			SetText (obj, "Name", auctionFace.tableList[i].tableName);
-			obj.newName = auctionFace.tableList[i].tableNode.ToString();
+			obj.name = auctionFace.tableList[i].tableNode.ToString();
 			obj.SetActive(true);
 			list.Add(obj);
 		}
@@ -185,8 +185,8 @@ public class AuctionUI : IUserInterface {
 	//分类列表请求
 	private void tableItemClick(GameObject btn)
 	{
-		Debug.Log ("....click ...."+btn.newName);
-		itemId = int.Parse (btn.newName);
+		Debug.Log ("....click ...."+btn.name);
+		itemId = int.Parse (btn.name);
 		StartCoroutine (itemRequest ());
 	}
 
@@ -202,7 +202,7 @@ public class AuctionUI : IUserInterface {
 		GameObject gridObj = Util.FindChildRecursive(obj.transform, "Grid").gameObject;
 		for (int i = 0; i < gritItem.Count; i++) {
 			var ob = NGUITools.AddChild(gridObj,Util.FindChildRecursive(gridObj.transform, "Toggle1").gameObject);
-			ob.newName = gritItem[i].tableNode.ToString();
+			ob.name = gritItem[i].tableNode.ToString();
 			SetText (ob, "Label", gritItem[i].tableName);
 			ob.SetActive(true);
 		}
@@ -247,7 +247,7 @@ public class AuctionUI : IUserInterface {
 		GameObject gridObj = Util.FindChildRecursive(AuctionnerMeshView.transform, "Grid").gameObject;
 		for (int i = 0; i < length; i++) {
 			var ob = NGUITools.AddChild(gridObj,Util.FindChildRecursive(AuctionnerMeshView.transform, "AucitonMesh").gameObject);
-			ob.newName = itemInfo[i].Id.ToString();
+			ob.name = itemInfo[i].Id.ToString();
 			//物品图片 等级根据id读取  配置表的icon  todo
 			commondSetForIcon (ob,itemInfo[i].BaseId);
 			//SetText (ob, "Level", ""+i);
@@ -267,10 +267,10 @@ public class AuctionUI : IUserInterface {
 
 	private void auctionItemClick(GameObject bt)
 	{
-		Debug.Log ("bt:"+bt.newName);
+		Debug.Log ("bt:"+bt.name);
 
-		tipBuyId = int.Parse (bt.newName);
-		AuctionItem info = setItemInfo [auctionFace.GetItemIndex(setItemInfo,int.Parse(bt.newName))];
+		tipBuyId = int.Parse (bt.name);
+		AuctionItem info = setItemInfo [auctionFace.GetItemIndex(setItemInfo,int.Parse(bt.name))];
 
 		//ItemData data = new ItemData (1, info.BaseId);
 

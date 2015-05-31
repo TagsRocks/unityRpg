@@ -34,7 +34,7 @@ namespace ChuMeng
 
 		IEnumerator InitProperty() {
 			Log.Net ("characterinfo   init");
-			NetDebug.netDebug.AddConsole("CharacterInfo:: Init Property "+gameObject.newName);
+			NetDebug.netDebug.AddConsole("CharacterInfo:: Init Property "+gameObject.name);
 			CGGetCharacterInfo.Builder getChar = CGGetCharacterInfo.CreateBuilder ();
 			getChar.PlayerId = photonView.GetServerID();
 

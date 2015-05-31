@@ -37,7 +37,7 @@ namespace ChuMeng
 		}
 
 		void OnLevel(GameObject g) {
-			var levId =  System.Convert.ToInt32(g.newName.Replace ("Level", ""));
+			var levId =  System.Convert.ToInt32(g.name.Replace ("Level", ""));
 			CopyController.copyController.SelectLevel (curChapter, allLevels[levId-1]);
 
 			WindowMng.windowMng.PushView ("UI/CopyTips");	

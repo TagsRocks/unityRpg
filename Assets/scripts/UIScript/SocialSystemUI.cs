@@ -79,7 +79,7 @@ public class SocialSystemUI : IUserInterface {
 		for (int i = 0; i < Length; i++) {
 			var obj = NGUITools.AddChild(Util.FindChildRecursive(FriendScrollView.transform, "Friend_Grid").gameObject,friendItem);
 			obj.SetActive(true);
-			obj.newName = i.ToString();
+			obj.name = i.ToString();
 			Itemcontentset(friendlistsinfo[i],obj,false,false);
 			itemList.Add(obj);
 			UIEventListener.Get(obj.gameObject).onClick = clickListItem;
@@ -101,7 +101,7 @@ public class SocialSystemUI : IUserInterface {
 			obj.SetActive(true);
 			UIDragScrollView sc = obj.GetComponent<UIDragScrollView>();
 			sc.scrollView = Util.FindChildRecursive(EnemyScrollView.transform, "EnemyScrollView").GetComponent<UIScrollView>();
-			obj.newName = i.ToString();
+			obj.name = i.ToString();
 			//Itemcontentset(enemylistsinfo[i],obj,false,false);
 			itemList.Add(obj);
 			UIEventListener.Get(obj.gameObject).onClick = clickListItem;
@@ -122,7 +122,7 @@ public class SocialSystemUI : IUserInterface {
 			obj.SetActive(true);
 			UIDragScrollView sc = obj.GetComponent<UIDragScrollView>();
 			sc.scrollView = Util.FindChildRecursive(BlackListScrollView.transform, "BlackListScrollView").GetComponent<UIScrollView>();
-			obj.newName = blacklistsinfo[i].PlayerId.ToString();
+			obj.name = blacklistsinfo[i].PlayerId.ToString();
 			Itemcontentset(blacklistsinfo[i],obj,false,false);
 			itemList.Add(obj);
 			UIEventListener.Get(obj.gameObject).onClick = clickListItem;
@@ -143,7 +143,7 @@ public class SocialSystemUI : IUserInterface {
 			obj.SetActive(true);
 			UIDragScrollView sc = obj.GetComponent<UIDragScrollView>();
 			sc.scrollView = Util.FindChildRecursive(RecommendScrollView.transform, "RecommendScrollView").GetComponent<UIScrollView>();
-			obj.newName = i.ToString();
+			obj.name = i.ToString();
 			//Itemcontentset(recommendlistsinfo[i],obj,false,false);
 			itemList.Add(obj);
 			UIEventListener.Get(obj.gameObject).onClick = clickListItem;
@@ -164,7 +164,7 @@ public class SocialSystemUI : IUserInterface {
 			UIDragScrollView sc = obj.GetComponent<UIDragScrollView>();
 			sc.scrollView = MessageView.GetComponent<UIScrollView>();
 			obj.SetActive(true);
-			obj.newName = messagelistsinfo[i].VerifyId.ToString();
+			obj.name = messagelistsinfo[i].VerifyId.ToString();
 			applyItemSet(messagelistsinfo[i],obj);
 			itemList.Add(obj);
 			UIEventListener.Get(obj.gameObject).onClick = clickListItem;
@@ -228,10 +228,10 @@ public class SocialSystemUI : IUserInterface {
 		SetText (obj, "rightLabel", rightbtntxt);
 		UILabel[] labels = obj.GetComponentsInChildren<UILabel> (true);
 		foreach (UILabel la in labels) {
-			if(la.newName == "msgName")
+			if(la.name == "msgName")
 			{
 				la.text = info.RelatedPlayerName;
-			}else if (la.newName == "msgLabel")
+			}else if (la.name == "msgLabel")
 			{
 				la.text = contents;
 			}
@@ -245,11 +245,11 @@ public class SocialSystemUI : IUserInterface {
 	//申请列表的按钮处理事件
 	void applaybtnClick(GameObject btn)
 	{
-		Debug.Log (dealApplyType+"：btnname:"+btn.newName);
-		if (btn.newName == "ChatButton") {
+		Debug.Log (dealApplyType+"：btnname:"+btn.name);
+		if (btn.name == "ChatButton") {
 			applayLeftDeal();
 		} 
-		else if (btn.newName == "DeleteButton") 
+		else if (btn.name == "DeleteButton") 
 		{
 			applayRightDeal();
 		}
@@ -289,7 +289,7 @@ public class SocialSystemUI : IUserInterface {
 	//列表  点击操作事件
 	void clickListItem(GameObject btn)
 	{
-		clickItemID = int.Parse(btn.newName);
+		clickItemID = int.Parse(btn.name);
 		commonTipPotionSet ();
 	}
 
@@ -501,8 +501,8 @@ public class SocialSystemUI : IUserInterface {
 
 	void tipbtnClick(GameObject btn)
 	{
-		Debug.Log ("tipbtnClick:"+btn.newName);
-		switch (btn.newName) 
+		Debug.Log ("tipbtnClick:"+btn.name);
+		switch (btn.name) 
 		{
 			case "Look":
 				lookFriend();

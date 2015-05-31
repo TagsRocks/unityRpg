@@ -138,7 +138,7 @@ namespace ChuMeng
 		public static List<Transform> FindAllChild(Transform t, string name) {
 			List<Transform> list = new List<Transform> ();
 			foreach (Transform c in t) {
-				if(c.newName == name) {
+				if(c.name == name) {
 					list.Add(c);
 				}
 			}
@@ -147,7 +147,7 @@ namespace ChuMeng
 		//not include root
 		public static Transform FindChildRecursive (Transform t, string name)
 		{
-			if (t.newName == name) {
+			if (t.name == name) {
 				return t;
 			}
 
@@ -196,10 +196,10 @@ namespace ChuMeng
 			var copyRender = copyPart.GetComponent<SkinnedMeshRenderer> ();
 			var myBones = new Transform[copyRender.bones.Length];
 			for (var i = 0; i < copyRender.bones.Length; i++) {
-				myBones [i] = Util.FindChildRecursive (root.transform, copyRender.bones [i].newName);
+				myBones [i] = Util.FindChildRecursive (root.transform, copyRender.bones [i].name);
 			}
 			render.bones = myBones;
-			render.rootBone = Util.FindChildRecursive (root.transform, copyRender.rootBone.newName);
+			render.rootBone = Util.FindChildRecursive (root.transform, copyRender.rootBone.name);
 		}
 
 		public static int GetGoldDrop (int level)
@@ -397,7 +397,7 @@ namespace ChuMeng
 		 */ 
 		static void InitAstarPath ()
 		{
-			astarPath = AstarPath.newActive;
+			astarPath = AstarPath.active;
 		}
 
 		public static Vector2 GridToCoord (int x, int z)

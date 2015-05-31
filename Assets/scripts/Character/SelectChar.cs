@@ -91,7 +91,7 @@ namespace ChuMeng
 			player.GetComponent<NpcEquipment> ().InitDefaultEquip ();
 
 
-			selChar.newName = roleInfo.Name;
+			selChar.name = roleInfo.Name;
 			selChar.playerId = roleInfo.PlayerId;
 			selChar.level = roleInfo.Level;
 			selChar.roleInfo = roleInfo;

@@ -55,10 +55,10 @@ namespace ChuMeng {
 		}
 
 		public virtual void SetRun() {
-			throw new System.Exception ("AI Characet Not Set Run "+GetAttr().gameObject.newName);
+			throw new System.Exception ("AI Characet Not Set Run "+GetAttr().gameObject.name);
 		}
 		public virtual void SetIdle() {
-			throw new System.Exception ("AI Characet Not Set Idle "+GetAttr().gameObject.newName);
+			throw new System.Exception ("AI Characet Not Set Idle "+GetAttr().gameObject.name);
 		}
 
 		protected bool CheckAni(string name) {

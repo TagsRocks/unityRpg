@@ -34,7 +34,7 @@ namespace ChuMeng {
 
 		//显示装备槽装备信息
 		void OnEquipSlot(GameObject g) {
-			var act = GameInterface.gameInterface.EnumAction ((ItemData.EquipPosition)System.Enum.Parse (typeof(ItemData.EquipPosition), g.newName));
+			var act = GameInterface.gameInterface.EnumAction ((ItemData.EquipPosition)System.Enum.Parse (typeof(ItemData.EquipPosition), g.name));
 			act.NotifyTooltipsShow();
 		}
 

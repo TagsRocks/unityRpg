@@ -54,7 +54,7 @@ namespace ChuMeng {
 
 		}
 		public void OnChannel(GameObject g) {
-			var n = g.newName;
+			var n = g.name;
 			if (n.Equals ("world")) {
 				currentLabel.text = "World";
 				channelType = Talk.ChannelType.World;

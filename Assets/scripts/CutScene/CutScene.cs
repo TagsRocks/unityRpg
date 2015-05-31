@@ -56,7 +56,7 @@ public class CutScene : MonoBehaviour {
 		CutSceneTrack track = gameObject.AddComponent<CutSceneTrack> ();
 		track.id = id;
 		track.type = mt;
-		track.newName = "Subtitle";
+		track.name = "Subtitle";
 		return track;
 	}
 

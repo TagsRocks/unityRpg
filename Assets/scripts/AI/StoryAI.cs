@@ -1,4 +1,4 @@
-﻿
+
 /*
 Author: liyonghelpme
 Email: 233242872@qq.com
@@ -31,7 +31,7 @@ namespace ChuMeng {
 		}
 
 		IEnumerator KillNpc(MyAnimationEvent.Message msg) {
-			GetComponent<PlayerMoveController> ().enabled = false;
+			GetComponent<PlayerAIController> ().enabled = false;
 
 			NpcAttribute attribute = GetComponent<NpcAttribute> ();
 			attribute._characterState = CharacterState.Story;
@@ -50,7 +50,7 @@ namespace ChuMeng {
 			attribute._characterState = CharacterState.Idle;
 			animation.CrossFade("idle");
 
-			GetComponent<PlayerMoveController> ().enabled = false;
+			GetComponent<PlayerAIController> ().enabled = false;
 		}
 
 		IEnumerator WaitStory() {

@@ -14,7 +14,7 @@ namespace ChuMeng
 			var runner = transform.parent.GetComponent<SkillLayoutRunner> ();
 			runner.DoDamage (runner.stateMachine.target);
 			
-			Log.AI ("HurtDirect "+runner.stateMachine.target.newName);
+			Log.AI ("HurtDirect "+runner.stateMachine.target.name);
 		}
 	
 	}

@@ -1,0 +1,62 @@
+--- /Users/liyong/u3dGame/xuexingDaLu/Assets/thirdParty/Xffect/Editor/EffectLayerCustom.cs	2015-04-24 09:41:20.000000000 +0800
++++ Editor/EffectLayerCustom.cs	2015-03-06 22:25:18.000000000 +0800
+@@ -121,20 +121,11 @@
+ 	protected SerializedProperty IsSine;
+ 	protected SerializedProperty SineFreq;
+ 
+-    /*
+ 	protected SerializedProperty SineAffectorEnable;
+ 	protected SerializedProperty SineMagnitude;
+ 	protected SerializedProperty SineFreqTime;
+ 	protected SerializedProperty SineFreqDist;
+-    */
+ 	
+-    //sine modifier
+-    public SerializedProperty SineAffectorEnable;
+-    public SerializedProperty SineForce;
+-    public SerializedProperty ModifyPos;// change position or speed
+-    public SerializedProperty SineMaxFreq;
+-    public SerializedProperty SineMinFreq;
+-
+ 	//Bomb Affector
+     protected SerializedProperty BombAffectorEnable;
+     protected SerializedProperty BombObject;
+@@ -498,20 +489,12 @@
+ 		IsSine = serializedObject.FindProperty("IsSine");
+ 		SineFreq = serializedObject.FindProperty("SineFreq");
+ 
+-        /*
+ 		SineAffectorEnable = serializedObject.FindProperty("SineAffectorEnable");
+ 		SineMagnitude = serializedObject.FindProperty("SineMagnitude");
+ 		SineFreqTime = serializedObject.FindProperty("SineFreqTime");
+ 		SineFreqDist = serializedObject.FindProperty("SineFreqDist");
+-        */
+-
+-        SineAffectorEnable = serializedObject.FindProperty("SineAffectorEnable");
+-        SineForce = serializedObject.FindProperty("SineForce");
+-        ModifyPos = serializedObject.FindProperty("ModifyPos");// change position or speed
+-        SineMaxFreq = serializedObject.FindProperty("SineMaxFreq");
+-        SineMinFreq = serializedObject.FindProperty("SineMinFreq");
+-
+ 
++ 		
+ 		BombAffectorEnable = serializedObject.FindProperty("BombAffectorEnable");
+ 		BombObject = serializedObject.FindProperty("BombObject");
+ 		BombType = serializedObject.FindProperty("BombType");
+@@ -1297,11 +1280,11 @@
+ 	}
+ 	
+ 	void DrawSineAffector() {
+-        XEditor.BeginXArea("Sine Modifier", XArea, XEditorTool.MinHeight, XEditorTool.EArea.CheckBox, SineAffectorEnable);
+-        XEditor.DrawVector3Field("force", "", SineForce);
+-		XEditor.DrawToggle("modify Pos:", "", ModifyPos);
+-        XEditor.DrawFloat("SineMaxFreq", "", SineMaxFreq);
+-        XEditor.DrawFloat("SineMinFreq", "", SineMinFreq);
++		XEditor.BeginXArea("Sine Modifier", XArea, XEditorTool.MinHeight, XEditorTool.EArea.CheckBox, SineAffectorEnable);
++		
++		XEditor.DrawFloat("magnitude:", "", SineMagnitude);
++		XEditor.DrawFloat("SineFreqTime", "", SineFreqTime);
++		XEditor.DrawFloat("SineFreqDist", "", SineFreqDist);
+ 		XEditor.EndXArea();
+ 	}
+ 

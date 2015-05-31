@@ -131,7 +131,7 @@ namespace ChuMeng {
 			case QuestState.COMPLETE:
 				var q = GetCurrent();
 				var backpack = GameObject.FindObjectOfType<BackPack>();
-				backpack.Collect(q.newName);
+				backpack.Collect(q.name);
 
 				backpack.PutGold(q.RewardGold);
 				var player = GameObject.FindGameObjectWithTag("Player");

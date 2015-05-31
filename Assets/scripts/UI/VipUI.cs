@@ -30,7 +30,7 @@ namespace ChuMeng
 			//奖励模板
 			item = new List<GameObject>();
 			vipMesh = GetName ("VipMesh");
-			vipMesh.newName = "0";
+			vipMesh.name = "0";
 			item.Add(vipMesh);
 
 
@@ -116,7 +116,7 @@ namespace ChuMeng
 				while( item.Count < viplevel.Count){
 					Log.Net("item  data " + item.Count);
 					var items = NGUITools.AddChild(vipMesh.transform.parent.gameObject, vipMesh);
-					items.newName = c.ToString();
+					items.name = c.ToString();
 					item.Add(items);
 					c++;
 				}

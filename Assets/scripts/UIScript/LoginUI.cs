@@ -172,7 +172,7 @@ namespace ChuMeng
 		}
 		
 		void onSelect(GameObject g) {
-			var id = Convert.ToInt32(g.newName.Replace("account", ""));
+			var id = Convert.ToInt32(g.name.Replace("account", ""));
 			if (SaveGame.saveGame.otherAccounts.Count > id) {
 				currentSelect = id;
 				UpdateSelect ();

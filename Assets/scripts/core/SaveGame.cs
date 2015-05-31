@@ -299,7 +299,7 @@ namespace ChuMeng
 			}
 			if (MyEventSystem.myEventSystem == null) {
 				var evt = new GameObject();
-				evt.newName = "EventSystem";
+				evt.name = "EventSystem";
 				evt.AddComponent<MyEventSystem>();
 			}
 			MyEventSystem.myEventSystem.transform.parent = g.transform;

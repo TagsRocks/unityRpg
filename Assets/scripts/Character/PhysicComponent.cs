@@ -78,7 +78,7 @@ namespace ChuMeng
 				motionValue = Vector3.zero;
 				return true;
 			}
-			Log.Critical ("Object In Skill Move Yet "+gameObject.newName);
+			Log.Critical ("Object In Skill Move Yet "+gameObject.name);
 			return false;
 		}
 

@@ -14,6 +14,7 @@ namespace Xft
 	/// 震动是变化 X 坐标
     public class SineAffector : Affector
     {
+        /*
         protected float Magnitude;
         protected float SineFreqTime = 1;
         protected float SineFreqDist = 1;
@@ -25,49 +26,36 @@ namespace Xft
             SineFreqTime = sineFreqTime;
             SineFreqDist = sineFreqDist;
         }
-
+        */
+        protected Vector3 SineForce;
+        protected bool ModifyPos;
+        protected float SineMaxFreq;
+        protected float SineMinFreq;
+        float SineFreq = 1;
+        public SineAffector(Vector3 force, bool modifyPos, float maxFreq, float minFreq, EffectNode node)
+            :base(node, AFFECTORTYPE.SineAffector)
+        {
+            SineForce = force;
+            ModifyPos = modifyPos;
+            SineMaxFreq = maxFreq;
+            SineMinFreq = minFreq;
+            SineFreq = SineMinFreq;
+        }
         public override void Update(float deltaTime)
         {
-			Node.IsSine = true;
-			Node.SineMagnitude = Magnitude;
-			Node.SineFreqTime = SineFreqTime;
-			Node.SineFreqDist = SineFreqDist;
-
-            /*
-            float strength = 0f;
-
-            if(IsSine) {
-                strength = Magnitude;
-                float t = Node.GetElapsedTime();
-				float st = Mathf.Sin(2*Mathf.PI*SineFreq*t);
-				strength = st*strength;
-
-            }else if (MType == MAGTYPE.Fixed)
-                strength = Magnitude;
-            else
-                strength = MagCurve.Evaluate(Node.GetElapsedTime());
-
-   
-            if (GType == GAFTTYPE.Planar)
-            {
-                Vector3 syncDir = Node.Owner.ClientTransform.rotation * Dir;
-                if (IsAccelerate)
-                    Node.Velocity += syncDir * strength * deltaTime;
-                else
-                    Node.Position += syncDir * strength * deltaTime;
+            float strength = 0;
+            strength = 1;
+            float t = Node.GetElapsedTime();
+            float st = Mathf.Sin(2*Mathf.PI*SineFreq*t);
+            strength = st*strength;
+            Vector3 syncDir = Node.Owner.ClientTransform.rotation * SineForce;
+            if(ModifyPos) {
+                Node.Position += syncDir*strength*deltaTime;
+            }else {
+                Node.Velocity += syncDir*strength*deltaTime;
             }
-            else if (GType == GAFTTYPE.Spherical)
-            {
-                Vector3 dir;
-                dir = GravityObj.position - Node.GetOriginalPos();
-                if (IsAccelerate)
-                    Node.Velocity += dir * strength * deltaTime;
-                else
-                {
-                    Node.Position += dir.normalized * strength * deltaTime;
-                }  
-            }
-            */
+
+
         }
     }
 }

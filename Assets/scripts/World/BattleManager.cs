@@ -25,7 +25,7 @@ namespace ChuMeng
 		 */ 
 		public int waveNum = 0;
 		public static BattleManager battleManager;
-		[HideInInspector]
+		//[HideInInspector]
 		public List<GameObject>enemyList;
 		public DungeonData DungeonConfig;
 		//public AstarPath PathInfo;
@@ -187,12 +187,14 @@ namespace ChuMeng
 		//wait for a while to rest goto next wave
 		IEnumerator NextWave ()
 		{
+            Log.Sys("NextWave Start");
 			yield return new WaitForSeconds (3);
 			if (levelOver) {
 				yield break;
 			}
 
 			waveNum++;
+            Log.Sys("NewWaveNum "+waveNum + " MaxWave "+MaxWave);
 			if (waveNum >= MaxWave) {
 				currentZone++;
 				if (currentZone < Zones.Count) {
@@ -233,9 +235,11 @@ namespace ChuMeng
         /// <param name="go">Go.</param>
 		public void EnemyDead (GameObject go)
 		{
+            Log.Sys("MonsterDead "+go.name+" list "+enemyList.Count);
 			enemyList.Remove (go);
-			if (enemyList.Count > 0)
+			if (enemyList.Count > 0) {
 				return;
+            }
 
 			enemyList.Clear ();
 			StartCoroutine (NextWave ());

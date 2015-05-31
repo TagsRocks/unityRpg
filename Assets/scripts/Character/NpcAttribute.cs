@@ -233,18 +233,18 @@ namespace ChuMeng {
 		//根据配置文件初始化属性
 		//TODO: 初始化其它玩家的属性 PlayerOther  PlayerSelf Monster Boss
 		void InitData() {
-			Log.Important ("Initial Object HP "+gameObject.newName);
+			Log.Important ("Initial Object HP "+gameObject.name);
 			var characterInfo = GetComponent<CharacterInfo>();
 			if(ObjUnitData != null && characterInfo != null) {
 				var view = GetComponent<KBEngine.KBNetworkView>(); 
 
 
-				Log.Important("Player View State "+gameObject.newName+" "+view.IsPlayer+" "+view.IsMine);
+				Log.Important("Player View State "+gameObject.name+" "+view.IsPlayer+" "+view.IsMine);
 				HP_Max = _ObjUnitData.HP;
 				HP = HP_Max;
 				MP_Max = _ObjUnitData.MP;
 				MP = MP_Max;
-				Log.Important("Init Obj Data  "+gameObject.newName+" "+HP+" "+_ObjUnitData.HP);
+				Log.Important("Init Obj Data  "+gameObject.name+" "+HP+" "+_ObjUnitData.HP);
 				ChangeHP(0);
 				ChangeMP(0);
 				/*
@@ -355,7 +355,7 @@ namespace ChuMeng {
 			evt.floatArg = rate;
 			MyEventSystem.myEventSystem.PushEvent (evt);
 
-			Log.Important ("Init GameObject HP "+gameObject.newName);
+			Log.Important ("Init GameObject HP "+gameObject.name);
 
 			var evt1 = new MyEvent (MyEvent.EventType.UnitHP);
 			evt1.localID = GetLocalId ();
@@ -389,7 +389,7 @@ namespace ChuMeng {
 		 * Damage Type 
 		 */ 
 		public void DoHurt(int v, bool isCritical, SkillData.DamageType dt = SkillData.DamageType.Physic) {
-			Debug.Log ("NpcAttribute::DoHurt Name:"+gameObject.newName+" hurtValue:"+v+" Armor:"+Armor+" DamageType "+dt);
+			Debug.Log ("NpcAttribute::DoHurt Name:"+gameObject.name+" hurtValue:"+v+" Armor:"+Armor+" DamageType "+dt);
 			if (dt == SkillData.DamageType.Physic) {
 				int hurt = v - Armor;
 				Log.Important("Get Hurt is "+hurt);

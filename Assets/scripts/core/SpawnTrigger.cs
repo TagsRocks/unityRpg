@@ -53,8 +53,8 @@ namespace ChuMeng {
 
 		int curWaveNum = 0;
 		void Awake() {
-			if (gameObject.newName.Contains ("wave")) {
-				var num = Convert.ToInt32(gameObject.newName.Replace("wave", ""));
+			if (gameObject.name.Contains ("wave")) {
+				var num = Convert.ToInt32(gameObject.name.Replace("wave", ""));
 				waveNum = num;
 			}
 
@@ -72,8 +72,8 @@ namespace ChuMeng {
 
 		GameObject showRes;
 		string GetWave() {
-			if (gameObject != null && gameObject.newName.Contains ("wave")) {
-				var num = Convert.ToInt32(gameObject.newName.Replace("wave", ""));
+			if (gameObject != null && gameObject.name.Contains ("wave")) {
+				var num = Convert.ToInt32(gameObject.name.Replace("wave", ""));
 				waveNum = num;
 			}
 			return "" + waveNum;

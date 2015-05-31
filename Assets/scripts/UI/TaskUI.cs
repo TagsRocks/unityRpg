@@ -52,13 +52,13 @@ namespace ChuMeng
 			//任务标题
 			item = new List<GameObject> ();
 			taskMesh = GetName ("TaskMesh");
-			taskMesh.newName = "0";
+			taskMesh.name = "0";
 			item.Add (taskMesh);
 
 			//任务奖励
 			aItem = new List<GameObject> ();
 			awardMesh = GetName ("AwardMesh");
-			awardMesh.newName = "0";
+			awardMesh.name = "0";
 			aItem.Add (awardMesh);
 
 			SetCallback ("close", Hide);
@@ -125,7 +125,7 @@ namespace ChuMeng
 				int cou = aItem.Count;
 				while (aItem.Count < awardItem.Count) {
 					var aitems = NGUITools.AddChild(awardMesh.transform.parent.gameObject, awardMesh);
-					aitems.newName = cou.ToString();
+					aitems.name = cou.ToString();
 					cou++;
 					aItem.Add(aitems);
 				}	
@@ -151,7 +151,7 @@ namespace ChuMeng
 				int c = item.Count;
 				while (item.Count < taskItem.Count) {
 					var items = NGUITools.AddChild(taskMesh.transform.parent.gameObject, taskMesh);
-					items.newName = c.ToString();
+					items.name = c.ToString();
 					item.Add(items);
 					c++;
 				}
@@ -159,8 +159,8 @@ namespace ChuMeng
 				for (int i =0; i < taskItem.Count; i++) {
 					item[i].SetActive(true);
 					item[i].GetComponent<UIToggle>().value = false;
-					var id = System.Convert.ToInt32(item[i].newName);
-					CheckBox(item[i].newName, id, OnTask);
+					var id = System.Convert.ToInt32(item[i].name);
+					CheckBox(item[i].name, id, OnTask);
 					//添加任务标题内容
 					var name = Util.FindChildRecursive(item[i].transform, "name").GetComponent<UILabel>();
 					name.text = typeName + taskItem[i].Name;

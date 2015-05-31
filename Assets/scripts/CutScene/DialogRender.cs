@@ -1,4 +1,4 @@
-﻿
+
 /*
 Author: liyonghelpme
 Email: 233242872@qq.com
@@ -60,7 +60,7 @@ namespace ChuMeng {
 			/*
 			 * Stop Player Control Move
 			 */
-			player.GetComponent<PlayerMoveController> ().enabled = false;
+			player.GetComponent<PlayerAIController> ().enabled = false;
 			player.animation.CrossFade("idle");
 
 		}
@@ -109,7 +109,7 @@ namespace ChuMeng {
 			
 			var player = GameObject.FindGameObjectWithTag("Player");
 			player.GetComponent<StoryAI> ().enabled = false;
-			player.GetComponent<PlayerMoveController> ().enabled = true;
+			player.GetComponent<PlayerAIController> ().enabled = true;
 
 			var battleManager = GameObject.Find("BattleManager");
 			battleManager.GetComponent<BattleManager> ().waveNum = 2;

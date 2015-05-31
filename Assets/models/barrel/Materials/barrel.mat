@@ -7,7 +7,7 @@ Material:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: barrel
-  m_Shader: {fileID: 4800000, guid: 26a83b490d1944200b5dd86054936dd7, type: 3}
+  m_Shader: {fileID: 4800000, guid: 65a267bb8c6f1468a853369b6641d369, type: 3}
   m_ShaderKeywords: []
   m_CustomRenderQueue: -1
   m_SavedProperties:
@@ -17,7 +17,7 @@ Material:
         first:
           name: _MainTex
         second:
-          m_Texture: {fileID: 2800000, guid: 1039ea2c587a44e2cb9556230c3664bb, type: 3}
+          m_Texture: {fileID: 2800000, guid: ef46e18c131674562806315505a51c8a, type: 3}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
     m_Floats: {}

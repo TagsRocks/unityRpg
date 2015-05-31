@@ -102,7 +102,7 @@ namespace ChuMeng
 			//频道切换  从服务器把每个频道的信息拿出来
 			var n = "all";
 			if (g != null) {
-				n = g.newName;
+				n = g.name;
 			}
 			Talk.Channel channel = null;
 

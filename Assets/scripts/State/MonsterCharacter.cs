@@ -6,7 +6,7 @@ namespace ChuMeng
 	public class MonsterCharacter : AICharacter
 	{
 		public override void SetRun() {
-			Log.AI ("Monster run "+GetAttr().gameObject.newName);
+			Log.AI ("Monster run "+GetAttr().gameObject.name);
 			var runName = "run";
 			if (!CheckAni (runName)) {
 				runName = "walk";
