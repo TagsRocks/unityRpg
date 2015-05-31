@@ -1,4 +1,4 @@
-﻿
+
 /*
 Author: liyonghelpme
 Email: 233242872@qq.com
@@ -129,7 +129,7 @@ namespace ChuMeng
 
 			if ((transform.position - initPos).sqrMagnitude >= maxDistance * maxDistance) {
 				if (missileData.DieParticle != null) {
-					Log.AI ("bullet die " + gameObject.name);
+					Log.AI ("bullet die " + gameObject.newName);
 					GameObject g = Instantiate (missileData.DieParticle) as GameObject;
 					NGUITools.AddMissingComponent<RemoveSelf> (g);
 					g.transform.parent = ObjectManager.objectManager.transform;
@@ -187,7 +187,7 @@ namespace ChuMeng
 		//TODO:撞击墙壁如何处理
 		void OnTriggerEnter (Collider other)
 		{
-			Log.AI ("Bullet collider enemy " + other.name + " " + other.tag);
+			Log.AI ("Bullet collider enemy " + other.newName + " " + other.tag);
 			if (other.tag == enemyTag) {
 				//攻击多个目标只释放一次 DieParticle
 				CreateHitParticle();
@@ -226,7 +226,7 @@ namespace ChuMeng
 				//TODO::撞击其它玩家如何处理
 			} else if (other.tag == attacker.tag) { 
 			} else {//装到墙体 或者建筑物 等对象身上 则 反射  Not used
-				Log.AI ("Bullet colldier with Wall " + gameObject.name);
+				Log.AI ("Bullet colldier with Wall " + gameObject.newName);
 				if (missileData.HitParticle != null) {
 					GameObject g = Instantiate (missileData.HitParticle) as GameObject;
 					NGUITools.AddMissingComponent<RemoveSelf> (g);

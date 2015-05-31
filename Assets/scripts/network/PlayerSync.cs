@@ -1,4 +1,4 @@
-﻿
+
 /*
 Author: liyonghelpme
 Email: 233242872@qq.com
@@ -27,7 +27,7 @@ namespace ChuMeng
 		public void OnPhotonSerializeView (Packet packet)
 		{
 			if (photonView.IsMine) {
-				if(AstarPath.active != null && AstarPath.active.graphs.Length > 0) {
+				if(AstarPath.newActive != null && AstarPath.newActive.graphs.Length > 0) {
 					CGPlayerMove.Builder mv = CGPlayerMove.CreateBuilder ();
 					var vxz = Util.CoordToGrid(transform.position.x, transform.position.z);
 					//MapY Offset Height
@@ -43,7 +43,7 @@ namespace ChuMeng
 						packet.protoBody = mv.BuildPartial ();
 						return;
 					}else {
-						Log.Sys("Can't Move Grid "+mv.X+" "+mv.Z+" "+gameObject.name);
+						Log.Sys("Can't Move Grid "+mv.X+" "+mv.Z+" "+gameObject.newName);
 					}
 				}
 

@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -68,8 +68,8 @@ public class AuctionUI : IUserInterface {
 
 	private void btnClick(GameObject btn)
 	{
-		Debug.Log ("btnClick:"+btn.name);
-		switch (btn.name) 
+		Debug.Log ("btnClick:"+btn.newName);
+		switch (btn.newName) 
 		{
 			case "CloseBtn":
 				break;
@@ -164,7 +164,7 @@ public class AuctionUI : IUserInterface {
 		for (int i = 0; i < auctionFace.tableList.Count; i++) {
 			var obj = NGUITools.AddChild(Table,Util.FindChildRecursive(Table.transform, "Quest1").gameObject);
 			SetText (obj, "Name", auctionFace.tableList[i].tableName);
-			obj.name = auctionFace.tableList[i].tableNode.ToString();
+			obj.newName = auctionFace.tableList[i].tableNode.ToString();
 			obj.SetActive(true);
 			list.Add(obj);
 		}
@@ -185,8 +185,8 @@ public class AuctionUI : IUserInterface {
 	//分类列表请求
 	private void tableItemClick(GameObject btn)
 	{
-		Debug.Log ("....click ...."+btn.name);
-		itemId = int.Parse (btn.name);
+		Debug.Log ("....click ...."+btn.newName);
+		itemId = int.Parse (btn.newName);
 		StartCoroutine (itemRequest ());
 	}
 
@@ -202,7 +202,7 @@ public class AuctionUI : IUserInterface {
 		GameObject gridObj = Util.FindChildRecursive(obj.transform, "Grid").gameObject;
 		for (int i = 0; i < gritItem.Count; i++) {
 			var ob = NGUITools.AddChild(gridObj,Util.FindChildRecursive(gridObj.transform, "Toggle1").gameObject);
-			ob.name = gritItem[i].tableNode.ToString();
+			ob.newName = gritItem[i].tableNode.ToString();
 			SetText (ob, "Label", gritItem[i].tableName);
 			ob.SetActive(true);
 		}
@@ -247,7 +247,7 @@ public class AuctionUI : IUserInterface {
 		GameObject gridObj = Util.FindChildRecursive(AuctionnerMeshView.transform, "Grid").gameObject;
 		for (int i = 0; i < length; i++) {
 			var ob = NGUITools.AddChild(gridObj,Util.FindChildRecursive(AuctionnerMeshView.transform, "AucitonMesh").gameObject);
-			ob.name = itemInfo[i].Id.ToString();
+			ob.newName = itemInfo[i].Id.ToString();
 			//物品图片 等级根据id读取  配置表的icon  todo
 			commondSetForIcon (ob,itemInfo[i].BaseId);
 			//SetText (ob, "Level", ""+i);
@@ -267,10 +267,10 @@ public class AuctionUI : IUserInterface {
 
 	private void auctionItemClick(GameObject bt)
 	{
-		Debug.Log ("bt:"+bt.name);
+		Debug.Log ("bt:"+bt.newName);
 
-		tipBuyId = int.Parse (bt.name);
-		AuctionItem info = setItemInfo [auctionFace.GetItemIndex(setItemInfo,int.Parse(bt.name))];
+		tipBuyId = int.Parse (bt.newName);
+		AuctionItem info = setItemInfo [auctionFace.GetItemIndex(setItemInfo,int.Parse(bt.newName))];
 
 		//ItemData data = new ItemData (1, info.BaseId);
 

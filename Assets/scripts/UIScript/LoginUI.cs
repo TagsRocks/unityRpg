@@ -1,4 +1,4 @@
-﻿
+
 /*
 Author: liyonghelpme
 Email: 233242872@qq.com
@@ -172,7 +172,7 @@ namespace ChuMeng
 		}
 		
 		void onSelect(GameObject g) {
-			var id = Convert.ToInt32(g.name.Replace("account", ""));
+			var id = Convert.ToInt32(g.newName.Replace("account", ""));
 			if (SaveGame.saveGame.otherAccounts.Count > id) {
 				currentSelect = id;
 				UpdateSelect ();

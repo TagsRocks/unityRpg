@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -24,7 +24,7 @@ namespace ChuMeng
 
 			items = new List<GameObject> ();
 			shopItem = GetName ("shopprioove");
-			shopItem.name = "0";
+			shopItem.newName = "0";
 			items.Add (shopItem);
 
 			SetCallback ("top up", OnCharge);
@@ -101,7 +101,7 @@ namespace ChuMeng
 			int c = items.Count;
 			while (items.Count < goods.Count) {
 				var item = NGUITools.AddChild(shopItem.transform.parent.gameObject, shopItem);
-				item.name = c.ToString();
+				item.newName = c.ToString();
 				items.Add(item);
 				c++;
 			}

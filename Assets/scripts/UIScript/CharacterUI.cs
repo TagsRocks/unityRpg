@@ -1,4 +1,4 @@
-﻿
+
 /*
 Author: liyonghelpme
 Email: 233242872@qq.com
@@ -124,7 +124,7 @@ namespace ChuMeng
 		{
 			int cid = 0;
 			if (g != null) {
-				cid = Convert.ToInt32 (g.name.Replace ("char", ""));
+				cid = Convert.ToInt32 (g.newName.Replace ("char", ""));
 			} else {
 				
 			}

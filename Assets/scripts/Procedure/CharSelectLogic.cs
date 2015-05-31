@@ -141,7 +141,7 @@ namespace ChuMeng {
 				var selCharRes = packet.packet.protoBody as GCSelectCharacter;
 				SaveGame.saveGame.loginCharData = selCharRes;
 
-				SaveGame.saveGame.selectChar = role;
+                SaveGame.saveGame.SetSelectChar(role);
 
 				StartCoroutine(BindSession());
 			} else {

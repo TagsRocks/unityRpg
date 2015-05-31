@@ -1,4 +1,4 @@
-﻿
+
 /*
 Author: liyonghelpme
 Email: 233242872@qq.com
@@ -138,7 +138,7 @@ namespace ChuMeng
 		public static List<Transform> FindAllChild(Transform t, string name) {
 			List<Transform> list = new List<Transform> ();
 			foreach (Transform c in t) {
-				if(c.name == name) {
+				if(c.newName == name) {
 					list.Add(c);
 				}
 			}
@@ -147,7 +147,7 @@ namespace ChuMeng
 		//not include root
 		public static Transform FindChildRecursive (Transform t, string name)
 		{
-			if (t.name == name) {
+			if (t.newName == name) {
 				return t;
 			}
 
@@ -196,10 +196,10 @@ namespace ChuMeng
 			var copyRender = copyPart.GetComponent<SkinnedMeshRenderer> ();
 			var myBones = new Transform[copyRender.bones.Length];
 			for (var i = 0; i < copyRender.bones.Length; i++) {
-				myBones [i] = Util.FindChildRecursive (root.transform, copyRender.bones [i].name);
+				myBones [i] = Util.FindChildRecursive (root.transform, copyRender.bones [i].newName);
 			}
 			render.bones = myBones;
-			render.rootBone = Util.FindChildRecursive (root.transform, copyRender.rootBone.name);
+			render.rootBone = Util.FindChildRecursive (root.transform, copyRender.rootBone.newName);
 		}
 
 		public static int GetGoldDrop (int level)
@@ -397,7 +397,7 @@ namespace ChuMeng
 		 */ 
 		static void InitAstarPath ()
 		{
-			astarPath = AstarPath.active;
+			astarPath = AstarPath.newActive;
 		}
 
 		public static Vector2 GridToCoord (int x, int z)
@@ -625,6 +625,12 @@ namespace ChuMeng
 			root.fitHeight = true;
 
 		}
+
+    public static void InitGameObject(GameObject g){
+        g.transform.localPosition = Vector3.zero;
+        g.transform.localRotation = Quaternion.identity;
+        g.transform.localScale = Vector3.one;
+    }
 	}
 
 

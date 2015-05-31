@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 namespace ChuMeng
@@ -49,7 +49,7 @@ namespace ChuMeng
 
 		public void SetRandomActive ()
 		{
-			Log.AI ("SetRandomActive " + gameObject.name);
+			Log.AI ("SetRandomActive " + gameObject.newName);
 			var rd = Random.Range (0, 100);
 			var skList = attribute.ObjUnitData.GetSkillList ();
 			Log.AI ("skList is " + skList.Count);

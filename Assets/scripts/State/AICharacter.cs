@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -55,10 +55,10 @@ namespace ChuMeng {
 		}
 
 		public virtual void SetRun() {
-			throw new System.Exception ("AI Characet Not Set Run "+GetAttr().gameObject.name);
+			throw new System.Exception ("AI Characet Not Set Run "+GetAttr().gameObject.newName);
 		}
 		public virtual void SetIdle() {
-			throw new System.Exception ("AI Characet Not Set Idle "+GetAttr().gameObject.name);
+			throw new System.Exception ("AI Characet Not Set Idle "+GetAttr().gameObject.newName);
 		}
 
 		protected bool CheckAni(string name) {

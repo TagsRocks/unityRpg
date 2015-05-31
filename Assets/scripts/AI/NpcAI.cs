@@ -20,7 +20,7 @@ namespace ChuMeng {
 		Vector3 targetRotation;
 
 		CommonAI commonAI;
-		AICharacter ai;
+		
 		void Awake() {
 			commonAI = GetComponent<CommonAI> ();
 			attribute = GetComponent<NpcAttribute>();
@@ -49,7 +49,7 @@ namespace ChuMeng {
 			ai.ChangeState (AIStateEnum.IDLE);
 		}
 
-		void OnDestroy() {
+		protected override void OnDestroy() {
 			if (attribute.IsDead) {
 				Util.ClearMaterial (gameObject);
 			}

@@ -21,7 +21,8 @@ namespace ChuMeng
 			ai.ChangeState (AIStateEnum.IDLE);
 		}
 
-		void OnDestroy() {
+		protected override void OnDestroy() {
+            base.OnDestroy();
 			if (attribute.IsDead) {
 				Util.ClearMaterial (gameObject);
 			}

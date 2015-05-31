@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -77,8 +77,8 @@ namespace ChuMeng
 		}
 
 		void OnSkill(GameObject g) {
-			Log.GUI ("On Skill Button "+g.name);
-			curSkill = System.Convert.ToInt32(g.name);
+			Log.GUI ("On Skill Button "+g.newName);
+			curSkill = System.Convert.ToInt32(g.newName);
 			UpdateSkillInfo ();
 		}
 
@@ -126,7 +126,7 @@ namespace ChuMeng
 
 			int c = 0;
 			foreach(GameObject g in skillMeshes) {
-				g.name = c.ToString();
+				g.newName = c.ToString();
 				g.SetActive(false);
 				//g.GetComponent<UIButton>().onClick.Clear();
 				c++;

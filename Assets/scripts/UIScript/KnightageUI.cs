@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -183,7 +183,7 @@ public class KnightageUI : IUserInterface {
 			sc.scrollView = Util.FindChildRecursive(salaryview.transform, "ScrollView").GetComponent<UIScrollView>();
 			BoxCollider inputBtn = Util.FindChildRecursive (obj.transform, "Input").GetComponent<BoxCollider> ();
 			inputBtn.enabled = isMaster;
-			obj.name = wageList[i].PlayerId.ToString();
+			obj.newName = wageList[i].PlayerId.ToString();
 			salaryItemSet(wageList[i],obj);
 			itemList.Add(obj);
 		}
@@ -231,7 +231,7 @@ public class KnightageUI : IUserInterface {
 			UIDragScrollView sc = obj.GetComponent<UIDragScrollView>();
 			sc.scrollView = Util.FindChildRecursive(MemberView.transform, "ScrollView").GetComponent<UIScrollView>();
 			
-			obj.name = memberList[i].PlayerId.ToString();
+			obj.newName = memberList[i].PlayerId.ToString();
 			memberItemSet(memberList[i],obj);
 			itemList.Add(obj);
 			if(memberList[i].IsOnline)
@@ -293,7 +293,7 @@ public class KnightageUI : IUserInterface {
 			foreach (UIButton button in buttons) {
 				UIEventListener.Get (button.gameObject).onClick = societyItemClick;
 			}
-			obj.name = guildList[i].GuildMasterId.ToString();
+			obj.newName = guildList[i].GuildMasterId.ToString();
 			societyItemSet(guildList[i],obj);
 			itemList.Add(obj);
 
@@ -315,10 +315,10 @@ public class KnightageUI : IUserInterface {
 
 	private void societyItemClick(GameObject btn)
 	{
-		if (btn.name == "CallGuildMaster") 
+		if (btn.newName == "CallGuildMaster") 
 		{
 			Debug.Log("跳转 打开邮件写邮件面板");
-		} else if (btn.name == "ApplyFight") 
+		} else if (btn.newName == "ApplyFight") 
 		{
 			Debug.Log("功能未开启");
 			var evt = new MyEvent(MyEvent.EventType.DebugMessage);
@@ -353,7 +353,7 @@ public class KnightageUI : IUserInterface {
 			foreach (UIButton button in buttons) {
 				UIEventListener.Get (button.gameObject).onClick = applyItemClick;
 			}
-			obj.name = i.ToString();
+			obj.newName = i.ToString();
 			//societyItemSet(enemylistsinfo[i],obj);
 			itemList.Add(obj);
 			
@@ -380,19 +380,19 @@ public class KnightageUI : IUserInterface {
 
 	private void applyItemClick(GameObject btn)
 	{
-		if (btn.name == "Consent") 
+		if (btn.newName == "Consent") 
 		{
 			Debug.Log("同意 入团");
-		} else if (btn.name == "Refuse") 
+		} else if (btn.newName == "Refuse") 
 		{
 			Debug.Log("拒绝 入团");
-		}else if (btn.name == "ConsentButton") 
+		}else if (btn.newName == "ConsentButton") 
 		{
 			Debug.Log("全部同意");
-		}else if (btn.name == "RefuseButton") 
+		}else if (btn.newName == "RefuseButton") 
 		{
 			Debug.Log("全部拒绝 入团");
-		}else if (btn.name == "DeleteButton") 
+		}else if (btn.newName == "DeleteButton") 
 		{
 			Debug.Log("全部删除");
 		}
@@ -478,7 +478,7 @@ public class KnightageUI : IUserInterface {
 	//面板 下面列 按钮的事件处理
 	private void buttombtnClick(GameObject btn)
 	{
-		switch (btn.name) 
+		switch (btn.newName) 
 		{
 			case "ManorButton":
 				enterGuild ();
@@ -508,11 +508,11 @@ public class KnightageUI : IUserInterface {
 
 	private void noticeClick(GameObject btn)
 	{
-		if (btn.name == "cancelButton")
+		if (btn.newName == "cancelButton")
 		{
 			NoticeTips.SetActive (false);
 		}
-		else if (btn.name == "okButton")
+		else if (btn.newName == "okButton")
 		{
 			Debug.Log("NoticeText.text:"+NoticeText.text);
 			if(ChangeNoticeText.text != "")

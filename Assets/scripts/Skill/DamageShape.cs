@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -104,7 +104,7 @@ namespace ChuMeng
 									DoDamage (hitColliders [i].gameObject);
 									hurtEnemy.Add (hitColliders [i].gameObject);
 								} else if (shape == Shape.Angle) {
-									Log.AI ("DamageHit " + runner.stateMachine.name + " " + hitColliders [i].name);
+									Log.AI ("DamageHit " + runner.stateMachine.newName + " " + hitColliders [i].newName);
 									var dir = hitColliders [i].gameObject.transform.position - transform.position;
 									var cos = Vector3.Dot (dir.normalized, transform.forward);
 									if (cos > cosAngle) {
@@ -115,7 +115,7 @@ namespace ChuMeng
 							}
 						}
 					}
-					Log.AI ("Check Damage Shape " + runner.stateMachine.name);
+					Log.AI ("Check Damage Shape " + runner.stateMachine.newName);
 					damageYet = true;
 				}
 

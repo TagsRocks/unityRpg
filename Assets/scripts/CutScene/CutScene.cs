@@ -1,4 +1,4 @@
-﻿
+
 /*
 Author: liyonghelpme
 Email: 233242872@qq.com
@@ -56,7 +56,7 @@ public class CutScene : MonoBehaviour {
 		CutSceneTrack track = gameObject.AddComponent<CutSceneTrack> ();
 		track.id = id;
 		track.type = mt;
-		track.name = "Subtitle";
+		track.newName = "Subtitle";
 		return track;
 	}
 

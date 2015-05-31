@@ -1,4 +1,4 @@
-﻿/*************************/
+/*************************/
 //Chat System  聊天系统
 //Author : wangjunbo
 //Time : 2014年12月30日
@@ -102,7 +102,7 @@ namespace ChuMeng
 			//频道切换  从服务器把每个频道的信息拿出来
 			var n = "all";
 			if (g != null) {
-				n = g.name;
+				n = g.newName;
 			}
 			Talk.Channel channel = null;
 

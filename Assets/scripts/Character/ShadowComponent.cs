@@ -1,4 +1,4 @@
-﻿
+
 /*
 Author: liyonghelpme
 Email: 233242872@qq.com
@@ -20,7 +20,7 @@ public class ShadowComponent : MonoBehaviour {
 		if (shadowPlane == null) {
 			GameObject p = GameObject.CreatePrimitive (PrimitiveType.Plane);
 			shadowPlane = p;
-			p.name = "shadowPlane";
+			p.newName = "shadowPlane";
 			p.transform.parent = transform;
 			p.transform.localScale = Vector3.one;
 			p.transform.localRotation = Quaternion.identity;

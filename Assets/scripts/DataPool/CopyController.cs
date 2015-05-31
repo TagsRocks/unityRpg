@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -38,7 +38,7 @@ namespace ChuMeng {
 
 		public static CopyController copyController;
 		void Awake() {
-			gameObject.name = "CopyController";
+			gameObject.newName = "CopyController";
 			copyController = this;
 			DontDestroyOnLoad (gameObject);
 		}

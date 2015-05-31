@@ -1,4 +1,4 @@
-﻿/*--------------------------------*/
+/*--------------------------------*/
 //  作者 ： QiuChell
 //  时间 ： 2015年01月26日
 //  说明 ： 邮件系统
@@ -70,7 +70,7 @@ public class EmailSystemUI : IUserInterface {
 		for (int i = 0; i < Length; i++) {
 			var obj = NGUITools.AddChild(EmailGrid,Util.FindChildRecursive(EmailGrid.transform, "EmailMesh0").gameObject);
 			obj.SetActive(true);
-			obj.name = allmaillistinfo[i].MailId.ToString();
+			obj.newName = allmaillistinfo[i].MailId.ToString();
 			contentset(allmaillistinfo[i],obj);
 			ListInfo.Add(obj);
 			UIEventListener.Get(obj.gameObject).onClick = OpenWriteEmail;
@@ -169,7 +169,7 @@ public class EmailSystemUI : IUserInterface {
 	
 	private void OpenWriteEmail(GameObject button)
 	{
-		openMailID = int.Parse(button.name);
+		openMailID = int.Parse(button.newName);
 		UILabel[] label = button.GetComponentsInChildren<UILabel> (true);
 		foreach (UILabel la in label)
 		{
@@ -210,7 +210,7 @@ public class EmailSystemUI : IUserInterface {
 		{
 			for (int i = 0; i < ListInfo.Count; i++)
 			{
-				GameInterface_EMail.GetInstance().DelEMailRequest(int.Parse(ListInfo[i].name));
+				GameInterface_EMail.GetInstance().DelEMailRequest(int.Parse(ListInfo[i].newName));
 				Destroy(ListInfo[i]);
 			}
 			ListInfo.Clear();
@@ -221,7 +221,7 @@ public class EmailSystemUI : IUserInterface {
 			GameObject des = EmailGrid.transform.Find(openMailID.ToString()).gameObject;
 			for (int i = 0; i < ListInfo.Count; i++)
 			{
-				if (des.name == ListInfo[i].name)
+				if (des.newName == ListInfo[i].newName)
 				{
 					ListInfo.RemoveAt(i);
 				}
@@ -296,7 +296,7 @@ public class EmailSystemUI : IUserInterface {
 	}
 	private void writeSaveAnnexDeal(GameObject btn)
 	{
-		Debug.Log (btn.name);
+		Debug.Log (btn.newName);
 		//接入打开物品的界面接口，选着道具作为赠送附件
 	}
 }

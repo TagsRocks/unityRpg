@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 namespace ChuMeng
@@ -47,7 +47,7 @@ namespace ChuMeng
 		void MakeMissile(float deg) {
 			Log.AI ("bullet degree "+deg);
 
-			var b = new GameObject("bullet_"+Missile.name);
+			var b = new GameObject("bullet_"+Missile.newName);
 			var bullet = b.AddComponent<Bullet>();
 			bullet.OffsetPos = Position;
 			GameObject attacker = null;

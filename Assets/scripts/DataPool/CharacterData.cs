@@ -49,7 +49,7 @@ namespace ChuMeng {
 		[SaveAttribute()]
 		public int SkillPoint = 0;
 		[SaveAttribute()]
-		public string name;
+		public string newName;
 
 
 		void Awake() {

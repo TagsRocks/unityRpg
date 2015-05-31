@@ -1,4 +1,4 @@
-﻿
+
 /*
 Author: liyonghelpme
 Email: 233242872@qq.com
@@ -46,7 +46,7 @@ namespace ChuMeng
 		}
 		protected override void OnLocalEvent (MyEvent evt)
 		{	
-			Log.Important ("Blood bar OnEvent "+gameObject.name+" type "+evt.type+" "+evt.localID+" localId "+GetComponent<KBEngine.KBNetworkView>().GetLocalId());
+			Log.Important ("Blood bar OnEvent "+gameObject.newName+" type "+evt.type+" "+evt.localID+" localId "+GetComponent<KBEngine.KBNetworkView>().GetLocalId());
 			Log.Important("Init HP And Max "+GetComponent<NpcAttribute>().HP + " "+GetComponent<NpcAttribute>().HP_Max);
 			if (evt.type == MyEvent.EventType.UnitHP) {
 				

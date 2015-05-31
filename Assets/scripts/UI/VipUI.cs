@@ -1,4 +1,4 @@
-﻿/*
+/*
 Author :  Wangjunbo
 Email  :  1305201219@qq.com
 */
@@ -30,7 +30,7 @@ namespace ChuMeng
 			//奖励模板
 			item = new List<GameObject>();
 			vipMesh = GetName ("VipMesh");
-			vipMesh.name = "0";
+			vipMesh.newName = "0";
 			item.Add(vipMesh);
 
 
@@ -116,7 +116,7 @@ namespace ChuMeng
 				while( item.Count < viplevel.Count){
 					Log.Net("item  data " + item.Count);
 					var items = NGUITools.AddChild(vipMesh.transform.parent.gameObject, vipMesh);
-					items.name = c.ToString();
+					items.newName = c.ToString();
 					item.Add(items);
 					c++;
 				}

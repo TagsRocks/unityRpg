@@ -20,7 +20,17 @@ namespace ChuMeng
 			Single, //单人副本只有玩家自己不用同步移动数据等战斗数据
 			Multiple, //多人副本同步自己和其它玩家的数据
 		}
-		public SceneType sceneType = SceneType.City;
+		public SceneType sceneType{
+            get {
+                if(activeScene != null){
+                    if(activeScene.IsCity){
+                        return SceneType.City;
+                    }
+                }
+                return SceneType.Single;
+            }
+        }
+
 		public WorldStation station = WorldStation.NotEnter;
 		LoadingUI loadUI;
 		int nextSceneId;
@@ -50,16 +60,57 @@ namespace ChuMeng
 		public bool IsPeaceLevel() {
 			return sceneType == SceneType.City;
 		}
+        /// <summary>
+        /// 编辑器测试用的进入场景的初始化流程
+        /// </summary>
+        public IEnumerator TestInitScene(){
+            var sdata = CopyController.copyController.GetLevelInfo (3);
+            sdata.isCity = false;
+            activeScene = new CScene(sdata);
+           
+            if (CameraController.cameraController == null) {
+                var mc = Resources.Load<GameObject> ("levelPublic/MainCamera");
+                var m = Instantiate (mc) as GameObject;
+                var lightMapCamera = Instantiate (Resources.Load<GameObject> ("LightCamera")) as GameObject;
+                
+            }
+
+            MyEventSystem.myEventSystem.PushEvent (MyEvent.EventType.EnterScene);
+            yield return null;
+            var start = GameObject.Find("PlayerStart");
+            CameraController.cameraController.TracePositon(start.transform.position);
+            var g = new GameObject("StreamLoadLevel");
+
+            var loader = g.AddComponent<StreamLoadLevel>();
+
+            yield return StartCoroutine(loader.LoadFirstRoom());
+
+            CreateMyPlayer();
+            //Start Generate Monster
+            station = WorldStation.Enter;
+            NetDebug.netDebug.AddConsole ("Init Player Over Next");
+
+
+            CreateUI ();
+            //场景其它初始化交给LevelInit
+            NetDebug.netDebug.AddConsole ("WorldManager:: InitLevel");
+            CreateLevelInit ();
+            NetDebug.netDebug.AddConsole ("Init World Finish");
+
+            StartCoroutine(loader.LoadRoomNeibor());
+        }
 		//执行进入场景的代码逻辑
 		IEnumerator EnterScene(GCEnterScene sceneData) {
 
 			var sdata = CopyController.copyController.GetLevelInfo (nextSceneId);
 
+            /*
 			if (sdata.isCity) {
 				sceneType = SceneType.City;
 			} else {
 				sceneType = SceneType.Single;
 			}
+            */
 
 			//sceneType = SceneType.Single;
 
@@ -78,7 +129,6 @@ namespace ChuMeng
 				var mc = Resources.Load<GameObject> ("levelPublic/MainCamera");
 				var m = Instantiate (mc) as GameObject;
 				var lightMapCamera = Instantiate (Resources.Load<GameObject> ("levelPublic/lightMapCamera")) as GameObject;
-
 
 			}
 			NetDebug.netDebug.AddConsole ("Load Scene Name is "+sdata.SceneName);
@@ -117,6 +167,12 @@ namespace ChuMeng
 			ObjectManager.objectManager.InitCache ();
 			NetDebug.netDebug.AddConsole ("Init World Finish");
 		}
+
+
+
+        /// <summary>
+        /// 创建移动攻击等控制UI
+        /// </summary>
 		void CreateUI(){
 			//初始化UIRoot
 			UIPanel p = NGUITools.CreateUI (false, (int)GameLayer.UICamera);
@@ -136,6 +192,10 @@ namespace ChuMeng
 			Log.GUI ("Init virtual Joy stick "+vjoyController);
 		}
 
+        /// <summary>
+        /// 加载和场景匹配的游戏主UI
+        /// 从网络初始化玩家数据,只在登陆进入游戏的时候需要，后续都是增量更新
+        /// </summary>
 		void CreateLevelInit() {
 
 			Log.GUI ("Push Main UI ");
@@ -153,17 +213,6 @@ namespace ChuMeng
 			}
 
 			StartCoroutine(SaveGame.saveGame.InitDataFromNetwork());
-
-			//var g = new GameObject ("LevelInit");
-			//g.AddComponent<LevelInit> ();
-
-			//g.transform.parent = transform;
-
-			/*
-			g = new GameObject ("BattleManager");
-			g.AddComponent<BattleManager> ();
-			g.transform.parent = transform;
-			*/
 		}
 
 		//重新创建玩家自身
@@ -171,9 +220,9 @@ namespace ChuMeng
 
 			GameObject player = null;
 			if (sceneType == SceneType.Single) {
-				player = ObjectManager.objectManager.CreateMyPlayer ();
+				player = ObjectManager.objectManager.CreateMyPlayerInCopy ();
 			} else if (sceneType == SceneType.City) {
-				player = ObjectManager.objectManager.CreateLoginMyPlayer ();
+				player = ObjectManager.objectManager.CreateMyPlayerInCity ();
 			}
 			NetDebug.netDebug.AddConsole ("Create My Player Over");
 

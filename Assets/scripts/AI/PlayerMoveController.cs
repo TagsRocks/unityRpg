@@ -59,7 +59,6 @@ namespace ChuMeng
 		}
 	
 
-		AICharacter ai;
 		AnimationController animationController;
 		void Awake ()
 		{

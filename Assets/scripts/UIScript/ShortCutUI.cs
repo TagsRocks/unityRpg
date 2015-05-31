@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -32,7 +32,7 @@ namespace ChuMeng
 		}
 
 		void OnSkillButton(GameObject g) {
-			var id = System.Convert.ToInt32(g.name.Replace ("SkillButton", ""));
+			var id = System.Convert.ToInt32(g.newName.Replace ("SkillButton", ""));
 			GameInterface_Skill.skillInterface.SetSkillShortCut (skillId, id);
 			//Close UI
 			Hide (null);

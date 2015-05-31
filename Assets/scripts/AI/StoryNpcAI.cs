@@ -25,7 +25,7 @@ namespace ChuMeng {
 
 		MyAnimationEvent myAnimationEvent;
 		CharacterController controller;
-		NpcAttribute attribute;
+		
 		void Awake() {
 			attribute = GetComponent<NpcAttribute> ();
 			myAnimationEvent = GetComponent<MyAnimationEvent>();

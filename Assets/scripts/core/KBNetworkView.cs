@@ -1,4 +1,4 @@
-﻿
+
 /*
 Author: liyonghelpme
 Email: 233242872@qq.com
@@ -191,7 +191,7 @@ namespace KBEngine
 		}
 		void Start() {
 			//localId = LocalID++;
-			Log.Sys ("Implement Local ID "+localId+" "+gameObject.name);
+			Log.Sys ("Implement Local ID "+localId+" "+gameObject.newName);
 		}
 		void Awake ()
 		{

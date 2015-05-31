@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using ChuMeng;
@@ -29,7 +29,7 @@ namespace ChuMeng
 			for (int i = 0; i < Length; i++) {
 				var obj = NGUITools.AddChild(itemParent,item);
 				obj.SetActive(true);
-				obj.name = i.ToString();
+				obj.newName = i.ToString();
 				//itemcontentset(list[i],obj);
 				UIEventListener.Get(obj.gameObject).onClick = clickListItem;
 			}
@@ -43,7 +43,7 @@ namespace ChuMeng
 
 		void clickListItem(GameObject btn)
 		{
-			Debug.Log ("btn click :"+btn.name);
+			Debug.Log ("btn click :"+btn.newName);
 		}
 
 		private void initrightpannel()
@@ -62,11 +62,11 @@ namespace ChuMeng
 
 		void btnClick(GameObject btn)
 		{
-			Debug.Log ("right  btn click :"+btn.name);
-			if(btn.name == "StartButton")
+			Debug.Log ("right  btn click :"+btn.newName);
+			if(btn.newName == "StartButton")
 			{
 				combatChallenge();
-			}else if(btn.name == "Ranking")
+			}else if(btn.newName == "Ranking")
 			{
 				gotoRangPage();
 			}

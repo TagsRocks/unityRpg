@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -84,7 +84,7 @@ namespace ChuMeng
                 runner.stateMachine = this;
                 runner.Event = item;
                 allRunners.Add(g);
-                Log.AI ("SkillLayout " + item.layout.name);
+                Log.AI ("SkillLayout " + item.layout.newName);
             } else if (item.childSkillId != 0 && item.childSkillId != -1)
             {
                 Log.AI("Create Child Skill "+item.childSkillId);
@@ -95,7 +95,7 @@ namespace ChuMeng
 
 		void OnHit ()
 		{
-			Log.AI ("Show Skill Hit Event " + gameObject.name);
+			Log.AI ("Show Skill Hit Event " + gameObject.newName);
 			if (skillDataConfig != null) {
 				foreach (SkillDataConfig.EventItem item in skillDataConfig.eventList) {
 					if (item.evt == MyEvent.EventType.EventTrigger) {
@@ -159,7 +159,7 @@ namespace ChuMeng
 
 		IEnumerator FinishSkill ()
 		{
-			Log.AI ("Finish Skill Here " + gameObject.name);
+			Log.AI ("Finish Skill Here " + gameObject.newName);
 			yield return new WaitForSeconds (lifeTime);
 			foreach (GameObject r in allRunners) {
 				GameObject.Destroy (r);

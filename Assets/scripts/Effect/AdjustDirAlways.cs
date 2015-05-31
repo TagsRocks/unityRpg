@@ -1,4 +1,4 @@
-﻿﻿using UnityEngine;
+﻿using UnityEngine;
 using System.Collections;
 
 namespace ChuMeng
@@ -21,7 +21,7 @@ namespace ChuMeng
 			var el = GetComponent<EffectLayer> ();
 			oldPos = el.EmitPoint;
 			initDeg = new Vector2 (el.OriRotationMin, el.OriRotationMax);
-			Log.AI ("Adjust Effect Layer emitPoint and rotation " + gameObject.name + " ");
+			Log.AI ("Adjust Effect Layer emitPoint and rotation " + gameObjectnewNamee + " ");
 		}
 
 		void Update() {

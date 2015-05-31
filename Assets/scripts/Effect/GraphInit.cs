@@ -6,7 +6,7 @@ namespace ChuMeng
 	public class GraphInit : MonoBehaviour
 	{
         public Texture lightMap;
-        public Vector3 camPos = Vector3.zero;
+        //public Vector3 camPos = Vector3.zero;
 
         public Vector3 ambient = Vector3.one;
         public Texture lightMask;
@@ -15,11 +15,15 @@ namespace ChuMeng
         // Use this for initialization
 		void Start ()
 		{
+
+            var lc = Resources.Load<GameObject>("LightCamera").camera;
+            var lightCamera = lc.GetComponent<LightCamera>();
             //New Shader lightMapxxx need these Set
-            var lc = GameObject.FindGameObjectWithTag("LightCamera").camera;
+            //var lc = GameObject.FindGameObjectWithTag("LightCamera").camera;
+
             var camSize = lc.orthographicSize;
             Shader.SetGlobalTexture("_LightMap", lightMap);
-            Shader.SetGlobalVector("_CamPos", camPos);
+            Shader.SetGlobalVector("_CamPos", lightCamera.CamPos);
             Shader.SetGlobalFloat("_CameraSize", camSize);
 
             Shader.SetGlobalVector("_AmbientCol", ambient);

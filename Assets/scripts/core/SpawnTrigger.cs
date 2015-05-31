@@ -53,8 +53,8 @@ namespace ChuMeng {
 
 		int curWaveNum = 0;
 		void Awake() {
-			if (gameObject.name.Contains ("wave")) {
-				var num = Convert.ToInt32(gameObject.name.Replace("wave", ""));
+			if (gameObject.newName.Contains ("wave")) {
+				var num = Convert.ToInt32(gameObject.newName.Replace("wave", ""));
 				waveNum = num;
 			}
 
@@ -68,10 +68,12 @@ namespace ChuMeng {
 
 		bool setResourceYet = false;
 		GameObject oldResource;
+       
+
 		GameObject showRes;
 		string GetWave() {
-			if (gameObject.name.Contains ("wave")) {
-				var num = Convert.ToInt32(gameObject.name.Replace("wave", ""));
+			if (gameObject != null && gameObject.newName.Contains ("wave")) {
+				var num = Convert.ToInt32(gameObject.newName.Replace("wave", ""));
 				waveNum = num;
 			}
 			return "" + waveNum;
@@ -82,9 +84,11 @@ namespace ChuMeng {
 
 #if UNITY_EDITOR
 			if(!EditorApplication.isPlaying) {
+                string replaceTexture = "";
 				if(MonsterID != -1) {
 					var mData = GMDataBaseSystem.database.SearchId<MonsterFightConfigData>(GameData.MonsterFightConfig, MonsterID);
 					Resource = Resources.Load<GameObject>(mData.model);
+                    replaceTexture = mData.textureReplace;
 				}
 
 				if(oldResource != Resource) {
@@ -101,6 +105,16 @@ namespace ChuMeng {
 						showRes = GameObject.Instantiate(Resource) as GameObject;
 						showRes.transform.parent = transform;
 						showRes.transform.localPosition = Vector3.zero;
+                        if(replaceTexture.Length > 0) {
+                            var skins = showRes.GetComponentInChildren<SkinnedMeshRenderer> ();
+                            var tex = Resources.Load<Texture>(replaceTexture);
+                            if(skins != null && tex != null){
+                                Log.Sys("Set Texture "+tex);
+                                var mat = new Material(skins.renderer.sharedMaterial);
+                                mat.mainTexture = tex;
+                                skins.renderer.sharedMaterial = mat;
+                            }
+                        }
 					}
 					oldResource = Resource;
 				}
@@ -148,6 +162,7 @@ namespace ChuMeng {
 		/// </summary>
 		/// <returns>The monster.</returns>
 		IEnumerator GenerateMonster() {
+            Log.Sys("GenerateMonsters "+GroupNum);
 			for(int i = 0; i < GroupNum; i++) {
 				ObjectManager.objectManager.CreateMonster(Util.GetUnitData(false, MonsterID, 0), this);
 				yield return new WaitForSeconds(1);
@@ -166,15 +181,18 @@ namespace ChuMeng {
 
 		// Update is called once per frame
 		void Update () {
-//#if UNITY_EDITOR
-			//if(showRes != null) {
-			//ClearChildren();
-			//}
-//#endif
+            if(isSpawnYet) {
+                return;
+            }
+
 			if(BattleManager.battleManager == null) {
 				Debug.LogError("SpawnTrigger:: battleManager Not Init");
 				return;
 			}
+            if(WorldManager.worldManager.station != WorldManager.WorldStation.Enter){
+                Log.Sys("Spawn Not Enter World");
+                return;
+            }
 
 			if(!isSpawnYet && BattleManager.battleManager.waveNum == waveNum && (Resource != null || MonsterID != -1)) {
 				isSpawnYet = true;

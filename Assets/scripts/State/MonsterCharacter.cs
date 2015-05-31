@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 namespace ChuMeng
@@ -6,7 +6,7 @@ namespace ChuMeng
 	public class MonsterCharacter : AICharacter
 	{
 		public override void SetRun() {
-			Log.AI ("Monster run "+GetAttr().gameObject.name);
+			Log.AI ("Monster run "+GetAttr().gameObject.newName);
 			var runName = "run";
 			if (!CheckAni (runName)) {
 				runName = "walk";

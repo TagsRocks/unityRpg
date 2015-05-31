@@ -1,4 +1,4 @@
-﻿
+
 /*
 Author: liyonghelpme
 Email: 233242872@qq.com
@@ -54,7 +54,7 @@ namespace ChuMeng {
 
 		}
 		public void OnChannel(GameObject g) {
-			var n = g.name;
+			var n = g.newName;
 			if (n.Equals ("world")) {
 				currentLabel.text = "World";
 				channelType = Talk.ChannelType.World;

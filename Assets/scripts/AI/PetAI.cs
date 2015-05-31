@@ -9,8 +9,7 @@ namespace ChuMeng
 
 	public class PetAI : AIBase
 	{
-		NpcAttribute attribute;
-		AICharacter ai;
+		
 		void Awake() {
 			attribute = GetComponent<NpcAttribute>();
 			ai = new MonsterCharacter ();

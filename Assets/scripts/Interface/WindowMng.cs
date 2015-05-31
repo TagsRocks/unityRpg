@@ -1,4 +1,4 @@
-﻿
+
 /*
 Author: liyonghelpme
 Email: 233242872@qq.com
@@ -138,9 +138,9 @@ namespace ChuMeng
 
 			//bag.GetComponent<UIPanel> ().depth = (int)UIDepth.Window+stack.Count*10+1;
 			stack.Add (bag);
-			Log.GUI ("Push UI "+bag.name);
+			Log.GUI ("Push UI "+bag.newName);
 			foreach(GameObject g in stack) {
-				Log.GUI("Stack UI is "+g.name);
+				Log.GUI("Stack UI is "+g.newName);
 			}
 			return bag;
 		}
@@ -167,14 +167,14 @@ namespace ChuMeng
 				p.depth = (int)UIDepth.Window+100+1+(p.depth-oldDepth);
 			}
 			
-			Log.GUI ("Push Notify UI "+bag.name);
+			Log.GUI ("Push Notify UI "+bag.newName);
 			foreach(GameObject g in stack) {
-				Log.GUI("Stack UI is "+g.name);
+				Log.GUI("Stack UI is "+g.newName);
 			}
 			return bag;
 		}
 		public void PopView() {
-			Log.Important ("UI Layer "+stack.Count);
+			Log.Important ("UI Layer "+stack.Count+" alphaCount "+alphaStack.Count+" backactive "+back.activeInHierarchy);
 			var top = stack[stack.Count-1];
 			stack.RemoveAt (stack.Count - 1);
 			var alpha = alphaStack [alphaStack.Count - 1];

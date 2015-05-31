@@ -1,4 +1,4 @@
-﻿
+
 /*
 Author: liyonghelpme
 Email: 233242872@qq.com
@@ -77,7 +77,7 @@ namespace ChuMeng
 
 
 		void OnGrid(GameObject g) {
-			gridSelect = System.Convert.ToInt32 (g.name.Replace ("Mesh", ""));
+			gridSelect = System.Convert.ToInt32 (g.newName.Replace ("Mesh", ""));
 			Log.Important ("On Grid is "+gridSelect);
 			//设置当前选中的物品
 			//得到当前BUtton绑定的ActionItem

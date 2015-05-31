@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 namespace ChuMeng
@@ -12,7 +12,7 @@ namespace ChuMeng
 					var g = new GameObject();
 					_cursor = g.AddComponent<CursorManager>();
 					DontDestroyOnLoad(g);
-					g.name = "CursorManager";
+					g.newName = "CursorManager";
 				}
 				return _cursor;
 			}

@@ -24,7 +24,7 @@ namespace ChuMeng
 		public void exportMethod ()
 		{
 #if UNITY_EDITOR
-			var astar =  AstarPath.active;
+			var astar =  AstarPath.newActive;
 			if(astar == null) {
 				astar = GameObject.FindObjectOfType<AstarPath>();
 			}

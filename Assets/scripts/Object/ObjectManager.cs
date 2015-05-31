@@ -1,4 +1,4 @@
-﻿
+
 /*
 Author: liyonghelpme
 Email: 233242872@qq.com
@@ -167,7 +167,7 @@ namespace ChuMeng
 			//Current Scene Height
 
 			//var AStar = GameObject.Find ("AStar").GetComponent<AstarPath> ();
-			var AStar = AstarPath.active;
+			var AStar = AstarPath.newActive;
 			//Scene Height Data 
 			var gridGraph = AStar.graphs [0] as Pathfinding.GridGraph;
 			var gridIndex = (int)(z) * gridGraph.width + (int)(x);
@@ -384,7 +384,7 @@ namespace ChuMeng
 			Log.Sys ("DialogPlayer is " + job.ToString ());
 			//var fakeObject = Instantiate (Resources.Load<GameObject> ("DialogPlayer/" + job.ToString ())) as GameObject;
 			var fakeObject = SelectChar.ConstructChar (job);
-			fakeObject.name = fakeObject.name + "_fake";
+			fakeObject.newName = fakeObject.newName + "_fake";
 
 
 			fakeObject.SetActive (false);
@@ -412,7 +412,7 @@ namespace ChuMeng
 		/// 
 		/// 角色的初始化位置不同
 		/// </summary>
-		public GameObject CreateMyPlayer ()
+		public GameObject CreateMyPlayerInCopy ()
 		{
 			var player = CreateMyPlayerInternal ();
 			SetStartPointPosition (player);
@@ -451,10 +451,14 @@ namespace ChuMeng
 			player.GetComponent<NpcEquipment> ().InitDefaultEquip ();
 			player.GetComponent<NpcEquipment> ().InitPlayerEquipmentFromBackPack ();
 			
-			player.name = "playerSeperate";
+			player.newName = "player_me";
 			
 			ObjectManager.objectManager.AddObject (SaveGame.saveGame.selectChar.PlayerId, view);
 			
+            var light = GameObject.Instantiate(Resources.Load<GameObject>("light/playerLight")) as GameObject;
+            light.transform.parent = player.transform;
+            light.transform.localPosition = Vector3.zero;
+
 			NetDebug.netDebug.AddConsole("LevelInit::Awake Initial kbplayer Initial KbNetowrkView " + kbplayer + " " + view);
 			return player;
 		}
@@ -480,7 +484,7 @@ namespace ChuMeng
 		/// 
 		/// 角色的初始化位置不同
 		///</summary> 
-		public GameObject CreateLoginMyPlayer ()
+		public GameObject CreateMyPlayerInCity ()
 		{
 			NetDebug.netDebug.AddConsole ("LoginMyPlayer");
 			var player = CreateMyPlayerInternal ();
@@ -554,7 +558,7 @@ namespace ChuMeng
 				player.GetComponent<NpcAttribute> ().SetObjUnitData (udata);
 				player.GetComponent<NpcEquipment> ().InitDefaultEquip ();
 
-				player.name = "player_" + vp.UnitId.Id;
+				player.newName = "player_" + vp.UnitId.Id;
 				player.transform.parent = gameObject.transform;
 				
 				

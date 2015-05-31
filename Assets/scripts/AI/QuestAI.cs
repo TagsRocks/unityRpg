@@ -1,4 +1,4 @@
-﻿
+
 /*
 Author: liyonghelpme
 Email: 233242872@qq.com
@@ -131,7 +131,7 @@ namespace ChuMeng {
 			case QuestState.COMPLETE:
 				var q = GetCurrent();
 				var backpack = GameObject.FindObjectOfType<BackPack>();
-				backpack.Collect(q.name);
+				backpack.Collect(q.newName);
 
 				backpack.PutGold(q.RewardGold);
 				var player = GameObject.FindGameObjectWithTag("Player");

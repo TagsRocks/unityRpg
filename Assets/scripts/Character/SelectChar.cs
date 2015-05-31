@@ -21,7 +21,7 @@ namespace ChuMeng
 	[RequireComponent(typeof(KBEngine.KBNetworkView))]
 	public class SelectChar : MonoBehaviour
 	{
-		public string name;
+		public string newName;
 		public long playerId;
 		public int level;
 		public uint job;
@@ -91,7 +91,7 @@ namespace ChuMeng
 			player.GetComponent<NpcEquipment> ().InitDefaultEquip ();
 
 
-			selChar.name = roleInfo.Name;
+			selChar.newName = roleInfo.Name;
 			selChar.playerId = roleInfo.PlayerId;
 			selChar.level = roleInfo.Level;
 			selChar.roleInfo = roleInfo;

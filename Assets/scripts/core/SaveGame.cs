@@ -1,4 +1,4 @@
-﻿
+
 /*
 Author: liyonghelpme
 Email: 233242872@qq.com
@@ -70,7 +70,28 @@ namespace ChuMeng
 		 * set These two Value
 		 */ 
 
-		public RolesInfo selectChar;
+        public RolesInfo selectChar{
+            get; private set;
+        }
+
+        /// <summary>
+        /// 登陆时候设置选择的人物
+        /// </summary>
+        public void SetSelectChar(RolesInfo role){
+            selectChar = role;
+        }
+
+        /// <summary>
+        /// 测试的时候设置人物数据
+        /// </summary>
+        public void TestSetRole(){
+            var role = RolesInfo.CreateBuilder ();
+            role.Name = "战士";
+            role.PlayerId = 103;
+            role.Level = 1;
+            role.Job = (Job)1;
+            selectChar = role.Build();
+        }
 		bool DataInitFromNetworkYet = false;
 
 		void Awake ()
@@ -278,7 +299,7 @@ namespace ChuMeng
 			}
 			if (MyEventSystem.myEventSystem == null) {
 				var evt = new GameObject();
-				evt.name = "EventSystem";
+				evt.newName = "EventSystem";
 				evt.AddComponent<MyEventSystem>();
 			}
 			MyEventSystem.myEventSystem.transform.parent = g.transform;

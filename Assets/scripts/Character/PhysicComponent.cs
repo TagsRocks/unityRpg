@@ -3,7 +3,9 @@ using System.Collections;
 
 namespace ChuMeng
 {
-	//TODO::角色所有操作 SimpleMove CharacterController 的代码都要在Physics里面进行 确保同一帧只调用一次
+    /// <summary>
+    /// 角色所有操作 SimpleMove CharacterController 的代码都要在Physics里面进行 确保同一帧只调用一次
+    /// </summary>
 	public class PhysicComponent : MonoBehaviour
 	{
 		float Gravity = 20;
@@ -56,6 +58,7 @@ namespace ChuMeng
 					//moveValue = Vector3.zero;
 					GetComponent<CharacterController>().Move(moveValue*Time.deltaTime);
 					moveValue = new Vector3(0, -Gravity, 0);
+                 
 				}else {
 					GetComponent<CharacterController>().Move(motionValue);
 					
@@ -75,7 +78,7 @@ namespace ChuMeng
 				motionValue = Vector3.zero;
 				return true;
 			}
-			Log.Critical ("Object In Skill Move Yet "+gameObject.name);
+			Log.Critical ("Object In Skill Move Yet "+gameObject.newName);
 			return false;
 		}
 
@@ -88,6 +91,18 @@ namespace ChuMeng
 			//skillMoveFade = true;
 		}
 		//public bool StopMove = false;
+        void Start(){
+            StartCoroutine(CheckFalling());
+        }
+        IEnumerator CheckFalling(){
+            var mtrans = transform;
+            while(true){
+                if(mtrans.position.y < -512){
 
+                    mtrans.position = new Vector3(mtrans.position.x, 10, mtrans.position.z);
+                }
+                yield return new WaitForSeconds(1);
+            }
+        }
 	}
 }
