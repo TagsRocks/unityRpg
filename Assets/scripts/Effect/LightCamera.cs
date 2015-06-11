@@ -4,6 +4,7 @@ using System.Collections;
 public class LightCamera : MonoBehaviour {
     public Vector3 CamPos;
     void Awake() {
+        DontDestroyOnLoad(gameObject);
         
     }
 	// Use this for initialization

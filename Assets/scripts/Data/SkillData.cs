@@ -1,4 +1,4 @@
-﻿
+
 /*
 Author: liyonghelpme
 Email: 233242872@qq.com
@@ -102,12 +102,6 @@ namespace ChuMeng
 			}
 		}
 
-		//攻击距离和 是否有子弹决定 技能远程还是近战
-		public float Range {
-			get {
-				return skillConfig.distance;
-			}
-		}
 
 		public int CooldownMS{
 			get {
@@ -188,7 +182,7 @@ namespace ChuMeng
 		}
 
 		public SkillData(int skillId, int level) {
-			skillConfig = GMDataBaseSystem.database.SearchId<SkillConfigData> (GameData.SkillConfig, skillId);
+			skillConfig = GMDataBaseSystem.SearchIdStatic<SkillConfigData> (GameData.SkillConfig, skillId);
 
 			foreach (SkillEffectConfigData sd in GameData.SkillEffectConfig) {
 				if(sd.skillId == skillId && sd.skillLevel == level) {

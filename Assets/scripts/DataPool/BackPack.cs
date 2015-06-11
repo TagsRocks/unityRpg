@@ -20,6 +20,9 @@ using UnityEditor;
 
 namespace ChuMeng
 {
+    /// <summary>
+    /// Backpack Data Controller
+    /// </summary>
 	public class BackPack : MonoBehaviour
 	{
 		public static int MaxBackPackNumber = 25;
@@ -46,7 +49,7 @@ namespace ChuMeng
 		//背包物品所在槽
 		int slotId;
 		GameObject player;
-		PotionUI pui;
+		//PotionUI pui;
 		[ButtonCallFunc()]
 		public bool clearEquip;
 
@@ -118,12 +121,6 @@ namespace ChuMeng
 				shortCutInfo = shortInfo;
 			}
 		}
-
-		/*
-		public BackpackData GetAction(int slot) {
-			return SlotData [slot];
-		}
-		*/
 
 		public List<ShortCut> shortCuts;
 
@@ -247,10 +244,10 @@ namespace ChuMeng
 		}
 
 
-		BackpackData GetHpPotion ()
+		public BackpackData GetHpPotion ()
 		{
 			for (int i = 0; i < SlotData.Count; i++) {
-				if (SlotData [i] != null && SlotData [i].itemData != null && SlotData [i].itemData.UnitType == ItemData.UnitTypeEnum.POTION && SlotData [i].itemData.UnitEffect == ItemData.UnitEffectEnum.AddHP) {
+				if (SlotData [i] != null && SlotData [i].itemData != null && SlotData [i].itemData.UnitType == ItemData.UnitTypeEnum.POTION) {
 					return SlotData [i];
 				}
 			}
@@ -296,33 +293,6 @@ namespace ChuMeng
 			*/
 		}	
 
-
-
-
-		void InitPotion ()
-		{
-			if (uiRoot == null)
-				return;
-
-			pui = uiRoot.GetComponent<PotionUI> ();
-			Debug.Log ("Init pui " + pui);
-			if (pui != null) {
-				UIEventListener.Get (pui.hpPotion).onClick = OnHp;
-				UIEventListener.Get (pui.mpPotion).onClick = OnMp; 
-				var bd = GetHpPotion ();
-				if (bd != null) {
-					pui.SetHpNum (bd.num);
-				} else {
-					pui.SetHpNum (0);
-				}
-				bd = GetMpPotion ();
-				if (bd != null) {
-					pui.SetMpNum (bd.num);
-				} else {
-					pui.SetMpNum (0);
-				}
-			}
-		}
 
 		//获取某个装备槽上面的装备
 		public EquipData GetEquipData (ItemData.EquipPosition slot)
@@ -384,6 +354,7 @@ namespace ChuMeng
 
 		void BackpackStateUpdate ()
 		{
+            /*
 			if (pui != null) {
 				BackpackData bd2 = GetHpPotion ();
 				if (bd2 != null) {
@@ -394,6 +365,7 @@ namespace ChuMeng
 					pui.SetMpNum (bd2.num);
 				}
 			}
+            */
 		}
 
 		/*
@@ -675,6 +647,12 @@ namespace ChuMeng
 			}
 		}
 
+        public void UpdateGoodsCount(GoodsCountChange gc){
+            if(gc.BaseId == 4){
+                var me = ObjectManager.objectManager.GetMyData();
+                me.SetProp(CharAttribute.CharAttributeEnum.GOLD_COIN, gc.Num);
+            }
+        }
 		//TODO:
 		public void AddItemInfo(GoodsCountChange gc) {
 			//var item = SlotData[gc.PackEntry.Index];

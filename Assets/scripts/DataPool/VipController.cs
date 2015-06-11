@@ -1,4 +1,4 @@
-﻿/*
+/*
 Author: Wangjunbo
 Email: 1305201219@qq.com
 */
@@ -169,7 +169,7 @@ namespace ChuMeng
 		}
 
 		public VipLevelItem(int Id, bool b){
-			vipleveldata = GMDataBaseSystem.database.SearchId<VipLevelRewardConfigData> (GameData.VipLevelRewardConfig, Id);
+			vipleveldata = GMDataBaseSystem.SearchIdStatic<VipLevelRewardConfigData> (GameData.VipLevelRewardConfig, Id);
 			enable = b;
 		}
 	}

@@ -174,7 +174,7 @@ namespace ChuMeng
 			return bag;
 		}
 		public void PopView() {
-			Log.Important ("UI Layer "+stack.Count+" alphaCount "+alphaStack.Count+" backactive "+back.activeInHierarchy);
+			Log.Important ("UI Layer "+stack.Count+" alphaCount "+alphaStack.Count+" backactive "+back);
 			var top = stack[stack.Count-1];
 			stack.RemoveAt (stack.Count - 1);
 			var alpha = alphaStack [alphaStack.Count - 1];
@@ -190,7 +190,7 @@ namespace ChuMeng
 			}
 		}
 
-		public void ShowNotifyLog(string text, float time) {
+		public void ShowNotifyLog(string text, float time = 3) {
 			var g = PushTopNotify ("UI/NotifyLog");
 			g.GetComponent<NotifyUI> ().SetText (text);
 			g.GetComponent<NotifyUI> ().SetDurationTime (time);

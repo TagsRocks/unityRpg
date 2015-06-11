@@ -68,22 +68,22 @@ namespace ChuMeng
             sdata.isCity = false;
             activeScene = new CScene(sdata);
            
-            if (CameraController.cameraController == null) {
+            if (CameraController.cameraController == null ) {
+                Log.Sys("CreateMainCamera");
                 var mc = Resources.Load<GameObject> ("levelPublic/MainCamera");
                 var m = Instantiate (mc) as GameObject;
                 var lightMapCamera = Instantiate (Resources.Load<GameObject> ("LightCamera")) as GameObject;
-                
             }
+            Log.Sys("MainCamera");
 
             MyEventSystem.myEventSystem.PushEvent (MyEvent.EventType.EnterScene);
             yield return null;
+            var g = new GameObject("StreamLoadLevel");
+            var loader = g.AddComponent<StreamLoadLevel>();
+            yield return StartCoroutine(loader.LoadFirstRoom());
+
             var start = GameObject.Find("PlayerStart");
             CameraController.cameraController.TracePositon(start.transform.position);
-            var g = new GameObject("StreamLoadLevel");
-
-            var loader = g.AddComponent<StreamLoadLevel>();
-
-            yield return StartCoroutine(loader.LoadFirstRoom());
 
             CreateMyPlayer();
             //Start Generate Monster
@@ -101,6 +101,7 @@ namespace ChuMeng
         }
 		//执行进入场景的代码逻辑
 		IEnumerator EnterScene(GCEnterScene sceneData) {
+            Log.Sys("EnterNextScene is "+nextSceneId);
 
 			var sdata = CopyController.copyController.GetLevelInfo (nextSceneId);
 
@@ -125,12 +126,7 @@ namespace ChuMeng
 			//Init Camera
 			NetDebug.netDebug.AddConsole("初始化照相机需要等待一frame");
 
-			if (CameraController.cameraController == null) {
-				var mc = Resources.Load<GameObject> ("levelPublic/MainCamera");
-				var m = Instantiate (mc) as GameObject;
-				var lightMapCamera = Instantiate (Resources.Load<GameObject> ("levelPublic/lightMapCamera")) as GameObject;
 
-			}
 			NetDebug.netDebug.AddConsole ("Load Scene Name is "+sdata.SceneName);
 			//等待加载静态场景资源
 			AsyncOperation async = Application.LoadLevelAsync (sdata.SceneName);
@@ -139,14 +135,39 @@ namespace ChuMeng
 			while (!async.isDone) {
 				yield return null;
 			}
+            //InitCamera After Load Scene
+            //Scene Load Finish Then Load MainCamera
+            if (CameraController.cameraController == null) {
+                Log.Sys("CreateMainCamera");
+                var mc = Resources.Load<GameObject> ("levelPublic/MainCamera");
+                var m = Instantiate (mc) as GameObject;
+                //var lightMapCamera = Instantiate (Resources.Load<GameObject> ("levelPublic/lightMapCamera")) as GameObject;
+                var lightMapCamera = Instantiate (Resources.Load<GameObject> ("LightCamera")) as GameObject;
 
+            }
+            if(BattleManager.battleManager == null) {
+                var g = new GameObject("BattleManager");
+                g.AddComponent<BattleManager>();
+            }
+
+            Log.Sys("Cameramain "+Camera.main);
 
 			MyEventSystem.myEventSystem.PushEvent (MyEvent.EventType.EnterScene);
 			//正在进入一个场景
 			yield return null;
 
-			var start = GameObject.Find("PlayerStart");
-			CameraController.cameraController.TracePositon(start.transform.position);
+            //
+            //if(!sdata.isCity) {
+            {
+                var g = new GameObject("StreamLoadLevel");
+                var loader = g.AddComponent<StreamLoadLevel>();
+                yield return StartCoroutine(loader.LoadFirstRoom());
+            }
+            //}
+
+            var start = GameObject.Find("PlayerStart");
+            CameraController.cameraController.TracePositon(start.transform.position);
+
 
 			NetDebug.netDebug.AddConsole ("LoadScene Finish start Init UI");
 
@@ -199,7 +220,7 @@ namespace ChuMeng
 		void CreateLevelInit() {
 
 			Log.GUI ("Push Main UI ");
-			var uiName = LevelInit.GetUI ();
+			var uiName = Util.GetUI ();
 			WindowMng.windowMng.PushView (uiName, false);
 			MyEventSystem.myEventSystem.PushEvent (MyEvent.EventType.UpdateShortCut);
 
@@ -246,6 +267,7 @@ namespace ChuMeng
 
 		//游戏过程中切换场景 向服务器请求场景切换
 		public IEnumerator ChangeScene(int sceneId, bool isRelive) {
+            Log.Sys("ChangeEnterNextScene "+sceneId);
 			nextSceneId = sceneId;
 			station = isRelive ? WorldStation.Relive : WorldStation.AskChangeScene; 
 

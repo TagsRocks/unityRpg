@@ -642,7 +642,7 @@ MonoBehaviour:
   VersionIdentifier1: 222
   ClientTransform: {fileID: 400022}
   SyncClient: 0
-  Material: {fileID: 2100000, guid: 3bcdfd8d78cbc41288b2eda8415aea13, type: 2}
+  Material: {fileID: 2100000, guid: 8b9447e1eb68a44ae98db7c10abe90c6, type: 2}
   RenderType: 0
   StartTime: 0
   MaxFps: 60
@@ -1063,7 +1063,7 @@ MonoBehaviour:
   VersionIdentifier1: 222
   ClientTransform: {fileID: 400024}
   SyncClient: 0
-  Material: {fileID: 2100000, guid: 6d9fb93f9f45c438d9f5e0ed17f5a011, type: 2}
+  Material: {fileID: 2100000, guid: 419f8860ee35c4189a6d5e2356b14db5, type: 2}
   RenderType: 3
   StartTime: 0
   MaxFps: 60
@@ -1475,7 +1475,7 @@ MonoBehaviour:
   VersionIdentifier1: 222
   ClientTransform: {fileID: 400026}
   SyncClient: 0
-  Material: {fileID: 2100000, guid: fd6dec446df344cccbc6d71140996ad5, type: 2}
+  Material: {fileID: 2100000, guid: 0bb9dafac42c84d05a96ea5e572fea17, type: 2}
   RenderType: 0
   StartTime: 0
   MaxFps: 60
@@ -1891,7 +1891,7 @@ MonoBehaviour:
   VersionIdentifier1: 222
   ClientTransform: {fileID: 400028}
   SyncClient: 0
-  Material: {fileID: 2100000, guid: 3bcdfd8d78cbc41288b2eda8415aea13, type: 2}
+  Material: {fileID: 2100000, guid: 8b9447e1eb68a44ae98db7c10abe90c6, type: 2}
   RenderType: 0
   StartTime: 0
   MaxFps: 60
@@ -2731,7 +2731,7 @@ MonoBehaviour:
   VersionIdentifier1: 222
   ClientTransform: {fileID: 400036}
   SyncClient: 0
-  Material: {fileID: 2100000, guid: 875e4384fcbbb42f4bf45fdf9b799469, type: 2}
+  Material: {fileID: 2100000, guid: 3c2217da3932044c98ce7d38a83c02d8, type: 2}
   RenderType: 0
   StartTime: 0
   MaxFps: 60

@@ -292,18 +292,25 @@ namespace ChuMeng
 			DestroyObject (hp.UnitId.Id);
 		}
 
+        /// <summary>
+        /// Save AStar Cooord To Grid
+        /// </summary>
 		void SaveMyPosAndRot ()
 		{
 			if (WorldManager.worldManager.GetActive ().IsCity) {
 				var my = GetMyPlayer ();
-				var grid = Util.CoordToGrid (my.transform.position);
+				/*
+                var grid = Util.CoordToGrid (my.transform.position);
 
 				GCBindingSession.Builder bind = GCBindingSession.CreateBuilder (SaveGame.saveGame.bindSession);
 				bind.X = System.Convert.ToInt32 (grid.x);
 				bind.Y = (int)grid.y;
 				bind.Z = (int)grid.z;
 				bind.Direction = (int)transform.localRotation.eulerAngles.y;
-				SaveGame.saveGame.bindSession = bind.BuildPartial ();
+
+                SaveGame.saveGame.bindSession = bind.BuildPartial ();
+                */            
+				
 			}
 		}
 
@@ -470,8 +477,10 @@ namespace ChuMeng
 		}
 
 		void SetCityStartPos(GameObject player) {
-			player.transform.position = GetMyInitPos ();
-			player.transform.forward = GetMyInitRot ();
+            SetStartPointPosition(player);
+			//player.transform.position = GetMyInitPos ();
+			//player.transform.forward = GetMyInitRot ();
+
 		}
 		///<summary>
 		/// 主城内

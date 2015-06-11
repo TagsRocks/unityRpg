@@ -358,7 +358,7 @@ MonoBehaviour:
   VersionIdentifier1: 222
   ClientTransform: {fileID: 400002}
   SyncClient: 0
-  Material: {fileID: 2100000, guid: 64020be2019c44f33a2b8698451d3a3c, type: 2}
+  Material: {fileID: 2100000, guid: 610246e4ab65d477cb9b48fd833a4e86, type: 2}
   RenderType: 0
   StartTime: 0
   MaxFps: 60
@@ -780,7 +780,7 @@ MonoBehaviour:
   VersionIdentifier1: 222
   ClientTransform: {fileID: 400004}
   SyncClient: 0
-  Material: {fileID: 2100000, guid: fd6a5dafe5d8e446eb4a45a4687c64ff, type: 2}
+  Material: {fileID: 2100000, guid: 92f1414212ad54e86a96e19a2c52f942, type: 2}
   RenderType: 0
   StartTime: 0
   MaxFps: 60
@@ -1201,7 +1201,7 @@ MonoBehaviour:
   VersionIdentifier1: 222
   ClientTransform: {fileID: 400006}
   SyncClient: 0
-  Material: {fileID: 2100000, guid: 86919757610eb45188e1add6143bb205, type: 2}
+  Material: {fileID: 2100000, guid: 3262f1a71e9614fa381fee4d95b4cddf, type: 2}
   RenderType: 0
   StartTime: 0
   MaxFps: 60
@@ -2025,7 +2025,7 @@ MonoBehaviour:
   BirthSubEmitter: 
   CollisionSubEmitter: 
   DeathSubEmitter: 
-  AvailableNodeCount: 2
+  AvailableNodeCount: 8
   LastClientPos: {x: 3.58999968, y: 3.9000001, z: 2.86000013}
   MyCamera: {fileID: 0}
   Owner: {fileID: 11400008}
@@ -2059,7 +2059,7 @@ MonoBehaviour:
   VersionIdentifier1: 222
   ClientTransform: {fileID: 400012}
   SyncClient: 0
-  Material: {fileID: 2100000, guid: 7fc1e97add96a4b7c8f2986bacc0749d, type: 2}
+  Material: {fileID: 2100000, guid: ef91ca9a2b41f431f83830884f2af3ee, type: 2}
   RenderType: 0
   StartTime: 0
   MaxFps: 60
@@ -2482,7 +2482,7 @@ MonoBehaviour:
   VersionIdentifier1: 222
   ClientTransform: {fileID: 400014}
   SyncClient: 0
-  Material: {fileID: 2100000, guid: 8ce15bd366d454e8da0b713c410c195d, type: 2}
+  Material: {fileID: 2100000, guid: 45636e6e9bc334b16bfcb379e4b05564, type: 2}
   RenderType: 0
   StartTime: 0
   MaxFps: 60
@@ -2901,7 +2901,7 @@ MonoBehaviour:
   VersionIdentifier1: 222
   ClientTransform: {fileID: 400020}
   SyncClient: 0
-  Material: {fileID: 2100000, guid: 1166989335a594900a2ec1a0fdc59917, type: 2}
+  Material: {fileID: 2100000, guid: a0a71071b3f984b768bf23c90dedbb11, type: 2}
   RenderType: 0
   StartTime: 0
   MaxFps: 60

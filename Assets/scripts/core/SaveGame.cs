@@ -199,11 +199,11 @@ namespace ChuMeng
 			}
 			return null;
 		}
-		public CharacterData charData;
-		//public BackPack backpack;
-		//public SkillDataController skill;
 
-		public void LoadSaveFile ()
+        /// <summary>
+        /// 加载save.json 文件保存的用户信息
+        /// </summary>
+		void LoadSaveFile ()
 		{
 			string fpath = Path.Combine (Application.persistentDataPath, "save.json");
 			Debug.Log ("savepath " + fpath);
@@ -233,6 +233,8 @@ namespace ChuMeng
 				} finally {
 					fs.Close ();
 				}
+                //var ret = PlayerInfo.ParseFrom(buffer);
+
 				saveData = JSON.Parse (System.Text.Encoding.UTF8.GetString (buffer));
 			}
 
@@ -242,16 +244,14 @@ namespace ChuMeng
 				}
 			}
 		}
+        public GameObject EffectMainNode = null;
 
+        /// <summary>
+        /// 初始化各个子模块
+        /// </summary>
 		public void InitData ()
 		{
-			/*
-			 * Init Character Data into Memory
-			 * After Load Data then Initial Player Character
-			 */
-
 			var g = gameObject;
-			//transform parent = transform bug
 			if (BackPack.backpack == null) {
 				var back = new GameObject("backpack");
 				back.transform.parent = transform;
@@ -386,7 +386,10 @@ namespace ChuMeng
 				taskobj.AddComponent<TaskController>();
 				taskobj.transform.parent = transform;
 			}
-
+            var eff = new GameObject("EffectMainNode");
+            eff.transform.parent = transform;
+            EffectMainNode = eff;
+        
 			InitYet = true;
 		}
 

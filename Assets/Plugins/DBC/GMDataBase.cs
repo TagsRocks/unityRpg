@@ -68,7 +68,11 @@ namespace ChuMeng
 			"",
 		};
 
-		public T SearchId<T>(List<T> data, int id) where T : IConfig {
+        public T SearchId<T>(List<T> data, int id) where T : IConfig {
+            return GMDataBaseSystem.SearchIdStatic<T>(data, id);
+        }
+
+		public static T SearchIdStatic<T>(List<T> data, int id) where T : IConfig {
 			var d = data.Cast<IConfig> ();
 			foreach (IConfig conf in d) {
 				if(conf.id == id) {

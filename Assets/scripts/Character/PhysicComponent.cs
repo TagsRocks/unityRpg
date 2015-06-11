@@ -97,7 +97,7 @@ namespace ChuMeng
         IEnumerator CheckFalling(){
             var mtrans = transform;
             while(true){
-                if(mtrans.position.y < -512){
+                if(mtrans.position.y < -50){
 
                     mtrans.position = new Vector3(mtrans.position.x, 10, mtrans.position.z);
                 }

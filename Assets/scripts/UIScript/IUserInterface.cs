@@ -27,6 +27,9 @@ namespace ChuMeng
 			return GetName (name).GetComponent<UIInput> ();
 		}
 
+        public UISprite GetSprite(string name ){
+            return GetName(name).GetComponent<UISprite>();
+        }
 		public UILabel GetLabel(string name) {
 			var g = GetName (name);
 			return g.GetComponent<UILabel> ();

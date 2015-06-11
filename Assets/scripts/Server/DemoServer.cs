@@ -6,6 +6,7 @@ using System.Net.Sockets;
 using System.Collections.Generic;
 using Google.ProtocolBuffers;
 using SimpleJSON;
+using System;
 
 namespace ChuMeng
 {
@@ -121,7 +122,7 @@ namespace ChuMeng
 			msgReader.msgHandle = handleMsg;
 		}
 
-		void sendPacket (IBuilderLite retpb, uint flowId)
+		public void SendPacket (IBuilderLite retpb, uint flowId)
 		{
 			var bytes = ServerBundle.sendImmediate (retpb, flowId);
 			Debug.Log ("DemoServer: Send Packet " + flowId);
@@ -147,7 +148,7 @@ namespace ChuMeng
 				retPb = au;
 			} else if (className == "CGLoginAccount") {
 				var au = GCLoginAccount.CreateBuilder ();
-
+                /*
 				var role = RolesInfo.CreateBuilder ();
 				role.Name = "刺客";
 				role.PlayerId = 101;
@@ -168,6 +169,12 @@ namespace ChuMeng
 				role.Level = 1;
 				role.Job = (Job)1;
 				au.AddRolesInfos (role);
+                */
+                var playerInfo = ServerData.Instance.playerInfo;
+                if(playerInfo.HasRoles){
+                    var role = RolesInfo.CreateBuilder().MergeFrom(playerInfo.Roles);
+                    au.AddRolesInfos(role);
+                }
 
 				retPb = au;
 			} else if (className == "CGSelectCharacter") {
@@ -202,6 +209,9 @@ namespace ChuMeng
 				var au = GCLoadPackInfo.CreateBuilder ();
 
 				if (inpb.PackType == PackType.DEFAULT_PACK) {
+                    var pkInfo = ServerData.Instance.playerInfo.PackInfoList;
+                    au.AddRangePackInfo(pkInfo);
+                    /*
 					int c = 0;
 					var pk = new JSONArray();
 
@@ -227,31 +237,11 @@ namespace ChuMeng
 
 					}
 					packInf = pk.ToString();
+                    */
 				} else {
 					au.PackType = PackType.DRESSED_PACK;
 				}
 
-				//var pk = SimpleJSON.JSONNode.Parse (packInf).AsArray;
-
-				/*
-				if (inpb.PackType == PackType.DEFAULT_PACK) {
-					au.PackType = PackType.DEFAULT_PACK;
-					foreach (JSONNode k in pk) {
-						var pinfo = PackInfo.CreateBuilder ();
-						var pkentry = PackEntry.CreateBuilder ();
-						pkentry.Id = k ["id"].AsInt;
-						pkentry.BaseId = k ["baseId"].AsInt;
-						pkentry.Index = k ["index"].AsInt;
-						pinfo.CdTime = 0;
-						pkentry.GoodsType = k ["goodsType"].AsInt;
-						pkentry.Count = 1;
-						pinfo.PackEntry = pkentry.BuildPartial ();
-						au.AddPackInfo (pinfo);
-					}
-				} else {
-					au.PackType = PackType.DRESSED_PACK;
-				}
-				*/
 				retPb = au;
 			} else if (className == "CGGetCharacterInfo") {
 				var inpb = packet.protoBody as CGGetCharacterInfo;
@@ -261,7 +251,11 @@ namespace ChuMeng
 					var bd = BasicData.CreateBuilder ();
 					att.AttrKey = l;
 					bd.Indicate = 1;
-					bd.TheInt32 = 120;
+                    if(l == (int)CharAttribute.CharAttributeEnum.GOLD_COIN) {
+                        bd.TheInt32 = ServerData.Instance.playerInfo.Gold;
+                    }else {
+					    bd.TheInt32 = 120;
+                    }
 					att.BasicData = bd.BuildPartial ();
 					au.AddAttributes (att);
 				}
@@ -375,12 +369,22 @@ namespace ChuMeng
 				var au = GCListAllTeams.CreateBuilder ();
 				retPb = au;
 			} else if (className == "CGCopyInfo") {
-				var au = GCCopyInfo.CreateBuilder ();
-				var cin = CopyInfo.CreateBuilder ();
-				cin.Id = 6;
-				cin.IsPass = false;
-				au.AddCopyInfo (cin);
-				retPb = au;
+                var pinfo = ServerData.Instance.playerInfo;
+                if(pinfo.HasCopyInfos){
+                    retPb = GCCopyInfo.CreateBuilder().MergeFrom(pinfo.CopyInfos);
+                }else {
+                    //First Fetch Login Info
+                    var au = GCCopyInfo.CreateBuilder ();
+                    var cin = CopyInfo.CreateBuilder ();
+                    cin.Id = 3;
+                    cin.IsPass = false;
+                    au.AddCopyInfo (cin);
+                    var msg = au.Build();
+                    pinfo.CopyInfos = msg;
+                    retPb = GCCopyInfo.CreateBuilder().MergeFrom(msg);
+                }
+
+				
 			}else if(className == "CGLoadVipLevelGiftReceiveInfo"){
 				var au = GCLoadVipLevelGiftReceiveInfo.CreateBuilder();
 				var vip = ReceviedReward.CreateBuilder();
@@ -537,21 +541,30 @@ namespace ChuMeng
 				retPb = au;
 			} else if (className == "CGAutoRegisterAccount") {
 				var au = GCAutoRegisterAccount.CreateBuilder ();
-				au.Username = "liyong";
+				au.Username = "liyong_"+UnityEngine.Random.Range(0, 1000);
 				retPb = au;
 			} else if (className == "CGRegisterAccount") {
+                var inpb = packet.protoBody as CGRegisterAccount;
+                ServerData.Instance.playerInfo.Username = inpb.Username;
+
 				var au = GCRegisterAccount.CreateBuilder ();
 				retPb = au;
 			} else if (className == "CGCreateCharacter") {
+
 				var inpb = packet.protoBody as CGCreateCharacter;
+
 				var au = GCCreateCharacter.CreateBuilder ();
 				var role = RolesInfo.CreateBuilder ();
-				role.Name = "test";
+				role.Name = inpb.Username;
 				role.PlayerId = playerId;
 				playerId++;
 				role.Level = 1;
 				role.Job = inpb.Job;
-				au.AddRolesInfos (role);
+                var msg = role.Build();
+                ServerData.Instance.playerInfo.Roles = msg;
+
+                au.AddRolesInfos (msg);
+            
 				retPb = au;
 			} else if (className == "CGSendChat") {
 				var inpb = packet.protoBody as CGSendChat;
@@ -568,7 +581,7 @@ namespace ChuMeng
 				push.Channel = 0;
 				push.ChatContent = inpb.Content;
 
-				sendPacket (push, 0);
+				SendPacket (push, 0);
 
 				if(inpb.Content == "getAllWeapon") {
 					Debug.Log("getAllWeapon ");
@@ -600,7 +613,7 @@ namespace ChuMeng
 					}
 
 					packInf = pk.ToString();
-					sendPacket(pushPack, 0);
+					SendPacket(pushPack, 0);
 				}else if(inpb.Content == "getAllEquip") {
 					Debug.Log("getAllEquip ");
 					
@@ -631,19 +644,35 @@ namespace ChuMeng
 					}
 					
 					packInf = pk.ToString();
-					sendPacket(pushPack, 0);
+					SendPacket(pushPack, 0);
 				}
 
 			} else if (className == "CGPlayerMove") {
 				var au = GCPlayerMove.CreateBuilder ();
 				retPb = au;
-			}
+            }else {
+                var fullName = packet.protoBody.GetType().FullName;
+                var handlerName = fullName.Replace("ChuMeng", "ServerPacketHandler");
+
+                var tp = Type.GetType(handlerName);
+                if(tp == null) {
+                    Debug.LogError("PushMessage noHandler "+handlerName);
+                }else {
+                    var ph = (ServerPacketHandler.IPacketHandler)Activator.CreateInstance(tp);
+                    KBEngine.KBEngineApp.app.queueInLoop(
+                        delegate() {
+                            ph.HandlePacket(packet);
+                       });
+                }
+            }
 		
 
 			if (retPb != null) {
-				sendPacket (retPb, flowId);
+				SendPacket (retPb, flowId);
 			} else {
-				Debug.LogError ("DemoServer::not Handle Message " + className);
+                if(className != "CGHeartBeat") {
+				   Debug.LogError ("DemoServer::not Handle Message " + className);
+                }
 			}
 		}
 
@@ -693,12 +722,23 @@ namespace ChuMeng
 	{
 		public static DemoServer demoServer;
 		public bool stop = false;
+        ServerData serverData;
+        ServerThread sth;
+        public ServerThread GetThread(){
+            return sth;
+        }
+        public ServerData GetServerData(){
+            return serverData;
+        }
 
 		public DemoServer ()
 		{
 			demoServer = this;
+            serverData = new ServerData();
+            serverData.LoadData();
+
 			Debug.Log ("Init DemoServer");
-			var sth = new ServerThread ();
+			sth = new ServerThread ();
 			var t = new Thread (new ThreadStart (sth.run));
 			t.Start ();
 
@@ -706,6 +746,7 @@ namespace ChuMeng
 
 		public void ShutDown ()
 		{
+            serverData.SaveUserData();
 			stop = true;
 		}
 	}

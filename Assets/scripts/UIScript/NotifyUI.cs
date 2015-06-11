@@ -11,11 +11,12 @@ namespace ChuMeng
 {
 	public class NotifyUI : IUserInterface
 	{
-		public UILabel label;
-
+		UILabel label;
+        UISprite bg;
 		void Awake ()
 		{
 			label = GetLabel ("notifyLabel");
+            bg = GetSprite("BG");
 		}
 
 	
@@ -28,6 +29,10 @@ namespace ChuMeng
 
 		public void SetText(string text) {
 			label.text = text;
+            var w = label.printedSize.x;
+            Log.GUI("textSize "+w);
+            bg.width = (int)Mathf.Max((w+100), 310);
+
 		}
 		IEnumerator WaitTime(float t) {
 			yield return new WaitForSeconds (t);

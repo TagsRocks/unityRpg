@@ -34,7 +34,7 @@ namespace ChuMeng
 
 	    List<GameObject> Zones = new List<GameObject>();
 
-		public int currentZone = 0;
+		public int currentZone = -1;
 		// Use this for initialization
 		public GameObject exitZone;
 		public List<SpawnTrigger> allWaves;
@@ -50,6 +50,7 @@ namespace ChuMeng
 		{
 			levelOver = false;
 			battleManager = this;
+            allWaves = new List<SpawnTrigger>();
 
 			Debug.Log ("BattleManager:: init UI ");
 			enemyList = new List<GameObject> ();
@@ -58,7 +59,7 @@ namespace ChuMeng
 			//DungeonConfig.InitCreep (PathInfo);
 			//DungeonConfig.InitProps (PathInfo);
 
-			currentZone = 0;
+			currentZone = -1;
 
 			for (int i = 1; i < Zones.Count; i++) {
 				var zone = Zones [i];
@@ -78,7 +79,8 @@ namespace ChuMeng
 
             Zones.Add(z);
             InitZoneState(z);
-            if(currentZone == 0){
+            if(currentZone == -1){
+                currentZone = 0;
                 InitZone();
             }
         }
@@ -150,20 +152,21 @@ namespace ChuMeng
 		 */ 
 		IEnumerator GotoNextZone ()
 		{
-
+            Log.Sys("GotoNextZone");
 			if (exitZone != null) {
 				//exitZone.SetActive (false);
 				exitZone.GetComponent<ExitWall>().ZoneClear();
 			}
 
 			var ez = Zones [currentZone].transform.Find ("enterZone");
-            var protectWall = Zones[currentZone].transform.Find("protectWall");
 
 			if (ez == null) {
 				Debug.LogError ("BattleManager::Next Zone has No EnterZone");
 			}
 			enterZone = ez.gameObject;
 			var ezone = enterZone.GetComponent<EnterZone> ();
+            var protectWall = Zones[currentZone].transform.Find("protectWall");
+            protectWall.gameObject.SetActive(false);
 
 			//Wait For Player pass Zone Enter New Zone
 			while (!ezone.Enter) {
@@ -175,9 +178,11 @@ namespace ChuMeng
 				exitZone.GetComponent<ExitWall>().CloseDoor();
 			}
 
+
             if(protectWall != null){
                 protectWall.GetComponent<ProtectWall>().ShowWall();
             }
+
 
 			InitZone ();
             StartCoroutine(StreamLoadLevel.Instance.MoveInNewRoom());

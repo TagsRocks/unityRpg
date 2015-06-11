@@ -1,4 +1,4 @@
-﻿
+
 /*
 Author: liyonghelpme
 Email: 233242872@qq.com
@@ -109,7 +109,7 @@ namespace ChuMeng
 		}
 
 		public AchievementItem(int Id){
-			achiData = GMDataBaseSystem.database.SearchId<AchieveConfigData> (GameData.AchieveConfig, Id);
+			achiData = GMDataBaseSystem.SearchIdStatic<AchieveConfigData> (GameData.AchieveConfig, Id);
 			state = false;
 		}
 

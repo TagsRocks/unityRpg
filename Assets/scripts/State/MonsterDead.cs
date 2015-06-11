@@ -67,6 +67,7 @@ namespace ChuMeng {
 			var deathBlood = Resources.Load<GameObject> ("particles/swordhit");
 
 			GameObject g = GameObject.Instantiate (deathBlood) as GameObject;
+            g.transform.parent = SaveGame.saveGame.EffectMainNode.transform;
 			g.transform.position = GetAttr().transform.position;
 			if ( CheckAni("die")) {
 				GetAttr().animation.CrossFade ("die");

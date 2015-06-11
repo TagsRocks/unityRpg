@@ -101,6 +101,7 @@ namespace ChuMeng {
 			int curChapter = GetCurrentChapter ();
 			int curLevel = GetCurrentLevel ();
 
+            Log.Sys("curChapter chapter "+curChapter+" chapter "+chapter+" curLevel "+curLevel);
 			if (curChapter > chapter) {
 				allLevels = GetAllChapterLevelInfo(chapter);
 				foreach(LevelInfo l in allLevels) {
@@ -159,7 +160,7 @@ namespace ChuMeng {
 			int lastId = 0;
 			foreach(CopyInfo c in copyInfo.CopyInfoList) {
 				if(!c.IsPass) {
-					return c.Id;
+					return c.Id-1;
 				}else {
 					lastId = c.Id;
 				}
@@ -187,7 +188,7 @@ namespace ChuMeng {
 
 		public string ChapterName(int cha) {
 			Log.GUI ("GetChapter Name "+cha);
-			var chapter = GMDataBaseSystem.database.SearchId<ChapterConfigData> (GameData.ChapterConfig, cha);
+			var chapter = GMDataBaseSystem.SearchIdStatic<ChapterConfigData> (GameData.ChapterConfig, cha);
 			return chapter.name;
 		}
 

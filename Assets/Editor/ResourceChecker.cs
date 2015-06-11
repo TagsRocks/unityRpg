@@ -1,4 +1,4 @@
-// Resource Checker
+﻿// Resource Checker
 // (c) 2012 Simon Oliver / HandCircus / hello@handcircus.com
 // Public domain, do with whatever you like, commercial or not
 // This comes with no warranty, use at your own risk!

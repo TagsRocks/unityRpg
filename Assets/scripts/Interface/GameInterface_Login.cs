@@ -26,7 +26,8 @@ namespace ChuMeng
 		}
 		public void LoginGame ()
 		{
-			LoginInit.GetLogin().StartCoroutine (LoginInit.GetLogin().loginCoroutine ());
+			//LoginInit.GetLogin().StartCoroutine (LoginInit.GetLogin().loginCoroutine ());
+            LoginInit.GetLogin().TryToLogin();
 		}
 
 		public void SelectAccounAndLogin (int currentSelect)
@@ -50,7 +51,7 @@ namespace ChuMeng
 		public void StartGame (RolesInfo roleInfo)
 		{
 			//LoginInit.loginInit.StartCoroutine(LoginInit.loginInit.StartGameCoroutine (roleInfo));
-			CharSelectLogic.charSelectLogic.StartGame (roleInfo);
+			CharSelectProgress.charSelectLogic.StartGame (roleInfo);
 		}
 
 	}

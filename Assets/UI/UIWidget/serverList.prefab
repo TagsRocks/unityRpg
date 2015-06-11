@@ -136,13 +136,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57e428c9b6087304da439ec665b56a2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  atlas: {fileID: 11400000, guid: 5fc638a4ff3dd475bb9e6a4590441d37, type: 2}
+  atlas: {fileID: 11400000, guid: 3d0ac78d1be8dd949b39ac5d71df8553, type: 2}
   bitmapFont: {fileID: 0}
-  trueTypeFont: {fileID: 12800000, guid: bbcb21fce1b2a4d789771e46c042ad4c, type: 3}
-  fontSize: 25
+  trueTypeFont: {fileID: 12800000, guid: d15f6e8f644c6fa48a7a827527bbde21, type: 3}
+  fontSize: 20
   fontStyle: 0
-  backgroundSprite: loginButton1
-  highlightSprite: loginButton
+  backgroundSprite: Role
+  highlightSprite: Role
   position: 0
   alignment: 1
   items:
@@ -213,7 +213,7 @@ MonoBehaviour:
   rightType: 1
   bottomType: 1
   topType: 1
-  mAtlas: {fileID: 11400000, guid: 5fc638a4ff3dd475bb9e6a4590441d37, type: 2}
+  mAtlas: {fileID: 0}
   mSpriteName: loginButton1
   mFillCenter: 1
 --- !u!114 &11400006

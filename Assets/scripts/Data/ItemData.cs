@@ -39,6 +39,7 @@ namespace ChuMeng
 			None = 0,
 			POTION = 1,
 			GEM = 2,
+            UPGRADE = 3,
 
 			QUESTITEM = 9,
 			GOLD = 12,
@@ -70,6 +71,12 @@ namespace ChuMeng
 				return propsConfig.buffEffectTime / 1000.0f;
 			}
 		}
+
+        public int triggerBuffId{
+            get {
+                return propsConfig.triggerBuffId;
+            }
+        }
 
 		public float TotalAdd {
 			get {

@@ -24,6 +24,7 @@ namespace ChuMeng
         /// 玩家进入新的区域显示区域保护门
         /// </summary>
         public void ShowWall(){
+            Log.Sys("Show Protect Wall For ThisRoom");
             gameObject.SetActive(true);
         }
 

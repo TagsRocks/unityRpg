@@ -1,4 +1,4 @@
-﻿
+
 /*
 Author: liyonghelpme
 Email: 233242872@qq.com
@@ -317,10 +317,10 @@ namespace ChuMeng
 			IsPlayer = isPlayer;
 			Log.Important ("Init Unit Data is "+isPlayer+" "+mid+" "+level);
 			if (!isPlayer) {
-				config = GMDataBaseSystem.database.SearchId<MonsterFightConfigData> (GameData.MonsterFightConfig, mid);
+				config = GMDataBaseSystem.SearchIdStatic<MonsterFightConfigData> (GameData.MonsterFightConfig, mid);
 
 			} else {
-				jobConfig = GMDataBaseSystem.database.SearchId<RoleJobDescriptionsData>(GameData.RoleJobDescriptions, mid);
+				jobConfig = GMDataBaseSystem.SearchIdStatic<RoleJobDescriptionsData>(GameData.RoleJobDescriptions, mid);
 				foreach(RoleUpgradeConfigData r in GameData.RoleUpgradeConfig) {
 					if(r.job == mid && r.level == level) {
 						playerConfig = r;

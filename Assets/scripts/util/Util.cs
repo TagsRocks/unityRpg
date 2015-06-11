@@ -626,11 +626,19 @@ namespace ChuMeng
 
 		}
 
-    public static void InitGameObject(GameObject g){
-        g.transform.localPosition = Vector3.zero;
-        g.transform.localRotation = Quaternion.identity;
-        g.transform.localScale = Vector3.one;
-    }
+        public static void InitGameObject(GameObject g){
+            g.transform.localPosition = Vector3.zero;
+            g.transform.localRotation = Quaternion.identity;
+            g.transform.localScale = Vector3.one;
+        }
+
+        public static string GetUI() {
+            if (WorldManager.worldManager.GetActive ().def.isCity) {
+                return "UI/MainUI";
+            } else {
+                return "UI/GameUI";
+            }
+        }
 	}
 
 

@@ -1,4 +1,4 @@
-﻿/*
+/*
  * Author : Wangjunbo
  * Email : 1305201219@qq.com
 */
@@ -85,7 +85,7 @@ namespace ChuMeng
 				case 6:
 					str = "通关{fubenid}。";
 					ht.Clear();
-					var test = GMDataBaseSystem.database.SearchId<DungeonConfigData>(GameData.DungeonConfig, tar[1]).name;
+					var test = GMDataBaseSystem.SearchIdStatic<DungeonConfigData>(GameData.DungeonConfig, tar[1]).name;
 					ht.Add("fubenid", test);
 					text = str.Inject(ht);
 					break;
@@ -188,7 +188,7 @@ namespace ChuMeng
 		}
 
 		public TaskItem(int Id){
-			taskData = GMDataBaseSystem.database.SearchId<TaskConfigData> (GameData.TaskConfig, Id);
+			taskData = GMDataBaseSystem.SearchIdStatic<TaskConfigData> (GameData.TaskConfig, Id);
 			condition = TaskController.taskController.GetTaskTarget (taskData.condition);
 			awardData = TaskController.taskController.GetTaskAward (taskData.rewards);
 		}

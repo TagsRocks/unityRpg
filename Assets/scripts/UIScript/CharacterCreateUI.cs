@@ -1,4 +1,4 @@
-﻿
+
 /*
 Author: liyonghelpme
 Email: 233242872@qq.com
@@ -46,7 +46,7 @@ namespace ChuMeng
 		void OnCreate(GameObject g) {
 			var name = GetInput ("nameBoard").value;
 			Log.GUI ("Create Char is "+ name +" "+currentJob);
-			CharSelectLogic.charSelectLogic.CreateChar (name, currentJob+1);
+			CharSelectProgress.charSelectLogic.CreateChar (name, currentJob+1);
 
 		}
 

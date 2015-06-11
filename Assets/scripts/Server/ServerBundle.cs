@@ -8,6 +8,8 @@ namespace ChuMeng
 {
 	public class ServerBundle 
 	{
+        static System.UInt32 serverPushFlowId = 0;
+
 		KBEngine.MemoryStream stream = new KBEngine.MemoryStream();
 		public int messageLength = 0;
 		public KBEngine.Message msgtype = null;
@@ -15,9 +17,13 @@ namespace ChuMeng
 		public int msgId;
 		public System.UInt32 flowId;
 
+
 		void newMessage(System.Type type) {
 			Debug.Log ("ServerBundle:: 开始发送消息 Message is " + type.Name);
 			var pa = Util.GetMsgID (type.Name);
+            if(pa == null) {
+                Debug.LogError("GetMessage Id Error, please Update NameMap.json "+type.Name);
+            }
 			moduleId = pa.moduleId;
 			msgId = pa.messageId;
 			
@@ -61,6 +67,11 @@ namespace ChuMeng
 
 			return bundle.stream.getbuffer();
 		}
+
+        public static void SendImmediate(IBuilderLite build) {
+            DemoServer.demoServer.GetThread().SendPacket(build, serverPushFlowId++);
+        }
+
 	}
 
 }

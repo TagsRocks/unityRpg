@@ -1,4 +1,4 @@
-﻿/*
+/*
 Author :   Wangjunbo
 Emial :     1305201219@qq.com
 */
@@ -19,7 +19,7 @@ namespace ChuMeng
 
 		//获取vip经验
 		public int GetVipNeedExp(int viplevel){
-			return GMDataBaseSystem.database.SearchId<VipLevelConfigData> (GameData.VipLevelConfig, viplevel).vipExp;		
+			return GMDataBaseSystem.SearchIdStatic<VipLevelConfigData> (GameData.VipLevelConfig, viplevel).vipExp;		
 		}
 
 		//获取vip特权

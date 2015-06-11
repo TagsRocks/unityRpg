@@ -30,6 +30,7 @@ namespace ChuMeng
 	/// </summary>
 	public class LevelInit : MonoBehaviour
 	{
+        /*
 		GameObject levelPublic;
 		GameObject startPoint;
 		QuestDataController quest;
@@ -38,9 +39,7 @@ namespace ChuMeng
 
 
 		void InitScene() {
-			/*
-			 * Get Data From Disk  Save Data to Disk 
-			 */
+
 			Debug.Log("LevelInit::  SaveGame Exits?");
 			
 			//用于测试 关卡的时候 初始化一个SaveGame
@@ -53,9 +52,6 @@ namespace ChuMeng
 			} else {
 			}
 
-			/*
-			 * Initial BackPack From network
-			 */ 
 			
 			StartCoroutine (InitDataAndPlayer ());
 		}
@@ -110,15 +106,9 @@ namespace ChuMeng
 		}
 	
 	
+    */
 
-
-		public static string GetUI() {
-			if (WorldManager.worldManager.GetActive ().def.isCity) {
-				return "UI/GameUI";
-			} else {
-				return "UI/GameUI";
-			}
-		}
+		
 	}
 
 }

@@ -156,20 +156,22 @@ namespace ChuMeng
 			if (shit) {
 				if(isCritical) {
 					var criticalEffect = GameObject.Instantiate(Resources.Load<GameObject>("particles/criticalHit")) as GameObject;
-					criticalEffect.transform.parent = ObjectManager.objectManager.transform;
+					criticalEffect.transform.parent = SaveGame.saveGame.EffectMainNode.transform;
 					criticalEffect.transform.localPosition = GetAttr().transform.localPosition+ Vector3.up;
 					criticalEffect.transform.localRotation = Quaternion.identity;
 					criticalEffect.transform.localScale = Vector3.one;
+                    criticalEffect.AddMissingComponent<RemoveSelf>();
 				}else {
 					var bloodBomb = Resources.Load<GameObject> ("particles/monsters/player/bloodHit");
 					GameObject g = GameObject.Instantiate (bloodBomb) as GameObject;
-					g.transform.parent = ObjectManager.objectManager.transform;
+					g.transform.parent = SaveGame.saveGame.EffectMainNode.transform;
 					g.transform.localPosition = GetAttr ().transform.localPosition + new Vector3 (0, 1, 0);
 					g.transform.localRotation = Quaternion.identity;
 					g.transform.localScale = Vector3.one;
 				}
 				var swordHit = Resources.Load<GameObject> ("particles/swordhit");
 				GameObject g2 = GameObject.Instantiate (swordHit) as GameObject;
+                g2.transform.parent = SaveGame.saveGame.EffectMainNode.transform;
 				g2.transform.position = GetAttr ().transform.position + new Vector3 (0, 1, 0);
 			}
 			return shit;

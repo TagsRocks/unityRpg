@@ -344,6 +344,11 @@ public partial class Util {
 		return retMsg;
 	}	
 
+	static IMessageLite GetCGHeartBeat(ByteString buf) {
+		var retMsg = ChuMeng.CGHeartBeat.ParseFrom(buf);
+		return retMsg;
+	}	
+
 	static IMessageLite GetGCPushLootReward(ByteString buf) {
 		var retMsg = ChuMeng.GCPushLootReward.ParseFrom(buf);
 		return retMsg;
@@ -384,8 +389,8 @@ public partial class Util {
 		return retMsg;
 	}	
 
-	static IMessageLite GetCGHeartBeat(ByteString buf) {
-		var retMsg = ChuMeng.CGHeartBeat.ParseFrom(buf);
+	static IMessageLite GetGCPushNotify(ByteString buf) {
+		var retMsg = ChuMeng.GCPushNotify.ParseFrom(buf);
 		return retMsg;
 	}	
 
@@ -909,6 +914,11 @@ public partial class Util {
 		return retMsg;
 	}	
 
+	static IMessageLite GetGCClickLottery(ByteString buf) {
+		var retMsg = ChuMeng.GCClickLottery.ParseFrom(buf);
+		return retMsg;
+	}	
+
 	static IMessageLite GetCGClickLottery(ByteString buf) {
 		var retMsg = ChuMeng.CGClickLottery.ParseFrom(buf);
 		return retMsg;
@@ -916,11 +926,6 @@ public partial class Util {
 
 	static IMessageLite GetGCLoadRecordInfo(ByteString buf) {
 		var retMsg = ChuMeng.GCLoadRecordInfo.ParseFrom(buf);
-		return retMsg;
-	}	
-
-	static IMessageLite GetGCClickLottery(ByteString buf) {
-		var retMsg = ChuMeng.GCClickLottery.ParseFrom(buf);
 		return retMsg;
 	}	
 
@@ -2131,6 +2136,8 @@ public partial class Util {
 
 	{"GCPushLevelUpgrade", GetGCPushLevelUpgrade},
 
+	{"CGHeartBeat", GetCGHeartBeat},
+
 	{"GCPushLootReward", GetGCPushLootReward},
 
 	{"CGBindingSession", GetCGBindingSession},
@@ -2147,7 +2154,7 @@ public partial class Util {
 
 	{"GCEnterScene", GetGCEnterScene},
 
-	{"CGHeartBeat", GetCGHeartBeat},
+	{"GCPushNotify", GetGCPushNotify},
 
 	{"GCPushLootRewardRemove", GetGCPushLootRewardRemove},
 
@@ -2357,11 +2364,11 @@ public partial class Util {
 
 	{"CGLoadRecordInfo", GetCGLoadRecordInfo},
 
+	{"GCClickLottery", GetGCClickLottery},
+
 	{"CGClickLottery", GetCGClickLottery},
 
 	{"GCLoadRecordInfo", GetGCLoadRecordInfo},
-
-	{"GCClickLottery", GetGCClickLottery},
 
 	{"GCLoadTaskList", GetGCLoadTaskList},
 

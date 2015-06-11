@@ -1,7 +1,4 @@
 {
-    "MRankListProtoc": {
-        "id": 12
-    }, 
     "MPetProtoc": {
         "id": 18
     }, 
@@ -60,6 +57,13 @@
         "CGPushGetAchievement": 1000, 
         "CGPushLoseAchievement": 1001
     }, 
+    "MTopProtoc": {
+        "CGLoadTop4Type": 1, 
+        "GCLoadTop4Type": 2, 
+        "CGSearchPlayerTop": 3, 
+        "GCSearchPlayerTop": 4, 
+        "id": 12
+    }, 
     "MDungeonProtoc": {
         "CGEnterDungeon": 1, 
         "GCEnterDungeon": 2, 
@@ -86,7 +90,7 @@
         "GCBuyMallProps": 6, 
         "CGBuyPresentMallProps": 7, 
         "GCBuyPresentMallProps": 8, 
-        "id": 30, 
+        "id": 11, 
         "GCPushMallOffersCount": 1000
     }, 
     "MContestProtoc": {
@@ -202,17 +206,17 @@
         "CGVipLevelReward": 5, 
         "GCVipLevelReward": 6, 
         "CGPropsObtainVip": 7, 
+        "GCPropsObtainVip": 8, 
         "CGMoneyObtainVip": 9, 
-        "CGLoadVipFreeGiftReceiveInfo": 11, 
-        "GCLoadVipFreeGiftReceiveInfo": 12, 
-        "CGVipFreeReward": 13, 
-        "GCVipFreeReward": 14, 
-        "GCPropsObtainVip": 15, 
-        "GCMoneyObtainVip": 16, 
+        "GCMoneyObtainVip": 10, 
+        "CGLoadVipPrivilegeGiftReceiveInfo": 11, 
+        "GCLoadVipPrivilegeGiftReceiveInfo": 12, 
+        "CGVipPrivilegeGiftReward": 13, 
+        "GCVipPrivilegeGiftReward": 14, 
         "id": 16, 
         "GCPushVipInfo": 1000, 
         "GCPushVipLevelExp": 1001, 
-        "GCPushVipAttention": 1002
+        "GCPushVipObtain": 1002
     }, 
     "MAdminProtoc": {
         "CGClearCache": 1, 
@@ -461,6 +465,8 @@
         "GCChangeScreen4Point": 37, 
         "CGPickUpLootReward": 38, 
         "GCPickUpLootReward": 39, 
+        "CGForgotPassword": 40, 
+        "GCForgotPassword": 41, 
         "GCPushNotice2Kick": 1000, 
         "GCPushAttribute2Members": 1001, 
         "GCPushLevelUpgrade": 1002, 
@@ -475,6 +481,7 @@
         "GCPushLootRewardRemove": 1011, 
         "GCPushFightModeChangeWithMap": 1012, 
         "GCPushPlayerResurrect": 1013, 
-        "GCPushPlayerToilState": 1014
+        "GCPushPlayerToilState": 1014, 
+        "GCPushNotify": 1015
     }
 }

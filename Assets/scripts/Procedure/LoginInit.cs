@@ -18,16 +18,6 @@ namespace ChuMeng
 
 	public class LoginInit : UnityEngine.MonoBehaviour
 	{
-		//GameObject uiRoot;
-		//LoginUI loginUI;
-		//CharacterUI charUI;
-	
-		//GCLoginAccount charInfo;
-		/*
-		public GCLoginAccount GetCharInfo() {
-			return charInfo;
-		}
-		*/
 		static LoginInit loginInit;
 		public static LoginInit GetLogin() {
 			return loginInit;
@@ -37,11 +27,6 @@ namespace ChuMeng
 		{
 			loginInit = this;
 
-			//uiRoot = GameObject.FindGameObjectWithTag ("UIRoot");
-			//loginUI = uiRoot.GetComponent<LoginUI> ();
-			//charUI = uiRoot.GetComponent<CharacterUI> ();
-
-
 			if (SaveGame.saveGame == null) {
 				var saveGame = new GameObject("SaveGame");
 				saveGame.AddComponent<SaveGame>();
@@ -50,28 +35,13 @@ namespace ChuMeng
 			}
 			sg = SaveGame.saveGame;
 		}
-
-
-
-		void Test(GameObject g) {
-			/*
-			Debug.Log("login CGLoginAccount");
-			CGLoginAccount.Builder account = CGLoginAccount.CreateBuilder ();
-			
-			//account.Uuid = username;
-			var data = account.Build ();
-			byte[] bytes;
-			using (System.IO.MemoryStream stream = new System.IO.MemoryStream()) {
-				data.WriteTo (stream);
-				bytes = stream.ToArray ();
-			}
-			Bundle bundle = new Bundle ();
-			bundle.newMessage ("MPlayerProtoc", "CGLoginAccount");
-			uint fid = bundle.writePB (bytes);
-			bundle.send (KBEngineApp.app.networkInterface(), TestGCLoginAccount, fid);
-			*/
-
-		}
+        public void TryToLogin(){
+            if(SaveGame.saveGame.otherAccounts.Count == 0){
+                StartCoroutine(regAndLog());
+            }else {
+                StartCoroutine(loginCoroutine());
+            }
+        }
 
 		public IEnumerator loginCoroutine() {
 			Debug.Log("LoginInit::loginCoroutine start login CGLoginAccount");
@@ -110,22 +80,21 @@ namespace ChuMeng
 		public IEnumerator regAndLog() {
 			Debug.Log ("LoginInit::regAndlog: start Register");
 			PacketHolder packet = new PacketHolder ();
-			{
+            {
 				CGAutoRegisterAccount.Builder auto = CGAutoRegisterAccount.CreateBuilder ();
 				var data = auto.Build ();
 				Bundle bundle = new Bundle ();
 				bundle.newMessage (typeof(CGAutoRegisterAccount));
 				uint fid = bundle.writePB (data);
 				yield return StartCoroutine (bundle.sendCoroutine (KBEngineApp.app.networkInterface(), fid, packet));
-			}
+            }
 
 			{
 				var newAccount = packet.packet.protoBody as GCAutoRegisterAccount;
 				CGRegisterAccount.Builder reg = CGRegisterAccount.CreateBuilder ();
 				reg.Username = newAccount.Username;
-				//reg.Password = newAccount.Password;
-				//reg.Password = newAccount.Username;
 				reg.Password = "123456";
+
 				var data = reg.BuildPartial ();
 				Debug.Log("LoginInit::regAndLog: "+newAccount+" : "+data);
 				Debug.Log("LoginInit::regAndLog:  username pass "+newAccount.Username+" "+data.Password);
@@ -139,7 +108,7 @@ namespace ChuMeng
 					SaveGame.saveGame.SaveFile ();
 				} else {
 
-					//loginUI.showLog (Util.GetString ("autoRegError"));
+					Log.Sys(Util.GetString ("autoRegError"));
 				}
 			}
 
@@ -180,7 +149,7 @@ namespace ChuMeng
 
 		void Start ()
 		{
-			WindowMng.windowMng.PushView ("UI/loginUI");
+            WindowMng.windowMng.PushView ("UI/loginUI2");
 			MyEventSystem.myEventSystem.PushEvent (MyEvent.EventType.UpdateLogin);
 
 		}

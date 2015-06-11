@@ -23,7 +23,8 @@ namespace ChuMeng
 				
 				if (GetAttr ().ObjUnitData.SpawnEffect != "") {
 					GameObject g = GameObject.Instantiate (Resources.Load<GameObject> (GetAttr ().ObjUnitData.SpawnEffect)) as GameObject;
-					g.transform.position = GetAttr ().transform.position;
+                    g.transform.parent = SaveGame.saveGame.EffectMainNode.transform;
+                    g.transform.position = GetAttr ().transform.position;
 					NGUITools.AddMissingComponent<RemoveSelf>(g);
 				}
 				yield return GetAttr ().StartCoroutine (Util.WaitForAnimation (GetAttr ().animation));
@@ -38,6 +39,7 @@ namespace ChuMeng
 				}else {
 					g = GameObject.Instantiate(Resources.Load<GameObject>("particles/playerskills/impsummon")) as GameObject;
 				}
+                g.transform.parent = SaveGame.saveGame.EffectMainNode.transform;
 				g.transform.position = GetAttr ().transform.position;
 				NGUITools.AddMissingComponent<RemoveSelf>(g);
 				yield return GetAttr ().StartCoroutine (Util.WaitForAnimation (GetAttr ().animation));

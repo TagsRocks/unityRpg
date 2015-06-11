@@ -1,4 +1,4 @@
-﻿
+
 /*
 Author: QiuChell
 Email: 122595579@qq.com
@@ -59,7 +59,7 @@ namespace ChuMeng
 		
 		//Id  公会等级id
 		public GuildConfigInfo(int Id){
-			guildData = GMDataBaseSystem.database.SearchId<GuildConfigData> (GameData.GuildConfig, Id);
+			guildData = GMDataBaseSystem.SearchIdStatic<GuildConfigData> (GameData.GuildConfig, Id);
 		}
 	}
 }

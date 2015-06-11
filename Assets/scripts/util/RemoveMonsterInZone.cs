@@ -26,6 +26,8 @@ public class RemoveMonsterInZone : MonoBehaviour {
             var trigger = t.GetComponent<SpawnTrigger>();
             if(trigger != null){
                 trigger.reset = true;
+                trigger.UpdateEditor();
+                trigger.UpdateEditor();
             }
         }
     }

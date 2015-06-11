@@ -47,7 +47,7 @@ namespace ChuMeng
 			//销毁环境音效和背景音乐
 
 			//销毁场景网络对象 其它玩家 服务器Npc
-			var keys = ObjectManager.objectManager.Actors.Where (f => true).ToArray ();
+			var keys = ObjectManager.objectManager.Actors.ToArray ();
 
 			foreach (var k in keys) {
 				ObjectManager.objectManager.DestroyObject(k.Key);
