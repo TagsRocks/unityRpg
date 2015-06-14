@@ -38,7 +38,7 @@ namespace ChuMeng
 		/// </summary>
 		public KBEngine.KBNetworkView GetPhotonView (long viewID)
 		{
-			KBEngine.KBNetworkView result = null;
+			//KBEngine.KBNetworkView result = null;
 			foreach (KBEngine.KBNetworkView view in photonViewList) {
 				if (view.GetServerID () == viewID && view.IsPlayer) {
 					return view;
@@ -159,7 +159,7 @@ namespace ChuMeng
 		private Vector3 GetMyInitPos ()
 		{
 			var x = SaveGame.saveGame.bindSession.X;
-			var y = SaveGame.saveGame.bindSession.Y;
+			//var y = SaveGame.saveGame.bindSession.Y;
 			var z = SaveGame.saveGame.bindSession.Z;
 
 			var coord = Util.GridToCoord (x, z);
@@ -174,7 +174,7 @@ namespace ChuMeng
 			Debug.Log ("ObjectManager::GetMyInitPos GridIndex" + gridIndex);
 			var n = gridGraph.nodes [gridIndex];
 
-			var hei = (Vector3)(n.Position);
+			var hei = (Vector3)(n.position);
 			var ret = new Vector3 (coord.x, hei.y + 0.3f, coord.y);
 			Debug.Log ("Pos " + ret);
 			return ret;
@@ -189,7 +189,7 @@ namespace ChuMeng
 			Debug.Log ("ObjectManager::GetMyInitPos GridIndex" + gridIndex);
 			var n = gridGraph.nodes [gridIndex];
 			
-			var hei = (Vector3)(n.Position);
+			var hei = (Vector3)(n.position);
 			return hei.y + 0.1f;
 		}
 
@@ -298,7 +298,7 @@ namespace ChuMeng
 		void SaveMyPosAndRot ()
 		{
 			if (WorldManager.worldManager.GetActive ().IsCity) {
-				var my = GetMyPlayer ();
+				//var my = GetMyPlayer ();
 				/*
                 var grid = Util.CoordToGrid (my.transform.position);
 
@@ -609,19 +609,19 @@ namespace ChuMeng
 
 				//NGUITools.AddMissingComponent<NpcAI>(g);
 				var type = Type.GetType ("ChuMeng." + unitData.AITemplate);
-				var t = typeof(NGUITools);
-				var m = t.GetMethod ("AddMissingComponent");
+				//var t = typeof(NGUITools);
+				//var m = t.GetMethod ("AddMissingComponent");
 				Log.AI ("Monster Create Certain AI  " + unitData.AITemplate + " " + type);
-				var geMethod = m.MakeGenericMethod (type);
-				var petAI = geMethod.Invoke (null, new object[]{g}) as AIBase;
+				//var geMethod = m.MakeGenericMethod (type);
+				//var petAI = geMethod.Invoke (null, new object[]{g}) as AIBase;
 
 
 				g.transform.parent = transform;
 				g.tag = GameTag.Enemy;
 				g.layer = (int)GameLayer.Npc;
 
-				var charInfo = g.GetComponent<CharacterInfo> ();
-				var skillInfo = g.GetComponent<SkillInfoComponent> ();
+				//var charInfo = g.GetComponent<CharacterInfo> ();
+				//var skillInfo = g.GetComponent<SkillInfoComponent> ();
 				var netView = g.GetComponent<KBEngine.KBNetworkView> ();
 				netView.SetID (new KBEngine.KBViewID (myPlayer.ID, myPlayer));
 				netView.IsPlayer = false;
@@ -655,11 +655,11 @@ namespace ChuMeng
 			GameObject g = Instantiate (Resource) as GameObject;
 			NpcAttribute npc = NGUITools.AddMissingComponent<NpcAttribute> (g);
 			var type = Type.GetType ("ChuMeng." + unitData.AITemplate);
-			var t = typeof(NGUITools);
-			var m = t.GetMethod ("AddMissingComponent");
+			//var t = typeof(NGUITools);
+			//var m = t.GetMethod ("AddMissingComponent");
 			Log.AI ("Create Certain AI  " + unitData.AITemplate + " " + type);
-			var geMethod = m.MakeGenericMethod (type);
-			var petAI = geMethod.Invoke (null, new object[]{g}) as AIBase;
+			//var geMethod = m.MakeGenericMethod (type);
+			//var petAI = geMethod.Invoke (null, new object[]{g}) as AIBase;
 			//var petAI = NGUITools.AddMissingComponent<type> (g);
 
 			g.transform.parent = transform;

@@ -161,7 +161,7 @@ namespace ChuMeng {
 						KBEngine.Message msg = new KBEngine.Message();
 						IMessageLite pbmsg = msg.handlePB(moduleId, msgid, stream);
 						KBEngine.Packet p = new KBEngine.Packet (flag, msglen, flowId, moduleId, msgid, 0, 0, pbmsg);
-						var fullName = pbmsg.GetType().FullName;
+						//var fullName = pbmsg.GetType().FullName;
 
 						handler(p);
 

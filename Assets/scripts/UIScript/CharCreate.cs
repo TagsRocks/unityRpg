@@ -16,7 +16,7 @@ namespace ChuMeng
             RegEvent ();
             SetCallback("createChar", OnCreate);
             selChar = GetName("SelChar");
-            var evt = UIEventListener.Get(selChar);
+            //var evt = UIEventListener.Get(selChar);
             //TODO: Drag
             //evt.onDrag();
 

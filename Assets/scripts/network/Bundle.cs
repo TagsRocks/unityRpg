@@ -201,7 +201,7 @@ namespace KBEngine
 		void sendImm(NetworkInterface networkInterface, uint fId) {
 			fini (true);
 			Debug.Log ("message Number " + streamList.Count);
-			bool resp = false;
+			//bool resp = false;
 			if(networkInterface.valid())
 			{
 				for(int i=0; i<streamList.Count; i++)
@@ -209,7 +209,7 @@ namespace KBEngine
 					stream = streamList[i];
 					networkInterface.send(stream.getbuffer(), delegate(Packet p) {
 						//par.packet = p;
-						resp = true;
+						//resp = true;
 					}, fId);
 				}
 			}

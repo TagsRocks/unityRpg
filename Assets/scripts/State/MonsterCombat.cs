@@ -18,7 +18,8 @@ namespace ChuMeng {
 		IEnumerator CastSkill(GameObject targetPlayer) {
 			GetAttr ().GetComponent<SkillInfoComponent> ().SetRandomActive ();
 			var activeSkill = GetAttr().GetComponent<SkillInfoComponent>().GetActiveSkill();
-			var skillStateMachine = SkillLogic.CreateSkillStateMachine (GetAttr().gameObject, activeSkill.skillData, GetAttr().transform.position, targetPlayer);
+			//var skillStateMachine = 
+            SkillLogic.CreateSkillStateMachine (GetAttr().gameObject, activeSkill.skillData, GetAttr().transform.position, targetPlayer);
 
 			//SetAni("attack", 1, WrapMode.Once);
 

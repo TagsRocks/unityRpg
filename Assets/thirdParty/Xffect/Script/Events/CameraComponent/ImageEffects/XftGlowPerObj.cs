@@ -116,7 +116,7 @@ public class XftGlowPerObj : MonoBehaviour
 
 	void OnPreRender()
 	{
-		if (!enabled || !gameObject.active)
+		if (!enabled || !gameObject.activeSelf)
 		return;
 		
 		PrepareRenderTex();

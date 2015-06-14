@@ -589,7 +589,7 @@ public class XffectComponent : MonoBehaviour
 #if UNITY_4_0 || UNITY_4_0_1 || UNITY_4_1 || UNITY_4_2 || UNITY_4_3 || UNITY_4_4
         return obj.activeSelf;
 #else
-        return obj.active;
+        return obj.activeSelf;
 #endif
     }
     
@@ -598,7 +598,7 @@ public class XffectComponent : MonoBehaviour
 #if UNITY_4_0 || UNITY_4_0_1 || UNITY_4_1 || UNITY_4_2 || UNITY_4_3 || UNITY_4_4
         obj.SetActive(flag);
 #else
-        obj.active = flag;
+        obj.SetActive(flag);
 #endif
     }
     

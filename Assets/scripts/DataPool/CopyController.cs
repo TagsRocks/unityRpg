@@ -96,7 +96,7 @@ namespace ChuMeng {
 		public List<LevelInfo> GetChapterLevel(int chapter) {
 			Log.GUI ("GetChapterLevel "+chapter);
 			List<LevelInfo> allLevels = null;
-			int c = 0;
+			//int c = 0;
 			Log.GUI ("copyInfoLength "+copyInfo.CopyInfoCount);
 			int curChapter = GetCurrentChapter ();
 			int curLevel = GetCurrentLevel ();

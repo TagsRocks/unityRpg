@@ -181,7 +181,7 @@ public class MakeParticle : MonoBehaviour
         int count = (curve.Length - 1) / 2;
         float x = 0;
         float value = 0;
-        float max = 1;
+        //float max = 1;
         var ks = new Keyframe[count];
 
         int c = 0;
@@ -285,7 +285,7 @@ public class MakeParticle : MonoBehaviour
         {
             Debug.LogError(" Model Particle "+effectLayer.name);
             effectLayer.RenderType = 3;
-            var mesh = modData["MESH"].Value;
+            //var mesh = modData["MESH"].Value;
             //var meshPath = mesh.Replace("media", Application.dataPath).Replace(".mesh", ".");
 
         }

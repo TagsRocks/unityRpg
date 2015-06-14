@@ -133,7 +133,7 @@ namespace ChuMeng {
 			b.SetShortCutInfo (shortInfo);
 
 			yield return StartCoroutine (KBEngine.Bundle.sendSimple(this, b, packet));
-			var ret = packet.packet.protoBody as GCModifyShortcutsInfo;
+			//var ret = packet.packet.protoBody as GCModifyShortcutsInfo;
 			SetShortSkillData (skId, index);
 		}
 

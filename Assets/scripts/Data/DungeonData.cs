@@ -81,7 +81,7 @@ namespace ChuMeng
 							if (Random.Range (0.0f, 1.0f) < rate) {
 								var creep = CreepSpawnClass.GetRandomCreep ();
 								var mg = Instantiate (creep.gameObject) as GameObject;
-								mg.transform.position = (Vector3)node.Position + new Vector3 (0, 0.1f, 0);
+								mg.transform.position = (Vector3)node.position + new Vector3 (0, 0.1f, 0);
 							}
 						}
 					}
@@ -111,7 +111,7 @@ namespace ChuMeng
 							if (Random.Range (0.0f, 1.0f) < rate) {
 								var bar = PropsSpawnClass.GetRandomProps ();
 								var mg = Instantiate (Resources.Load<GameObject> (bar.ModelName)) as GameObject;
-								mg.transform.position = (Vector3)node.Position + new Vector3 (0, 0.1f, 0);
+								mg.transform.position = (Vector3)node.position + new Vector3 (0, 0.1f, 0);
 								mg.GetComponent<ItemDataRef> ().ItemData = bar;
 								mg.tag = "Barrel";
 							}

@@ -11,7 +11,8 @@ namespace ChuMeng
 			SetCallback ("loginAccountbut", OnLogin);
 		}
 		void OnLogin(GameObject g) {
-			GameInterface_Login.loginInterface.LoginWithUserNamePass (GetInput("username").text, GetInput("password").text);
+			GameInterface_Login.loginInterface.LoginWithUserNamePass (GetInput("username").value, GetInput("password").value);
+
 		}
 		void OnRegister(GameObject g) {
 			WindowMng.windowMng.PushView ("UI/createAccountPanel");

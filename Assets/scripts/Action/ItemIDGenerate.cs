@@ -38,11 +38,11 @@ public class ItemIDGenerate : MonoBehaviour {
 
 #if !UNITY_WEBPLAYER
 		itemDataList.Clear ();
-		var parPath = Path.Combine (Application.dataPath, "Resources/units/items");
-		var resPath = Path.Combine(Application.dataPath, "Resources")+Path.DirectorySeparatorChar;
-		var resDir = new DirectoryInfo (parPath);
+		//var parPath = Path.Combine (Application.dataPath, "Resources/units/items");
+		//var resPath = Path.Combine(Application.dataPath, "Resources")+Path.DirectorySeparatorChar;
+		//var resDir = new DirectoryInfo (parPath);
 
-		FileInfo[] fileInfo = resDir.GetFiles ("*.*", SearchOption.AllDirectories);
+		//FileInfo[] fileInfo = resDir.GetFiles ("*.*", SearchOption.AllDirectories);
 		/*
 		foreach (FileInfo file in fileInfo) {
 			Debug.Log("file is "+file+" "+file.FullName);
@@ -68,18 +68,10 @@ public class ItemIDGenerate : MonoBehaviour {
 			}
 		}
 
+        /*
 		foreach(ItemData it in itemDataList) {
-			/*
-			if(it.ObjectId == -1) {
-				#if UNITY_EDITOR
-				AssetDatabase.StartAssetEditing();
-				it.ObjectId = maxId++;
-				EditorUtility.SetDirty(it);
-				AssetDatabase.StopAssetEditing();
-				#endif
-			}
-			*/
 		}
+        */
 #if UNITY_EDITOR
 		EditorUtility.SetDirty(this);
 #endif
@@ -90,7 +82,7 @@ public class ItemIDGenerate : MonoBehaviour {
 		#if !UNITY_WEBPLAYER
 		itemDataList.Clear ();
 		var parPath = Path.Combine (Application.dataPath, "Resources/units/items");
-		var resPath = Path.Combine(Application.dataPath, "Resources")+Path.DirectorySeparatorChar;
+		//var resPath = Path.Combine(Application.dataPath, "Resources")+Path.DirectorySeparatorChar;
 		var resDir = new DirectoryInfo (parPath);
 		
 		FileInfo[] fileInfo = resDir.GetFiles ("*.*", SearchOption.AllDirectories);

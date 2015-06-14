@@ -27,7 +27,7 @@ namespace ChuMeng {
 
 		IEnumerator ShowAttr() {
 
-			var player = ObjectManager.objectManager.GetMyPlayer ();
+			//var player = ObjectManager.objectManager.GetMyPlayer ();
 			yield return null;
 			/*
 			if (player != null) {

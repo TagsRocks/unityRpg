@@ -119,7 +119,7 @@ namespace KBEngine
 		}
 
 		public IMessageLite handlePB(byte moduleId, System.UInt16 msgId, MemoryStream msgstream) {
-			var buf = msgstream.getbuffer ();
+			//var buf = msgstream.getbuffer ();
 			IMessageLite msg =  Util.GetMsg (moduleId, msgId, msgstream.getBytString());
 			return msg;
 		}

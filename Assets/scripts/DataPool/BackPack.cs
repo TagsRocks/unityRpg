@@ -159,8 +159,8 @@ namespace ChuMeng
 
 		void UseEquipNetwork(GCUserDressEquip result) {
 			//旧背包和装备槽的数据
-			var itemAtBag = SlotData [slotId];
-			var itemAtUser = oldEquip;
+			//var itemAtBag = SlotData [slotId];
+			//var itemAtUser = oldEquip;
 
 			if (oldEquip != null) {
 				PopEquipData(equipSlot);

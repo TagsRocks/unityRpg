@@ -233,9 +233,9 @@ namespace ChuMeng
 			dt = dt.AddSeconds (long.Parse(_time)/1000).ToLocalTime();
 			//dt:3/5/2015 4:50:09 PM
 			string date = dt.ToShortDateString().ToString();   
-			string time = dt.ToLongTimeString().ToString();  
+			//string time = dt.ToLongTimeString().ToString();  
 			string[] date_arr = date.Split('/'); 
-			string[] time_arr = time.Split(':');     
+			//string[] time_arr = time.Split(':');     
 			//string result = date_arr[0]+"月"+date_arr[1]+"日"+" "+time_arr[0]+"时"+time_arr[1]+"分";     
 			string result = date_arr [2] + "/" + date_arr [0] + "/" + date_arr [1];
 			return result;        

@@ -15,7 +15,7 @@ namespace ChuMeng {
 		MyAnimationEvent myAnimationEvent;
 
 
-		CharacterController controller;
+		//CharacterController controller;
 		float heading;
 		Vector3 targetRotation;
 
@@ -26,7 +26,7 @@ namespace ChuMeng {
 			attribute = GetComponent<NpcAttribute>();
 
 			myAnimationEvent = GetComponent<MyAnimationEvent>();
-			controller = GetComponent<CharacterController>();
+			//controller = GetComponent<CharacterController>();
 			heading = Random.Range(0, 360);
 			transform.eulerAngles = new Vector3(0, heading, 0);
 

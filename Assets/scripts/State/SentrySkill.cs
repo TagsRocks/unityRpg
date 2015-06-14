@@ -36,8 +36,8 @@ namespace ChuMeng
 		{
 			Log.AI("Check Animation sentry " + GetAttr().animation.IsPlaying(activeSkill.skillData.AnimationName));
 			float passTime = 0;
-			var animation = GetAttr().animation;
-			var attackAniName = activeSkill.skillData.AnimationName;
+			//var animation = GetAttr().animation;
+			//var attackAniName = activeSkill.skillData.AnimationName;
 			/*
 			while (!quit)
 			{

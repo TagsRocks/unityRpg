@@ -24,7 +24,7 @@ namespace ChuMeng
 	{
 		public float ApproachDistance = 20;
 
-		bool inStunned = false;
+		//bool inStunned = false;
 
 		public float WalkSpeed = 2f;
 		public float RunSpeed = 5;
@@ -34,13 +34,13 @@ namespace ChuMeng
 		public float maxHeadingChange = 30;
 		MyAnimationEvent myAnimationEvent;
 
-		CharacterController controller;
+		//CharacterController controller;
 		float heading;
 		Vector3 targetRotation;
 
 		GameObject targetPlayer;
-		GameObject bloodBomb;
-		GameObject swordHit;
+		//GameObject bloodBomb;
+		//GameObject swordHit;
 		GameObject deathBlood;
 		
 		NpcAttribute attribute;
@@ -49,15 +49,16 @@ namespace ChuMeng
 
 		Seeker seeker;
 		bool findPath = false;
-		Pathfinding.Path path;
+		//Pathfinding.Path path;
 
 		string attackAniName;
 
 		void Awake() {
+            /*
 			bloodBomb = Resources.Load<GameObject> ("particles/monsters/player/bloodHit");
 			swordHit = Resources.Load<GameObject> ("particles/swordhit");
-			deathBlood = Resources.Load<GameObject> ("particles/swordhit");
-
+            */
+            deathBlood = Resources.Load<GameObject> ("particles/swordhit");
 			seeker = GetComponent<Seeker>();
 
 			attribute = GetComponent<NpcAttribute>();
@@ -66,7 +67,7 @@ namespace ChuMeng
 
 			myAnimationEvent = GetComponent<MyAnimationEvent>();
 			attribute._characterState = CharacterState.Idle;
-			controller = GetComponent<CharacterController>();
+			//controller = GetComponent<CharacterController>();
 			heading = Random.Range(0, 360);
 			transform.eulerAngles = new Vector3(0, heading, 0);
 
@@ -80,7 +81,7 @@ namespace ChuMeng
 		}
 		void OnPathComplete(Pathfinding.Path _p) {
 			//Debug.Log("path is "+_p);
-			path = _p;
+			//path = _p;
 			findPath = true;
 		}
 

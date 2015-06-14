@@ -29,7 +29,8 @@ namespace ChuMeng
         }
         void OnBuy(GameObject g)
         {
-            var ret = GameInterface_Backpack.BuyItem(101);
+            //var ret = 
+            GameInterface_Backpack.BuyItem(101);
         }
         // Use this for initialization
         void Start()

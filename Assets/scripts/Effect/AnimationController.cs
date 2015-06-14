@@ -110,17 +110,13 @@ public class AnimationController : MonoBehaviour
 		return;
 
 		//Move Idle Attack Not as so
+        /*
 		if (currentState == state) {
-			/*
-			currentState = state;
-			currentState.weight = 0;
-			currentState.time = currentStateTime = 0;
-			currentState.enabled = true;
-			*/
 			return;
 		}
+        */
 
-
+        /*
 		animationFadeTime = fadeTime;
 		while (fadingStates.Count >= 2) {
 			var ani = fadingStates[0];
@@ -128,6 +124,7 @@ public class AnimationController : MonoBehaviour
 			ani.enabled = false;
 			fadingStates.RemoveAt(0);
 		}
+        */
 
 		/*
 		for (int i = 0; i < fadingStates.Count; i++) {
@@ -142,6 +139,7 @@ public class AnimationController : MonoBehaviour
 		*/
 
 		//
+        /*
 		if (currentState != null)
 			fadingStates.Add (currentState);
 		Log.Ani ("CrossFade Ani ");
@@ -149,6 +147,7 @@ public class AnimationController : MonoBehaviour
 		currentState.weight = 0;
 		currentState.time = currentStateTime = 0;
 		currentState.enabled = true;
+        */
 		//
 	}
 	bool FadeOutAnimation (AnimationState state, float aI)

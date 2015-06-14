@@ -16,7 +16,7 @@ namespace ChuMeng
 		//战斗姿态更适合展示武器 
 		void SetIdle() {
 			//var peace = LevelInit.IsPeaceLevel ();
-			var peace = WorldManager.worldManager.IsPeaceLevel();
+			//var peace = WorldManager.worldManager.IsPeaceLevel();
 			var idleName = "stand";
 
 			animation.CrossFade (idleName);

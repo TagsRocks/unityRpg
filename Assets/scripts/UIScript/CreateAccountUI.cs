@@ -11,10 +11,12 @@ namespace ChuMeng {
 			var passwordInput = GetInput("password");
 			var pass2 = GetInput("pass2");
 
-			if (nameInput.text == "" || passwordInput.text == "" || pass2.text == "" || passwordInput.text != pass2.text) {
+			if (nameInput.value == "" || passwordInput.value == "" 
+                || pass2.value == "" 
+                || passwordInput.value != pass2.value) {
 				//showLog(Util.GetString("inputError"));
 			} else {
-				GameInterface_Login.loginInterface.RegisterAccount(nameInput.text, passwordInput.text);
+				GameInterface_Login.loginInterface.RegisterAccount(nameInput.value, passwordInput.value);
 				//loginInit.startRegister();
 			}
 		}

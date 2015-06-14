@@ -21,8 +21,8 @@ namespace EventHandler {
 				p.transform.localScale = Vector3.one;
 			} else {
 				p.transform.parent = evt.player.transform;
-				var y = evt.player.transform.localRotation.eulerAngles.y;
-				var playerForward = Quaternion.Euler (new Vector3 (0, y, 0));
+				//var y = evt.player.transform.localRotation.eulerAngles.y;
+				//var playerForward = Quaternion.Euler (new Vector3 (0, y, 0));
 
 				p.transform.localPosition = evt.particleOffset;
 				p.transform.localRotation = Quaternion.identity;

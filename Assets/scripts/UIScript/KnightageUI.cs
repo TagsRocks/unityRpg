@@ -67,7 +67,7 @@ public class KnightageUI : IUserInterface {
 			isMaster = true;
 		}
 		
-		GameData d = new GameData ();
+		//GameData d = new GameData ();
 
 		Verification.gameObject.SetActive(isMaster);
 		DissolveButton.gameObject.SetActive (isMaster);
@@ -198,7 +198,7 @@ public class KnightageUI : IUserInterface {
 	{
 		SetText (obj, "name", itemInfo.PlayerName);
 		SetText (obj, "occupation", Util.GetJobName((int)(itemInfo.Job)));//职业
-		string jobname = Util.GetJobName (1);
+		//string jobname = Util.GetJobName (1);
 		SetText (obj, "level", itemInfo.PlayerLevel.ToString());
 		SetText (obj, "post", GetDutyName(itemInfo.Duty));
 		SetText (obj, "contribution", itemInfo.Donate.ToString());
@@ -366,7 +366,7 @@ public class KnightageUI : IUserInterface {
 	private void applyItemSet(VerifyItem itemInfo,GameObject obj)
 	{
 		SetText (obj, "Time", itemInfo.VerifyTime.ToString());
-		string str = "";
+		//string str = "";
 		//if(itemInfo.
 	}
 

@@ -17,7 +17,7 @@ public class ExportPackage : MonoBehaviour {
             tar = g.name+".unitypackage";
 
             foreach(var o in objs){
-                var ot = o.GetType();
+                //var ot = o.GetType();
                 /*
                 if(ot == typeof(GameObject)
                    || ot == typeof(Material)

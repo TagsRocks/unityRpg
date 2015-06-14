@@ -564,7 +564,7 @@ namespace Xft
 
         public class BounceAffector : Affector {
             float curTime;
-            Vector3 dir;
+            //Vector3 dir;
             Vector3 initVelocity;
             Vector3 initPos;
             float jumpHeight;
@@ -577,7 +577,7 @@ namespace Xft
             {
                 friction = 2f;
                 curTime = 1/2.75f;
-                dir = Node.Velocity;
+                //dir = Node.Velocity;
 				initVelocity = new Vector3(Node.Velocity.x, 0, Node.Velocity.z);
                 initPos = Node.Position;
 				curPos = initPos;

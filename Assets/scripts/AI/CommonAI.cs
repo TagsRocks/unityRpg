@@ -18,11 +18,11 @@ namespace ChuMeng {
 	/// </summary>
 	public class CommonAI : MonoBehaviour {
 		NpcAttribute attribute;
-		CharacterController controller;
+		//CharacterController controller;
 
-		float moveSpeed = 0;
+		//float moveSpeed = 0;
 		MyAnimationEvent myAnimationEvent;
-		GameObject targetObj;
+		//GameObject targetObj;
 
 		/*
 		 * 攻击操作的对象
@@ -34,7 +34,7 @@ namespace ChuMeng {
 
 		void Awake() {
 			attribute = GetComponent<NpcAttribute> ();
-			controller = GetComponent<CharacterController> ();
+			//controller = GetComponent<CharacterController> ();
 			myAnimationEvent = GetComponent<MyAnimationEvent> ();
 			targetPlayer = null;
 		}
@@ -79,7 +79,7 @@ namespace ChuMeng {
 
 			string attAniName = "rslash_1";
 			var targetAttribute = target.GetComponent<NpcAttribute> ();
-			targetObj = target;
+			//targetObj = target;
 
 			while (!targetAttribute.IsDead) {
 				animation.CrossFade (attAniName);

@@ -112,7 +112,8 @@ namespace ChuMeng
 				//TODO:boss普通技能 暂时先用默认技能 后续添加随机技能
 				GetAttr().GetComponent<SkillInfoComponent>().SetDefaultActive();
 				var activeSkill = GetAttr().GetComponent<SkillInfoComponent>().GetActiveSkill();
-				var skillStateMachine = SkillLogic.CreateSkillStateMachine (GetAttr().gameObject, activeSkill.skillData, GetAttr().transform.position, targetPlayer);
+				//var skillStateMachine = 
+                SkillLogic.CreateSkillStateMachine (GetAttr().gameObject, activeSkill.skillData, GetAttr().transform.position, targetPlayer);
 
 				//Attack Player DoHit
 				while (!quit&& GetAttr().animation.isPlaying) {

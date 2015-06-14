@@ -115,7 +115,7 @@ namespace ChuMeng
 			Log.AI ("Wait For Combat Animation");
 			//GameObject enemy = NearestEnemy ();
 			float passTime = 0;
-			var transform = GetAttr ().transform;
+			//var transform = GetAttr ().transform;
 			bool hitYet = false;
 			do {
 				if(!hitYet && GetEvent().onHit) {

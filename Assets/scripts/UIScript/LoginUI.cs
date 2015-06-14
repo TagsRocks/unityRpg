@@ -72,7 +72,7 @@ namespace ChuMeng
 			for (int i=0; i < 3; i++) {
 				var ac = Util.FindChildRecursive (transform, string.Format("account{0}", i)).gameObject;
 				accountList.Add (ac);
-				var cp = i;
+				//var cp = i;
 				UIEventListener.Get(ac).onClick = onSelect;
 			}
 

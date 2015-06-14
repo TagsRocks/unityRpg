@@ -36,12 +36,12 @@ namespace ChuMeng
 				}
 
 
-				uint checksum;
+				//uint checksum;
 				Pathfinding.Serialization.SerializeSettings settings = Pathfinding.Serialization.SerializeSettings.All;
 
 
 				byte[] bytes = null;
-				uint ch = 0;
+				//uint ch = 0;
 				astar.AddWorkItem (new AstarPath.AstarWorkItem (delegate (bool force) {
 					Pathfinding.Serialization.AstarSerializer sr = new Pathfinding.Serialization.AstarSerializer(astar.astarData, settings);
 					sr.OpenSerialize();
@@ -74,7 +74,7 @@ namespace ChuMeng
 					sr.zip.AddEntry("playerStart"+Convert.ToString(mapId)+".json", System.Text.Encoding.UTF8.GetBytes(jc.ToString()));
 					sr.zip.AddEntry("graph0.json", System.Text.Encoding.UTF8.GetBytes(js.ToString()));
 					bytes = sr.CloseSerialize();
-					ch = sr.GetChecksum ();
+					//ch = sr.GetChecksum ();
 					return true;
 				}));
 

@@ -71,8 +71,10 @@ namespace ChuMeng
             if (CameraController.cameraController == null ) {
                 Log.Sys("CreateMainCamera");
                 var mc = Resources.Load<GameObject> ("levelPublic/MainCamera");
-                var m = Instantiate (mc) as GameObject;
-                var lightMapCamera = Instantiate (Resources.Load<GameObject> ("LightCamera")) as GameObject;
+                //var m = 
+                Instantiate (mc);// as GameObject;
+                //var lightMapCamera = 
+                Instantiate (Resources.Load<GameObject> ("LightCamera"));// as GameObject;
             }
             Log.Sys("MainCamera");
 
@@ -140,9 +142,11 @@ namespace ChuMeng
             if (CameraController.cameraController == null) {
                 Log.Sys("CreateMainCamera");
                 var mc = Resources.Load<GameObject> ("levelPublic/MainCamera");
-                var m = Instantiate (mc) as GameObject;
+                //var m = 
+                Instantiate (mc);//  as GameObject;
                 //var lightMapCamera = Instantiate (Resources.Load<GameObject> ("levelPublic/lightMapCamera")) as GameObject;
-                var lightMapCamera = Instantiate (Resources.Load<GameObject> ("LightCamera")) as GameObject;
+                //var lightMapCamera = 
+                Instantiate (Resources.Load<GameObject> ("LightCamera"));// as GameObject;
 
             }
             if(BattleManager.battleManager == null) {
@@ -207,7 +211,8 @@ namespace ChuMeng
 
 			//删除的对象不能放在Don'tDestroy 下面
 			var vjoyController = Resources.Load<GameObject> ("levelPublic/VirtualJoystick");
-			var ng = GameObject.Instantiate (vjoyController) as GameObject;
+			//var ng = 
+            GameObject.Instantiate (vjoyController);// as GameObject;
 			//ng.transform.parent = transform;
 			//vjoyController.transform.parent = transform;
 			Log.GUI ("Init virtual Joy stick "+vjoyController);

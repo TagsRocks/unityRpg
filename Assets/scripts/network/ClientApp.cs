@@ -51,7 +51,8 @@ public class ClientApp : UnityEngine.MonoBehaviour {
 			KBEngineApp.app.ip = testUrl;
 			KBEngineApp.app.port = Convert.ToUInt16(testPort);
 
-			var s = new ChuMeng.DemoServer();
+			//var s = 
+            new ChuMeng.DemoServer();
 
 		} else {
 			KBEngineApp.app.ip = url;

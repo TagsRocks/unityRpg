@@ -10,12 +10,12 @@ namespace ChuMeng
     public class ProtectWall : MonoBehaviour
     {
         Transform doorOpenBeam;
-        Transform collider;
+        Transform colliderObj;
         List<Transform> beams;
         void Awake(){
             doorOpenBeam = transform.FindChild("doorOpenBeam");
             doorOpenBeam.gameObject.SetActive (false);
-            collider = transform.FindChild("collider");
+            colliderObj = transform.FindChild("collider");
             beams = Util.FindAllChild (transform, "enterBeam_entrance");
             gameObject.SetActive(false);
         }

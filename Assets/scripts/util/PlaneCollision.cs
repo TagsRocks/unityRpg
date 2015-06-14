@@ -24,8 +24,8 @@ public class PlaneCollision : MonoBehaviour {
 	}
 
 	void OnPlaneCollision(Xft.CollisionParam param) {
-		GameObject g = param.CollideObject;
-		Vector3 pos = param.CollidePos;
+		//GameObject g = param.CollideObject;
+		//Vector3 pos = param.CollidePos;
 		Xft.EffectNode ef = param.effectNode;
 		ef.SetBounce();
 		//Debug.Log("collision is "+g+" "+pos);

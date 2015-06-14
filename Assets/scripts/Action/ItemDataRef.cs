@@ -121,8 +121,7 @@ namespace ChuMeng
 
 				var movement = nor*flySpeed+upSpeed;
 				movement *= Time.deltaTime;
-				var flag =  controller.Move(movement);
-
+				controller.Move(movement);
 				upSpeed.y -= Gravity*Time.deltaTime;
 
 				passTime += Time.deltaTime;
@@ -166,7 +165,7 @@ namespace ChuMeng
 		{
 			var breakable = Resources.Load<GameObject> ("particles/barrelbreak");
 			breakable.transform.position = transform.position + new Vector3 (0, 0.1f, 0);
-			GameObject g = Instantiate (breakable) as GameObject;
+			Instantiate (breakable);
 			StartCoroutine (WaitRemove ());
 		}
 

@@ -158,7 +158,8 @@ namespace ChuMeng
 					newSpeed = diff/halfDist*speed;
 				}
 
-				bool suc = runner.MoveOwner (targetPos, newSpeed);
+				//bool suc = 
+                runner.MoveOwner (targetPos, newSpeed);
 				yield return null;
 			}while(diff > 0.1f && !runner.stateMachine.isStop && enable);
 

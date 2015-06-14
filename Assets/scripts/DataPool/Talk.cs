@@ -260,7 +260,8 @@ namespace ChuMeng
 				return 1;
 			}
 
-			CGSendChat sc = (CGSendChat)KBEngine.Bundle.sendImmediate (sendChat);
+			//CGSendChat sc = 
+            KBEngine.Bundle.sendImmediate (sendChat);
 			return 0;
 		}
 

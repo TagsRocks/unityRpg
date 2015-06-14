@@ -248,7 +248,8 @@ namespace ChuMeng
 			load.Verify = ids;
 			load.Reply = reply;
 			yield return StartCoroutine (KBEngine.Bundle.sendSimple (this, load, packet));
-			GCApprovalApplyJoinGuild approvalapplyjoinguild = (packet.packet.protoBody as GCApprovalApplyJoinGuild);//处理单条信息  返回的数据   如果是批量操作 如全部删除 全部同意 全部拒绝  返回结果数据就没有意义
+			
+            //GCApprovalApplyJoinGuild approvalapplyjoinguild = (packet.packet.protoBody as GCApprovalApplyJoinGuild);//处理单条信息  返回的数据   如果是批量操作 如全部删除 全部同意 全部拒绝  返回结果数据就没有意义
 			//approvalapplyjoinguild.VerifyApprovalList
 		}
 
@@ -280,7 +281,8 @@ namespace ChuMeng
 			var packet = new KBEngine.PacketHolder ();
 			var load = CGLoadGuildSkills.CreateBuilder ();
 			yield return StartCoroutine (KBEngine.Bundle.sendSimple (this, load, packet));
-			GCLoadGuildSkills guildskills = (packet.packet.protoBody as GCLoadGuildSkills);
+			
+            //GCLoadGuildSkills guildskills = (packet.packet.protoBody as GCLoadGuildSkills);
 			//guildskills.GuildSkillList
 		}
 
@@ -306,7 +308,7 @@ namespace ChuMeng
 			load.ShopId = shopId;
 			load.Count = count;
 			yield return StartCoroutine (KBEngine.Bundle.sendSimple (this, load, packet));
-			GCBuyGuildShopGoods buy = (packet.packet.protoBody as GCBuyGuildShopGoods);
+			//GCBuyGuildShopGoods buy = (packet.packet.protoBody as GCBuyGuildShopGoods);
 			//buy.Donate
 		}
 

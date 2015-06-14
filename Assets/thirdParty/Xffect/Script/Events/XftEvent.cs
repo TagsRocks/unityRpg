@@ -39,7 +39,7 @@ namespace Xft
 		protected Camera FindMyCamera()
         {
             int layerMask = 1 << m_owner.gameObject.layer;
-            Camera[] cameras = GameObject.FindSceneObjectsOfType(typeof(Camera)) as Camera[];
+            Camera[] cameras = GameObject.FindObjectsOfType(typeof(Camera)) as Camera[];
             for (int i = 0, imax = cameras.Length; i < imax; ++i)
             {
                 Camera cam = cameras[i];
