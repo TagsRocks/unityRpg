@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -8,7 +8,7 @@ namespace ChuMeng
 	{
 		public static GameInterface_Skill skillInterface = new GameInterface_Skill();
 		public List<SkillFullInfo> GetActiveSkill() {
-			return SkillDataController.skillDataController.active;
+			return SkillDataController.skillDataController.activeSkillData;
 		}
 
 		public List<SkillFullInfo> GetPassitiveSkill() {
@@ -48,6 +48,11 @@ namespace ChuMeng
 		public int DistriSp() {
 			return SkillDataController.skillDataController.DistriSp;
 		}
+
+        public static void MeUseSkill(int skillId){
+            var skillData = Util.GetSkillData(skillId, 1);
+            ObjectManager.objectManager.GetMyPlayer().GetComponent<MyAnimationEvent>().OnSkill(skillData);
+        }
 
 		public static void OnSkill (int skIndex)
 		{

@@ -27,6 +27,10 @@ namespace ChuMeng
 		// Update is called once per frame
 		void Update ()
 		{
+            if(Input.GetKeyDown("f10")) {
+                WindowMng.windowMng.PushView("UI/GMCmd");
+            }
+
 			if (Input.touchCount > 0) {
 				Log.GUI(" Capture Touch Event ");
 			}

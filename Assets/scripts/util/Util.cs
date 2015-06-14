@@ -636,7 +636,8 @@ namespace ChuMeng
             if (WorldManager.worldManager.GetActive ().def.isCity) {
                 return "UI/MainUI";
             } else {
-                return "UI/GameUI";
+                return "UI/GameUI2";
+
             }
         }
 	}

@@ -53,6 +53,14 @@ namespace ChuMeng
 		[ButtonCallFunc()]
 		public bool clearEquip;
 
+        public int GetItemId(int itemId){
+            foreach(BackpackData bd in SlotData){
+                if(bd != null && bd.itemData != null && bd.baseId == itemId && bd.goodsType == (int)GoodsTypeEnum.Props){
+                    return (int)bd.id;
+                }
+            }
+            return -1;
+        }
 		public int GetItemCount(int goodsType, int objId) {
 			var count = 0;
 			foreach (BackpackData bd in SlotData) {
@@ -580,7 +588,8 @@ namespace ChuMeng
 				} else {
 				}
 				Log.Important("LoadPacketInfo is "+load);
-				StartCoroutine (InitEquipData ());
+				yield return StartCoroutine (InitEquipData ());
+                MyEventSystem.myEventSystem.PushEvent(MyEvent.EventType.UpdateItemCoffer);
 			}
 		}
 

@@ -17,6 +17,7 @@ using System;
 public class ClientApp : UnityEngine.MonoBehaviour {
 	public static KBEngineApp gameapp = null;
     public static GameObject client;
+    public static ClientApp Instance;
 	public int updateInterval;
 
 	/*
@@ -35,6 +36,7 @@ public class ClientApp : UnityEngine.MonoBehaviour {
 	public int heartBeat = 8;
 	void Awake() {
         client = gameObject;
+        Instance = this;
 		DontDestroyOnLoad (this.gameObject);
 	}
 

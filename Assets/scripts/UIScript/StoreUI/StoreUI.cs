@@ -16,6 +16,7 @@ namespace ChuMeng
             RegEvent();
 
             goldNum = GetLabel("gNum");
+            SetCallback("Close", Hide);
             //UpdateFrame();
         }
         protected override void OnEvent(MyEvent evt)

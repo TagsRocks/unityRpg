@@ -9,6 +9,10 @@ using System.Collections.Generic;
 
 namespace ChuMeng
 {
+    public enum GoodsTypeEnum {
+        Props = 0,
+        Equip = 1,
+    }
 	public class ItemData
 	{
 		private IConfig config = null;
@@ -308,10 +312,10 @@ namespace ChuMeng
 		public ItemData (int goodsType, int baseId)
 		{
 			if (goodsType == 0) {
-				propsConfig = (PropsConfigData)GMDataBaseSystem.database.SearchIdByConf (GMDataBaseSystem.DBName.PropsConfig, baseId);
+				propsConfig =  GMDataBaseSystem.SearchIdStatic<PropsConfigData> (GameData.PropsConfig, baseId);
 				config = propsConfig;
 			} else {
-				equipConfig = (EquipConfigData)GMDataBaseSystem.database.SearchIdByConf (GMDataBaseSystem.DBName.EquipConfig, baseId);
+				equipConfig = GMDataBaseSystem.SearchIdStatic<EquipConfigData> (GameData.EquipConfig, baseId);
 				config = equipConfig;
 			}
 			if (config == null) {

@@ -20,6 +20,24 @@ namespace ChuMeng
             }
             return hp.num;
         }
+
+        public static void UseItem(int itemId){
+            ClientApp.Instance.StartCoroutine(UseItemCor(itemId));
+            
+        }
+        static System.Collections.IEnumerator UseItemCor(int itemId){
+            var id = BackPack.backpack.GetItemId(itemId);
+            var itemData = Util.GetItemData(0, itemId);
+
+            var use = CGUseUserProps.CreateBuilder();
+            use.UserPropsId = id;
+            use.Count = 1;
+            var packet = new KBEngine.PacketHolder();
+            yield return KBEngine.Bundle.sendSimple(ClientApp.Instance, use, packet) ;
+            if(packet.packet.flag == 0) {
+                GameInterface_Skill.MeUseSkill(itemData.triggerBuffId);
+            }
+        }
     }
 
 }

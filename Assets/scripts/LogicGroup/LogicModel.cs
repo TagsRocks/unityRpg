@@ -5,7 +5,7 @@ public class LogicModel : LogicNode {
     public string ani;
 
 	// Use this for initialization
-	void Start () {
+	protected override void Start () {
         animation[ani].speed = 1;
         animation[ani].wrapMode = WrapMode.Loop;
         animation.CrossFade(ani);

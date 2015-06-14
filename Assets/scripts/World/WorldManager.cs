@@ -222,7 +222,7 @@ namespace ChuMeng
 			Log.GUI ("Push Main UI ");
 			var uiName = Util.GetUI ();
 			WindowMng.windowMng.PushView (uiName, false);
-			MyEventSystem.myEventSystem.PushEvent (MyEvent.EventType.UpdateShortCut);
+			MyEventSystem.myEventSystem.PushEvent (MyEvent.EventType.UpdateMainUI);
 
 			Log.Sys ("Init SaveGame And Data");
 			if (SaveGame.saveGame == null) {

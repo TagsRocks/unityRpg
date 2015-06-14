@@ -78,7 +78,6 @@ public class MakeParticle : MonoBehaviour
                 } else if (modType == "Emitter")
                 {
                     Debug.Log("Emit Config " + modData.ToString());
-                    //SetEmit(effectLayer, forever, rateArr, modData);
                     SetEmit(effectLayer, modData);
 
                 } else if (modType == "Texture Rotate")
@@ -154,9 +153,15 @@ public class MakeParticle : MonoBehaviour
 
     void SetLinear(EffectLayer effectLayer, JSONClass modData){
         effectLayer.GravityAffectorEnable = true;
-        var dir = new Vector3(modData["FORCESX"].AsFloat, modData["FORCESY"].AsFloat, modData["FORCESZ"].AsFloat);
+        var dir = Vector3.up;
+        if(modData["FORCES"] != null){
+            var forces = ConvertToFloat(modData["FORCES"].Value);
+            dir = new Vector3(forces[0], forces[1], forces[2]);
+        }else {
+            dir = new Vector3(modData["FORCESX"].AsFloat, modData["FORCESY"].AsFloat, modData["FORCESZ"].AsFloat);
+        }
         effectLayer.GravityDirection = dir.normalized;
-        effectLayer.GravityMag = dir.magnitude;
+        effectLayer.GravityMag = dir.magnitude*velScale;
     }
     void SetSine(EffectLayer effectLayer, JSONClass modData) {
         effectLayer.SineAffectorEnable = true;
@@ -171,6 +176,30 @@ public class MakeParticle : MonoBehaviour
 
     }
 
+    void SetVortexCurve(EffectLayer effectLayer, float[] curve){
+
+        int count = (curve.Length - 1) / 2;
+        float x = 0;
+        float value = 0;
+        float max = 1;
+        var ks = new Keyframe[count];
+
+        int c = 0;
+        for (int i = 1; i < curve.Length; i++)
+        {
+            var mod = (i - 1) % 2;
+            if (mod == 0)
+            {
+                x = curve [i];
+            } else if (mod == 1)
+            {
+                value = curve [i];
+                ks[c] = new Keyframe(x, value);
+                c++;
+            }
+        }
+        effectLayer.VortexCurve = new AnimationCurve(ks);
+    }
     void SetVortext(EffectLayer effectLayer, JSONClass modData)
     {
         effectLayer.VortexAffectorEnable = true;
@@ -183,13 +212,18 @@ public class MakeParticle : MonoBehaviour
         }
         effectLayer.VortexDirection = new Vector3(dirx, diry, dirz);
 
-        if (modData ["rate"] != null)
+        var rateData = modData["RATE"] == null? modData["rate"]: modData["RATE"];
+        if (rateData != null)
         {
-            var rate = ConvertToFloat(modData ["rate"].Value);
+            var rate = ConvertToFloat(rateData.Value);
             var rateType = (int)rate [0];
+            Log.Sys("VortexCurveType "+rateType);
             if (rateType == 0)
             {
                 effectLayer.VortexMag = rate [1];
+            }else if(rateType == 3){
+                effectLayer.VortexMagType = MAGTYPE.Curve;
+                SetVortexCurve(effectLayer, rate);
             }
         }
         var posx = modData["POSITIONX"].AsFloat;
@@ -228,6 +262,7 @@ public class MakeParticle : MonoBehaviour
         effectLayer.GravityAftType = GAFTTYPE.Spherical;
     }
 
+    float velScale = 1;
     void SetProp(EffectLayer effectLayer, JSONClass modData)
     {
         var fw = modData ["FRAMES WIDE"].AsInt;
@@ -275,6 +310,13 @@ public class MakeParticle : MonoBehaviour
             var pz = modData["POSITIONZ"].AsFloat;
             effectLayer.transform.localPosition = new Vector3(-px, py, pz);
         }
+        var vs = modData["VELOCITY SCALE"];
+        if(vs != null) {
+            velScale = vs.AsFloat;
+        }else {
+            velScale = 1;
+        }
+
     }
 
     void SetRandomScaleCurve(EffectLayer effectLayer, float[] scale)
@@ -498,13 +540,20 @@ public class MakeParticle : MonoBehaviour
             effectLayer.IsNodeLifeLoop = false;
             effectLayer.IsBurstEmit = false;
         }
+        var numLoops = modData["NUM LOOPS"];
+        bool hasLoops = false;
         if (modData ["NUM LOOPS"] == null)
         {
             effectLayer.IsBurstEmit = false;
             effectLayer.EmitLoop = -1;
-        } else if (modData ["NUM LOOPS"].AsInt == 1)
+        } 
+        else if (modData ["NUM LOOPS"].AsInt == 1)
         {
             effectLayer.IsBurstEmit = true;
+        }else if(numLoops.AsInt == 0){
+            hasLoops = true;
+            effectLayer.IsBurstEmit = false;
+            effectLayer.EmitLoop = 1;
         }
 
         {
@@ -528,12 +577,30 @@ public class MakeParticle : MonoBehaviour
                 effectLayer.EmitDelay = 0;
 
             }
+
+            Log.Sys("NumLoops "+numLoops);
             
             lifeTime = effectLayer.NodeLifeMax;
             effectLayer.MaxENodes = (int)Mathf.Max(rateNum, rateNum*lifeTime);
         }
+        if(hasLoops && numLoops.AsInt == 0) {
+            effectLayer.IsBurstEmit = false;
+            effectLayer.EmitLoop = 1;
+        }
 
-
+        var duration = modData["EMIT DURATION"];
+        if(duration == null){
+        }else {
+            var dur = ConvertToFloat(duration.Value);
+            if(dur[0] == 0){
+                if(dur[1] == 0){
+                    effectLayer.IsBurstEmit = true;
+                }else {
+                    effectLayer.EmitDuration = dur[1];
+                }
+            }else {
+            }
+        }
 
         var emitType = modData ["TYPE OF EMITTER"].Value;
         if (emitType == "Circle")
@@ -562,6 +629,10 @@ public class MakeParticle : MonoBehaviour
         if(scaleModData == ""){
         }else {
            scaleData = ConvertToFloat(scaleModData);
+            //Avoid Start Scale 0
+           if(scaleData[1] == 0){
+                scaleData[1] = 1;
+            }
         }
 
         var vs = modData["VISUAL SCALE"].Value;
@@ -584,11 +655,18 @@ public class MakeParticle : MonoBehaviour
             effectLayer.OriScaleXMin = effectLayer.OriScaleXMax = scaleData [1]*vscale;
             effectLayer.OriScaleYMin = effectLayer.OriScaleYMax = scaleData [1]*vscale;
         }
+        Log.Sys("scaleData is type "+scaType+" vscale "+vscale + " scaleData "+scaleData[1]+" res "+effectLayer.OriScaleXMin    );
 
         var posx = modData ["POSITIONX"].AsFloat;
         var posy = modData ["POSITIONY"].AsFloat;
         var posz = modData ["POSITIONZ"].AsFloat;
-        effectLayer.EmitPoint = new Vector3(posx, posy, posz);
+        var pos = modData["POSITION"];
+        if(pos != null) {
+            var p = ConvertToFloat(pos.Value);
+            effectLayer.EmitPoint = new Vector3(p[0], p[1], p[2]);
+        }else {
+            effectLayer.EmitPoint = new Vector3(posx, posy, posz);
+        }
         //Width * Height
         if (modData ["WIDTH"].Value != "")
         {
@@ -612,13 +690,13 @@ public class MakeParticle : MonoBehaviour
         var vtype = (int)velocity [0];
         if (vtype == 0)
         {
-            effectLayer.OriSpeed = velocity [1];
+            effectLayer.OriSpeed = velocity [1]*velScale;
             effectLayer.OriVelocityAxis = Vector3.up;
         } else if (vtype == 1)
         {
-            effectLayer.OriSpeed = velocity [1];
-            effectLayer.SpeedMin = velocity [1];
-            effectLayer.SpeedMax = velocity [2];
+            effectLayer.OriSpeed = velocity [1]*velScale;
+            effectLayer.SpeedMin = velocity [1]*velScale;
+            effectLayer.SpeedMax = velocity [2]*velScale;
             effectLayer.IsRandomSpeed = true;
             effectLayer.OriVelocityAxis = Vector3.up;
 
@@ -643,14 +721,16 @@ public class MakeParticle : MonoBehaviour
                     if(minDeg > 0) {
                         effectLayer.DirType = DIRECTION_TYPE.Cone;
                         effectLayer.UseRandomDirAngle = false;
-                        effectLayer.AngleAroundAxis = (int)minDeg;
+                        effectLayer.AngleAroundAxis = (int)0;
                         effectLayer.AngleAroundAxisMax = (int)minDeg;
                         effectLayer.SpriteType = (int)Xft.STYPE.BILLBOARD_SELF;
+                        effectLayer.UseRandomDirAngle = true;
                     }
 
                 }
             }
         }
+
 
 
     }

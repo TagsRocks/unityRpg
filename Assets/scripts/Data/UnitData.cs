@@ -47,8 +47,7 @@ namespace ChuMeng
 				return playerConfig.level;
 			}
 		}
-		//TODO:配置文件增加 怪物 出生粒子效果的配置，一键发布对应的配置属性到数据表里面
-		//对应的属性配置表 是一个 json文件 保存在客户端本地
+
 		public string SpawnEffect{
 			get {
 				return config.spawnParticle;

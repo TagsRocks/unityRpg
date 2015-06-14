@@ -7,12 +7,12 @@ namespace ChuMeng {
 		public Vector3 direction = Vector3.right;
 		public float magnitude = 0.4f;
 
-		public bool active = true;
+		bool isActive = true;
 		bool startYet = false;
 
 		public bool autoRemove = false;
 		void Update() {
-			if (active) {
+			if (isActive) {
 				if(!startYet) {
 					startYet = true;
 					StartCoroutine(ShakeCamera());

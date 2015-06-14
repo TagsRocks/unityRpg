@@ -129,6 +129,7 @@ namespace ChuMeng
 			ShakeCameraEnd,
 
 			UpdatePlayerData,
+            UpdateMainUI, //
 		}
 
 

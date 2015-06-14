@@ -16,6 +16,7 @@ namespace ChuMeng
             SetCallback("StoreButton", OnStore);
             this.regEvt = new System.Collections.Generic.List<MyEvent.EventType>(){
                 MyEvent.EventType.UpdateItemCoffer,
+                MyEvent.EventType.UpdateMainUI,
             };
             RegEvent();
         }

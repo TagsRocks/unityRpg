@@ -122,6 +122,16 @@ namespace ChuMeng
 			msgReader.msgHandle = handleMsg;
 		}
 
+
+        public void SendPacket (IBuilderLite retpb, uint flowId, int errorCode)
+        {
+            var bytes = ServerBundle.sendImmediateError (retpb, flowId, errorCode);
+            Debug.Log ("DemoServer: Send Packet " + flowId);
+            lock (msgBuffer) {
+                msgBuffer.Add (bytes);
+            }
+        }
+
 		public void SendPacket (IBuilderLite retpb, uint flowId)
 		{
 			var bytes = ServerBundle.sendImmediate (retpb, flowId);
@@ -566,88 +576,8 @@ namespace ChuMeng
                 au.AddRolesInfos (msg);
             
 				retPb = au;
-			} else if (className == "CGSendChat") {
-				var inpb = packet.protoBody as CGSendChat;
-				var au = GCSendChat.CreateBuilder ();
-				retPb = au;
-
-				var push = GCPushChat2Client.CreateBuilder ();
-				push.PlayerId = 1;
-				push.PlayerName = "You";
-				push.PlayerLevel = 1;
-				push.PlayerJob = 1;
-				push.PlayerVip = 1;
-				push.TargetId = 3;
-				push.Channel = 0;
-				push.ChatContent = inpb.Content;
-
-				SendPacket (push, 0);
-
-				if(inpb.Content == "getAllWeapon") {
-					Debug.Log("getAllWeapon ");
-
-					int c = 0;
-					var pk = new JSONArray();
-					var pushPack  = GCPushPackInfo.CreateBuilder ();
-					pushPack.PackType = PackType.DEFAULT_PACK;
-					pushPack.BackpackAdjust = true;
-					foreach (EquipConfigData ed in GameData.EquipConfig) {
-						if (ed.job == selectPlayerJob && ed.equipPosition == 8) {
-							var pinfo = PackInfo.CreateBuilder ();
-							var pkentry = PackEntry.CreateBuilder ();
-							pkentry.Id = ed.id;
-							pkentry.BaseId = ed.id;
-							pkentry.Index = c;
-							pinfo.CdTime = 0;
-							pkentry.GoodsType = 1;
-							pinfo.PackEntry = pkentry.BuildPartial ();
-							pushPack.AddPackInfo (pinfo);
-							var dict = new JSONClass();
-							dict["id"].AsInt = ed.id;
-							dict["baseId"].AsInt = ed.id;
-							dict["index"].AsInt = c;
-							dict["goodsType"].AsInt = 1;
-							pk.Add(dict);
-							c++;
-						}
-					}
-
-					packInf = pk.ToString();
-					SendPacket(pushPack, 0);
-				}else if(inpb.Content == "getAllEquip") {
-					Debug.Log("getAllEquip ");
-					
-					int c = 0;
-					var pk = new JSONArray();
-					var pushPack  = GCPushPackInfo.CreateBuilder ();
-					pushPack.PackType = PackType.DEFAULT_PACK;
-					pushPack.BackpackAdjust = true;
-					foreach (EquipConfigData ed in GameData.EquipConfig) {
-						if (ed.job == selectPlayerJob && ed.equipPosition != 8) {
-							var pinfo = PackInfo.CreateBuilder ();
-							var pkentry = PackEntry.CreateBuilder ();
-							pkentry.Id = ed.id;
-							pkentry.BaseId = ed.id;
-							pkentry.Index = c;
-							pinfo.CdTime = 0;
-							pkentry.GoodsType = 1;
-							pinfo.PackEntry = pkentry.BuildPartial ();
-							pushPack.AddPackInfo (pinfo);
-							var dict = new JSONClass();
-							dict["id"].AsInt = ed.id;
-							dict["baseId"].AsInt = ed.id;
-							dict["index"].AsInt = c;
-							dict["goodsType"].AsInt = 1;
-							pk.Add(dict);
-							c++;
-						}
-					}
-					
-					packInf = pk.ToString();
-					SendPacket(pushPack, 0);
-				}
-
-			} else if (className == "CGPlayerMove") {
+			} 
+            else if (className == "CGPlayerMove") {
 				var au = GCPlayerMove.CreateBuilder ();
 				retPb = au;
             }else {

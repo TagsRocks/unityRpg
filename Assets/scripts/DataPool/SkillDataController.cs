@@ -57,7 +57,7 @@ namespace ChuMeng {
 
 		List<SkillFullInfo> activeSkill = new List<SkillFullInfo>();
 		List<SkillFullInfo> passiveSkill = new List<SkillFullInfo>();
-		public List<SkillFullInfo> active {
+		public List<SkillFullInfo> activeSkillData {
 			get {
 				return activeSkill;
 			}

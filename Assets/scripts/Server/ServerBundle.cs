@@ -30,7 +30,7 @@ namespace ChuMeng
 			msgtype = null;
 		}
 
-		public uint writePB(byte[] v) {
+		uint writePB(byte[] v, int errorCode=0) {
 
 			int bodyLength = 4 + 1 + 2+ 4 + 2 + v.Length;
 			int totalLength = 1 + 4 + bodyLength;
@@ -43,20 +43,32 @@ namespace ChuMeng
 			stream.writeUint8 (Convert.ToByte(moduleId));
 			stream.writeUint16 (Convert.ToUInt16(msgId));
 			stream.writeUint32 (Convert.ToUInt32 (123));//response time
-			stream.writeUint16 (Convert.ToUInt16 (0)); // no error reponse flag
+			stream.writeUint16 (Convert.ToUInt16 (errorCode)); // no error reponse flag
 			stream.writePB (v);
 			
 			return flowId;
 		}
 
-		uint writePB(IMessageLite pbMsg) {
+		uint writePB(IMessageLite pbMsg, int errorCode=0) {
 			byte[] bytes;
 			using (System.IO.MemoryStream stream = new System.IO.MemoryStream()) {
 				pbMsg.WriteTo (stream);
 				bytes = stream.ToArray ();
 			}
-			return writePB (bytes);
+			return writePB (bytes, errorCode);
 		}
+
+        public static byte[] sendImmediateError(IBuilderLite build, uint flowId, int errorCode) {
+            var data = build.WeakBuild ();
+
+            var bundle = new ServerBundle ();
+            bundle.newMessage (data.GetType());
+            bundle.flowId = flowId;
+            bundle.writePB (data, errorCode);
+
+            return bundle.stream.getbuffer();
+        }
+
 		public static byte[] sendImmediate(IBuilderLite build, uint flowId) {
 			var data = build.WeakBuild ();
 
@@ -67,8 +79,24 @@ namespace ChuMeng
 
 			return bundle.stream.getbuffer();
 		}
-
-        public static void SendImmediate(IBuilderLite build) {
+        /// <summary>
+        /// Send Packet With ErrorCode
+        /// </summary>
+        /// <param name="build">Build.</param>
+        /// <param name="flow">Flow.</param>
+        /// <param name="errorCode">Error code.</param>
+        public static void SendImmediateError(IBuilderLite build, uint flow, int errorCode) {
+            DemoServer.demoServer.GetThread().SendPacket(build, flow, errorCode);
+        }
+        /// <summary>
+        /// Response To Request 
+        /// </summary>
+        /// <param name="build">Build.</param>
+        /// <param name="flow">Flow.</param>
+        public static void SendImmediate(IBuilderLite build, uint flow) {
+            DemoServer.demoServer.GetThread().SendPacket(build, flow);
+        }
+        public static void SendImmediatePush(IBuilderLite build) {
             DemoServer.demoServer.GetThread().SendPacket(build, serverPushFlowId++);
         }
 
