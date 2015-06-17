@@ -15,19 +15,21 @@ namespace ChuMeng
 {
 	public class ItemDataRef : MonoBehaviour
 	{
-		public ItemData ItemData;
+		public ItemData itemData;
 		public GameObject Particle;
 		public bool IsOnGround = false;
-		ShadowComponent shadow;
+		//ShadowComponent shadow;
 		GameObject player;
-		BackPack backpack;
+		
+        //BackPack backpack;
 		//Gold Number
-		public int Value;
+		private int num;
 
 		void Awake ()
 		{
-			player = GameObject.FindGameObjectWithTag ("Player");
-			shadow = GetComponent<ShadowComponent> ();
+			//player = GameObject.FindGameObjectWithTag ("Player");
+            player = ObjectManager.objectManager.GetMyPlayer();
+			//shadow = GetComponent<ShadowComponent> ();
 			/*
 			if (GetComponent<ShadowComponent> ()) {
 				GetComponent<ShadowComponent> ().CreateShadowPlane ();
@@ -35,17 +37,18 @@ namespace ChuMeng
 			*/
 			//backpack = GameObject.Find ("backpackController");
 
-			backpack = GameObject.FindObjectOfType<BackPack> ();
+			//backpack = GameObject.FindObjectOfType<BackPack> ();
+
 		}
 		// Use this for initialization
 		void Start ()
 		{
-			if (ItemData != null && ItemData.UnitType == ItemData.UnitTypeEnum.QUESTITEM) {
+			if (itemData != null && itemData.UnitType == ItemData.UnitTypeEnum.QUESTITEM) {
 				var c = NGUITools.AddMissingComponent<SphereCollider>(gameObject);
 				c.radius = 2;
 				c.isTrigger = true;
 			}
-			else if (ItemData != null && IsOnGround) {
+			else if (itemData != null && IsOnGround) {
 				var c = gameObject.AddComponent<CharacterController>();
 				c.center = new Vector3(0, 0.2f, 0);
 				c.radius = 0.1f;
@@ -84,6 +87,7 @@ namespace ChuMeng
 		//TODO:拾取掉落物品
 		IEnumerator PickTreasure ()
 		{
+            Log.Sys("PickThisTreasure "+itemData.ItemName);
 			Vector2 dir = Random.insideUnitCircle;
 			float curFlySpeed = 0;
 			Vector3 upSpeed = new Vector3(0, 5, 0);
@@ -128,8 +132,11 @@ namespace ChuMeng
 				yield return null;
 			}
 
-			/*
 			GameObject.Destroy (gameObject);
+            GameInterface_Backpack.PickItem(itemData, num);
+            IsOnGround = false;
+
+            /*
 			if (backpack != null) {
 				if(ItemData.UnitType == ItemData.UnitTypeEnum.GOLD) {
 					backpack.GetComponent<BackPack>().PutGold(Value);
@@ -147,12 +154,14 @@ namespace ChuMeng
 		// Update is called once per frame
 		void Update ()
 		{
+            /*
 			if (player != null && shadow != null) {
 				var dis = (player.transform.position - transform.position).magnitude;
 				if (dis < 4) {
 					shadow.AdjustLightPos (player.transform.position + new Vector3 (0, 3, 0));
 				}
 			}
+            */
 		}
 
 		IEnumerator WaitRemove ()
@@ -169,10 +178,10 @@ namespace ChuMeng
 			StartCoroutine (WaitRemove ());
 		}
 
-		public static GameObject MakeDropItem(ItemData itemData, Vector3 pos) {
+		public static GameObject MakeDropItem(ItemData itemData, Vector3 pos, int num) {
 			var g = Instantiate(Resources.Load<GameObject>(itemData.DropMesh)) as GameObject;
 			var com = NGUITools.AddMissingComponent<ItemDataRef>(g);
-			com.ItemData = itemData;
+			com.itemData = itemData;
 			g.transform.position = pos;
 			
 			var par = Instantiate(Resources.Load<GameObject>("particles/drops/generic_item")) as GameObject;
@@ -180,7 +189,7 @@ namespace ChuMeng
 			par.transform.localPosition = Vector3.zero;
 			com.Particle = par;
 			com.IsOnGround = true;
-
+            com.num = num;
 			return g;
 		}
 	}

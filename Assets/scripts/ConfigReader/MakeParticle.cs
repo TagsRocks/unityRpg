@@ -441,7 +441,7 @@ public class MakeParticle : MonoBehaviour
         effectLayer.OriVelocityAxis = new Vector3(-rotX, rotY, rotZ);
     }
 
-    float oldRotateSpeed = 10;
+    //float oldRotateSpeed = 10;
 
     void SetRotate(EffectLayer effectLayer, JSONClass modData)
     {
@@ -460,7 +460,7 @@ public class MakeParticle : MonoBehaviour
         }
         float[] speed = new float[]{0, 10};
         if(modData ["ROTATION SPEED"].Value == ""){
-            oldRotateSpeed = 10;
+            //oldRotateSpeed = 10;
         }else {
             speed = ConvertToFloat(modData ["ROTATION SPEED"].Value);
         }

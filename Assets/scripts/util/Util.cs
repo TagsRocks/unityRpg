@@ -640,6 +640,23 @@ namespace ChuMeng
 
             }
         }
+
+        public static List<List<float>> ParseConfig(string config){
+            Log.Sys("ParseConfig "+config);
+            var ret = new List<List<float>>();
+            var g = config.Split(char.Parse("|"));
+            foreach(var s in g){
+                var c = s.Split(char.Parse("_"));
+                var c1 = new List<float>();
+                ret.Add(c1);
+                foreach(var c2 in c){
+                    var f = Convert.ToSingle(c2);
+                    c1.Add(f);
+                }
+            }
+            Log.Sys("ConfigCoount "+ret.Count);
+            return ret;
+        }
 	}
 
 

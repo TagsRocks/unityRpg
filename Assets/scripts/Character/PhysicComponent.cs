@@ -17,10 +17,10 @@ namespace ChuMeng
 			return lastSpeed;
 		}
 		float lastSpeed = 0;
-		Vector3 lastPos;
+		//Vector3 lastPos;
 		//技能操控玩家移动
 		public void SkillMove(Vector3 pos, float speed) {
-			lastPos = pos;
+			//lastPos = pos;
 			var dir = pos - transform.position;
 			dir.y = 0;
 			Log.Sys("SkillMove Position "+pos+" speed "+speed+" dir "+dir);

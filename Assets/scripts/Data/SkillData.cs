@@ -117,8 +117,8 @@ namespace ChuMeng
 
 		public int ManaCost {
 			get {
-				return 0;
-				//return skillConfig.mpExp;
+				//return 0;
+				return skillConfig.mpExp;
 			}
 		}
 

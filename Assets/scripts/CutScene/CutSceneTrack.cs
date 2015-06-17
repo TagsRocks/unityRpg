@@ -16,7 +16,7 @@ public class CutSceneTrack : MonoBehaviour {
 	public CutScene.MediaType type = CutScene.MediaType.Subtitles;
 	public List<CutSceneClip> clips = new List<CutSceneClip>();
 
-	CutSceneSubtitles currentSubtitle;
+	//CutSceneSubtitles currentSubtitle;
 	[HideInInspector]
 	public int id = 0;
 
@@ -46,11 +46,11 @@ public class CutSceneTrack : MonoBehaviour {
 	}
 
 	void PlaySubtitle(CutSceneClip clip) {
-		currentSubtitle = (CutSceneSubtitles)clip.master;
+		//currentSubtitle = (CutSceneSubtitles)clip.master;
 		StartCoroutine (StopSubtitle(clip.duration));
 	}
 	IEnumerator StopSubtitle(float duration) {
 		yield return new WaitForSeconds (duration);
-		currentSubtitle = null;
+		//currentSubtitle = null;
 	}
 }

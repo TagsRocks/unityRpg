@@ -404,6 +404,11 @@ public partial class Util {
 		return retMsg;
 	}	
 
+	static IMessageLite GetCGPickItem(ByteString buf) {
+		var retMsg = ChuMeng.CGPickItem.ParseFrom(buf);
+		return retMsg;
+	}	
+
 	static IMessageLite GetGCPushExpChange(ByteString buf) {
 		var retMsg = ChuMeng.GCPushExpChange.ParseFrom(buf);
 		return retMsg;
@@ -2159,6 +2164,8 @@ public partial class Util {
 	{"GCPushLootRewardRemove", GetGCPushLootRewardRemove},
 
 	{"GCForgotPassword", GetGCForgotPassword},
+
+	{"CGPickItem", GetCGPickItem},
 
 	{"GCPushExpChange", GetGCPushExpChange},
 

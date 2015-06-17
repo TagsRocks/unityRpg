@@ -19,10 +19,10 @@ namespace ChuMeng {
 		float heading;
 		Vector3 targetRotation;
 
-		CommonAI commonAI;
+		//CommonAI commonAI;
 		
 		void Awake() {
-			commonAI = GetComponent<CommonAI> ();
+			//commonAI = GetComponent<CommonAI> ();
 			attribute = GetComponent<NpcAttribute>();
 
 			myAnimationEvent = GetComponent<MyAnimationEvent>();

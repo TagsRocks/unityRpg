@@ -31,8 +31,8 @@ namespace ChuMeng
 		GameObject Scabbard;
 		GameObject Chest;
 		EquipData ChestData;
-		GameObject Helm;
-		EquipData HelmData;
+		//GameObject Helm;
+		//EquipData HelmData;
 		GameObject Boots;
 		EquipData BootsData;
 		GameObject Gloves;
@@ -53,7 +53,7 @@ namespace ChuMeng
 
 		Transform rightHand;
 		Transform back;
-		MyAnimationEvent myAnimationEvent;
+		//MyAnimationEvent myAnimationEvent;
 		GameObject weaponTrail;
 		NpcAttribute attribute;
 		bool IsFakeObject = false;
@@ -79,7 +79,7 @@ namespace ChuMeng
 		void Awake ()
 		{
 			attribute = GetComponent<NpcAttribute> ();
-			myAnimationEvent = GetComponent<MyAnimationEvent> ();
+			//myAnimationEvent = GetComponent<MyAnimationEvent> ();
 
 			rightHand = Util.FindChildRecursive (transform, "Armature|tag_righthand");
 			if (rightHand == null) {
@@ -261,7 +261,7 @@ namespace ChuMeng
 					Log.Sys ("Player Fake Equip is " + " " + obj.name + " " + equip);
 					WieldEquip (equip.WeaponData);
 					WieldEquip (equip.ChestData);
-					WieldEquip (equip.HelmData);
+					//WieldEquip (equip.HelmData);
 					WieldEquip (equip.BootsData);
 					WieldEquip (equip.GlovesData);
 					WieldEquip (equip.headData);
@@ -543,10 +543,12 @@ namespace ChuMeng
 		public int GetArmor ()
 		{
 			int arm = 0;
+            /*
 			if (HelmData != null) {
 				var it = HelmData.itemData.InitItemData ();
 				arm += it.RealArmor;
 			}
+            */
 			if (ChestData != null) {
 				var it = ChestData.itemData.InitItemData ();
 				arm += it.RealArmor;

@@ -24,12 +24,12 @@ namespace ChuMeng {
 		public float FastRotateSpeed = 10;
 
 		MyAnimationEvent myAnimationEvent;
-		CharacterController controller;
+		//CharacterController controller;
 		
 		void Awake() {
 			attribute = GetComponent<NpcAttribute> ();
 			myAnimationEvent = GetComponent<MyAnimationEvent>();
-			controller = GetComponent<CharacterController>();
+			//controller = GetComponent<CharacterController>();
 			animation.Play("idle");
 			animation ["idle"].wrapMode = WrapMode.Loop;
 			//GetComponent<ShadowComponent> ().CreateShadowPlane ();

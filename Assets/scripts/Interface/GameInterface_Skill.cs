@@ -50,13 +50,29 @@ namespace ChuMeng
 		}
 
         public static void MeUseSkill(int skillId){
+            Log.Sys("MeUseSkill "+skillId);
+            if(skillId == 0) {
+                return;
+            }
+            Log.GUI("ItemUseSkill "+skillId);
             var skillData = Util.GetSkillData(skillId, 1);
             ObjectManager.objectManager.GetMyPlayer().GetComponent<MyAnimationEvent>().OnSkill(skillData);
         }
 
 		public static void OnSkill (int skIndex)
 		{
-			ObjectManager.objectManager.GetMyPlayer ().GetComponent<MyAnimationEvent> ().OnSkill(SkillDataController.skillDataController.GetShortSkillData (skIndex));
+            var skillData = SkillDataController.skillDataController.GetShortSkillData (skIndex);
+            if(skillData != null) {
+                var mana = ObjectManager.objectManager.GetMyData().GetProp(CharAttribute.CharAttributeEnum.MP);
+                var cost = skillData.ManaCost;
+                if(cost > mana){
+                    WindowMng.windowMng.PushTopNotify("魔法不足");
+                    return;
+                }
+                var npc = ObjectManager.objectManager.GetMyAttr();
+                npc.ChangeMP(-cost);
+    			ObjectManager.objectManager.GetMyPlayer ().GetComponent<MyAnimationEvent> ().OnSkill(skillData);
+            }
 		}
 	}
 }

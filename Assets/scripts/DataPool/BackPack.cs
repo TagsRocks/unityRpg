@@ -48,7 +48,7 @@ namespace ChuMeng
 
 		//背包物品所在槽
 		int slotId;
-		GameObject player;
+		//GameObject player;
 		//PotionUI pui;
 		[ButtonCallFunc()]
 		public bool clearEquip;
@@ -122,11 +122,11 @@ namespace ChuMeng
 		 */ 
 		public class ShortCut
 		{
-			ShortCutInfo shortCutInfo;
+			//ShortCutInfo shortCutInfo;
 
 			public ShortCut (ShortCutInfo shortInfo)
 			{
-				shortCutInfo = shortInfo;
+				//shortCutInfo = shortInfo;
 			}
 		}
 
@@ -147,7 +147,7 @@ namespace ChuMeng
 
 			//uIRoot = GameObject.Find ("UI Root");
 
-			player = GameObject.FindGameObjectWithTag ("Player");
+			//player = GameObject.FindGameObjectWithTag ("Player");
 		}
 
 		ItemData.EquipPosition FindEquipSlot (int backpackSlotId)
@@ -662,22 +662,5 @@ namespace ChuMeng
                 me.SetProp(CharAttribute.CharAttributeEnum.GOLD_COIN, gc.Num);
             }
         }
-		//TODO:
-		public void AddItemInfo(GoodsCountChange gc) {
-			//var item = SlotData[gc.PackEntry.Index];
-			//PutItemInBackpackIndex (new BackpackData(gc.PackEntry));
-		}
-		//TODO:
-		public void RemoveItemInfo(GoodsCountChange gc) {
-			/*
-			if (gc.PackEntry.Count == 0) {
-				ClearSlot (gc.PackEntry.Index);
-			} else {
-				//Remove Old Item
-				ClearSlot(gc.PackEntry.Index);
-				PutItemInBackpackIndex(new BackpackData(gc.PackEntry));
-			}
-			*/
-		}
 	}
 }

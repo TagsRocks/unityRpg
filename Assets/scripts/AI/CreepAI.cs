@@ -29,7 +29,7 @@ public class CreepAI : MonoBehaviour {
 
 	CharacterController controller;
 	CreepState creepState;
-	float heading;
+	//float heading;
 	Vector3 targetRotation;
 
 	Vector3 targetPos;
@@ -44,7 +44,7 @@ public class CreepAI : MonoBehaviour {
 		seeker = GetComponent<Seeker>();
 		controller = GetComponent<CharacterController>();
 		creepState = CreepState.Idle;
-		heading = Random.Range(0, 360);
+		//heading = Random.Range(0, 360);
 		radius = 5;
 		//controller.detectCollisions = false;
 		animation.Play("idle");

@@ -11,7 +11,7 @@ namespace ChuMeng
 
 
 		int attackId = 0;
-		string attackAniName = null;
+		//string attackAniName = null;
 		public override void EnterState ()
 		{
 			base.EnterState ();

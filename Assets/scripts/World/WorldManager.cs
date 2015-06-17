@@ -82,7 +82,7 @@ namespace ChuMeng
             yield return null;
             var g = new GameObject("StreamLoadLevel");
             var loader = g.AddComponent<StreamLoadLevel>();
-            yield return StartCoroutine(loader.LoadFirstRoom());
+            yield return loader.StartCoroutine(loader.LoadFirstRoom());
 
             var start = GameObject.Find("PlayerStart");
             CameraController.cameraController.TracePositon(start.transform.position);
@@ -99,7 +99,7 @@ namespace ChuMeng
             CreateLevelInit ();
             NetDebug.netDebug.AddConsole ("Init World Finish");
 
-            StartCoroutine(loader.LoadRoomNeibor());
+            loader.StartCoroutine(loader.LoadRoomNeibor());
         }
 		//执行进入场景的代码逻辑
 		IEnumerator EnterScene(GCEnterScene sceneData) {
@@ -162,11 +162,11 @@ namespace ChuMeng
 
             //
             //if(!sdata.isCity) {
-            {
-                var g = new GameObject("StreamLoadLevel");
-                var loader = g.AddComponent<StreamLoadLevel>();
+            //{
+                var g1 = new GameObject("StreamLoadLevel");
+                var loader = g1.AddComponent<StreamLoadLevel>();
                 yield return StartCoroutine(loader.LoadFirstRoom());
-            }
+            //}
             //}
 
             var start = GameObject.Find("PlayerStart");
@@ -191,6 +191,8 @@ namespace ChuMeng
 			//初始化缓存的场景玩家
 			ObjectManager.objectManager.InitCache ();
 			NetDebug.netDebug.AddConsole ("Init World Finish");
+
+            StartCoroutine(loader.LoadRoomNeibor());
 		}
 
 

@@ -154,8 +154,7 @@ namespace ChuMeng {
 					}
 				}
 
-				DropTreasure();
-				DropExp();
+				//DropTreasure();
 			}
 		}
 
@@ -171,7 +170,7 @@ namespace ChuMeng {
 			}
 		}
 
-		int _PoisonDefense = 0;
+		//int _PoisonDefense = 0;
 		public int PoisonDefense {
 			get {
 				return GetWaterDefense();
@@ -363,7 +362,10 @@ namespace ChuMeng {
 			evt1.intArg1 = HP_Max;
 			MyEventSystem.myEventSystem.PushLocalEvent(evt1.localID, evt1);
 
-
+            if(GetLocalId() == ObjectManager.objectManager.GetMyLocalId())
+            {
+                MyEventSystem.myEventSystem.PushEvent(MyEvent.EventType.UpdateMainUI);
+            }
 		}
 
 		public void ChangeMP(int c) {
@@ -383,6 +385,10 @@ namespace ChuMeng {
 			evt1.intArg1 = MP_Max;
 			MyEventSystem.myEventSystem.PushEvent (evt1);
 
+            if(GetLocalId() == ObjectManager.objectManager.GetMyLocalId())
+            {
+                MyEventSystem.myEventSystem.PushEvent(MyEvent.EventType.UpdateMainUI);
+            }
 		}
 
 		/*
@@ -430,21 +436,6 @@ namespace ChuMeng {
 
 		}
 
-		/*
-		 * Multiple player Send Exp
-		 * TODO:怪物死亡赠送经验
-		 */ 
-		void DropExp() {
-			/*
-			if (_ObjUnitData != null) {
-				int e = _ObjUnitData.GetXp(_Level);
-				Debug.Log("Drop Exp "+e);
-				if(GetComponent<MyAnimationEvent>().attacker != null) {
-					GetComponent<MyAnimationEvent>().attacker.GetComponent<NpcAttribute>().AddExp(e);
-				}
-			}
-			*/
-		}
 
 		//TODO: 单人副本中需要判断是否升级以及升级相关处理
 		public void ChangeExp(int e) {
@@ -478,7 +469,9 @@ namespace ChuMeng {
 
 
 		//TODO: 掉落物品机制重新设计 掉落物品和掉落黄金 
-		void DropTreasure() {
+		public List<float> GetDropTreasure() {
+            return _ObjUnitData.GetRandomDrop();
+
 			/*
 			if (_ObjUnitData != null) {
 				UnitData.Treasure treasure = _ObjUnitData.GetRandomDrop();

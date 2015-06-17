@@ -232,6 +232,7 @@ namespace ChuMeng
         /// <returns>The current room neibor.</returns>
         public IEnumerator LoadRoomNeibor()
         {
+            Log.Sys("LoadRoomNeibor");
             var nextRoom = currentRoomIndex + 1;
             if (loadedRoom.Contains(nextRoom) || configLists.Count <= nextRoom)
             {
@@ -331,6 +332,7 @@ namespace ChuMeng
             Log.Sys("Inital SceneId Layout "+sceneId);
             LevelConfigData.Init();
             configLists = LevelConfigData.LevelLayout[sceneId];
+            Log.Sys("ConfigList "+configLists.Count);
 
         }
     

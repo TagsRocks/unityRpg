@@ -101,7 +101,7 @@ namespace ChuMeng
 				}
 			}
 		}
-		bool stopAttack = false;
+		//bool stopAttack = false;
 		//TODO:增加摇杆控制攻击方向功能 这样人物会根据摇杆方向来确定攻击目标
 		IEnumerator WaitForAttackAnimation (Animation animation)
 		{
@@ -149,7 +149,7 @@ namespace ChuMeng
 
 				var vhValue = Mathf.Abs(v)+Mathf.Abs(h);
 				if(hitYet && vhValue > 0.2f) {
-					stopAttack = true;
+					//stopAttack = true;
 					break;
 				}
 
@@ -182,7 +182,7 @@ namespace ChuMeng
 				Log.Ani ("Do ule Press Time "+attackAniName+"  "+pressAttack+" " + attackPressTime + " " + Time.time + " " + WindowTime);
 				yield return GetAttr ().StartCoroutine (WaitForAttackAnimation (GetAttr ().animation));
 
-				stopAttack = false;
+				//stopAttack = false;
 				if (pressAttack && ((Time.time - attackPressTime) < WindowTime)) {
 					Log.AI("Press Attack Again");
 					pressAttack = false;

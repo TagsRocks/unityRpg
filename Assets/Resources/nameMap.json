@@ -467,6 +467,7 @@
         "GCPickUpLootReward": 39, 
         "CGForgotPassword": 40, 
         "GCForgotPassword": 41, 
+        "CGPickItem": 42, 
         "GCPushNotice2Kick": 1000, 
         "GCPushAttribute2Members": 1001, 
         "GCPushLevelUpgrade": 1002, 

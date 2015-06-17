@@ -5,6 +5,17 @@ namespace ChuMeng
 {
     public static class GameInterface_Backpack
     {
+        /// <summary>
+        /// 拾取某个物品
+        /// </summary>
+        public static void PickItem(ItemData itemData, int num)
+        {
+            var pick = CGPickItem.CreateBuilder();
+            pick.ItemId = itemData.ObjectId;
+            pick.Num = num;
+            KBEngine.Bundle.sendImmediate(pick);
+        }
+
         public static bool BuyItem(int itemId)
         {
             var buyItem = CGBuyShopProps.CreateBuilder();
@@ -33,8 +44,10 @@ namespace ChuMeng
             use.UserPropsId = id;
             use.Count = 1;
             var packet = new KBEngine.PacketHolder();
-            yield return KBEngine.Bundle.sendSimple(ClientApp.Instance, use, packet) ;
-            if(packet.packet.flag == 0) {
+            Log.Net("Send Use Item");
+            yield return ClientApp.Instance.StartCoroutine(KBEngine.Bundle.sendSimple(ClientApp.Instance, use, packet));
+            Log.Sys("UseResult "+packet.packet.flag);
+            if(packet.packet.responseFlag == 0) {
                 GameInterface_Skill.MeUseSkill(itemData.triggerBuffId);
             }
         }

@@ -957,13 +957,13 @@ MonoBehaviour:
   updateAnchors: 1
   mColor: {r: .875, g: .289522082, b: .289522082, a: 1}
   mPivot: 4
-  mWidth: 34
+  mWidth: 36
   mHeight: 30
   mDepth: 2
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 1.13333333
+  aspectRatio: 1.20000005
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 12800000, guid: d15f6e8f644c6fa48a7a827527bbde21, type: 3}
   mFont: {fileID: 0}
@@ -1449,7 +1449,7 @@ MonoBehaviour:
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 4.44444466
+  aspectRatio: 3.40625
   keepCrispWhenShrunk: 0
   mTrueTypeFont: {fileID: 12800000, guid: d15f6e8f644c6fa48a7a827527bbde21, type: 3}
   mFont: {fileID: 0}

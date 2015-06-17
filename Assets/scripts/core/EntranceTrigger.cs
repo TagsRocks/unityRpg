@@ -38,11 +38,13 @@ namespace ChuMeng {
 
 
 		void OnTriggerEnter(Collider other) {
+            /*
 			if (other.tag == "Player" && NextSceneId != -1 && other.gameObject == ObjectManager.objectManager.GetMyPlayer()) {
 				Debug.Log("Enter Level");
 				var tips = WindowMng.windowMng.PushView("UI/tips").GetComponent<TipsPanel>();
 				tips.SetOk(OnOk);
 			}
+            */
 		}
 
 		void OnTriggerExit(Collider other) {

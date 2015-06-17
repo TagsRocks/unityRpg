@@ -33,7 +33,7 @@ namespace ChuMeng
             Log.GUI("OnLevelId "+levId);
             CopyController.copyController.SelectLevel (curChapter, allLevels[levId]);
 
-            WorldManager.worldManager.StartCoroutine (WorldManager.worldManager.ChangeScene(CopyController.copyController.SelectLevelInfo.levelLocal.id, false));
+            WorldManager.worldManager.WorldChangeScene(CopyController.copyController.SelectLevelInfo.levelLocal.id, false);
             Log.GUI("OnCopyLevel "+levId);
         }
         void UpdateFrame() {

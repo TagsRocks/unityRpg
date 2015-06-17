@@ -22,9 +22,9 @@ namespace ChuMeng
 
 		public CollisionFlags collisionFlags;
 	
-		MyAnimationEvent myAnimationEvent;
+		//MyAnimationEvent myAnimationEvent;
 
-		CharacterController controller;
+		//CharacterController controller;
 		/// <summary>
 		/// 从配置代码文件中读取用于所有的职业角色 例如  Config.cs  Config.config.xxxx
 		/// </summary>
@@ -59,13 +59,13 @@ namespace ChuMeng
 		}
 	
 
-		AnimationController animationController;
+		//AnimationController animationController;
 		void Awake ()
 		{
-			controller = GetComponent<CharacterController> ();
+			//controller = GetComponent<CharacterController> ();
 			attribute = GetComponent<NpcAttribute> ();
-			myAnimationEvent = GetComponent<MyAnimationEvent> ();
-			animationController = GetComponent<AnimationController> ();
+			//myAnimationEvent = GetComponent<MyAnimationEvent> ();
+			//animationController = GetComponent<AnimationController> ();
 
 			ai = new HumanCharacter ();
 			ai.attribute = attribute;

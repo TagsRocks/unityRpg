@@ -39,7 +39,7 @@ namespace ChuMeng {
 		List<SkillFullInfo> skillSlots = new List<SkillFullInfo>();
 
 		//CharacterData charData;
-		int distributedSkillPoint;
+		//int distributedSkillPoint;
 		int totalSkillPoint;
 		public int TotalSp {
 			get {
@@ -48,7 +48,8 @@ namespace ChuMeng {
 		}
 		public int DistriSp {
 			get {
-				return distributedSkillPoint;
+                return 0;
+				//return distributedSkillPoint;
 			}
 		}
 
@@ -193,9 +194,11 @@ namespace ChuMeng {
 
 		//TODO: 学习一个新技能 
 		void OnLearn(GameObject g) {
-			if (totalSkillPoint - distributedSkillPoint > 0) {
+			/*
+            if (totalSkillPoint - distributedSkillPoint > 0) {
 				
 			}
+            */
 			/*
 			if (charData.SkillPoint > 0) {
 				var sk = GetSkill(g.name);

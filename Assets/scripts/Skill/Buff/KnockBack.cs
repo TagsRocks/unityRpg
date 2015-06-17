@@ -6,11 +6,11 @@ namespace ChuMeng
 	//0.8s 击退怪物 buff
 	public class KnockBack : IEffect
 	{
-		float UpSpeed = 1;
-		float KnockBackTime = 0.7f;
-		float KnockBackSpeed = 22;
-		float Gravity = 20;
-		float StopKnockTime = 0.1f;
+		//float UpSpeed = 1;
+		//float KnockBackTime = 0.7f;
+		//float KnockBackSpeed = 22;
+		//float Gravity = 20;
+		//float StopKnockTime = 0.1f;
 
 		public override void Init (Affix af, GameObject o)
 		{

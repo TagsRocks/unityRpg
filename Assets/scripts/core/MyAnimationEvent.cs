@@ -80,6 +80,7 @@ namespace ChuMeng
 
 
 		public void InsertMsg(Message msg) {
+            Log.Sys("AddMessage "+msg.type);
 			messages.Add (msg);
 		}
 

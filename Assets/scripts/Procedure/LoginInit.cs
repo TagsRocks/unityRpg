@@ -22,7 +22,7 @@ namespace ChuMeng
 		public static LoginInit GetLogin() {
 			return loginInit;
 		}
-		SaveGame sg;
+		//SaveGame sg;
 		void Awake ()
 		{
 			loginInit = this;
@@ -33,7 +33,7 @@ namespace ChuMeng
 				saveGame.GetComponent<SaveGame>().InitData();
 				saveGame.GetComponent<SaveGame>().InitServerList();
 			}
-			sg = SaveGame.saveGame;
+			//sg = SaveGame.saveGame;
 		}
         public void TryToLogin(){
             if(SaveGame.saveGame.otherAccounts.Count == 0){

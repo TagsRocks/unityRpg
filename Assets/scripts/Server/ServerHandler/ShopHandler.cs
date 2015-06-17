@@ -18,8 +18,12 @@ namespace ServerPacketHandler {
                 notify.SetNotify("金币不足");
                 ChuMeng.ServerBundle.SendImmediatePush(notify);
             }else {
+                if(playerData.IsPackageFull(itemId, 1)){
+                    playerData.SendNotify("背包已满");
+                    return;
+                }
                 playerData.SetGold(has-data.goldCoin);
-                playerData.AddItemInPackage(itemId);
+                playerData.AddItemInPackage(itemId, 1);
             }
 
         }
@@ -35,6 +39,19 @@ namespace ServerPacketHandler {
             }else {
                 ChuMeng.ServerBundle.SendImmediateError(pb, packet.flowId, 1);
             }
+        }
+    }
+    public class CGPickItem : IPacketHandler{
+        public override void HandlePacket(KBEngine.Packet packet)
+        {
+            var inpb = packet.protoBody as ChuMeng.CGPickItem;
+            /*
+            if(playerData.IsPackageFull(inpb.ItemId, 1)){
+                playerData.SendNotify("背包已满");
+                return;
+            }
+            */
+            playerData.AddItemInPackage(inpb.ItemId, inpb.Num);
         }
     }
 }

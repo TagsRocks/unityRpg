@@ -84,6 +84,13 @@ namespace ChuMeng
 			}
 			return null;
 		}
+        public NpcAttribute GetMyAttr(){
+            var myplayer = GetMyPlayer();
+            if(myplayer != null){
+                return myplayer.GetComponent<NpcAttribute>();
+            }
+            return null;
+        }
 		public GameObject GetMyPlayer ()
 		{
 			if (myPlayer != null) {
@@ -364,7 +371,9 @@ namespace ChuMeng
 		{
 			MyEventSystem.myEventSystem.PushEvent (MyEvent.EventType.PlayerLeaveWorld);
 			//删除我自己玩家
-			DestroyObject (myPlayer.ID);
+            if(myPlayer !=null) {
+			    DestroyObject (myPlayer.ID);
+            }
 
 		}
 
@@ -609,11 +618,12 @@ namespace ChuMeng
 
 				//NGUITools.AddMissingComponent<NpcAI>(g);
 				var type = Type.GetType ("ChuMeng." + unitData.AITemplate);
-				//var t = typeof(NGUITools);
-				//var m = t.GetMethod ("AddMissingComponent");
+				var t = typeof(NGUITools);
+				var m = t.GetMethod ("AddMissingComponent");
 				Log.AI ("Monster Create Certain AI  " + unitData.AITemplate + " " + type);
-				//var geMethod = m.MakeGenericMethod (type);
-				//var petAI = geMethod.Invoke (null, new object[]{g}) as AIBase;
+				var geMethod = m.MakeGenericMethod (type);
+				//var petAI = 
+                geMethod.Invoke (null, new object[]{g});// as AIBase;
 
 
 				g.transform.parent = transform;
@@ -655,12 +665,14 @@ namespace ChuMeng
 			GameObject g = Instantiate (Resource) as GameObject;
 			NpcAttribute npc = NGUITools.AddMissingComponent<NpcAttribute> (g);
 			var type = Type.GetType ("ChuMeng." + unitData.AITemplate);
-			//var t = typeof(NGUITools);
-			//var m = t.GetMethod ("AddMissingComponent");
+			var t = typeof(NGUITools);
+			var m = t.GetMethod ("AddMissingComponent");
 			Log.AI ("Create Certain AI  " + unitData.AITemplate + " " + type);
-			//var geMethod = m.MakeGenericMethod (type);
-			//var petAI = geMethod.Invoke (null, new object[]{g}) as AIBase;
-			//var petAI = NGUITools.AddMissingComponent<type> (g);
+			var geMethod = m.MakeGenericMethod (type);
+			//var petAI = 
+            geMethod.Invoke (null, new object[]{g});// as AIBase;
+			//var petAI = 
+            //NGUITools.AddMissingComponent<type> (g);
 
 			g.transform.parent = transform;
 			g.tag = owner.tag;

@@ -22,7 +22,7 @@ namespace ChuMeng
 	{
 		private Dictionary<CharAttribute.CharAttributeEnum, int> propertyValue = new Dictionary<CharAttribute.CharAttributeEnum, int> ();
 		Dictionary<CharAttribute.CharAttributeEnum, bool> propertyDirty = new Dictionary<CharAttribute.CharAttributeEnum, bool>();
-		bool initYet = false;
+		public bool initYet = false;
 		NpcAttribute attribute;
 	
 		/*

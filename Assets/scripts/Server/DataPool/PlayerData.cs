@@ -10,8 +10,10 @@ namespace ChuMeng
     {
         public static void AddGold(int num)
         {
+            var itemData = Util.GetItemData(0, (int)ItemData.ItemID.GOLD);
             var has = ServerData.Instance.playerInfo.Gold;
             SetGold(has + num);
+            SendNotify(string.Format("{0}+{1}", itemData.ItemName, num));
         }
 
         public static void SetGold(int num)
@@ -27,33 +29,78 @@ namespace ChuMeng
             ServerBundle.SendImmediatePush(n);
         }
 
-        //Notify
-        //Props Stack
-        public static void AddItemInPackage(int itemId)
-        {
+        public static bool IsPackageFull(int itemId, int num){
             var pinfo = ServerData.Instance.playerInfo;
+            var itemData = Util.GetItemData(0, itemId);
+            if(itemData.UnitType == ItemData.UnitTypeEnum.GOLD){
+                return false;
+            }
 
-            //Has Such Objects 
+            if (itemData.MaxStackSize > 1)
+            {
+                Log.Sys("AddItemInStack");
+                foreach (var p in pinfo.PackInfoList)
+                {
+                    if (p.PackEntry.BaseId == itemId)
+                    {
+                        return false;
+                    }
+                }
+            }
+
+            PackInfo[] packList = new PackInfo[BackPack.MaxBackPackNumber];
             foreach (var p in pinfo.PackInfoList)
             {
-                if (p.PackEntry.BaseId == itemId)
+                packList [p.PackEntry.Index] = p;
+            }
+
+            for (int i = 0; i < BackPack.MaxBackPackNumber; i++)
+            {
+                if (packList [i] == null)
                 {
-                    pinfo.PackInfoList.Remove(p);
-                    var newPkinfo = PackInfo.CreateBuilder(p);
-                    var newPkEntry = PackEntry.CreateBuilder(p.PackEntry);
-                    newPkEntry.Count++;
-                    newPkinfo.PackEntry = newPkEntry.Build();
-                    var msg = newPkinfo.Build();
-                    pinfo.PackInfoList.Add(msg);
+                    return false;
+                }
+            }
+            return true;
+        }
+        //Notify
+        //Props Stack
+        public static void AddItemInPackage(int itemId, int num)
+        {
+            var pinfo = ServerData.Instance.playerInfo;
+            var itemData = Util.GetItemData(0, itemId);
+            if(itemData.UnitType == ItemData.UnitTypeEnum.GOLD){
+                PlayerData.AddGold(num);
+                return;
+            }
+
+            //Has Such Objects 
+            if (itemData.MaxStackSize > 1)
+            {
+                Log.Sys("AddItemInStack");
+                foreach (var p in pinfo.PackInfoList)
+                {
+                    if (p.PackEntry.BaseId == itemId)
+                    {
+                        pinfo.PackInfoList.Remove(p);
+                        var newPkinfo = PackInfo.CreateBuilder(p);
+                        var newPkEntry = PackEntry.CreateBuilder(p.PackEntry);
+                        newPkEntry.Count += num;
+                        newPkinfo.PackEntry = newPkEntry.Build();
+                        var msg = newPkinfo.Build();
+                        pinfo.PackInfoList.Add(msg);
 
 
-                    var push = GCPushPackInfo.CreateBuilder();
-                    push.BackpackAdjust = false;
-                    push.PackType = PackType.DEFAULT_PACK;
-                    push.PackInfoList.Add(msg);
+                        var push = GCPushPackInfo.CreateBuilder();
+                        push.BackpackAdjust = false;
+                        push.PackType = PackType.DEFAULT_PACK;
+                        push.PackInfoList.Add(msg);
 
-                    ServerBundle.SendImmediatePush(push);
-                    return;
+                        ServerBundle.SendImmediatePush(push);
+
+                        SendNotify(string.Format("{0}+{1}", itemData.ItemName, num));
+                        return;
+                    }
                 }
             }
             //new Item
@@ -68,7 +115,8 @@ namespace ChuMeng
                     maxId++;
                 }
             }
-            if(maxId < 0){
+            if (maxId < 0)
+            {
                 maxId++;
             }
 
@@ -83,7 +131,7 @@ namespace ChuMeng
                     pkentry.Id = maxId;
                     pkentry.BaseId = itemId;
                     pkentry.GoodsType = 0;
-                    pkentry.Count = 1;
+                    pkentry.Count = num;
                     pkentry.Index = i;
 
                     pkInfo.PackEntry = pkentry.Build();
@@ -95,6 +143,8 @@ namespace ChuMeng
                     push.PackType = PackType.DEFAULT_PACK;
                     push.PackInfoList.Add(msg);
                     ServerBundle.SendImmediatePush(push);
+
+                    SendNotify(string.Format("{0}+{1}", itemData.ItemName, num));
                     return;
                 }
             }
@@ -116,23 +166,28 @@ namespace ChuMeng
                     var np = ChuMeng.PackInfo.CreateBuilder(pinfo);
                     var pk = ChuMeng.PackEntry.CreateBuilder(np.PackEntry);
                     pk.Count--;
-                    if(pk.Count < 0) {
+                    if (pk.Count < 0)
+                    {
                         SendNotify("道具数量不足");
                         return false;
                     }
+                    var pkMsg = pk.Build();
 
                     player.PackInfoList.Remove(pinfo);
-                    np.SetPackEntry(pk);
-                    if(pk.Count == 0) {
-                    }else {
-                        player.AddPackInfo(np);
+                    np.SetPackEntry(pkMsg);
+                    var npmsg = np.Build();
+                    if (pkMsg.Count == 0)
+                    {
+                    } else
+                    {
+                        player.AddPackInfo(npmsg);
                     }
 
 
                     var push = GCPushPackInfo.CreateBuilder();
                     push.BackpackAdjust = false;
                     push.PackType = PackType.DEFAULT_PACK;
-                    push.PackInfoList.Add(np.Build());
+                    push.PackInfoList.Add(npmsg);
                     ServerBundle.SendImmediatePush(push);
 
                     return true;
@@ -142,7 +197,8 @@ namespace ChuMeng
             return false;
         }
 
-        public static void  SendNotify(string str){
+        public static void  SendNotify(string str)
+        {
             var no = GCPushNotify.CreateBuilder();
             no.Notify = str;
             ServerBundle.SendImmediatePush(no);

@@ -18,7 +18,7 @@ namespace ChuMeng {
 			evt.playerId = playerId;
 			evt.exp = GetAttr ().ObjUnitData.XP;
 			MyEventSystem.myEventSystem.PushEvent (evt);
-
+            DropGoods.Drop(GetAttr());
 		}
 		IEnumerator KnockDie() {
 			GameObject attacker = GetEvent ().attacker;

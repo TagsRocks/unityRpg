@@ -1,4 +1,4 @@
-﻿
+
 /*
 Author: liyonghelpme
 Email: 233242872@qq.com
@@ -112,7 +112,7 @@ namespace ChuMeng
 								var bar = PropsSpawnClass.GetRandomProps ();
 								var mg = Instantiate (Resources.Load<GameObject> (bar.ModelName)) as GameObject;
 								mg.transform.position = (Vector3)node.position + new Vector3 (0, 0.1f, 0);
-								mg.GetComponent<ItemDataRef> ().ItemData = bar;
+								mg.GetComponent<ItemDataRef> ().itemData = bar;
 								mg.tag = "Barrel";
 							}
 						}

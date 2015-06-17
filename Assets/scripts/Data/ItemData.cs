@@ -50,6 +50,9 @@ namespace ChuMeng
 			MATERIAL = 13,
 
 		}
+        public enum ItemID {
+            GOLD = 4,
+        }
 
 		//装备对应的EquipData位置
 

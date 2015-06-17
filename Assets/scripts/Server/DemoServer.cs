@@ -148,6 +148,7 @@ namespace ChuMeng
 			var className = receivePkg.Split (char.Parse (".")) [1];
 			IBuilderLite retPb = null;
 			uint flowId = packet.flowId;
+            bool findHandler = false;
 
 			if (className == "CGAutoRegisterAccount") {
 				var au = GCAutoRegisterAccount.CreateBuilder ();
@@ -588,6 +589,7 @@ namespace ChuMeng
                 if(tp == null) {
                     Debug.LogError("PushMessage noHandler "+handlerName);
                 }else {
+                    findHandler = true;
                     var ph = (ServerPacketHandler.IPacketHandler)Activator.CreateInstance(tp);
                     KBEngine.KBEngineApp.app.queueInLoop(
                         delegate() {
@@ -600,7 +602,7 @@ namespace ChuMeng
 			if (retPb != null) {
 				SendPacket (retPb, flowId);
 			} else {
-                if(className != "CGHeartBeat") {
+                if(className != "CGHeartBeat" && !findHandler) {
 				   Debug.LogError ("DemoServer::not Handle Message " + className);
                 }
 			}

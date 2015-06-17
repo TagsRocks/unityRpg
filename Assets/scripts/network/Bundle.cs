@@ -183,6 +183,7 @@ namespace KBEngine
 						par.packet = p;
 						resp = true;
 					}, fId);
+                    Log.Sys("SendNetworkSuc");
 				}
 			}
 			else
@@ -234,7 +235,7 @@ namespace KBEngine
 
 			bundle.newMessage (data.GetType ());
 			var fid = bundle.writePB (data);
-			Log.Net ("Perhaps network not ok");
+			//Log.Net ("Perhaps network not ok");
 			yield return mo.StartCoroutine(bundle.sendCoroutine(KBEngine.KBEngineApp.app.networkInterface(), fid, par));
 			
 		}

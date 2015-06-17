@@ -3,16 +3,21 @@ using System.Collections;
 using System.Collections.Generic;
 
 //SceneId ---> ConfigData List
-namespace ChuMeng {
-    public class LevelConfigData  {
+namespace ChuMeng
+{
+    public class LevelConfigData
+    {
         static bool initYet = false;
         public static Dictionary<int, List<LevelConfig>> LevelLayout = new Dictionary<int, List<LevelConfig>>();
-        public static void Init(){
-            if(initYet) {
+
+        public static void Init()
+        {
+            if (initYet)
+            {
                 return;
             }
             initYet = true;
-            var l1 =  new List<LevelConfig>(){
+            var l1 = new List<LevelConfig>(){
                 new LevelConfig("ENTRANCE_S", -1, 3),
                 new LevelConfig("NS", -1, 2),
                     new LevelConfig("NS", -1, 1){useOtherZone=true, zoneId=1},

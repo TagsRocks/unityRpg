@@ -32,7 +32,8 @@ namespace ChuMeng
 		//点击进入副本按钮
 		void OnEnter(GameObject g) {
             //进入场景切换流程逻辑
-			WorldManager.worldManager.StartCoroutine (WorldManager.worldManager.ChangeScene(CopyController.copyController.SelectLevelInfo.levelLocal.id, false));
+			//WorldManager.worldManager.StartCoroutine (WorldManager.worldManager.ChangeScene(CopyController.copyController.SelectLevelInfo.levelLocal.id, false));
+            WorldManager.worldManager.WorldChangeScene(CopyController.copyController.SelectLevelInfo.levelLocal.id, false);
 
 		}
 

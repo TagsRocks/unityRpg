@@ -53,7 +53,7 @@ namespace ChuMeng {
 		}
 		void Awake() {
 			Log.GUI ("Init Attack UI ");
-			SetCallback ("SelectButton", OnSelect);
+			//SetCallback ("SelectButton", OnSelect);
 			SetCallback ("NormalATKButton", OnAttack);
 			
 			regEvt = new List<MyEvent.EventType> (){
@@ -63,9 +63,6 @@ namespace ChuMeng {
 			RegEvent ();
 		}
 
-		void OnSelect(GameObject g) {
-			
-		}
 
 		void OnAttack(GameObject g) {
 
