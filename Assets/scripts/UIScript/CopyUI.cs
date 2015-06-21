@@ -11,7 +11,7 @@ namespace ChuMeng
 		GameObject right;
 		int curChapter = -1;
 		List<GameObject> levels;
-		int MaxLevel = 8;
+		//int MaxLevel = 8;
 		List<LevelInfo> allLevels;
 
 		void Awake() {

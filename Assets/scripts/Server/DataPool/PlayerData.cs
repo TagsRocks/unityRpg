@@ -8,6 +8,27 @@ namespace ChuMeng
     /// </summary>
     public static class PlayerData
     {
+        public static void AddLevel(int add){
+            var pinfo = ServerData.Instance.playerInfo;
+            pinfo.Roles.Level += add;
+            var push = GCPushLevel.CreateBuilder();
+            push.Level = pinfo.Roles.Level;
+            ServerBundle.SendImmediatePush(push);
+        }
+
+        public static void AddSkillPoint(int sp){
+            var pinfo = ServerData.Instance.playerInfo;
+            if(!pinfo.HasSkill)
+            {
+                pinfo.Skill =GCLoadSkillPanel.CreateBuilder().Build();
+            }
+            pinfo.Skill.TotalPoint += sp;
+
+            var psp = GCPushSkillPoint.CreateBuilder();
+            psp.SkillPoint = pinfo.Skill.TotalPoint;
+            ServerBundle.SendImmediatePush(psp);
+        }
+
         public static void AddGold(int num)
         {
             var itemData = Util.GetItemData(0, (int)ItemData.ItemID.GOLD);
@@ -203,6 +224,73 @@ namespace ChuMeng
             no.Notify = str;
             ServerBundle.SendImmediatePush(no);
         }
-    }
+
+        public static void LevelUpSkill(int skId){
+            var pinfo = ServerData.Instance.playerInfo;
+            int totalSP = 0;
+            int skillLevel = 0;
+            if(pinfo.HasSkill){
+                totalSP = pinfo.Skill.TotalPoint;
+                foreach(var s in pinfo.Skill.SkillInfosList){
+                    if(s.SkillInfoId == skId){
+                        skillLevel = s.Level;
+                        break;
+                    }
+                }
+            }
+            var skData = Util.GetSkillData(skId, skillLevel);
+            var maxLev = skData.MaxLevel;
+            var playerLev = pinfo.Roles.Level;
+            var next = Util.GetSkillData(skId, skillLevel+1);
+            var needLev = next.LevelRequired;
+
+            if(totalSP > 0 && skillLevel < maxLev && playerLev >= needLev ){
+                pinfo.Skill.TotalPoint--;
+                bool find = false;
+                foreach(var sk in pinfo.Skill.SkillInfosList){
+                    if(sk.SkillInfoId == skId){
+                        sk.Level++;
+                        find = true;
+                        break;
+                    }
+                }
+                if(!find){
+                    var newinfo = SkillInfo.CreateBuilder();
+                    newinfo.SkillInfoId = skId;
+                    newinfo.Level = 1;
+                    pinfo.Skill.SkillInfosList.Add(newinfo.Build());
+                }
+
+                //pinfo.Skill = newSk.Build();
+
+                var activeSkill = GCPushActivateSkill.CreateBuilder();
+                activeSkill.SkillId = skId;
+                activeSkill.Level = skillLevel+1;
+                ServerBundle.SendImmediatePush(activeSkill);
+
+            }else if(totalSP <= 0){
+                SendNotify("剩余技能点不足");
+            }else if(playerLev < needLev){
+                SendNotify("等级不足");
+            }else {
+                SendNotify("技能已经升到满级");
+            }
+        }
+
+        public static void GetShortCuts(KBEngine.Packet packet){
+            var au = GCLoadShortcutsInfo.CreateBuilder ();
+            var pinfo = ServerData.Instance.playerInfo;
+            if(pinfo.HasSkill) {
+                int ind = 0;
+                foreach(var sk in pinfo.Skill.SkillInfosList){
+                    var sh = ShortCutInfo.CreateBuilder ();
+                    sh.Index = ind;
+                    sh.BaseId = sk.SkillInfoId;
+                    au.AddShortCutInfo (sh);
+                }
+            }
+            ServerBundle.SendImmediate(au, packet.flowId);
+        }
+    }   
 
 }

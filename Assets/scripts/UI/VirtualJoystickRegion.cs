@@ -63,7 +63,7 @@ namespace ChuMeng
 		//
 		public static VirtualJoystickRegion VJR;
 		Vector2 initPos;
-		bool touchYet = false;
+		//bool touchYet = false;
 	
 		private void ResetJoystick ()
 		{

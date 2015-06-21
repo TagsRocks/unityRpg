@@ -28,7 +28,7 @@ namespace ChuMeng {
 		//GameObject player;
 		//PlayerMoveController pmc;
 		//Transform attackUI;
-		List<UISprite> skillIcons = new List<UISprite>();
+		//List<UISprite> skillIcons = new List<UISprite>();
 
 		void InitShortCut() {
 			Log.GUI ("Init Short Cut Icon");
@@ -59,6 +59,7 @@ namespace ChuMeng {
 			regEvt = new List<MyEvent.EventType> (){
 				MyEvent.EventType.UpdateSkill,
 				MyEvent.EventType.UpdateShortCut,
+                MyEvent.EventType.UpdateMainUI,
 			};
 			RegEvent ();
 		}

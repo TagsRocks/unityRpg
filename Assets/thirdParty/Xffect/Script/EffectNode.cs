@@ -531,7 +531,7 @@ namespace Xft
                 if (Owner.EventHandleFunctionName != "" && Owner.EventReceiver != null)
                 {
                     //Owner.EventReceiver.SendMessage(Owner.EventHandleFunctionName, Owner.CollisionGoal);
-                    Owner.EventReceiver.SendMessage(Owner.EventHandleFunctionName, new CollisionParam(collideObject,GetOriginalPos(), this));
+                    Owner.EventReceiver.SendMessage(Owner.EventHandleFunctionName, new CollisionParam(collideObject,GetOriginalPos(), this) );
                     isCollision = true;
                 }
                     

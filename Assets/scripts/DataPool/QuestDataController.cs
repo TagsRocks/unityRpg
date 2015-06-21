@@ -34,7 +34,6 @@ namespace ChuMeng {
 
 		List<QuestData> allQuests = new List<QuestData>();
 
-		BackPack backpack;
 
 		public class TaskList {
 			public GCLoadTaskList allTask;
@@ -99,7 +98,6 @@ namespace ChuMeng {
 		// Use this for initialization
 		//Find Backpack object
 		void Start () {
-			backpack = GameObject.FindObjectOfType<BackPack> ();
 
 		}
 

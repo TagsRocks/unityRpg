@@ -196,7 +196,8 @@
         "GCResetSkillPoint": 12, 
         "GCPushMemberSkillCD": 1000, 
         "GCPushUnitAddBuffer": 1001, 
-        "GCPushActivateSkill": 1002
+        "GCPushActivateSkill": 1002, 
+        "GCPushSkillPoint": 1003
     }, 
     "MVIPProtoc": {
         "CGLoadVipInfo": 1, 
@@ -483,6 +484,7 @@
         "GCPushFightModeChangeWithMap": 1012, 
         "GCPushPlayerResurrect": 1013, 
         "GCPushPlayerToilState": 1014, 
-        "GCPushNotify": 1015
+        "GCPushNotify": 1015, 
+        "GCPushLevel": 1016
     }
 }

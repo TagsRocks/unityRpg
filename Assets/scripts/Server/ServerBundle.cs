@@ -69,7 +69,7 @@ namespace ChuMeng
             return bundle.stream.getbuffer();
         }
 
-		public static byte[] sendImmediate(IBuilderLite build, uint flowId) {
+		public static byte[] MakePacket(IBuilderLite build, uint flowId) {
 			var data = build.WeakBuild ();
 
 			var bundle = new ServerBundle ();

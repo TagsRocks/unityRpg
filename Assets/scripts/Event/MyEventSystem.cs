@@ -278,6 +278,9 @@ namespace ChuMeng
 		public void PushEvent(MyEvent.EventType evt) {
 			PushEvent (new MyEvent (evt));
 		}
+        public static void PushEventStatic(MyEvent.EventType evt){
+            myEventSystem.PushEvent(evt);
+        }
 
 	}
 

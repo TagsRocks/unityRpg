@@ -23,6 +23,9 @@ namespace ChuMeng
 			return t.gameObject;
 		}
 
+        public UIGrid GetGrid(string name){
+            return GetName(name).GetComponent<UIGrid>();
+        }
 		public UIInput GetInput(string name) {
 			return GetName (name).GetComponent<UIInput> ();
 		}

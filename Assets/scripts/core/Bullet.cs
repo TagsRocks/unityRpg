@@ -34,7 +34,7 @@ namespace ChuMeng
 		public Vector3 OffsetPos;
 		GameObject activeParticle;
 		//TODO: 支持玩家或者怪物发射的子弹或者技能 根据attacker的tag Player 还是Enemy 确定其它Tag
-		bool HitYet = false;
+		//bool HitYet = false;
 		void Start ()
 		{
 			LeftRicochets = missileData.NumRicochets;

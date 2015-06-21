@@ -18,10 +18,10 @@ namespace ChuMeng {
 
 		public float WaitTime = 2;
 		GameObject player;
-		GameObject uiRoot;
+		//GameObject uiRoot;
 
 		void Awake() {
-			uiRoot = GameObject.FindGameObjectWithTag("UIRoot");
+			//uiRoot = GameObject.FindGameObjectWithTag("UIRoot");
 
 		}
 		// Use this for initialization

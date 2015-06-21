@@ -1,4 +1,4 @@
-﻿﻿using UnityEngine;
+﻿using UnityEngine;
 using System.Collections;
 
 namespace ChuMeng
@@ -32,7 +32,7 @@ namespace ChuMeng
 		public float CoolDownTime = 0;
 
 		//主动被动技能初始化
-		SkillInfo skillInfo = null; 
+		//SkillInfo skillInfo = null; 
 		//
 		ShortCutInfo shortInfo = null;
 
@@ -66,10 +66,16 @@ namespace ChuMeng
 			skillData = Util.GetSkillData (skId, 1);
 		}
 
+        public SkillFullInfo(GCPushActivateSkill p){
+            skillData = Util.GetSkillData(p.SkillId, p.Level);
+        }
 
+        public void SetLevel(int lev){
+            skillData = Util.GetSkillData(skillId, lev);
+        }
 		//TODO:从服务器初始化 技能数据
 		public SkillFullInfo(SkillInfo sk) {
-			skillInfo = sk;
+			//skillInfo = sk;
 			skillData = Util.GetSkillData (sk.SkillInfoId, sk.Level);
 		}
 

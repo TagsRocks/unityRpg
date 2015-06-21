@@ -29,7 +29,7 @@ namespace ChuMeng {
 				OnOk(null);
 			}
 		}
-		bool enterYet = false;
+		//bool enterYet = false;
 		
 		void OnOk(GameObject g) {	
 			Log.GUI ("OnOk Next Scene "+NextSceneId);

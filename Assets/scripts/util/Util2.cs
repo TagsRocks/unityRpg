@@ -229,6 +229,11 @@ public partial class Util {
 		return retMsg;
 	}	
 
+	static IMessageLite GetGCRegisterAccount(ByteString buf) {
+		var retMsg = ChuMeng.GCRegisterAccount.ParseFrom(buf);
+		return retMsg;
+	}	
+
 	static IMessageLite GetGCListBranchinges(ByteString buf) {
 		var retMsg = ChuMeng.GCListBranchinges.ParseFrom(buf);
 		return retMsg;
@@ -479,8 +484,8 @@ public partial class Util {
 		return retMsg;
 	}	
 
-	static IMessageLite GetGCRegisterAccount(ByteString buf) {
-		var retMsg = ChuMeng.GCRegisterAccount.ParseFrom(buf);
+	static IMessageLite GetGCPushLevel(ByteString buf) {
+		var retMsg = ChuMeng.GCPushLevel.ParseFrom(buf);
 		return retMsg;
 	}	
 
@@ -1184,6 +1189,11 @@ public partial class Util {
 		return retMsg;
 	}	
 
+	static IMessageLite GetGCPushUnitAddBuffer(ByteString buf) {
+		var retMsg = ChuMeng.GCPushUnitAddBuffer.ParseFrom(buf);
+		return retMsg;
+	}	
+
 	static IMessageLite GetGCLoadInjectPropsLevelUpInfo(ByteString buf) {
 		var retMsg = ChuMeng.GCLoadInjectPropsLevelUpInfo.ParseFrom(buf);
 		return retMsg;
@@ -1194,8 +1204,8 @@ public partial class Util {
 		return retMsg;
 	}	
 
-	static IMessageLite GetGCPushUnitAddBuffer(ByteString buf) {
-		var retMsg = ChuMeng.GCPushUnitAddBuffer.ParseFrom(buf);
+	static IMessageLite GetGCPushSkillPoint(ByteString buf) {
+		var retMsg = ChuMeng.GCPushSkillPoint.ParseFrom(buf);
 		return retMsg;
 	}	
 
@@ -2095,6 +2105,8 @@ public partial class Util {
 
 	{"GCLoadHoroscope", GetGCLoadHoroscope},
 
+	{"GCRegisterAccount", GetGCRegisterAccount},
+
 	{"GCListBranchinges", GetGCListBranchinges},
 
 	{"CGLoginAccount", GetCGLoginAccount},
@@ -2195,7 +2207,7 @@ public partial class Util {
 
 	{"GCCreateCharacter", GetGCCreateCharacter},
 
-	{"GCRegisterAccount", GetGCRegisterAccount},
+	{"GCPushLevel", GetGCPushLevel},
 
 	{"GCPlayerMove", GetGCPlayerMove},
 
@@ -2477,11 +2489,13 @@ public partial class Util {
 
 	{"GCPushActivateSkill", GetGCPushActivateSkill},
 
+	{"GCPushUnitAddBuffer", GetGCPushUnitAddBuffer},
+
 	{"GCLoadInjectPropsLevelUpInfo", GetGCLoadInjectPropsLevelUpInfo},
 
 	{"GCResetSkillPoint", GetGCResetSkillPoint},
 
-	{"GCPushUnitAddBuffer", GetGCPushUnitAddBuffer},
+	{"GCPushSkillPoint", GetGCPushSkillPoint},
 
 	{"GCSkillLevelUp", GetGCSkillLevelUp},
 

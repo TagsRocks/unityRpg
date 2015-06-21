@@ -6,7 +6,7 @@ namespace ChuMeng
 {
     public class CharCreate : IUserInterface
     {
-        GameObject selChar;
+        //GameObject selChar;
         void Awake()
         {
             regEvt = new List<MyEvent.EventType> () {
@@ -15,7 +15,7 @@ namespace ChuMeng
             };
             RegEvent ();
             SetCallback("createChar", OnCreate);
-            selChar = GetName("SelChar");
+            //selChar = GetName("SelChar");
             //var evt = UIEventListener.Get(selChar);
             //TODO: Drag
             //evt.onDrag();

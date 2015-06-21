@@ -40,11 +40,14 @@ namespace ChuMeng {
 
 		//CharacterData charData;
 		//int distributedSkillPoint;
-		int totalSkillPoint;
+		int totalSkillPoint; //LeftSkillPoint Can Be Use
 		public int TotalSp {
 			get {
 				return totalSkillPoint;
 			}
+            set {
+                totalSkillPoint = value;
+            }
 		}
 		public int DistriSp {
 			get {
@@ -96,6 +99,7 @@ namespace ChuMeng {
 			MyEventSystem.myEventSystem.PushEvent (MyEvent.EventType.UpdateSkill);
 		}
 		public SkillData GetShortSkillData(int index) {
+            Log.Sys("GetShortSkillData");
 			foreach (SkillFullInfo s in skillSlots) {
 				if(s.shortSlotId == index) {
 					return s.skillData;
@@ -138,6 +142,11 @@ namespace ChuMeng {
 			SetShortSkillData (skId, index);
 		}
 
+        /// <summary>
+        /// 初始化右下角的技能快捷栏
+        /// 初始化技能列表 
+        /// </summary>
+        /// <returns>The from network.</returns>
 		public IEnumerator InitFromNetwork() {
 			Log.Net ("Init Skill slots");
 			CGLoadShortcutsInfo.Builder b = CGLoadShortcutsInfo.CreateBuilder ();
@@ -152,20 +161,47 @@ namespace ChuMeng {
 			Log.Net ("Init Skill slots over "+skillSlots.Count);
 			MyEventSystem.myEventSystem.PushEvent (MyEvent.EventType.UpdateShortCut);
 
-			/*
+			
+            Log.Sys("LoadSkillPanel");
 			//获取特定技能面板的技能点 所有面板公用这些技能点
 			CGLoadSkillPanel.Builder ls = CGLoadSkillPanel.CreateBuilder ();
 			ls.SkillSort = SkillSort.ACTIVE_SKILL;
 			KBEngine.PacketHolder p2 = new KBEngine.PacketHolder ();
 			yield return StartCoroutine (KBEngine.Bundle.sendSimple(this, ls, p2));
 
-			var data = p2.packet.protoBody as GCLoadSkillPanel;
-			distributedSkillPoint = data.Distributed;
-			totalSkillPoint = data.TotalPoint;
+            Log.Net("FinishLoad");
+            var data = p2.packet.protoBody as GCLoadSkillPanel;
+            //distributedSkillPoint = data.Distributed;
+            if(data.HasTotalPoint) {
+                totalSkillPoint = data.TotalPoint;
+            }else {
+                totalSkillPoint = 0;
+            }
+            Dictionary<int, SkillInfo> skIdToInfo = new Dictionary<int, SkillInfo>();
+            Log.GUI("SkillInfoList "+data.SkillInfosList.Count+" totalPoint "+totalSkillPoint);
 
-			foreach (SkillInfo sk in data.SkillInfosList) {
-				activeSkill.Add(new SkillFullInfo(sk));
-			}
+            foreach (SkillInfo sk in data.SkillInfosList) {
+                skIdToInfo[sk.SkillInfoId] = sk;
+            }
+
+            var myJob = ChuMeng.ObjectManager.objectManager.GetMyJob();
+            Log.Sys("SkillMyJob AndList "+myJob);
+            foreach(var s in GameData.SkillConfig){
+                if(s.job == myJob ){
+                    if(skIdToInfo.ContainsKey(s.id)){
+                        activeSkill.Add(new SkillFullInfo(skIdToInfo[s.id]));
+                    }else {
+                        var skInfo = SkillInfo.CreateBuilder();
+                        skInfo.SkillInfoId = s.id;
+                        skInfo.Level = 0;
+                        activeSkill.Add(new SkillFullInfo(skInfo.Build()));
+                    }
+                }
+            }
+            Log.Sys("MySkillCount "+activeSkill.Count);
+
+
+            /*
 
 			Log.Sys ("Init Active Skill "+activeSkill.Count);
 
@@ -217,6 +253,7 @@ namespace ChuMeng {
 
 
 		//TODO: 添加技能学习 或者 降级的花费
+        /*
 		void LevelUpSkill(int skId) {
 			foreach (SkillFullInfo sk in activeSkill) {
 				if(sk.skillId == skId) {
@@ -230,20 +267,24 @@ namespace ChuMeng {
 					break;
 				}
 			}
-
 		}
+        */
+
 		/*
 		 * 需要道具升级技能
 		 * TODO:Push SP点数更新
 		 */ 
-		public IEnumerator SkillLevelUpWithSp(int skillId) {
-			var packet = new KBEngine.PacketHolder ();
+		public void SkillLevelUpWithSp(int skillId) {
+			//var packet = new KBEngine.PacketHolder ();
 			var levelUp = CGSkillLevelUp.CreateBuilder ();
 			levelUp.SkillId = skillId;
-			yield return StartCoroutine (KBEngine.Bundle.sendSimple (this, levelUp, packet));
-			//skillList.LevelUpWithProps (packet.packet.protoBody as GCInjectPropsLevelUp);
-			LevelUpSkill (skillId);
-			MyEventSystem.myEventSystem.PushEvent (MyEvent.EventType.UpdateSkill);
+			//yield return StartCoroutine (KBEngine.Bundle.sendSimple (this, levelUp, packet));
+            KBEngine.Bundle.sendImmediate(levelUp);
+			
+            //skillList.LevelUpWithProps (packet.packet.protoBody as GCInjectPropsLevelUp);
+			//LevelUpSkill (skillId);
+			
+            //MyEventSystem.myEventSystem.PushEvent (MyEvent.EventType.UpdateSkill);
 		}
 
 
@@ -257,6 +298,13 @@ namespace ChuMeng {
 
 
 		public void ActivateSkill(GCPushActivateSkill skill) {
+            foreach(var a in activeSkill){
+                if(a.skillId == skill.SkillId) {
+                    a.SetLevel(skill.Level);
+                    break;
+                }
+            }
+            MyEventSystem.PushEventStatic(MyEvent.EventType.UpdateSkill);
 		}
 
 	}

@@ -6,8 +6,10 @@ namespace ChuMeng
     public class MainUI : IUserInterface
     {
         UILabel hpLabel;
+        UILabel level;
         void Awake(){
             hpLabel = GetLabel("HPNum");
+            level = GetLabel("Level");
 
             SetCallback("ReturnCity_Button", OnCopy);
             SetCallback("Knapsack_Button", OnBag);
@@ -17,11 +19,13 @@ namespace ChuMeng
             this.regEvt = new System.Collections.Generic.List<MyEvent.EventType>(){
                 MyEvent.EventType.UpdateItemCoffer,
                 MyEvent.EventType.UpdateMainUI,
+                MyEvent.EventType.UpdatePlayerData,
             };
             RegEvent();
         }
         void UpdateFrame(){
             hpLabel.text = GameInterface_Backpack.GetHpNum().ToString(); 
+            level.text = "[ff9500]等级:"+GameInterface_Player.GetLevel()+"[-]";
         }
         protected override void OnEvent(MyEvent evt)
         {
@@ -38,6 +42,8 @@ namespace ChuMeng
         void OnBag(GameObject g){
         }
         void OnSkill(GameObject g){
+            WindowMng.windowMng.PushView("UI/SkillUI", true);
+            MyEventSystem.myEventSystem.PushEvent(MyEvent.EventType.UpdateSkill);
         }
 
         void OnStore(GameObject g){

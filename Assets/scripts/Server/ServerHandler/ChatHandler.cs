@@ -25,6 +25,10 @@ namespace ServerPacketHandler
 
             if(cmds[0] == "add_gold") {
                 playerData.AddGold(System.Convert.ToInt32(cmds[1]));
+            }else if(cmds[0] == "add_sp") {
+                playerData.AddSkillPoint(System.Convert.ToInt32(cmds[1]));
+            }else if(cmds[0] == "add_lvl") {
+                playerData.AddLevel(System.Convert.ToInt32(cmds[1]));
             }
             /*
             if (inpb.Content == "getAllWeapon")

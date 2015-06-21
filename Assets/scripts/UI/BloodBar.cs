@@ -20,7 +20,7 @@ namespace ChuMeng
 		Vector2 size = new Vector2 (40, 10);
 		Texture2D progressBarEmpty;
 		Texture2D progressBarFull;
-		float passTime = 0;
+		//float passTime = 0;
 		float curValue = 0;
 
 		void Awake() {

@@ -452,6 +452,11 @@ namespace ChuMeng {
 		}
 
 
+        public void ChangeLevel(int lev){
+            Level = lev;
+            MyEventSystem.myEventSystem.PushEvent(MyEvent.EventType.UpdatePlayerData);
+        }
+
 		//TODO:玩家升级的逻辑处理  技能点
 		void LevelUp() {
 			//Modify Hp Mp

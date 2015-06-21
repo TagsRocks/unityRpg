@@ -11,6 +11,7 @@ Email: 233242872@qq.com
 using UnityEngine;
 using System.Collections;
 
+[ExecuteInEditMode]
 public class PlaneCollision : MonoBehaviour {
 
 	// Use this for initialization

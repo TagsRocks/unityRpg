@@ -134,7 +134,7 @@ namespace ChuMeng
 
 		public void SendPacket (IBuilderLite retpb, uint flowId)
 		{
-			var bytes = ServerBundle.sendImmediate (retpb, flowId);
+			var bytes = ServerBundle.MakePacket(retpb, flowId);
 			Debug.Log ("DemoServer: Send Packet " + flowId);
 			lock (msgBuffer) {
 				msgBuffer.Add (bytes);
@@ -271,7 +271,9 @@ namespace ChuMeng
 					au.AddAttributes (att);
 				}
 				retPb = au;
-			} else if (className == "CGLoadShortcutsInfo") {
+			} 
+            /*
+            else if (className == "CGLoadShortcutsInfo") {
 				var au = GCLoadShortcutsInfo.CreateBuilder ();
 
 
@@ -361,7 +363,9 @@ namespace ChuMeng
 					au.AddShortCutInfo (sh);
 				}
 				retPb = au;
-			} else if (className == "CGListBranchinges") {
+			} 
+            */
+            else if (className == "CGListBranchinges") {
 				var au = GCListBranchinges.CreateBuilder ();
 				var bran = Branching.CreateBuilder ();
 				bran.Line = 1;
@@ -370,10 +374,8 @@ namespace ChuMeng
 				retPb = au;
 			} else if (className == "CGHeartBeat") {
 			
-			} else if (className == "CGLoadSkillPanel") {
-				var au = GCLoadSkillPanel.CreateBuilder ();
-				retPb = au;
-			} else if (className == "CGLoadSaleItems") {
+			} 
+            else if (className == "CGLoadSaleItems") {
 				var au = GCLoadSaleItems.CreateBuilder ();
 				retPb = au;
 			} else if (className == "CGListAllTeams") {

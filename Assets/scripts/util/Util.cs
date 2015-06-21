@@ -55,6 +55,7 @@ namespace ChuMeng
 		}
 	}
 
+    public delegate void EmptyDelegate();
 	public delegate void VoidDelegate (GameObject g);
 
 	public delegate void ItemDelegate (ItemData id);
