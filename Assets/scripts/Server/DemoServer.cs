@@ -254,7 +254,9 @@ namespace ChuMeng
 				}
 
 				retPb = au;
-			} else if (className == "CGGetCharacterInfo") {
+			}
+            /*
+            else if (className == "CGGetCharacterInfo") {
 				var inpb = packet.protoBody as CGGetCharacterInfo;
 				var au = GCGetCharacterInfo.CreateBuilder ();
 				foreach (int l in inpb.ParamKeyList) {
@@ -272,6 +274,7 @@ namespace ChuMeng
 				}
 				retPb = au;
 			} 
+            */         
             /*
             else if (className == "CGLoadShortcutsInfo") {
 				var au = GCLoadShortcutsInfo.CreateBuilder ();
@@ -389,7 +392,7 @@ namespace ChuMeng
                     //First Fetch Login Info
                     var au = GCCopyInfo.CreateBuilder ();
                     var cin = CopyInfo.CreateBuilder ();
-                    cin.Id = 3;
+                    cin.Id = 101;
                     cin.IsPass = false;
                     au.AddCopyInfo (cin);
                     var msg = au.Build();
@@ -562,13 +565,15 @@ namespace ChuMeng
 
 				var au = GCRegisterAccount.CreateBuilder ();
 				retPb = au;
-			} else if (className == "CGCreateCharacter") {
+			}
+            /*
+            else if (className == "CGCreateCharacter") {
 
 				var inpb = packet.protoBody as CGCreateCharacter;
 
 				var au = GCCreateCharacter.CreateBuilder ();
 				var role = RolesInfo.CreateBuilder ();
-				role.Name = inpb.Username;
+				role.Name = inpb.PlayerName;
 				role.PlayerId = playerId;
 				playerId++;
 				role.Level = 1;
@@ -580,6 +585,7 @@ namespace ChuMeng
             
 				retPb = au;
 			} 
+            */
             else if (className == "CGPlayerMove") {
 				var au = GCPlayerMove.CreateBuilder ();
 				retPb = au;
@@ -593,10 +599,12 @@ namespace ChuMeng
                 }else {
                     findHandler = true;
                     var ph = (ServerPacketHandler.IPacketHandler)Activator.CreateInstance(tp);
+                    ph.HandlePacket(packet);
+                    /*
                     KBEngine.KBEngineApp.app.queueInLoop(
                         delegate() {
-                            ph.HandlePacket(packet);
                        });
+                    */
                 }
             }
 		

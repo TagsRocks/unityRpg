@@ -39,6 +39,8 @@ namespace ChuMeng
 			levelUp.SetActive (true);
 			yield return new WaitForSeconds (3);
 			levelUp.SetActive (false);
+
+            OnlyHide();
 		}
 
 		public void Init() {

@@ -136,7 +136,10 @@ namespace ChuMeng
         {
             get
             {
-                return playerConfig.exp; 
+                if(playerConfig != null) {
+                    return playerConfig.exp; 
+                }
+                return 0;
             }
         }
 

@@ -8,7 +8,17 @@ namespace ChuMeng
     /// </summary>
     public static class PlayerData
     {
-        public static void AddLevel(int add){
+        public static void AddExp(int add)
+        {
+            var pinfo = ServerData.Instance.playerInfo;
+            pinfo.Exp += add;
+            var push = GCPushExpChange.CreateBuilder();
+            push.Exp = pinfo.Exp;
+            ServerBundle.SendImmediatePush(push);
+        }
+
+        public static void AddLevel(int add)
+        {
             var pinfo = ServerData.Instance.playerInfo;
             pinfo.Roles.Level += add;
             var push = GCPushLevel.CreateBuilder();
@@ -16,11 +26,12 @@ namespace ChuMeng
             ServerBundle.SendImmediatePush(push);
         }
 
-        public static void AddSkillPoint(int sp){
+        public static void AddSkillPoint(int sp)
+        {
             var pinfo = ServerData.Instance.playerInfo;
-            if(!pinfo.HasSkill)
+            if (!pinfo.HasSkill)
             {
-                pinfo.Skill =GCLoadSkillPanel.CreateBuilder().Build();
+                pinfo.Skill = GCLoadSkillPanel.CreateBuilder().Build();
             }
             pinfo.Skill.TotalPoint += sp;
 
@@ -50,10 +61,12 @@ namespace ChuMeng
             ServerBundle.SendImmediatePush(n);
         }
 
-        public static bool IsPackageFull(int itemId, int num){
+        public static bool IsPackageFull(int itemId, int num)
+        {
             var pinfo = ServerData.Instance.playerInfo;
             var itemData = Util.GetItemData(0, itemId);
-            if(itemData.UnitType == ItemData.UnitTypeEnum.GOLD){
+            if (itemData.UnitType == ItemData.UnitTypeEnum.GOLD)
+            {
                 return false;
             }
 
@@ -90,7 +103,8 @@ namespace ChuMeng
         {
             var pinfo = ServerData.Instance.playerInfo;
             var itemData = Util.GetItemData(0, itemId);
-            if(itemData.UnitType == ItemData.UnitTypeEnum.GOLD){
+            if (itemData.UnitType == ItemData.UnitTypeEnum.GOLD)
+            {
                 PlayerData.AddGold(num);
                 return;
             }
@@ -225,14 +239,18 @@ namespace ChuMeng
             ServerBundle.SendImmediatePush(no);
         }
 
-        public static void LevelUpSkill(int skId){
+        public static void LevelUpSkill(int skId)
+        {
             var pinfo = ServerData.Instance.playerInfo;
             int totalSP = 0;
             int skillLevel = 0;
-            if(pinfo.HasSkill){
+            if (pinfo.HasSkill)
+            {
                 totalSP = pinfo.Skill.TotalPoint;
-                foreach(var s in pinfo.Skill.SkillInfosList){
-                    if(s.SkillInfoId == skId){
+                foreach (var s in pinfo.Skill.SkillInfosList)
+                {
+                    if (s.SkillInfoId == skId)
+                    {
                         skillLevel = s.Level;
                         break;
                     }
@@ -241,20 +259,24 @@ namespace ChuMeng
             var skData = Util.GetSkillData(skId, skillLevel);
             var maxLev = skData.MaxLevel;
             var playerLev = pinfo.Roles.Level;
-            var next = Util.GetSkillData(skId, skillLevel+1);
+            var next = Util.GetSkillData(skId, skillLevel + 1);
             var needLev = next.LevelRequired;
 
-            if(totalSP > 0 && skillLevel < maxLev && playerLev >= needLev ){
+            if (totalSP > 0 && skillLevel < maxLev && playerLev >= needLev)
+            {
                 pinfo.Skill.TotalPoint--;
                 bool find = false;
-                foreach(var sk in pinfo.Skill.SkillInfosList){
-                    if(sk.SkillInfoId == skId){
+                foreach (var sk in pinfo.Skill.SkillInfosList)
+                {
+                    if (sk.SkillInfoId == skId)
+                    {
                         sk.Level++;
                         find = true;
                         break;
                     }
                 }
-                if(!find){
+                if (!find)
+                {
                     var newinfo = SkillInfo.CreateBuilder();
                     newinfo.SkillInfoId = skId;
                     newinfo.Level = 1;
@@ -265,31 +287,163 @@ namespace ChuMeng
 
                 var activeSkill = GCPushActivateSkill.CreateBuilder();
                 activeSkill.SkillId = skId;
-                activeSkill.Level = skillLevel+1;
+                activeSkill.Level = skillLevel + 1;
                 ServerBundle.SendImmediatePush(activeSkill);
 
-            }else if(totalSP <= 0){
+            } else if (totalSP <= 0)
+            {
                 SendNotify("剩余技能点不足");
-            }else if(playerLev < needLev){
+            } else if (playerLev < needLev)
+            {
                 SendNotify("等级不足");
-            }else {
+            } else
+            {
                 SendNotify("技能已经升到满级");
             }
         }
 
-        public static void GetShortCuts(KBEngine.Packet packet){
-            var au = GCLoadShortcutsInfo.CreateBuilder ();
+        public static void GetShortCuts(KBEngine.Packet packet)
+        {
+            var au = GCLoadShortcutsInfo.CreateBuilder();
             var pinfo = ServerData.Instance.playerInfo;
-            if(pinfo.HasSkill) {
+            if (pinfo.HasSkill)
+            {
                 int ind = 0;
-                foreach(var sk in pinfo.Skill.SkillInfosList){
-                    var sh = ShortCutInfo.CreateBuilder ();
+                foreach (var sk in pinfo.Skill.SkillInfosList)
+                {
+                    var sh = ShortCutInfo.CreateBuilder();
                     sh.Index = ind;
                     sh.BaseId = sk.SkillInfoId;
-                    au.AddShortCutInfo (sh);
+                    au.AddShortCutInfo(sh);
                 }
             }
             ServerBundle.SendImmediate(au, packet.flowId);
+        }
+
+        public static void GetProp(KBEngine.Packet g)
+        {
+            var pinfo = ServerData.Instance.playerInfo;
+            var getChar = g.protoBody as CGGetCharacterInfo;
+            var au = GCGetCharacterInfo.CreateBuilder();
+            foreach (var k in getChar.ParamKeyList)
+            {
+                var att = RolesAttributes.CreateBuilder();
+                var bd = BasicData.CreateBuilder();
+                att.AttrKey = k;
+                bd.Indicate = 1;
+                if (k == (int)CharAttribute.CharAttributeEnum.LEVEL)
+                {
+                    bd.TheInt32 = pinfo.Roles.Level; 
+                } else if (k == (int)CharAttribute.CharAttributeEnum.EXP)
+                {
+                    bd.TheInt32 = pinfo.Exp;
+                } else if (k == (int)CharAttribute.CharAttributeEnum.GOLD_COIN)
+                {
+                    bd.TheInt32 = pinfo.Gold;
+                }
+                att.BasicData = bd.Build();
+                au.AddAttributes(att);
+            }
+
+            ServerBundle.SendImmediate(au, g.flowId);
+        }
+
+        public static void AddProp(KBEngine.Packet p)
+        {
+            var pinfo = ServerData.Instance.playerInfo;
+            var inpb = p.protoBody as CGAddProp;
+            if (inpb.Key == (int)CharAttribute.CharAttributeEnum.EXP)
+            {
+                //if (!pinfo.HasExp)
+                /*
+                {
+                    pinfo.Exp = 0;
+                }
+                */
+                pinfo.Exp += inpb.Value; 
+            } else if (inpb.Key == (int)CharAttribute.CharAttributeEnum.LEVEL)
+            {
+                pinfo.Roles.Level += inpb.Value;
+                AddSkillPoint(1);
+            }
+        }
+
+        public static void SetProp(KBEngine.Packet p)
+        {
+            var pinfo = ServerData.Instance.playerInfo;
+            var inpb = p.protoBody as CGSetProp;
+            if (inpb.Key == (int)CharAttribute.CharAttributeEnum.EXP)
+            {
+                pinfo.Exp = inpb.Value;
+            }
+        }
+
+        public static void CreateCharacter(KBEngine.Packet packet)
+        {
+            var inpb = packet.protoBody as CGCreateCharacter;
+            var au = GCCreateCharacter.CreateBuilder();
+            var role = RolesInfo.CreateBuilder();
+            role.Name = inpb.PlayerName;
+            role.PlayerId = 100;
+            //playerId++;
+            role.Level = 1;
+            role.Job = inpb.Job;
+            var msg = role.Build();
+            ServerData.Instance.playerInfo.Roles = msg;
+
+            au.AddRolesInfos(msg);
+
+            ServerBundle.SendImmediate(au, packet.flowId);    
+        }
+
+        /// <summary>
+        /// First Chapter Lev 
+        /// </summary>
+        /// <param name="openLev">Open lev.</param>
+        public static void PassLev(int openLev)
+        {
+            var pinfo = ServerData.Instance.playerInfo;
+            if (!pinfo.HasCopyInfos)
+            {
+                var au = GCCopyInfo.CreateBuilder();
+                var cin = CopyInfo.CreateBuilder();
+                cin.Id = 101;
+                cin.IsPass = false;
+                au.AddCopyInfo(cin);
+                var msg = au.Build();
+                pinfo.CopyInfos = msg;
+            }
+            int levId = 100+openLev;
+            //int levId = -1;
+            //int count = -1;
+            bool find = false;
+            foreach (var c in pinfo.CopyInfos.CopyInfoList)
+            {
+                if (c.Id == levId)
+                {
+                    c.IsPass = true;
+                    find = true;
+                    break;
+                }
+            }
+            if (!find)
+            {
+                var cinfo = new CopyInfo();
+                cinfo.Id = levId;
+                cinfo.IsPass = true;
+                pinfo.CopyInfos.CopyInfoList.Add(cinfo);
+            }
+            foreach(var c in pinfo.CopyInfos.CopyInfoList){
+                if(c.Id < levId){
+                    c.IsPass = true;
+                }
+            }
+
+            var open = GCPushLevelOpen.CreateBuilder();
+            open.Chapter = 1;
+            open.Level = openLev;
+            ServerBundle.SendImmediatePush(open);
+
         }
     }   
 

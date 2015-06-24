@@ -107,6 +107,17 @@ namespace ChuMeng
 			LoadMsg ();
 		}
 
+        void Start(){
+            StartCoroutine(SaveData());
+        }
+
+        IEnumerator SaveData(){
+            while(true) {
+                yield return new WaitForSeconds(60);
+                ServerData.Instance.SaveUserData();
+            }
+        }
+
 
 		//只从网络初始化一次数据
 		public IEnumerator InitDataFromNetwork ()
@@ -428,11 +439,6 @@ namespace ChuMeng
 			}
 		}
 
-		// Use this for initialization
-		void Start ()
-		{
-	
-		}
 		static int sid = 0;
 		// Update is called once per frame
 		void Update ()
@@ -446,5 +452,6 @@ namespace ChuMeng
 		public string GetDefaultPassword() {
 			return otherAccounts[0]["password"];
 		}
+
 	}
 }

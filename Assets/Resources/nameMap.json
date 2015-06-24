@@ -469,6 +469,8 @@
         "CGForgotPassword": 40, 
         "GCForgotPassword": 41, 
         "CGPickItem": 42, 
+        "CGAddProp": 43, 
+        "CGSetProp": 44, 
         "GCPushNotice2Kick": 1000, 
         "GCPushAttribute2Members": 1001, 
         "GCPushLevelUpgrade": 1002, 

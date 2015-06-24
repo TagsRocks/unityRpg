@@ -649,7 +649,7 @@ namespace ChuMeng
 
 				BattleManager.battleManager.enemyList.Add (npc.gameObject);
 				npc.SetDeadDelegate = BattleManager.battleManager.EnemyDead;
-				npc.Level = spawn.Level;
+				//npc.Level = spawn.Level;
 			} else {
 				cacheMonster.Add (new MonsterInit (unitData, spawn));
 			}

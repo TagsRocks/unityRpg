@@ -10,6 +10,9 @@ namespace ChuMeng
             return ObjectManager.objectManager.GetMyData().GetProp(CharAttribute.CharAttributeEnum.LEVEL);
         }
 
+        public static void UpdateExp(GCPushExpChange p){
+            ObjectManager.objectManager.GetMyAttr().SetExp(p.Exp);
+        }
     }
 
 }

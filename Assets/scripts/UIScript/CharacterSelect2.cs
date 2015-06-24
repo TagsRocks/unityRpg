@@ -53,6 +53,8 @@ namespace ChuMeng
                     var charI =  charInfo.RolesInfosList[0];
                     selectRoleInfo = charI;
                     namelevel.text = string.Format("[d2691e]姓名:{0}[-]\n[a0522d]等级:{1}[-]", charI.Name, charI.Level);
+                    namelevel.gameObject.SetActive(true);
+
                     SelChar.SetActive(true);
                     var evt = new MyEvent(MyEvent.EventType.MeshShown);
                     evt.intArg = -1;

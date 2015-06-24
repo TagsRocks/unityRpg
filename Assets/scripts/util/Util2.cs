@@ -279,6 +279,11 @@ public partial class Util {
 		return retMsg;
 	}	
 
+	static IMessageLite GetGCBindingSession(ByteString buf) {
+		var retMsg = ChuMeng.GCBindingSession.ParseFrom(buf);
+		return retMsg;
+	}	
+
 	static IMessageLite GetCGGetCharacterInfo(ByteString buf) {
 		var retMsg = ChuMeng.CGGetCharacterInfo.ParseFrom(buf);
 		return retMsg;
@@ -444,8 +449,8 @@ public partial class Util {
 		return retMsg;
 	}	
 
-	static IMessageLite GetGCBindingSession(ByteString buf) {
-		var retMsg = ChuMeng.GCBindingSession.ParseFrom(buf);
+	static IMessageLite GetCGAddProp(ByteString buf) {
+		var retMsg = ChuMeng.CGAddProp.ParseFrom(buf);
 		return retMsg;
 	}	
 
@@ -506,6 +511,11 @@ public partial class Util {
 
 	static IMessageLite GetCGPickUpLootReward(ByteString buf) {
 		var retMsg = ChuMeng.CGPickUpLootReward.ParseFrom(buf);
+		return retMsg;
+	}	
+
+	static IMessageLite GetCGSetProp(ByteString buf) {
+		var retMsg = ChuMeng.CGSetProp.ParseFrom(buf);
 		return retMsg;
 	}	
 
@@ -2125,6 +2135,8 @@ public partial class Util {
 
 	{"CGChangeFightMode", GetCGChangeFightMode},
 
+	{"GCBindingSession", GetGCBindingSession},
+
 	{"CGGetCharacterInfo", GetCGGetCharacterInfo},
 
 	{"GCPushAttribute2Members", GetGCPushAttribute2Members},
@@ -2191,7 +2203,7 @@ public partial class Util {
 
 	{"GCSettingClothShow", GetGCSettingClothShow},
 
-	{"GCBindingSession", GetGCBindingSession},
+	{"CGAddProp", GetCGAddProp},
 
 	{"GCChangeScreen4Point", GetGCChangeScreen4Point},
 
@@ -2216,6 +2228,8 @@ public partial class Util {
 	{"CGSelectCharacter", GetCGSelectCharacter},
 
 	{"CGPickUpLootReward", GetCGPickUpLootReward},
+
+	{"CGSetProp", GetCGSetProp},
 
 	{"GCPushPlayerDressAttributeChanges", GetGCPushPlayerDressAttributeChanges},
 

@@ -40,12 +40,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   roomPieces:
-  - {fileID: 100000, guid: 9db961b124cde4fc68ffac54091a4738, type: 2}
   - {fileID: 100000, guid: c7440f87c544d4f458e54b7c0e6024a2, type: 2}
+  - {fileID: 100000, guid: 44ef5491b2b524969a292e94b3cbbd0f, type: 2}
+  - {fileID: 100000, guid: 9db961b124cde4fc68ffac54091a4738, type: 2}
   - {fileID: 100000, guid: 81d42f05cf653454c9dd351ccff0c362, type: 2}
   - {fileID: 100000, guid: 2d5858341215e4906bb1d8690ea7465e, type: 2}
   - {fileID: 100000, guid: 790d3a5ed81fb404caf3cc7d139f2ebd, type: 2}
   - {fileID: 100000, guid: 273c8561f21ff4be8ae0d9f2689c99ed, type: 2}
+  - {fileID: 100000, guid: 8133031ffd95c4610b52da6484509ce7, type: 2}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

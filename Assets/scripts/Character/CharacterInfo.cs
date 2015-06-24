@@ -38,6 +38,7 @@ namespace ChuMeng
 			CGGetCharacterInfo.Builder getChar = CGGetCharacterInfo.CreateBuilder ();
 			getChar.PlayerId = photonView.GetServerID();
 
+            /*
 			foreach (CharAttribute.CharAttributeEnum e in (CharAttribute.CharAttributeEnum[])System.Enum.GetValues(typeof(CharAttribute.CharAttributeEnum))) {
 				var key = (int)e;
 				//TODO: Hp mp load From LocalData
@@ -45,6 +46,10 @@ namespace ChuMeng
 					getChar.AddParamKey (key);
 				}
 			}
+            */         
+            getChar.AddParamKey((int)CharAttribute.CharAttributeEnum.LEVEL);
+            getChar.AddParamKey((int)CharAttribute.CharAttributeEnum.EXP);
+            getChar.AddParamKey((int)CharAttribute.CharAttributeEnum.GOLD_COIN);
 
 			NetDebug.netDebug.AddConsole ("GetChar is "+getChar.ParamKeyCount);
 
@@ -81,6 +86,7 @@ namespace ChuMeng
 			SetProp (CharAttribute.CharAttributeEnum.MP, attribute.ObjUnitData.MP);
 			SetProp (CharAttribute.CharAttributeEnum.MP_MAX, attribute.ObjUnitData.MP);
 			SetProp (CharAttribute.CharAttributeEnum.LEVEL, attribute.ObjUnitData.Level);
+            SetProp(CharAttribute.CharAttributeEnum.EXP_MAX, (int)attribute.ObjUnitData.MaxExp);
 
 
 			attribute.ChangeHP (0);

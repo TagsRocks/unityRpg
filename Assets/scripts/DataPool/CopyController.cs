@@ -141,6 +141,7 @@ namespace ChuMeng {
 			foreach(CopyInfo c in copyInfo.CopyInfoList) {
 				if(!c.IsPass) {
 					var linfo1 = GetLevelInfo(c.Id);
+                    Log.Sys("Chapter Lev "+c.Id);
 					return linfo1.Chapter;
 				}else {
 					lastId = c.Id;
@@ -174,6 +175,29 @@ namespace ChuMeng {
 			return lastId;
 		}
 
+        public void OpenLev(GCPushLevelOpen open){
+            var chapter = GetAllChapterLevelInfo(open.Chapter);
+            var levId = open.Chapter*100+open.Level;
+
+            bool find = false;
+            foreach(var c in copyInfo.CopyInfoList){
+                if(c.Id == levId){
+                    c.IsPass = true;
+                    find = true;
+                    break;
+                }else if(c.Id < levId){
+                    c.IsPass = true;
+                }
+            }
+
+            if(!find){
+                var nc = new CopyInfo();
+                nc.Id = levId;
+                nc.IsPass = true;
+                copyInfo.CopyInfoList.Add(nc);
+            }
+            MyEventSystem.PushEventStatic(MyEvent.EventType.UpdateCopy);
+        }
 
 		//选择特定的关卡
 		public void SelectLevel(int chapter, LevelInfo lev) {

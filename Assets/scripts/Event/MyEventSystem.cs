@@ -128,7 +128,7 @@ namespace ChuMeng
 			ShakeCameraStart,
 			ShakeCameraEnd,
 
-			UpdatePlayerData,
+			UpdatePlayerData,//Global Used To Notify MY Data Change
             UpdateMainUI, //
 		}
 

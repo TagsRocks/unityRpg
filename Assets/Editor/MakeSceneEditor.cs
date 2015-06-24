@@ -562,8 +562,16 @@ public class MakeSceneEditor : Editor
             lp.transform.parent = g.transform;
             pp.transform.parent = g.transform;
 
-            PrefabUtility.CreatePrefab("Assets/room/"+g.name+".prefab", g);
+            var resName = "Assets/Resources/room/"+g.name+".prefab";
+            PrefabUtility.CreatePrefab(resName, g);
             GameObject.DestroyImmediate(g);
+            var res = Resources.LoadAssetAtPath<GameObject>(resName);
+            var roomList = Resources.Load<GameObject>("RoomList");
+            var rl = roomList.GetComponent<RoomList>();
+            rl.AddRoom(res);
+
+
+
 
             var pieces = GameObject.Find("RoomPieces");
             var props = GameObject.Find("Props");
@@ -702,7 +710,8 @@ public class MakeSceneEditor : Editor
                     var oldFile = Path.Combine("Assets/levelsets/mine", fbx);
                     var tar = Path.Combine("Assets/prefabs", prefab);
                     var g = Resources.LoadAssetAtPath<GameObject>(oldFile);
-                    var tg = PrefabUtility.CreatePrefab(tar, g);
+                    //var tg = 
+                        PrefabUtility.CreatePrefab(tar, g);
                     //tg.AddComponent<BoxCollider>();
                 }
             }

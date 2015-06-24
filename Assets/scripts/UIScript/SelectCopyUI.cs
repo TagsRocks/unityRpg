@@ -4,6 +4,9 @@ using System.Collections.Generic;
 
 namespace ChuMeng
 {
+    /// <summary>
+    /// No Use Any More 
+    /// </summary>
 	public class SelectCopyUI : IUserInterface
 	{
 		List<GameObject> copyItem;

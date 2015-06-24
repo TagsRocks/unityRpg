@@ -143,6 +143,7 @@ namespace KBEngine
 			localId = lid;
 		}
 
+
 		int localId = -1;
 		public int GetLocalId() {
 			if (localId == -1) {
@@ -178,6 +179,11 @@ namespace KBEngine
 		/// </summary>
 		public bool IsPlayer = true;
 
+        public bool IsMe {
+            get {
+                return localId == ChuMeng.ObjectManager.objectManager.GetMyLocalId(); 
+            }
+        }
 		//是否是本地玩家
 		public bool IsMine {
 			get {

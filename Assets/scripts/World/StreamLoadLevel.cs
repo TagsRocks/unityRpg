@@ -45,6 +45,8 @@ namespace ChuMeng
                 "NE",
                 "NS",
                 "NW",
+                    "PB",
+                    "LM",
             };
                 var rooms = Resources.Load<GameObject>("RoomList");
                 foreach (var r in rooms.GetComponent<RoomList>().roomPieces)
@@ -93,6 +95,7 @@ namespace ChuMeng
             //var playerStart = GameObject.Find("PlayerStart");
             //playerStart.transform.localPosition = playerStart.transform.localPosition + firstOffset;
 
+            Log.Sys("First Room NamePices "+first.room);
             var piece = namePieces [first.room];
             var roomConfig = Resources.Load<GameObject>("room/" + piece);
             yield return StartCoroutine(LoadRoom(roomConfig));
@@ -101,7 +104,7 @@ namespace ChuMeng
             yield return StartCoroutine(LoadProps(roomConfig));
             yield return StartCoroutine(LoadZone());
 
-            var zone = loadedZone[currentRoomIndex];
+            var zone = loadedZone [currentRoomIndex];
             var zoneConfigStart = zone.transform.FindChild("PlayerStart");
 
             var g = new GameObject("PlayerStart");
@@ -115,9 +118,10 @@ namespace ChuMeng
         /// <returns>The zones.</returns>
         IEnumerator LoadZone()
         {
-            var roomConfig = configLists[currentRoomIndex];
+            var roomConfig = configLists [currentRoomIndex];
             int index = currentRoomIndex;
-            if(roomConfig.useOtherZone){
+            if (roomConfig.useOtherZone)
+            {
                 index = roomConfig.zoneId;
             }
 
@@ -135,7 +139,7 @@ namespace ChuMeng
             Util.InitGameObject(zone);
             loadedZone [currentRoomIndex] = zone;
             //if(BattleManager.battleManager != null) {
-                BattleManager.battleManager.AddZone(zone);
+            BattleManager.battleManager.AddZone(zone);
             //}
             yield return null;
         }
@@ -329,10 +333,10 @@ namespace ChuMeng
         };
             */
             var sceneId = WorldManager.worldManager.GetActive().def.id;
-            Log.Sys("Inital SceneId Layout "+sceneId);
+            Log.Sys("Inital SceneId Layout " + sceneId);
             LevelConfigData.Init();
-            configLists = LevelConfigData.LevelLayout[sceneId];
-            Log.Sys("ConfigList "+configLists.Count);
+            configLists = LevelConfigData.LevelLayout [sceneId];
+            Log.Sys("ConfigList " + configLists.Count);
 
         }
     

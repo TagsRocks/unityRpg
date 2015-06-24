@@ -11,6 +11,7 @@ namespace ChuMeng
         int curChapter = -1;
         List<LevelInfo> allLevels;
 
+        UIGrid grid;
         void Awake() {
             regEvt = new System.Collections.Generic.List<MyEvent.EventType> () {
                 MyEvent.EventType.OpenCopyUI,
@@ -22,6 +23,8 @@ namespace ChuMeng
             levels = new List<GameObject>();
             Cell = GetName("Cell");
             Cell.SetActive(false);
+
+            grid = GetGrid("Grid");
         }
 
         protected override void OnEvent (MyEvent evt)
@@ -81,6 +84,8 @@ namespace ChuMeng
                     }
                 }
             }
+
+            grid.repositionNow = true;
         }
 
         // Use this for initialization

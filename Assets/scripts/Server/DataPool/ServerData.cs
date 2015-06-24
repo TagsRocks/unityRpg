@@ -19,6 +19,7 @@ namespace ChuMeng
             Instance = this;
         }
         public void LoadData(){
+            Log.Sys("SavePath BackUp Data "+Application.persistentDataPath);
             string fpath = Path.Combine (Application.persistentDataPath, "server.json");
             var exist = File.Exists (fpath);
             FileStream fs = null;
@@ -28,6 +29,8 @@ namespace ChuMeng
 
             if (fs == null) {
                 playerInfo = PlayerInfo.CreateBuilder();
+                playerInfo.Exp = 0;
+                playerInfo.Gold = 0;
             }else {
                 byte[] buffer;
                 try {
@@ -47,10 +50,19 @@ namespace ChuMeng
 
         }
 
+        bool inSave = false;
         /// <summary>
         /// 保存玩家数据到磁盘上面
         /// </summary>
         public void SaveUserData(){
+            if(inSave) {
+                return;
+            }
+            if(playerInfo == null) {
+                return;
+            }
+
+            inSave = true;
             Log.Sys("SaveUserData");
             string fpath = Path.Combine (Application.persistentDataPath, "server.json");
             var msg = playerInfo.Build();
@@ -58,6 +70,7 @@ namespace ChuMeng
 
                 msg.WriteTo(outfile);
             }
+            inSave = false;
         }
 
 

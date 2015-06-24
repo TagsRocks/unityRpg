@@ -17,7 +17,7 @@ namespace ChuMeng
         // Use this for initialization
         void Start()
         {
-            doorOpenBeam = transform.FindChild("doorOpenBeam");
+            doorOpenBeam = Util.FindChildRecursive(transform, "doorOpenBeam");
             doorOpenBeam.gameObject.SetActive(false);
             colliderObj = transform.FindChild("collider");
             beams = Util.FindAllChild(transform, "enterBeam_entrance");

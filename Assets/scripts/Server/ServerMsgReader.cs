@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using System;
 using Google.ProtocolBuffers;
@@ -163,7 +163,9 @@ namespace ChuMeng {
 						KBEngine.Packet p = new KBEngine.Packet (flag, msglen, flowId, moduleId, msgid, 0, 0, pbmsg);
 						//var fullName = pbmsg.GetType().FullName;
 
-						handler(p);
+                        KBEngine.KBEngineApp.app.queueInLoop(delegate() {
+                            handler(p);
+                        });
 
 						stream.clear();
 						

@@ -92,10 +92,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   offsetX: -1
-  offsetZ: 8
+  offsetZ: 10
   maxinumDistance: 2
   playerVelocity: 10
-  offsetY: 8
+  offsetY: 10
   XRot: 45
   YRot: 170
   RotSmooth: 5

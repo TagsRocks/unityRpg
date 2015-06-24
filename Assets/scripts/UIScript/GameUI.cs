@@ -10,6 +10,9 @@ namespace ChuMeng
         UISlider hp;
         UISlider mp;
 
+        UISlider exp;
+        UILabel expLabel;
+        UILabel level;
 
         UILabel hpLabel;
         void Awake()
@@ -19,6 +22,9 @@ namespace ChuMeng
             mpLabel = GetLabel ("MPLabel");
             hp = GetSlider ("HP");
             mp = GetSlider ("MP");
+            expLabel = GetLabel("EXPLabel");
+            exp = GetSlider("Exp");
+            level = GetLabel("Level");
 
             hpLabel = GetLabel("HPNum");
             SetCallback("HPBottle", OnBottle);
@@ -26,7 +32,7 @@ namespace ChuMeng
             this.regEvt = new System.Collections.Generic.List<MyEvent.EventType>(){
                 MyEvent.EventType.UpdateItemCoffer,
                 MyEvent.EventType.UpdateMainUI,
-
+                MyEvent.EventType.UpdatePlayerData,
             };
             /*
             var view = NGUITools.AddMissingComponent<KBEngine.KBNetworkView>();
@@ -65,6 +71,13 @@ namespace ChuMeng
 
             hp.value = me.GetProp(CharAttribute.CharAttributeEnum.HP)*1.0f/me.GetProp(CharAttribute.CharAttributeEnum.HP_MAX);
             mp.value = me.GetProp(CharAttribute.CharAttributeEnum.MP)*1.0f/me.GetProp(CharAttribute.CharAttributeEnum.MP_MAX);
+
+            var ep = me.GetProp(CharAttribute.CharAttributeEnum.EXP);
+            var ma = me.GetProp(CharAttribute.CharAttributeEnum.EXP_MAX);
+            exp.value = ep*1.0f/ma;
+            expLabel.text = ep+"/"+ma;
+
+            level.text = "[ff9500]等级:"+me.GetProp(CharAttribute.CharAttributeEnum.LEVEL)+"[-]";
         }
 
         protected override void OnEvent(MyEvent evt)

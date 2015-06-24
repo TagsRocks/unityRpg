@@ -8,12 +8,12 @@ namespace ChuMeng
         void Awake()
         {
             SetCallback("Ok", delegate(GameObject g){
-                act(true);
                 Hide(null);
+                act(true);
            });
             SetCallback("Cancel", delegate (GameObject g){
-                act(false);
                 Hide(null);
+                act(false);
             });
         }
 

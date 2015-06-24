@@ -231,6 +231,7 @@ namespace ChuMeng
 			WindowMng.windowMng.PushView (uiName, false);
 			MyEventSystem.myEventSystem.PushEvent (MyEvent.EventType.UpdateMainUI);
 
+
 			Log.Sys ("Init SaveGame And Data");
 			if (SaveGame.saveGame == null) {
 				//var saveGame = Instantiate (Resources.Load<GameObject> ("levelPublic/saveGame")) as GameObject;
