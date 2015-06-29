@@ -41,9 +41,9 @@ namespace ChuMeng
 
                 new LevelConfig("NW_PB", 1, 0){useOtherZone=true, zoneId=12},
                 new LevelConfig("EW_PB", 0, 0){useOtherZone=true, zoneId=13},
-                new LevelConfig("NE", -1, 0){useOtherZone=true, zoneId=14},
-                new LevelConfig("NS", -1, 1){useOtherZone=true, zoneId=15},
-                new LevelConfig("EXIT_S", -1, 2){useOtherZone=true, zoneId=16},
+                new LevelConfig("NE_PB", -1, 0){useOtherZone=true, zoneId=14},
+                new LevelConfig("NS_PB", -1, 1){useOtherZone=true, zoneId=15},
+                new LevelConfig("EXIT_S_PB", -1, 2){useOtherZone=true, zoneId=16},
 
             };
             LevelLayout.Add(102, l1);

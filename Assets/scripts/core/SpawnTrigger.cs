@@ -134,7 +134,7 @@ namespace ChuMeng
                 }
             }
             GetWave();
-            if(oldWaveNum != waveNum) {
+            if(oldWaveNum != waveNum || waveText == null) {
                 if(waveText != null) {
                     GameObject.DestroyImmediate(waveText);
                     waveText = null;
