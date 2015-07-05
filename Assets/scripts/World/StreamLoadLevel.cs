@@ -47,6 +47,7 @@ namespace ChuMeng
                 "NW",
                     "PB",
                     "LM",
+                    "W",
             };
                 var rooms = Resources.Load<GameObject>("RoomList");
                 foreach (var r in rooms.GetComponent<RoomList>().roomPieces)
