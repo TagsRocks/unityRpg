@@ -320,7 +320,8 @@
         "GCPushGoodsCountChange": 1000, 
         "GCPushPlayerDressedEquipChange": 1001, 
         "GCPushPlayerDressInfo": 1002, 
-        "GCPushPackInfo": 1003
+        "GCPushPackInfo": 1003, 
+        "GCPushShortcutsInfo": 1004
     }, 
     "MGuildProtoc": {
         "CGCreateGuild": 1, 
@@ -471,6 +472,9 @@
         "CGPickItem": 42, 
         "CGAddProp": 43, 
         "CGSetProp": 44, 
+        "CGGetKeyValue": 45, 
+        "GCGetKeyValue": 46, 
+        "CGSetKeyValue": 47, 
         "GCPushNotice2Kick": 1000, 
         "GCPushAttribute2Members": 1001, 
         "GCPushLevelUpgrade": 1002, 

@@ -111,6 +111,8 @@ namespace ChuMeng
 			var vcontroller = playerMove.vcontroller;
 
 
+            var rd = Random.Range(1, 3);
+            BackgroundSound.Instance.PlayEffect("onehandswinglarge"+rd);
 			skillStateMachine = SkillLogic.CreateSkillStateMachine (GetAttr().gameObject, activeSkill.skillData, GetAttr().transform.position);
 			Log.AI ("Wait For Combat Animation");
 			//GameObject enemy = NearestEnemy ();
@@ -120,6 +122,7 @@ namespace ChuMeng
 			do {
 				if(!hitYet && GetEvent().onHit) {
 					hitYet = true;
+
 				}
 
 				if (CheckEvent ()) {
@@ -178,6 +181,12 @@ namespace ChuMeng
 				}else {
 					SetAni (attackAniName, rate, WrapMode.Once);
 				}
+                //BackgroundSound.Instance.PlayEffect("blast"+((attackId%3)+1));
+                var rd = Random.Range(1, 10);
+                if(rd <= 3){
+                    BackgroundSound.Instance.PlayEffect("destroyereffort"+rd);
+                }
+
 
 				Log.Ani ("Do ule Press Time "+attackAniName+"  "+pressAttack+" " + attackPressTime + " " + Time.time + " " + WindowTime);
 				yield return GetAttr ().StartCoroutine (WaitForAttackAnimation (GetAttr ().animation));

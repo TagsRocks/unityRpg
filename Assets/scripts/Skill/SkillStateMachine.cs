@@ -127,6 +127,9 @@ namespace ChuMeng
 						InitLayout (item, null);
 					}
 				}
+                if(!string.IsNullOrEmpty(skillFullData.skillData.Sound)) {
+                    BackgroundSound.Instance.PlayEffect("skill/"+skillFullData.skillData.Sound);
+                }
 			}
 		}
 
@@ -135,6 +138,9 @@ namespace ChuMeng
 			switch (evt.type) {
 			case MyEvent.EventType.EventTrigger:
 				OnHit ();
+                if(!string.IsNullOrEmpty(skillFullData.skillData.HitSound)) {
+                    BackgroundSound.Instance.PlayEffect(skillFullData.skillData.HitSound);
+                }
 				break;
 			case MyEvent.EventType.EventMissileDie:
                 OnMissileDie(evt);

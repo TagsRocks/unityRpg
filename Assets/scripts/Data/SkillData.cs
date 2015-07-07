@@ -21,6 +21,16 @@ namespace ChuMeng
     {
         SkillConfigData skillConfig;
         SkillEffectConfigData effectConfig;
+        public string Sound {
+            get {
+                return skillConfig.effectSound;
+            }
+        }
+        public string HitSound {
+            get {
+                return skillConfig.hitSound;
+            }
+        }
         //下一级技能学习 的条件数据
         SkillLearnConfigData learnConfig;
 

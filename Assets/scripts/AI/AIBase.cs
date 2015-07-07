@@ -28,6 +28,9 @@ namespace ChuMeng
 	{
 		protected NpcAttribute attribute;
 		protected AICharacter ai;
+        public AICharacter GetAI(){
+            return ai;
+        }
 
 		public List<ChuMeng.MyEvent.EventType> regEvt = null;
 		

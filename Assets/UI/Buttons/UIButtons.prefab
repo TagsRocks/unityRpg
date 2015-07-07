@@ -43,7 +43,7 @@ MonoBehaviour:
   mSprites:
   - name: ButtonStandardRed
     x: 0
-    y: 92
+    y: 348
     width: 220
     height: 40
     borderLeft: 20
@@ -56,7 +56,7 @@ MonoBehaviour:
     paddingBottom: 2
   - name: ButtonStandardRedHighlight
     x: 0
-    y: 51
+    y: 307
     width: 220
     height: 40
     borderLeft: 20
@@ -67,9 +67,22 @@ MonoBehaviour:
     paddingRight: 14
     paddingTop: 2
     paddingBottom: 2
+  - name: fuben
+    x: 124
+    y: 405
+    width: 45
+    height: 47
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 11
+    paddingRight: 16
+    paddingTop: 17
+    paddingBottom: 8
   - name: LVbg
-    x: 0
-    y: 14
+    x: 181
+    y: 476
     width: 36
     height: 36
     borderLeft: 0
@@ -81,8 +94,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: PointPlusClose
-    x: 224
-    y: 230
+    x: 218
+    y: 486
     width: 26
     height: 26
     borderLeft: 0
@@ -94,8 +107,8 @@ MonoBehaviour:
     paddingTop: 1
     paddingBottom: 1
   - name: PointPlusLitClose
-    x: 224
-    y: 201
+    x: 181
+    y: 449
     width: 26
     height: 26
     borderLeft: 0
@@ -106,9 +119,22 @@ MonoBehaviour:
     paddingRight: 1
     paddingTop: 1
     paddingBottom: 1
+  - name: SKIll
+    x: 124
+    y: 453
+    width: 56
+    height: 59
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
   - name: Skill1
     x: 0
-    y: 133
+    y: 389
     width: 123
     height: 123
     borderLeft: 0
@@ -120,8 +146,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: StandardTab
-    x: 124
-    y: 228
+    x: 0
+    y: 278
     width: 99
     height: 28
     borderLeft: 0
@@ -133,8 +159,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: StandardTabInactive
-    x: 124
-    y: 199
+    x: 100
+    y: 278
     width: 99
     height: 28
     borderLeft: 0
@@ -146,8 +172,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: StandardTabInactiveLit
-    x: 124
-    y: 170
+    x: 0
+    y: 249
     width: 99
     height: 28
     borderLeft: 0
@@ -159,8 +185,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: StandardTabLit
-    x: 124
-    y: 141
+    x: 100
+    y: 249
     width: 99
     height: 28
     borderLeft: 0
@@ -172,8 +198,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: StoreButton
-    x: 224
-    y: 176
+    x: 208
+    y: 453
     width: 23
     height: 22
     borderLeft: 0

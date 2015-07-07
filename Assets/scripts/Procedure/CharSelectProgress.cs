@@ -116,7 +116,17 @@ namespace ChuMeng {
 				//1 Main
 				//2 New User One Piece Of Scene With only Level1
                 //
-				WorldManager.worldManager.WorldChangeScene(2, false);
+                var getValue = CGGetKeyValue.CreateBuilder();
+                getValue.Key = GameBool.FINISH_NEW;
+                var packet2 = new KBEngine.PacketHolder();
+                yield return StartCoroutine(KBEngine.Bundle.sendSimple(this, getValue, packet2));
+                var p = packet2.packet.protoBody as GCGetKeyValue;
+                if(p.Value == ""){
+                    //WorldManager.worldManager.WorldChangeScene(2, false);
+                    Application.LoadLevel("storyIntro");
+                }else {
+                    WorldManager.worldManager.WorldChangeScene(2, false);
+                }
 
 			} else {
 			}

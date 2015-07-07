@@ -160,6 +160,7 @@ namespace ChuMeng
             foreach (var p in  rd.Prefabs)
             {
                 var r = GameObject.Instantiate(p.prefab) as GameObject;
+                r.isStatic = true;
                 r.transform.parent = rootOfPieces.transform;
                 r.transform.localPosition = p.pos;
                 r.transform.localRotation = p.rot;

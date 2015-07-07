@@ -71,7 +71,7 @@ AudioListener:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
-  m_Enabled: 1
+  m_Enabled: 0
 --- !u!92 &9200000
 Behaviour:
   m_ObjectHideFlags: 1
@@ -112,7 +112,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lightMap: {fileID: 8400000, guid: 5a3cade6b6da442f3aee87a019eb109f, type: 2}
-  ambient: {x: 1, y: 1, z: 1}
+  ambient: {x: .800000012, y: .800000012, z: .800000012}
   lightMask: {fileID: 0}
   lightCoff: 0
   testAmbient: {r: 1, g: 1, b: 1, a: 0}

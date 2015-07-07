@@ -43,6 +43,9 @@ namespace ChuMeng
         {
             UpdateFrame ();
         }
+        void OnDestroy(){
+            MyEventSystem.myEventSystem.PushEvent(MyEvent.EventType.MeshHide);
+        }
         RolesInfo selectRoleInfo;
         void UpdateFrame() {
             var charInfo = GameInterface_Login.loginInterface.GetCharInfo ();

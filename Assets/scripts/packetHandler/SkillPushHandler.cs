@@ -24,4 +24,10 @@ namespace PacketHandler
             ChuMeng.GameInterface_Player.UpdateExp(packet.protoBody as ChuMeng.GCPushExpChange);
         }
     }
+    public class GCPushShortcutsInfo : IPacketHandler {
+        public override void HandlePacket(KBEngine.Packet packet)
+        {
+            ChuMeng.GameInterface_Skill.UpdateShortcutsInfo(packet.protoBody as ChuMeng.GCPushShortcutsInfo);
+        }
+    }
 }

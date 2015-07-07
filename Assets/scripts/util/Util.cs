@@ -54,6 +54,9 @@ namespace ChuMeng
 		{
 		}
 	}
+    public static class GameBool {
+        public static readonly string FINISH_NEW = "finishNew";
+    }
 
     public delegate void EmptyDelegate();
 	public delegate void VoidDelegate (GameObject g);
@@ -303,6 +306,7 @@ namespace ChuMeng
 		{
 			var lp = WindowMng.windowMng.PushTopNotify ("UI/LevelUpPanel").GetComponent<LevelUpPanel> ();
 			lp.ShowLevelUp (lev);
+            BackgroundSound.Instance.PlayEffect("levelup");
 		}
 
 		public class Pair

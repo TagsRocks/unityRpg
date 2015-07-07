@@ -135,6 +135,8 @@ namespace ChuMeng
 
 		bool DoDamage ()
 		{
+            var rd = Random.Range(1, 3);
+            BackgroundSound.Instance.PlayEffect("bladeimp"+rd);
 			var damage = GetEvent ().FetchDamage ();
 			var shit = false;
 			bool isCritical = false;

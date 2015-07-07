@@ -3,6 +3,9 @@ using System.Collections;
 
 namespace ChuMeng
 {
+    /// <summary>
+    /// blood And Harm Number 
+    /// </summary>
 	public class FollowTarget : MonoBehaviour
 	{
 		public Transform target;
@@ -28,6 +31,9 @@ namespace ChuMeng
 			mTrans.localPosition = pos;
 		}
 		void Update() {
+            if(target.gameObject == null){
+                return;
+            }
 			var offsetPos = target.position + Vector3.up;
 			var pos = gameCamera.WorldToViewportPoint (offsetPos);
 			transform.position = uiCamera.ViewportToWorldPoint (pos);

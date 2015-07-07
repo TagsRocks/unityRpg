@@ -263,6 +263,11 @@ namespace ChuMeng
 		public void InitData ()
 		{
 			var g = gameObject;
+            if(SoundManager.Instance == null) {
+                var sound = new GameObject("Sound");
+                sound.transform.parent = transform;
+                sound.AddComponent<SoundManager>();
+            }
 			if (BackPack.backpack == null) {
 				var back = new GameObject("backpack");
 				back.transform.parent = transform;

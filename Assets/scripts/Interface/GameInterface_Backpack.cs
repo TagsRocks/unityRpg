@@ -33,10 +33,16 @@ namespace ChuMeng
         }
 
         public static void UseItem(int itemId){
+            var me = ObjectManager.objectManager.GetMyPlayer().GetComponent<AIBase>();
+            if(me.GetAI().state.type != AIStateEnum.IDLE){
+                return;
+            }
+
             ClientApp.Instance.StartCoroutine(UseItemCor(itemId));
-            
         }
         static System.Collections.IEnumerator UseItemCor(int itemId){
+
+
             var id = BackPack.backpack.GetItemId(itemId);
             var itemData = Util.GetItemData(0, itemId);
 

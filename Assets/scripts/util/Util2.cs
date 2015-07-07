@@ -229,8 +229,8 @@ public partial class Util {
 		return retMsg;
 	}	
 
-	static IMessageLite GetGCRegisterAccount(ByteString buf) {
-		var retMsg = ChuMeng.GCRegisterAccount.ParseFrom(buf);
+	static IMessageLite GetGCGetKeyValue(ByteString buf) {
+		var retMsg = ChuMeng.GCGetKeyValue.ParseFrom(buf);
 		return retMsg;
 	}	
 
@@ -241,6 +241,11 @@ public partial class Util {
 
 	static IMessageLite GetCGLoginAccount(ByteString buf) {
 		var retMsg = ChuMeng.CGLoginAccount.ParseFrom(buf);
+		return retMsg;
+	}	
+
+	static IMessageLite GetCGGetKeyValue(ByteString buf) {
+		var retMsg = ChuMeng.CGGetKeyValue.ParseFrom(buf);
 		return retMsg;
 	}	
 
@@ -304,8 +309,8 @@ public partial class Util {
 		return retMsg;
 	}	
 
-	static IMessageLite GetGCPushPlayerResurrect(ByteString buf) {
-		var retMsg = ChuMeng.GCPushPlayerResurrect.ParseFrom(buf);
+	static IMessageLite GetCGSetKeyValue(ByteString buf) {
+		var retMsg = ChuMeng.CGSetKeyValue.ParseFrom(buf);
 		return retMsg;
 	}	
 
@@ -394,6 +399,11 @@ public partial class Util {
 		return retMsg;
 	}	
 
+	static IMessageLite GetGCPushLevel(ByteString buf) {
+		var retMsg = ChuMeng.GCPushLevel.ParseFrom(buf);
+		return retMsg;
+	}	
+
 	static IMessageLite GetGCEnterScene(ByteString buf) {
 		var retMsg = ChuMeng.GCEnterScene.ParseFrom(buf);
 		return retMsg;
@@ -454,6 +464,11 @@ public partial class Util {
 		return retMsg;
 	}	
 
+	static IMessageLite GetGCRegisterAccount(ByteString buf) {
+		var retMsg = ChuMeng.GCRegisterAccount.ParseFrom(buf);
+		return retMsg;
+	}	
+
 	static IMessageLite GetGCChangeScreen4Point(ByteString buf) {
 		var retMsg = ChuMeng.GCChangeScreen4Point.ParseFrom(buf);
 		return retMsg;
@@ -489,8 +504,8 @@ public partial class Util {
 		return retMsg;
 	}	
 
-	static IMessageLite GetGCPushLevel(ByteString buf) {
-		var retMsg = ChuMeng.GCPushLevel.ParseFrom(buf);
+	static IMessageLite GetGCPushPlayerResurrect(ByteString buf) {
+		var retMsg = ChuMeng.GCPushPlayerResurrect.ParseFrom(buf);
 		return retMsg;
 	}	
 
@@ -674,6 +689,11 @@ public partial class Util {
 		return retMsg;
 	}	
 
+	static IMessageLite GetCGSellUserProps(ByteString buf) {
+		var retMsg = ChuMeng.CGSellUserProps.ParseFrom(buf);
+		return retMsg;
+	}	
+
 	static IMessageLite GetGCPushPackInfo(ByteString buf) {
 		var retMsg = ChuMeng.GCPushPackInfo.ParseFrom(buf);
 		return retMsg;
@@ -684,8 +704,8 @@ public partial class Util {
 		return retMsg;
 	}	
 
-	static IMessageLite GetGCMergeUserProps(ByteString buf) {
-		var retMsg = ChuMeng.GCMergeUserProps.ParseFrom(buf);
+	static IMessageLite GetCGSplitUserProps(ByteString buf) {
+		var retMsg = ChuMeng.CGSplitUserProps.ParseFrom(buf);
 		return retMsg;
 	}	
 
@@ -754,8 +774,8 @@ public partial class Util {
 		return retMsg;
 	}	
 
-	static IMessageLite GetCGSplitUserProps(ByteString buf) {
-		var retMsg = ChuMeng.CGSplitUserProps.ParseFrom(buf);
+	static IMessageLite GetGCMergeUserProps(ByteString buf) {
+		var retMsg = ChuMeng.GCMergeUserProps.ParseFrom(buf);
 		return retMsg;
 	}	
 
@@ -819,8 +839,8 @@ public partial class Util {
 		return retMsg;
 	}	
 
-	static IMessageLite GetCGSellUserProps(ByteString buf) {
-		var retMsg = ChuMeng.CGSellUserProps.ParseFrom(buf);
+	static IMessageLite GetGCPushShortcutsInfo(ByteString buf) {
+		var retMsg = ChuMeng.GCPushShortcutsInfo.ParseFrom(buf);
 		return retMsg;
 	}	
 
@@ -2115,11 +2135,13 @@ public partial class Util {
 
 	{"GCLoadHoroscope", GetGCLoadHoroscope},
 
-	{"GCRegisterAccount", GetGCRegisterAccount},
+	{"GCGetKeyValue", GetGCGetKeyValue},
 
 	{"GCListBranchinges", GetGCListBranchinges},
 
 	{"CGLoginAccount", GetCGLoginAccount},
+
+	{"CGGetKeyValue", GetCGGetKeyValue},
 
 	{"GCPushFightModeChangeWithMap", GetGCPushFightModeChangeWithMap},
 
@@ -2145,7 +2167,7 @@ public partial class Util {
 
 	{"GCPushSpireInfo", GetGCPushSpireInfo},
 
-	{"GCPushPlayerResurrect", GetGCPushPlayerResurrect},
+	{"CGSetKeyValue", GetCGSetKeyValue},
 
 	{"GCPushPlayerModifyName", GetGCPushPlayerModifyName},
 
@@ -2181,6 +2203,8 @@ public partial class Util {
 
 	{"GCModifyPassword", GetGCModifyPassword},
 
+	{"GCPushLevel", GetGCPushLevel},
+
 	{"GCEnterScene", GetGCEnterScene},
 
 	{"GCPushNotify", GetGCPushNotify},
@@ -2205,6 +2229,8 @@ public partial class Util {
 
 	{"CGAddProp", GetCGAddProp},
 
+	{"GCRegisterAccount", GetGCRegisterAccount},
+
 	{"GCChangeScreen4Point", GetGCChangeScreen4Point},
 
 	{"CGEnterScene", GetCGEnterScene},
@@ -2219,7 +2245,7 @@ public partial class Util {
 
 	{"GCCreateCharacter", GetGCCreateCharacter},
 
-	{"GCPushLevel", GetGCPushLevel},
+	{"GCPushPlayerResurrect", GetGCPushPlayerResurrect},
 
 	{"GCPlayerMove", GetGCPlayerMove},
 
@@ -2293,11 +2319,13 @@ public partial class Util {
 
 	{"GCPushGoodsCountChange", GetGCPushGoodsCountChange},
 
+	{"CGSellUserProps", GetCGSellUserProps},
+
 	{"GCPushPackInfo", GetGCPushPackInfo},
 
 	{"CGAutoAdjustPack", GetCGAutoAdjustPack},
 
-	{"GCMergeUserProps", GetGCMergeUserProps},
+	{"CGSplitUserProps", GetCGSplitUserProps},
 
 	{"GCLoadShortcutsInfo", GetGCLoadShortcutsInfo},
 
@@ -2325,7 +2353,7 @@ public partial class Util {
 
 	{"GCTakeOffCloth", GetGCTakeOffCloth},
 
-	{"CGSplitUserProps", GetCGSplitUserProps},
+	{"GCMergeUserProps", GetGCMergeUserProps},
 
 	{"GCUseUserProps", GetGCUseUserProps},
 
@@ -2351,7 +2379,7 @@ public partial class Util {
 
 	{"GCAutoAdjustPack", GetGCAutoAdjustPack},
 
-	{"CGSellUserProps", GetCGSellUserProps},
+	{"GCPushShortcutsInfo", GetGCPushShortcutsInfo},
 
 	{"GCPushPlayerDressedEquipChange", GetGCPushPlayerDressedEquipChange},
 

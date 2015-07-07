@@ -215,14 +215,16 @@ namespace ChuMeng
 				var au = GCEnterScene.CreateBuilder ();
 				au.Id = inpb.Id;
 				retPb = au;
-			} else if (className == "CGLoadPackInfo") {
+			} 
+            /*
+            else if (className == "CGLoadPackInfo") {
 				var inpb = packet.protoBody as CGLoadPackInfo;
 				var au = GCLoadPackInfo.CreateBuilder ();
 
 				if (inpb.PackType == PackType.DEFAULT_PACK) {
                     var pkInfo = ServerData.Instance.playerInfo.PackInfoList;
                     au.AddRangePackInfo(pkInfo);
-                    /*
+
 					int c = 0;
 					var pk = new JSONArray();
 
@@ -248,13 +250,14 @@ namespace ChuMeng
 
 					}
 					packInf = pk.ToString();
-                    */
 				} else {
 					au.PackType = PackType.DRESSED_PACK;
+
 				}
 
 				retPb = au;
 			}
+            */
             /*
             else if (className == "CGGetCharacterInfo") {
 				var inpb = packet.protoBody as CGGetCharacterInfo;

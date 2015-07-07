@@ -18,20 +18,27 @@ namespace ChuMeng
 		float barDisplay = 0;
 		Vector2 pos = new Vector2 (20, 40);
 		Vector2 size = new Vector2 (40, 10);
-		Texture2D progressBarEmpty;
-		Texture2D progressBarFull;
+
+		//Texture2D progressBarEmpty;
+		//Texture2D progressBarFull;
 		//float passTime = 0;
 		float curValue = 0;
-
+        GameObject bar;
+        UISlider fill;
 		void Awake() {
 			regLocalEvt = new System.Collections.Generic.List<MyEvent.EventType> (){
 				MyEvent.EventType.UnitHP,
 			};
 			RegEvent ();
+            bar = GameObject.Instantiate(Resources.Load<GameObject>("UI/BloodBar")) as GameObject;
+            bar.transform.parent = WindowMng.windowMng.GetUIRoot().transform;
+            Util.InitGameObject(bar);
+            fill = bar.GetComponent<UISlider>();
 		}
 		// Use this for initialization
 		void Start ()
 		{
+            /*
 			progressBarEmpty = new Texture2D (1, 1);
 			progressBarEmpty.SetPixel (0, 0, new Color (0.5f, 0.5f, 0.5f, 0.8f));
 			progressBarEmpty.wrapMode = TextureWrapMode.Repeat;
@@ -41,6 +48,7 @@ namespace ChuMeng
 			progressBarFull.SetPixel (0, 0, new Color (0.8f, 0.2f, 0.2f, 0.8f));
 			progressBarFull.wrapMode = TextureWrapMode.Repeat;
 			progressBarFull.Apply ();
+            */
 
 			//GetComponent<NpcAttribute> ().ChangeHP (0);
 		}
@@ -56,10 +64,8 @@ namespace ChuMeng
 
 		void OnGUI ()
 		{
-			if (Camera.main == null) {
-				return;
-			}
-			Vector3 sp = Camera.main.WorldToScreenPoint (transform.position);
+
+            /*
 			pos = sp;
 			//Debug.Log("blood pos "+sp);
 			pos.y = Screen.height - pos.y - 25;
@@ -76,7 +82,7 @@ namespace ChuMeng
 			GUI.DrawTexture (new Rect (0, 0, size.x * curValue, size.y), progressBarFull);
 	
 			GUI.EndGroup ();
-				
+			*/	
 
 		}
 
@@ -84,10 +90,23 @@ namespace ChuMeng
 		{
 			barDisplay = v;
 		}
-
+        void OnDestroy(){
+            barDisplay = 0;
+            fill.value = 0;
+            GameObject.Destroy(bar);
+            //GameObject.Destroy(bar, 0.1f);
+        }
 		// Update is called once per frame
 		void Update ()
 		{
+            if (Camera.main == null) {
+                return;
+            }
+            Vector3 sp = Camera.main.WorldToScreenPoint (transform.position+new Vector3(0, 2.5f, 0));
+            var uiWorldPos = UICamera.mainCamera.ScreenToWorldPoint(sp);
+            uiWorldPos.z = 0;
+            bar.transform.position = uiWorldPos;
+            fill.value = barDisplay;
 		}
 	}
 

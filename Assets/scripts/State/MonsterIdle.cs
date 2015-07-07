@@ -48,6 +48,8 @@ namespace ChuMeng
 				SetAni ("idle", 1, WrapMode.Loop);
 			}
 			birthYet = true;
+            var rd = Random.Range(1, 3);
+            BackgroundSound.Instance.PlayEffect("batmanspawn"+rd);
 		}
 		
 		public override IEnumerator RunLogic ()

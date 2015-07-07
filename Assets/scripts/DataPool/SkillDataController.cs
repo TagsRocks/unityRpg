@@ -142,6 +142,14 @@ namespace ChuMeng {
 			SetShortSkillData (skId, index);
 		}
 
+        public void UpdateShortcutsInfo(IList<ShortCutInfo> shortCutInfo){
+            skillSlots = new List<SkillFullInfo> ();
+            foreach (ShortCutInfo s in shortCutInfo) {
+                var full = new SkillFullInfo(s);
+                skillSlots.Add(full);
+            }
+            MyEventSystem.myEventSystem.PushEvent (MyEvent.EventType.UpdateShortCut);
+        }
         /// <summary>
         /// 初始化右下角的技能快捷栏
         /// 初始化技能列表 

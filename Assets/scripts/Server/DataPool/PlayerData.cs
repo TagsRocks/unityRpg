@@ -300,7 +300,25 @@ namespace ChuMeng
             {
                 SendNotify("技能已经升到满级");
             }
+            PushSkillShortcutsInfo();
         }
+        static void PushSkillShortcutsInfo(){
+            var au = GCPushShortcutsInfo.CreateBuilder();
+            var pinfo = ServerData.Instance.playerInfo;
+            if(pinfo.HasSkill){
+                int ind = 0;
+                foreach (var sk in pinfo.Skill.SkillInfosList)
+                {
+                    var sh = ShortCutInfo.CreateBuilder();
+                    sh.Index = ind;
+                    sh.BaseId = sk.SkillInfoId;
+                    au.AddShortCutInfo(sh);
+                    ind++;
+                }
+            }
+            ServerBundle.SendImmediatePush(au);
+        }
+
 
         public static void GetShortCuts(KBEngine.Packet packet)
         {
@@ -315,6 +333,7 @@ namespace ChuMeng
                     sh.Index = ind;
                     sh.BaseId = sk.SkillInfoId;
                     au.AddShortCutInfo(sh);
+                    ind++;
                 }
             }
             ServerBundle.SendImmediate(au, packet.flowId);
@@ -391,7 +410,18 @@ namespace ChuMeng
             var msg = role.Build();
             ServerData.Instance.playerInfo.Roles = msg;
 
+            var pkinfo = PackInfo.CreateBuilder();
+            var pkEntry = PackEntry.CreateBuilder();
+            pkEntry.Id = 1; 
+            pkEntry.BaseId = 97;
+            pkEntry.GoodsType = 1;
+            pkinfo.PackEntry = pkEntry.Build();
+
+            var pinfo = ServerData.Instance.playerInfo;
+            pinfo.AddDressInfo(pkinfo);
+
             au.AddRolesInfos(msg);
+
 
             ServerBundle.SendImmediate(au, packet.flowId);    
         }
@@ -413,7 +443,7 @@ namespace ChuMeng
                 var msg = au.Build();
                 pinfo.CopyInfos = msg;
             }
-            int levId = 100+openLev;
+            int levId = 100 + openLev;
             //int levId = -1;
             //int count = -1;
             bool find = false;
@@ -433,8 +463,10 @@ namespace ChuMeng
                 cinfo.IsPass = true;
                 pinfo.CopyInfos.CopyInfoList.Add(cinfo);
             }
-            foreach(var c in pinfo.CopyInfos.CopyInfoList){
-                if(c.Id < levId){
+            foreach (var c in pinfo.CopyInfos.CopyInfoList)
+            {
+                if (c.Id < levId)
+                {
                     c.IsPass = true;
                 }
             }
@@ -445,6 +477,60 @@ namespace ChuMeng
             ServerBundle.SendImmediatePush(open);
 
         }
+
+        public static void LoadPackInfo(KBEngine.Packet packet)
+        {
+            var inpb  = packet.protoBody as CGLoadPackInfo;
+            var au = GCLoadPackInfo.CreateBuilder();
+            if (inpb.PackType == PackType.DEFAULT_PACK)
+            {
+                au.PackType = PackType.DEFAULT_PACK;
+                var pkInfo = ServerData.Instance.playerInfo.PackInfoList;
+                au.AddRangePackInfo(pkInfo);
+            } else if(inpb.PackType == PackType.DRESSED_PACK)
+            {
+                au.PackType = PackType.DRESSED_PACK;
+                var pkInfo = ServerData.Instance.playerInfo.DressInfoList;
+                au.AddRangePackInfo(pkInfo);
+            }
+            ServerBundle.SendImmediate(au, packet.flowId);
+        }
+
+        public static void GetKeyValue(KBEngine.Packet packet){
+            var playerInfo = ServerData.Instance.playerInfo;
+            var inpb = packet.protoBody as CGGetKeyValue;
+            var key = inpb.Key;
+            var get = GCGetKeyValue.CreateBuilder();
+            bool find = false;
+            foreach(var kv1 in playerInfo.GameStateList){
+                if(kv1.Key == key) {
+                    get.Value = kv1.Value;
+                    find = true;
+                    break;
+                }
+            }
+            if(!find){
+                get.Value = "";
+            }
+            ServerBundle.SendImmediate(get, packet.flowId);
+        }
+        public static void SetKeyValue(KBEngine.Packet packet){
+            var playerInfo = ServerData.Instance.playerInfo;
+            var inpb = packet.protoBody as CGSetKeyValue;
+            bool find = false;
+            foreach(var kv in playerInfo.GameStateList) {
+                if(kv.Key == inpb.Kv.Key) {
+                    kv.Value = inpb.Kv.Value;
+                    find = true;
+                    break;
+                }
+            }
+            if(!find){
+                playerInfo.GameStateList.Add(inpb.Kv);
+            }
+        }
     }   
+
+
 
 }

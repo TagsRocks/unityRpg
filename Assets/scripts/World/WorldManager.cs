@@ -277,6 +277,9 @@ namespace ChuMeng
 		public IEnumerator ChangeScene(int sceneId, bool isRelive) {
             Log.Sys("ChangeEnterNextScene "+sceneId);
 			nextSceneId = sceneId;
+            var sdata = CopyController.copyController.GetLevelInfo (nextSceneId);
+            BackgroundSound.Instance.PlaySound(sdata.background);
+
 			station = isRelive ? WorldStation.Relive : WorldStation.AskChangeScene; 
 
 			//先显示加载界面，首先加载网络资源接着加载静态资源

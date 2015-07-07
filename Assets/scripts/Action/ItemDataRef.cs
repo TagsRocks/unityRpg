@@ -111,7 +111,7 @@ namespace ChuMeng
 
 			yield return new WaitForSeconds (1);
 
-			float flySpeed = 10;
+			float flySpeed = 20;
 			float UpSpeed = 10;
 			upSpeed = new Vector3 (0, UpSpeed, 0);
 			while (true) {
@@ -131,7 +131,7 @@ namespace ChuMeng
 				passTime += Time.deltaTime;
 				yield return null;
 			}
-
+            BackgroundSound.Instance.PlayEffect("pickup");
 			GameObject.Destroy (gameObject);
             GameInterface_Backpack.PickItem(itemData, num);
             IsOnGround = false;
@@ -190,6 +190,7 @@ namespace ChuMeng
 			com.Particle = par;
 			com.IsOnGround = true;
             com.num = num;
+            BackgroundSound.Instance.PlayEffect("dropgold");
 			return g;
 		}
 	}

@@ -9,6 +9,7 @@ namespace ChuMeng
         {
             base.Init(af, o);
             type = Affix.EffectType.AddHPMP;
+            BackgroundSound.Instance.PlayEffect("healdrink");
         }
         IEnumerator Add(){
             var duration = affix.Duration;

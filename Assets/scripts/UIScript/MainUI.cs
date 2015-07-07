@@ -12,7 +12,7 @@ namespace ChuMeng
             level = GetLabel("Level");
 
             SetCallback("ReturnCity_Button", OnCopy);
-            SetCallback("Knapsack_Button", OnBag);
+            //SetCallback("Knapsack_Button", OnBag);
             SetCallback("Skill_Button", OnSkill);
             SetCallback("NormalATKButton", OnTalk);
             SetCallback("StoreButton", OnStore);

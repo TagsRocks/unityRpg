@@ -11,6 +11,10 @@ namespace ChuMeng {
 		public override void EnterState ()
 		{
 			base.EnterState ();
+            var rd = Random.Range(1, 3);
+            BackgroundSound.Instance.PlayEffect("bloodexplode"+rd);
+            var rd1 = Random.Range(1, 3);
+            BackgroundSound.Instance.PlayEffect("burrowerdeath"+rd1);
 			var playerId = ObjectManager.objectManager.GetMyLocalId();
 			var monId = GetAttr ().GetLocalId ();
 			var evt = new DeadExpEvent();
@@ -63,7 +67,7 @@ namespace ChuMeng {
 		public override IEnumerator RunLogic ()
 		{
 			GetAttr ().ShowDead ();
-			GetAttr ().GetComponent<BloodBar> ().enabled = false;
+			//GetAttr ().GetComponent<BloodBar> ().enabled = false;
 			var deathBlood = Resources.Load<GameObject> ("particles/swordhit");
 
 			GameObject g = GameObject.Instantiate (deathBlood) as GameObject;

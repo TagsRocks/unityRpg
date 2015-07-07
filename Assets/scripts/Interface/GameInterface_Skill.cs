@@ -104,5 +104,9 @@ namespace ChuMeng
             var charInfo = ObjectManager.objectManager.GetMyAttr();
             charInfo.ChangeLevel(lev.Level);
         }
+
+        public static void UpdateShortcutsInfo(GCPushShortcutsInfo inpb){
+            SkillDataController.skillDataController.UpdateShortcutsInfo(inpb.ShortCutInfoList);
+        }
     }
 }

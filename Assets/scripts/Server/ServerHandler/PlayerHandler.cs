@@ -28,4 +28,24 @@ namespace ServerPacketHandler {
             playerData.CreateCharacter(packet);
         }
     }
+    public class CGLoadPackInfo : IPacketHandler {
+        public override void HandlePacket(KBEngine.Packet packet){
+            playerData.LoadPackInfo(packet);
+        }
+    }
+
+    public class CGGetKeyValue : IPacketHandler {
+        public override void HandlePacket(KBEngine.Packet packet){
+            playerData.GetKeyValue(packet);
+        }
+    }
+
+    /// <summary>
+    /// new  NewUserStory 
+    /// </summary>
+    public class CGSetKeyValue : IPacketHandler {
+        public override void HandlePacket(KBEngine.Packet packet){
+            playerData.SetKeyValue(packet);
+        }
+    }
 }

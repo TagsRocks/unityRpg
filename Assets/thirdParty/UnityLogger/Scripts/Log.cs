@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 using System;
+using System.Diagnostics;
 
 public class Log
 {
@@ -61,29 +62,39 @@ public class Log
 	{
 		Record( category, Level.Normal, message );
 	}
+    [Conditional("DEBUG")]
 	public static void AI(string messages) {
 		Important (Category.AI, messages);
 	}
+    [Conditional("DEBUG")]
 	public static void Ani(string message) {
 		Important (Category.Animation, message);
 	}
+    [Conditional("DEBUG")]
 	public static void Sys(string messages) {
 		Important (Category.System, messages);
 	}
+    [Conditional("DEBUG")]
 	public static void GUI(string message) {
 		Important (Category.GUI, message);
 	}
+    [Conditional("DEBUG")]
 	public static void Net(string message) {
 		Important (Category.Network, message);
 	}
 
+    [Conditional("DEBUG")]
 	public static void Important( string message ) { Important( Category.Console, message ); }
+
+    [Conditional("DEBUG")]
 	public static void Important( Category category, string message )
 	{
 		Record( category, Level.Important, message );
 	}
 
+    [Conditional("DEBUG")]
 	public static void Critical( string message ) { Critical( Category.Console, message ); }
+    [Conditional("DEBUG")]
 	public static void Critical( Category category, string message )
 	{
 		Record( category, Level.Critical, message );
@@ -109,7 +120,7 @@ public class Log
 	{
 		if( Instance.useConsole )
 		{
-			Debug.Log( logMessage.message );
+			UnityEngine.Debug.Log( logMessage.message );
 		}
 		else
 		{

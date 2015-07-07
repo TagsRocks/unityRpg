@@ -17,6 +17,13 @@ namespace ChuMeng
 			SetAttrState (CharacterState.Running);
 			aiCharacter.SetRun ();
 		}
+        IEnumerator MoveSound(){
+            while(!quit){
+                var rd = Random.Range(1, 3);
+                BackgroundSound.Instance.PlayEffect("heavydirtrun"+rd);
+                yield return new WaitForSeconds(0.5f);
+            }
+        }
 
 		public override IEnumerator RunLogic ()
 		{
@@ -25,6 +32,7 @@ namespace ChuMeng
 			var camRight = playerMove.camRight;
 			var camForward = playerMove.camForward;
 
+            GetAttr().StartCoroutine(MoveSound());
 			while (!quit) {
 				if (CheckEvent ()) {
 					yield break;

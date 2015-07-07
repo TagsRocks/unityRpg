@@ -52,18 +52,19 @@ namespace ChuMeng
                 new LevelConfig("ENTRANCE_E_KG", 0, 0){useOtherZone=true, zoneId=17},
 
                 new LevelConfig("EW_LM", 1, 0){useOtherZone=true, zoneId=18},
-                new LevelConfig("NE_LM", 2, 0){useOtherZone=true, zoneId=19},
-                new LevelConfig("EXIT_W", 2, -1){useOtherZone=true, zoneId=20},
+                new LevelConfig("SW_LM", 2, 0){useOtherZone=true, zoneId=25},
+                new LevelConfig("NE_LM", 2, -1){useOtherZone=true, zoneId=19},
+                new LevelConfig("EXIT_W", 3, -1){useOtherZone=true, zoneId=20},
 
             };
             LevelLayout.Add(103, l1);
 
             l1 = new List<LevelConfig>(){
-                new LevelConfig("ENTRANCE_E_KG", 0, 0){useOtherZone=true, zoneId=17},
+                new LevelConfig("ENTRANCE_W_LM", 0, 0){useOtherZone=true, zoneId=21},
 
-                new LevelConfig("EW_LM", 1, 0){useOtherZone=true, zoneId=18},
-                new LevelConfig("NE_LM", 2, 0){useOtherZone=true, zoneId=19},
-                new LevelConfig("EXIT_W", 2, -1){useOtherZone=true, zoneId=20},
+                new LevelConfig("SE_LM", -1, 0){useOtherZone=true, zoneId=22},
+                new LevelConfig("NW_PB", -1, -1){useOtherZone=true, zoneId=23},
+                new LevelConfig("EXIT_W", -2, -1){useOtherZone=true, zoneId=24},
 
             };
             LevelLayout.Add(104, l1);

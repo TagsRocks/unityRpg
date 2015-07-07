@@ -25,6 +25,7 @@ namespace ChuMeng {
 				var damage = (int)(attribute.Damage*(1.0f+skillData.skillData.WeaponDamagePCT/100.0f-1.0f+rate-1.0f));
 				Log.Sys("calculate Damage Rate "+skillData.skillData.WeaponDamagePCT);
 				enemy.GetComponent<MyAnimationEvent> ().OnHit (attacker, damage, isCritical);
+
 			}
 			//}
 		}

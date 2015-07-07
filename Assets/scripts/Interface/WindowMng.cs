@@ -168,8 +168,11 @@ namespace ChuMeng
             Log.GUI("Push UI " + bag.name);
             foreach (GameObject g in stack)
             {
-                Log.GUI("Stack UI is " + g.name);
+                if(g != null) {
+                    Log.GUI("Stack UI is " + g.name);
+                }
             }
+            BackgroundSound.Instance.PlayEffect("sheet_opencenter");
             return bag;
         }
 
@@ -232,6 +235,8 @@ namespace ChuMeng
             {
                 back.SetActive(false);
             }
+
+            BackgroundSound.Instance.PlayEffect("sheet_close");
         }
 
         public void ShowNotifyLog(string text, float time = 3)
