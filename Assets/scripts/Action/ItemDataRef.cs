@@ -115,6 +115,9 @@ namespace ChuMeng
 			float UpSpeed = 10;
 			upSpeed = new Vector3 (0, UpSpeed, 0);
 			while (true) {
+                if(player == null){
+                    break;
+                }
 				moveDirection = player.transform.position - transform.position;
 				if(moveDirection.magnitude < 0.3f) {
 					break;
@@ -136,33 +139,8 @@ namespace ChuMeng
             GameInterface_Backpack.PickItem(itemData, num);
             IsOnGround = false;
 
-            /*
-			if (backpack != null) {
-				if(ItemData.UnitType == ItemData.UnitTypeEnum.GOLD) {
-					backpack.GetComponent<BackPack>().PutGold(Value);
-				}else {
-					backpack.GetComponent<BackPack> ().PutItemInBackpack(ItemData);
-				}
-				if(Particle != null) {
-					GameObject.Destroy(Particle);
-				}
-				IsOnGround = false;
-			}
-			*/
 		}
 
-		// Update is called once per frame
-		void Update ()
-		{
-            /*
-			if (player != null && shadow != null) {
-				var dis = (player.transform.position - transform.position).magnitude;
-				if (dis < 4) {
-					shadow.AdjustLightPos (player.transform.position + new Vector3 (0, 3, 0));
-				}
-			}
-            */
-		}
 
 		IEnumerator WaitRemove ()
 		{

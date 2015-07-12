@@ -39,9 +39,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7f20b2b91695493591744f6e9c67f49, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentQuests: []
-  allQuests:
-  - {fileID: 11400000, guid: 85e6eb0b514f142a4be2b24bcb5a93d9, type: 2}
   CollectQuest: 0
 --- !u!1001 &100100000
 Prefab:

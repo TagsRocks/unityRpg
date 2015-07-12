@@ -130,6 +130,8 @@ namespace ChuMeng
 
 			UpdatePlayerData,//Global Used To Notify MY Data Change
             UpdateMainUI, //
+
+            KillAllMonster,
 		}
 
 

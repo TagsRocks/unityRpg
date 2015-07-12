@@ -92,10 +92,6 @@ namespace ChuMeng
             var firstOffset = new Vector3(first.x * 96, 9, first.y * 96 + 48);
             root.transform.localPosition = firstOffset;
 
-            //playerStart Config In Zone
-            //var playerStart = GameObject.Find("PlayerStart");
-            //playerStart.transform.localPosition = playerStart.transform.localPosition + firstOffset;
-
             Log.Sys("First Room NamePices "+first.room);
             var piece = namePieces [first.room];
             var roomConfig = Resources.Load<GameObject>("room/" + piece);
@@ -135,13 +131,14 @@ namespace ChuMeng
                 yield break;
             }
             var zone = GameObject.Instantiate(zoneConfig) as GameObject;
+            if(zone == null){
+                Debug.LogError("LoadZone Null "+zone+" config "+zoneConfig);
+            }
+
             zone.transform.parent = root.transform;
-            //zone.name = "Zone";
             Util.InitGameObject(zone);
             loadedZone [currentRoomIndex] = zone;
-            //if(BattleManager.battleManager != null) {
             BattleManager.battleManager.AddZone(zone);
-            //}
             yield return null;
         }
 
@@ -156,6 +153,7 @@ namespace ChuMeng
             rootOfPieces.transform.parent = root.transform;
             Util.InitGameObject(rootOfPieces);
 
+            int c = 0;
             //Batch Rooom
             foreach (var p in  rd.Prefabs)
             {
@@ -165,8 +163,10 @@ namespace ChuMeng
                 r.transform.localPosition = p.pos;
                 r.transform.localRotation = p.rot;
                 r.transform.localScale = p.scale;
-                if (slowly)
+                c++;
+                if (slowly && c >= batchNum)
                 {
+                    c = 0;
                     yield return null;
                 }
             }
@@ -175,7 +175,7 @@ namespace ChuMeng
 
 
         }
-
+        const int batchNum = 10;
         IEnumerator LoadLight(GameObject roomConfig, bool slowly=false)
         {
             var light = roomConfig.transform.Find("light_data");
@@ -186,6 +186,7 @@ namespace ChuMeng
             Util.InitGameObject(rootOfLight);
             
             //Batch Rooom
+            int c= 0;
             foreach (var p in  rd.Prefabs)
             {
                 var r = GameObject.Instantiate(p.prefab) as GameObject;
@@ -193,8 +194,10 @@ namespace ChuMeng
                 r.transform.localPosition = p.pos;
                 r.transform.localRotation = p.rot;
                 r.transform.localScale = p.scale;
-                if (slowly)
+                c++;
+                if (slowly && c > batchNum)
                 {
+                    c=0;
                     yield return null;
                 }
             }
@@ -212,6 +215,7 @@ namespace ChuMeng
             Util.InitGameObject(rootOfLight);
             
             //Batch Rooom
+            int c = 0;
             foreach (var p in  rd.Prefabs)
             {
                 var r = GameObject.Instantiate(p.prefab) as GameObject;
@@ -219,8 +223,10 @@ namespace ChuMeng
                 r.transform.localPosition = p.pos;
                 r.transform.localRotation = p.rot;
                 r.transform.localScale = p.scale;
-                if (slowly)
+                c++;
+                if (slowly && c > batchNum)
                 {
+                    c=0;
                     yield return null;
                 }
             }
@@ -284,7 +290,7 @@ namespace ChuMeng
 
         public IEnumerator MoveInNewRoom()
         {
-            yield return StartCoroutine(ReleaseOldRoom());
+            StartCoroutine(ReleaseOldRoom());
             yield return StartCoroutine(LoadRoomNeibor());
         }
         /// <summary>
@@ -299,6 +305,36 @@ namespace ChuMeng
             if (toRemove >= 0 && toRemove < configLists.Count)
             {
                 var g = GameObject.Find("Root_" + toRemove);
+                //GameObject.Destroy(g);
+                List<GameObject> childs = new List<GameObject>();
+                foreach(Transform t in g.transform){
+                    childs.Add(t.gameObject);
+                    //yield return null;
+                }
+                int c = 0;
+                for(int i =0; i < childs.Count; i++){
+                    List<GameObject> subChild = new List<GameObject>();
+                    var cc = childs[i].transform.childCount;
+                    var ci = childs[i].transform;
+                    for(int j = 0; j < cc; j++){
+                        subChild.Add(ci.GetChild(j).gameObject);
+                        //yield return null;
+                        c++;
+                        if(c > batchNum){
+                            c = 0;
+                            yield return null;
+                        }
+                    }
+                    for(int j = 0; j < subChild.Count; j++){
+                        GameObject.Destroy(subChild[j]);
+                        if(c > batchNum) {
+                            c = 0;
+                            yield return null;
+                        }
+                    }
+                    yield return null;
+                }
+
                 GameObject.Destroy(g);
             }
             yield return null;

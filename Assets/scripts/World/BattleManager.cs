@@ -32,7 +32,7 @@ namespace ChuMeng
 		public bool StartSpawn = false;
 		public int MaxWave = 5;
 
-	    List<GameObject> Zones = new List<GameObject>();
+        public List<GameObject> Zones;
 
 		public int currentZone = -1;
 		// Use this for initialization
@@ -42,12 +42,21 @@ namespace ChuMeng
 
 		public bool levelOver = false;
 
-		//public FailUI failUI;
+        [ButtonCallFunc()]
+        public bool killAll = false;
+        public void killAllMethod(){
+            foreach(var e in enemyList){
+                var npc = e.GetComponent<NpcAttribute>();
+                npc.ChangeHP(-npc.HP_Max);
 
-		public bool CheckDead = true;
+            }
+        }
+
 
 		void Awake ()
 		{
+            Zones = new List<GameObject>();
+
 			levelOver = false;
 			battleManager = this;
             allWaves = new List<SpawnTrigger>();
@@ -202,10 +211,11 @@ namespace ChuMeng
             Log.Sys("NewWaveNum "+waveNum + " MaxWave "+MaxWave);
 			if (waveNum >= MaxWave) {
 				currentZone++;
+                Log.Sys("currentZone zoneCount "+currentZone+" count "+Zones.Count);
 				if (currentZone < Zones.Count) {
 					yield return StartCoroutine (GotoNextZone ());
 				} else {
-					Debug.Log ("BattleManager::NextWave No Wave Battle Finish");
+					Log.Sys("BattleManager::NextWave No Wave Battle Finish "+MaxWave);
 					yield return StartCoroutine (LevelFinish ());
 				}
 			}
@@ -217,14 +227,18 @@ namespace ChuMeng
         /// <returns>The finish.</returns>
 		IEnumerator LevelFinish ()
 		{
-			var notify = WindowMng.windowMng.PushView ("UI/NotifyLog").GetComponent<NotifyUI>();
-			float leftTime = 5;
+            Log.Sys("LevelFinish ");
+            float leftTime = 5f;
+            var notify = WindowMng.windowMng.ShowNotifyLog("", 5.2f).GetComponent<NotifyUI>();
 			while (leftTime > 0) {
-				notify.SetTime (leftTime);
+				//notify.SetTime (leftTime);
+                notify.SetText(string.Format("退出副本倒计时{0}s", (int)leftTime));
 				leftTime -= Time.deltaTime;
 				yield return null;
 			}
-			WindowMng.windowMng.PopView ();
+            notify.SetText(string.Format("退出副本倒计时{0}s", (int)0));
+
+
 			var victoryUI = WindowMng.windowMng.PushView ("UI/victory").GetComponent<VictoryUI>();
 			while (!victoryUI.con) {
 				yield return null;

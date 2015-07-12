@@ -691,7 +691,7 @@ namespace ChuMeng
 
 		public void ShutDown ()
 		{
-            serverData.SaveUserData();
+            //serverData.SaveUserData();
 			stop = true;
 		}
 	}

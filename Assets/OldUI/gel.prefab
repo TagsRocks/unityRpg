@@ -471,8 +471,6 @@ MonoBehaviour:
   hit: 0
   onHit: 0
   attacker: {fileID: 0}
-  ShowTrail: 0
-  HideTrail: 0
   KnockBack: 0
   WhoKnock: {fileID: 0}
   fleeEvent: 0

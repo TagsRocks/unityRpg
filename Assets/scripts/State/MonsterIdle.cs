@@ -27,7 +27,8 @@ namespace ChuMeng
                     g.transform.position = GetAttr ().transform.position;
 					NGUITools.AddMissingComponent<RemoveSelf>(g);
 				}
-				yield return GetAttr ().StartCoroutine (Util.WaitForAnimation (GetAttr ().animation));
+				//yield return GetAttr ().StartCoroutine (Util.WaitForAnimation (GetAttr ().animation));
+                yield return new WaitForSeconds(1f);
 				
 				SetAttrState (CharacterState.Idle);
 				SetAni ("idle", 1, WrapMode.Loop);
@@ -42,21 +43,31 @@ namespace ChuMeng
                 g.transform.parent = SaveGame.saveGame.EffectMainNode.transform;
 				g.transform.position = GetAttr ().transform.position;
 				NGUITools.AddMissingComponent<RemoveSelf>(g);
-				yield return GetAttr ().StartCoroutine (Util.WaitForAnimation (GetAttr ().animation));
+				//yield return GetAttr ().StartCoroutine (Util.WaitForAnimation (GetAttr ().animation));
+                yield return new WaitForSeconds(1f);
 
 				SetAttrState (CharacterState.Idle);
 				SetAni ("idle", 1, WrapMode.Loop);
 			}
 			birthYet = true;
             var rd = Random.Range(1, 3);
-            BackgroundSound.Instance.PlayEffect("batmanspawn"+rd);
+            BackgroundSound.Instance.PlayEffectPos("batmanspawn"+rd, GetAttr().transform.position);
+
 		}
-		
+		IEnumerator IdleSound(){
+            while(!quit){
+                var rd = Random.Range(2, 4);
+                yield return new WaitForSeconds(rd);
+                var rd1 = Random.Range(1, 3);
+                BackgroundSound.Instance.PlayEffectPos("batmanidle"+rd1 ,GetAttr().transform.position);
+            }
+        }
 		public override IEnumerator RunLogic ()
 		{
 			if (!birthYet) {
 				yield return GetAttr ().StartCoroutine (Birth ());
 			}
+            GetAttr().StartCoroutine(IdleSound());
 			yield return GetAttr().StartCoroutine(NewHeading());
 			
 			Log.AI ("State Logic Over "+type);

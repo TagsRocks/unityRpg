@@ -1578,23 +1578,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dbeadbc6c7c4a448f8234b8d6a1243e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnEffect: {fileID: 0}
-  Radius: 5
-  FlySpeed: 5
-  UpSpeed: 1
-  KnockUpSpeed: 2
-  KnockUpFlyTime: .200000003
-  KnockUpFlySpeed: 1
-  Gravity: 20
-  WalkSpeed: 2
-  RunSpeed: 5
-  FastRotateSpeed: 10
-  directionChangeInterval: 3
-  maxHeadingChange: 30
-  KnockFlyTime: .800000012
-  KnockBackTime: .800000012
-  StopKnockTime: .100000001
-  KnockBackSpeed: 22
+  regEvt: 
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1606,13 +1590,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4c404202453646c6b5ec85cddca1a9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  IsPlayer: 1
+  timeToDead: 0
   hit: 0
   onHit: 0
   attacker: {fileID: 0}
-  ShowTrail: 0
-  HideTrail: 0
   KnockBack: 0
   WhoKnock: {fileID: 0}
+  fleeEvent: 0
+  fleeTime: 0
 --- !u!114 &11400004
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1625,30 +1611,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _characterState: 0
-  FastRotateSpeed: 10
-  walkSpeed: 6
-  HP: 70
-  MaxHP: 70
-  MP: 70
-  MaxMP: 70
-  Strength: 0
-  Dexterity: 0
-  Magic: 0
-  Defense: 0
-  Exp: 0
-  AttributePoint: 0
-  _Level: 1
-  _Damage: 0
-  XP: 90
-  SightRadius: 7
-  MotionRadius: 4.5
-  _Armor: 0
-  parent: {fileID: 0}
-  isBirth: 0
-  _ObjUnitData: {fileID: 0}
-  skills: []
-  ReachRange: 2
-  PatrolRange: 5
+  OwnerId: -1
 --- !u!114 &11400006
 MonoBehaviour:
   m_ObjectHideFlags: 1

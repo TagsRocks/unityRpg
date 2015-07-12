@@ -33,6 +33,7 @@ namespace ServerPacketHandler
                 playerData.AddExp(System.Convert.ToInt32(cmds[1]));
             }else if(cmds[0] == "pass_lev"){
                 playerData.PassLev(System.Convert.ToInt32(cmds[1]));
+            }else if(cmds[0] == "kill_all"){
             }
             /*
             if (inpb.Content == "getAllWeapon")

@@ -1,17 +1,42 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 namespace ChuMeng
 {
 	public class HumanIdle : IdleState
 	{
+        bool first= true;
 		public override void EnterState ()
 		{
 			Log.AI ("Enter Idle State");
 			base.EnterState ();
 			SetAttrState (CharacterState.Idle);
 			aiCharacter.SetIdle ();
+            if(first){
+                first = false;
+                GetAttr().StartCoroutine(CheckFall());
+            }
 		}
+
+        IEnumerator CheckFall(){
+            Vector3 originPos = GetAttr().OriginPos;
+            List<Vector3> samplePos = new List<Vector3>(){originPos};
+            while(true){
+                var lastOne = samplePos[0];
+                Log.Sys("lastPos nowPos "+lastOne+" now "+GetAttr().transform.position);
+                if(GetAttr().transform.position.y < (lastOne.y-2)){
+                    GetAttr().transform.position = lastOne;    
+                }else {
+                    var pos = GetAttr().transform.position;
+                    samplePos.Add(pos);
+                    if(samplePos.Count > 4){
+                        samplePos.RemoveAt(0);
+                    }
+                }
+                yield return new WaitForSeconds(1);
+            }
+        }
 
 
 

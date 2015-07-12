@@ -38,6 +38,9 @@ namespace ChuMeng
         public CharacterState _characterState = CharacterState.Idle;
         public int OwnerId = -1;
 
+        public Vector3 OriginPos{
+            get;private set;
+        }
         public void SetOwnerId(int ownerId)
         {
             OwnerId = ownerId;
@@ -402,6 +405,12 @@ namespace ChuMeng
         void Start()
         {
             charInfo = GetComponent<CharacterInfo>();
+            OriginPos = transform.position;
+            StartCoroutine(AdjustOri());
+        }
+        IEnumerator AdjustOri(){
+            yield return new WaitForSeconds(0.5f);
+            OriginPos = transform.position;
         }
         
         // Update is called once per frame
@@ -512,6 +521,7 @@ namespace ChuMeng
         }
 
         //calculate Hurt event in stunned
+
         public bool CheckDead()
         {
             return (HP <= 0);

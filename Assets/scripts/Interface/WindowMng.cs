@@ -239,11 +239,12 @@ namespace ChuMeng
             BackgroundSound.Instance.PlayEffect("sheet_close");
         }
 
-        public void ShowNotifyLog(string text, float time = 3)
+        public GameObject ShowNotifyLog(string text, float time = 3)
         {
             var g = PushTopNotify("UI/NotifyLog");
             g.GetComponent<NotifyUI>().SetText(text);
             g.GetComponent<NotifyUI>().SetDurationTime(time);
+            return g;
         }
 
         public void ShowDialog(BoolDelegate action)

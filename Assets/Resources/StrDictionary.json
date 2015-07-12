@@ -49,6 +49,12 @@
 	},
 	
 	{
+		"id" : 9,
+		"key" : "leftTime",
+		"value" : "剩余时间{TIME}s",
+	},
+	
+	{
 		"id": 999999,
 		"key" : "END",
 		"value" : "END"

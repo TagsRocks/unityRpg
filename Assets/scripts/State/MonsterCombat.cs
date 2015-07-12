@@ -44,9 +44,19 @@ namespace ChuMeng {
 
 		}
 
+        IEnumerator CheckFall(){
+            while(!quit){
+                var ori = GetAttr().OriginPos;
+                if(GetAttr().transform.position.y < (ori.y-3)){
+                    GetAttr().transform.position = GetAttr().OriginPos;    
+                }
+                yield return new WaitForSeconds(1);
+            }
+        }
 		public override IEnumerator RunLogic ()
 		{
 			var physic = GetAttr ().GetComponent<PhysicComponent> ();
+            GetAttr().StartCoroutine(CheckFall());
 
 			var targetPlayer = ObjectManager.objectManager.GetMyPlayer();
 			GetAttr().GetComponent<CommonAI>().SetTargetPlayer(targetPlayer);

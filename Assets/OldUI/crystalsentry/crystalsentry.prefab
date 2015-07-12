@@ -468,9 +468,10 @@ MonoBehaviour:
   IsSine: 0
   SineFreq: 1
   SineAffectorEnable: 0
-  SineMagnitude: 1
-  SineFreqTime: 1
-  SineFreqDist: 1
+  SineForce: {x: 0, y: 1, z: 0}
+  ModifyPos: 1
+  SineMaxFreq: 5
+  SineMinFreq: 1
   AirAffectorEnable: 0
   AirObject: {fileID: 400000}
   AirMagType: 0
@@ -889,9 +890,10 @@ MonoBehaviour:
   IsSine: 0
   SineFreq: 1
   SineAffectorEnable: 0
-  SineMagnitude: 1
-  SineFreqTime: 1
-  SineFreqDist: 1
+  SineForce: {x: 0, y: 1, z: 0}
+  ModifyPos: 1
+  SineMaxFreq: 5
+  SineMinFreq: 1
   AirAffectorEnable: 0
   AirObject: {fileID: 400002}
   AirMagType: 0
@@ -1304,9 +1306,10 @@ MonoBehaviour:
   IsSine: 0
   SineFreq: 1
   SineAffectorEnable: 0
-  SineMagnitude: 1
-  SineFreqTime: 1
-  SineFreqDist: 1
+  SineForce: {x: 0, y: 1, z: 0}
+  ModifyPos: 1
+  SineMaxFreq: 5
+  SineMinFreq: 1
   AirAffectorEnable: 0
   AirObject: {fileID: 400004}
   AirMagType: 0
@@ -1725,9 +1728,10 @@ MonoBehaviour:
   IsSine: 0
   SineFreq: 1
   SineAffectorEnable: 0
-  SineMagnitude: 1
-  SineFreqTime: 1
-  SineFreqDist: 1
+  SineForce: {x: 0, y: 1, z: 0}
+  ModifyPos: 1
+  SineMaxFreq: 5
+  SineMinFreq: 1
   AirAffectorEnable: 0
   AirObject: {fileID: 400006}
   AirMagType: 0

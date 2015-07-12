@@ -23,6 +23,10 @@ namespace ChuMeng
             source.Play();
         }
 
+        public void PlayEffectPos(string sound , Vector3 pos){
+            var clip = Resources.Load<AudioClip>("sound/" + sound);
+            AudioSource.PlayClipAtPoint(clip, pos);
+        }
         public void PlayEffect(string sound){
             var clip = Resources.Load<AudioClip>("sound/" + sound);
             source.PlayOneShot(clip);

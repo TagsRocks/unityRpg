@@ -100,9 +100,13 @@ namespace ChuMeng
 			aiCharacter.GetAttr ()._characterState = s;
 		}
 
+        NpcAttribute attr;
 		protected NpcAttribute GetAttr ()
 		{
-			return aiCharacter.GetAttr ();
+            if(attr == null){
+                attr = aiCharacter.GetAttr();
+            }
+			return attr;
 		}
 
 		protected MyAnimationEvent GetEvent ()
