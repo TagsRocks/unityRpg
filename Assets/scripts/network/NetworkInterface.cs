@@ -68,6 +68,7 @@ namespace KBEngine
 		{
 			return ((socket_ != null) && (socket_.Connected == true));
 		}
+
 		
 		public void bindMessage()
 		{
@@ -85,8 +86,11 @@ namespace KBEngine
 		
 		private static void connectCB(IAsyncResult asyncresult)
 		{
-			if(KBEngineApp.app.networkInterface().valid())
+			if(KBEngineApp.app.networkInterface().valid()) {
 				KBEngineApp.app.networkInterface().sock().EndConnect(asyncresult);
+            }else {
+                ChuMeng.MyEventSystem.myEventSystem.PushEvent(ChuMeng.MyEvent.EventType.ReConnect);
+            }
 			
 			TimeoutObject.Set();
 		}
@@ -110,6 +114,10 @@ __RETRY:
 				
 		        if (TimeoutObject.WaitOne(10000))
 		        {
+                    if(valid()) {
+                    }else {
+                        ChuMeng.MyEventSystem.myEventSystem.PushEvent(ChuMeng.MyEvent.EventType.ReConnect);
+                    }
 		        }
 		        else
 		        {
@@ -142,6 +150,11 @@ __RETRY:
         
         public void close()
         {
+            try{
+            socket_.Shutdown(SocketShutdown.Both);
+            }catch(Exception ex){
+                Debug.LogError("Close Client Socket Error "+ex);
+            }
             socket_.Close(0);
             socket_ = null;
         }
@@ -228,7 +241,7 @@ __RETRY:
 				throw new ArgumentException ("invalid socket!");
             }
 			
-            if (socket_.Poll(100000, SelectMode.SelectRead))
+            if (socket_.Poll(0, SelectMode.SelectRead))
             {
 	           if(socket_ == null || socket_.Connected == false) 
 				{
@@ -298,7 +311,7 @@ __RETRY:
 			}
 			else
 			{
-				System.Threading.Thread.Sleep(1);
+				System.Threading.Thread.Sleep(50);
 			}
 		}
 	}

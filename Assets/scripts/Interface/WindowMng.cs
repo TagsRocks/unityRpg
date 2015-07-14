@@ -133,8 +133,9 @@ namespace ChuMeng
                 }
             }
 
-            GameObject bag;
-            if (uiMap.TryGetValue(viewName, out bag))
+            GameObject bag = null;
+            uiMap.TryGetValue(viewName, out bag);
+            if (bag != null)
             {
                 bag.SetActive(true);
             } else

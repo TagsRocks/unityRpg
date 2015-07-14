@@ -313,12 +313,15 @@ namespace ChuMeng
 				saveData["characters"] = new JSONArray();
 				saveData["lastSelect"].AsInt = -1;
 			}
+            /*
 			if (MyEventSystem.myEventSystem == null) {
 				var evt = new GameObject();
 				evt.name = "EventSystem";
 				evt.AddComponent<MyEventSystem>();
 			}
-			MyEventSystem.myEventSystem.transform.parent = g.transform;
+            MyEventSystem.myEventSystem.transform.parent = g.transform;
+            */
+            MyEventSystem.myEventSystem.InitEventHandler();
 
 			if (MallController.mallController == null) {
 				var tempObj1 = new GameObject("MallController");

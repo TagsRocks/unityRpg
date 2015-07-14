@@ -40,6 +40,12 @@ namespace ChuMeng {
 			state = READ_STATE.READ_STATE_FLAG;
 		}
 		
+        public void Reset(){
+            Debug.LogError("Reset Server MsgReader");
+            expectSize = 1;
+            state = READ_STATE.READ_STATE_FLAG;
+        }
+
 		public void process(byte[] datas, MessageLength length) {
 			Debug.Log ("process receive Data " + length+" state "+state);
 			MessageLength totallen = 0;

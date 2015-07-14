@@ -271,6 +271,7 @@ __RESTART_REMOVE:
 		
 		public static void processInEvents()
 		{
+            return;
 			Monitor.Enter(events_in);
 
 			if(firedEvents_in.Count > 0)

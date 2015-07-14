@@ -132,6 +132,7 @@ namespace ChuMeng
             UpdateMainUI, //
 
             KillAllMonster,
+            ReConnect,
 		}
 
 
@@ -176,7 +177,7 @@ namespace ChuMeng
 		void PushEvent (MyEvent evt);
 	}
 
-	public class MyEventSystem : MonoBehaviour
+	public class MyEventSystem 
 	{
         static int LocalCoff = 100000;
 		public static List<EventHandler.IEventHandler> eventHandlers = new List<EventHandler.IEventHandler>() {
@@ -184,18 +185,25 @@ namespace ChuMeng
 			new  EventHandler.DeadExpHandler(),
 		};
 
-		public static MyEventSystem myEventSystem;
+		public static MyEventSystem myEventSystem = new MyEventSystem();
+        MyEventSystem(){
+            Log.AI ("Init all Event Handler");
+        }
+        public void InitEventHandler(){
+            foreach (EventHandler.IEventHandler handler in eventHandlers) {
+                handler.Init();
+                handler.RegEvent();
+            } 
 
+        }
+
+        /*
 		void Awake() {
 			myEventSystem = this;
 			DontDestroyOnLoad (gameObject);
-
 			Log.AI ("Init all Event Handler");
-			foreach (EventHandler.IEventHandler handler in eventHandlers) {
-				handler.Init();
-				handler.RegEvent();
-			}
 		}
+        */      
 
 
 		Dictionary<MyEvent.EventType, List<EventDel>> m_listeners = new Dictionary<MyEvent.EventType, List<EventDel>>();
