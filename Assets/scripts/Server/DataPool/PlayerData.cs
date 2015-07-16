@@ -19,8 +19,12 @@ namespace ChuMeng
 
         public static void AddLevel(int add)
         {
+            Log.Net("AddLevel "+add);
             var pinfo = ServerData.Instance.playerInfo;
             pinfo.Roles.Level += add;
+            AddSkillPoint(1);
+            SendNotify("升级技能点+1");
+
             var push = GCPushLevel.CreateBuilder();
             push.Level = pinfo.Roles.Level;
             ServerBundle.SendImmediatePush(push);
@@ -369,6 +373,7 @@ namespace ChuMeng
 
         public static void AddProp(KBEngine.Packet p)
         {
+            Log.Net("ServerAdddProp");
             var pinfo = ServerData.Instance.playerInfo;
             var inpb = p.protoBody as CGAddProp;
             if (inpb.Key == (int)CharAttribute.CharAttributeEnum.EXP)
@@ -382,8 +387,7 @@ namespace ChuMeng
                 pinfo.Exp += inpb.Value; 
             } else if (inpb.Key == (int)CharAttribute.CharAttributeEnum.LEVEL)
             {
-                pinfo.Roles.Level += inpb.Value;
-                AddSkillPoint(1);
+                AddLevel(inpb.Value);
             }
         }
 

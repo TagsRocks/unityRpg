@@ -26,7 +26,7 @@ namespace ChuMeng {
 			}
 
 			var label = NGUITools.AddChild (popUpPanel, hudText);
-			label.GetComponent<FollowTarget> ().target = target;
+			label.GetComponent<FollowTarget> ().target = target.gameObject;
 			//label.SetActive (true);
 
 			label.GetComponent<HUDText> ().Add (text, Color.white, 2f);
@@ -44,7 +44,7 @@ namespace ChuMeng {
 			}
 			
 			var label = NGUITools.AddChild (popUpPanel, hudText);
-			label.GetComponent<FollowTarget> ().target = target;
+			label.GetComponent<FollowTarget> ().target = target.gameObject;
 			//label.SetActive (true);
 			
 			label.GetComponent<HUDText> ().Add (text, new Color(0.8f, 0.1f, 0.1f), 0.1f);
@@ -62,7 +62,7 @@ namespace ChuMeng {
 			}
 			
 			var label = NGUITools.AddChild (popUpPanel, purpleText);
-			label.GetComponent<FollowTarget> ().target = target;
+			label.GetComponent<FollowTarget> ().target = target.gameObject;
 			//label.SetActive (true);
 			
 			label.GetComponent<HUDText> ().Add (text, new Color(223/255.0f, 31/255.0f, 246/255.0f), 0.1f);

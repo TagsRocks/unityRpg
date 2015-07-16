@@ -24,7 +24,8 @@ namespace ChuMeng
 
         public void Close()
         {
-            if(isClose) {
+            if (isClose)
+            {
                 return;
             }
             if (connect != null && connect.Connected && isConnected)
@@ -37,7 +38,10 @@ namespace ChuMeng
                     Debug.LogError("ShutDownSocket Error " + ex);
                 }
             }
-            connect.Close();
+            if (connect != null)
+            {
+                connect.Close();
+            }
             connect = null;
             isClose = true;
             Debug.LogError("CloseServer To Client Socket");
@@ -129,10 +133,18 @@ namespace ChuMeng
         int selectPlayerJob = 4;
         Socket socket;
         ChuMeng.ServerMsgReader msgReader = new ServerMsgReader();
+        System.Random random = new System.Random(1000);
+        public void CloseServerSocket(){
+            socket.Close();
+            if(currentCon != null) {
+                currentCon.Close();
+                currentCon = null;
+            }
+        }
 
         void InitListenSocket()
         {
-            Debug.LogWarning("InitListenSocket");
+            Debug.LogError("InitListenSocket "+random.Next());
             socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
             socket.SetSocketOption(System.Net.Sockets.SocketOptionLevel.Socket, SocketOptionName.ReuseAddress, true);
             IPEndPoint ip = new IPEndPoint(IPAddress.Parse("127.0.0.1"), 20000);
@@ -151,7 +163,8 @@ namespace ChuMeng
 
         public void SendPacket(IBuilderLite retpb, uint flowId, int errorCode)
         {
-            if(currentCon == null || currentCon.isClose){
+            if (currentCon == null || currentCon.isClose)
+            {
                 return;
             }
             var bytes = ServerBundle.sendImmediateError(retpb, flowId, errorCode);
@@ -164,7 +177,8 @@ namespace ChuMeng
 
         public void SendPacket(IBuilderLite retpb, uint flowId)
         {
-            if(currentCon == null || currentCon.isClose){
+            if (currentCon == null || currentCon.isClose)
+            {
                 return;
             }
             var bytes = ServerBundle.MakePacket(retpb, flowId);
@@ -442,7 +456,7 @@ namespace ChuMeng
             } else if (className == "CGAutoRegisterAccount")
             {
                 var au = GCAutoRegisterAccount.CreateBuilder();
-                au.Username = "liyong_" + UnityEngine.Random.Range(0, 1000);
+                au.Username = "liyong_" + random.Next();
                 retPb = au;
             } else if (className == "CGRegisterAccount")
             {
@@ -486,12 +500,13 @@ namespace ChuMeng
         }
 
         int maxId = 0;
+
         void SendThread(MyCon con)
         {
             int id = ++maxId;
             while (!con.isClose && !DemoServer.demoServer.stop)
             {
-                Debug.LogError("SendThread Start "+id);
+                Debug.LogError("SendThread Start " + id);
                 lock (con.msgBuffer)
                 {
                     while (!con.isClose && con.msgBuffer.Count > 0 && !DemoServer.demoServer.stop)
@@ -535,7 +550,7 @@ namespace ChuMeng
         public void run()
         {
             InitListenSocket();
-            Debug.Log("Start Demo Server");
+            Debug.LogError("Start Demo Server");
             byte[] buffer = new byte[1024];
             while (!DemoServer.demoServer.stop)
             {
@@ -547,36 +562,47 @@ namespace ChuMeng
                 {
                     try
                     {
-                        Debug.LogWarning("Server Start Accept");
+                        Debug.LogError("Server Start Accept "+random.Next());
                         connect = socket.Accept();
                         break;
                     } catch (Exception ex)
                     {
                         Debug.LogError("ServerSocket AcceptError " + ex);
-                        socket.Shutdown(SocketShutdown.Both);
-                        socket.Close();
-
-                        InitListenSocket();
+                        //socket.Shutdown(SocketShutdown.Both);
+                        try{
+                            socket.Close();
+                        }catch (Exception ex1){
+                            Debug.LogError("Server Socket Close Error "+ex1);
+                        }
+                        Thread.Sleep(1);
+                        if (!DemoServer.demoServer.stop)
+                        {
+                            InitListenSocket();
+                        }
+                        
                     }
 
                 }
-
+               
                 var con = new MyCon(connect);
-                if (currentCon != null)
+                if (!DemoServer.demoServer.stop)
                 {
-                    lock (currentCon.msgBuffer)
+                    if (currentCon != null)
                     {
-                        currentCon.msgBuffer.Clear();
+                        lock (currentCon.msgBuffer)
+                        {
+                            currentCon.msgBuffer.Clear();
+                        }
                     }
+
+                    currentCon = con;
+                    var sendThread = new Thread(new ThreadStart(delegate()
+                    {
+                        SendThread(con);
+                    }));
+
+                    sendThread.Start();
                 }
-
-                currentCon = con;
-                var sendThread = new Thread(new ThreadStart(delegate()
-                {
-                    SendThread(con);
-                }));
-
-                sendThread.Start();
 
                 while (!con.isClose && !DemoServer.demoServer.stop)
                 {
@@ -615,9 +641,9 @@ namespace ChuMeng
             }
 
             Debug.LogError("DemoServer Stop");
+            socket.Close();
         }
     }
-
     public class DemoServer
     {
         public static DemoServer demoServer;

@@ -28,11 +28,15 @@ namespace ChuMeng {
 		//向当前所面朝方向进行攻击
 		public override IEnumerator RunLogic ()
 		{
-			PlayAni (activeSkill.skillData.AnimationName, 1f, WrapMode.Once);
 			Log.AI ("Check Animation "+GetAttr().animation.IsPlaying(activeSkill.skillData.AnimationName));
 			float passTime = 0;
+            var realAttackTime = GetAttr ().ObjUnitData.AttackAniSpeed;
 			var animation = GetAttr ().animation;
 			var attackAniName = activeSkill.skillData.AnimationName;
+            var rate = GetAttr().animation[attackAniName].length/realAttackTime;
+            Log.AI("AttackAniSpeed "+rate+" realAttackTime "+realAttackTime);
+            PlayAni (activeSkill.skillData.AnimationName, rate, WrapMode.Once);
+
 			while(!quit) {
 
 				if(CheckEvent()) {

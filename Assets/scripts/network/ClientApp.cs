@@ -81,6 +81,7 @@ public class ClientApp : UnityEngine.MonoBehaviour
                 var ret = KBEngine.KBEngineApp.app.login_loginapp();
                 if (!ret)
                 {
+                    ChuMeng.WindowMng.windowMng.ShowNotifyLog("网络连接失败");
                     Debug.LogError("FirstConnect Error");
                     //WaitTry
                     yield return new WaitForSeconds(1);
@@ -138,6 +139,14 @@ public class ClientApp : UnityEngine.MonoBehaviour
             nextSendTickCountOnSerialize = Environment.TickCount + updateIntervalOnSerialize;
         }
         //KBEngine.Event.processOutEvents ();
+    }
+    public bool IsPause = false;
+    void OnApplicationPause(bool pauseStatus) {
+        IsPause = pauseStatus;
+        if(pauseStatus){
+            //ChuMeng.DemoServer.demoServer.GetThread().CloseServerSocket();
+            ChuMeng.ServerData.Instance.SaveUserData();
+        }
     }
 
 }

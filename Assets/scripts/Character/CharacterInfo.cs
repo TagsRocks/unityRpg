@@ -38,15 +38,6 @@ namespace ChuMeng
 			CGGetCharacterInfo.Builder getChar = CGGetCharacterInfo.CreateBuilder ();
 			getChar.PlayerId = photonView.GetServerID();
 
-            /*
-			foreach (CharAttribute.CharAttributeEnum e in (CharAttribute.CharAttributeEnum[])System.Enum.GetValues(typeof(CharAttribute.CharAttributeEnum))) {
-				var key = (int)e;
-				//TODO: Hp mp load From LocalData
-				if(e != CharAttribute.CharAttributeEnum.LEVEL) {
-					getChar.AddParamKey (key);
-				}
-			}
-            */         
             getChar.AddParamKey((int)CharAttribute.CharAttributeEnum.LEVEL);
             getChar.AddParamKey((int)CharAttribute.CharAttributeEnum.EXP);
             getChar.AddParamKey((int)CharAttribute.CharAttributeEnum.GOLD_COIN);
@@ -80,18 +71,26 @@ namespace ChuMeng
 			Log.Net (m.ToString());
 
 			Log.Important ("PropertyValue is "+propertyValue);
+
+            attribute.ChangeLevel(GetProp(CharAttribute.CharAttributeEnum.LEVEL));
+
+            /*
 			//Hp MP Init From Config table
 			SetProp (CharAttribute.CharAttributeEnum.HP, attribute.ObjUnitData.HP);
 			SetProp (CharAttribute.CharAttributeEnum.HP_MAX, attribute.ObjUnitData.HP);
 			SetProp (CharAttribute.CharAttributeEnum.MP, attribute.ObjUnitData.MP);
 			SetProp (CharAttribute.CharAttributeEnum.MP_MAX, attribute.ObjUnitData.MP);
-			SetProp (CharAttribute.CharAttributeEnum.LEVEL, attribute.ObjUnitData.Level);
+			//SetProp (CharAttribute.CharAttributeEnum.LEVEL, attribute.ObjUnitData.Level);
             SetProp(CharAttribute.CharAttributeEnum.EXP_MAX, (int)attribute.ObjUnitData.MaxExp);
+            */
+
+            attribute.ChangeHP (0);
+            attribute.ChangeMP (0);
+            attribute.ChangeExp (0);
 
 
-			attribute.ChangeHP (0);
-			attribute.ChangeMP (0);
-			attribute.ChangeExp (0);
+
+            //attribute.ChangeLevel(GetProp(CharAttribute.CharAttributeEnum.LEVEL));
 			Log.Important ("Init HP "+attribute.HP);
 			Log.Important ("Init Property Over");
 			initYet = true;

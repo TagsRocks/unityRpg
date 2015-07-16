@@ -25,10 +25,13 @@ namespace ChuMeng
         }
         void UpdateFrame(){
             hpLabel.text = GameInterface_Backpack.GetHpNum().ToString(); 
-            level.text = "[ff9500]等级:"+GameInterface_Player.GetLevel()+"[-]";
+            var lev = GameInterface_Player.GetLevel();
+            Log.GUI("lev "+lev );
+            level.text = "[ff9500]等级:"+lev+"[-]";
         }
         protected override void OnEvent(MyEvent evt)
         {
+            Log.GUI("OnEvent "+evt.type);
             UpdateFrame();
         }
 

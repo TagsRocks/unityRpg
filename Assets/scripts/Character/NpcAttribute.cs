@@ -347,6 +347,10 @@ namespace ChuMeng
         {
             _ObjUnitData = Util.GetUnitData(_ObjUnitData.GetIsPlayer(), _ObjUnitData.ID, Level);
             charInfo.SetProp(CharAttribute.CharAttributeEnum.EXP_MAX, (int)_ObjUnitData.MaxExp);
+            charInfo.SetProp (CharAttribute.CharAttributeEnum.HP, _ObjUnitData.HP);
+            charInfo.SetProp (CharAttribute.CharAttributeEnum.HP_MAX, _ObjUnitData.HP);
+            charInfo.SetProp (CharAttribute.CharAttributeEnum.MP, _ObjUnitData.MP);
+            charInfo.SetProp (CharAttribute.CharAttributeEnum.MP_MAX, _ObjUnitData.MP);
         }
 
         CharacterInfo charInfo;
@@ -578,7 +582,6 @@ namespace ChuMeng
             Level = lev;
             if (GetLocalId() == ObjectManager.objectManager.GetMyLocalId())
             {
-                //MyEventSystem.myEventSystem.PushEvent(MyEvent.EventType.UpdateMainUI);
                 MyEventSystem.myEventSystem.PushEvent(MyEvent.EventType.UpdatePlayerData);
             }
         }
@@ -590,8 +593,7 @@ namespace ChuMeng
             Level += 1;
             Exp = 0;
 
-
-
+            Log.Net("AddLevelUp "+IsMe());
             if (IsMe())
             {
                 var setSync = CGSetProp.CreateBuilder();

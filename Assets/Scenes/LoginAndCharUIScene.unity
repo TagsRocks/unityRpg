@@ -303,6 +303,7 @@ GameObject:
   - 114: {fileID: 775957295}
   - 114: {fileID: 775957292}
   - 114: {fileID: 775957296}
+  - 114: {fileID: 775957297}
   m_Layer: 0
   m_Name: kbengine
   m_TagString: Untagged
@@ -342,6 +343,7 @@ MonoBehaviour:
   testPort: 20000
   debug: 1
   heartBeat: 8
+  IsPause: 0
 --- !u!4 &775957294
 Transform:
   m_ObjectHideFlags: 0
@@ -386,6 +388,22 @@ MonoBehaviour:
   lightCoff: 0
   testAmbient: {r: 0, g: 0, b: 0, a: 0}
   InitAmbient: 0
+--- !u!114 &775957297
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 775957291}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3845e45d7b2614c0b845bd378da9e92f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CloseNet: 0
+  TestServer: 0
+  Save: 0
+  file: server1.json
+  ReadFile: 0
 --- !u!1 &1161206340
 GameObject:
   m_ObjectHideFlags: 0

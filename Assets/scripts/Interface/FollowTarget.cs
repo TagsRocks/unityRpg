@@ -8,7 +8,7 @@ namespace ChuMeng
     /// </summary>
 	public class FollowTarget : MonoBehaviour
 	{
-		public Transform target;
+		public GameObject target;
 		Transform mTrans;
 		Camera gameCamera;
 		Camera uiCamera;
@@ -21,7 +21,7 @@ namespace ChuMeng
 		{
 			gameCamera = NGUITools.FindCameraForLayer (target.gameObject.layer);
 			uiCamera = NGUITools.FindCameraForLayer (gameObject.layer);
-			var pos = gameCamera.WorldToViewportPoint (target.position);
+			var pos = gameCamera.WorldToViewportPoint (target.transform.position);
 			transform.position = uiCamera.ViewportToWorldPoint (pos);
 
 			pos = mTrans.localPosition;
@@ -31,10 +31,10 @@ namespace ChuMeng
 			mTrans.localPosition = pos;
 		}
 		void Update() {
-            if(target.gameObject == null){
+            if(target == null){
                 return;
             }
-			var offsetPos = target.position + Vector3.up;
+			var offsetPos = target.transform.position + Vector3.up;
 			var pos = gameCamera.WorldToViewportPoint (offsetPos);
 			transform.position = uiCamera.ViewportToWorldPoint (pos);
 			pos = mTrans.localPosition;
