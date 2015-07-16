@@ -188,6 +188,9 @@ namespace ChuMeng
             {
                 uiRoot = GameObject.FindGameObjectWithTag("UIRoot");
             }
+            if(uiRoot == null) {
+                return null;
+            }
             GameObject bag;
             if (uiMap.TryGetValue(viewName, out bag))
             {
@@ -243,8 +246,10 @@ namespace ChuMeng
         public GameObject ShowNotifyLog(string text, float time = 3)
         {
             var g = PushTopNotify("UI/NotifyLog");
-            g.GetComponent<NotifyUI>().SetText(text);
-            g.GetComponent<NotifyUI>().SetDurationTime(time);
+            if(g != null) {
+                g.GetComponent<NotifyUI>().SetText(text);
+                g.GetComponent<NotifyUI>().SetDurationTime(time);
+            }
             return g;
         }
 

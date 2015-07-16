@@ -23,7 +23,7 @@ public class TestClientNet : MonoBehaviour {
         var data = f.bytes;
         try {
             var playerInfo = ChuMeng.PlayerInfo.CreateBuilder().MergeFrom(data);
-            Debug.Log(playerInfo);
+            Debug.Log(playerInfo.Build().ToString());
         }catch(System.Exception ex){
             Debug.LogError("PlayerInfo Load Error :"+ex);
         }

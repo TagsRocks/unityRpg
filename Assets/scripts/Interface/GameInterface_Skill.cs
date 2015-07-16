@@ -84,7 +84,7 @@ namespace ChuMeng
                 var cost = skillData.ManaCost;
                 if (cost > mana)
                 {
-                    WindowMng.windowMng.PushTopNotify("魔法不足");
+                    WindowMng.windowMng.ShowNotifyLog("魔法不足");
                     return;
                 }
                 var npc = ObjectManager.objectManager.GetMyAttr();

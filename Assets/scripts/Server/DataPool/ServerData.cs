@@ -72,6 +72,7 @@ namespace ChuMeng
         bool inSave = false;
         /// <summary>
         /// 保存玩家数据到磁盘上面
+        /// 新旧文件内容会重叠在一起导致错误，需要先删除旧文件
         /// </summary>
         public void SaveUserData(){
             WindowMng.windowMng.ShowNotifyLog("正在保存数据");
@@ -88,6 +89,12 @@ namespace ChuMeng
                 var exist = File.Exists (fpath);
                 FileStream fs = null;
                 if (exist) {
+                    string fpath2 = Path.Combine (Application.persistentDataPath, "server"+nextFile+".json");
+                    var nextExist = File.Exists(fpath2);
+                    if(nextExist){
+                        File.Delete(fpath2);
+                    }
+
                     fs = new FileStream (fpath, FileMode.Open);
 
                     byte[] buffer;
@@ -103,8 +110,7 @@ namespace ChuMeng
                         fs.Close ();
                     }
 
-                    string fpath2 = Path.Combine (Application.persistentDataPath, "server"+nextFile+".json");
-                    using (FileStream outfile = new FileStream(fpath2, FileMode.OpenOrCreate)) {
+                    using (FileStream outfile = new FileStream(fpath2, FileMode.Create)) {
                         outfile.Write(buffer, 0, buffer.Length); 
                     }
                 }
@@ -112,8 +118,13 @@ namespace ChuMeng
 
             Log.Sys("SaveUserData");
             string fpath3 = Path.Combine (Application.persistentDataPath, "server"+0+".json");
+            var exits3 = File.Exists(fpath3);
+            if(exits3) {
+                File.Delete(fpath3);
+            }
+
             var msg = playerInfo.Build();
-            using (FileStream outfile = new FileStream(fpath3, FileMode.OpenOrCreate)) {
+            using (FileStream outfile = new FileStream(fpath3, FileMode.Create)) {
 
                 msg.WriteTo(outfile);
             }
