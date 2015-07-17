@@ -29,6 +29,10 @@ public class TestClientNet : MonoBehaviour {
         }
 
     }
+    [ButtonCallFunc()]public bool Kill;
+    public void KillMethod(){
+        ChuMeng.BattleManager.battleManager.killAllMethod();
+    }
 	// Use this for initialization
 	void Start () {
 	

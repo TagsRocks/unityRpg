@@ -268,7 +268,9 @@ namespace ChuMeng
 
             if (totalSP > 0 && skillLevel < maxLev && playerLev >= needLev)
             {
-                pinfo.Skill.TotalPoint--;
+                //pinfo.Skill.TotalPoint--;
+                AddSkillPoint(-1);
+
                 bool find = false;
                 foreach (var sk in pinfo.Skill.SkillInfosList)
                 {
@@ -294,6 +296,8 @@ namespace ChuMeng
                 activeSkill.Level = skillLevel + 1;
                 ServerBundle.SendImmediatePush(activeSkill);
 
+
+
             } else if (totalSP <= 0)
             {
                 SendNotify("剩余技能点不足");
@@ -305,6 +309,7 @@ namespace ChuMeng
                 SendNotify("技能已经升到满级");
             }
             PushSkillShortcutsInfo();
+
         }
         static void PushSkillShortcutsInfo(){
             var au = GCPushShortcutsInfo.CreateBuilder();

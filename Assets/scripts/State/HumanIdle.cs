@@ -25,7 +25,7 @@ namespace ChuMeng
             while(true){
                 var lastOne = samplePos[0];
                 Log.Sys("lastPos nowPos "+lastOne+" now "+GetAttr().transform.position);
-                if(GetAttr().transform.position.y < (lastOne.y-2)){
+                if(GetAttr().transform.position.y < (lastOne.y-3)){
                     GetAttr().transform.position = lastOne;    
                 }else {
                     var pos = GetAttr().transform.position;

@@ -351,6 +351,7 @@ namespace ChuMeng
             charInfo.SetProp (CharAttribute.CharAttributeEnum.HP_MAX, _ObjUnitData.HP);
             charInfo.SetProp (CharAttribute.CharAttributeEnum.MP, _ObjUnitData.MP);
             charInfo.SetProp (CharAttribute.CharAttributeEnum.MP_MAX, _ObjUnitData.MP);
+            ChangeHP(0);
         }
 
         CharacterInfo charInfo;

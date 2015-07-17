@@ -62,11 +62,24 @@ namespace ChuMeng
                 BackgroundSound.Instance.PlayEffectPos("batmanidle"+rd1 ,GetAttr().transform.position);
             }
         }
+
+        IEnumerator CheckFarAway(){
+            var oriPos = GetAttr().OriginPos;
+            while(!quit){
+                var curPos = GetAttr().transform.position;
+                var dis = Pathfinding.AstarMath.SqrMagnitudeXZ(curPos, oriPos);
+                if(dis > 25) {
+                    GetAttr().transform.position = oriPos;
+                }
+                yield return new WaitForSeconds(1);
+            }
+        }
 		public override IEnumerator RunLogic ()
 		{
 			if (!birthYet) {
 				yield return GetAttr ().StartCoroutine (Birth ());
 			}
+            GetAttr().StartCoroutine(CheckFarAway());
             GetAttr().StartCoroutine(IdleSound());
 			yield return GetAttr().StartCoroutine(NewHeading());
 			

@@ -54,6 +54,7 @@ namespace ChuMeng
 				c.radius = 0.1f;
 				c.height = 0.5f;
 				Physics.IgnoreCollision(c, player.GetComponent<CharacterController>());
+                collider.isTrigger = true;
 				StartCoroutine (PickTreasure ());
 
 			}

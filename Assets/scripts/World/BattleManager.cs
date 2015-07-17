@@ -50,6 +50,14 @@ namespace ChuMeng
 
             }
         }
+        [ButtonCallFunc()]
+        public bool killAndMove;
+        public void killAndMoveMethod(){
+            killAllMethod();
+            if(exitZone != null) {
+                ObjectManager.objectManager.GetMyPlayer().transform.position = exitZone.GetComponent<ExitWall>().colliderObj.transform.position+new Vector3(0, 0.5f, 0);
+            }
+        }
 
         void Awake()
         {

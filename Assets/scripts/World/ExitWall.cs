@@ -12,7 +12,7 @@ namespace ChuMeng
     public class ExitWall : MonoBehaviour
     {
         Transform doorOpenBeam;
-        Transform colliderObj;
+        public Transform colliderObj;
         List<Transform> beams;
         // Use this for initialization
         void Start()
