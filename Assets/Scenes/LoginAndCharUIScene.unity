@@ -402,8 +402,9 @@ MonoBehaviour:
   CloseNet: 0
   TestServer: 0
   Save: 0
-  file: server1.json
+  file: server0_5.json
   ReadFile: 0
+  Kill: 0
 --- !u!1 &1161206340
 GameObject:
   m_ObjectHideFlags: 0

@@ -91,6 +91,15 @@ namespace ChuMeng {
 		}
 
 
+        /// <summary>
+        /// NotifyServer I has Pass This Level
+        /// </summary>
+        public void PassLevel(){
+            var levId = SelectLevelInfo.levelLocal.id;
+            Log.Net("PassLevel "+levId);
+            GameInterface_Chat.chatInterface.SendChatMsg("pass_lev "+(levId-100), 0);
+
+        }
 
 		//获得某个的章节的level信息
 		public List<LevelInfo> GetChapterLevel(int chapter) {
@@ -115,7 +124,7 @@ namespace ChuMeng {
 			} else {
 				allLevels = GetAllChapterLevelInfo(chapter);
 				foreach(LevelInfo l in allLevels) {
-					if(l.CopyId <= curLevel) {
+					if(l.CopyId < curLevel) {
 						var cin = CopyInfo.CreateBuilder();
 						cin.IsPass = true;
 						l.levelServer = cin.BuildPartial();
@@ -166,6 +175,7 @@ namespace ChuMeng {
 					lastId = c.Id;
 				}
 			}
+            Log.GUI("PassedLevel Max "+lastId);
 			lastId++;
 			var linfo = GetLevelInfo (lastId);
 			//All Level Open

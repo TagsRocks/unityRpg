@@ -715,7 +715,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 190850}
   m_LocalRotation: {x: 0, y: 8.94069672e-08, z: 0, w: 1}
-  m_LocalPosition: {x: -1.85039508, y: .393957138, z: -85.2511063}
+  m_LocalPosition: {x: -1.85038066, y: -.626042843, z: -4.79999971}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 490862}
@@ -739,7 +739,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 190856}
   m_LocalRotation: {x: 0, y: 8.94069672e-08, z: 0, w: 1}
-  m_LocalPosition: {x: 1.78407657, y: .463624477, z: -85.2511063}
+  m_LocalPosition: {x: 1.784091, y: -.556375504, z: -4.80000067}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 490864}
@@ -763,7 +763,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 190864}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: .350543022, z: -85.2511063}
+  m_LocalPosition: {x: 0, y: -.669456959, z: -4.80000019}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 490868}
@@ -866,7 +866,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 190874}
   m_LocalRotation: {x: 0, y: 8.94069672e-08, z: 0, w: 1}
-  m_LocalPosition: {x: -1.85039568, y: .393957138, z: -88.9000015}
+  m_LocalPosition: {x: -1.85039556, y: .393957138, z: -88.1999969}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 490884}
@@ -878,7 +878,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 190880}
   m_LocalRotation: {x: 0, y: 8.94069672e-08, z: 0, w: 1}
-  m_LocalPosition: {x: 1.78407598, y: .463624477, z: -88.9000015}
+  m_LocalPosition: {x: 1.78407609, y: .463624477, z: -88.1999969}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 490886}
@@ -902,7 +902,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 190888}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: .350543022, z: -88.9000015}
+  m_LocalPosition: {x: 0, y: .350543022, z: -88.1999969}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 490890}
@@ -1041,7 +1041,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 190902}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.6109271, y: .668211997, z: 55.4504547}
+  m_LocalPosition: {x: -.819999993, y: .670000017, z: 55.4500008}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 490926}
@@ -1125,7 +1125,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 190916}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 25.7000008, y: .699999988, z: 23.1000004}
+  m_LocalPosition: {x: 6.96999979, y: 1.51999998, z: 23.1000004}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 490926}
@@ -2299,7 +2299,7 @@ MonoBehaviour:
   CollisionSubEmitter: 
   DeathSubEmitter: 
   AvailableNodeCount: 10
-  LastClientPos: {x: 1.85037982, y: -.393957138, z: 85.2511063}
+  LastClientPos: {x: 1.85037982, y: .626042843, z: 4.80000019}
   MyCamera: {fileID: 0}
   Owner: {fileID: 11490852}
   mStopped: 0
@@ -2732,7 +2732,7 @@ MonoBehaviour:
   CollisionSubEmitter: 
   DeathSubEmitter: 
   AvailableNodeCount: 10
-  LastClientPos: {x: -1.78409183, y: -.463624477, z: 85.2511063}
+  LastClientPos: {x: -1.78409183, y: .556375504, z: 4.80000019}
   MyCamera: {fileID: 0}
   Owner: {fileID: 11490856}
   mStopped: 0
@@ -3165,7 +3165,7 @@ MonoBehaviour:
   CollisionSubEmitter: 
   DeathSubEmitter: 
   AvailableNodeCount: 10
-  LastClientPos: {x: 0, y: -.350543022, z: 85.2511063}
+  LastClientPos: {x: 0, y: .669456959, z: 4.80000019}
   MyCamera: {fileID: 0}
   Owner: {fileID: 11490860}
   mStopped: 0
@@ -4042,7 +4042,7 @@ MonoBehaviour:
   CollisionSubEmitter: 
   DeathSubEmitter: 
   AvailableNodeCount: 10
-  LastClientPos: {x: 1.85037982, y: -.393957138, z: 2.32717776}
+  LastClientPos: {x: 1.85037982, y: -.393957138, z: 88.1999969}
   MyCamera: {fileID: 0}
   Owner: {fileID: 11490870}
   mStopped: 0
@@ -4475,7 +4475,7 @@ MonoBehaviour:
   CollisionSubEmitter: 
   DeathSubEmitter: 
   AvailableNodeCount: 10
-  LastClientPos: {x: -1.78409183, y: -.463624477, z: 2.32717729}
+  LastClientPos: {x: -1.78409183, y: -.463624477, z: 88.1999969}
   MyCamera: {fileID: 0}
   Owner: {fileID: 11490874}
   mStopped: 0
@@ -4908,7 +4908,7 @@ MonoBehaviour:
   CollisionSubEmitter: 
   DeathSubEmitter: 
   AvailableNodeCount: 10
-  LastClientPos: {x: 0, y: -.350543022, z: 2.32717752}
+  LastClientPos: {x: 0, y: -.350543022, z: 88.1999969}
   MyCamera: {fileID: 0}
   Owner: {fileID: 11490878}
   mStopped: 0
@@ -4938,6 +4938,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 413e32afe718f4a86a6c893f52d914ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  colliderObj: {fileID: 0}
 --- !u!114 &11490882
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5225,7 +5226,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c4fae6f481a441cdb162962549e72c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  waveNum: 1
+  waveNum: 0
   Forever: 0
   Group: 0
   Resource: {fileID: 100106, guid: 5551c8507ad8cc64186c498658a7b53c, type: 2}

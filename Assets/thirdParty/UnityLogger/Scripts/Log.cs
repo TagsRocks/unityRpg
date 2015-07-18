@@ -1,3 +1,7 @@
+#if UNITY_EDITOR
+#define DEBUG
+#endif
+
 using UnityEngine;
 using System.Collections.Generic;
 using System;

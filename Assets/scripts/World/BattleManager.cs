@@ -250,12 +250,13 @@ namespace ChuMeng
         }
 
         /// <summary>
-        /// 
+        /// Open NextLevel 
         /// </summary>
         /// <returns>The finish.</returns>
         IEnumerator LevelFinish()
         {
             Log.Sys("LevelFinish ");
+            CopyController.copyController.PassLevel();
             float leftTime = 5f;
             var notify = WindowMng.windowMng.ShowNotifyLog("", 5.2f).GetComponent<NotifyUI>();
             if (notify != null)

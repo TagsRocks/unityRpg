@@ -485,6 +485,7 @@ namespace ChuMeng
             open.Level = openLev;
             ServerBundle.SendImmediatePush(open);
 
+            Debug.Log("PassLevelData "+pinfo.Build().ToString());
         }
 
         public static void LoadPackInfo(KBEngine.Packet packet)
