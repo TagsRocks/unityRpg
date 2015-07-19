@@ -24,6 +24,11 @@ namespace ChuMeng
         RoleUpgradeConfigData playerConfig = null;
         RoleJobDescriptionsData jobConfig = null;
 
+        public MonsterFightConfigData Config {
+            get {
+                return config;
+            }
+        }
         public int ID
         {
             get

@@ -72,10 +72,7 @@ namespace ChuMeng
 				moveSpeed = Mathf.Lerp (moveSpeed, targetSpeed, curSmooth);
 
 				var movement = moveDirection * moveSpeed;
-				//movement *= Time.deltaTime;
-				//controller.Move (movement);
 
-				//controller.SimpleMove(movement);
 				playerMove.GetComponent<PhysicComponent>().MoveSpeed(movement);
 				playerMove.transform.rotation = Quaternion.LookRotation (moveDirection);
 

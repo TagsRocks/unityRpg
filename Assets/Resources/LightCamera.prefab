@@ -72,7 +72,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4147e83d7810642ff8327e96c4af917c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CamPos: {x: 0, y: 0, z: -5}
+  CamPos: {x: 0, y: 0, z: 10}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

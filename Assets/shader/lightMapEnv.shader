@@ -63,23 +63,14 @@
 			}
 			
 			fixed4 frag(v2f i) : Color {
-				//
 	        	
 	        	fixed4 col =  tex2D(_MainTex, i.uv);
 	        	fixed4 retCol;
-	        	//retCol.rgb = col.rgb*((_AmbientCol).rgb+tex2D(_LightMap, (i.offPos.xz+float2(_CameraSize, _CameraSize))/(2*_CameraSize)).rgb*2 );
 				
 				fixed2 mapUV = (i.offPos.xz+float2(_CameraSize, _CameraSize))/(2*_CameraSize);
 				
-				//fixed2 mapUV2;
-				 
-				//mapUV2.x = mapUV.x/ (2*_CameraSizeX);
-				//mapUV2.y = mapUV.y/ (2*_CameraSizeZ);
-				
-				
 				retCol.rgb = col.rgb*(_AmbientCol.rgb+tex2D(_LightMap, mapUV).rgb * (1-tex2D(_LightMask, mapUV).a)*_LightCoff );
 				retCol.a = col.a;
-				//fixed4 col = tex2D(_MainTex, i.uv);
 				return retCol;
 			}	
 

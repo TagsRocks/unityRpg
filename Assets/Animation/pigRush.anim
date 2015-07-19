@@ -20,17 +20,17 @@ AnimationClip:
         value: {x: 0, y: 0, z: 0}
         inSlope: {x: 0, y: 0, z: 0}
         outSlope: {x: 0, y: 0, z: 0}
-        tangentMode: 1104674816
+        tangentMode: 837963792
       - time: .333333343
         value: {x: 0, y: 0, z: 0}
         inSlope: {x: 0, y: 0, z: 4.50000048}
         outSlope: {x: 0, y: 0, z: 4.50000048}
-        tangentMode: 1035542544
+        tangentMode: 0
       - time: 1
         value: {x: 0, y: 0, z: 6}
         inSlope: {x: 0, y: 0, z: 9.00000095}
         outSlope: {x: 0, y: 0, z: 9.00000095}
-        tangentMode: 7471174
+        tangentMode: 1095761920
       m_PreInfinity: 2
       m_PostInfinity: 2
     path: DamageShape

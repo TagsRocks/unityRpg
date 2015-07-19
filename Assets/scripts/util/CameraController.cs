@@ -15,6 +15,7 @@ namespace ChuMeng
 {
 	/// <summary>
 	/// 控制主镜头跟随玩家一起移动
+    /// 先初始化主镜头以及设置正确旋转方向，以方便用户操作方向的设置
 	/// </summary>
 	public class CameraController : KBEngine.MonoBehaviour
 	{
@@ -36,6 +37,8 @@ namespace ChuMeng
 		// Use this for initialization
 		public static CameraController cameraController;
 		void Awake() {
+            Util.InitGameObject(gameObject);
+            transform.localRotation = Quaternion.Euler(new Vector3(0, YRot, 0));
 			cameraController = this;
 			DontDestroyOnLoad (gameObject);
 			
@@ -88,15 +91,12 @@ namespace ChuMeng
 				scrollDegree += Input.GetAxis ("Mouse ScrollWheel") * ScrollCoff;
 
 				scrollDegree = Mathf.Max (0, Mathf.Min (45, scrollDegree));
-				Vector3 npos = new Vector3 (0, 0, 1);
+
+				Vector3 npos = new Vector3 (0, 0, -1);
 				npos = Quaternion.Euler (new Vector3 (scrollDegree, 0, 0)) * npos;
 				Vector3 newCameraPos = offsetZ * npos + (new Vector3 (0, offsetY, 0));
 
-				//Vector3 viewDir = (new Vector3 (0, -offsetY, 0))-npos;
-
-				//targetRotation = Quaternion.Euler (new Vector3(XRot, YRot, 0));
-				float xDir = 90 - (180 - (90 - scrollDegree)) / 2;
-				//var qua = Quaternion.LookRotation (viewDir);
+				float xDir = 90 - (180 - (90 + scrollDegree)) / 2;
 				targetRotation = Quaternion.Euler (new Vector3 (xDir, YRot, 0));
 
 

@@ -60,6 +60,10 @@ namespace ChuMeng
 						Log.Sys ("add particle to bone " + skillConfig.boneName);
 						//g.transform.parent = transform;
 						var par = Util.FindChildRecursive(stateMachine.attacker.transform, skillConfig.boneName);
+                        if(par == null) {
+                            par = stateMachine.attacker.transform;
+                        }
+
 						//g.transform.parent =  
 						g.transform.localPosition = skillConfig.Position+par.transform.position;
 						g.transform.localRotation = Quaternion.identity;

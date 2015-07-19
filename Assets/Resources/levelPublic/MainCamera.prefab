@@ -97,7 +97,7 @@ MonoBehaviour:
   playerVelocity: 10
   offsetY: 10
   XRot: 45
-  YRot: 170
+  YRot: 0
   RotSmooth: 5
   ScrollCoff: 4
 --- !u!114 &11400002
@@ -112,9 +112,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lightMap: {fileID: 8400000, guid: 5a3cade6b6da442f3aee87a019eb109f, type: 2}
-  ambient: {x: .800000012, y: .800000012, z: .800000012}
-  lightMask: {fileID: 0}
-  lightCoff: 0
+  ambient: {x: .600000024, y: .600000024, z: .600000024}
+  lightMask: {fileID: 2800000, guid: 0f68bc94fc73f4b2cae2633ae2c09dac, type: 3}
+  lightCoff: 4
   testAmbient: {r: 1, g: 1, b: 1, a: 0}
   InitAmbient: 0
 --- !u!124 &12400000

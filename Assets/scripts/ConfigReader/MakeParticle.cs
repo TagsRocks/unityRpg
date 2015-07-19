@@ -293,7 +293,7 @@ public class MakeParticle : MonoBehaviour
         var isLight = modData ["IS LIGHT"].AsBool;
         if (isLight)
         {
-            effectLayer.gameObject.layer = 11;
+            effectLayer.gameObject.layer = (int)GameLayer.Light;
 
         }
         if (modData ["ORIGIN"].Value == "Bottom Center")

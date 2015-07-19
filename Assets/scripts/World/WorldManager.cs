@@ -44,6 +44,7 @@ namespace ChuMeng
 		{
 			worldManager = this;
 			DontDestroyOnLoad (this.gameObject);
+            gameObject.AddComponent<ActiveNearCamera>();
 		}
 
 		// Use this for initialization
@@ -106,17 +107,6 @@ namespace ChuMeng
             Log.Sys("EnterNextScene is "+nextSceneId);
 
 			var sdata = CopyController.copyController.GetLevelInfo (nextSceneId);
-
-            /*
-			if (sdata.isCity) {
-				sceneType = SceneType.City;
-			} else {
-				sceneType = SceneType.Single;
-			}
-            */
-
-			//sceneType = SceneType.Single;
-
 			//删除旧的场景中的玩家数据
 			if (activeScene != null) {
 				activeScene.LeaveScene();
@@ -270,11 +260,19 @@ namespace ChuMeng
             //关闭选择人物 界面等
 		}
 		public void WorldChangeScene(int sceneId, bool isRelive) {
+            LevelConfigData.Init();
+            var hasData = LevelConfigData.LevelLayout.ContainsKey(sceneId);
+            if(!hasData){
+                WindowMng.windowMng.ShowNotifyLog("关卡尚未开放");
+                return;
+            }
+
 			StartCoroutine (ChangeScene(sceneId, isRelive));
 		}
 
 		//游戏过程中切换场景 向服务器请求场景切换
 		public IEnumerator ChangeScene(int sceneId, bool isRelive) {
+
             Log.Sys("ChangeEnterNextScene "+sceneId);
 			nextSceneId = sceneId;
             var sdata = CopyController.copyController.GetLevelInfo (nextSceneId);
@@ -288,6 +286,7 @@ namespace ChuMeng
 			MyEventSystem.myEventSystem.PushEvent (MyEvent.EventType.ChangeScene);
 
 			Log.Net ("EnterScene Process");
+
 			CGEnterScene.Builder es = CGEnterScene.CreateBuilder ();
 			es.Id = sceneId;
 			var packet = new KBEngine.PacketHolder ();

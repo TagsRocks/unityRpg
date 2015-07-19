@@ -11,6 +11,7 @@ namespace ChuMeng
         public int y;
         public bool useOtherZone = false;
         public int zoneId;
+        public bool flip = false;
     
         public LevelConfig(string r, int x1, int y1)
         {
@@ -48,6 +49,12 @@ namespace ChuMeng
                     "PB",
                     "LM",
                     "W",
+                    "E",
+                    "KG",
+                    "SW",
+                    "SE",
+
+
             };
                 var rooms = Resources.Load<GameObject>("RoomList");
                 foreach (var r in rooms.GetComponent<RoomList>().roomPieces)
@@ -190,6 +197,7 @@ namespace ChuMeng
             foreach (var p in  rd.Prefabs)
             {
                 var r = GameObject.Instantiate(p.prefab) as GameObject;
+                r.isStatic = true;
                 r.transform.parent = rootOfLight.transform;
                 r.transform.localPosition = p.pos;
                 r.transform.localRotation = p.rot;
@@ -213,7 +221,7 @@ namespace ChuMeng
             var rootOfLight = new GameObject("Props");
             rootOfLight.transform.parent = root.transform;
             Util.InitGameObject(rootOfLight);
-            
+             
             //Batch Rooom
             int c = 0;
             foreach (var p in  rd.Prefabs)
@@ -223,6 +231,9 @@ namespace ChuMeng
                 r.transform.localPosition = p.pos;
                 r.transform.localRotation = p.rot;
                 r.transform.localScale = p.scale;
+
+                r.AddComponent<CheckNearMainCamera>();
+
                 c++;
                 if (slowly && c > batchNum)
                 {
@@ -267,7 +278,11 @@ namespace ChuMeng
 
             var first = configLists [currentRoomIndex];
             var firstOffset = new Vector3(first.x * 96, 9, first.y * 96 + 48);
+            Log.Sys("FirstRoom "+first.room);
             root.transform.localPosition = firstOffset;
+            if(first.flip) {
+                root.transform.localScale = new Vector3(-1, 1, 1);
+            }
             
             var piece = namePieces [first.room];
             var roomConfig = Resources.Load<GameObject>("room/" + piece);
@@ -358,18 +373,6 @@ namespace ChuMeng
         void Awake()
         {
             Instance = this;
-            /*
-            configLists = new List<LevelConfig>(){
-            new LevelConfig("ENTRANCE_S", -1, 3),
-            new LevelConfig("NS", -1, 2),
-                new LevelConfig("NS", -1, 1){useOtherZone=true, zoneId=1},
-            new LevelConfig("NE", -1, 0),
-            new LevelConfig("EW", 0, 0),
-            new LevelConfig("NW", 1, 0),
-                new LevelConfig("NS", 1, 1){useOtherZone=true, zoneId=1},
-            new LevelConfig("EXIT_S", 1, 2),
-        };
-            */
             var sceneId = WorldManager.worldManager.GetActive().def.id;
             Log.Sys("Inital SceneId Layout " + sceneId);
             LevelConfigData.Init();

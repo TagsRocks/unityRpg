@@ -569,6 +569,9 @@ public class MakeSceneEditor : Editor
             var roomList = Resources.Load<GameObject>("RoomList");
             var rl = roomList.GetComponent<RoomList>();
             rl.AddRoom(res);
+            EditorUtility.SetDirty(rl);
+            AssetDatabase.Refresh();
+
 
 
 

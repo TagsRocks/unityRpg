@@ -610,6 +610,12 @@ namespace ChuMeng
 		public void CreateMonster (UnitData unitData, SpawnTrigger spawn)
 		{
 			if (WorldManager.worldManager.station == WorldManager.WorldStation.Enter) {
+                Log.Sys("UnityDataIs "+unitData.ID);
+                if(unitData.Config == null) {
+                    Debug.LogError("NotFoundMonster "+unitData.ID);
+                    return;
+                }
+
 				Log.Sys ("Create Monster Unit " + unitData.name);
 				var Resource = Resources.Load<GameObject> (unitData.ModelName);
 				//本地怪兽不需要Player信息

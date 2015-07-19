@@ -3,6 +3,9 @@ using System.Collections;
 
 namespace ChuMeng
 {
+    /// <summary>
+    ///键盘输入监听器 
+    /// </summary>
 	public class CursorManager : MonoBehaviour
 	{
 		static CursorManager _cursor;

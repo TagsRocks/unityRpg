@@ -9,6 +9,9 @@ namespace ChuMeng
 		public Vector2 inputVector = Vector2.zero;
 	}
 
+    /// <summary>
+    ///接受键盘和屏幕虚拟摇杆移动输入 
+    /// </summary>
 	public class MoveController : KBEngine.MonoBehaviour
 	{
 		public VirtualController vcontroller = new VirtualController();
@@ -33,7 +36,11 @@ namespace ChuMeng
 			camForward.Normalize ();
 		}
 		
-
+        /// <summary>
+        /// 主镜头旋转了180角度
+        /// 输入的左右也要调整 
+        /// </summary>
+        /// <param name="evt">Evt.</param>
 		protected override void OnLocalEvent (MyEvent evt)
 		{
 			if (evt.type == MyEvent.EventType.MovePlayer) {

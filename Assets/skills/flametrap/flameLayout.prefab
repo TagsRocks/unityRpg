@@ -82,11 +82,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1ce79f3f4d6c4a3ead15b7d1f8a37e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shape: 1
+  shape: 2
   angle: 45
   enable: 1
-  radius: 2
+  radius: 4
   Once: 1
+  SyncWithPlayer: 0
+  NoHurt: 0
+  speed: 6
+  Distance: 6
+  delayTime: .400000006
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

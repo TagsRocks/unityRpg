@@ -504,9 +504,9 @@ namespace ChuMeng
         void SendThread(MyCon con)
         {
             int id = ++maxId;
+            Debug.LogError("SendThread Start " + id);
             while (!con.isClose && !DemoServer.demoServer.stop)
             {
-                Debug.LogError("SendThread Start " + id);
                 lock (con.msgBuffer)
                 {
                     while (!con.isClose && con.msgBuffer.Count > 0 && !DemoServer.demoServer.stop)
@@ -540,9 +540,10 @@ namespace ChuMeng
                         con.msgBuffer.RemoveAt(0);
                     }
                 }
-                Debug.LogError("Send Finish");
                 Thread.Sleep(100);
             }
+
+            Debug.LogError("Send Finish "+id);
         }
 
         MyCon currentCon = null;

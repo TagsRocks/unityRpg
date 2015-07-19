@@ -20,10 +20,12 @@ namespace ChuMeng
 	using pb = global::Google.ProtocolBuffers;
 	public enum GameLayer
 	{
-		PlayerCamera = 12,
-		UICamera = 5,
-		Npc = 13,
-        Light = 11,
+        PlayerCamera = 12, //UI中显示3D对象
+        UICamera = 5, //2D UI层
+        Npc = 13, //所有玩家和怪物所在层
+        Light = 11, //场景灯光元素所在层
+        Light2  = 8, //不小心将粒子的光照设置到了这层
+        SceneProps = 14, //场景物件所在层
 	}
 
 	public class GameTag
