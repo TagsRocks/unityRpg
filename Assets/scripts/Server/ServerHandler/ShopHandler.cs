@@ -32,7 +32,7 @@ namespace ServerPacketHandler {
         public override void HandlePacket(KBEngine.Packet packet)
         {
             var inpb = packet.protoBody as ChuMeng.CGUseUserProps;
-            var ret = playerData.ReduceItem(inpb.UserPropsId);
+            var ret = playerData.ReduceItem(inpb.UserPropsId, 1);
             var pb = ChuMeng.GCUseUserProps.CreateBuilder();
             if(ret) {
                 ChuMeng.ServerBundle.SendImmediate(pb, packet.flowId);
@@ -45,12 +45,6 @@ namespace ServerPacketHandler {
         public override void HandlePacket(KBEngine.Packet packet)
         {
             var inpb = packet.protoBody as ChuMeng.CGPickItem;
-            /*
-            if(playerData.IsPackageFull(inpb.ItemId, 1)){
-                playerData.SendNotify("背包已满");
-                return;
-            }
-            */
             playerData.AddItemInPackage(inpb.ItemId, inpb.Num);
         }
     }

@@ -25,6 +25,7 @@ namespace ChuMeng
 {
     public class SpawnTrigger : MonoBehaviour
     {
+        public const int EliteRate = 10;
         public int waveNum;
         public bool Forever = false;
 
@@ -174,7 +175,7 @@ namespace ChuMeng
             {
                 var rd = UnityEngine.Random.Range(0, 100);
                 var unitData = Util.GetUnitData(false, MonsterID, 0);
-                if(rd < 5 || BattleManager.battleManager.allElite)
+                if(rd < EliteRate || BattleManager.battleManager.allElite)
                 {
                     var elites = unitData.EliteIds;
                     if(elites.Count > 0){

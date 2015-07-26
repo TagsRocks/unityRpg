@@ -19,6 +19,27 @@ namespace ChuMeng
 		private EquipConfigData equipConfig = null;
 		private PropsConfigData propsConfig = null;
 
+        public int GetRndAtk() {
+            if(string.IsNullOrEmpty(propsConfig.attack)) {
+                return 0;
+            }
+
+            var dic = SimpleJSON.JSON.Parse(propsConfig.attack).AsArray;
+            var s = dic[0].AsInt;
+            var e = dic[1].AsInt;
+            var ret = Random.Range(s, e+1);
+            return ret;
+        }
+        public int GetRndDef() {
+            if(string.IsNullOrEmpty(propsConfig.defense)) {
+                return 0;
+            }
+            var dic = SimpleJSON.JSON.Parse(propsConfig.defense).AsArray;
+            var s = dic[0].AsInt;
+            var e = dic[1].AsInt;
+            var ret = Random.Range(s, e+1);
+            return ret;
+        }
         public int GoldCost {
             get {
                 if(IsEquip()) {
@@ -32,6 +53,13 @@ namespace ChuMeng
 			Props = 0,
 			Equip = 1,
 		}
+        public GoodsType GetGoodsType() {
+            if(IsProps()) {
+                return GoodsType.Props;
+            }
+            return GoodsType.Equip;
+        }
+
 		//服务器上装备的位置
 		public enum EquipPosition
 		{
@@ -39,8 +67,8 @@ namespace ChuMeng
 			TROUSERS = 2,
 			SHOES = 3,
 			GLOVES = 4,
-			RING = 5,
-			NECK = 6,
+			//RING = 5,
+			//NECK = 6,
 			BODY = 7,
 			WEAPON = 8,
 		}
@@ -60,6 +88,7 @@ namespace ChuMeng
 		}
         public enum ItemID {
             GOLD = 4,
+            DRUG = 101,
         }
 
 		//装备对应的EquipData位置
@@ -165,11 +194,6 @@ namespace ChuMeng
 		}
 
 
-		public int RealDamage {
-			get {
-				return Damage;
-			}
-		}
 
 		public int RealArmor {
 			get {
@@ -222,13 +246,15 @@ namespace ChuMeng
 			}
 		}
 
-		//使用等级
+        //道具等级
 		public int Level {
 			get {
+                return propsConfig.level;
+                /*
 				if (propsConfig != null) {
-					return propsConfig.useLevel;
 				}
-				return equipConfig.useLevel;
+				return equipConfig.equipLevel;
+                */
 			}
 		}
 		/*
@@ -247,22 +273,6 @@ namespace ChuMeng
 			get {
 				return (Job)equipConfig.job;
 			}
-		}
-
-
-		public class InitItemDataRet
-		{
-			public int RealDamage;
-			public int RealArmor;
-		}
-
-		public InitItemDataRet InitItemData ()
-		{
-			var it = new InitItemDataRet ();
-			it.RealDamage = RealDamage;
-			it.RealArmor = RealArmor;
-
-			return it;
 		}
 
         /// <summary>

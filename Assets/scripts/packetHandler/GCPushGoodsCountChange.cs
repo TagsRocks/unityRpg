@@ -21,7 +21,7 @@ namespace PacketHandler
 				}
                 */            
 			}
-			ChuMeng.MyEventSystem.myEventSystem.PushEvent (ChuMeng.MyEvent.EventType.PackageItemChanged);
+			ChuMeng.MyEventSystem.myEventSystem.PushEvent (ChuMeng.MyEvent.EventType.UpdateItemCoffer);
 		}
 	}
 

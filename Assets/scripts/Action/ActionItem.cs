@@ -97,7 +97,6 @@ namespace ChuMeng
 			Equip,
 		}
 
-		public int ID;
 		ItemData _itemData = null;
 		public EquipExtraDefine extraInfo = new EquipExtraDefine ();
 

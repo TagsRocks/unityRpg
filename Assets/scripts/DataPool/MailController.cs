@@ -106,7 +106,7 @@ namespace ChuMeng
 			yield return StartCoroutine (KBEngine.Bundle.sendSimple(this, send, packet));
 
 			//扣除银币和 道具
-			BackPack.backpack.SendMail (silverCoin, itemIds);
+			//BackPack.backpack.SendMail (silverCoin, itemIds);
 		}
 
 

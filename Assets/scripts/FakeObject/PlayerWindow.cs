@@ -10,6 +10,12 @@ namespace ChuMeng
 			playerWindow = this;
 			DontDestroyOnLoad (gameObject);
 		}
+        void OnDisable() {
+            Log.Sys("WhoClosePlayerWindow");
+        }
+        void OnEnable() {
+            Log.Sys("WhoOpenPlayerWindow");
+        }
 		// Use this for initialization
 		void Start ()
 		{

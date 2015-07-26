@@ -12,7 +12,7 @@ namespace PacketHandler
 				ChuMeng.BackPack.backpack.SetItemInfo(data);
 
 				ChuMeng.MyEventSystem.myEventSystem.PushEvent (ChuMeng.MyEvent.EventType.UpdateItemCoffer);
-				ChuMeng.MyEventSystem.myEventSystem.PushEvent(ChuMeng.MyEvent.EventType.UpdateSuperTip);
+				//ChuMeng.MyEventSystem.myEventSystem.PushEvent(ChuMeng.MyEvent.EventType.UpdateSuperTip);
 			}
 		}
 	}

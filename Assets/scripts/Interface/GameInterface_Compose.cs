@@ -13,7 +13,7 @@ namespace ChuMeng {
 		//服务器通知背包物品消失，以及新的物品产生  GCPushGoodsCountChange 
 		//消耗金钱
 		public void ComposeItemBegin(EquipIntensifyConfigData curSel) {
-			BackPack.backpack.StartCoroutine(BackPack.backpack.ComposeItemCor (curSel.node));
+			//BackPack.backpack.StartCoroutine(BackPack.backpack.ComposeItemCor (curSel.node));
 		}
 
 		public List<EquipIntensifyConfigData> GetIntensify(int equipId) {

@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 namespace ChuMeng
 {
@@ -19,7 +20,7 @@ namespace ChuMeng
 
         public static void AddLevel(int add)
         {
-            Log.Net("AddLevel "+add);
+            Log.Net("AddLevel " + add);
             var pinfo = ServerData.Instance.playerInfo;
             pinfo.Roles.Level += add;
             AddSkillPoint(1);
@@ -49,7 +50,10 @@ namespace ChuMeng
             var itemData = Util.GetItemData(0, (int)ItemData.ItemID.GOLD);
             var has = ServerData.Instance.playerInfo.Gold;
             SetGold(has + num);
-            SendNotify(string.Format("{0}+{1}", itemData.ItemName, num));
+            if (num > 0)
+            {
+                SendNotify(string.Format("[ff9500]{0}+{1}[-]", itemData.ItemName, num));
+            }
         }
 
         public static void SetGold(int num)
@@ -103,6 +107,11 @@ namespace ChuMeng
         }
         //Notify
         //Props Stack
+        /// <summary>
+        /// 得到的道具装备都是白装，自己不断升级，类似怪物猎人 
+        /// </summary>
+        /// <param name="itemId">Item identifier.</param>
+        /// <param name="num">Number.</param>
         public static void AddItemInPackage(int itemId, int num)
         {
             var pinfo = ServerData.Instance.playerInfo;
@@ -137,7 +146,7 @@ namespace ChuMeng
 
                         ServerBundle.SendImmediatePush(push);
 
-                        SendNotify(string.Format("{0}+{1}", itemData.ItemName, num));
+                        SendNotify(string.Format("[ff0a0a]{0}+{1}[-]", itemData.ItemName, num));
                         return;
                     }
                 }
@@ -149,11 +158,12 @@ namespace ChuMeng
             foreach (var p in pinfo.PackInfoList)
             {
                 packList [p.PackEntry.Index] = p;
-                maxId = (long)Mathf.Max(p.PackEntry.Id+1, maxId);
+                maxId = (long)Mathf.Max(p.PackEntry.Id + 1, maxId);
             }
 
-            foreach(var p in pinfo.DressInfoList){
-                maxId = (long)Mathf.Max(p.PackEntry.Id+1, maxId);
+            foreach (var p in pinfo.DressInfoList)
+            {
+                maxId = (long)Mathf.Max(p.PackEntry.Id + 1, maxId);
             }
 
             if (maxId < 0)
@@ -185,7 +195,7 @@ namespace ChuMeng
                     push.PackInfoList.Add(msg);
                     ServerBundle.SendImmediatePush(push);
 
-                    SendNotify(string.Format("{0}+{1}", itemData.ItemName, num));
+                    SendNotify(string.Format("[ff0a0a]{0}+{1}[-]", itemData.ItemName, num));
                     return;
                 }
             }
@@ -197,7 +207,7 @@ namespace ChuMeng
 
         }
 
-        public static bool ReduceItem(long userPropsId)
+        public static bool ReduceItem(long userPropsId, int num)
         {
             var player = ChuMeng.ServerData.Instance.playerInfo;
             foreach (var pinfo in player.PackInfoList)
@@ -206,7 +216,7 @@ namespace ChuMeng
                 {
                     var np = ChuMeng.PackInfo.CreateBuilder(pinfo);
                     var pk = ChuMeng.PackEntry.CreateBuilder(np.PackEntry);
-                    pk.Count--;
+                    pk.Count -= num;
                     if (pk.Count < 0)
                     {
                         SendNotify("道具数量不足");
@@ -313,10 +323,13 @@ namespace ChuMeng
             PushSkillShortcutsInfo();
 
         }
-        static void PushSkillShortcutsInfo(){
+
+        static void PushSkillShortcutsInfo()
+        {
             var au = GCPushShortcutsInfo.CreateBuilder();
             var pinfo = ServerData.Instance.playerInfo;
-            if(pinfo.HasSkill){
+            if (pinfo.HasSkill)
+            {
                 int ind = 0;
                 foreach (var sk in pinfo.Skill.SkillInfosList)
                 {
@@ -329,7 +342,6 @@ namespace ChuMeng
             }
             ServerBundle.SendImmediatePush(au);
         }
-
 
         public static void GetShortCuts(KBEngine.Packet packet)
         {
@@ -385,12 +397,6 @@ namespace ChuMeng
             var inpb = p.protoBody as CGAddProp;
             if (inpb.Key == (int)CharAttribute.CharAttributeEnum.EXP)
             {
-                //if (!pinfo.HasExp)
-                /*
-                {
-                    pinfo.Exp = 0;
-                }
-                */
                 pinfo.Exp += inpb.Value; 
             } else if (inpb.Key == (int)CharAttribute.CharAttributeEnum.LEVEL)
             {
@@ -421,17 +427,22 @@ namespace ChuMeng
             var msg = role.Build();
             ServerData.Instance.playerInfo.Roles = msg;
 
-            var pkinfo = PackInfo.CreateBuilder();
-            var pkEntry = PackEntry.CreateBuilder();
-            pkEntry.Id = 1; 
-            pkEntry.BaseId = 97;
-            pkEntry.GoodsType = 1;
-            pkEntry.Level = 1;
-            pkinfo.PackEntry = pkEntry.Build();
-
-            var pinfo = ServerData.Instance.playerInfo;
-            pinfo.AddDressInfo(pkinfo);
-
+            var dress = new int[] {
+                97, 68, 69, 70, 71, 72,
+            };
+            int id = 1;
+            foreach (var d in dress)
+            {
+                var pkinfo = PackInfo.CreateBuilder();
+                var pkEntry = PackEntry.CreateBuilder();
+                pkEntry.Id = id++;
+                pkEntry.BaseId = d;
+                pkEntry.GoodsType = 1;
+                pkEntry.Level = 1;
+                pkinfo.PackEntry = pkEntry.Build();
+                var pinfo = ServerData.Instance.playerInfo;
+                pinfo.AddDressInfo(pkinfo);
+            }
             au.AddRolesInfos(msg);
 
 
@@ -488,19 +499,19 @@ namespace ChuMeng
             open.Level = openLev;
             ServerBundle.SendImmediatePush(open);
 
-            Debug.Log("PassLevelData "+pinfo.Build().ToString());
+            Debug.Log("PassLevelData " + pinfo.Build().ToString());
         }
 
         public static void LoadPackInfo(KBEngine.Packet packet)
         {
-            var inpb  = packet.protoBody as CGLoadPackInfo;
+            var inpb = packet.protoBody as CGLoadPackInfo;
             var au = GCLoadPackInfo.CreateBuilder();
             if (inpb.PackType == PackType.DEFAULT_PACK)
             {
                 au.PackType = PackType.DEFAULT_PACK;
                 var pkInfo = ServerData.Instance.playerInfo.PackInfoList;
                 au.AddRangePackInfo(pkInfo);
-            } else if(inpb.PackType == PackType.DRESSED_PACK)
+            } else if (inpb.PackType == PackType.DRESSED_PACK)
             {
                 au.PackType = PackType.DRESSED_PACK;
                 var pkInfo = ServerData.Instance.playerInfo.DressInfoList;
@@ -509,100 +520,164 @@ namespace ChuMeng
             ServerBundle.SendImmediate(au, packet.flowId);
         }
 
-        public static void GetKeyValue(KBEngine.Packet packet){
+        public static void GetKeyValue(KBEngine.Packet packet)
+        {
             var playerInfo = ServerData.Instance.playerInfo;
             var inpb = packet.protoBody as CGGetKeyValue;
             var key = inpb.Key;
             var get = GCGetKeyValue.CreateBuilder();
             bool find = false;
-            foreach(var kv1 in playerInfo.GameStateList){
-                if(kv1.Key == key) {
+            foreach (var kv1 in playerInfo.GameStateList)
+            {
+                if (kv1.Key == key)
+                {
                     get.Value = kv1.Value;
                     find = true;
                     break;
                 }
             }
-            if(!find){
+            if (!find)
+            {
                 get.Value = "";
             }
             ServerBundle.SendImmediate(get, packet.flowId);
         }
-        public static void SetKeyValue(KBEngine.Packet packet){
+
+        public static void SetKeyValue(KBEngine.Packet packet)
+        {
             var playerInfo = ServerData.Instance.playerInfo;
             var inpb = packet.protoBody as CGSetKeyValue;
             bool find = false;
-            foreach(var kv in playerInfo.GameStateList) {
-                if(kv.Key == inpb.Kv.Key) {
+            foreach (var kv in playerInfo.GameStateList)
+            {
+                if (kv.Key == inpb.Kv.Key)
+                {
                     kv.Value = inpb.Kv.Value;
                     find = true;
                     break;
                 }
             }
-            if(!find){
+            if (!find)
+            {
                 playerInfo.GameStateList.Add(inpb.Kv);
             }
         }
-        static bool CheckGold(int cost){
+
+        static bool CheckGold(int cost)
+        {
             return true;
         }
         /// <summary>
-        /// Gets the item in pack. 
+        /// 根据ID获得背包中的道具 
         /// </summary>
         /// <returns>The item in pack.</returns>
         /// <param name="id">Identifier.</param>
-        static PackInfo GetItemInPack(long id) {
+        static PackInfo GetItemInPack(long id)
+        {
             var playerInfo = ServerData.Instance.playerInfo;
-            foreach(var p in playerInfo.PackInfoList) {
-                if(p.PackEntry.Id == id) {
+            foreach (var p in playerInfo.PackInfoList)
+            {
+                if (p.PackEntry.Id == id)
+                {
                     return p;
                 }
             }
             return null;
         }
-        public static void LevelUpEquip(KBEngine.Packet packet) {
+
+        public static void LevelUpEquip(KBEngine.Packet packet)
+        {
             var playerInfo = ServerData.Instance.playerInfo;
             var inpb = packet.protoBody as CGLevelUpEquip;
             var eid = inpb.EquipId;
             var curLev = 0;
             PackInfo packInfo = null; 
-            foreach(var e in playerInfo.DressInfoList){
-                if(e.PackEntry.Id == eid){
+            foreach (var e in playerInfo.DressInfoList)
+            {
+                if (e.PackEntry.Id == eid)
+                {
                     packInfo = e;
                     break;
                 }
             }
-            if(packInfo != null) {
-                curLev = packInfo.PackEntry.Level+2;
+            if (packInfo != null)
+            {
+                curLev = packInfo.PackEntry.Level + 2;
                 var levCost = GMDataBaseSystem.SearchIdStatic<EquipLevelData>(GameData.EquipLevel, curLev);
-                if(levCost == null){
+                if (levCost == null)
+                {
                     SendNotify("装备已经升到顶级了");
                     return;
                 }
 
                 var myGold = playerInfo.Gold;
-                if(levCost.gold > myGold){
+                if (levCost.gold > myGold)
+                {
                     SendNotify("金币不足");
                     return;
                 }
-                playerInfo.Gold -= levCost.gold;
+                AddGold(-levCost.gold);
 
                 var extraAtt = 0;
                 var extraDef = 0;
-                foreach(var g in inpb.GemIdList){
+                foreach (var g in inpb.GemIdList)
+                {
                     var pinfo = GetItemInPack(g);
-                    extraAtt += pinfo.PackEntry.ExtraAttack;
-                    extraDef += pinfo.PackEntry.ExtraDefense;
-                    ReduceItem(g);
+                    var itemData = Util.GetItemData(0, pinfo.PackEntry.BaseId);
+                    extraAtt += itemData.GetRndAtk();
+                    extraDef += itemData.GetRndDef();
+                    ReduceItem(g, 1);
                 }
-                packInfo.PackEntry.Level++;
-                packInfo.PackEntry.ExtraAttack += extraAtt;
-                packInfo.PackEntry.ExtraDefense += extraDef;
-                SendNotify("装备升级成功");
+                var rate = Random.Range(0, 100);
+                if (rate < levCost.rate)
+                {
+                    packInfo.PackEntry.Level++;
+                    packInfo.PackEntry.ExtraAttack += extraAtt;
+                    packInfo.PackEntry.ExtraDefense += extraDef;
+                    SendNotify("装备升级成功");
 
-                var update = GCPushEquipDataUpdate.CreateBuilder();
-                update.PackInfo = packInfo;
-                ServerBundle.SendImmediatePush(update);
+                    var update = GCPushEquipDataUpdate.CreateBuilder();
+                    update.PackInfo = packInfo;
+                    ServerBundle.SendImmediatePush(update);
+                } else
+                {
+                    SendNotify("装备升级失败");
+                }
             }
+        }
+
+        public static void LevelUpGem(KBEngine.Packet packet)
+        {
+            var playerInfo = ServerData.Instance.playerInfo;
+            var inpb = packet.protoBody as CGLevelUpGem;
+            var gemId = inpb.GemIdList [0];
+            var gem = GetItemInPack(gemId);
+            var itemData = Util.GetItemData(0, gem.PackEntry.BaseId);
+
+            var targetGem = PlayerPackage.GetRndGem(itemData.Level + 1);
+            if (targetGem != null)
+            {
+                AddItemInPackage(targetGem.id, 1);
+                SendNotify("合成成功");
+            } else
+            {
+                SendNotify("合成失败");
+            }
+            foreach (var g in inpb.GemIdList)
+            {
+                ReduceItem(g, 1);
+            }
+        }
+
+        public static void SellUserProps(KBEngine.Packet packet)
+        {
+            var playerInfo = ServerData.Instance.playerInfo;
+            var inpb = packet.protoBody as CGSellUserProps;
+            var item = GetItemInPack(inpb.UserPropsId);
+            var num = item.PackEntry.Count;
+            var itemData = Util.GetItemData(inpb.GoodsType, item.PackEntry.BaseId);
+            ReduceItem(inpb.UserPropsId, num);
+            AddGold(itemData.GoldCost * num);
         }
     }   
 

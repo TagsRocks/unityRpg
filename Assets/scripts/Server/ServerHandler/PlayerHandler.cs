@@ -54,4 +54,15 @@ namespace ServerPacketHandler {
             playerData.LevelUpEquip(packet);
         }
     }
-}
+    public class CGLevelUpGem : IPacketHandler {
+        public override void HandlePacket(KBEngine.Packet packet){
+            playerData.LevelUpGem(packet);
+        }
+    }
+
+    public class CGSellUserProps : IPacketHandler {
+        public override void HandlePacket(KBEngine.Packet packet){
+            playerData.SellUserProps(packet);
+        }
+    }
+}   

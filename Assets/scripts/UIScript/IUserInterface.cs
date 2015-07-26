@@ -14,6 +14,12 @@ namespace ChuMeng
 	{
 		public static GameObject UIRoot = null;
 
+        void OnDisable() {
+            DropEvent();
+        }
+        void OnEnable() {
+            RegEvent();
+        }
 		public GameObject GetName(string name) {
 			var t = Util.FindChildRecursive (transform, name);
 			if(t == null) {
@@ -43,7 +49,7 @@ namespace ChuMeng
 		}
 
 		public void SetCallback(string name, UIEventListener.VoidDelegate callback) {
-			UIEventListener.Get (GetName (name)).onClick += callback;
+			UIEventListener.Get (GetName (name)).onClick = callback;
 		}
 
         public void SetCallback(string name, UIEventListener.EmptyDelegate callback) {

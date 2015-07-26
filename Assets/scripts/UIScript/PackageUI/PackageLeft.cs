@@ -15,8 +15,6 @@ namespace ChuMeng
             Cell = GetName("Cell");
 
             this.regEvt = new System.Collections.Generic.List<MyEvent.EventType>(){
-                MyEvent.EventType.OpenItemCoffer,
-                MyEvent.EventType.PackageItemChanged,
                 MyEvent.EventType.UpdateItemCoffer,
             };
             RegEvent();

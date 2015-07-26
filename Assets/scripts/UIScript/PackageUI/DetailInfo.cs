@@ -15,6 +15,14 @@ namespace ChuMeng
             SetCallback("LevelUp", OnLevelUp);
             SetCallback("Equip", OnEquip);
             SetCallback("Sell", OnSell);
+            //GetName("Sell").SetActive(false);
+            GetName("Equip").SetActive(false);
+
+            regEvt = new System.Collections.Generic.List<MyEvent.EventType>() {
+                MyEvent.EventType.UpdateItemCoffer,
+                MyEvent.EventType.UpdateDetailUI,
+            };
+            RegEvent();
         }
         void OnLevelUp() {
             if(equipData != null) {
@@ -25,16 +33,14 @@ namespace ChuMeng
                 var lv = WindowMng.windowMng.PushView("UI/LevelUpGem");
                 var gem = lv.GetComponent<LevelUpGem>();
                 gem.SetData(backpackData);
+                MyEventSystem.PushEventStatic(MyEvent.EventType.UpdateItemCoffer);
             }
         }
         void OnEquip(){
         }
-        void OnSell() {
-        }
-
-        // Use this for initialization
-        void Start()
+        protected override void OnEvent(MyEvent evt)
         {
+
             if(equipData != null) {
                 var label = GetLabel("Equip/Label");
                 label.text = "卸下";
@@ -48,12 +54,15 @@ namespace ChuMeng
                 if(equipData.itemData.RealArmor > 0) {
                     baseAttr += string.Format("[8900cf]防御力:{0}[-]\n", equipData.itemData.RealArmor);
                 }
-                string extarAttr = "";
+                //string extarAttr = "";
+                string extarAttr = string.Format("[fc0000]额外攻击:{0}[-]\n[fc0000]额外防御:{1}[-]\n", 
+                                                 equipData.entry.ExtraAttack,
+                                                 equipData.entry.ExtraDefense);
                 //[fc0000]额外攻击:1000[-]\n[fc0000]额外防御:100[-]\n
 
                 Name.text = string.Format( "[ff9500]{0}({1}级)[-]\n[0098fc]{2}金币[-]\n{3}{4}[fcfc00]{5}[-]",
                     equipData.itemData.ItemName, 
-                    1,
+                    equipData.entry.Level,
                     equipData.itemData.GoldCost,
                     baseAttr,
                     extarAttr,
@@ -88,8 +97,9 @@ namespace ChuMeng
                     if(equipData.itemData.RealArmor > 0) {
                         baseAttr += string.Format("[8900cf]防御力:{0}[-]\n", backpackData.itemData.RealArmor);
                     }
-                    string extarAttr = "";
-                    //[fc0000]额外攻击:1000[-]\n[fc0000]额外防御:100[-]\n
+                    string extarAttr = string.Format("[fc0000]额外攻击:{0}[-]\n[fc0000]额外防御:{1}[-]\n", 
+                                                     backpackData.entry.ExtraAttack,
+                                                     backpackData.entry.ExtraDefense);
                     
                     Name.text = string.Format( "[ff9500]{0}({1}级)[-]\n[0098fc]{2}金币[-]\n{3}{4}[fcfc00]{5}[-]",
                                              backpackData .itemData.ItemName, 
@@ -102,12 +112,11 @@ namespace ChuMeng
             }
 
         }
-    
-        // Update is called once per frame
-        void Update()
-        {
-    
+        void OnSell() {
+            PlayerPackage.SellItem(backpackData);
+            WindowMng.windowMng.PopView();
         }
+
     }
 
 }

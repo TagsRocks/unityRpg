@@ -26,12 +26,12 @@ namespace ChuMeng
             RegEvent ();
         }
         void OnEnter(GameObject g){
+            MyEventSystem.myEventSystem.PushEvent(MyEvent.EventType.MeshHide);
             GameInterface_Login.loginInterface.StartGame (selectRoleInfo);
-           
         }
         void ShowCreate(){
             Log.GUI ("Push View Create");
-            WindowMng.windowMng.ReplaceView ("UI/CharCreate", false);
+            WindowMng.windowMng.ReplaceView ("UI/CharCreate", false, false);
             MyEventSystem.myEventSystem.PushEvent(MyEvent.EventType.UpdateCharacterCreateUI);
         }
 
@@ -44,7 +44,7 @@ namespace ChuMeng
             UpdateFrame ();
         }
         void OnDestroy(){
-            MyEventSystem.myEventSystem.PushEvent(MyEvent.EventType.MeshHide);
+            //MyEventSystem.myEventSystem.PushEvent(MyEvent.EventType.MeshHide);
         }
         RolesInfo selectRoleInfo;
         void UpdateFrame() {

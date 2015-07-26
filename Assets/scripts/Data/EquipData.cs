@@ -19,7 +19,7 @@ namespace ChuMeng
 			}
 		}
 
-		PackEntry entry;
+		public PackEntry entry;
 		PackInfo info;
 		MallItem mallItem;
 		public ItemData.EquipPosition Slot{
@@ -46,11 +46,6 @@ namespace ChuMeng
 			itemData = Util.GetItemData (1, entry.BaseId);
 		}
 
-		//商城物品来初始化装备信息
-		public EquipData(MallItem mall) {
-			mallItem = mall;
-			itemData = Util.GetItemData (1, mall.data.ObjectId);
-		}
 		             
 	}
 

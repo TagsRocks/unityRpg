@@ -11,9 +11,20 @@ namespace ChuMeng
 
         List<GameObject> leftCells = new List<GameObject>();
 
+        UILabel goldNum;
         void Awake()
         {
             SetCallback("closeButton", Hide);
+            goldNum = GetLabel("GoldNum/Label");
+            regEvt = new List<MyEvent.EventType>() {
+                MyEvent.EventType.UpdateItemCoffer, //DrugNum
+            };
+            RegEvent();
+        }
+        protected override void OnEvent(MyEvent evt)
+        {
+            var me = ObjectManager.objectManager.GetMyData();
+            goldNum.text = "金币: "+me.GetProp(CharAttribute.CharAttributeEnum.GOLD_COIN);
         }
         // Use this for initialization
         void Start()

@@ -153,7 +153,7 @@ namespace ChuMeng
 			load.Count = count;
 			yield return StartCoroutine (KBEngine.Bundle.sendSimple(this, load, packet));
 
-			BackPack.backpack.ShopBuy (mallId, count);
+			//BackPack.backpack.ShopBuy (mallId, count);
 		}
 	
 

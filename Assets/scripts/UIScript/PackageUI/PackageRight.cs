@@ -4,6 +4,9 @@ using System.Collections.Generic;
 
 namespace ChuMeng
 {
+    /// <summary>
+    ///背包右侧UI 
+    /// </summary>
     public class PackageRight : IUserInterface
     {
         List<GameObject> Cells = new List<GameObject>();
@@ -14,8 +17,7 @@ namespace ChuMeng
             Cell = GetName("Cell");
 
             this.regEvt = new System.Collections.Generic.List<MyEvent.EventType>(){
-                MyEvent.EventType.OpenItemCoffer,
-                MyEvent.EventType.PackageItemChanged,
+                //MyEvent.EventType.OpenItemCoffer,
                 MyEvent.EventType.UpdateItemCoffer,
             };
             RegEvent();
@@ -28,7 +30,8 @@ namespace ChuMeng
             Cell.SetActive(false);
             for(int i = 0; i < BackPack.MaxBackPackNumber; i++) {
                 var item = PlayerPackage.playerPackage.EnumItem(PlayerPackage.PackagePageEnum.All, i);
-                if(item != null) {
+                if(item != null && item.packInfo != null && item.itemData != null) {
+                    Log.GUI("PackageRight is "+item.packInfo+" slot is "+item.InstanceID);
                     var c = GameObject.Instantiate(Cell) as GameObject;
                     c.transform.parent = Cell.transform.parent;
                     Util.InitGameObject(c);
@@ -46,17 +49,6 @@ namespace ChuMeng
         protected override void OnEvent(MyEvent evt)
         {
             UpdateFrame();
-        }
-        // Use this for initialization
-        void Start()
-        {
-    
-        }
-    
-        // Update is called once per frame
-        void Update()
-        {
-    
         }
     }
 

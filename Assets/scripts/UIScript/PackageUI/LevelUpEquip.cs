@@ -11,6 +11,7 @@ namespace ChuMeng
         public LevelUpEquipRight right;
 
         List<BackpackData> gems = new List<BackpackData>();
+
         void Awake()
         {
             SetCallback("closeButton", Hide);
@@ -18,13 +19,36 @@ namespace ChuMeng
             right.PutInGem = PutInGem ;
             left = GetName("Left").GetComponent<LevelUpEquipLeft>();
             left.parent = this;
-
+            regEvt = new List<MyEvent.EventType>(){
+                MyEvent.EventType.UpdateItemCoffer,
+            };
+            RegEvent();
         }
+
         public void SetEquip(EquipData ed) {
             equip = ed;
+            left.SetEquip(ed);
         }
+
+        protected override void OnEvent(MyEvent evt)
+        {
+            var allEquip = BackPack.backpack.GetEquipmentData();
+            foreach(var e in allEquip) {
+                if(e.id == equip.id) {
+                    SetEquip(e);
+                    break;
+                }
+            }
+            gems.Clear();
+            left.SetGems(gems);
+            right.SetGems(gems);
+
+        }
+
         void Start() {
             left.SetEquip(equip);
+            //left.SetGems(gems);
+            right.SetGems(gems);
         }
 
         public void PutInGem(BackpackData data)
@@ -36,6 +60,7 @@ namespace ChuMeng
                 left.SetGems(gems);
                 right.SetGems(gems);
             }
+
         }
         public void TakeOffGem(BackpackData data) 
         {

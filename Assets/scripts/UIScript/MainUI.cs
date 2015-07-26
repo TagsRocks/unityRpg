@@ -3,6 +3,9 @@ using System.Collections;
 
 namespace ChuMeng
 {
+    /// <summary>
+    ///主城中的UI 
+    /// </summary>
     public class MainUI : IUserInterface
     {
         UILabel hpLabel;
@@ -26,7 +29,7 @@ namespace ChuMeng
         }
         void OnPack(GameObject g){
             WindowMng.windowMng.PushView ("UI/Package", true);
-            MyEventSystem.myEventSystem.PushEvent (MyEvent.EventType.OpenItemCoffer);
+            MyEventSystem.myEventSystem.PushEvent (MyEvent.EventType.UpdateItemCoffer);
         }
         void UpdateFrame(){
             hpLabel.text = GameInterface_Backpack.GetHpNum().ToString(); 
@@ -57,7 +60,7 @@ namespace ChuMeng
 
         void OnStore(GameObject g){
             WindowMng.windowMng.PushView ("UI/StoreUI", true);
-            MyEventSystem.myEventSystem.PushEvent (MyEvent.EventType.PackageItemChanged);
+            MyEventSystem.myEventSystem.PushEvent (MyEvent.EventType.UpdateItemCoffer);
         }
 
     }

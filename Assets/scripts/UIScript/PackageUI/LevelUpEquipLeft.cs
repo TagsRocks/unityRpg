@@ -25,17 +25,20 @@ namespace ChuMeng
 
         UILabel Name;
 
+        UILabel Rate;
+        UITable Table;
         void Awake()
         {
             Grid = GetName("Grid").GetComponent<UIGrid>();
             Cell = GetName("Cell");
+            Rate = GetLabel("Rate");
+            Table = GetName("Table").GetComponent<UITable>();
 
             Name = GetLabel("Name");
-            SetCallback("closeButton", Hide);
+            //SetCallback("closeButton", Hide);
             SetCallback("LevelUp", OnLevelUp);
             regEvt = new System.Collections.Generic.List<MyEvent.EventType>() {
                 MyEvent.EventType.UpdateItemCoffer,
-                MyEvent.EventType.PackageItemChanged,
             };
             RegEvent();
         }
@@ -60,17 +63,33 @@ namespace ChuMeng
             {
                 baseAttr += string.Format("[8900cf]防御力:{0}[-]\n", equipData.itemData.RealArmor);
             }
-            string extarAttr = "";
-            //[fc0000]额外攻击:1000[-]\n[fc0000]额外防御:100[-]\n
+            string extarAttr = string.Format("[fc0000]额外攻击:{0}[-]\n[fc0000]额外防御:{1}[-]\n", 
+                                             equipData.entry.ExtraAttack,
+                                             equipData.entry.ExtraDefense);
 
             Name.text = string.Format("[ff9500]{0}({1}级)[-]\n[0098fc]{2}金币[-]\n{3}{4}[fcfc00]{5}[-]",
                     equipData.itemData.ItemName, 
-                    1,
+                    equipData.entry.Level+1,
                     equipData.itemData.GoldCost,
                     baseAttr,
                     extarAttr,
                     equipData.itemData.Description);
+            var levCost =  GMDataBaseSystem.SearchIdStatic<EquipLevelData>(GameData.EquipLevel, equipData.entry.Level+1);
+            if(levCost != null) {
+                Rate.text = string.Format("[ff9500]成功率:{0}%[-]\n[ff9500]金币:{1}[-]",
+                                levCost.rate,
+                                 levCost.gold
+                                          );
+            }
+
             InitList();
+            StartCoroutine(WaitReset());
+        }
+        IEnumerator WaitReset() {
+            yield return new WaitForSeconds(0.1f);
+            Table.repositionNow = true;
+            yield return new WaitForSeconds(0.2f);
+            Table.repositionNow = true;
         }
         void InitList(){
             foreach(var c in Cells){
@@ -87,7 +106,7 @@ namespace ChuMeng
                     Util.InitGameObject(c);
                     c.SetActive(true);
                     var pak = c.GetComponent<PackageItem>();
-                    pak.SetData(item);
+                    pak.SetData(item, 0, false);
                     pak.SetButtonCB(delegate(){
                         parent.TakeOffGem(temp);
                     });
@@ -100,17 +119,7 @@ namespace ChuMeng
             Grid.repositionNow = true;
         }
 
-        // Use this for initialization
-        void Start()
-        {
-    
-        }
-    
-        // Update is called once per frame
-        void Update()
-        {
-    
-        }
+       
     }
 
 }

@@ -75,8 +75,13 @@ namespace KBEngine
 		protected List<ChuMeng.MyEvent.EventType> regEvt = null;
 		protected List<ChuMeng.MyEvent.EventType> regLocalEvt = null;
 
-		protected void RegEvent ()
+        protected bool regYet = false;
+		public void RegEvent ()
 		{
+            if(regYet) {
+                return;
+            }
+            regYet = true;
 			if (regEvt != null) {
 				foreach (ChuMeng.MyEvent.EventType t in regEvt) {
 					ChuMeng.MyEventSystem.myEventSystem.RegisterEvent (t, OnEvent);
@@ -95,7 +100,11 @@ namespace KBEngine
 		
 		}
 
-		protected void DropEvent()  {
+		public void DropEvent()  {
+            if(!regYet) {
+                return;
+            }
+            regYet = false;
 			if (regEvt != null) {
 				foreach(ChuMeng.MyEvent.EventType t in regEvt) {
 					ChuMeng.MyEventSystem.myEventSystem.dropListener(t, OnEvent);

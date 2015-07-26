@@ -43,6 +43,8 @@ namespace ServerPacketHandler
                     playerData.PassLev(System.Convert.ToInt32(cmds [1]));
                 } else if (cmds [0] == "kill_all")
                 {
+                }else if(cmds[0] == "add_item") {
+                    playerData.AddItemInPackage(System.Convert.ToInt32(cmds[1]), System.Convert.ToInt32(cmds[2]));
                 }
             } catch (System.Exception e)
             {

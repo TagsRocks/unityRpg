@@ -27,6 +27,7 @@ namespace ChuMeng
             };
         }
         bool onNext = false;
+        public static bool Ignore = false;
         void OnNext(GameObject g){
             onNext = true;
             BackgroundSound.Instance.PlayEffect("sheet_opencenter");
@@ -39,10 +40,12 @@ namespace ChuMeng
         }
         IEnumerator ShowContent(){
             int curId = 0;
-            while(curId < text.Length){
-                yield return StartCoroutine(ShowText(curId));
-                yield return StartCoroutine(WaitForNext());
-                curId++;
+            if(!Ignore) {
+                while(curId < text.Length){
+                    yield return StartCoroutine(ShowText(curId));
+                    yield return StartCoroutine(WaitForNext());
+                    curId++;
+                }
             }
             EnterGame();
         }

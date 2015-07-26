@@ -21,8 +21,8 @@ namespace ChuMeng {
 
 		void Awake() {
 			regEvt = new System.Collections.Generic.List<MyEvent.EventType>(){
-				MyEvent.EventType.OpenItemCoffer,
 				MyEvent.EventType.RefreshEquip,
+                MyEvent.EventType.UpdateItemCoffer,
 
 			};
 			RegEvent ();
@@ -58,7 +58,7 @@ namespace ChuMeng {
 		protected override void OnEvent (MyEvent evt)
 		{
 			Log.Important ("Self Equip Receive Event "+evt.type);
-			if (evt.type == MyEvent.EventType.OpenItemCoffer) {
+			if (evt.type == MyEvent.EventType.UpdateItemCoffer) {
 				var evt2 = new MyEvent (MyEvent.EventType.MeshShown);
 				evt2.intArg = ObjectManager.objectManager.GetMyLocalId ();
 				MyEventSystem.myEventSystem.PushEvent (evt2);
@@ -92,7 +92,7 @@ namespace ChuMeng {
 
 			act = GameInterface.gameInterface.EnumAction (ItemData.EquipPosition.BODY);
 			SetActionItem ("BODY", act);
-
+            /*
 			act = GameInterface.gameInterface.EnumAction (ItemData.EquipPosition.NECK);
 			SetActionItem ("NECK", act);
 
@@ -101,6 +101,7 @@ namespace ChuMeng {
 
 			act = GameInterface.gameInterface.EnumAction (ItemData.EquipPosition.RING);
 			SetActionItem ("RING", act);
+            */
 
 			act = GameInterface.gameInterface.EnumAction (ItemData.EquipPosition.GLOVES);
 			SetActionItem ("GLOVES", act);

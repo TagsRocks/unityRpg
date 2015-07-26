@@ -18,27 +18,13 @@ namespace ChuMeng
 		public ItemData itemData;
 		public GameObject Particle;
 		public bool IsOnGround = false;
-		//ShadowComponent shadow;
 		GameObject player;
 		
-        //BackPack backpack;
-		//Gold Number
 		private int num;
 
 		void Awake ()
 		{
-			//player = GameObject.FindGameObjectWithTag ("Player");
             player = ObjectManager.objectManager.GetMyPlayer();
-			//shadow = GetComponent<ShadowComponent> ();
-			/*
-			if (GetComponent<ShadowComponent> ()) {
-				GetComponent<ShadowComponent> ().CreateShadowPlane ();
-			}
-			*/
-			//backpack = GameObject.Find ("backpackController");
-
-			//backpack = GameObject.FindObjectOfType<BackPack> ();
-
 		}
 		// Use this for initialization
 		void Start ()
@@ -60,30 +46,6 @@ namespace ChuMeng
 			}
 		}
 
-		/*
-		 * TODO:拾取任务物品
-		 */
-		void OnTriggerEnter(Collider col) {
-
-			/*
-			 * if (col.tag == "Player") {
-				if(ItemData != null && ItemData.UnitType == ItemData.UnitTypeEnum.QUESTITEM) {
-					GameObject.Destroy (gameObject);
-					if (backpack != null) {
-						if(ItemData.UnitType == ItemData.UnitTypeEnum.GOLD) {
-							backpack.PutGold(Value);
-						}else {
-							backpack.PutItemInBackpack(ItemData);
-						}
-						if(Particle != null) {
-							GameObject.Destroy(Particle);
-						}
-						IsOnGround = false;
-					}
-				}
-			}
-			*/
-		}
 
 		//TODO:拾取掉落物品
 		IEnumerator PickTreasure ()
@@ -169,9 +131,18 @@ namespace ChuMeng
 			com.Particle = par;
 			com.IsOnGround = true;
             com.num = num;
-            BackgroundSound.Instance.PlayEffect("dropgold");
+
+            if(itemData.IsGem()) {
+                com.StartCoroutine(WaitSound("dropgem"));
+            }else {
+                com.StartCoroutine(WaitSound("dropgold"));
+            }
 			return g;
 		}
+        static IEnumerator WaitSound(string s) {
+            yield return new WaitForSeconds(0.2f);
+            BackgroundSound.Instance.PlayEffect(s);
+        }
 	}
 
 }

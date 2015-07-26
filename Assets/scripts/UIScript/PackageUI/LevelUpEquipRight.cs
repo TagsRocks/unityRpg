@@ -22,7 +22,6 @@ namespace ChuMeng
             Cell = GetName("Cell");
             regEvt = new System.Collections.Generic.List<MyEvent.EventType>() {
                 MyEvent.EventType.UpdateItemCoffer,
-                MyEvent.EventType.PackageItemChanged,
             };
             RegEvent();
         }
@@ -35,16 +34,17 @@ namespace ChuMeng
             UpdateFrame();
         }
 
-        bool CheckContainGem(long id)
+        int CheckContainGem(long id)
         {
+            var c = 0;
             foreach (var g in gems)
             {
                 if (g.id == id)
                 {
-                    return true;
+                    c++;
                 }
             }
-            return false;
+            return c;
         }
 
         void UpdateFrame()
@@ -60,16 +60,16 @@ namespace ChuMeng
                 var temp = item;
                 if (item != null && item.itemData.IsGem())
                 {
-                    if (CheckContainGem(item.id))
-                    {
-                    } else
+                    var count = CheckContainGem(item.id);
+                    if(item.entry.Count > count)
                     {
                         var c = GameObject.Instantiate(Cell) as GameObject;
+                        c.name = ""+item.id;
                         c.transform.parent = Cell.transform.parent;
                         Util.InitGameObject(c);
                         c.SetActive(true);
                         var pak = c.GetComponent<PackageItem>();
-                        pak.SetData(item);
+                        pak.SetData(item, count);
                         pak.SetButtonCB(delegate()
                         {
                             PutInGem(temp);
@@ -78,6 +78,11 @@ namespace ChuMeng
                     }
                 }
             }
+            StartCoroutine(WaitReset());
+        }
+        IEnumerator WaitReset() {
+            yield return new WaitForSeconds(0.1f);
+            Grid.repositionNow = true;
         }
 
         protected override void OnEvent(MyEvent evt)

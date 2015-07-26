@@ -3,6 +3,9 @@ using System.Collections;
 
 namespace ChuMeng
 {
+    /// <summary>
+    ///主城购买药品商店UI 
+    /// </summary>
     public class StoreUI : IUserInterface
     {
         UILabel goldNum;
@@ -10,7 +13,6 @@ namespace ChuMeng
         {
             SetCallback("Buy", OnBuy);
             this.regEvt = new System.Collections.Generic.List<MyEvent.EventType>(){
-                MyEvent.EventType.PackageItemChanged, //GoldNum
                 MyEvent.EventType.UpdateItemCoffer, //DrugNum
             };
             RegEvent();

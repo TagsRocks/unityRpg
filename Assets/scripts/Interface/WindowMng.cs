@@ -101,12 +101,12 @@ namespace ChuMeng
         }
 
         //替换掉当前显示的UI类似于切换场景
-        public GameObject ReplaceView(string viewName, bool needAlpha = true)
+        public GameObject ReplaceView(string viewName, bool needAlpha = true, bool destroy = true)
         {
             Log.GUI("ReplaceView");
             while (stack.Count > 0)
             {
-                PopView();
+                PopView(destroy);
             }
 
             return PushView(viewName, needAlpha);
@@ -137,11 +137,13 @@ namespace ChuMeng
             uiMap.TryGetValue(viewName, out bag);
             if (bag != null)
             {
+                //bag.GetComponent<IUserInterface>().RegEvent();
                 bag.SetActive(true);
             } else
             {
                 bag = NGUITools.AddChild(uiRoot, Resources.Load<GameObject>(viewName));
                 uiMap [viewName] = bag;
+                bag.SetActive(true);
             }
             if (bag == null)
             {
@@ -214,14 +216,23 @@ namespace ChuMeng
             }
             
             Log.GUI("Push Notify UI " + bag.name);
+#if UNITY_EDITOR
             foreach (GameObject g in stack)
             {
-                Log.GUI("Stack UI is " + g.name);
+                if(g != null) {
+                    Log.GUI("Stack UI is " + g.name);
+                }
             }
+#endif
             return bag;
         }
 
-        public void PopView()
+        /// <summary>
+        /// 对于有大量内部状态的UI，下次打开重新构建初始化
+        // 简单UI可以复用 
+        /// </summary>
+        /// <param name="destroy">If set to <c>true</c> destroy.</param>
+        public void PopView(bool destroy =true)
         {
             Log.Important("UI Layer " + stack.Count + " alphaCount " + alphaStack.Count + " backactive " + back);
             var top = stack [stack.Count - 1];
@@ -232,7 +243,14 @@ namespace ChuMeng
             {   
                 GameObject.Destroy(alpha);
             }
-            top.SetActive(false);
+
+            if(destroy){
+                GameObject.Destroy(top);
+            }else {
+                top.SetActive(false);
+            }
+            //top.GetComponent<IUserInterface>().DropEvent();//Close Remove Event
+            //GameObject.Destroy(top);
 
             //除了主UI其它UI才有Back遮挡
             if (stack.Count == 1)

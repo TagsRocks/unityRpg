@@ -13,7 +13,7 @@ namespace ChuMeng
 		void Awake() {
 			regEvt = new System.Collections.Generic.List<MyEvent.EventType> (){
 				MyEvent.EventType.ShowSuperToolTip,
-				MyEvent.EventType.UpdateSuperTip,
+				//MyEvent.EventType.UpdateSuperTip,
 			};
 			RegEvent ();
 
@@ -43,7 +43,7 @@ namespace ChuMeng
 			if (evt.type == MyEvent.EventType.ShowSuperToolTip) {
 				//SuperToolTips.superToolTips.SendAskItemInfoMsg();
 				UpdateFrame();
-			} else if (evt.type == MyEvent.EventType.UpdateSuperTip) {
+			} else {//if (evt.type == MyEvent.EventType.UpdateSuperTip) {
 				UpdateFrame();
 			}
 		}

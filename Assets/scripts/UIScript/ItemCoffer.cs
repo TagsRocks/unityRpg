@@ -21,8 +21,7 @@ namespace ChuMeng
 		{
 			regEvt = new List<MyEvent.EventType> () 
 			{
-				MyEvent.EventType.OpenItemCoffer,
-				MyEvent.EventType.PackageItemChanged,
+				//MyEvent.EventType.OpenItemCoffer,
 				MyEvent.EventType.UpdateItemCoffer,
 				MyEvent.EventType.UnitMoney,
 			};

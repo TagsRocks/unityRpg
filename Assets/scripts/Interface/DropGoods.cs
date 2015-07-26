@@ -22,12 +22,6 @@ namespace ChuMeng
 
                     ItemDataRef.MakeDropItem(itemData, mon.transform.position + new Vector3(0, 0.4f, 0), num);
 
-                    //Drop Gold Or 
-                    /*
-                var g = GameObject.Instantiate(Resources.Load<GameObject>(itemData.DropMesh)) as GameObject;
-                var com = NGUITools.AddMissingComponent<ItemDataRef>(g);
-                */
-
                 }
             }else {
                 Log.Sys("NoDropTreasure ");

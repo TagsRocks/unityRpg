@@ -30,14 +30,15 @@ namespace ChuMeng
 
 			UnitDead,//角色死亡
 
-			OpenItemCoffer, //打开背包面板
-			PackageItemChanged, //背包物品变化
+			//OpenItemCoffer, //打开背包面板
+			//PackageItemChanged, //背包物品变化
 			//null arg
 			UpdateItemCoffer, //更新物品
+            UpdateDetailUI,
 
 
 			ShowSuperToolTip, //显示tips面板
-			UpdateSuperTip, //更新tip面板
+			//UpdateSuperTip, //更新tip面板
 
 			DebugMessage,
 

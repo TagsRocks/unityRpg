@@ -869,6 +869,11 @@ public partial class Util {
 		return retMsg;
 	}	
 
+	static IMessageLite GetCGLevelUpGem(ByteString buf) {
+		var retMsg = ChuMeng.CGLevelUpGem.ParseFrom(buf);
+		return retMsg;
+	}	
+
 	static IMessageLite GetCGMergeUserProps(ByteString buf) {
 		var retMsg = ChuMeng.CGMergeUserProps.ParseFrom(buf);
 		return retMsg;
@@ -2400,6 +2405,8 @@ public partial class Util {
 	{"CGTakeOffCloth", GetCGTakeOffCloth},
 
 	{"GCQueryUserEquipInfo", GetGCQueryUserEquipInfo},
+
+	{"CGLevelUpGem", GetCGLevelUpGem},
 
 	{"CGMergeUserProps", GetCGMergeUserProps},
 

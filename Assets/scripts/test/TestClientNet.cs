@@ -37,13 +37,9 @@ public class TestClientNet : MonoBehaviour {
     public void EliteMethod(){
         ChuMeng.BattleManager.battleManager.allElite = true;
     }
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+
+    [ButtonCallFunc()]public bool ignore;
+    public void ignoreMethod() {
+        ChuMeng.StoryDialog.Ignore = true;
+    }
 }

@@ -43,8 +43,8 @@ namespace ChuMeng
 		private float tapTimer;				// Double-tap's timer.
 		private bool enable;				// VJR external control.
 
-		public float JoyWidth = 200;
-		public float JoyHeight = 200;
+		public float JoyWidth = 350;
+		public float JoyHeight = 350;
 
 		//
 	

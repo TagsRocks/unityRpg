@@ -358,8 +358,8 @@ namespace ChuMeng
 
         void Awake()
         {
-            npcEquipment = GetComponent<NpcEquipment>();
         }
+
 
         public void SetObjUnitData(UnitData ud)
         {
@@ -392,7 +392,7 @@ namespace ChuMeng
             {
                 d += npcEquipment.GetDamage();
             }
-            Debug.Log("Damage is what  " + d);
+            Log.Sys("Damage is what  " + d+" g "+gameObject);
             return d;
         }
 
@@ -409,6 +409,7 @@ namespace ChuMeng
 
         void Start()
         {
+            npcEquipment = GetComponent<NpcEquipment>();
             charInfo = GetComponent<CharacterInfo>();
             OriginPos = transform.position;
             StartCoroutine(AdjustOri());

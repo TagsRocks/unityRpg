@@ -7,7 +7,7 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using SimpleJSON;
-
+using System;
 /*
  * 
 	背包物品结构：
@@ -18,6 +18,13 @@ namespace ChuMeng
 
 	public class BackpackData : ActionItem
 	{
+        Guid gid = Guid.NewGuid();
+        public Guid InstanceID {
+            get{
+                return gid;
+            }
+        }
+
 		public long cdTime = 0;
 		public long id {
 			get {

@@ -318,6 +318,7 @@
         "CGUnbindingGoods": 33, 
         "GCUnbindingGoods": 34, 
         "CGLevelUpEquip": 35, 
+        "CGLevelUpGem": 36, 
         "GCPushGoodsCountChange": 1000, 
         "GCPushPlayerDressedEquipChange": 1001, 
         "GCPushPlayerDressInfo": 1002, 

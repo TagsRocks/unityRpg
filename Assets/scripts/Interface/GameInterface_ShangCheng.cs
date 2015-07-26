@@ -20,12 +20,14 @@ namespace ChuMeng
 		//更新FakeObject CurrentPlayer的装备信息  参考npcEquipment 以及背包的实现 SelfEquip 
 		//以及ToolTip 上使用按钮 导致的UI状态显示变化  DoAction1
 		public void TryFashion(MallItem goods) {
+            /*
 			var evt = new MyEvent (MyEvent.EventType.TryEquip);
 			evt.localID = ObjectManager.objectManager.GetMyLocalId ();
 			evt.boolArg = true;
 			evt.equipData = new EquipData(goods);
 			Log.GUI ("TryFashion is "+evt.localID);
 			MyEventSystem.myEventSystem.PushEvent (evt);
+            */
 		}
 
 		//TODO: 重置界面和功能

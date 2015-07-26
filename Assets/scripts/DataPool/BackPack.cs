@@ -71,13 +71,18 @@ namespace ChuMeng
 		}
 
 
-		//服务器更新背包数据  Don't ClearBag
+
+    /// <summary>
+            ///服务器更新背包数据  Don't ClearBag 
+    /// </summary>
+    /// <param name="info">Info.</param>
 		public void SetItemInfo(GCPushPackInfo info) {
 			//整理背包首先清空
 			if (info.BackpackAdjust) {
 				UserBagClear ();
 			}
 
+            Log.Net("SetItemInfo "+info);
 			foreach (PackInfo pkinfo in info.PackInfoList) {
 				PutItemInBackpackIndex (pkinfo.PackEntry.Index, new BackpackData (pkinfo));
 			}
@@ -131,11 +136,6 @@ namespace ChuMeng
 				SlotData.Add(new BackpackData((PackInfo)null));
 			}
 			backpack = this;
-
-
-			//uIRoot = GameObject.Find ("UI Root");
-
-			//player = GameObject.FindGameObjectWithTag ("Player");
 		}
 
 		ItemData.EquipPosition FindEquipSlot (int backpackSlotId)
@@ -146,18 +146,9 @@ namespace ChuMeng
 
 
 		void UseEquipNetwork(GCUserDressEquip result) {
-			//旧背包和装备槽的数据
-			//var itemAtBag = SlotData [slotId];
-			//var itemAtUser = oldEquip;
-
 			if (oldEquip != null) {
 				PopEquipData(equipSlot);
 			}
-
-			//TODO:服务器告诉清理某个槽 再清理槽 不用现在清理
-			//ClearSlot (slotId);
-
-			//新背包和装备槽数据
 			var ed = new EquipData (result.DressEquip);
 			EquipmentData.Add (ed);
 
@@ -165,14 +156,11 @@ namespace ChuMeng
 				var newBagItem = new BackpackData (result.PackEquip);
 				PutItemInBackpackIndex(newBagItem);
 			}
-
-			var evt = new MyEvent (MyEvent.EventType.PackageItemChanged);
-			evt.intArg = slotId;
-			MyEventSystem.myEventSystem.PushEvent (evt);
+            MyEventSystem.PushEventStatic(MyEvent.EventType.UpdateItemCoffer);
 
 			//更新角色属性面板的装备信息
 			//以及角色本身的装备信息
-			evt = new MyEvent (MyEvent.EventType.CharEquipChanged);
+			var evt = new MyEvent (MyEvent.EventType.CharEquipChanged);
 			evt.localID = ObjectManager.objectManager.GetMyLocalId ();
 			evt.equipData = ed;
 			evt.boolArg = true;
@@ -314,9 +302,12 @@ namespace ChuMeng
 				Debug.LogError ("BackPack:; has object in index " + realIndex);
 				//return;
 			}
-
-			SlotData [realIndex] = bd;
-			Log.Sys ("BackPack:: PutItemInBackpackIndex "+realIndex+" " + SlotData [realIndex].itemData.ItemName);
+            if(bd.itemData.IsProps() && bd.num == 0){
+                SlotData[realIndex] = null;
+            }else {
+			    SlotData [realIndex] = bd;
+            }
+			//Log.Sys ("BackPack:: PutItemInBackpackIndex "+realIndex+" " + SlotData [realIndex].itemData.ItemName);
 		}
 
 		void BackpackStateUpdate ()
@@ -560,66 +551,32 @@ namespace ChuMeng
 			MyEventSystem.myEventSystem.PushEvent (MyEvent.EventType.UpdateItemCoffer);
 		}
 
-		/*
-		 * 完成任务 回收任务道具 Collect Quest Item 
-		 */
-		public void Collect (string itemName)
-		{
-			int sid = -1;
-			foreach (BackpackData b in SlotData) {
-				sid++;
-				if (b.itemData != null && b.itemData.ItemName == itemName) {
-					ClearSlot (sid);
-					break;
-				}
-			}
-		}
-
-
-		/*
-		 * 打开一个ItemTips面板，显示Item信息
-		 */ 
-		public void ShowItem (GCViewChatGoods chatGoods)
-		{
-
-		}
-
-		/*
-		 * 发送邮件扣除 银币和 物品
-		 */ 
-		public void SendMail (int silverCoin, List<int> itemIds)
-		{
-		}
-
-		/*
-		 * 获取所有邮件的奖励
-		 */ 
-		public void ReceiveAll(GCReceiveMailsAllReward rewards) {
-		}
-
-		//服务器推送背包状态变化信息
-		//客户端时刻和服务器的数据是同步的原则
-		public void ShopBuy(int mallId, int count) {
-			
-		}
-
-
-		//强化装备
-		public IEnumerator ComposeItemCor(int node) {
-			CGEquipIntensify.Builder ein = CGEquipIntensify.CreateBuilder ();
-			ein.Id = node;
-			var packet = new KBEngine.PacketHolder ();
-			yield return StartCoroutine (KBEngine.Bundle.sendSimple(this, ein, packet));
-			if (packet.packet.responseFlag == 0) {
-				MyEventSystem.myEventSystem.PushEvent(MyEvent.EventType.ComposeOver);
-			}
-		}
-
+        /// <summary>
+        ///更新金币数量 
+        /// </summary>
+        /// <param name="gc">Gc.</param>
         public void UpdateGoodsCount(GoodsCountChange gc){
             if(gc.BaseId == 4){
                 var me = ObjectManager.objectManager.GetMyData();
                 me.SetProp(CharAttribute.CharAttributeEnum.GOLD_COIN, gc.Num);
             }
+        }
+
+        /// <summary>
+        /// 装备宝石升级成功 
+        /// </summary>
+        /// <param name="update">Update.</param>
+        public void EquipDataUpdate(GCPushEquipDataUpdate update) {
+            int c = 0;
+            foreach(var b in EquipmentData ){
+                if(b.id == update.PackInfo.PackEntry.Id) {
+                    EquipmentData.RemoveAt(c);
+                    break;
+                }
+                c++;
+            }
+            EquipmentData.Add(new EquipData(update.PackInfo));
+            MyEventSystem.PushEventStatic(MyEvent.EventType.UpdateItemCoffer);
         }
 	}
 }
