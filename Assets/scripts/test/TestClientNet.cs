@@ -33,6 +33,10 @@ public class TestClientNet : MonoBehaviour {
     public void KillMethod(){
         ChuMeng.BattleManager.battleManager.killAllMethod();
     }
+    [ButtonCallFunc()]public bool Elite;
+    public void EliteMethod(){
+        ChuMeng.BattleManager.battleManager.allElite = true;
+    }
 	// Use this for initialization
 	void Start () {
 	

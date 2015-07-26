@@ -48,10 +48,6 @@ namespace ChuMeng
 			return actionItem.itemData.Level;
 		}
 
-		//装备绑定信息
-		public ItemData.BindInfo GetItemBindInfo() {
-			return actionItem.GetBindInfo();
-		}
 
 
 

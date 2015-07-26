@@ -172,7 +172,20 @@ namespace ChuMeng
             Log.Sys("GenerateMonsters " + GroupNum);
             for (int i = 0; i < GroupNum; i++)
             {
-                ObjectManager.objectManager.CreateMonster(Util.GetUnitData(false, MonsterID, 0), this);
+                var rd = UnityEngine.Random.Range(0, 100);
+                var unitData = Util.GetUnitData(false, MonsterID, 0);
+                if(rd < 5 || BattleManager.battleManager.allElite)
+                {
+                    var elites = unitData.EliteIds;
+                    if(elites.Count > 0){
+                        var rd2 = UnityEngine.Random.Range(0, elites.Count);
+                        var id2 = elites[rd2];
+                        unitData = Util.GetUnitData(false, id2, 0);
+                        Log.Sys("CreateEliteMonster "+id2);
+                    }
+                }
+
+                ObjectManager.objectManager.CreateMonster(unitData, this);
                 yield return new WaitForSeconds(1);
             }
             

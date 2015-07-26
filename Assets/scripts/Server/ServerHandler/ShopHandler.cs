@@ -32,7 +32,7 @@ namespace ServerPacketHandler {
         public override void HandlePacket(KBEngine.Packet packet)
         {
             var inpb = packet.protoBody as ChuMeng.CGUseUserProps;
-            var ret = playerData.ReduceItem((int)inpb.UserPropsId);
+            var ret = playerData.ReduceItem(inpb.UserPropsId);
             var pb = ChuMeng.GCUseUserProps.CreateBuilder();
             if(ret) {
                 ChuMeng.ServerBundle.SendImmediate(pb, packet.flowId);

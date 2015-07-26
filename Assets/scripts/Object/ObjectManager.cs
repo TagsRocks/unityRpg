@@ -622,7 +622,6 @@ namespace ChuMeng
 				GameObject g = Instantiate (Resource) as GameObject;
 				NpcAttribute npc = NGUITools.AddMissingComponent<NpcAttribute> (g);
 
-				//NGUITools.AddMissingComponent<NpcAI>(g);
 				var type = Type.GetType ("ChuMeng." + unitData.AITemplate);
 				var t = typeof(NGUITools);
 				var m = t.GetMethod ("AddMissingComponent");
@@ -636,8 +635,6 @@ namespace ChuMeng
 				g.tag = GameTag.Enemy;
 				g.layer = (int)GameLayer.Npc;
 
-				//var charInfo = g.GetComponent<CharacterInfo> ();
-				//var skillInfo = g.GetComponent<SkillInfoComponent> ();
 				var netView = g.GetComponent<KBEngine.KBNetworkView> ();
 				netView.SetID (new KBEngine.KBViewID (myPlayer.ID, myPlayer));
 				netView.IsPlayer = false;
@@ -652,6 +649,9 @@ namespace ChuMeng
 				float rg = UnityEngine.Random.Range (0, spawn.Radius);
 
 				npc.transform.position = spawn.transform.position + v * rg;
+                if(unitData.IsElite) {
+                    npc.transform.localScale = new Vector3(2, 2, 2);
+                }
 
 				BattleManager.battleManager.enemyList.Add (npc.gameObject);
 				npc.SetDeadDelegate = BattleManager.battleManager.EnemyDead;

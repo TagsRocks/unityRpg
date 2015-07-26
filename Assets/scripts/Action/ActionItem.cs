@@ -139,10 +139,6 @@ namespace ChuMeng
 			return itemData.ItemName;
 		}
 
-		public virtual ItemData.BindInfo GetBindInfo ()
-		{
-			return itemData.bindInfo;
-		}
 
 		public virtual void InitItemData ()
 		{

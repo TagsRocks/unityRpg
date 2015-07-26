@@ -68,8 +68,8 @@ MonoBehaviour:
     paddingTop: 2
     paddingBottom: 2
   - name: fuben
-    x: 124
-    y: 405
+    x: 181
+    y: 465
     width: 45
     height: 47
     borderLeft: 0
@@ -82,7 +82,7 @@ MonoBehaviour:
     paddingBottom: 8
   - name: LVbg
     x: 181
-    y: 476
+    y: 428
     width: 36
     height: 36
     borderLeft: 0
@@ -93,8 +93,21 @@ MonoBehaviour:
     paddingRight: 0
     paddingTop: 0
     paddingBottom: 0
+  - name: Package
+    x: 124
+    y: 392
+    width: 51
+    height: 60
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
   - name: PointPlusClose
-    x: 218
+    x: 227
     y: 486
     width: 26
     height: 26
@@ -107,8 +120,8 @@ MonoBehaviour:
     paddingTop: 1
     paddingBottom: 1
   - name: PointPlusLitClose
-    x: 181
-    y: 449
+    x: 218
+    y: 438
     width: 26
     height: 26
     borderLeft: 0
@@ -198,8 +211,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: StoreButton
-    x: 208
-    y: 453
+    x: 181
+    y: 405
     width: 23
     height: 22
     borderLeft: 0

@@ -72,7 +72,7 @@ namespace ChuMeng
 		}
 
 		void OnPackUp(GameObject g) {
-			PlayerPackage.playerPackage.PackUpPacket (PackType.DEFAULT_PACK);
+			//PlayerPackage.playerPackage.PackUpPacket (PackType.DEFAULT_PACK);
 		}
 
 

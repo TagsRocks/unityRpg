@@ -41,6 +41,7 @@ namespace ChuMeng
         public bool
             killAll = false;
 
+        public bool allElite = false;
         public void killAllMethod()
         {
             foreach (var e in enemyList)

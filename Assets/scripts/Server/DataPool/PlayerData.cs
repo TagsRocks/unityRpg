@@ -145,15 +145,17 @@ namespace ChuMeng
             //new Item
             //all Slot
             PackInfo[] packList = new PackInfo[BackPack.MaxBackPackNumber];
-            int maxId = 0;
+            long maxId = 0;
             foreach (var p in pinfo.PackInfoList)
             {
                 packList [p.PackEntry.Index] = p;
-                if (p.PackEntry.Id >= maxId)
-                {
-                    maxId++;
-                }
+                maxId = (long)Mathf.Max(p.PackEntry.Id+1, maxId);
             }
+
+            foreach(var p in pinfo.DressInfoList){
+                maxId = (long)Mathf.Max(p.PackEntry.Id+1, maxId);
+            }
+
             if (maxId < 0)
             {
                 maxId++;
@@ -195,7 +197,7 @@ namespace ChuMeng
 
         }
 
-        public static bool ReduceItem(int userPropsId)
+        public static bool ReduceItem(long userPropsId)
         {
             var player = ChuMeng.ServerData.Instance.playerInfo;
             foreach (var pinfo in player.PackInfoList)
@@ -424,6 +426,7 @@ namespace ChuMeng
             pkEntry.Id = 1; 
             pkEntry.BaseId = 97;
             pkEntry.GoodsType = 1;
+            pkEntry.Level = 1;
             pkinfo.PackEntry = pkEntry.Build();
 
             var pinfo = ServerData.Instance.playerInfo;
@@ -537,6 +540,68 @@ namespace ChuMeng
             }
             if(!find){
                 playerInfo.GameStateList.Add(inpb.Kv);
+            }
+        }
+        static bool CheckGold(int cost){
+            return true;
+        }
+        /// <summary>
+        /// Gets the item in pack. 
+        /// </summary>
+        /// <returns>The item in pack.</returns>
+        /// <param name="id">Identifier.</param>
+        static PackInfo GetItemInPack(long id) {
+            var playerInfo = ServerData.Instance.playerInfo;
+            foreach(var p in playerInfo.PackInfoList) {
+                if(p.PackEntry.Id == id) {
+                    return p;
+                }
+            }
+            return null;
+        }
+        public static void LevelUpEquip(KBEngine.Packet packet) {
+            var playerInfo = ServerData.Instance.playerInfo;
+            var inpb = packet.protoBody as CGLevelUpEquip;
+            var eid = inpb.EquipId;
+            var curLev = 0;
+            PackInfo packInfo = null; 
+            foreach(var e in playerInfo.DressInfoList){
+                if(e.PackEntry.Id == eid){
+                    packInfo = e;
+                    break;
+                }
+            }
+            if(packInfo != null) {
+                curLev = packInfo.PackEntry.Level+2;
+                var levCost = GMDataBaseSystem.SearchIdStatic<EquipLevelData>(GameData.EquipLevel, curLev);
+                if(levCost == null){
+                    SendNotify("装备已经升到顶级了");
+                    return;
+                }
+
+                var myGold = playerInfo.Gold;
+                if(levCost.gold > myGold){
+                    SendNotify("金币不足");
+                    return;
+                }
+                playerInfo.Gold -= levCost.gold;
+
+                var extraAtt = 0;
+                var extraDef = 0;
+                foreach(var g in inpb.GemIdList){
+                    var pinfo = GetItemInPack(g);
+                    extraAtt += pinfo.PackEntry.ExtraAttack;
+                    extraDef += pinfo.PackEntry.ExtraDefense;
+                    ReduceItem(g);
+                }
+                packInfo.PackEntry.Level++;
+                packInfo.PackEntry.ExtraAttack += extraAtt;
+                packInfo.PackEntry.ExtraDefense += extraDef;
+                SendNotify("装备升级成功");
+
+                var update = GCPushEquipDataUpdate.CreateBuilder();
+                update.PackInfo = packInfo;
+                ServerBundle.SendImmediatePush(update);
             }
         }
     }   

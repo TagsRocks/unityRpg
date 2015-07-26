@@ -46,6 +46,12 @@ namespace ChuMeng
 			UIEventListener.Get (GetName (name)).onClick += callback;
 		}
 
+        public void SetCallback(string name, UIEventListener.EmptyDelegate callback) {
+            UIEventListener.Get (GetName (name)).onClick = delegate(GameObject go) {
+                callback(); 
+            };
+        }
+
 		public void SetCheckBox(string name, BoolDelegate cb) {
 			var tog = GetName(name).GetComponent<UIToggle>();
 

@@ -38,37 +38,13 @@ namespace ChuMeng {
 			return BackPack.backpack.EnumItem (type, index);
 		}
 
-		/*
-		 * 整理背包
-		 */ 
-		public void PackUpPacket(PackType type) {
-			CGAutoAdjustPack.Builder pack = CGAutoAdjustPack.CreateBuilder ();
-			pack.PackType = type;
-			KBEngine.Bundle.sendImmediate (pack);
-		}
-
-		/*
-		 * 打开仓库
-		 */ 
-		public void OpenBank() {
-		}
-
-		//打开商店
-		public void OpenStore() {
-		}
-
-		//打开拍卖行
-		public void OpenAuction() {
-		}
-
-		//获取钱币数量
-		public void GetMoney() {
-			
-		}
-
-		//背包物品点击
-		public void ItemClicked(int index) {
-		}
-
+        public void LevelUpEquip(EquipData eqData, List<BackpackData> gems){
+            var lev = CGLevelUpEquip.CreateBuilder();
+            lev.EquipId = eqData.id;
+            foreach(var g in gems){
+                lev.AddGemId(g.id);
+            }
+            KBEngine.Bundle.sendImmediate(lev);
+        }
 	}
 }

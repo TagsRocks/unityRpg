@@ -25,7 +25,7 @@ namespace ChuMeng
     /// </summary>
 	public class BackPack : MonoBehaviour
 	{
-		public static int MaxBackPackNumber = 25;
+		public const int MaxBackPackNumber = 25;
 
 		public static BackPack backpack;
 		GameObject uiRoot;
@@ -39,6 +39,9 @@ namespace ChuMeng
 		 * EquipmentData Init From Network
 		 */ 
 		private List<EquipData> EquipmentData;
+        public List<EquipData> GetEquipmentData() {
+            return EquipmentData;
+        }
 
 		//要卸下来的装备的槽
 		ItemData.EquipPosition equipSlot;
@@ -48,10 +51,6 @@ namespace ChuMeng
 
 		//背包物品所在槽
 		int slotId;
-		//GameObject player;
-		//PotionUI pui;
-		[ButtonCallFunc()]
-		public bool clearEquip;
 
         public int GetItemId(int itemId){
             foreach(BackpackData bd in SlotData){
@@ -71,15 +70,6 @@ namespace ChuMeng
 			return count;
 		}
 
-		public void clearEquipMethod ()
-		{
-#if UNITY_EDITOR
-			for (int i = 1; i < EquipmentData.Count; i++) {
-				EquipmentData[i].itemData = null;
-			}
-			EditorUtility.SetDirty(this);
-#endif
-		}
 
 		//服务器更新背包数据  Don't ClearBag
 		public void SetItemInfo(GCPushPackInfo info) {
@@ -122,11 +112,9 @@ namespace ChuMeng
 		 */ 
 		public class ShortCut
 		{
-			//ShortCutInfo shortCutInfo;
 
 			public ShortCut (ShortCutInfo shortInfo)
 			{
-				//shortCutInfo = shortInfo;
 			}
 		}
 
@@ -271,35 +259,6 @@ namespace ChuMeng
 			}
 			return null;
 		}
-
-
-		/*
-		 * Use HP Potion Add 
-		 * TODO: use HP MP Count
-		 */ 
-		void OnHp (GameObject g)
-		{
-			/*
-			BackpackData bd = GetHpPotion ();
-			if (bd != null && bd.num > 0) {
-				bd.num--;
-				pui.SetHpNum (bd.num);
-				player.GetComponent<NpcAttribute> ().AddHp (bd.itemData.Duration, bd.itemData.TotalAdd);
-			}
-			*/
-		}
-
-		void OnMp (GameObject g)
-		{
-			/*
-			BackpackData bd = GetMpPotion ();
-			if (bd != null && bd.num > 0) {
-				bd.num--;
-				pui.SetMpNum (bd.num);
-				player.GetComponent<NpcAttribute> ().AddMp (bd.itemData.Duration, bd.itemData.TotalAdd);
-			}
-			*/
-		}	
 
 
 		//获取某个装备槽上面的装备

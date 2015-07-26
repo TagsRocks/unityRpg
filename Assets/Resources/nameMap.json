@@ -317,11 +317,13 @@
         "GCTakeOffCloth": 32, 
         "CGUnbindingGoods": 33, 
         "GCUnbindingGoods": 34, 
+        "CGLevelUpEquip": 35, 
         "GCPushGoodsCountChange": 1000, 
         "GCPushPlayerDressedEquipChange": 1001, 
         "GCPushPlayerDressInfo": 1002, 
         "GCPushPackInfo": 1003, 
-        "GCPushShortcutsInfo": 1004
+        "GCPushShortcutsInfo": 1004, 
+        "GCPushEquipDataUpdate": 1005
     }, 
     "MGuildProtoc": {
         "CGCreateGuild": 1, 

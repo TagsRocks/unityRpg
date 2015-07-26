@@ -48,4 +48,10 @@ namespace ServerPacketHandler {
             playerData.SetKeyValue(packet);
         }
     }
+
+    public class CGLevelUpEquip : IPacketHandler {
+        public override void HandlePacket(KBEngine.Packet packet){
+            playerData.LevelUpEquip(packet);
+        }
+    }
 }

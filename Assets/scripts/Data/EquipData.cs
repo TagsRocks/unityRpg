@@ -9,7 +9,7 @@ namespace ChuMeng
 {
 	public class EquipData : ActionItem
 	{
-		//背包物品ID 或者商城物品ID
+		//背包物品ID 或者商城物品ID UniqueItemId
 		public long id {
 			get {
 				if(entry != null) {

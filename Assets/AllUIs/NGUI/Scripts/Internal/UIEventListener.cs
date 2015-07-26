@@ -13,6 +13,7 @@ using UnityEngine;
 [AddComponentMenu("NGUI/Internal/Event Listener")]
 public class UIEventListener : MonoBehaviour
 {
+    public delegate void EmptyDelegate(); 
 	public delegate void VoidDelegate (GameObject go);
 	public delegate void BoolDelegate (GameObject go, bool state);
 	public delegate void FloatDelegate (GameObject go, float delta);

@@ -29,6 +29,34 @@ namespace ChuMeng
                 return config;
             }
         }
+        public bool IsElite {
+            get {
+                return config.id > 1000;
+            }
+        }
+        List<int> elites = null;
+        public List<int> EliteIds{
+            get {
+                var mid = config.id;
+                if(elites == null) {
+                    var ret = new List<int>();
+                    var elite = GMDataBaseSystem.database.SearchId<MonsterFightConfigData>(GameData.MonsterFightConfig, mid+1000);
+                    if(elite != null) {
+                        ret.Add(elite.id);
+                    }
+                    for(int i=1; i < 10; i++){
+                        var elite1 = GMDataBaseSystem.database.SearchId<MonsterFightConfigData>(GameData.MonsterFightConfig, 10*(mid+1000)+i);
+                        if(elite1 != null) {
+                            ret.Add(elite1.id);
+                        }else {
+                            break;
+                        }
+                    }
+                    elites = ret;
+                }
+                return elites;
+            }
+        }
         public int ID
         {
             get

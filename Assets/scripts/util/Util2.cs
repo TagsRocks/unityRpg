@@ -714,6 +714,11 @@ public partial class Util {
 		return retMsg;
 	}	
 
+	static IMessageLite GetGCUserDressEquip(ByteString buf) {
+		var retMsg = ChuMeng.GCUserDressEquip.ParseFrom(buf);
+		return retMsg;
+	}	
+
 	static IMessageLite GetCGSwapShortcuts(ByteString buf) {
 		var retMsg = ChuMeng.CGSwapShortcuts.ParseFrom(buf);
 		return retMsg;
@@ -734,8 +739,8 @@ public partial class Util {
 		return retMsg;
 	}	
 
-	static IMessageLite GetGCUserDressEquip(ByteString buf) {
-		var retMsg = ChuMeng.GCUserDressEquip.ParseFrom(buf);
+	static IMessageLite GetGCPushEquipDataUpdate(ByteString buf) {
+		var retMsg = ChuMeng.GCPushEquipDataUpdate.ParseFrom(buf);
 		return retMsg;
 	}	
 
@@ -771,6 +776,11 @@ public partial class Util {
 
 	static IMessageLite GetGCTakeOffCloth(ByteString buf) {
 		var retMsg = ChuMeng.GCTakeOffCloth.ParseFrom(buf);
+		return retMsg;
+	}	
+
+	static IMessageLite GetCGLevelUpEquip(ByteString buf) {
+		var retMsg = ChuMeng.CGLevelUpEquip.ParseFrom(buf);
 		return retMsg;
 	}	
 
@@ -2329,6 +2339,8 @@ public partial class Util {
 
 	{"GCLoadShortcutsInfo", GetGCLoadShortcutsInfo},
 
+	{"GCUserDressEquip", GetGCUserDressEquip},
+
 	{"CGSwapShortcuts", GetCGSwapShortcuts},
 
 	{"GCUnbindingGoods", GetGCUnbindingGoods},
@@ -2337,7 +2349,7 @@ public partial class Util {
 
 	{"CGUnbindingGoods", GetCGUnbindingGoods},
 
-	{"GCUserDressEquip", GetGCUserDressEquip},
+	{"GCPushEquipDataUpdate", GetGCPushEquipDataUpdate},
 
 	{"GCPushPlayerDressInfo", GetGCPushPlayerDressInfo},
 
@@ -2352,6 +2364,8 @@ public partial class Util {
 	{"CGCheckout4Storage", GetCGCheckout4Storage},
 
 	{"GCTakeOffCloth", GetGCTakeOffCloth},
+
+	{"CGLevelUpEquip", GetCGLevelUpEquip},
 
 	{"GCMergeUserProps", GetGCMergeUserProps},
 

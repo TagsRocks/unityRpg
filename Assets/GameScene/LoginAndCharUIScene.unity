@@ -310,7 +310,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &775957292
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -405,6 +405,7 @@ MonoBehaviour:
   file: server0_5.json
   ReadFile: 0
   Kill: 0
+  Elite: 0
 --- !u!1 &1161206340
 GameObject:
   m_ObjectHideFlags: 0

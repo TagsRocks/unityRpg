@@ -19,6 +19,14 @@ namespace ChuMeng
 		private EquipConfigData equipConfig = null;
 		private PropsConfigData propsConfig = null;
 
+        public int GoldCost {
+            get {
+                if(IsEquip()) {
+                    return equipConfig.goldCost;
+                }
+                return propsConfig.goldCoin;
+            }
+        }
 		public enum GoodsType
 		{
 			Props = 0,
@@ -73,11 +81,6 @@ namespace ChuMeng
 
 		public UnitEffectEnum UnitEffect = UnitEffectEnum.None;
 
-		public float Duration {
-			get {
-				return propsConfig.buffEffectTime / 1000.0f;
-			}
-		}
 
         public int triggerBuffId{
             get {
@@ -85,11 +88,6 @@ namespace ChuMeng
             }
         }
 
-		public float TotalAdd {
-			get {
-				return propsConfig.attrValue;
-			}
-		}
 
 		public UnitTypeEnum UnitType {
 			get {
@@ -166,14 +164,6 @@ namespace ChuMeng
 			Binded,
 		}
 
-		public BindInfo bindInfo {
-			get {
-				if (propsConfig != null) {
-					return (BindInfo)propsConfig.bindingType;
-				}
-				return (BindInfo)equipConfig.bindingType;
-			}
-		}
 
 		public int RealDamage {
 			get {
@@ -275,6 +265,10 @@ namespace ChuMeng
 			return it;
 		}
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns><c>true</c> if this instance is equip; otherwise, <c>false</c>.</returns>
 		public bool IsEquip ()
 		{
 			return equipConfig != null;
@@ -340,6 +334,7 @@ namespace ChuMeng
 
 		public IEnumerable<Attr> whiteAttr {	
 			get {
+                /*
 				foreach (CharAttribute.CharAttributeEnum e in ActionItem.WhiteAttributeEnum) {
 					Log.Important ("Config is what " + config);
 					//Log.Important("Field is "+e.ToString().ToLower());
@@ -349,6 +344,8 @@ namespace ChuMeng
 						yield return new Attr (e, val);
 					}
 				}
+                */
+                yield break;
 			}
 		}
 

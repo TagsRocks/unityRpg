@@ -16,12 +16,17 @@ namespace ChuMeng
             SetCallback("Skill_Button", OnSkill);
             SetCallback("NormalATKButton", OnTalk);
             SetCallback("StoreButton", OnStore);
+            SetCallback("PackButton", OnPack);
             this.regEvt = new System.Collections.Generic.List<MyEvent.EventType>(){
                 MyEvent.EventType.UpdateItemCoffer,
                 MyEvent.EventType.UpdateMainUI,
                 MyEvent.EventType.UpdatePlayerData,
             };
             RegEvent();
+        }
+        void OnPack(GameObject g){
+            WindowMng.windowMng.PushView ("UI/Package", true);
+            MyEventSystem.myEventSystem.PushEvent (MyEvent.EventType.OpenItemCoffer);
         }
         void UpdateFrame(){
             hpLabel.text = GameInterface_Backpack.GetHpNum().ToString(); 
@@ -36,6 +41,7 @@ namespace ChuMeng
         }
 
         void OnTalk(GameObject g){
+
         }
         void OnCopy(GameObject g){
             WindowMng.windowMng.PushView ("UI/CopyList", true);

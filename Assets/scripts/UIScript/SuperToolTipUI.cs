@@ -182,7 +182,7 @@ namespace ChuMeng
 				str = lev.ToString();
 			}
 			GetLabel ("needLevel").text = str;
-
+            /*
 			var binfo = SuperToolTips.superToolTips.GetItemBindInfo ();
 			if (binfo == ItemData.BindInfo.Free) {
 				GetLabel ("bindInfo").text = "";
@@ -193,6 +193,7 @@ namespace ChuMeng
 			} else if (binfo == ItemData.BindInfo.Binded) {
 				GetLabel ("bindInfo").text = "[00FF00]已绑定[FFFFFF]";
 			}
+            */
 
 			var icon = SuperToolTips.superToolTips.GetItemIcon ();
 			SetIcon ("icon", icon.iconId, icon.iconName);
