@@ -889,6 +889,7 @@ public class MakeSceneEditor : Editor
         if (GUILayout.Button("导入带动画模型"))
         {
             var allModel = Path.Combine(Application.dataPath, modelStr.stringValue);
+            Debug.Log("Import Animation Model "+allModel);
             var resDir = new DirectoryInfo(allModel);
             DirectoryInfo[] fileInfo = resDir.GetDirectories("*", SearchOption.TopDirectoryOnly);//("*.*", SearchOption.TopDirectoryOnly);
             foreach (DirectoryInfo file in fileInfo)
@@ -1035,12 +1036,18 @@ public class MakeSceneEditor : Editor
     GameObject CreateAniModelPrefab(FileInfo[] allFiles, string dirName)
     {
         var tar = Path.Combine("Assets/ModelPrefab", dirName + ".prefab");
+        Debug.Log("CreateAniModelPrefab "+tar);
         //var tg = PrefabUtility.CreatePrefab(tar, g);
         Dictionary<string, string> aniFbx = new Dictionary<string, string>();
         AssetDatabase.StartAssetEditing();
+        bool npc = false;
         foreach (var f in allFiles)
         {
             Debug.Log("fbx file is " + f.FullName);
+            if(f.FullName.Contains("npc"))
+            {
+                npc = true;
+            }
             var path = f.FullName.Replace(Application.dataPath, "Assets");
             var import = ModelImporter.GetAtPath(path) as ModelImporter;
             if (path.Contains("@"))
@@ -1072,9 +1079,12 @@ public class MakeSceneEditor : Editor
         var prefab = PrefabUtility.CreatePrefab(tar, Resources.LoadAssetAtPath<GameObject>(aniFbx ["idle"]));
         prefab.transform.Find("Armature").localRotation = Quaternion.identity;
         prefab.transform.localRotation = Quaternion.Euler(new Vector3(-90, 0, 0));
-        var meshCollider = prefab.AddComponent<MeshCollider>();
-        var colObj = Resources.LoadAssetAtPath<GameObject>(aniFbx ["collision"]);
-        meshCollider.sharedMesh = colObj.GetComponent<MeshFilter>().sharedMesh;
+        if(aniFbx.ContainsKey("collision")) {
+            var meshCollider = prefab.AddComponent<MeshCollider>();
+            var colObj = Resources.LoadAssetAtPath<GameObject>(aniFbx ["collision"]);
+            meshCollider.sharedMesh = colObj.GetComponent<MeshFilter>().sharedMesh;
+        }
+
         var aniPart = prefab.GetComponent<Animation>();
         foreach (var ani in aniFbx)
         {
@@ -1092,7 +1102,12 @@ public class MakeSceneEditor : Editor
             if (t.renderer != null)
             {
                 Debug.Log("render is " + t.name);
-                t.renderer.sharedMaterial.shader = Shader.Find("Custom/lightMapEnv");
+                if(npc) {
+                    t.renderer.sharedMaterial.shader = Shader.Find("Custom/npcShader");
+                    t.renderer.sharedMaterial.color = Color.white;
+                }else {
+                    t.renderer.sharedMaterial.shader = Shader.Find("Custom/lightMapEnv");
+                }
                 EditorUtility.SetDirty(t.renderer.sharedMaterial);
             }
         }

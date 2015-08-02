@@ -44,10 +44,7 @@ namespace ChuMeng
 			BackPack.backpack.StartCoroutine(BackPack.backpack.UseEquipForNetwork ());
 		}
 
-		//获取特定的装备槽的Item
-		public ActionItem EnumAction(ItemData.EquipPosition type) {
-			return ActionSystem.actionSystem.EnumAction (type);
-		}
+		
 
 	}
 }

@@ -278,11 +278,7 @@ namespace ChuMeng
 				skill.transform.parent = transform;
 				skill.AddComponent<SkillDataController>();
 			}
-			if (QuestDataController.questDataController == null) {
-				var quest = new GameObject("quest");
-				quest.transform.parent = transform;
-				quest.AddComponent<QuestDataController>();
-			}
+			
 
 			if (CopyController.copyController == null) {
 				var copy = new GameObject();
@@ -323,11 +319,6 @@ namespace ChuMeng
             */
             MyEventSystem.myEventSystem.InitEventHandler();
 
-			if (MallController.mallController == null) {
-				var tempObj1 = new GameObject("MallController");
-				tempObj1.AddComponent<MallController>();
-				tempObj1.transform.parent = transform;
-			}
 			if (TeamController.teamController == null) {
 				var tempObj = new GameObject ("TeamController");
 				tempObj.AddComponent<TeamController> ();
