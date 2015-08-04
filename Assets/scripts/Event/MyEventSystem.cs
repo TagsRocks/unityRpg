@@ -134,6 +134,9 @@ namespace ChuMeng
 
             KillAllMonster,
             ReConnect,
+
+            ShowStory,
+            EndStory,
 		}
 
 

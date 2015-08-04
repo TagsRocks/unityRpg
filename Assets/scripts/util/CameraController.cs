@@ -49,12 +49,17 @@ namespace ChuMeng
 				MyEvent.EventType.ShakeCameraStart,
 				MyEvent.EventType.ShakeCameraEnd,
 				MyEvent.EventType.ShakeCamera,
+
+                MyEvent.EventType.ShowStory,
+                MyEvent.EventType.EndStory,
+
 			};
 			RegEvent ();
 		}
 		Vector3 shakeInitPos;
 		Vector3 shakeDir;
 		bool inShake = false;
+        bool inStory = false;
 
 		public bool CheckCanShake() {
 			if (inShake) {
@@ -77,36 +82,48 @@ namespace ChuMeng
 			} else if (evt.type == MyEvent.EventType.ShakeCamera) {
 				//Log.Sys("CameraShakeValue "+evt.floatArg+"  dir "+shakeDir+" initPos "+shakeInitPos);
 				transform.position = shakeInitPos+shakeDir*evt.floatArg;
-			}
+			}else if(evt.type == MyEvent.EventType.ShowStory){
+                scrollDegree = -45; 
+                inStory = true;
+                AdjustCameraPos();
+            }else if(evt.type == MyEvent.EventType.EndStory) {
+                scrollDegree = 0;
+                inStory = false;
+            }
+
 		}
 		public void TracePositon(Vector3 pos) {
 			Vector3 newCameraPos = offsetZ * Vector3.forward + offsetY * Vector3.up;
 			var cp = pos + newCameraPos;
 			transform.position = cp;
 		}
+        void AdjustCameraPos(){
+            Vector3 npos = new Vector3 (0, 0, -1);
+            npos = Quaternion.Euler (new Vector3 (scrollDegree, 0, 0)) * npos;
+            Vector3 newCameraPos = offsetZ * npos + (new Vector3 (0, offsetY, 0));
+
+            float xDir = 90 - (180 - (90 + scrollDegree)) / 2;
+            targetRotation = Quaternion.Euler (new Vector3 (xDir, YRot, 0));
+
+
+            movementX = (player.transform.position.x + offsetX - this.transform.position.x) / maxinumDistance;
+            movementZ = (player.transform.position.z + newCameraPos.z - this.transform.position.z) / maxinumDistance;
+            movementY = (player.transform.position.y + newCameraPos.y - this.transform.position.y) / maxinumDistance;
+
+            transform.rotation = Quaternion.Slerp (transform.rotation, targetRotation, Time.deltaTime * RotSmooth);
+            this.transform.position += new Vector3 (movementX * playerVelocity * Time.deltaTime, movementY * playerVelocity * Time.deltaTime, movementZ * playerVelocity * Time.deltaTime);
+                
+        }
 		// Update is called once per frame
 		void Update ()
 		{
 			if (player != null && !inShake) {
-				scrollDegree += Input.GetAxis ("Mouse ScrollWheel") * ScrollCoff;
-
-				scrollDegree = Mathf.Max (0, Mathf.Min (45, scrollDegree));
-
-				Vector3 npos = new Vector3 (0, 0, -1);
-				npos = Quaternion.Euler (new Vector3 (scrollDegree, 0, 0)) * npos;
-				Vector3 newCameraPos = offsetZ * npos + (new Vector3 (0, offsetY, 0));
-
-				float xDir = 90 - (180 - (90 + scrollDegree)) / 2;
-				targetRotation = Quaternion.Euler (new Vector3 (xDir, YRot, 0));
-
-
-				movementX = (player.transform.position.x + offsetX - this.transform.position.x) / maxinumDistance;
-				movementZ = (player.transform.position.z + newCameraPos.z - this.transform.position.z) / maxinumDistance;
-				movementY = (player.transform.position.y + newCameraPos.y - this.transform.position.y) / maxinumDistance;
-
-				transform.rotation = Quaternion.Slerp (transform.rotation, targetRotation, Time.deltaTime * RotSmooth);
-				this.transform.position += new Vector3 (movementX * playerVelocity * Time.deltaTime, movementY * playerVelocity * Time.deltaTime, movementZ * playerVelocity * Time.deltaTime);
-			}
+                if(!inStory) {
+    				scrollDegree += Input.GetAxis ("Mouse ScrollWheel") * ScrollCoff;
+    				scrollDegree = Mathf.Max (0, Mathf.Min (45, scrollDegree));
+                }
+                AdjustCameraPos();
+            }
 		}
 	}
 

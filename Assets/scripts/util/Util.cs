@@ -59,6 +59,9 @@ namespace ChuMeng
     public static class GameBool {
         public static readonly string FINISH_NEW = "finishNew";
         public static readonly string chapter1Start = "chapter1Start"; 
+        public static readonly string cunZhangState = "cunZhangState";
+
+
         public static readonly string zhiruo1 = "zhiruo1"; 
         public static readonly string donghu1 = "donghu1"; 
         public static readonly string qinqing1 = "qinqing1"; 

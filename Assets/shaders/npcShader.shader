@@ -53,29 +53,45 @@
 	        struct v2f {
 	        	fixed4 pos : SV_POSITION;
 	        	fixed2 uv : TEXCOORD0;
+	        	fixed3 offPos : TEXCOORD2;
 	        };
 	        
 	        uniform sampler2D _MainTex;
 	        uniform fixed4 _Color;
+	        
+	        uniform sampler2D _LightMap;
+		    uniform float4 _CamPos;
+		    uniform float _CameraSize;
+		    uniform float4 _AmbientCol;
+		    uniform sampler2D _LightMask;
+			uniform float _LightCoff;
+			
 	        
 	        v2f vert(appdata_base v) 
 			{
 				v2f o;
 				o.pos = mul(UNITY_MATRIX_MVP, v.vertex);
 				o.uv = MultiplyUV(UNITY_MATRIX_TEXTURE0, v.texcoord);
-				
+				o.offPos = mul(_Object2World, v.vertex).xyz-(_WorldSpaceCameraPos+_CamPos);
 				return o;
 			}
 			
+			
 			fixed4 frag(v2f i) : Color {
-				return tex2D(_MainTex, i.uv)*_Color;
+				fixed4 col =  tex2D(_MainTex, i.uv);
+				fixed4 retCol;
+				fixed2 mapUV = (i.offPos.xz+float2(_CameraSize, _CameraSize))/(2*_CameraSize);
+				retCol.rgb = col.rgb*(_AmbientCol.rgb+tex2D(_LightMap, mapUV).rgb * (1-tex2D(_LightMask, mapUV).a)*_LightCoff );
+				retCol.a = col.a;
+				return retCol;
+				//return tex2D(_MainTex, i.uv)*_Color;
 			}
 		
 	        ENDCG	
 		}
 		
 		Pass {
-			Name "BASE"
+			Name "Shadow"
 			
 			Offset -1.0, -2.0
 			CGPROGRAM

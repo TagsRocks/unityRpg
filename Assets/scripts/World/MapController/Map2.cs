@@ -7,7 +7,7 @@ namespace ChuMeng
     ///主城场景控制类配置 
     /// 配置所有Npc的Interactive事件的处理机制
     /// </summary>
-    public class Map2 : CScene 
+    public partial class Map2 : CScene 
     {
         public override void Init()
         {
@@ -28,38 +28,7 @@ namespace ChuMeng
         }
 
 
-        IEnumerator ShowChapter1StartDialog() {
-            var npcDialog = WindowMng.windowMng.PushView("UI/NpcDialog", false);
-            var dia = npcDialog.GetComponent<NpcDialog>();
-            dia.ShowNext = delegate() {
-                GameInterface_Player.SetGameState(GameBool.chapter1Start, true);
-                WindowMng.windowMng.PopView();
-            };
 
-            string[] text = new string[]{
-                @"孩子你父母有重要的事情要做，他们嘱托我照顾你，等你有了力量，就可以去找他们了。你父母走之前留给你一些东西，现在你可以先去村子里转转，一会再过来找我。",
-            };
-            dia.ShowText(text[0]);
-            yield return null;
-        }
-
-        void ShowCunZhangNormalWord() {
-            string[] text = new string[]{
-                @"{0}，你再耐心等一会，我正在施法。", 
-            };
-            var npcDialog = WindowMng.windowMng.PushView("UI/NpcDialog", false);
-            var dia = npcDialog.GetComponent<NpcDialog>();
-            dia.ShowText(string.Format(text[0], ObjectManager.objectManager.GetMyName()));
-        }
-
-        void TalkToCunZhang() {
-            //未曾开始对话
-            if(!GameInterface_Player.GetGameState(GameBool.chapter1Start)) {
-                StartCoroutine(ShowChapter1StartDialog());
-            }else {
-                ShowCunZhangNormalWord();
-            }
-        }
         //Wait For All Npc Init Over
         //Then Set Npc TalkHandler
         IEnumerator Start(){
@@ -88,7 +57,7 @@ namespace ChuMeng
 
         void TalkToMiePo() {
             string[] text = new string[]{
-                @"离我们家至若远点,你这不详之子", 
+                @"离我们家至若远点,你这不祥之子", 
             };
             var npcDialog = WindowMng.windowMng.PushView("UI/NpcDialog", false);
             var dia = npcDialog.GetComponent<NpcDialog>();
@@ -256,7 +225,7 @@ namespace ChuMeng
 
         void WanShan2() {
             string[] text = new string[]{
-                @"{0},要不要赌上一把。", 
+                @"{0},托你给秦情的礼物送到了么?", 
             };
             var npcDialog = WindowMng.windowMng.PushView("UI/NpcDialog", false);
             var dia = npcDialog.GetComponent<NpcDialog>();

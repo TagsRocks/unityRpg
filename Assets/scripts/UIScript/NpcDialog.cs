@@ -15,6 +15,16 @@ namespace ChuMeng
             SetCallback("Fast", OnFast);
             button.SetActive(false);
         }
+        protected override void OnEnable()
+        {
+            base.OnEnable();
+            MyEventSystem.myEventSystem.PushEvent(MyEvent.EventType.ShowStory);
+        }
+        protected override void OnDisable()
+        {
+            MyEventSystem.myEventSystem.PushEvent(MyEvent.EventType.EndStory);
+            base.OnDisable();
+        }
 
         bool onNext = false;
         void OnNext() {
@@ -24,6 +34,7 @@ namespace ChuMeng
         bool fast = false;
         int count = 0;
         void OnFast() {
+            Log.GUI("OnFast "+count);
             count++;
             if(count >= 2){
                 fast = true;

@@ -50,6 +50,7 @@ namespace ChuMeng
         public bool InitAmbient;
         public void InitAmbientMethod() {
             Shader.SetGlobalVector("_AmbientCol", testAmbient);
+            Shader.SetGlobalFloat("_LightCoff", lightCoff);
         }
 
 	}

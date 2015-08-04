@@ -42,6 +42,32 @@ namespace ChuMeng
             }
         }
 
+        public static int GetIntState(string key) {
+            var list = ServerData.Instance.playerInfo.GameStateList;
+            foreach(var kv in list) {
+                if(kv.Key == key) {
+                    return Convert.ToInt32(kv.Value);
+                }
+            }
+            return 0;
+        }
+
+        public static void SetIntState(string key, int v) {
+            var list = ServerData.Instance.playerInfo.GameStateList;
+            foreach(var kv in list) {
+                if(kv.Key == key) {
+                    kv.Value = v.ToString();
+                    return;
+                }
+            }
+            
+            var kv2 = KeyValue.CreateBuilder();
+            kv2.Key = key;
+            kv2.Value = v.ToString();
+            list.Add(kv2.Build());
+        }
+
+
         public static bool GetGameState(string key) {
             var list = ServerData.Instance.playerInfo.GameStateList;
             foreach(var kv in list) {

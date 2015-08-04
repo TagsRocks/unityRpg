@@ -14,10 +14,10 @@ namespace ChuMeng
 	{
 		public static GameObject UIRoot = null;
 
-        void OnDisable() {
+        protected virtual void OnDisable() {
             DropEvent();
         }
-        void OnEnable() {
+        protected virtual void  OnEnable() {
             RegEvent();
         }
 		public GameObject GetName(string name) {
