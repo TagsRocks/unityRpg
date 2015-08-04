@@ -58,6 +58,12 @@ namespace ChuMeng
 	}
     public static class GameBool {
         public static readonly string FINISH_NEW = "finishNew";
+        public static readonly string chapter1Start = "chapter1Start"; 
+        public static readonly string zhiruo1 = "zhiruo1"; 
+        public static readonly string donghu1 = "donghu1"; 
+        public static readonly string qinqing1 = "qinqing1"; 
+        public static readonly string wanshan1 = "wanshan1"; 
+
     }
 
     public delegate void EmptyDelegate();
@@ -495,6 +501,17 @@ namespace ChuMeng
 			monsterData [key] = ud;
 			return ud;
 		}
+        public static UnitData GetNpcData(int npcId) {
+            int key = 2 * 1000000 + npcId * 10 + 0;
+            if (monsterData.ContainsKey (key)) {
+                return monsterData [key];
+            }
+
+            var config = GMDataBaseSystem.SearchIdStatic<NpcConfigData>(GameData.NpcConfig, npcId);
+            UnitData ud = new UnitData (config);
+            monsterData [key] = ud;
+            return ud;
+        }
 
 		static Dictionary<int, SkillData> skillData = new Dictionary<int, SkillData> ();
 

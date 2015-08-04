@@ -26,7 +26,6 @@ namespace ChuMeng
         public static BattleManager battleManager;
         //[HideInInspector]
         public List<GameObject>enemyList;
-        public DungeonData DungeonConfig;
         //public AstarPath PathInfo;
         public bool StartSpawn = false;
         public int MaxWave = 5;
@@ -70,10 +69,6 @@ namespace ChuMeng
 
             Debug.Log("BattleManager:: init UI ");
             enemyList = new List<GameObject>();
-
-            //TODO:增加场景中到处跑的小动物 和场景中可破坏的物体
-            //DungeonConfig.InitCreep (PathInfo);
-            //DungeonConfig.InitProps (PathInfo);
 
             currentZone = -1;
 

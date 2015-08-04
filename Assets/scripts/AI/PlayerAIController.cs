@@ -19,12 +19,6 @@ namespace ChuMeng
 	[RequireComponent(typeof(PlayerSync))]
 	public class PlayerAIController : AIBase
 	{
-
-		public CollisionFlags collisionFlags;
-	
-		//MyAnimationEvent myAnimationEvent;
-
-		//CharacterController controller;
 		/// <summary>
 		/// 从配置代码文件中读取用于所有的职业角色 例如  Config.cs  Config.config.xxxx
 		/// </summary>
@@ -59,13 +53,9 @@ namespace ChuMeng
 		}
 	
 
-		//AnimationController animationController;
 		void Awake ()
 		{
-			//controller = GetComponent<CharacterController> ();
 			attribute = GetComponent<NpcAttribute> ();
-			//myAnimationEvent = GetComponent<MyAnimationEvent> ();
-			//animationController = GetComponent<AnimationController> ();
 
 			ai = new HumanCharacter ();
 			ai.attribute = attribute;

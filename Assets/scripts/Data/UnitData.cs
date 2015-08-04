@@ -23,6 +23,12 @@ namespace ChuMeng
         MonsterFightConfigData config = null;
         RoleUpgradeConfigData playerConfig = null;
         RoleJobDescriptionsData jobConfig = null;
+        NpcConfigData npcConfig = null;
+        public NpcConfigData NpcConfig {
+            get {
+                return npcConfig;
+            }
+        }
 
         public MonsterFightConfigData Config {
             get {
@@ -139,6 +145,9 @@ namespace ChuMeng
         {
             get
             {
+                if(npcConfig != null) {
+                    return npcConfig.LogicTemplate;
+                }
                 return config.LogicTemplate;
             }
         }
@@ -154,6 +163,10 @@ namespace ChuMeng
         {
             get
             {
+                if(npcConfig != null) {
+                    return npcConfig.name;
+                }
+
                 if (IsPlayer)
                 {
                     return jobConfig.job;
@@ -189,6 +202,9 @@ namespace ChuMeng
         {
             get
             {
+                if(npcConfig != null) {
+                    return npcConfig.model;
+                }
                 if (IsPlayer)
                 {
                     return jobConfig.ModelName;
@@ -205,6 +221,9 @@ namespace ChuMeng
         {
             get
             {
+                if(npcConfig != null) {
+                    return 1;
+                }
                 if (IsPlayer)
                 {
                     return playerConfig.maxHp;
@@ -307,6 +326,9 @@ namespace ChuMeng
         {
             get
             {
+                if(npcConfig != null) {
+                    return "";
+                }
                 if (!IsPlayer)
                 {
                     return config.textureReplace;
@@ -430,7 +452,21 @@ namespace ChuMeng
         {
             return jobConfig.DefaultWardrobe;
         }
+        public bool IsNpc() {
+            return npcConfig != null;
+        }
 
+        public UnitData(NpcConfigData n){
+            npcConfig = n;
+        }
+        /// <summary>
+        /// 0 Monster
+        /// 1 Player 
+        /// 2 Npc
+        /// </summary>
+        /// <param name="isPlayer">If set to <c>true</c> is player.</param>
+        /// <param name="mid">Middle.</param>
+        /// <param name="level">Level.</param>
         public UnitData(bool isPlayer, int mid, int level)
         {
             IsPlayer = isPlayer;

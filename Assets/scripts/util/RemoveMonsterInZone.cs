@@ -9,7 +9,20 @@ public class RemoveMonsterInZone : MonoBehaviour {
         var pro = transform.Find("properties");
         foreach(Transform t in pro){
             var trigger = t.GetComponent<SpawnTrigger>();
-            if(trigger != null){
+            var spawnNpc = t.GetComponent<SpawnNpc>();
+            if(trigger != null || spawnNpc != null){
+                for(int i = 0; i < t.childCount; i++){
+                    GameObject.DestroyImmediate(t.GetChild(i).gameObject);
+
+                }
+            }
+        }
+
+        pro = transform.Find("npcs");
+        foreach(Transform t in pro){
+            var trigger = t.GetComponent<SpawnTrigger>();
+            var spawnNpc = t.GetComponent<SpawnNpc>();
+            if(trigger != null || spawnNpc != null){
                 for(int i = 0; i < t.childCount; i++){
                     GameObject.DestroyImmediate(t.GetChild(i).gameObject);
 

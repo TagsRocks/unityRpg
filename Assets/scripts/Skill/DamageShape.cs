@@ -62,7 +62,7 @@ namespace ChuMeng
         {
             runner = transform.parent.GetComponent<SkillLayoutRunner>();
             enemytTag = ObjectManager.GetEnemyTag(runner.stateMachine.attacker.tag);
-            cosAngle = Mathf.Cos(angle);
+            cosAngle = Mathf.Cos(Mathf.Deg2Rad * angle);
             if (runner != null && runner.Event.attachOwner)
             {
                 InitPosition = runner.transform.position;

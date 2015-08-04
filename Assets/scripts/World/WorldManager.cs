@@ -67,7 +67,8 @@ namespace ChuMeng
         public IEnumerator TestInitScene(){
             var sdata = CopyController.copyController.GetLevelInfo (3);
             sdata.isCity = false;
-            activeScene = new CScene(sdata);
+            //activeScene = new CScene(sdata);
+            activeScene = CScene.CreateScene(sdata);
            
             if (CameraController.cameraController == null ) {
                 Log.Sys("CreateMainCamera");
@@ -110,8 +111,9 @@ namespace ChuMeng
 			//删除旧的场景中的玩家数据
 			if (activeScene != null) {
 				activeScene.LeaveScene();
+                GameObject.Destroy(activeScene.gameObject);
 			}
-			activeScene = new CScene (sdata);
+            activeScene = CScene.CreateScene(sdata);
 			activeScene.Init ();
 			activeScene.EnterScene ();
 
@@ -143,6 +145,13 @@ namespace ChuMeng
                 var g = new GameObject("BattleManager");
                 g.AddComponent<BattleManager>();
             }
+            {
+                var g = new GameObject("NpcManager"); 
+                g.AddComponent<NpcManager>();
+            }
+            activeScene.ManagerInitOver();
+
+              
 
             Log.Sys("Cameramain "+Camera.main);
 

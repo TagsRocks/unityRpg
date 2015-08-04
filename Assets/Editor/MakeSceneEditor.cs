@@ -1076,9 +1076,12 @@ public class MakeSceneEditor : Editor
 
 
         //Use First Animation FBX idle as base
+
         var prefab = PrefabUtility.CreatePrefab(tar, Resources.LoadAssetAtPath<GameObject>(aniFbx ["idle"]));
-        prefab.transform.Find("Armature").localRotation = Quaternion.identity;
-        prefab.transform.localRotation = Quaternion.Euler(new Vector3(-90, 0, 0));
+        if(!npc) {
+            prefab.transform.Find("Armature").localRotation = Quaternion.identity;
+            prefab.transform.localRotation = Quaternion.Euler(new Vector3(-90, 0, 0));
+        }
         if(aniFbx.ContainsKey("collision")) {
             var meshCollider = prefab.AddComponent<MeshCollider>();
             var colObj = Resources.LoadAssetAtPath<GameObject>(aniFbx ["collision"]);

@@ -11,29 +11,18 @@ Email: 233242872@qq.com
 using UnityEngine;
 using System.Collections;
 namespace ChuMeng {
+    /// <summary>
+    ///怪物AI 
+    /// </summary>
 	public class NpcAI : AIBase {
 		MyAnimationEvent myAnimationEvent;
-
-
-		//CharacterController controller;
 		float heading;
 		Vector3 targetRotation;
-
-		//CommonAI commonAI;
-		
 		void Awake() {
-			//commonAI = GetComponent<CommonAI> ();
 			attribute = GetComponent<NpcAttribute>();
-
 			myAnimationEvent = GetComponent<MyAnimationEvent>();
-			//controller = GetComponent<CharacterController>();
 			heading = Random.Range(0, 360);
 			transform.eulerAngles = new Vector3(0, heading, 0);
-
-			//NGUITools.AddMissingComponent<ShadowComponent> (gameObject);
-			//GetComponent<ShadowComponent> ().CreateShadowPlane ();
-
-
 
 			ai = new MonsterCharacter ();
 			ai.attribute = attribute;

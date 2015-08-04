@@ -44,8 +44,9 @@ namespace ChuMeng
         }
 
         void OnTalk(GameObject g){
-
+            GameInterface_Player.TalkToNpc();
         }
+
         void OnCopy(GameObject g){
             WindowMng.windowMng.PushView ("UI/CopyList", true);
             MyEventSystem.myEventSystem.PushEvent (MyEvent.EventType.OpenCopyUI);

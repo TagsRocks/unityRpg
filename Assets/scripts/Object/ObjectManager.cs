@@ -517,19 +517,28 @@ namespace ChuMeng
 		{
 			public UnitData unitData;
 			public SpawnTrigger spawn;
+            public GameObject spawnObj;
 
 			public MonsterInit (UnitData ud, SpawnTrigger sp)
 			{
 				unitData = ud;
 				spawn = sp;
 			}
+
+            public MonsterInit (UnitData ud, GameObject obj)
+            {
+                unitData = ud;
+                spawnObj = obj;
+            }
 		}
 		List<MonsterInit> cacheMonster = new List<MonsterInit> ();
+        List<MonsterInit> cacheNpc = new List<MonsterInit>();
 
 		public void InitCache ()
 		{
 			InitCachePlayer ();
 			InitCacheMonster ();
+            InitCacheNpc();
 		}
 
 		void InitCachePlayer ()
@@ -547,6 +556,12 @@ namespace ChuMeng
 			}
 			cacheMonster.Clear ();
 		}
+        void InitCacheNpc() {
+            foreach (MonsterInit m in cacheNpc) {
+               CreateNpc(m.unitData, m.spawnObj);
+            }
+           cacheNpc .Clear ();
+        }
 
 		///<summary>
 		/// 其它玩家构建流程  主城内 或者副本内
@@ -599,6 +614,47 @@ namespace ChuMeng
 				Debug.LogError ("该状态不能接受其它玩家的构建请求 " + WorldManager.worldManager.station + "  " + vp.ToString ());
 			}
 		}
+
+        public void CreateNpc(UnitData unitData, GameObject spawn) {
+            if (WorldManager.worldManager.station == WorldManager.WorldStation.Enter) {
+                var Resource = Resources.Load<GameObject> (unitData.ModelName);
+                GameObject g = Instantiate (Resource) as GameObject;
+                if(g.GetComponent<CharacterController>() == null) {
+                    var c = g.AddComponent<CharacterController>();
+                    c.center = new Vector3(0, 0.7f, 0);
+                    c.height = 1.6f;
+                }
+
+                NpcAttribute npc = NGUITools.AddMissingComponent<NpcAttribute> (g);
+
+                var type = Type.GetType ("ChuMeng." + unitData.AITemplate);
+                var t = typeof(NGUITools);
+                var m = t.GetMethod ("AddMissingComponent");
+                Log.AI ("Monster Create Certain AI  " + unitData.AITemplate + " " + type);
+                var geMethod = m.MakeGenericMethod (type);
+                geMethod.Invoke (null, new object[]{g});// as AIBase;
+
+                g.transform.parent = transform;
+                g.tag = GameTag.Player; //Player Or Npc 
+                g.layer = (int)GameLayer.Npc;
+
+                //Register Unique Id To Npc 
+                var netView = g.GetComponent<KBEngine.KBNetworkView> ();
+                netView.SetID (new KBEngine.KBViewID (myPlayer.ID, myPlayer));
+                netView.IsPlayer = false;
+
+                npc.SetObjUnitData (unitData);
+                AddObject (netView.GetServerID (), netView);
+
+                npc.transform.position = spawn.transform.position;
+                var rotY = spawn.transform.localRotation.eulerAngles.y;
+                npc.transform.localRotation = Quaternion.Euler(new Vector3(0, rotY, 0)); 
+
+                NpcManager.Instance.RegNpc(unitData.name, g);
+            }else {
+                cacheNpc.Add (new MonsterInit (unitData,spawn ));
+            }
+        }
 
 
 		///<summary>

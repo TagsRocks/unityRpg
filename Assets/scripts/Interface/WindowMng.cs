@@ -32,6 +32,7 @@ namespace ChuMeng
 
         GameObject background = null;
         GameObject alphaBlock;
+        GameObject justBlock;
         GameObject uiRoot = null;
 
         public GameObject GetUIRoot()
@@ -55,6 +56,7 @@ namespace ChuMeng
 
             background = Resources.Load<GameObject>("UI/Background");
             alphaBlock = Resources.Load<GameObject>("UI/alphaBlock");
+            justBlock = Resources.Load<GameObject>("UI/justBlock");
 
             MyEventSystem.myEventSystem.RegisterEvent(MyEvent.EventType.MeshShown, OnEvent);
             MyEventSystem.myEventSystem.RegisterEvent(MyEvent.EventType.MeshHide, OnEvent);
@@ -156,7 +158,9 @@ namespace ChuMeng
                 alphaStack.Add(alpha);
             } else
             {
-                alphaStack.Add(null);
+                var just = NGUITools.AddChild(uiRoot, justBlock);
+                just.GetComponent<UIPanel>().depth = (int)UIDepth.Window + stack.Count * 10;
+                alphaStack.Add(just);
             }
 
             var allPanel = Util.GetAllPanel(bag);
@@ -255,7 +259,9 @@ namespace ChuMeng
             //除了主UI其它UI才有Back遮挡
             if (stack.Count == 1)
             {
-                back.SetActive(false);
+                if(back != null) {
+                    back.SetActive(false);
+                }
             }
 
             BackgroundSound.Instance.PlayEffect("sheet_close");
