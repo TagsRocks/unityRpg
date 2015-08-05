@@ -17,11 +17,18 @@ namespace ChuMeng
             var myTransform = GetAttr().transform;
             var targetPlayer = ObjectManager.objectManager.GetMyPlayer().transform;
             var physic = myTransform.GetComponent<PhysicComponent>();
+            var tarPos = targetPlayer.position + new Vector3(Random.Range(-3.0f, 3.0f), 0, Random.Range(-3.0f, 3.0f));
             while(!quit) {
-                Vector3 dir = targetPlayer.position-myTransform.position;
+                Vector3 dir = tarPos - myTransform.position;
                 dir.y = 0;
-                if(dir.sqrMagnitude < 9) {
+                if(dir.sqrMagnitude < 25) {
                     aiCharacter.ChangeState(AIStateEnum.IDLE);
+                    yield break;
+                }
+
+                if(dir.sqrMagnitude > 200) {
+                    aiCharacter.ChangeState(AIStateEnum.IDLE);
+                    physic.transform.position = tarPos+ new Vector3(Random.Range(-3.0f, 3.0f), 0.2f, Random.Range(-3.0f, 3.0f));
                     yield break;
                 }
 

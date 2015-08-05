@@ -20,7 +20,7 @@ namespace ChuMeng
                 var pos = GetAttr().transform.localPosition;
                 var tarPos = player.transform.localPosition;
                 var dis = Util.XZSqrMagnitude(pos, tarPos);
-                if(dis > 16) {
+                if(dis > 36) {
                     aiCharacter.ChangeState(AIStateEnum.MOVE);
                     yield break;
                 }

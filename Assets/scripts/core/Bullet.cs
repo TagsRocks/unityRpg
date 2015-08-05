@@ -154,8 +154,10 @@ namespace ChuMeng
 
 				var evt = new MyEvent (MyEvent.EventType.EventMissileDie);
 				evt.missile = transform;
-				Log.Sys ("Push Missile Die Event " + attacker.GetComponent<KBEngine.KBNetworkView> ().GetLocalId ());
-				MyEventSystem.myEventSystem.PushLocalEvent (attacker.GetComponent<KBEngine.KBNetworkView> ().GetLocalId (), evt);
+                if(attacker != null) {
+    				Log.Sys ("Push Missile Die Event " + attacker.GetComponent<KBEngine.KBNetworkView> ().GetLocalId ());
+    				MyEventSystem.myEventSystem.PushLocalEvent (attacker.GetComponent<KBEngine.KBNetworkView> ().GetLocalId (), evt);
+                }
 			}
 		}
 

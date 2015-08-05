@@ -21,11 +21,14 @@ namespace ChuMeng
         public static CScene CreateScene(DungeonConfigData sceneDef){
             var tp = Type.GetType ("ChuMeng.Map" +sceneDef.id);
             var g = new GameObject("CScene");
-
-            var t = typeof(NGUITools);
-            var m = t.GetMethod ("AddMissingComponent");
-            var geMethod = m.MakeGenericMethod (tp);
-            geMethod.Invoke (null, new object[]{g});// as AIBase;
+            if(tp == null) {
+                g.AddComponent<CScene>();
+            }else {
+                var t = typeof(NGUITools);
+                var m = t.GetMethod ("AddMissingComponent");
+                var geMethod = m.MakeGenericMethod (tp);
+                geMethod.Invoke (null, new object[]{g});// as AIBase;
+            }
 
             var sc = g.GetComponent<CScene>();
             sc.def = sceneDef;
