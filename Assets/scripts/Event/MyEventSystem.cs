@@ -25,7 +25,6 @@ namespace ChuMeng
 			UnitExp, 
 			UnitFaceImage,
 
-			UnitHPPercent,
 			UnitMPPercent,
 
 			UnitDead,//角色死亡

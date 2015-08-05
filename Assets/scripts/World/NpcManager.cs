@@ -5,7 +5,8 @@ using System.Collections.Generic;
 namespace ChuMeng
 {
     /// <summary>
-    /// 注册某张地图上所有的Npc 
+    /// 注册某张地图上所有的Npc
+    ///  name --> 1Npc
     /// </summary>
     public class NpcManager : MonoBehaviour
     {

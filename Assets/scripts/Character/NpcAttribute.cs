@@ -445,14 +445,6 @@ namespace ChuMeng
             HP += c;
             HP = Mathf.Min(Mathf.Max(0, HP), HP_Max);
             var rate = HP * 1.0f / HP_Max * 1.0f;
-
-
-            var evt = new MyEvent(MyEvent.EventType.UnitHPPercent);
-            evt.localID = GetLocalId();
-
-            evt.floatArg = rate;
-            MyEventSystem.myEventSystem.PushEvent(evt);
-
             Log.Important("Init GameObject HP " + gameObject.name);
 
             var evt1 = new MyEvent(MyEvent.EventType.UnitHP);

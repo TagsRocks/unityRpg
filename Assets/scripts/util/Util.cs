@@ -63,7 +63,10 @@ namespace ChuMeng
 
 
         public static readonly string zhiruo1 = "zhiruo1"; 
+        public static readonly string zhiruo3 = "zhiruo3"; 
         public static readonly string donghu1 = "donghu1"; 
+        public static readonly string donghu3 = "donghu3"; 
+
         public static readonly string qinqing1 = "qinqing1"; 
         public static readonly string wanshan1 = "wanshan1"; 
 
@@ -683,6 +686,13 @@ namespace ChuMeng
             }
             Log.Sys("ConfigCoount "+ret.Count);
             return ret;
+        }
+
+
+        public  static float XZSqrMagnitude (Vector3 a, Vector3 b) {
+            float dx = b.x-a.x;
+            float dz = b.z-a.z;
+            return dx*dx + dz*dz;
         }
 	}
 

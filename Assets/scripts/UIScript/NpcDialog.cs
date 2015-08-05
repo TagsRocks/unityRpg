@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 namespace ChuMeng
 {
@@ -71,6 +72,7 @@ namespace ChuMeng
         public void ShowText(string t) {
             StartCoroutine(PrintText(t));
         }
+
     }
 
 }

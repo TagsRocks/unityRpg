@@ -76,9 +76,9 @@ namespace KBEngine
 		protected List<ChuMeng.MyEvent.EventType> regLocalEvt = null;
 
         protected bool regYet = false;
-		public void RegEvent ()
+		public void RegEvent (bool force=false)
 		{
-            if(regYet) {
+            if(regYet && !force) {
                 return;
             }
             regYet = true;
@@ -90,6 +90,7 @@ namespace KBEngine
 
 			if (regLocalEvt != null) {
 				foreach(ChuMeng.MyEvent.EventType t in regLocalEvt) {
+                    Log.Sys("Reglocalevent "+t+" view "+photonView+" myevent "+ChuMeng.MyEventSystem.myEventSystem);
 					ChuMeng.MyEventSystem.myEventSystem.RegisterLocalEvent(photonView.GetLocalId(), t, OnLocalEvent);
 				}
 			}

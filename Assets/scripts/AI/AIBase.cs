@@ -9,13 +9,13 @@ using System.Collections.Generic;
 
 namespace ChuMeng
 {
+    [RequireComponent(typeof(KBEngine.KBNetworkView))]
 	[RequireComponent(typeof(CharacterController))]
 	[RequireComponent(typeof(MyAnimationEvent))]
 	[RequireComponent(typeof(BloodBar))]
 	[RequireComponent(typeof(NpcAttribute))]
 	[RequireComponent(typeof(CommonAI))]
 	[RequireComponent(typeof(ShadowComponent))]
-	[RequireComponent(typeof(KBEngine.KBNetworkView))]
 	[RequireComponent(typeof(CharacterInfo))]
 	[RequireComponent(typeof(SkillInfoComponent))]
 	[RequireComponent(typeof(PhysicComponent))]

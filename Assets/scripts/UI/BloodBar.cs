@@ -19,17 +19,12 @@ namespace ChuMeng
 		Vector2 pos = new Vector2 (20, 40);
 		Vector2 size = new Vector2 (40, 10);
 
-		//Texture2D progressBarEmpty;
-		//Texture2D progressBarFull;
-		//float passTime = 0;
+		
 		float curValue = 0;
         GameObject bar;
         UISlider fill;
 		void Awake() {
-			regLocalEvt = new System.Collections.Generic.List<MyEvent.EventType> (){
-				MyEvent.EventType.UnitHP,
-			};
-			RegEvent ();
+			
             bar = GameObject.Instantiate(Resources.Load<GameObject>("UI/BloodBar")) as GameObject;
             bar.transform.parent = WindowMng.windowMng.GetUIRoot().transform;
             Util.InitGameObject(bar);
@@ -38,20 +33,16 @@ namespace ChuMeng
 		// Use this for initialization
 		void Start ()
 		{
-            /*
-			progressBarEmpty = new Texture2D (1, 1);
-			progressBarEmpty.SetPixel (0, 0, new Color (0.5f, 0.5f, 0.5f, 0.8f));
-			progressBarEmpty.wrapMode = TextureWrapMode.Repeat;
-			progressBarEmpty.Apply ();
+            Log.GUI("BloodBar Start Event");
+            regLocalEvt = new System.Collections.Generic.List<MyEvent.EventType> (){
+                MyEvent.EventType.UnitHP,
+            };
+            RegEvent (true); 
 
-			progressBarFull = new Texture2D (1, 1);
-			progressBarFull.SetPixel (0, 0, new Color (0.8f, 0.2f, 0.2f, 0.8f));
-			progressBarFull.wrapMode = TextureWrapMode.Repeat;
-			progressBarFull.Apply ();
-            */
+            GetComponent<NpcAttribute>().ChangeHP(0);
+        }
 
-			//GetComponent<NpcAttribute> ().ChangeHP (0);
-		}
+
 		protected override void OnLocalEvent (MyEvent evt)
 		{	
 			Log.Important ("Blood bar OnEvent "+gameObject.name+" type "+evt.type+" "+evt.localID+" localId "+GetComponent<KBEngine.KBNetworkView>().GetLocalId());
