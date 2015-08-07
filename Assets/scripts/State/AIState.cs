@@ -28,6 +28,11 @@ namespace ChuMeng
 		}
 
 		public AIStateEnum type = AIStateEnum.INVALID;
+        /// <summary>
+        ///构成一个Idle组成的树状结构
+        /// Idle对应的状态有自己的层 
+        /// </summary>
+        public int layer = 0;
 
 		public AIState ()
 		{

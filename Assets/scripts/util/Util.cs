@@ -26,12 +26,14 @@ namespace ChuMeng
         Light = 11, //场景灯光元素所在层
         Light2  = 8, //不小心将粒子的光照设置到了这层
         SceneProps = 14, //场景物件所在层
+        IgnoreCollision = 15,
 	}
 
-	public class GameTag
+	public static class GameTag
 	{
 		public const string Player = "Player";
 		public const string Enemy = "Enemy";
+        public const string Npc = "Npc";
 	}
 
 	public enum UIDepth

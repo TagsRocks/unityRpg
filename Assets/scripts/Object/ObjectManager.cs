@@ -635,8 +635,8 @@ namespace ChuMeng
                 geMethod.Invoke (null, new object[]{g});// as AIBase;
 
                 g.transform.parent = transform;
-                g.tag = GameTag.Player; //Player Or Npc 
-                g.layer = (int)GameLayer.Npc;
+                g.tag = GameTag.Npc; //Player Or Npc 
+                g.layer = (int)GameLayer.IgnoreCollision;
 
                 //Register Unique Id To Npc 
                 var netView = g.GetComponent<KBEngine.KBNetworkView> ();

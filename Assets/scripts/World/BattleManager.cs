@@ -211,6 +211,7 @@ namespace ChuMeng
             {
                 protectWall.GetComponent<ProtectWall>().ShowWall();
             }
+            MyEventSystem.myEventSystem.PushEvent(MyEvent.EventType.EnterNextZone);
 
 
             InitZone();
@@ -240,9 +241,17 @@ namespace ChuMeng
                 } else
                 {
                     Log.Sys("BattleManager::NextWave No Wave Battle Finish " + MaxWave);
-                    yield return StartCoroutine(LevelFinish());
+                    var n = MyEventSystem.myEventSystem.GetRegEventHandler(MyEvent.EventType.LevelFinish);
+                    if(n > 0) {
+                        MyEventSystem.myEventSystem.PushEvent(MyEvent.EventType.LevelFinish);
+                    }else {
+                        yield return StartCoroutine(LevelFinish());
+                    }
                 }
             }
+        }
+        public void GameOver() {
+            StartCoroutine(LevelFinish());
         }
 
         /// <summary>

@@ -15,6 +15,8 @@ TagManager:
   - 
   - LightCamera
   - 
+  - Enermy
+  - 
   Builtin Layer 0: Default
   Builtin Layer 1: TransparentFX
   Builtin Layer 2: Ignore Raycast
@@ -30,7 +32,7 @@ TagManager:
   User Layer 12: PlayerCamera
   User Layer 13: Npc
   User Layer 14: SceneProps
-  User Layer 15: 
+  User Layer 15: IgnoreCollision
   User Layer 16: 
   User Layer 17: 
   User Layer 18: 

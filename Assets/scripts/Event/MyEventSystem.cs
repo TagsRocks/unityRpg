@@ -136,6 +136,16 @@ namespace ChuMeng
 
             ShowStory,
             EndStory,
+
+            EnterNextZone,
+
+            BossSpawn,
+            SpeakOver,//对话结束
+            BossDead,
+
+            NpcDead,
+            LevelFinish,
+            GameOver,
 		}
 
 
@@ -276,7 +286,18 @@ namespace ChuMeng
 				evtListener.Remove(callback);
 			}
 		}
-
+        /// <summary>
+        ///获得注册了特定事件的事件处理器数量 
+        /// </summary>
+        /// <returns>The reg event handler.</returns>
+        /// <param name="evt">Evt.</param>
+        public int GetRegEventHandler(MyEvent.EventType evt) {
+            List<EventDel> evtListeners = null;
+            if (m_listeners.TryGetValue (evt, out evtListeners)) {
+                return evtListeners.Count;
+            }
+            return 0;
+        }
 		public void PushEvent(MyEvent evt) {
 			List<EventDel> evtListeners = null;
 			if (m_listeners.TryGetValue (evt.type, out evtListeners)) {

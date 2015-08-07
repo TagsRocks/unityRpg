@@ -27,8 +27,6 @@ namespace ChuMeng
         {
         }
 
-
-
         //Wait For All Npc Init Over
         //Then Set Npc TalkHandler
         IEnumerator Start(){

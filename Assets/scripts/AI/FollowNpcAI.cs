@@ -11,6 +11,7 @@ namespace ChuMeng
             ai.attribute = attribute;
             ai.AddState (new FollowIdle ());
             ai.AddState (new FollowRun ());
+            ai.AddState(new FollowDead());
         }
 
         void Start ()

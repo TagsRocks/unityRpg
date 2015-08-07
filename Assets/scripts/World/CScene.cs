@@ -7,7 +7,7 @@ using System.Linq;
 //一个场景中的数据，包括LevelInit AStar 以及 BattleManager 以及Forever怪物出生点等信息
 namespace ChuMeng
 {
-	public class CScene : MonoBehaviour
+	public class CScene : KBEngine.MonoBehaviour 
 	{
 		public bool IsCity {
 			get {
@@ -15,7 +15,7 @@ namespace ChuMeng
 			}
 		}
 		public DungeonConfigData def;
-        void Awake() {
+        protected virtual void Awake() {
             GameObject.DontDestroyOnLoad(gameObject);
         }
         public static CScene CreateScene(DungeonConfigData sceneDef){

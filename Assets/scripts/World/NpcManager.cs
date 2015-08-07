@@ -21,6 +21,11 @@ namespace ChuMeng
         public QuestNpcAI GetNpc(string name) {
             return map[name].GetComponent<QuestNpcAI>();
         }
+
+        public GameObject GetNpcObj(string name){
+            return map[name];
+        }
+
         Dictionary<string, GameObject> map = new Dictionary<string, GameObject>();
         public void RegNpc(string name, GameObject npc) {
             map[name] = npc;

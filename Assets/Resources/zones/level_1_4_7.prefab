@@ -10,7 +10,7 @@ GameObject:
   - 4: {fileID: 400000}
   - 114: {fileID: 11400000}
   m_Layer: 0
-  m_Name: bull
+  m_Name: boss
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -872,6 +872,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &158976
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 458976}
+  - 114: {fileID: 11458976}
+  m_Layer: 0
+  m_Name: bull
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!4 &400000
 Transform:
   m_ObjectHideFlags: 1
@@ -879,11 +895,11 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 26.3740807, y: 1.68171096, z: 56.6037369}
+  m_LocalPosition: {x: -4.11000013, y: 1.67999995, z: 56.5999985}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 400104}
-  m_RootOrder: 24
+  m_RootOrder: 25
 --- !u!4 &400002
 Transform:
   m_ObjectHideFlags: 1
@@ -1554,6 +1570,7 @@ Transform:
   - {fileID: 400006}
   - {fileID: 400004}
   - {fileID: 400002}
+  - {fileID: 458976}
   - {fileID: 400000}
   m_Father: {fileID: 400106}
   m_RootOrder: 0
@@ -1573,6 +1590,18 @@ Transform:
   - {fileID: 400048}
   m_Father: {fileID: 0}
   m_RootOrder: 0
+--- !u!4 &458976
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 158976}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 26.3740807, y: 1.68171096, z: 56.6037369}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 400104}
+  m_RootOrder: 24
 --- !u!23 &2300000
 Renderer:
   m_ObjectHideFlags: 1
@@ -1782,11 +1811,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c4fae6f481a441cdb162962549e72c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  waveNum: 3
+  waveNum: 4
   Forever: 0
   Group: 0
-  Resource: {fileID: 100106, guid: 5551c8507ad8cc64186c498658a7b53c, type: 2}
-  MonsterID: 113
+  Resource: {fileID: 100100, guid: b862d1b01c2344c5a95e187211a932b0, type: 2}
+  MonsterID: 5
   reset: 0
   isSpawnYet: 0
   Level: 1
@@ -3206,7 +3235,7 @@ MonoBehaviour:
   CollisionSubEmitter: 
   DeathSubEmitter: 
   AvailableNodeCount: 10
-  LastClientPos: {x: 1.85037982, y: -.393957138, z: 85.2511063}
+  LastClientPos: {x: 1.85037982, y: -.393957138, z: 3.8056035}
   MyCamera: {fileID: 0}
   Owner: {fileID: 11400056}
   mStopped: 0
@@ -3639,7 +3668,7 @@ MonoBehaviour:
   CollisionSubEmitter: 
   DeathSubEmitter: 
   AvailableNodeCount: 10
-  LastClientPos: {x: -1.78409183, y: -.463624477, z: 85.2511063}
+  LastClientPos: {x: -1.78409183, y: -.463624477, z: 3.80560303}
   MyCamera: {fileID: 0}
   Owner: {fileID: 11400060}
   mStopped: 0
@@ -4072,7 +4101,7 @@ MonoBehaviour:
   CollisionSubEmitter: 
   DeathSubEmitter: 
   AvailableNodeCount: 10
-  LastClientPos: {x: 0, y: -.350543022, z: 85.2511063}
+  LastClientPos: {x: 0, y: -.350543022, z: 3.80560327}
   MyCamera: {fileID: 0}
   Owner: {fileID: 11400064}
   mStopped: 0
@@ -4949,7 +4978,7 @@ MonoBehaviour:
   CollisionSubEmitter: 
   DeathSubEmitter: 
   AvailableNodeCount: 10
-  LastClientPos: {x: 1.85037982, y: -.393957138, z: 4.38205481}
+  LastClientPos: {x: 49.2069588, y: -.393957138, z: 54.7579079}
   MyCamera: {fileID: 0}
   Owner: {fileID: 11400074}
   mStopped: 0
@@ -5382,7 +5411,7 @@ MonoBehaviour:
   CollisionSubEmitter: 
   DeathSubEmitter: 
   AvailableNodeCount: 10
-  LastClientPos: {x: -1.78409183, y: -.463624477, z: 4.38205481}
+  LastClientPos: {x: 45.5724869, y: -.463624477, z: 54.7579079}
   MyCamera: {fileID: 0}
   Owner: {fileID: 11400078}
   mStopped: 0
@@ -5815,7 +5844,7 @@ MonoBehaviour:
   CollisionSubEmitter: 
   DeathSubEmitter: 
   AvailableNodeCount: 10
-  LastClientPos: {x: 0, y: -.350543022, z: 4.38205481}
+  LastClientPos: {x: 47.3565788, y: -.350543022, z: 54.7579079}
   MyCamera: {fileID: 0}
   Owner: {fileID: 11400082}
   mStopped: 0
@@ -5845,6 +5874,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 413e32afe718f4a86a6c893f52d914ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  colliderObj: {fileID: 0}
 --- !u!114 &11400086
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5882,6 +5912,30 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Remove: 0
   Reset: 0
+--- !u!114 &11458976
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 158976}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c4fae6f481a441cdb162962549e72c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  waveNum: 3
+  Forever: 0
+  Group: 0
+  Resource: {fileID: 100106, guid: 5551c8507ad8cc64186c498658a7b53c, type: 2}
+  MonsterID: 113
+  reset: 0
+  isSpawnYet: 0
+  Level: 1
+  GroupNum: 1
+  Radius: 0
+  AddLevel: 0
+  TotalWave: 5
+  waveText: {fileID: 0}
 --- !u!135 &13500000
 SphereCollider:
   m_ObjectHideFlags: 1

@@ -15,6 +15,7 @@ using System.Collections.Generic;
 namespace ChuMeng {
 	/// <summary>
 	/// 通用逻辑需要的 数据池 和 相关逻辑代码
+    /// Billboard
 	/// </summary>
 	public class CommonAI : MonoBehaviour {
 		NpcAttribute attribute;
@@ -205,6 +206,9 @@ namespace ChuMeng {
 				yield return null;
 			}
 		}
+
+
+
 	}
 }
 

@@ -31,6 +31,13 @@ namespace ChuMeng
         public override IEnumerator RunLogic()
         {
            yield return GetAttr().StartCoroutine(CheckMoveToPlayer());
+            while(!quit) {
+                if (CheckEvent())
+                {
+                    return true;
+                }
+                yield return null;
+            }
         }
     }
 
