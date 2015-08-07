@@ -20,10 +20,11 @@ namespace ChuMeng
         {
             Log.GUI("TalkToNpc");
             var myp = ObjectManager.objectManager.GetMyPlayer();
-            var hitColliders = Physics.OverlapSphere(myp.transform.position, 2, 1 << (int)GameLayer.Npc);
+            var hitColliders = Physics.OverlapSphere(myp.transform.position, 2, 1 << (int)GameLayer.IgnoreCollision);
             var cosAngle = Mathf.Cos(Mathf.Deg2Rad * 90);
             var myfor = myp.transform.forward;
             myfor.y = 0;
+            Log.GUI("TalkTONum "+hitColliders.Length);
             for (int i = 0; i < hitColliders.Length; i++)
             {
                 var obj = hitColliders [i].gameObject;

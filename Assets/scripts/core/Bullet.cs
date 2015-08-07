@@ -99,6 +99,9 @@ namespace ChuMeng
 		}
 		void DoDamage(Collider other){
 			if (other.tag == enemyTag && !missileData.DontHurtObject) {
+                if(!string.IsNullOrEmpty(skillData.HitSound)) {
+                    BackgroundSound.Instance.PlayEffect(skillData.HitSound);
+                }
 				SkillDamageCaculate.DoDamage (attacker, new SkillFullInfo (skillData), other.gameObject);
 			}
 		}

@@ -43,7 +43,7 @@ MonoBehaviour:
   DieParticle: {fileID: 0}
   HitParticle: {fileID: 0}
   ReleaseParticle: {fileID: 0}
-  Velocity: 5
+  Velocity: 10
   Radius: .5
   MaxDistance: 5
   NumRicochets: 0
@@ -51,7 +51,11 @@ MonoBehaviour:
   GotoPosition: 0
   piercing: 1
   maxTurnRate: 360
-  DieWaitTime: 2
+  DieWaitTime: 4
+  IsAOE: 0
+  AOERadius: 0
+  DontHurtObject: 0
+  shakeData: {fileID: 0}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

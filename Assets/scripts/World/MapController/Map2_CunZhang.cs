@@ -83,9 +83,15 @@ namespace ChuMeng
             var dia = npcDialog.GetComponent<NpcDialog>();
             dia.ShowText(string.Format(text [0], ObjectManager.objectManager.GetMyName()));
         }
-
+        void CunZhang5(){
+            string[] text = new string[]{
+                "孩子你终于安全回来了！后面故事待续", 
+            };
+            NpcDialogInterface.ShowTextList(text, null);
+        }
         void TalkToCunZhang()
         {
+            Log.GUI("TalkTOCunZhange");
             //未曾开始对话
             if (!GameInterface_Player.GetGameState(GameBool.chapter1Start))
             {
@@ -111,6 +117,8 @@ namespace ChuMeng
                     }
                 }else if(step == 1){
                     CunZhang4();
+                }else {
+                    CunZhang5();
                 }
             }
         }
