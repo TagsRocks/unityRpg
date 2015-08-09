@@ -14,13 +14,15 @@ namespace ChuMeng
         Transform doorOpenBeam;
         public Transform colliderObj;
         List<Transform> beams;
-        // Use this for initialization
-        void Start()
-        {
+        void Awake() {
             doorOpenBeam = Util.FindChildRecursive(transform, "doorOpenBeam");
             doorOpenBeam.gameObject.SetActive(false);
             colliderObj = transform.FindChild("collider");
             beams = Util.FindAllChild(transform, "enterBeam_entrance");
+        }
+        // Use this for initialization
+        void Start()
+        {
         }
 
         /// <summary>
@@ -28,6 +30,7 @@ namespace ChuMeng
         /// </summary>
         public void ZoneClear()
         {
+            gameObject.SetActive(true);
             colliderObj.gameObject.SetActive(false);
             StartCoroutine(WaitShowDoorOpenEffect());
         }

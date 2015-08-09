@@ -148,10 +148,12 @@ namespace ChuMeng
             loadedZone [currentRoomIndex] = zone;
             BattleManager.battleManager.AddZone(zone);
 
+            /*
             var exit = zone.transform.FindChild("exitZone");
             if(exit != null) {
                 exit.gameObject.AddComponent<CheckNearMainCamera>();
             }
+            */
 
             yield return null;
         }

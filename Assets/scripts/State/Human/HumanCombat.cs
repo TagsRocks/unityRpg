@@ -144,8 +144,10 @@ namespace ChuMeng
 			while (!quit) {
 				attackAniName = GetAttackAniName (); 
 
-				var realAttackTime = GetAttr ().ObjUnitData.AttackAniSpeed;
-				var rate = GetAttr().animation[attackAniName].length/realAttackTime;
+                var realAttackTime = activeSkill.skillData.AttackAniTime/GetAttr().GetSpeedCoff();
+                var rate = GetAttr().animation[attackAniName].length/realAttackTime;
+				//var realAttackTime = GetAttr ().ObjUnitData.AttackAniSpeed;
+				//var rate = GetAttr().animation[attackAniName].length/realAttackTime;
 				if(first) {
 					PlayAni(attackAniName, rate, WrapMode.Once);
 					first = false;

@@ -1410,7 +1410,7 @@ MonoBehaviour:
   LifeTime: -1
   IgnoreTimeScale: 0
   EditView: 0
-  Scale: 2
+  Scale: 3
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

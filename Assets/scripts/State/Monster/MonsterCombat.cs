@@ -21,7 +21,7 @@ namespace ChuMeng {
             var skillStateMachine = SkillLogic.CreateSkillStateMachine (GetAttr().gameObject, activeSkill.skillData, GetAttr().transform.position, targetPlayer);
 			Log.AI ("Skill SetAni "+activeSkill.skillData.AnimationName);
 
-			var realAttackTime = activeSkill.skillData.AttackAniTime;
+			var realAttackTime = activeSkill.skillData.AttackAniTime/GetAttr().GetSpeedCoff();
 			var rate = GetAttr().animation[activeSkill.skillData.AnimationName].length/realAttackTime;
 			SetAni (activeSkill.skillData.AnimationName, rate, WrapMode.Once);
             var physic = GetAttr().GetComponent<PhysicComponent>();
