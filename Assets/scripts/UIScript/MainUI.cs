@@ -20,12 +20,17 @@ namespace ChuMeng
             SetCallback("NormalATKButton", OnTalk);
             SetCallback("StoreButton", OnStore);
             SetCallback("PackButton", OnPack);
+            SetCallback("GMButton", OnGM);
             this.regEvt = new System.Collections.Generic.List<MyEvent.EventType>(){
                 MyEvent.EventType.UpdateItemCoffer,
                 MyEvent.EventType.UpdateMainUI,
                 MyEvent.EventType.UpdatePlayerData,
             };
             RegEvent();
+        }
+        void OnGM() {
+            WindowMng.windowMng.PushView("UI/GMCmd");
+
         }
         void OnPack(GameObject g){
             WindowMng.windowMng.PushView ("UI/Package", true);

@@ -34,8 +34,20 @@ namespace ChuMeng
         }
         void OnLevel(int levId){
             Log.GUI("OnLevelId "+levId);
-            CopyController.copyController.SelectLevel (curChapter, allLevels[levId]);
+            var levData = allLevels[levId];
+            if(levData.levelLocal.condition != 0 && allLevels.Count > (levId+1)) {
+                var num = BackPack.backpack.GetItemCount(0, levData.levelLocal.condition);
+                var item = Util.GetItemData(0, levData.levelLocal.condition);
+                if(num <= 0) {
+                    WindowMng.windowMng.ShowNotifyLog(string.Format("[ff1010]{0}[-]被魔神强大结界所笼罩,需要[ff1010]{1}[-]打破结界, 似乎[ff1010]商店[-]有此物可以获得。", 
+                              levData.levelLocal.name, item.ItemName));
+                    return;
+                }else {
+                    GameInterface_Backpack.UseItem(levData.levelLocal.condition);
+                }
+            }
 
+            CopyController.copyController.SelectLevel (curChapter, allLevels[levId]);
             WorldManager.worldManager.WorldChangeScene(CopyController.copyController.SelectLevelInfo.levelLocal.id, false);
             Log.GUI("OnCopyLevel "+levId);
         }

@@ -196,12 +196,13 @@ MonoBehaviour:
   shape: 0
   angle: 0
   enable: 0
-  radius: 2
+  radius: 3
   Once: 0
   SyncWithPlayer: 0
   NoHurt: 0
   speed: 6
   Distance: 6
+  delayTime: 0
 --- !u!114 &11400004
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -217,7 +218,7 @@ MonoBehaviour:
   duration: .200000003
   direction: {x: 0, y: 1, z: 0}
   magnitude: 1
-  active: 1
+  autoRemove: 0
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

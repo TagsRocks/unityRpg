@@ -36,6 +36,7 @@ namespace ChuMeng
 			//sg = SaveGame.saveGame;
 		}
         public void TryToLogin(){
+            Log.Net("TryToLogin");
             if(SaveGame.saveGame.otherAccounts.Count == 0){
                 StartCoroutine(regAndLog());
             }else {
