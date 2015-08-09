@@ -111,7 +111,8 @@ namespace ChuMeng
 					moveDirection = Vector3.RotateTowards (moveDirection, targetDirection, rotateSpeed * Time.deltaTime, 0);			
 				}
                 moveDirection = moveDirection.normalized;
-				playerMove.transform.rotation = Quaternion.LookRotation (moveDirection);
+				//playerMove.transform.rotation = Quaternion.LookRotation (moveDirection);
+                physics.TurnTo(moveDirection);
                 var movement = moveDirection * walkSpeed ;
                 physics.MoveSpeed(movement);
 

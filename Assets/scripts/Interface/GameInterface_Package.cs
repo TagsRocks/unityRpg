@@ -15,8 +15,8 @@ using System.Collections.Generic;
  */ 
 
 namespace ChuMeng {
-	public class PlayerPackage {
-		public static PlayerPackage playerPackage = new PlayerPackage();
+	public class GameInterface_Package {
+		public static GameInterface_Package playerPackage = new GameInterface_Package();
 
 		public enum PackagePageEnum
 		{

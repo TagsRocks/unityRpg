@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 namespace ChuMeng
@@ -6,7 +6,7 @@ namespace ChuMeng
     public class DetailInfo : IUserInterface 
     {
         public BackpackData backpackData;
-        public EquipData equipData;
+        private EquipData equipData;
         UILabel Name;
 
         void Awake() {
@@ -38,10 +38,20 @@ namespace ChuMeng
         }
         void OnEquip(){
         }
+        public void SetEquip(EquipData ed) {
+            equipData = ed;
+        }
         protected override void OnEvent(MyEvent evt)
         {
-
             if(equipData != null) {
+                var allEquip = BackPack.backpack.GetEquipmentData();
+                foreach(var e in allEquip) {
+                    if(e.id == equipData.id) {
+                        SetEquip(e);
+                        break;
+                    }
+                }
+
                 var label = GetLabel("Equip/Label");
                 label.text = "卸下";
                 GetName("Equip").SetActive(false);
@@ -113,7 +123,7 @@ namespace ChuMeng
 
         }
         void OnSell() {
-            PlayerPackage.SellItem(backpackData);
+            GameInterface_Package.SellItem(backpackData);
             WindowMng.windowMng.PopView();
         }
 

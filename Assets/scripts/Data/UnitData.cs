@@ -46,6 +46,7 @@ namespace ChuMeng
             get
             {
                 return config.id > 1000;
+                //return false;
             }
         }
 

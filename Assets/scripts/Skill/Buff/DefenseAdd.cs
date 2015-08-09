@@ -10,7 +10,7 @@ namespace ChuMeng {
 		}
 		public override void OnActive ()
 		{
-			obj.GetComponent<CharacterInfo> ().SetDirty (CharAttribute.CharAttributeEnum.DEFENSE);
+			//obj.GetComponent<CharacterInfo> ().SetDirty (CharAttribute.CharAttributeEnum.DEFENSE);
 		}
 		public override int GetArmor ()
 		{
@@ -19,7 +19,7 @@ namespace ChuMeng {
 		public override void OnDie ()
 		{
 			base.OnDie ();
-			obj.GetComponent<CharacterInfo> ().SetDirty (CharAttribute.CharAttributeEnum.DEFENSE);
+			//obj.GetComponent<CharacterInfo> ().SetDirty (CharAttribute.CharAttributeEnum.DEFENSE);
 		}
 
 	}

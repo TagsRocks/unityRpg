@@ -6,6 +6,7 @@ namespace ChuMeng
     //Move To Target Point
     public class FollowRun : MoveState
     {
+        float speed = 5;
         //一次性初始化代码
         public override void EnterState()
         {
@@ -37,10 +38,10 @@ namespace ChuMeng
                 }
 
                 dir.Normalize();
-                var rotation = Quaternion.LookRotation(dir);
-                myTransform.rotation = Quaternion.Slerp(myTransform.rotation, rotation, Mathf.Min(1, Time.deltaTime*10));
-
-                physic.MoveSpeed(dir * 5 );
+                //var rotation = Quaternion.LookRotation(dir);
+                //myTransform.rotation = Quaternion.Slerp(myTransform.rotation, rotation, Mathf.Min(1, Time.deltaTime*10));
+                physic.TurnTo(dir);
+                physic.MoveSpeed(dir * speed);
                 yield return null ;
             }
         }

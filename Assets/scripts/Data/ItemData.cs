@@ -1,4 +1,4 @@
-﻿
+
 /*
 Author: liyonghelpme
 Email: 233242872@qq.com
@@ -368,22 +368,22 @@ namespace ChuMeng
 			return a;
 		}
 
-		public bool IsPackage (PlayerPackage.PackagePageEnum pkg)
+		public bool IsPackage (GameInterface_Package.PackagePageEnum pkg)
 		{
-			if (pkg == PlayerPackage.PackagePageEnum.All) {
+			if (pkg == GameInterface_Package.PackagePageEnum.All) {
 				return true;
 			}
-			if (pkg == PlayerPackage.PackagePageEnum.Equip) {
+			if (pkg == GameInterface_Package.PackagePageEnum.Equip) {
 				return IsEquip ();
 			}
-			if (pkg == PlayerPackage.PackagePageEnum.Fashion) {
+			if (pkg == GameInterface_Package.PackagePageEnum.Fashion) {
 				return IsFashion ();
 			}
-			if (pkg == PlayerPackage.PackagePageEnum.Task) {
+			if (pkg == GameInterface_Package.PackagePageEnum.Task) {
 				return IsTask ();
 			}
 
-			if (pkg == PlayerPackage.PackagePageEnum.General) {
+			if (pkg == GameInterface_Package.PackagePageEnum.General) {
 				return IsGeneral ();
 			}
 

@@ -21,7 +21,7 @@ namespace ChuMeng
 	public class CharacterInfo : KBEngine.MonoBehaviour
 	{
 		private Dictionary<CharAttribute.CharAttributeEnum, int> propertyValue = new Dictionary<CharAttribute.CharAttributeEnum, int> ();
-		Dictionary<CharAttribute.CharAttributeEnum, bool> propertyDirty = new Dictionary<CharAttribute.CharAttributeEnum, bool>();
+		//Dictionary<CharAttribute.CharAttributeEnum, bool> propertyDirty = new Dictionary<CharAttribute.CharAttributeEnum, bool>();
 		public bool initYet = false;
 		NpcAttribute attribute;
 	
@@ -122,6 +122,11 @@ namespace ChuMeng
 			*/
 		}
 	
+        /// <summary>
+        /// 某种属性当前为脏值，需要重新计算 
+        /// </summary>
+        /// <param name="key">Key.</param>
+        /*
 		public void SetDirty(CharAttribute.CharAttributeEnum key) {
 			propertyDirty [key] = true;
 		}
@@ -133,6 +138,7 @@ namespace ChuMeng
 			propertyDirty.TryGetValue (key, out ret);
 			return ret;
 		}
+        */
 
 		// Use this for initialization
 		IEnumerator Start ()

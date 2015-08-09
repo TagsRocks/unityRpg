@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -72,7 +72,7 @@ namespace ChuMeng
             if(gems.Count < 2){
                 WindowMng.windowMng.ShowNotifyLog("需要放入两个宝石才能升级!");
             }else {
-                PlayerPackage.playerPackage.LevelUpEquip(equip, gems);
+                GameInterface_Package.playerPackage.LevelUpEquip(equip, gems);
             }
         }
 

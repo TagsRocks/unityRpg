@@ -42,7 +42,9 @@ namespace ChuMeng
 					yield break;
 				}
 
-				GetAttr().transform.rotation = Quaternion.Slerp(GetAttr().transform.rotation, rotation, Time.deltaTime*FastRotateSpeed);
+				//GetAttr().transform.rotation = Quaternion.Slerp(GetAttr().transform.rotation, rotation, Time.deltaTime*FastRotateSpeed);
+                var newDir = Vector3.Slerp(GetAttr().transform.forward, dir, Time.deltaTime*FastRotateSpeed);
+                physic.TurnTo(newDir);
 				//GetController().SimpleMove(dir*RunSpeed);
 				physic.MoveSpeed(dir*RunSpeed);
 				runTime += Time.deltaTime;

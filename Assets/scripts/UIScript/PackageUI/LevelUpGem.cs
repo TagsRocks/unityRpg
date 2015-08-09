@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -62,11 +62,11 @@ namespace ChuMeng
                         lev = g.itemData.Level;
                     }
                 }
-                var target = PlayerPackage.GetAllLevGems(lev+1);
+                var target = GameInterface_Package.GetAllLevGems(lev+1);
                 if(target.Count == 0){
                     WindowMng.windowMng.ShowNotifyLog("该宝石无法合成");
                 }else {
-                    PlayerPackage.playerPackage.LevelUpGem(gems);
+                    GameInterface_Package.playerPackage.LevelUpGem(gems);
                 }
             }
         }

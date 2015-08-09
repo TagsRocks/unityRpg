@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -658,7 +658,7 @@ namespace ChuMeng
             var gem = GetItemInPack(gemId);
             var itemData = Util.GetItemData(0, gem.PackEntry.BaseId);
 
-            var targetGem = PlayerPackage.GetRndGem(itemData.Level + 1);
+            var targetGem = GameInterface_Package.GetRndGem(itemData.Level + 1);
             if (targetGem != null)
             {
                 AddItemInPackage(targetGem.id, 1);

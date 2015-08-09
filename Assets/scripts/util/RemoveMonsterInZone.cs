@@ -2,16 +2,23 @@
 using System.Collections;
 using ChuMeng;
 
-public class RemoveMonsterInZone : MonoBehaviour {
+public class RemoveMonsterInZone : MonoBehaviour
+{
     [ButtonCallFunc()]
-    public bool Remove;
-    public void RemoveMethod(){
+    public bool
+        Remove;
+
+    public void RemoveMethod()
+    {
         var pro = transform.Find("properties");
-        foreach(Transform t in pro){
+        foreach (Transform t in pro)
+        {
             var trigger = t.GetComponent<SpawnTrigger>();
             var spawnNpc = t.GetComponent<SpawnNpc>();
-            if(trigger != null || spawnNpc != null){
-                for(int i = 0; i < t.childCount; i++){
+            if (trigger != null || spawnNpc != null)
+            {
+                for (int i = 0; i < t.childCount; i++)
+                {
                     GameObject.DestroyImmediate(t.GetChild(i).gameObject);
 
                 }
@@ -19,25 +26,36 @@ public class RemoveMonsterInZone : MonoBehaviour {
         }
 
         pro = transform.Find("npcs");
-        foreach(Transform t in pro){
-            var trigger = t.GetComponent<SpawnTrigger>();
-            var spawnNpc = t.GetComponent<SpawnNpc>();
-            if(trigger != null || spawnNpc != null){
-                for(int i = 0; i < t.childCount; i++){
-                    GameObject.DestroyImmediate(t.GetChild(i).gameObject);
+        if (pro != null)
+        {
+            foreach (Transform t in pro)
+            {
+                var trigger = t.GetComponent<SpawnTrigger>();
+                var spawnNpc = t.GetComponent<SpawnNpc>();
+                if (trigger != null || spawnNpc != null)
+                {
+                    for (int i = 0; i < t.childCount; i++)
+                    {
+                        GameObject.DestroyImmediate(t.GetChild(i).gameObject);
 
+                    }
                 }
             }
         }
     }
 
     [ButtonCallFunc()]
-    public bool Reset;
-    public void ResetMethod(){
+    public bool
+        Reset;
+
+    public void ResetMethod()
+    {
         var pro = transform.Find("properties");
-        foreach(Transform t in pro){
+        foreach (Transform t in pro)
+        {
             var trigger = t.GetComponent<SpawnTrigger>();
-            if(trigger != null){
+            if (trigger != null)
+            {
                 trigger.reset = true;
                 trigger.UpdateEditor();
                 trigger.UpdateEditor();
@@ -45,13 +63,15 @@ public class RemoveMonsterInZone : MonoBehaviour {
         }
     }
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+    // Use this for initialization
+    void Start()
+    {
+    
+    }
+    
+    // Update is called once per frame
+    void Update()
+    {
+    
+    }
 }

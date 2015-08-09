@@ -396,6 +396,9 @@ namespace ChuMeng
             return d;
         }
 
+        public float GetSpeedCoff() {
+            return GetComponent<BuffComponent>().GetSpeedCoff();
+        }
         int GetAllArmor()
         {
             int a = _Armor;

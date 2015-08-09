@@ -172,7 +172,6 @@ namespace ChuMeng
                     passTime -= Time.deltaTime;
                     
                     var forward = GetAttr().transform.TransformDirection(Vector3.forward);
-
                     GetAttr().GetComponent<PhysicComponent>().MoveSpeed(forward * RunSpeed);
                     yield return null;
                 }

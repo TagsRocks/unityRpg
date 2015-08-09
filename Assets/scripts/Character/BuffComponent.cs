@@ -10,7 +10,9 @@ namespace ChuMeng {
 		
 		void Update () {
 			foreach(IEffect ef in effectList) {
-				ef.OnUpdate();
+                if(!ef.IsDie) {
+				    ef.OnUpdate();
+                }
 			}
 			for (int i = 0; i < effectList.Count; ) {
 				var ef = effectList[i];
@@ -33,6 +35,13 @@ namespace ChuMeng {
 				buff.Init (affix, gameObject);
 				buff.attacker = attacker;
 
+                if(affix.IsOnlyOne) {
+                    for(int i=0; i < effectList.Count; i++) {
+                        if(effectList[i].affix.effectType == affix.effectType) {
+                            effectList[i].IsDie = true;
+                        }
+                    }
+                }
 				effectList.Add (buff);
 				buff.OnActive ();
 			}
@@ -46,6 +55,15 @@ namespace ChuMeng {
 			}
 			return addArmor;
 		}
+
+        public float GetSpeedCoff() {
+            float speedCoff = 1;
+            foreach(IEffect ef in effectList) {
+                speedCoff *= ef.GetSpeedCoff();
+            }
+            return speedCoff;
+        }
+
 
 		void OnDisable() {
 			foreach(IEffect ef in effectList) {

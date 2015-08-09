@@ -85,6 +85,7 @@ namespace ChuMeng
         
         IEnumerator NewHeading()
         {
+            var physics = GetAttr().GetComponent<PhysicComponent>();
             while (!quit)
             {
                 aiCharacter.SetIdle();
@@ -103,6 +104,7 @@ namespace ChuMeng
                 
                 aiCharacter.SetRun();
                 passTime = directionChangeInterval;
+
                 while (passTime > 0)
                 {
                     if (CheckTarget())
@@ -110,10 +112,8 @@ namespace ChuMeng
                         yield break;
                     }
                     passTime -= Time.deltaTime;
-                    
                     var forward = GetAttr().transform.TransformDirection(Vector3.forward);
-                    
-                    GetAttr().GetComponent<PhysicComponent>().MoveSpeed(forward * RunSpeed);
+                    physics.MoveSpeed(forward * RunSpeed);
                     yield return null;
                 }
                 

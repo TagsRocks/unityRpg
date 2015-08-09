@@ -44,6 +44,10 @@ namespace ChuMeng
 			StartCoroutine (UpdateUnitSpawn());
 		}
 
+        /// <summary>
+        /// 生成子弹同时附着上当前Runner所对应事件的Affix 
+        /// </summary>
+        /// <param name="deg">Deg.</param>
 		void MakeMissile(float deg) {
 			Log.AI ("bullet degree "+deg);
 
@@ -55,6 +59,7 @@ namespace ChuMeng
 				bullet.skillData = runner.stateMachine.skillFullData.skillData;
 				attacker = runner.stateMachine.attacker;
 				bullet.attacker = runner.stateMachine.attacker;
+                bullet.runner = runner;
 			}
 
 			bullet.missileData = Missile;

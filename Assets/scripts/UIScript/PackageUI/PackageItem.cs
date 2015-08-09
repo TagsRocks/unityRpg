@@ -24,7 +24,7 @@ namespace ChuMeng
                 }
                 var win = WindowMng.windowMng.PushView("UI/DetailInfo");
                 var detail = win.GetComponent<DetailInfo>();
-                detail.equipData = equipData;
+                detail.SetEquip(equipData);
                 detail.backpackData = backpack;
                 MyEventSystem.PushEventStatic(MyEvent.EventType.UpdateDetailUI);
             }

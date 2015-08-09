@@ -53,6 +53,7 @@ namespace ChuMeng
         //触发Hit事件的时候 是否停止移动  冲击技能
         public float delayTime = 0;
         private  float passTime = 0;
+
         void Awake()
         {
             passTime = 0;
@@ -78,7 +79,8 @@ namespace ChuMeng
         void Update()
         {
             passTime += Time.deltaTime;
-            if(passTime < delayTime) {
+            if (passTime < delayTime)
+            {
                 return;
             }
             if (Once && damageYet)
@@ -90,53 +92,47 @@ namespace ChuMeng
 
                 if (!NoHurt)
                 {
-                    Collider[] hitColliders;
-                    if (SyncWithPlayer)
+                    if (shape == Shape.Line)
                     {
-                        hitColliders = Physics.OverlapSphere(runner.stateMachine.attacker.transform.position, radius, 1 << (int)GameLayer.Npc);
                     } else
                     {
-                        hitColliders = Physics.OverlapSphere(transform.position, radius, 1 << (int)GameLayer.Npc);
-                    }
-                 
-
-                    for (int i = 0; i < hitColliders.Length; i++)
-                    {
-                        if (hitColliders [i].tag == enemytTag)
+                        Collider[] hitColliders;
+                        if (SyncWithPlayer)
                         {
-                            if (!hurtEnemy.Contains(hitColliders [i].gameObject))
+                            hitColliders = Physics.OverlapSphere(runner.stateMachine.attacker.transform.position, radius, 1 << (int)GameLayer.Npc);
+                        } else
+                        {
+                            hitColliders = Physics.OverlapSphere(transform.position, radius, 1 << (int)GameLayer.Npc);
+                        }
+
+                        for (int i = 0; i < hitColliders.Length; i++)
+                        {
+                            if (hitColliders [i].tag == enemytTag)
                             {
-                                if (shape == Shape.Sphere)
+                                if (!hurtEnemy.Contains(hitColliders [i].gameObject))
                                 {
-                                    DoDamage(hitColliders [i].gameObject);
-                                    hurtEnemy.Add(hitColliders [i].gameObject);
-                                } else if (shape == Shape.Angle)
-                                {
-                                    Log.AI("DamageHit " + runner.stateMachine.name + " " + hitColliders [i].name);
-                                    var dir = hitColliders [i].gameObject.transform.position - transform.position;
-                                    var cos = Vector3.Dot(dir.normalized, transform.forward);
-                                    if (cos > cosAngle)
+                                    if (shape == Shape.Sphere)
                                     {
                                         DoDamage(hitColliders [i].gameObject);
                                         hurtEnemy.Add(hitColliders [i].gameObject);
-                                    }
-                                } else if (shape == Shape.Line)
-                                {
-                                    Log.AI("Line Hit " + runner.stateMachine.name + " " + hitColliders [i].name);
-                                    var dir = hitColliders [i].gameObject.transform.position - transform.position;
-                                    var cos = Vector3.Dot(dir, transform.forward);
-                                    if (cos > 0)
+                                    } else if (shape == Shape.Angle)
                                     {
-                                        var newPos = transform.position + cos * transform.forward;
-                                        var dis = Pathfinding.AstarMath.SqrMagnitudeXZ(hitColliders [i].transform.position, newPos); 
-                                        Log.AI("Distance " + dis);
-                                        if (dis < 1f)
+                                        Log.AI("DamageHit " + runner.stateMachine.name + " " + hitColliders [i].name);
+                                        var dir = hitColliders [i].gameObject.transform.position - transform.position;
+                                        var cos = Vector3.Dot(dir.normalized, transform.forward);
+                                        if (cos > cosAngle)
                                         {
                                             DoDamage(hitColliders [i].gameObject);
                                             hurtEnemy.Add(hitColliders [i].gameObject);
                                         }
-                                            
                                     }
+                                    /*
+                                else if (shape == Shape.Line)
+                                {
+                                    Log.AI("Line Hit " + runner.stateMachine.name + " " + hitColliders [i].name);
+                                    StartCoroutine(CheckLineDamage());
+                                }
+                                */
                                 }
                             }
                         }
@@ -158,6 +154,31 @@ namespace ChuMeng
                 enableYet = true;
             }
         }
+
+        /// <summary>
+        ///构建飞行的子弹进行伤害判定 
+        /// </summary>
+        /// <returns>The line damage.</returns>
+        ///
+        /*
+        IEnumerator CheckLineDamage()
+        {
+            var dir = hitColliders [i].gameObject.transform.position - transform.position;
+            var cos = Vector3.Dot(dir, transform.forward);
+            if (cos > 0)
+            {
+                var newPos = transform.position + cos * transform.forward;
+                var dis = Pathfinding.AstarMath.SqrMagnitudeXZ(hitColliders [i].transform.position, newPos); 
+                Log.AI("Distance " + dis + " width");
+                if (dis < 2f)
+                {
+                    DoDamage(hitColliders [i].gameObject);
+                    hurtEnemy.Add(hitColliders [i].gameObject);
+                }
+                                            
+            }
+        }
+        */
 
         IEnumerator MoveOwner()
         {

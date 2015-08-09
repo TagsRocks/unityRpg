@@ -1,4 +1,4 @@
-﻿
+
 /*
 Author: liyonghelpme
 Email: 233242872@qq.com
@@ -90,7 +90,7 @@ namespace ChuMeng
 
 		
 		//枚举背包物品
-		public BackpackData EnumItem(ChuMeng.PlayerPackage.PackagePageEnum type, int index) {
+		public BackpackData EnumItem(ChuMeng.GameInterface_Package.PackagePageEnum type, int index) {
 			var allSlots = SlotData;
 			if (index < allSlots.Count) {
 				return allSlots [index];

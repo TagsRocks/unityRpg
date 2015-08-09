@@ -5,7 +5,7 @@ using System.Collections.Generic;
 namespace ChuMeng {
 	public class IEffect {
 		protected GameObject obj;
-		protected Affix affix;
+		public Affix affix;
 		protected Affix.EffectType type;
 		public bool IsDie = false;
 		public GameObject attacker;
@@ -49,6 +49,14 @@ namespace ChuMeng {
 				GameObject.Destroy(unitTheme);
 			}
 		}
+
+        /// <summary>
+        /// 速度修正系数
+        /// </summary>
+        /// <returns>The speed coff.</returns>
+        public virtual float GetSpeedCoff() {
+            return 1;
+        }
 
 		public virtual int GetArmor ()
 		{

@@ -58,6 +58,9 @@ MonoBehaviour:
   - {fileID: 100000, guid: 8133031ffd95c4610b52da6484509ce7, type: 2}
   - {fileID: 100000, guid: cda36eb5df89c4908ad44cfbf08afd30, type: 2}
   - {fileID: 100000, guid: 1b4db632985534074b1b8f9d21ee3a23, type: 2}
+  - {fileID: 140522, guid: f5a5d66ff16a649929bbda8fe5385539, type: 2}
+  - {fileID: 145618, guid: 54c7e88364f1d4e1388bbdf42323fe97, type: 2}
+  - {fileID: 156034, guid: 2be5fd3575134466296a663870cc4ede, type: 2}
   LoadAllRooms: 0
 --- !u!1001 &100100000
 Prefab:

@@ -29,7 +29,7 @@ namespace ChuMeng
             Log.Sys("AddHpNum AddMpNum "+addNumHP+" mp "+addNumMp+" max "+hpmax+" mpmax "+mpmax);
 
             Log.Sys("TotalAddCount "+count+" total "+tc);
-            while(count < tc) {
+            while(count < tc && !IsDie) {
                 if(goneTime > period) {
                     npcAttr.ChangeHP(addNumHP);
                     npcAttr.ChangeMP(addNumMp);

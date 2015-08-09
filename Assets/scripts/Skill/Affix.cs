@@ -4,8 +4,12 @@ using System.Collections.Generic;
 
 namespace ChuMeng
 {
+    /// <summary>
+    /// Buff的配置参数Key列表 
+    /// </summary>
     public enum PairEnum {
         Percent = 0,
+        Abs = 1,
     }
     [System.Serializable]
     public struct Pair
@@ -25,6 +29,9 @@ namespace ChuMeng
             DefenseAdd, //防御增加
             KnockBack, //击退怪物
             AddHPMP, //增加HP和MP
+            Fushi, //腐蚀降低防御力
+            ReduceHP, //持续降低HP
+            Frozen, //冰冻降低移动攻击速度 50% 不能叠加
         }
 
         public EffectType effectType = EffectType.None;
@@ -56,5 +63,10 @@ namespace ChuMeng
             Debug.LogError("NotFindAffixPara "+effectType+" key "+key);
             return null;
         }
+
+        /// <summary>
+        /// 燃烧不能叠加 
+        /// </summary>
+        public bool IsOnlyOne = false;
     }
 }

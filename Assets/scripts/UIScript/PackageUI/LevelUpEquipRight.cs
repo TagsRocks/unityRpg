@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -56,7 +56,7 @@ namespace ChuMeng
             Cell.SetActive(false);
             for (int i = 0; i < BackPack.MaxBackPackNumber; i++)
             {
-                var item = PlayerPackage.playerPackage.EnumItem(PlayerPackage.PackagePageEnum.All, i);
+                var item = GameInterface_Package.playerPackage.EnumItem(GameInterface_Package.PackagePageEnum.All, i);
                 var temp = item;
                 if (item != null && item.itemData.IsGem())
                 {

@@ -16,6 +16,7 @@ namespace ChuMeng
 	//多种类型子弹子类 bulletType
 	public class Bullet : MonoBehaviour
 	{
+        public SkillLayoutRunner runner;
 		bool isDie = false;
 		public SkillData skillData;
 		public GameObject attacker;
@@ -97,12 +98,24 @@ namespace ChuMeng
 			}
 
 		}
+        /// <summary>
+        ///子弹伤害计算也交给skillLayoutRunner执行 
+        /// </summary>
+        /// <param name="other">Other.</param>
 		void DoDamage(Collider other){
 			if (other.tag == enemyTag && !missileData.DontHurtObject) {
                 if(!string.IsNullOrEmpty(skillData.HitSound)) {
                     BackgroundSound.Instance.PlayEffect(skillData.HitSound);
                 }
-				SkillDamageCaculate.DoDamage (attacker, new SkillFullInfo (skillData), other.gameObject);
+                if(runner != null) {
+                    runner.DoDamage(other.gameObject);
+                    /*
+                    if(runner.Event.affix.target == Affix.TargetType.Enemy) {
+                        other.gameObject.GetComponent<BuffComponent>().AddBuff(runner.Event.affix);
+                    }
+                    */
+                }
+				//SkillDamageCaculate.DoDamage (attacker, new SkillFullInfo (skillData), other.gameObject);
 			}
 		}
 

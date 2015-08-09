@@ -31,15 +31,24 @@ namespace ChuMeng
 			return true;
 		}
 
+        IEnumerator FollowAttacker(){
+            Log.AI ("attach Particle to player");
+            //transform.parent = stateMachine.attacker.transform;
+            var attacker = stateMachine.attacker.transform;
+            transform.localScale = Vector3.one;
+            while(attacker != null) {
+                transform.localPosition = attacker.transform.localPosition;
+                transform.localRotation = attacker.transform.localRotation;
+                yield return null;
+            }
+        }
+
 		void Start ()
 		{
 			if (Event.attaches) {
-				Log.AI ("attach Particle to player");
-				transform.parent = stateMachine.attacker.transform;
-				transform.localPosition = Vector3.zero;
-				transform.localRotation = Quaternion.identity;
-				transform.localScale = Vector3.one;
+                StartCoroutine(FollowAttacker());
 			}
+
 			if (Event.affix.effectType != Affix.EffectType.None && Event.affix.target == Affix.TargetType.Self) {
 				stateMachine.attacker.GetComponent<BuffComponent> ().AddBuff (Event.affix);
 			}
@@ -53,6 +62,7 @@ namespace ChuMeng
 				if (particle != null) {
 					var g = GameObject.Instantiate (particle) as GameObject;
 					var xft = g.GetComponent<XffectComponent>();
+                    //Wait To Show Particle Why?
 					xft.enabled = false;
 					NGUITools.AddMissingComponent<RemoveSelf> (g);
 

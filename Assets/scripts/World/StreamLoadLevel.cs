@@ -53,6 +53,7 @@ namespace ChuMeng
                     "KG",
                     "SW",
                     "SE",
+                    "N",
 
 
             };

@@ -24,7 +24,7 @@ namespace ChuMeng {
 			var realAttackTime = activeSkill.skillData.AttackAniTime;
 			var rate = GetAttr().animation[activeSkill.skillData.AnimationName].length/realAttackTime;
 			SetAni (activeSkill.skillData.AnimationName, rate, WrapMode.Once);
-
+            var physic = GetAttr().GetComponent<PhysicComponent>();
 			while(GetAttr().animation.isPlaying && !quit) {
 				if(CheckEvent()) {
 					break;
@@ -33,8 +33,10 @@ namespace ChuMeng {
 				//自动向目标旋转
 				Vector3 dir = targetPlayer.transform.position - GetAttr ().transform.position;
 				dir.y = 0;
-				var rotation = Quaternion.LookRotation (dir);
-				GetAttr ().transform.rotation = Quaternion.Slerp (GetAttr ().transform.rotation, rotation, Time.deltaTime * FastRotateSpeed);
+                var newDir = Vector3.Slerp(GetAttr().transform.forward, dir, Time.deltaTime * FastRotateSpeed );
+				//var rotation = Quaternion.LookRotation (dir);
+				//GetAttr ().transform.rotation = Quaternion.Slerp (GetAttr ().transform.rotation, rotation, Time.deltaTime * FastRotateSpeed);
+                physic.TurnTo(newDir);
 				yield return null;
 			}
             skillStateMachine.Stop();
@@ -84,8 +86,10 @@ namespace ChuMeng {
 					}
 					Vector3 dir = targetPlayer.transform.position-GetAttr().transform.position;
 					dir.y = 0;
-					var rotation = Quaternion.LookRotation(dir);
-					GetAttr().transform.rotation = Quaternion.Slerp(GetAttr().transform.rotation, rotation, Time.deltaTime*FastRotateSpeed);
+                    var newDir = Vector3.Slerp(GetAttr().transform.forward, dir, Time.deltaTime*FastRotateSpeed);
+                    physic.TurnTo(newDir);
+					//var rotation = Quaternion.LookRotation(dir);
+					//GetAttr().transform.rotation = Quaternion.Slerp(GetAttr().transform.rotation, rotation, Time.deltaTime*FastRotateSpeed);
 					
 					var right = GetAttr().transform.TransformDirection(Vector3.right);
 					var back = GetAttr().transform.TransformDirection(Vector3.back);
@@ -115,9 +119,11 @@ namespace ChuMeng {
 					if(dir.magnitude < GetAttr().AttackRange*0.8f) {
 						break;
 					}
-					var rotation = Quaternion.LookRotation(dir);
+					//var rotation = Quaternion.LookRotation(dir);
 					
-					GetAttr().transform.rotation = Quaternion.Slerp(GetAttr().transform.rotation, rotation, Time.deltaTime*FastRotateSpeed);
+					//GetAttr().transform.rotation = Quaternion.Slerp(GetAttr().transform.rotation, rotation, Time.deltaTime*FastRotateSpeed);
+                    var newDir = Vector3.Slerp(GetAttr().transform.forward, dir, Time.deltaTime*FastRotateSpeed);
+                    physic.TurnTo(newDir);
 					var forward = GetAttr().transform.TransformDirection(Vector3.forward);
 					
 					//GetController().SimpleMove(forward*RunSpeed);

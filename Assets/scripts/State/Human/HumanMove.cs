@@ -33,6 +33,7 @@ namespace ChuMeng
 			var camForward = playerMove.camForward;
 
             GetAttr().StartCoroutine(MoveSound());
+            var physics = playerMove.GetComponent<PhysicComponent>();
 			while (!quit) {
 				if (CheckEvent ()) {
 					yield break;
@@ -73,8 +74,10 @@ namespace ChuMeng
 
 				var movement = moveDirection * moveSpeed;
 
-				playerMove.GetComponent<PhysicComponent>().MoveSpeed(movement);
-				playerMove.transform.rotation = Quaternion.LookRotation (moveDirection);
+				//playerMove.GetComponent<PhysicComponent>().MoveSpeed(movement);
+                physics.MoveSpeed(movement);
+				//playerMove.transform.rotation = Quaternion.LookRotation (moveDirection);
+                physics.TurnTo(moveDirection);
 
 				yield return null;
 			}

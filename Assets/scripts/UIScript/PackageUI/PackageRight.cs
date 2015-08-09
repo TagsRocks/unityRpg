@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -29,7 +29,7 @@ namespace ChuMeng
             }
             Cell.SetActive(false);
             for(int i = 0; i < BackPack.MaxBackPackNumber; i++) {
-                var item = PlayerPackage.playerPackage.EnumItem(PlayerPackage.PackagePageEnum.All, i);
+                var item = GameInterface_Package.playerPackage.EnumItem(GameInterface_Package.PackagePageEnum.All, i);
                 if(item != null && item.packInfo != null && item.itemData != null) {
                     Log.GUI("PackageRight is "+item.packInfo+" slot is "+item.InstanceID);
                     var c = GameObject.Instantiate(Cell) as GameObject;

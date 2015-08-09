@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -44,7 +44,7 @@ namespace ChuMeng
             bool findGem = false;
             if(gems.Count > 0){
                 var lev = gems[0].itemData.Level+1;
-                var target = PlayerPackage.GetAllLevGemRate(lev);
+                var target = GameInterface_Package.GetAllLevGemRate(lev);
                 if(target > 0) {
                     Rate.text = string.Format("[ff9500]成功率:{0}%[-]", target);
                     findGem = true;
