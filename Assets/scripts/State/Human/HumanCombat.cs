@@ -8,7 +8,8 @@ namespace ChuMeng
 	{
 		#region ConstVar
 		float WindowTime = 0.5f;
-		float rotateSpeed = 5;
+		float rotateSpeed = 10;
+        float walkSpeed = 1.5f;
 		#endregion
 
 
@@ -71,37 +72,7 @@ namespace ChuMeng
 		2：伤害数值确定   服务端 或者客户端 
 		3：伤害效果施展 例如击退  服务端 或者 客户端
 		*/
-		//TODO:根据副本类型决定 攻击目标
-		//TODO:攻击场景中移动的目标 玩家和怪物
-		//攻击场景中可以破话的目标 例如 木桶
 
-		//TODO: 
-		void DoHit ()
-		{
-			LayerMask mask = 1 << (int)GameLayer.Npc;
-			var enemies = Physics.OverlapSphere (GetAttr ().transform.position, GetAttr ().ObjUnitData.AttackRange, mask);
-			var transform = GetAttr ().transform;
-
-			Vector3 myFor = transform.forward;
-			myFor.y = 0;
-			myFor.Normalize ();
-			float cos45 = Mathf.Cos ((float)(Mathf.PI / 4));
-			
-			foreach (Collider g in enemies) {
-				if (g.tag == "Enemy") {
-					var eneDir = g.transform.position - transform.position;
-					eneDir.y = 0;
-					float dist = eneDir.magnitude;
-					var dir = eneDir.normalized;
-					float cos = Vector3.Dot (dir, myFor);
-					
-					if (cos > cos45 && dist < GetAttr ().AttackRange) {
-						SkillDamageCaculate.DoDamage (GetAttr ().gameObject, GetSkill ().GetDefaultSkill (), g.gameObject);
-					}
-				}
-			}
-		}
-		//bool stopAttack = false;
 		//TODO:增加摇杆控制攻击方向功能 这样人物会根据摇杆方向来确定攻击目标
 		IEnumerator WaitForAttackAnimation (Animation animation)
 		{
@@ -109,7 +80,7 @@ namespace ChuMeng
 			var camRight = playerMove.camRight;
 			var camForward = playerMove.camForward;
 			var vcontroller = playerMove.vcontroller;
-
+            var physics = playerMove.GetComponent<PhysicComponent>();
 
             var rd = Random.Range(1, 3);
             BackgroundSound.Instance.PlayEffect("onehandswinglarge"+rd);
@@ -122,9 +93,7 @@ namespace ChuMeng
 			do {
 				if(!hitYet && GetEvent().onHit) {
 					hitYet = true;
-
 				}
-
 				if (CheckEvent ()) {
 					break;
 				}
@@ -140,10 +109,11 @@ namespace ChuMeng
 				Vector3 targetDirection = h * camRight + v * camForward;
 				if (targetDirection != Vector3.zero) {
 					moveDirection = Vector3.RotateTowards (moveDirection, targetDirection, rotateSpeed * Time.deltaTime, 0);			
-					moveDirection = moveDirection.normalized;
 				}
+                moveDirection = moveDirection.normalized;
 				playerMove.transform.rotation = Quaternion.LookRotation (moveDirection);
-
+                var movement = moveDirection * walkSpeed ;
+                physics.MoveSpeed(movement);
 
 				if (passTime >= animation [attackAniName].length * 0.8f / animation [attackAniName].speed) {
 					break;

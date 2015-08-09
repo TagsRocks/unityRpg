@@ -34,6 +34,7 @@ namespace ChuMeng
 		public enum MsgType {
 			KillNpc,
 			DoSkill,
+            IDLE,
 		}
 		/*
 		 * Pass Message Format
@@ -83,6 +84,15 @@ namespace ChuMeng
             Log.Sys("AddMessage "+msg.type);
 			messages.Add (msg);
 		}
+
+        public Message NextMsg() {
+            if(messages.Count > 0) {
+                var ret = messages[0];
+                messages.RemoveAt(0);
+                return ret;
+            }
+            return null;
+        }
 
 		public Message CheckMsg(MsgType type) {
 			Message ret = null;

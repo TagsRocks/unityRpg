@@ -35,14 +35,15 @@ namespace ChuMeng
         public static void UseItem(int itemId){
             var me = ObjectManager.objectManager.GetMyPlayer().GetComponent<AIBase>();
             if(me.GetAI().state.type != AIStateEnum.IDLE){
-                return;
+                //WindowMng.windowMng.ShowNotifyLog("只有在安全的地方才能使用物品");
+                me.GetComponent<MyAnimationEvent>().InsertMsg(new MyAnimationEvent.Message(MyAnimationEvent.MsgType.IDLE));
+                //return;
             }
 
-            ClientApp.Instance.StartCoroutine(UseItemCor(itemId));
+            me.GetComponent<NpcAttribute>().StartCoroutine(UseItemCor(itemId));
         }
         static System.Collections.IEnumerator UseItemCor(int itemId){
-
-
+            yield return new WaitForSeconds(0.1f);
             var id = BackPack.backpack.GetItemId(itemId);
             var itemData = Util.GetItemData(0, itemId);
 

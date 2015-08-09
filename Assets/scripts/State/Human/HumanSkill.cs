@@ -7,6 +7,8 @@ namespace ChuMeng {
 		SkillStateMachine skillStateMachine;
 		SkillFullInfo activeSkill;
 
+        float rotateSpeed = 10;
+        float walkSpeed = 3.0f;
 
 		public override void EnterState ()
 		{
@@ -30,24 +32,50 @@ namespace ChuMeng {
 		{
 			Log.AI ("Check Animation "+GetAttr().animation.IsPlaying(activeSkill.skillData.AnimationName));
 			float passTime = 0;
-            var realAttackTime = GetAttr ().ObjUnitData.AttackAniSpeed;
+            //var realAttackTime = GetAttr ().ObjUnitData.AttackAniSpeed;
+            var realAttackTime = activeSkill.skillData.AttackAniTime;
 			var animation = GetAttr ().animation;
 			var attackAniName = activeSkill.skillData.AnimationName;
             var rate = GetAttr().animation[attackAniName].length/realAttackTime;
             Log.AI("AttackAniSpeed "+rate+" realAttackTime "+realAttackTime);
             PlayAni (activeSkill.skillData.AnimationName, rate, WrapMode.Once);
 
+            var playerMove = GetAttr ().GetComponent<MoveController> ();
+            var camRight = playerMove.camRight;
+            var camForward = playerMove.camForward;
+            var vcontroller = playerMove.vcontroller;
+            var physics = playerMove.GetComponent<PhysicComponent>();
 			while(!quit) {
 
 				if(CheckEvent()) {
-					yield break;
+					break;
 				}
+
+                float v = 0;
+                float h = 0;
+                if (vcontroller != null) {
+                    h = vcontroller.inputVector.x;//CameraRight 
+                    v = vcontroller.inputVector.y;//CameraForward
+                }
+                Vector3 moveDirection = playerMove.transform.forward;
+                Vector3 targetDirection = h * camRight + v * camForward;
+                if (targetDirection != Vector3.zero) {
+                    moveDirection = Vector3.RotateTowards (moveDirection, targetDirection, rotateSpeed * Time.deltaTime, 0);            
+                }
+                moveDirection = moveDirection.normalized;
+                playerMove.transform.rotation = Quaternion.LookRotation (moveDirection);
+                var movement = moveDirection * walkSpeed ;
+                physics.MoveSpeed(movement);
+
+
 				if(passTime >= animation[attackAniName].length*0.8f/animation[attackAniName].speed) {
 					break;
 				}
 				passTime += Time.deltaTime;
 				yield return null;
 			}
+
+            MyEventSystem.myEventSystem.PushLocalEvent(GetAttr().GetLocalId(), MyEvent.EventType.AnimationOver);
 			Log.AI ("Stop SkillState ");
 			skillStateMachine.Stop();
 			aiCharacter.ChangeState (AIStateEnum.IDLE);

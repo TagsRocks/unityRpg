@@ -24,7 +24,6 @@ namespace ChuMeng
             var pinfo = ServerData.Instance.playerInfo;
             pinfo.Roles.Level += add;
             AddSkillPoint(1);
-            SendNotify("升级技能点+1");
 
             var push = GCPushLevel.CreateBuilder();
             push.Level = pinfo.Roles.Level;
@@ -43,6 +42,11 @@ namespace ChuMeng
             var psp = GCPushSkillPoint.CreateBuilder();
             psp.SkillPoint = pinfo.Skill.TotalPoint;
             ServerBundle.SendImmediatePush(psp);
+            if(sp > 0) {
+                SendNotify("升级技能点+"+sp);
+            }else {
+                SendNotify("技能点"+sp);
+            }
         }
 
         public static void AddGold(int num)
@@ -602,7 +606,7 @@ namespace ChuMeng
             }
             if (packInfo != null)
             {
-                curLev = packInfo.PackEntry.Level + 2;
+                curLev = packInfo.PackEntry.Level+1;
                 var levCost = GMDataBaseSystem.SearchIdStatic<EquipLevelData>(GameData.EquipLevel, curLev);
                 if (levCost == null)
                 {

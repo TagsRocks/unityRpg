@@ -90,7 +90,9 @@ namespace ChuMeng
                 }
                 next = false;
             }
-            
+            //Send Drug To User
+            GameInterface_Chat.chatInterface.SendChatMsg("add_item 101 10", 0);
+
             GameInterface_Player.SetGameState(GameBool.qinqing1, true);
             WindowMng.windowMng.PopView();
         }

@@ -12,6 +12,7 @@ namespace ChuMeng
             label = GetLabel("Label");
             button = GetName("Next");
             SetCallback("Next", OnNext);
+            SetCallback("Fast", OnFast);
             text = new string[]{
                 @"炎历435年，华夏大陆上，神月湖畔，一对夫妻在夕阳下相依着。
 一个孩童独自在林中玩耍。
@@ -33,6 +34,15 @@ namespace ChuMeng
             BackgroundSound.Instance.PlayEffect("sheet_opencenter");
         }
 
+        bool fast = false;
+        int count = 0;
+        void OnFast() {
+            Log.GUI("OnFast "+count);
+            count++;
+            if(count >= 2){
+                fast = true;
+            }
+        }
         // Use this for initialization
         void Start()
         {
@@ -62,11 +72,16 @@ namespace ChuMeng
         IEnumerator ShowText(int curId){
             button.SetActive(false);
             var t = text[curId];
+            fast = false;
             for(int c = 0; c<= t.Length; c++){
+                if(fast) {
+                    break;
+                }
                 label.text = t.Substring(0, c);
                 yield return new WaitForSeconds(0.1f);
                 BackgroundSound.Instance.PlayEffect("pickup");
             }
+            label.text = t;
             button.SetActive(true);
         }
     

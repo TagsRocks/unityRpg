@@ -121,6 +121,7 @@ namespace ChuMeng
             {
                 uiRoot = GameObject.FindGameObjectWithTag("UIRoot");
             }
+            Log.GUI("UIRoot "+uiRoot);
             if (needAlpha)
             {
                 if (back == null)

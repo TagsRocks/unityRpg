@@ -69,7 +69,7 @@ namespace ChuMeng
 
             Name.text = string.Format("[ff9500]{0}({1}级)[-]\n[0098fc]{2}金币[-]\n{3}{4}[fcfc00]{5}[-]",
                     equipData.itemData.ItemName, 
-                    equipData.entry.Level+1,
+                    equipData.entry.Level,
                     equipData.itemData.GoldCost,
                     baseAttr,
                     extarAttr,

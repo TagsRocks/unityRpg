@@ -18,11 +18,7 @@ namespace ChuMeng {
 		IEnumerator CastSkill(GameObject targetPlayer) {
 			GetAttr ().GetComponent<SkillInfoComponent> ().SetRandomActive ();
 			var activeSkill = GetAttr().GetComponent<SkillInfoComponent>().GetActiveSkill();
-			//var skillStateMachine = 
-            SkillLogic.CreateSkillStateMachine (GetAttr().gameObject, activeSkill.skillData, GetAttr().transform.position, targetPlayer);
-
-			//SetAni("attack", 1, WrapMode.Once);
-
+            var skillStateMachine = SkillLogic.CreateSkillStateMachine (GetAttr().gameObject, activeSkill.skillData, GetAttr().transform.position, targetPlayer);
 			Log.AI ("Skill SetAni "+activeSkill.skillData.AnimationName);
 
 			var realAttackTime = activeSkill.skillData.AttackAniTime;
@@ -31,7 +27,7 @@ namespace ChuMeng {
 
 			while(GetAttr().animation.isPlaying && !quit) {
 				if(CheckEvent()) {
-					yield break;
+					break;
 				}
 
 				//自动向目标旋转
@@ -41,7 +37,7 @@ namespace ChuMeng {
 				GetAttr ().transform.rotation = Quaternion.Slerp (GetAttr ().transform.rotation, rotation, Time.deltaTime * FastRotateSpeed);
 				yield return null;
 			}
-
+            skillStateMachine.Stop();
 		}
 
         IEnumerator CheckFall(){
@@ -62,7 +58,7 @@ namespace ChuMeng {
 			GetAttr().GetComponent<CommonAI>().SetTargetPlayer(targetPlayer);
 			while(!quit) {
 				if(CheckEvent()) {
-					yield break;
+					break;
 				}
 				float passTime = 0;
 				aiCharacter.SetRun();
@@ -80,11 +76,11 @@ namespace ChuMeng {
 				aiCharacter.SetRun();
 				while(passTime < waitTime) {
 					if(CheckEvent()) {
-						yield break;
+						break;
 					}
 					if(CheckFlee()) {
 						aiCharacter.ChangeState(AIStateEnum.FLEE);
-						yield break;
+						break;
 					}
 					Vector3 dir = targetPlayer.transform.position-GetAttr().transform.position;
 					dir.y = 0;
@@ -97,7 +93,6 @@ namespace ChuMeng {
 						back = Vector3.zero;
 					}
 
-					//GetController().SimpleMove(right*WalkSpeed+back*WalkSpeed);
 					physic.MoveSpeed(right*WalkSpeed+back*WalkSpeed);
 					passTime += Time.deltaTime;
 					yield return null;
@@ -107,12 +102,12 @@ namespace ChuMeng {
 				aiCharacter.SetRun();
 				while(!quit) {
 					if(CheckEvent()){
-						yield break;
+						break;
 					}
 
 					if(CheckFlee()) {
 						aiCharacter.ChangeState(AIStateEnum.FLEE);
-						yield break;
+						break;
 					}
 					
 					Vector3 dir = targetPlayer.transform.position-GetAttr().transform.position;

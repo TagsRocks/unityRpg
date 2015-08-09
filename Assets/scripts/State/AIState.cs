@@ -217,27 +217,6 @@ namespace ChuMeng
 			return false;
 		}
 
-		protected bool CheckAttackEvent() {
-			var msg = GetEvent ().CheckMsg (MyAnimationEvent.MsgType.DoSkill);
-			if (msg != null) {
-				var isBaseAttack = GetSkill ().IsDefaultSkill (msg.skillData);
-                Log.AI("CheckCastSkill "+isBaseAttack);
-				if (isBaseAttack) {
-					Log.AI ("CheckAttack " + msg.type);
-					var skillPart = GetSkill ();
-					skillPart.SetDefaultActive ();
-					return aiCharacter.ChangeState (AIStateEnum.COMBAT);
-					
-				} else {
-					Log.AI ("Enter CastSkill");
-					var skillPart = GetSkill ();
-					skillPart.SetActiveSkill (msg.skillData);
-					return aiCharacter.ChangeState (AIStateEnum.CastSkill);
-					
-				}
-			}
-			return false;
-		}
 
 		//TODO:检测一些事件 然后进行状态切换
 		//获得对应注册哪些事件， 就检测哪些事件？
@@ -247,8 +226,53 @@ namespace ChuMeng
 			if (CheckBaseEvent ()) {
 				return true;
 			}
-			return CheckAttackEvent ();
+            var msg = GetEvent().NextMsg();
+            if(msg != null) {
+                if(msg.type == MyAnimationEvent.MsgType.IDLE) {
+                    return aiCharacter.ChangeState(AIStateEnum.IDLE);
+                }else if(msg.type == MyAnimationEvent.MsgType.DoSkill) {
+                    var isBaseAttack = GetSkill ().IsDefaultSkill (msg.skillData);
+                    Log.AI("CheckCastSkill "+isBaseAttack);
+                    if (isBaseAttack) {
+                        Log.AI ("CheckAttack " + msg.type);
+                        var skillPart = GetSkill ();
+                        skillPart.SetDefaultActive ();
+                        return aiCharacter.ChangeState (AIStateEnum.COMBAT);
+                        
+                    } else {
+                        Log.AI ("Enter CastSkill");
+                        var skillPart = GetSkill ();
+                        skillPart.SetActiveSkill (msg.skillData);
+                        return aiCharacter.ChangeState (AIStateEnum.CastSkill);
+                    }
+                }
+
+            }
+            return false;
+			//return CheckAttackEvent ();
 		}
+
+        protected bool CheckAttackEvent() {
+            var msg = GetEvent ().CheckMsg (MyAnimationEvent.MsgType.DoSkill);
+            if (msg != null) {
+                var isBaseAttack = GetSkill ().IsDefaultSkill (msg.skillData);
+                Log.AI("CheckCastSkill "+isBaseAttack);
+                if (isBaseAttack) {
+                    Log.AI ("CheckAttack " + msg.type);
+                    var skillPart = GetSkill ();
+                    skillPart.SetDefaultActive ();
+                    return aiCharacter.ChangeState (AIStateEnum.COMBAT);
+                    
+                } else {
+                    Log.AI ("Enter CastSkill");
+                    var skillPart = GetSkill ();
+                    skillPart.SetActiveSkill (msg.skillData);
+                    return aiCharacter.ChangeState (AIStateEnum.CastSkill);
+                    
+                }
+            }
+            return false;
+        }
 
 	}
 

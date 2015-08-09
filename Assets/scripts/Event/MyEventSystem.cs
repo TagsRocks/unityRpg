@@ -102,12 +102,11 @@ namespace ChuMeng
 
 			EventTrigger = 10000,//动画的Hit事件
 			EventStart = 10001,
-		
-
 			SpawnParticle = 10002,
 			EventMissileDie = 10003,
-
 			EventEnd = 10004,
+            AnimationOver, //Skill AnimationOver
+
 
 			UpdateTask,
 			openTask,
