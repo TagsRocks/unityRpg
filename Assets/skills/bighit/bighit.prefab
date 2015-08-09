@@ -115,7 +115,7 @@ MonoBehaviour:
   duration: .200000003
   direction: {x: 1, y: 0, z: 0}
   magnitude: 1
-  active: 1
+  autoRemove: 0
 --- !u!114 &11400014
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -128,14 +128,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shape: 1
-  angle: 45
+  angle: 90
   enable: 1
-  radius: 3
+  radius: 5
   Once: 0
   SyncWithPlayer: 0
   NoHurt: 0
   speed: 6
   Distance: 6
+  delayTime: 0
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

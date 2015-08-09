@@ -24,38 +24,58 @@ namespace ChuMeng
         RoleUpgradeConfigData playerConfig = null;
         RoleJobDescriptionsData jobConfig = null;
         NpcConfigData npcConfig = null;
-        public NpcConfigData NpcConfig {
-            get {
+
+        public NpcConfigData NpcConfig
+        {
+            get
+            {
                 return npcConfig;
             }
         }
 
-        public MonsterFightConfigData Config {
-            get {
+        public MonsterFightConfigData Config
+        {
+            get
+            {
                 return config;
             }
         }
-        public bool IsElite {
-            get {
+
+        public bool IsElite
+        {
+            get
+            {
                 return config.id > 1000;
             }
         }
+
         List<int> elites = null;
-        public List<int> EliteIds{
-            get {
+
+        public List<int> EliteIds
+        {
+            get
+            {
                 var mid = config.id;
-                if(elites == null) {
+                if (elites == null)
+                {
                     var ret = new List<int>();
-                    var elite = GMDataBaseSystem.database.SearchId<MonsterFightConfigData>(GameData.MonsterFightConfig, mid+1000);
-                    if(elite != null) {
-                        ret.Add(elite.id);
-                    }
-                    for(int i=1; i < 10; i++){
-                        var elite1 = GMDataBaseSystem.database.SearchId<MonsterFightConfigData>(GameData.MonsterFightConfig, 10*(mid+1000)+i);
-                        if(elite1 != null) {
-                            ret.Add(elite1.id);
-                        }else {
-                            break;
+                    if (mid < 1000)//Not Elite Then Find Elite
+                    {
+                        var elite = GMDataBaseSystem.database.SearchId<MonsterFightConfigData>(GameData.MonsterFightConfig, mid + 1000);
+                        if (elite != null)
+                        {
+                            ret.Add(elite.id);
+                        }
+                        for (int i=1; i < 10; i++)
+                        {
+                            var elite1 = GMDataBaseSystem.database.SearchId<MonsterFightConfigData>(GameData.MonsterFightConfig, 10 * (mid + 1000) + i);
+                            if (elite1 != null)
+                            {
+                                ret.Add(elite1.id);
+                            } else
+                            {
+                                break;
+                            }
                         }
                     }
                     elites = ret;
@@ -63,6 +83,7 @@ namespace ChuMeng
                 return elites;
             }
         }
+
         public int ID
         {
             get
@@ -145,7 +166,8 @@ namespace ChuMeng
         {
             get
             {
-                if(npcConfig != null) {
+                if (npcConfig != null)
+                {
                     return npcConfig.LogicTemplate;
                 }
                 return config.LogicTemplate;
@@ -163,7 +185,8 @@ namespace ChuMeng
         {
             get
             {
-                if(npcConfig != null) {
+                if (npcConfig != null)
+                {
                     return npcConfig.name;
                 }
 
@@ -182,7 +205,8 @@ namespace ChuMeng
         {
             get
             {
-                if(playerConfig != null) {
+                if (playerConfig != null)
+                {
                     return playerConfig.exp; 
                 }
                 return 0;
@@ -202,7 +226,8 @@ namespace ChuMeng
         {
             get
             {
-                if(npcConfig != null) {
+                if (npcConfig != null)
+                {
                     return npcConfig.model;
                 }
                 if (IsPlayer)
@@ -221,7 +246,8 @@ namespace ChuMeng
         {
             get
             {
-                if(npcConfig != null) {
+                if (npcConfig != null)
+                {
                     return 1;
                 }
                 if (IsPlayer)
@@ -326,7 +352,8 @@ namespace ChuMeng
         {
             get
             {
-                if(npcConfig != null) {
+                if (npcConfig != null)
+                {
                     return "";
                 }
                 if (!IsPlayer)
@@ -437,10 +464,11 @@ namespace ChuMeng
             var lastRd = 0.0f;
             foreach (var d in drop)
             {
-                Log.Sys("random "+rd+" last "+lastRd+" d "+d[1]);
+                Log.Sys("random " + rd + " last " + lastRd + " d " + d [1]);
 
-                var nextRd = lastRd+d[1];
-                if(rd < nextRd){
+                var nextRd = lastRd + d [1];
+                if (rd < nextRd)
+                {
                     return d;
                 }
                 lastRd = nextRd;
@@ -452,11 +480,14 @@ namespace ChuMeng
         {
             return jobConfig.DefaultWardrobe;
         }
-        public bool IsNpc() {
+
+        public bool IsNpc()
+        {
             return npcConfig != null;
         }
 
-        public UnitData(NpcConfigData n){
+        public UnitData(NpcConfigData n)
+        {
             npcConfig = n;
         }
         /// <summary>

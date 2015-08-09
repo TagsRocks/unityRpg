@@ -48,21 +48,8 @@ MonoBehaviour:
       UnitTheme: {fileID: 0}
       addDefense: 0
       target: 0
+      affixParameters: []
     attachOwner: 0
-    attaches: 0
-    childSkillId: 0
-    AttachToTarget: 0
-    SetBeamTarget: 0
-    BeamOffset: {x: 0, y: 0, z: 0}
-  - evt: 10001
-    layout: {fileID: 100000, guid: a4ab9f4772fa8412c947504c6c2ddccd, type: 2}
-    affix:
-      effectType: 0
-      Duration: 0
-      UnitTheme: {fileID: 0}
-      addDefense: 0
-      target: 0
-    attachOwner: 1
     attaches: 0
     childSkillId: 0
     AttachToTarget: 0

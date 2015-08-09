@@ -422,7 +422,7 @@ MonoBehaviour:
   EmitUniform: 0
   LineLengthLeft: -1
   LineLengthRight: 1
-  MaxENodes: 15
+  MaxENodes: 5
   IsNodeLifeLoop: 0
   NodeLifeMin: 2
   NodeLifeMax: 3

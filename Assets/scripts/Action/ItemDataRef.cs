@@ -13,6 +13,9 @@ using System.Collections;
 
 namespace ChuMeng
 {
+    /// <summary>
+    ///掉落到地面上的物品 
+    /// </summary>
 	public class ItemDataRef : MonoBehaviour
 	{
 		public ItemData itemData;
@@ -25,6 +28,7 @@ namespace ChuMeng
 		void Awake ()
 		{
             player = ObjectManager.objectManager.GetMyPlayer();
+            //gameObject.transform.localScale = new Vector3(2, 2, 2);
 		}
 		// Use this for initialization
 		void Start ()

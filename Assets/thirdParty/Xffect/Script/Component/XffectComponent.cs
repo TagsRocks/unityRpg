@@ -278,11 +278,15 @@ public class XffectComponent : MonoBehaviour
         }
 #endif
         float deltaTime = (float)(CurTime - LastTime);
+        if(deltaTime < 0.0333f) { //Lower Update Rate
+            return;
+        }
         
         //simple method to check game delay: the game must run above 20 FPS.
         if (deltaTime > 0.05f)
         {
-			deltaTime = 0.0333f;
+			//deltaTime = 0.0333f;
+            deltaTime = 0.05f;
         }
         
         if (!IgnoreTimeScale)

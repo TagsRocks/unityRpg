@@ -37,7 +37,7 @@ namespace ChuMeng
                 }
                 while (player != null)
                 {
-                    var newHit = Physics.OverlapSphere(player.transform.position, 12, 1<<(int)GameLayer.SceneProps);
+                    var newHit = Physics.OverlapSphere(player.transform.position, 15, 1<<(int)GameLayer.SceneProps);
                     var newhash = new HashSet<Collider>();
                     newhash.UnionWith(newHit);
                     List<Collider> diff = new List<Collider>();

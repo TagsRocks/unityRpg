@@ -6,7 +6,7 @@ namespace ChuMeng
 	public class HumanMove : MoveState
 	{
 		float moveSpeed = 0;
-		float walkSpeed = 6.0f;
+		float walkSpeed = 8.0f;
 		float rotateSpeed = 500;
 		float speedSmoothing = 10;
 

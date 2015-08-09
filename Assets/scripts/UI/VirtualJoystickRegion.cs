@@ -67,6 +67,7 @@ namespace ChuMeng
 	
 		private void ResetJoystick ()
 		{
+            useMouse = false;
 			VJRvector = new Vector2 (0, 0);
 			_vjrNormals = VJRvector;
 			lastID = fingerID;
@@ -77,6 +78,13 @@ namespace ChuMeng
 			gotPosition = false;
 		}
 	
+        /// <summary>
+        ///限制虚拟摇杆的位置和中心的位置差 
+        /// </summary>
+        /// <returns>The radius.</returns>
+        /// <param name="midPoint">Middle point.</param>
+        /// <param name="endPoint">End point.</param>
+        /// <param name="maxDistance">Max distance.</param>
 		private Vector2 GetRadius (Vector2 midPoint, Vector2 endPoint, float maxDistance)
 		{
 			Vector2 distance = endPoint;
@@ -88,8 +96,29 @@ namespace ChuMeng
 			return distance;
 		}
 	
+        bool useMouse = false;
+        /// <summary>
+        /// Get Origin Operation Position 
+        /// </summary>
 		private void GetPosition ()
 		{
+            useMouse = false;
+            Vector3 mousePos = Input.mousePosition;
+#if UNITY_EDITOR
+            if(Input.GetMouseButtonDown(0)) {
+                if(mousePos.x < Screen.width/3 && mousePos.y < Screen.height/3) {
+                    useMouse = true;
+                    position = mousePos;
+                    origin = position;
+                    joystick.texture = joystick2D; 
+                    joystick.color = activeColor;
+                    background.texture = background2D;
+                    background.color = activeColor;
+                    gotPosition = true;
+                    return;
+                }
+            }
+#endif
 			foreach (Touch touch in Input.touches) {
 				fingerID = touch.fingerId;
 				if (fingerID >= 0 && fingerID < Input.touchCount) {
@@ -105,11 +134,15 @@ namespace ChuMeng
 							VJRdoubleTap = true;
 						}
 						gotPosition = true;
+                        break;
 					}
 				}
 			}
 		}
 	
+        /// <summary>
+        /// Limit Origin In ProperPosition 
+        /// </summary>
 		private void GetConstraints ()
 		{
 			if (origin.x < (background.pixelInset.width / 2) + 25) {
@@ -126,11 +159,17 @@ namespace ChuMeng
 			}
 		}
 	
+        /// <summary>
+        /// 0.8 操控满足0.8f就可以最大速度了 
+        /// </summary>
+        /// <returns>The controls.</returns>
+        /// <param name="pos">Position.</param>
+        /// <param name="ori">Ori.</param>
 		private Vector2 GetControls (Vector2 pos, Vector2 ori)
 		{
 			Vector2 vector = new Vector2 ();
 			if (Vector2.Distance (pos, ori) > 0) {
-				vector = new Vector2 (pos.x - ori.x, pos.y - ori.y);
+				vector = new Vector2 ((pos.x - ori.x)*1.2f, (pos.y - ori.y)*1.2f);
 			}
 			return vector;
 		}
@@ -174,7 +213,8 @@ namespace ChuMeng
 			lastID = -1;
 			VJRdoubleTap = false;
 			tapTimer = 0;
-			length = 50;
+            var rate = Mathf.Min(Screen.width/1024.0f, Screen.height/768.0f);
+			length = 80 * rate;
 			position = new Vector2 ((Screen.width / 3) / 2, (Screen.height / 3) / 2);
 			origin = position;
 			gotPosition = false;
@@ -182,59 +222,98 @@ namespace ChuMeng
 			enable = true;
 		}
 
+        void HandleMouse() {
+            if(gotPosition == true) {
+                if(Input.GetMouseButton(0)) {
+                    position = Input.mousePosition;
+                    position = GetRadius (origin, position, length);
+                    VJRvector = GetControls (position, origin);
+                    _vjrNormals = new Vector2 (VJRvector.x / length, VJRvector.y / length);
+                    if(_vjrNormals.sqrMagnitude >= 1) {
+                        _vjrNormals.Normalize();
+                    }
+                }
+            }
+
+            if(!gotPosition) {
+                if (background.color != inactiveColor) {
+                    background.color = inactiveColor;
+                }
+            }
+            var rsz = GetRealSize();
+            background.pixelInset = new Rect (origin.x - (rsz.x / 2), origin.y - (rsz.y / 2), rsz.x, rsz.y);
+            joystick.pixelInset = new Rect (position.x - (joystick.pixelInset.width / 2), position.y - (joystick.pixelInset.height / 2), size / 11, size / 11);
+        }
+        void HandleTouch() {
+            if(gotPosition == true) {
+                foreach (Touch touch in Input.touches) {
+                    if (touch.fingerId == fingerID) {
+                        position = touch.position;
+                        position = GetRadius (origin, position, length);
+                        VJRvector = GetControls (position, origin);
+                        _vjrNormals = new Vector2 (VJRvector.x / length, VJRvector.y / length);
+                        if(_vjrNormals.sqrMagnitude >= 1) {
+                            _vjrNormals.Normalize();
+                        }
+                        if (Input.GetTouch (fingerID).position.x > (Screen.width / 3) + background.pixelInset.width
+                            || Input.GetTouch (fingerID).position.y > (Screen.height / 3) + background.pixelInset.height) {
+                            ResetJoystick ();
+                        }
+                        break;
+                    }
+                }
+
+            }
+
+            if(gotPosition) {
+                if (Input.GetTouch (fingerID).phase == TouchPhase.Ended || Input.GetTouch (fingerID).phase == TouchPhase.Canceled) {
+                    ResetJoystick ();
+                }
+            }
+
+            if (gotPosition == false) {
+                if (background.color != inactiveColor) {
+                    background.color = inactiveColor;
+                }
+            }
+
+            var rsz = GetRealSize();
+            background.pixelInset = new Rect (origin.x - (rsz.x / 2), origin.y - (rsz.y / 2), rsz.x, rsz.y);
+            joystick.pixelInset = new Rect (position.x - (joystick.pixelInset.width / 2), position.y - (joystick.pixelInset.height / 2), size / 11, size / 11);
+        }
+
 		private void Update ()
 		{
 			if (tapTimer > 0) {
 				tapTimer -= Time.deltaTime;
 			}
-			if (fingerID > -1 && fingerID >= Input.touchCount) {
-				ResetJoystick ();
-			}
-			//Debug.Log("enable "+enable+" "+Input.touchCount);
 
-			if (enable == true) {
-				if (Input.touchCount > 0 && gotPosition == false) {
-					GetPosition ();
-					GetConstraints ();
-				}
-				if (Input.touchCount > 0 && fingerID > -1 && fingerID < Input.touchCount && gotPosition == true) {
-					foreach (Touch touch in Input.touches) {
-						if (touch.fingerId == fingerID) {
-							position = touch.position;
-							position = GetRadius (origin, position, length);
-							VJRvector = GetControls (position, origin);
-							_vjrNormals = new Vector2 (VJRvector.x / length, VJRvector.y / length);
+            if(useMouse && !Input.GetMouseButton(0)) {
+                ResetJoystick();
+            }
+            if(!useMouse) {
+                if (fingerID > -1 && fingerID >= Input.touchCount) {
+                    ResetJoystick ();
+                }
+            }
 
+            if(enable) {
+                if(gotPosition == false) {
+                    GetPosition ();
+                    GetConstraints ();
+                }
 
+                if(useMouse) {
+                    HandleMouse();
+                }else {
+                    HandleTouch();
+                }
 
-							if (Input.GetTouch (fingerID).position.x > (Screen.width / 3) + background.pixelInset.width
-								|| Input.GetTouch (fingerID).position.y > (Screen.height / 3) + background.pixelInset.height) {
-								ResetJoystick ();
-							}
-							//
-							//Debug.Log("Joystick Axis:: "+VJRnormals); //<-- Delete this line | (X,Y), from -1.0 to +1.0 | Use this value "VJRnormals" in your scripts.
-						}
-					}
-				}
-				if (gotPosition == true && Input.touchCount > 0 && fingerID > -1 && fingerID < Input.touchCount) {
-					if (Input.GetTouch (fingerID).phase == TouchPhase.Ended || Input.GetTouch (fingerID).phase == TouchPhase.Canceled) {
-						ResetJoystick ();
-					}
-				}
-				if (gotPosition == false && fingerID == -1 && tapTimer <= 0) {
-					if (background.color != inactiveColor) {
-						background.color = inactiveColor;
-					}
-				}
+            }else {
+                background.pixelInset = new Rect (0, 0, 0, 0);
+                joystick.pixelInset = new Rect (0, 0, 0, 0);
+            }
 
-				var rsz = GetRealSize();
-				background.pixelInset = new Rect (origin.x - (rsz.x / 2), origin.y - (rsz.y / 2), rsz.x, rsz.y);
-
-				joystick.pixelInset = new Rect (position.x - (joystick.pixelInset.width / 2), position.y - (joystick.pixelInset.height / 2), size / 11, size / 11);
-			} else if (background.pixelInset.width > 0) {
-				background.pixelInset = new Rect (0, 0, 0, 0);
-				joystick.pixelInset = new Rect (0, 0, 0, 0);
-			}
 		}
 	}
 }

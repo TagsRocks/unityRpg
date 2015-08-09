@@ -25,8 +25,8 @@ namespace ChuMeng
         Npc = 13, //所有玩家和怪物所在层
         Light = 11, //场景灯光元素所在层
         Light2  = 8, //不小心将粒子的光照设置到了这层
-        SceneProps = 14, //场景物件所在层
-        IgnoreCollision = 15,
+        SceneProps = 14, //场景物件所在层 用于物理检测何时显示场景物件
+        IgnoreCollision = 15, //NPC所在层,避免和玩家碰撞
 	}
 
 	public static class GameTag

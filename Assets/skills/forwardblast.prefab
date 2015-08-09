@@ -87,12 +87,13 @@ MonoBehaviour:
   shape: 1
   angle: 60
   enable: 0
-  radius: 1.5
+  radius: 4
   Once: 0
   SyncWithPlayer: 1
   NoHurt: 0
   speed: 12
   Distance: 6
+  delayTime: 0
 --- !u!135 &13500000
 SphereCollider:
   m_ObjectHideFlags: 1

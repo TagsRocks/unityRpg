@@ -422,7 +422,7 @@ MonoBehaviour:
   EmitUniform: 0
   LineLengthLeft: -1
   LineLengthRight: 1
-  MaxENodes: 15
+  MaxENodes: 5
   IsNodeLifeLoop: 0
   NodeLifeMin: 2
   NodeLifeMax: 3
@@ -1017,8 +1017,8 @@ MonoBehaviour:
   BirthSubEmitter: 
   CollisionSubEmitter: 
   DeathSubEmitter: 
-  AvailableNodeCount: 4
-  LastClientPos: {x: 0, y: 0, z: 0}
+  AvailableNodeCount: 5
+  LastClientPos: {x: -.0976827145, y: -.100000001, z: -.0711121559}
   MyCamera: {fileID: 0}
   Owner: {fileID: 11400004}
   mStopped: 0

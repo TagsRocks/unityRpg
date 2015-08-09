@@ -116460,8 +116460,8 @@ AnimationClip:
     intParameter: 0
     messageOptions: 0
   - time: .166666672
-    functionName: SpawnParticle
-    data: swordhit
+    functionName: HIT
+    data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
@@ -116474,8 +116474,8 @@ AnimationClip:
     intParameter: 0
     messageOptions: 0
   - time: .433333337
-    functionName: SpawnParticle
-    data: swordhit
+    functionName: HIT
+    data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
@@ -116488,8 +116488,8 @@ AnimationClip:
     intParameter: 0
     messageOptions: 0
   - time: .566666663
-    functionName: SpawnParticle
-    data: swordhit
+    functionName: HIT
+    data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
@@ -116502,8 +116502,8 @@ AnimationClip:
     intParameter: 0
     messageOptions: 0
   - time: .866666675
-    functionName: SpawnParticle
-    data: swordhit
+    functionName: HIT
+    data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
@@ -116516,8 +116516,8 @@ AnimationClip:
     intParameter: 0
     messageOptions: 0
   - time: 1.10000002
-    functionName: SpawnParticle
-    data: swordhit
+    functionName: HIT
+    data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
@@ -116530,8 +116530,8 @@ AnimationClip:
     intParameter: 0
     messageOptions: 0
   - time: 1.29999995
-    functionName: SpawnParticle
-    data: swordhit
+    functionName: HIT
+    data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
@@ -116544,8 +116544,8 @@ AnimationClip:
     intParameter: 0
     messageOptions: 0
   - time: 1.5
-    functionName: SpawnParticle
-    data: swordhit
+    functionName: HIT
+    data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
