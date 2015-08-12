@@ -34,6 +34,13 @@ namespace ChuMeng
         }
         public void PutInGem(BackpackData data)
         {
+            var needLevel = data.itemData.Level *5;
+            var myLev = ObjectManager.objectManager.GetMyAttr().Level;
+            if(needLevel > myLev) {
+                WindowMng.windowMng.ShowNotifyLog(string.Format("此种宝石需要自身达到{0}级,方能熔炼。", needLevel));
+                return;
+            }
+
             if(gems.Count >= 2){
                 WindowMng.windowMng.ShowNotifyLog("宝石已满，需要取下宝石才能放入新的!");
             }else {
@@ -62,9 +69,19 @@ namespace ChuMeng
                         lev = g.itemData.Level;
                     }
                 }
+
+                var needLevel = lev*5;
+                var myLev = ObjectManager.objectManager.GetMyAttr().Level;
+                if(needLevel > myLev) {
+                    WindowMng.windowMng.ShowNotifyLog(string.Format("只有自身达到{0}级,才能熔炼此种宝石", needLevel));
+                    return;
+                }
+             
+
+
                 var target = GameInterface_Package.GetAllLevGems(lev+1);
                 if(target.Count == 0){
-                    WindowMng.windowMng.ShowNotifyLog("该宝石无法合成");
+                    WindowMng.windowMng.ShowNotifyLog("此种宝石已经是最高级了");
                 }else {
                     GameInterface_Package.playerPackage.LevelUpGem(gems);
                 }

@@ -190,7 +190,8 @@ namespace ChuMeng
             get
             {
                 //return 0;
-                return skillConfig.mpExp;
+                return effectConfig.mp;
+                //return skillConfig.mpExp;
             }
         }
 

@@ -23,7 +23,7 @@ namespace ChuMeng
             g.transform.parent = SaveGame.saveGame.EffectMainNode.transform;
             g.transform.position = GetAttr().transform.position;
             if ( CheckAni("transform")) {
-                GetAttr().animation.CrossFade ("transform");
+               PlayAni("transform", 1, WrapMode.Clamp);
             }
             yield return new WaitForSeconds(2);
         }

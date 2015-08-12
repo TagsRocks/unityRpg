@@ -13,8 +13,11 @@ namespace ChuMeng
 	{
 		UILabel label;
         UISprite bg;
+        public static GameObject Instance;
+
 		void Awake ()
 		{
+            Instance = gameObject;
 			label = GetLabel ("notifyLabel");
             bg = GetSprite("BG");
 		}
@@ -34,8 +37,19 @@ namespace ChuMeng
             bg.width = (int)Mathf.Max((w+100), 310);
 
 		}
+        bool shortT = false;
+        public void ShortTime() {
+            shortT = true;
+        }
 		IEnumerator WaitTime(float t) {
-			yield return new WaitForSeconds (t);
+            shortT = false;
+            while(t > 0) {
+			    yield return new WaitForSeconds (1);
+                t--;
+                if(shortT) {
+                    break;
+                }
+            }
 			OnlyHide ();
 		}
 

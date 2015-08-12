@@ -87,6 +87,9 @@ namespace ChuMeng
             {
                 return;
             }
+            if(!runner || !runner.stateMachine || !runner.stateMachine.attacker) {
+                return;
+            }
             if (enable && !runner.stateMachine.isStop)
             {
 
@@ -204,6 +207,10 @@ namespace ChuMeng
 
             do
             {
+                if(!runner || !runner.stateMachine || !runner.stateMachine.attacker) {
+                    break;
+                }
+
                 diff = (targetPos - runner.stateMachine.attacker.transform.position).sqrMagnitude;
                 var newSpeed = speed;
                 if (diff < halfDist)
@@ -216,13 +223,7 @@ namespace ChuMeng
                 yield return null;
             } while(diff > 0.1f && !runner.stateMachine.isStop && enable);
 
-            /*
-            var phy = runner.stateMachine.attacker.GetComponent<PhysicComponent> ();
-            while (phy.GetLastSpeed() > 0.1f) {
-                runner.MoveOwner(targetPos, 0);
-                yield return null;
-            }
-            */
+
 
 
             Log.Sys("ExitSkillMove ");

@@ -174,12 +174,14 @@ namespace ChuMeng
             //bag.GetComponent<UIPanel> ().depth = (int)UIDepth.Window+stack.Count*10+1;
             stack.Add(bag);
             Log.GUI("Push UI " + bag.name);
+#if UNITY_EDITOR
             foreach (GameObject g in stack)
             {
                 if(g != null) {
                     Log.GUI("Stack UI is " + g.name);
                 }
             }
+#endif
             BackgroundSound.Instance.PlayEffect("sheet_opencenter");
             return bag;
         }
@@ -268,14 +270,17 @@ namespace ChuMeng
             BackgroundSound.Instance.PlayEffect("sheet_close");
         }
 
-        public GameObject ShowNotifyLog(string text, float time = 3)
+        public void ShowNotifyLog(string text, float time = 3, System.Action<GameObject> cb = null)
         {
+            /*
             var g = PushTopNotify("UI/NotifyLog");
             if(g != null) {
                 g.GetComponent<NotifyUI>().SetText(text);
                 g.GetComponent<NotifyUI>().SetDurationTime(time);
             }
             return g;
+            */
+            NotifyUIManager.Instance.AddNotify(text, time, cb);
         }
 
         public void ShowDialog(BoolDelegate action)

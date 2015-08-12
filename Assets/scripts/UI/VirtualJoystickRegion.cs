@@ -1,4 +1,4 @@
-﻿
+
 /*
 Author: liyonghelpme
 Email: 233242872@qq.com
@@ -169,7 +169,7 @@ namespace ChuMeng
 		{
 			Vector2 vector = new Vector2 ();
 			if (Vector2.Distance (pos, ori) > 0) {
-				vector = new Vector2 ((pos.x - ori.x)*1.2f, (pos.y - ori.y)*1.2f);
+				vector = new Vector2 ((pos.x - ori.x)*3f, (pos.y - ori.y)*3f);
 			}
 			return vector;
 		}

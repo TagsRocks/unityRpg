@@ -117,6 +117,9 @@ namespace ChuMeng
         {
             get
             {
+                if(config != null) {
+                    return config.level;
+                }
                 return playerConfig.level;
             }
         }
@@ -214,14 +217,6 @@ namespace ChuMeng
             }
         }
 
-        //怪物掉落经验
-        public int Exp
-        {
-            get
-            {
-                return config.exp;
-            }
-        }
 
         public string ModelName
         {
@@ -456,25 +451,24 @@ namespace ChuMeng
             }
         }
 
-        //TODO:获取掉落物品信息   单人副本获取掉落物品
-        public List<float>  GetRandomDrop()
+        public List<List<float>>  GetRandomDrop(float modify)
         {
             var dropList = config.drop;
             var drop = Util.ParseConfig(dropList);
-            var rd = Random.Range(0, 1.0f);
-            var lastRd = 0.0f;
+            //var lastRd = 0.0f;
+            //id rate num
+            List<List<float>> allDrops = new List<List<float>>();
             foreach (var d in drop)
             {
-                Log.Sys("random " + rd + " last " + lastRd + " d " + d [1]);
+                var rd = Random.Range(0, 1.0f);
+                Log.Sys("random " + rd + " last " + " d " + d [1]);
 
-                var nextRd = lastRd + d [1];
-                if (rd < nextRd)
+                if (rd < d[1]*modify)
                 {
-                    return d;
+                    allDrops.Add(d);
                 }
-                lastRd = nextRd;
             }
-            return null;
+            return allDrops;
         }
 
         public string GetDefaultWardrobe()

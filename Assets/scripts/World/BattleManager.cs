@@ -263,7 +263,16 @@ namespace ChuMeng
             Log.Sys("LevelFinish ");
             CopyController.copyController.PassLevel();
             float leftTime = 5f;
-            var notify = WindowMng.windowMng.ShowNotifyLog("", 5.2f).GetComponent<NotifyUI>();
+            //var notify = 
+            GameObject not = null;
+            WindowMng.windowMng.ShowNotifyLog("", 5.2f, delegate(GameObject n){
+                not = n;
+            });
+            while(not == null) {
+                yield return new WaitForSeconds(1);
+            }
+            var notify = not.GetComponent<NotifyUI>();
+            //.GetComponent<NotifyUI>();
             if (notify != null)
             {
                 while (leftTime > 0)

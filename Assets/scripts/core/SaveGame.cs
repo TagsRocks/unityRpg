@@ -263,6 +263,9 @@ namespace ChuMeng
 		public void InitData ()
 		{
 			var g = gameObject;
+            if(NotifyUIManager.Instance == null) {
+                g.AddComponent<NotifyUIManager>();
+            }
             if(SoundManager.Instance == null) {
                 var sound = new GameObject("Sound");
                 sound.transform.parent = transform;

@@ -21,6 +21,12 @@ namespace ChuMeng {
 			evt.monId = monId;
 			evt.playerId = playerId;
 			evt.exp = GetAttr ().ObjUnitData.XP;
+            var playerLevel = ObjectManager.objectManager.GetMyAttr().Level;
+            var num = (playerLevel-GetAttr().ObjUnitData.Level)/5;
+            if(num > 0) {
+                evt.exp = evt.exp >> num;
+            }
+
 			MyEventSystem.myEventSystem.PushEvent (evt);
             DropGoods.Drop(GetAttr());
 		}

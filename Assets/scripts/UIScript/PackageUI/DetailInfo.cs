@@ -26,10 +26,20 @@ namespace ChuMeng
         }
         void OnLevelUp() {
             if(equipData != null) {
+                var lev = equipData.entry.Level;
+                var needLevel = GMDataBaseSystem.SearchIdStatic<EquipLevelData>(GameData.EquipLevel, lev);
+                var myLev = ObjectManager.objectManager.GetMyAttr().Level;
+                if(needLevel.level > myLev) {
+                    WindowMng.windowMng.ShowNotifyLog(string.Format("只有自身达到{0}级,才能掌控更高级装备", needLevel.level));
+                    return;
+                }
+
                 var lv = WindowMng.windowMng.PushView("UI/LevelUpEquip");
                 var eq = lv.GetComponent<LevelUpEquip>();
                 eq.SetEquip(equipData);
             }else { 
+
+
                 var lv = WindowMng.windowMng.PushView("UI/LevelUpGem");
                 var gem = lv.GetComponent<LevelUpGem>();
                 gem.SetData(backpackData);

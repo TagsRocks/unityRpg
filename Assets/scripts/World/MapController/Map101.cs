@@ -40,8 +40,22 @@ namespace ChuMeng
             Log.Sys("Current Step is "+step);
             if(step == 1) {
                 StartCoroutine(CreateZhiRuoAndDongHu());
+            }else {
+                StartCoroutine(NormalBoss());
             }
         }
+        IEnumerator NormalBoss() {
+            while(!bossSpawn) {
+                yield return new WaitForSeconds(1);
+            } 
+            MyEventSystem.PushEventStatic(MyEvent.EventType.SpeakOver);
+
+            while(!bossDead) {
+                yield return new WaitForSeconds(2);
+            }
+            BattleManager.battleManager.GameOver();
+        }
+
 
         IEnumerator CreateZhiRuoAndDongHu() {
             GameObject  myplayer = null;

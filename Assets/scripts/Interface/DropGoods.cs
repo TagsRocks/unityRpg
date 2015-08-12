@@ -8,23 +8,16 @@ namespace ChuMeng
         public static void Drop(NpcAttribute mon)
         {
             var treasure = mon.GetDropTreasure();
-            if (treasure != null)
-            {
-                Log.Sys("DropTreasure " + treasure.Count);
-                if (treasure != null)
+            foreach(var d in treasure) {
+                Log.Sys("DropTreasure " + d.Count);
+                var itemData = Util.GetItemData(0, (int)d[0]);
+                int num = 1;
+                if (d.Count >= 3)
                 {
-                    var itemData = Util.GetItemData(0, (int)treasure [0]);
-                    int num = 1;
-                    if (treasure.Count >= 3)
-                    {
-                        num = (int)treasure [2];
-                    }
-
-                    ItemDataRef.MakeDropItem(itemData, mon.transform.position + new Vector3(0, 0.4f, 0), num);
-
+                    num = (int)d[2];
                 }
-            }else {
-                Log.Sys("NoDropTreasure ");
+
+                ItemDataRef.MakeDropItem(itemData, mon.transform.position + new Vector3(0, 0.4f, 0), num);
             }
         }
     }

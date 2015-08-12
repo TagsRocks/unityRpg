@@ -72,5 +72,6 @@ namespace ChuMeng
 			ObjectManager.objectManager.DestroyMySelf ();
 
 		}
+
 	}
 }
