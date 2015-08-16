@@ -120,7 +120,7 @@ MonoBehaviour:
     m_PostInfinity: 2
   UseMaxOnly: 0
   particle: {fileID: 0}
-  Missile: {fileID: 11400000, guid: 74f79e9988d77408792e407a03fa2320, type: 2}
+  Missile: {fileID: 11400000, guid: a349d7ebdb7f1411cb2800262948d5b4, type: 2}
   MonsterId: -1
   releaseOrder: 1
 --- !u!1001 &100100000

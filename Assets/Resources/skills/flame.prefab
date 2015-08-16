@@ -48,8 +48,10 @@ MonoBehaviour:
       UnitTheme: {fileID: 0}
       addDefense: 0
       target: 0
+      affixParameters: []
+      IsOnlyOne: 0
     attachOwner: 0
-    attaches: 1
+    attaches: 0
     childSkillId: -1
     AttachToTarget: 0
     SetBeamTarget: 0
