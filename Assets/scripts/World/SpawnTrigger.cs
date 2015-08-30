@@ -58,10 +58,14 @@ namespace ChuMeng
                 var num = Convert.ToInt32(gameObject.name.Replace("wave", ""));
                 waveNum = num;
             }
+            /*
             float dir = UnityEngine.Random.Range(0, 360);
             transform.localRotation = Quaternion.Euler(new Vector3(0, dir, 0));
+            */
+
             isSpawnYet = false;
             ClearChildren();
+            HideChild();
         }
         // Use this for initialization
         void Start()
@@ -102,10 +106,16 @@ namespace ChuMeng
                         GameObject.DestroyImmediate(showRes);
                         showRes = null;
                     }
-
-                    foreach(Transform t in transform) {
-                        GameObject.DestroyImmediate(t.gameObject);
+                    /*
+                    for(int i = 0; i < transform.childCount; ){
+                        if(transform.GetChild(i).name.Contains("Child")) {
+                            i++;
+                        }else {
+                            GameObject.DestroyImmediate(transform.GetChild(i).gameObject);
+                        }
                     }
+                    */
+                    ClearChildren();
                 
                     if(Resource != null) {
                         showRes = GameObject.Instantiate(Resource) as GameObject;
@@ -152,9 +162,19 @@ namespace ChuMeng
 #endif
         }
 
+        void HideChild(){
+            for(int i = 0; i < transform.childCount; ){
+                if(transform.GetChild(i).name.Contains("Child")) {
+                    transform.GetChild(i).gameObject.SetActive(false);
+                    i++;
+                }else {
+                }
+            }
+        }
         void ClearChildren()
         {
-            List<GameObject> g = new List<GameObject>();
+            //List<GameObject> g = new List<GameObject>();
+            /*
             foreach (Transform t in transform)
             {
                 g.Add(t.gameObject);
@@ -163,6 +183,16 @@ namespace ChuMeng
             {
                 GameObject.DestroyImmediate(g1);
             }
+            */
+
+            for(int i = 0; i < transform.childCount; ){
+                if(transform.GetChild(i).name.Contains("Child")) {
+                    i++;
+                }else {
+                    GameObject.DestroyImmediate(transform.GetChild(i).gameObject);
+                }
+            }
+
             reset = false;
             showRes = null;
             oldResource = null;

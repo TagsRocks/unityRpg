@@ -677,6 +677,7 @@ namespace ChuMeng
 				//本地怪兽不需要Player信息
 				GameObject g = Instantiate (Resource) as GameObject;
 				NpcAttribute npc = NGUITools.AddMissingComponent<NpcAttribute> (g);
+                npc.spawnTrigger = spawn.gameObject;
 
 				var type = Type.GetType ("ChuMeng." + unitData.AITemplate);
 				var t = typeof(NGUITools);
@@ -742,6 +743,7 @@ namespace ChuMeng
 
 
 			npc.SetOwnerId (owner.GetComponent<KBEngine.KBNetworkView> ().GetLocalId ());
+
 			//不可移动Buff
 			//持续时间Buff
 			//无敌不可被攻击Buff
@@ -751,11 +753,17 @@ namespace ChuMeng
 			var netView = NGUITools.AddMissingComponent<KBEngine.KBNetworkView> (g);
 			netView.SetID (new KBEngine.KBViewID (myPlayer.ID, myPlayer));
 			netView.IsPlayer = false;
+            //owner.GetComponent<NpcAttribute>().AddSummon(netView.gameObject);
 			
 			npc.SetObjUnitData (unitData);
 			AddObject (netView.GetServerID (), netView);
 
 			npc.transform.position = pos;	
+
+            if(npc.tag == GameTag.Enemy) {
+                BattleManager.battleManager.enemyList.Add (npc.gameObject);
+                npc.SetDeadDelegate = BattleManager.battleManager.EnemyDead;
+            }
 		}
 		//Npc构建流程 副本或者主城内
 
@@ -766,6 +774,15 @@ namespace ChuMeng
 			}
 			return GameTag.Player;
 		}
+        public List<GameObject> GetSummons(int localId) {
+            var ret = new List<GameObject>();
+            foreach(var g in photonViewList){
+                if(g.GetComponent<NpcAttribute>().OwnerId == localId) {
+                    ret.Add(g.gameObject);
+                }
+            }
+            return ret;
+        }
 	}
 
 }

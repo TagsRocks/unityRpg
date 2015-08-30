@@ -73,6 +73,28 @@ namespace ChuMeng
 
 		}
 
+        void MakeMonster(){
+            Affix af = null;
+            if(runner.Event.affix.target == Affix.TargetType.Pet) {
+                af = runner.Event.affix;
+            }
+            
+            var pos = gameObject.transform.position+runner.stateMachine.InitPos; 
+            if(runner.stateMachine.attacker != null){
+                var npc = runner.stateMachine.attacker.GetComponent<NpcAttribute>();
+                if(npc.spawnTrigger != null) {
+                    var c = npc.spawnTrigger.transform.childCount;
+                    if(c > 0) {
+                        var rd = Random.Range(0, c);
+                        var child = npc.spawnTrigger.transform.GetChild(rd);
+                        pos = child.transform.position;
+                        Log.AI("CreateMonster Use Dynamic Pos "+pos+" index "+rd);
+                    }
+                }
+            }
+            ObjectManager.objectManager.CreatePet(MonsterId, runner.stateMachine.attacker, af, 
+                                                  pos); 
+        }
 
 		IEnumerator UpdateUnitSpawn() {
 			float passTime = 0;
@@ -119,11 +141,7 @@ namespace ChuMeng
 							MakeMissile(initDeg+diffDeg*lastFrame);
 						}
 					}else if (MonsterId != -1){
-						Affix af = null;
-						if(runner.Event.affix.target == Affix.TargetType.Pet) {
-							af = runner.Event.affix;
-						}
-						ObjectManager.objectManager.CreatePet(MonsterId, runner.stateMachine.attacker, af, gameObject.transform.localPosition+runner.stateMachine.InitPos);
+                        MakeMonster();	
 					}
 				}
 

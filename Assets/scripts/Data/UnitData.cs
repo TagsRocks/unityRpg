@@ -428,20 +428,8 @@ namespace ChuMeng
             }
         }
 
-        /*
-         * Flee On My Friend Dead
-         */ 
-        public bool Flee
-        {
-            get
-            {
-                if (IsPlayer)
-                {
-                    return false;
-                }
-                return config.flee;
-            }
-        }
+ 
+     
 
         public Job job
         {

@@ -91,13 +91,7 @@ namespace ChuMeng
             PassiveSkill,
             AttachBuff,
         }
-        public SkillType skillType
-        {
-            get
-            {
-                return (SkillType)skillConfig.type;
-            }
-        }
+       
         public enum DamageType
         {
             Physic = 0,
@@ -166,13 +160,7 @@ namespace ChuMeng
             }
         }
 
-        public int CooldownMS
-        {
-            get
-            {
-                return skillConfig.coolTimeId;
-            }
-        }
+    
 
         public int LevelRequired
         {
@@ -225,13 +213,6 @@ namespace ChuMeng
             }
         }
 
-        public DamageShape damageShape
-        {
-            get
-            {
-                return (DamageShape)skillConfig.areaType;
-            }
-        }
 
         public string SkillDes
         {

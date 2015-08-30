@@ -30,6 +30,7 @@ namespace ChuMeng
         Flee,
     };
 
+
     /// <summary>
     /// 其它组件访问对象的数据 都通过 NpcAttribute 进行
     /// </summary>
@@ -37,6 +38,11 @@ namespace ChuMeng
     {
         public CharacterState _characterState = CharacterState.Idle;
         public int OwnerId = -1;
+
+        /// <summary>
+        /// Monster SpawnObject 
+        /// </summary>
+        public GameObject  spawnTrigger;
 
         public Vector3 OriginPos{
             get;private set;
@@ -793,6 +799,7 @@ namespace ChuMeng
         {
             return animation.GetClip(name) != null; 
         }
+
     }
 
 }

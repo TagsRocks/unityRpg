@@ -17,10 +17,14 @@ public class RemoveMonsterInZone : MonoBehaviour
             var spawnNpc = t.GetComponent<SpawnNpc>();
             if (trigger != null || spawnNpc != null)
             {
-                for (int i = 0; i < t.childCount; i++)
-                {
-                    GameObject.DestroyImmediate(t.GetChild(i).gameObject);
 
+                for (int i = 0; i < t.childCount; )
+                {
+                    if(t.GetChild(i).name.Contains("Child")){
+                        i++;
+                    }else {
+                        GameObject.DestroyImmediate(t.GetChild(i).gameObject);
+                    }
                 }
             }
         }
