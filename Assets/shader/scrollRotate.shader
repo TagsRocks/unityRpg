@@ -70,9 +70,8 @@
 				
 				float sinX = sin(_RotateAnim*_Time.y);
 				float cosX = cos(_RotateAnim*_Time.y);
-				float2x2 rotationMatrix = float2x2(cosX, -sinX, sinX, cosX);
-				rotationMatrix *= 0.5f;
-				rotationMatrix += 0.5f;
+				//-1 ~ 1  0-1 rotate UV 
+				float2x2 rotationMatrix = float2x2(cosX*0.5f+0.5f, -sinX*0.5f+0.5f, sinX*0.5f+0.5f, cosX*0.5f+0.5f);
 				o.uv = mul(o.uv, rotationMatrix);
 				
 				

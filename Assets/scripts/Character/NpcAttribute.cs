@@ -709,10 +709,10 @@ namespace ChuMeng
             return null;
         }
 
-        //获得终极技能
         //TODO: 死亡时释放的技能
-        public SkillData GetDeadSkill()
+        private SkillData GetDeadSkill()
         {
+            return GetComponent<SkillInfoComponent>().GetDeadSkill();
             /*
             foreach (SkillFullInfo sin in skills) {
                 if(sin.skillData.castType == SkillData.CastType.Struck ) {
@@ -786,7 +786,8 @@ namespace ChuMeng
             var sdata = GetDeadSkill();
             if (sdata != null)
             {
-                StartCoroutine(GetComponent<CommonAI>().ShowDeadSkill(sdata));
+                //StartCoroutine(GetComponent<CommonAI>().ShowDeadSkill(sdata));
+                StartCoroutine(SkillLogic.MakeSkill(gameObject, sdata, transform.position));
             }
             
             if (ObjectManager.objectManager != null && ObjectManager.objectManager.myPlayer != null)

@@ -47,6 +47,27 @@ namespace ChuMeng
 			activeSkill = GetDefaultSkill ().skillData;
 		}
 
+        /// <summary>
+        ///得到怪物的死亡随机技能 
+        /// </summary>
+        /// <returns>The dead skill.</returns>
+        public SkillData  GetDeadSkill(){
+            var skList = attribute.ObjUnitData.GetSkillList ();
+            foreach (SimpleJSON.JSONNode j in skList) {
+                if(!string.IsNullOrEmpty(j["death"].Value)) {
+                    if(j["death"].AsBool) {
+                        activeSkill = Util.GetSkillData(j["id"].AsInt, j["level"].AsInt);
+                        Log.AI("Set Death Skill Active "+activeSkill.SkillName);
+                        return activeSkill;
+                    }
+                }
+            }
+            return null;
+        }
+
+        /// <summary>
+        ///怪物随机一个技能 
+        /// </summary>
 		public void SetRandomActive ()
 		{
 			Log.AI ("SetRandomActive " + gameObject.name);

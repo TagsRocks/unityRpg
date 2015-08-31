@@ -73,6 +73,7 @@ namespace ChuMeng {
 		public override IEnumerator RunLogic ()
 		{
 			GetAttr ().ShowDead ();
+
 			//GetAttr ().GetComponent<BloodBar> ().enabled = false;
 			var deathBlood = Resources.Load<GameObject> ("particles/swordhit");
 

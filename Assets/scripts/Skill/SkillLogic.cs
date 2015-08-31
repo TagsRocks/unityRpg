@@ -5,6 +5,18 @@ namespace ChuMeng
 {
     public class SkillLogic
     {
+        /// <summary>
+        /// 释放一个技能状态机 
+        /// </summary>
+        /// <returns>The skill.</returns>
+        /// <param name="attacker">Attacker.</param>
+        /// <param name="activeSkill">Active skill.</param>
+        /// <param name="position">Position.</param>
+        public static IEnumerator  MakeSkill(GameObject attacker, SkillData activeSkill, Vector3 position){
+            var skillStateMachine = CreateSkillStateMachine(attacker, activeSkill, position);
+            yield return null;
+        }
+
         public static SkillStateMachine CreateSkillStateMachine(GameObject attacker, SkillData activeSkill, Vector3 position, GameObject enemy = null) {
             Log.AI("create Skill State Machine");
             var g = new GameObject ("SkillStateMachine");
