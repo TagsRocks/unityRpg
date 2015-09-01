@@ -28,7 +28,7 @@ namespace ChuMeng {
 		/*
 		 * 攻击操作的对象
 		 */ 
-		GameObject targetPlayer = null;
+		public GameObject targetPlayer = null;
 		public void SetTargetPlayer(GameObject g) {
 			targetPlayer = g;
 		}

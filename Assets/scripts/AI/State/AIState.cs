@@ -252,27 +252,7 @@ namespace ChuMeng
 			//return CheckAttackEvent ();
 		}
 
-        protected bool CheckAttackEvent() {
-            var msg = GetEvent ().CheckMsg (MyAnimationEvent.MsgType.DoSkill);
-            if (msg != null) {
-                var isBaseAttack = GetSkill ().IsDefaultSkill (msg.skillData);
-                Log.AI("CheckCastSkill "+isBaseAttack);
-                if (isBaseAttack) {
-                    Log.AI ("CheckAttack " + msg.type);
-                    var skillPart = GetSkill ();
-                    skillPart.SetDefaultActive ();
-                    return aiCharacter.ChangeState (AIStateEnum.COMBAT);
-                    
-                } else {
-                    Log.AI ("Enter CastSkill");
-                    var skillPart = GetSkill ();
-                    skillPart.SetActiveSkill (msg.skillData);
-                    return aiCharacter.ChangeState (AIStateEnum.CastSkill);
-                    
-                }
-            }
-            return false;
-        }
+     
 
 	}
 

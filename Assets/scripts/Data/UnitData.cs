@@ -117,7 +117,8 @@ namespace ChuMeng
         {
             get
             {
-                if(config != null) {
+                if (config != null)
+                {
                     return config.level;
                 }
                 return playerConfig.level;
@@ -146,9 +147,12 @@ namespace ChuMeng
                     int min = 0;
                     foreach (SimpleJSON.JSONNode j in skList)
                     {
-                        j ["min"].AsInt = min;
-                        j ["max"].AsInt = min + j ["chance"].AsInt;
-                        min += j ["chance"].AsInt;
+                        if (string.IsNullOrEmpty(j ["ignore"].Value))
+                        {
+                            j ["min"].AsInt = min;
+                            j ["max"].AsInt = min + j ["chance"].AsInt;
+                            min += j ["chance"].AsInt;
+                        }
                     }
                 } else
                 {
@@ -216,7 +220,6 @@ namespace ChuMeng
                 return 0;
             }
         }
-
 
         public string ModelName
         {
@@ -428,9 +431,6 @@ namespace ChuMeng
             }
         }
 
- 
-     
-
         public Job job
         {
             get
@@ -451,7 +451,7 @@ namespace ChuMeng
                 var rd = Random.Range(0, 1.0f);
                 Log.Sys("random " + rd + " last " + " d " + d [1]);
 
-                if (rd < d[1]*modify)
+                if (rd < d [1] * modify)
                 {
                     allDrops.Add(d);
                 }

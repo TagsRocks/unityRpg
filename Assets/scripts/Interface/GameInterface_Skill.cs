@@ -63,6 +63,10 @@ namespace ChuMeng
             return SkillDataController.skillDataController.DistriSp;
         }
 
+        /// <summary>
+        ///我的角色使用技能 
+        /// </summary>
+        /// <param name="skillId">Skill identifier.</param>
         public static void MeUseSkill(int skillId)
         {
             Log.Sys("MeUseSkill " + skillId);
@@ -75,6 +79,10 @@ namespace ChuMeng
             ObjectManager.objectManager.GetMyPlayer().GetComponent<MyAnimationEvent>().OnSkill(skillData);
         }
 
+        /// <summary>
+        /// UI点击使用技能 
+        /// </summary>
+        /// <param name="skIndex">Sk index.</param>
         public static void OnSkill(int skIndex)
         {
             var skillData = SkillDataController.skillDataController.GetShortSkillData(skIndex);

@@ -31,7 +31,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &106812
 GameObject:
   m_ObjectHideFlags: 1
@@ -47,7 +47,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &106814
 GameObject:
   m_ObjectHideFlags: 1
@@ -63,7 +63,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &106816
 GameObject:
   m_ObjectHideFlags: 1
@@ -79,7 +79,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &194882
 GameObject:
   m_ObjectHideFlags: 1
@@ -95,7 +95,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &194884
 GameObject:
   m_ObjectHideFlags: 1
@@ -1876,7 +1876,7 @@ MonoBehaviour:
   CollisionSubEmitter: 
   DeathSubEmitter: 
   AvailableNodeCount: 10
-  LastClientPos: {x: -48.0999985, y: 1.85604286, z: 46.3496208}
+  LastClientPos: {x: -48.0999985, y: 1.90604281, z: -21.4503803}
   MyCamera: {fileID: 0}
   Owner: {fileID: 11494922}
   mStopped: 0
@@ -2783,7 +2783,7 @@ MonoBehaviour:
   CollisionSubEmitter: 
   DeathSubEmitter: 
   AvailableNodeCount: 10
-  LastClientPos: {x: 45.8699989, y: 1.38604283, z: 45.3996201}
+  LastClientPos: {x: -45.3400002, y: 1.30604291, z: 46.8096199}
   MyCamera: {fileID: 0}
   Owner: {fileID: 11494928}
   mStopped: 0
@@ -3703,7 +3703,7 @@ MonoBehaviour:
   CollisionSubEmitter: 
   DeathSubEmitter: 
   AvailableNodeCount: 10
-  LastClientPos: {x: 45.8699989, y: 1.31637549, z: 49.0340919}
+  LastClientPos: {x: -45.3400002, y: 1.23637557, z: 50.4440918}
   MyCamera: {fileID: 0}
   Owner: {fileID: 11494942}
   mStopped: 0
@@ -4121,7 +4121,7 @@ MonoBehaviour:
   CollisionSubEmitter: 
   DeathSubEmitter: 
   AvailableNodeCount: 10
-  LastClientPos: {x: 45.8699989, y: 1.42945695, z: 47.25}
+  LastClientPos: {x: -45.3400002, y: 1.34945703, z: 48.6599998}
   MyCamera: {fileID: 0}
   Owner: {fileID: 11494926}
   mStopped: 0
@@ -4552,7 +4552,7 @@ MonoBehaviour:
   CollisionSubEmitter: 
   DeathSubEmitter: 
   AvailableNodeCount: 10
-  LastClientPos: {x: -48.0999985, y: 1.89945698, z: 48.2000008}
+  LastClientPos: {x: -48.0999985, y: 1.94945693, z: -19.6000004}
   MyCamera: {fileID: 0}
   Owner: {fileID: 11494932}
   mStopped: 0
@@ -4970,7 +4970,7 @@ MonoBehaviour:
   CollisionSubEmitter: 
   DeathSubEmitter: 
   AvailableNodeCount: 10
-  LastClientPos: {x: -48.0999985, y: 1.78637552, z: 49.9840927}
+  LastClientPos: {x: -48.0999985, y: 1.83637547, z: -17.8159084}
   MyCamera: {fileID: 0}
   Owner: {fileID: 11494952}
   mStopped: 0

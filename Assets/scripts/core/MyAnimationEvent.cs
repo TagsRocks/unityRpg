@@ -104,6 +104,10 @@ namespace ChuMeng
 			return ret;
 		}
 
+        /// <summary>
+        /// 角色使用某个技能 
+        /// </summary>
+        /// <param name="skillData">Skill data.</param>
 		public void OnSkill (SkillData skillData)
 		{
 			var msg = new Message (MsgType.DoSkill);

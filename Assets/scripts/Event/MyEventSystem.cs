@@ -145,6 +145,8 @@ namespace ChuMeng
             NpcDead,
             LevelFinish,
             GameOver,
+
+            Combat,
 		}
 
 

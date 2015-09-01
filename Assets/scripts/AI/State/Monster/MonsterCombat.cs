@@ -12,6 +12,7 @@ namespace ChuMeng {
 			SetAttrState (CharacterState.Attacking);	
 			WalkSpeed = GetAttr ().WalkSpeed;
 			RunSpeed = WalkSpeed*2;
+            //MyEventSystem.myEventSystem.PushLocalEvent(GetAttr().GetLocalId(), MyEvent.EventType.Combat);
 		}
 
 
@@ -51,6 +52,9 @@ namespace ChuMeng {
                 yield return new WaitForSeconds(1);
             }
         }
+
+       
+
 		public override IEnumerator RunLogic ()
 		{
 			var physic = GetAttr ().GetComponent<PhysicComponent> ();

@@ -31,6 +31,7 @@ namespace ChuMeng {
 			ai.AddState (new MonsterDead ());
 			ai.AddState (new MonsterFlee ());
 			ai.AddState (new MonsterKnockBack ());
+            ai.AddState(new MonsterSkill());
 		}
 		void Start() {
 			myAnimationEvent.RegFlee ();
