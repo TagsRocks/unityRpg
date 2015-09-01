@@ -35,6 +35,7 @@ namespace ChuMeng
                     g.transform.localRotation = Quaternion.identity;
                     g.transform.localScale = Vector3.one;
                 }
+                BackgroundSound.Instance.PlayEffect("skill/palaceTeleport");
             }else {
                 Log.Sys("ShanShuo NoAttacker ");
             }
