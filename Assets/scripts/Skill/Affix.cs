@@ -32,6 +32,7 @@ namespace ChuMeng
             Fushi, //腐蚀降低防御力
             ReduceHP, //持续降低HP
             Frozen, //冰冻降低移动攻击速度 50% 不能叠加
+            FanTan, //反弹伤害
         }
 
         public EffectType effectType = EffectType.None;
@@ -68,5 +69,6 @@ namespace ChuMeng
         /// 燃烧不能叠加 
         /// </summary>
         public bool IsOnlyOne = false;
+
     }
 }

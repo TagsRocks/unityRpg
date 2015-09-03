@@ -9,7 +9,7 @@ namespace ChuMeng
         {
             base.Init(af, o);
             type = Affix.EffectType.ReduceHP;
-            BackgroundSound.Instance.PlayEffect("fireattack3");
+            BackgroundSound.Instance.PlayEffect("skill/fireattack3");
         }
         IEnumerator Add(){
             var duration = affix.Duration;
@@ -32,7 +32,7 @@ namespace ChuMeng
                     npcAttr.ChangeHP(-addNumHP);
                     goneTime -= period;
                     count++;
-                    BackgroundSound.Instance.PlayEffect("fireattack3");
+                    BackgroundSound.Instance.PlayEffect("skill/fireattack3");
                 }
                 goneTime += Time.deltaTime;
                 yield return null;

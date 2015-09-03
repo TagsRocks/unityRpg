@@ -143,7 +143,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   VersionIdentifier1: 222
   ClientTransform: {fileID: 429428}
-  SyncClient: 0
+  SyncClient: 1
   Material: {fileID: 2100000, guid: 2f5b608029e7d40149767701219a054e, type: 2}
   RenderType: 0
   StartTime: 0
@@ -564,7 +564,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   VersionIdentifier1: 222
   ClientTransform: {fileID: 429430}
-  SyncClient: 0
+  SyncClient: 1
   Material: {fileID: 2100000, guid: a0a71071b3f984b768bf23c90dedbb11, type: 2}
   RenderType: 0
   StartTime: 0
@@ -992,7 +992,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   VersionIdentifier1: 222
   ClientTransform: {fileID: 429432}
-  SyncClient: 0
+  SyncClient: 1
   Material: {fileID: 2100000, guid: 610246e4ab65d477cb9b48fd833a4e86, type: 2}
   RenderType: 0
   StartTime: 0

@@ -713,17 +713,6 @@ namespace ChuMeng
         private SkillData GetDeadSkill()
         {
             return GetComponent<SkillInfoComponent>().GetDeadSkill();
-            /*
-            foreach (SkillFullInfo sin in skills) {
-                if(sin.skillData.castType == SkillData.CastType.Struck ) {
-                    int ch = Random.Range(0, 100);
-                    if(ch < sin.skillData.Chance) {
-                        return sin.skillData;
-                    }
-                }
-            }
-            */
-            return null;
         }
 
         IEnumerator AddHpProgress(float duration, float totalAdd)

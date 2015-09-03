@@ -81,7 +81,8 @@ namespace ChuMeng
 		{
 			barDisplay = v;
 		}
-        void OnDestroy(){
+        protected override void OnDestroy(){
+            base.OnDestroy();
             barDisplay = 0;
             fill.value = 0;
             GameObject.Destroy(bar);

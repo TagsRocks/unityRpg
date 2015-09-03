@@ -50,7 +50,9 @@ namespace ChuMeng
 			}
 
 			if (Event.affix.effectType != Affix.EffectType.None && Event.affix.target == Affix.TargetType.Self) {
-				stateMachine.attacker.GetComponent<BuffComponent> ().AddBuff (Event.affix);
+                if(stateMachine.attacker != null) {
+				    stateMachine.attacker.GetComponent<BuffComponent> ().AddBuff (Event.affix);
+                }
 			}
 			
 

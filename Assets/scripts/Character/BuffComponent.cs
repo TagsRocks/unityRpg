@@ -25,6 +25,15 @@ namespace ChuMeng {
 			}
 		}
 
+        public bool CheckHasSuchBuff(Affix.EffectType effectType){
+            for(int i=0; i < effectList.Count; i++) {
+                if(effectList[i].affix.effectType == effectType) {
+                    return true;
+                }
+            } 
+            return false;
+        }
+
 		public void AddBuff (Affix affix, GameObject attacker = null)
 		{
 			if (affix != null) {

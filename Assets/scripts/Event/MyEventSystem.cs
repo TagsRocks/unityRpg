@@ -147,6 +147,7 @@ namespace ChuMeng
             GameOver,
 
             Combat,
+            OnHit,
 		}
 
 
@@ -177,6 +178,7 @@ namespace ChuMeng
         public Transform missile;
 
 		public Vector3 ShakeDir;
+        public GameObject attacker;
 		public MyEvent(EventType t) {
 			type = t;
 		}

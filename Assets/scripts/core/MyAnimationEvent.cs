@@ -185,6 +185,9 @@ namespace ChuMeng
 				CacheDamage.Add(new DamageData(go, damage, isCritical, damageType, showHit));
 				onHit = true;
 				attacker = go;
+                var evt = new MyEvent(MyEvent.EventType.OnHit);
+                evt.attacker = attacker;
+                MyEventSystem.myEventSystem.PushLocalEvent(photonView.GetLocalId(), evt);
 			}
 		}
 

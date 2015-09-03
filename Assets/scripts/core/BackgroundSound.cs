@@ -31,6 +31,13 @@ namespace ChuMeng
             var clip = Resources.Load<AudioClip>("sound/" + sound);
             source.PlayOneShot(clip);
         }
+        public AudioSource  PlayEffectLoop(string sound) {
+            var clip = Resources.Load<AudioClip>("sound/" + sound);
+            var audio = gameObject.AddComponent<AudioSource>();
+            audio.loop = true;
+            audio.clip = clip;
+            return audio;
+        }
 
         void Update()
         {

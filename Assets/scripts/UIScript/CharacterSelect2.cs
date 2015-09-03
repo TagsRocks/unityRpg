@@ -43,7 +43,8 @@ namespace ChuMeng
         {
             UpdateFrame ();
         }
-        void OnDestroy(){
+        protected override void OnDestroy(){
+            base.OnDestroy();
             //MyEventSystem.myEventSystem.PushEvent(MyEvent.EventType.MeshHide);
         }
         RolesInfo selectRoleInfo;

@@ -147,6 +147,9 @@ namespace ChuMeng {
 		//获得当前章节的id
 		public int GetCurrentChapter() {
 			int lastId = 0;
+            if(copyInfo == null) {
+                return 1;
+            }
 			foreach(CopyInfo c in copyInfo.CopyInfoList) {
 				if(!c.IsPass) {
 					var linfo1 = GetLevelInfo(c.Id);

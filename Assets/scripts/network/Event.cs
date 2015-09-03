@@ -272,43 +272,7 @@ __RESTART_REMOVE:
 		public static void processInEvents()
 		{
             return;
-			Monitor.Enter(events_in);
-
-			if(firedEvents_in.Count > 0)
-			{
-				foreach(EventObj evt in firedEvents_in)
-				{
-					doingEvents_in.AddLast(evt);
-				}
-
-				firedEvents_in.Clear();
-			}
-
-			Monitor.Exit(events_in);
-
-			while (doingEvents_in.Count > 0) 
-			{
-				
-				EventObj eobj = doingEvents_in.First.Value;
-				
-				//Debug.Log("processInEvents:" + eobj.info.funcname + "(" + eobj.info + ")");
-				//foreach(object v in eobj.args)
-				//{
-				//	Debug.Log("processInEvents:args=" + v);
-				//}
-				try
-				{
-					eobj.info.method.Invoke (eobj.info.obj, eobj.args);
-
-				}
-	            catch (Exception e)
-	            {
-	            	Dbg.ERROR_MSG(e.ToString());
-	            	Dbg.ERROR_MSG("Event::processInEvents: event=" + eobj.info.funcname);
-	            }
-	            
-				doingEvents_in.RemoveFirst();
-			}
+		
 		}
 	
     }

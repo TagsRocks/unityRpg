@@ -22,7 +22,10 @@ namespace ChuMeng {
 			obj = o;
 			if (affix.UnitTheme != null) {
 				var par = GameObject.Instantiate(affix.UnitTheme) as GameObject;
-				par.transform.parent = obj.transform;
+				//par.transform.parent = obj.transform;
+                var sync = par.AddComponent<SyncPosWithTarget>();
+                sync.target = obj;
+
 				par.transform.localPosition = Vector3.zero;
 				par.transform.localRotation = Quaternion.identity;
 				par.transform.localScale = Vector3.one;
