@@ -82,9 +82,9 @@
 				
 				float sin2 = sin(_RotateAnim2*_Time.y);
 				float cos2 = cos(_RotateAnim2*_Time.y);
-				float2x2 rotationMatrix2 = float2x2(cos2, -sin2, sin2, cos2);
-				rotationMatrix2 *= 0.5f;
-				rotationMatrix2 += 0.5f;
+				float2x2 rotationMatrix2 = float2x2(cos2*0.5f+0.5f, -sin2*0.5f+0.5f, sin2*0.5f+0.5f, cos2*0.5f+0.5f);
+				//rotationMatrix2 *= 0.5f;
+				//rotationMatrix2 += 0.5f;
 				o.uv2 = mul(o.uv2, rotationMatrix2);
 				
 				o.offPos = mul(_Object2World, v.vertex).xyz-(_WorldSpaceCameraPos+_CamPos);

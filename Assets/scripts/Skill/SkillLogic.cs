@@ -56,7 +56,7 @@ namespace ChuMeng
 		//找到最近的敌人 不考虑朝向方向
 		public static GameObject FindNearestEnemy(GameObject attacker) {
 			var enemyTag = SkillLogic.GetEnemyTag (attacker.tag);
-			LayerMask mask = 1 << (int)GameLayer.Npc;
+			LayerMask mask = SkillDamageCaculate.GetDamageLayer();
 			var enemies = Physics.OverlapSphere (attacker.transform.position, attacker.GetComponent<NpcAttribute>().AttackRange, mask);
 			float minDist = 999999;
 			

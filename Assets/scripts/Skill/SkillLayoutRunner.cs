@@ -43,6 +43,7 @@ namespace ChuMeng
             }
         }
 
+        public Vector3 BeamTargetPos = Vector3.zero;
 		void Start ()
 		{
 			if (Event.attaches) {
@@ -102,7 +103,8 @@ namespace ChuMeng
 						Log.AI("SetBeamTarget is "+stateMachine.target.transform.position);
 						var bt = Util.FindChildrecursive<BeamTarget>(g.transform);
 						bt.transform.position = stateMachine.target.transform.position+Event.BeamOffset;
-						//DoDamage(stateMachine.target);
+                        BeamTargetPos = bt.transform.position;
+
 					}
 
 					StartCoroutine(EnableXft(xft));

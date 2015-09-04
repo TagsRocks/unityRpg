@@ -33,6 +33,8 @@ namespace ChuMeng
             ReduceHP, //持续降低HP
             Frozen, //冰冻降低移动攻击速度 50% 不能叠加
             FanTan, //反弹伤害
+            Ghost, //鬼魂化
+            IgnoreCol, //忽略一切的碰撞
         }
 
         public EffectType effectType = EffectType.None;

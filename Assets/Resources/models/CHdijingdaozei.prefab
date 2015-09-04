@@ -1226,7 +1226,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100080}
-  m_LocalRotation: {x: -1.20566546e-09, y: -1.66163208e-08, z: .381312281, w: .924446285}
+  m_LocalRotation: {x: -1.20566557e-09, y: -1.66163225e-08, z: .381312311, w: .924446344}
   m_LocalPosition: {x: -.0921932906, y: 0, z: 0}
   m_LocalScale: {x: .99999994, y: 1, z: .99999994}
   m_Children:
@@ -1440,8 +1440,6 @@ MonoBehaviour:
   hit: 0
   onHit: 0
   attacker: {fileID: 0}
-  ShowTrail: 0
-  HideTrail: 0
   KnockBack: 0
   WhoKnock: {fileID: 0}
   fleeEvent: 0

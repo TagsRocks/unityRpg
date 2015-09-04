@@ -387,6 +387,7 @@ MonoBehaviour:
   lightCoff: 5
   testAmbient: {r: 1, g: 1, b: 1, a: 0}
   InitAmbient: 0
+  InitNow: 0
 --- !u!114 &775957297
 MonoBehaviour:
   m_ObjectHideFlags: 0

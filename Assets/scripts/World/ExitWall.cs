@@ -43,7 +43,7 @@ namespace ChuMeng
         {
             while (true)
             {
-                var players = Physics.OverlapSphere(transform.position, 4, 1 << (int)GameLayer.Npc);
+                var players = Physics.OverlapSphere(transform.position, 4, SkillDamageCaculate.GetDamageLayer());
                 foreach (Collider p in players)
                 {
                     if (p.tag == GameTag.Player)

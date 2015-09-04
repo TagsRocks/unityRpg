@@ -48,6 +48,14 @@ namespace ChuMeng {
 			}
 			//}
 		}
+
+        /// <summary>
+        /// 得到伤害计算层 
+        /// </summary>
+        /// <returns>The damage layer.</returns>
+        public static int GetDamageLayer() {
+            return 1 << (int)GameLayer.Npc | 1 << (int) GameLayer.IgnoreCollision2;
+        }
 	}
 
 }

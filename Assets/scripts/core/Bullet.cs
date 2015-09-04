@@ -87,7 +87,7 @@ namespace ChuMeng
 			}
 			//if (sleepTime <= 0) {
 			//子弹不仅仅和动态对象碰撞不和 环境 墙体 碰撞
-			Collider[] col = Physics.OverlapSphere (transform.position, missileData.Radius, 1 << (int)GameLayer.Npc);
+			Collider[] col = Physics.OverlapSphere (transform.position, missileData.Radius, SkillDamageCaculate.GetDamageLayer());
 			foreach (Collider c in col) {
 				//和多个不同的敌人目标碰撞
 				if (c != lastColobj) {
@@ -109,18 +109,12 @@ namespace ChuMeng
                 }
                 if(runner != null) {
                     runner.DoDamage(other.gameObject);
-                    /*
-                    if(runner.Event.affix.target == Affix.TargetType.Enemy) {
-                        other.gameObject.GetComponent<BuffComponent>().AddBuff(runner.Event.affix);
-                    }
-                    */
                 }
-				//SkillDamageCaculate.DoDamage (attacker, new SkillFullInfo (skillData), other.gameObject);
 			}
 		}
 
 		void AOEDamage() {
-			Collider[] col = Physics.OverlapSphere (transform.position, missileData.AOERadius, 1 << (int)GameLayer.Npc);
+			Collider[] col = Physics.OverlapSphere (transform.position, missileData.AOERadius, SkillDamageCaculate.GetDamageLayer());
 			foreach (Collider c in col) {
 				DoDamage (c);
 			}

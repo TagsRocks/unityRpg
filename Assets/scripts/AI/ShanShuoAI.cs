@@ -3,6 +3,9 @@ using System.Collections;
 
 namespace ChuMeng
 {
+    /// <summary>
+    /// 闪烁刺客等刺客需要定期检测某种技能释放 
+    /// </summary>
     public class ShanShuoAI : AIBase
     {
         MyAnimationEvent myAnimationEvent;

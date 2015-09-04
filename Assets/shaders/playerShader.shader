@@ -24,12 +24,6 @@
 			//Blend SrcAlpha OneMinusSrcAlpha
 			zwrite off
 			ztest greater
-			//Color [_OverlayColor]
-			/*
-			SetTexture [_MainTex] {
-				combine texture * _OverlayColor
-			}
-			*/
 			
 			CGPROGRAM
 			#pragma vertex vert 

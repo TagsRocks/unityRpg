@@ -104,8 +104,13 @@ namespace ChuMeng
                         {
                         } else
                         {
+                            var t = typeof(NGUITools);
+                            var m = t.GetMethod ("AddMissingComponent");
+                            var geMethod = m.MakeGenericMethod (tp);
+                            var sk = geMethod.Invoke (null, new object[]{gameObject}) as SkillObj;
+
                             //技能有额外的条件需要检测
-                            var sk = (SkillObj)Activator.CreateInstance(tp);
+                            //var sk = (SkillObj)Activator.CreateInstance(tp);
                             var ret = sk.CheckCondition(gameObject);
                             Log.AI("CheckSkillCondition " + j ["id"].Value);
                             if (ret)

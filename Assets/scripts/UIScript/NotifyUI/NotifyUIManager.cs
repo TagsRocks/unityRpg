@@ -24,9 +24,15 @@ namespace ChuMeng
         public void AddNotify(string text, float time, System.Action<GameObject> cb)
         {
             nd.Add(new NotifyData(){text=text, time=time, cb = cb});
+            /*
             if(nd.Count >= 3) {
+                var n0 = nd[0];
                 nd.RemoveAt(0);
+                if(n0.cb != null) {
+                    n0.cb();
+                }
             }
+            */
         }
         // Use this for initialization
         void Start()
@@ -49,7 +55,11 @@ namespace ChuMeng
                         if (g != null)
                         {
                             g.GetComponent<NotifyUI>().SetText(not.text);
-                            g.GetComponent<NotifyUI>().SetDurationTime(not.time);
+                            var ft = not.time;
+                            if(nd.Count >= 3) {
+                                ft /= 2;
+                            }
+                            g.GetComponent<NotifyUI>().SetDurationTime(ft);
                         }
                         if (not.cb != null)
                         {

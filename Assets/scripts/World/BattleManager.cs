@@ -240,8 +240,8 @@ namespace ChuMeng
                     yield return StartCoroutine(GotoNextZone());
                 } else
                 {
-                    Log.Sys("BattleManager::NextWave No Wave Battle Finish " + MaxWave);
                     var n = MyEventSystem.myEventSystem.GetRegEventHandler(MyEvent.EventType.LevelFinish);
+                    Log.Sys("BattleManager::NextWave No Wave Battle Finish " + MaxWave+" evtNum "+n);
                     if(n > 0) {
                         MyEventSystem.myEventSystem.PushEvent(MyEvent.EventType.LevelFinish);
                     }else {
@@ -277,6 +277,7 @@ namespace ChuMeng
             {
                 while (leftTime > 0)
                 {
+                    Log.GUI("CountLeftTime "+leftTime);
                     //notify.SetTime (leftTime);
                     notify.SetText(string.Format("退出副本倒计时{0}s", (int)leftTime));
                     leftTime -= Time.deltaTime;
@@ -284,6 +285,7 @@ namespace ChuMeng
                 }
                 notify.SetText(string.Format("退出副本倒计时{0}s", (int)0));
             }
+            Log.GUI("Finish ThisLevel "+leftTime);
 
             var victoryUI = WindowMng.windowMng.PushView("UI/victory").GetComponent<VictoryUI>();
             while (!victoryUI.con)

@@ -272,14 +272,6 @@ namespace ChuMeng
 
         public void ShowNotifyLog(string text, float time = 3, System.Action<GameObject> cb = null)
         {
-            /*
-            var g = PushTopNotify("UI/NotifyLog");
-            if(g != null) {
-                g.GetComponent<NotifyUI>().SetText(text);
-                g.GetComponent<NotifyUI>().SetDurationTime(time);
-            }
-            return g;
-            */
             NotifyUIManager.Instance.AddNotify(text, time, cb);
         }
 

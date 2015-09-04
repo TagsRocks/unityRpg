@@ -45,7 +45,7 @@ namespace ChuMeng
         //是否会移动主角 多长时间 多长距离
         //public bool needMove = false;
         //public float distance = 0;
-        //冲击移动速度
+        //冲击移动速度 冲刺的最终距离
         public float speed = 6;
         bool enableYet = false;
         public float Distance = 6;
@@ -102,10 +102,10 @@ namespace ChuMeng
                         Collider[] hitColliders;
                         if (SyncWithPlayer)
                         {
-                            hitColliders = Physics.OverlapSphere(runner.stateMachine.attacker.transform.position, radius, 1 << (int)GameLayer.Npc);
+                            hitColliders = Physics.OverlapSphere(runner.stateMachine.attacker.transform.position, radius, SkillDamageCaculate.GetDamageLayer());
                         } else
                         {
-                            hitColliders = Physics.OverlapSphere(transform.position, radius, 1 << (int)GameLayer.Npc);
+                            hitColliders = Physics.OverlapSphere(transform.position, radius, SkillDamageCaculate.GetDamageLayer());
                         }
 
                         for (int i = 0; i < hitColliders.Length; i++)
@@ -158,30 +158,6 @@ namespace ChuMeng
             }
         }
 
-        /// <summary>
-        ///构建飞行的子弹进行伤害判定 
-        /// </summary>
-        /// <returns>The line damage.</returns>
-        ///
-        /*
-        IEnumerator CheckLineDamage()
-        {
-            var dir = hitColliders [i].gameObject.transform.position - transform.position;
-            var cos = Vector3.Dot(dir, transform.forward);
-            if (cos > 0)
-            {
-                var newPos = transform.position + cos * transform.forward;
-                var dis = Pathfinding.AstarMath.SqrMagnitudeXZ(hitColliders [i].transform.position, newPos); 
-                Log.AI("Distance " + dis + " width");
-                if (dis < 2f)
-                {
-                    DoDamage(hitColliders [i].gameObject);
-                    hurtEnemy.Add(hitColliders [i].gameObject);
-                }
-                                            
-            }
-        }
-        */
 
         IEnumerator MoveOwner()
         {
@@ -192,15 +168,6 @@ namespace ChuMeng
                 yield break;
             }
 
-            /*
-            var sp = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-            sp.transform.position = targetPos;
-            sp.collider.isTrigger = true;
-            
-            var sp2 = GameObject.CreatePrimitive(PrimitiveType.Cube);
-            sp2.transform.position = InitPosition;
-            sp2.collider.isTrigger = true;
-            */
 
             float diff = 0;
             float halfDist = Distance / 2.0f;
