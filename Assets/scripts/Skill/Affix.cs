@@ -41,6 +41,7 @@ namespace ChuMeng
         public float Duration = 10;//Buff Time 
 
         public GameObject UnitTheme;//buff 期间的单位粒子效果
+        public Vector3 ThemePos = Vector3.zero;
 
         //TODO:防御增加的数值 从数值表中读取
         //根据技能等级 以10%的比例上升 或者相对于某条数值曲线 上面取值

@@ -26,7 +26,7 @@ namespace ChuMeng {
                 var sync = par.AddComponent<SyncPosWithTarget>();
                 sync.target = obj;
 
-				par.transform.localPosition = Vector3.zero;
+				par.transform.localPosition = affix.ThemePos;
 				par.transform.localRotation = Quaternion.identity;
 				par.transform.localScale = Vector3.one;
 

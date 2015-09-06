@@ -347,11 +347,13 @@ namespace ChuMeng
 				combatObj.AddComponent<FriendsController>();
 				combatObj.transform.parent = transform;
 			}
+            /*
 			if (AchievementController.achievementController == null) {
 				var achievementObj = new GameObject("AchievementController");
 				achievementObj.AddComponent<AchievementController>();
 				achievementObj.transform.parent = transform;
 			}
+            */
 			if (CombatController.combatController == null) {
 				var combatObj = new GameObject("CombatController");
 				combatObj.AddComponent<FriendsController>();
@@ -367,6 +369,7 @@ namespace ChuMeng
 				guildObj.AddComponent<GuildController>();
 				guildObj.transform.parent = transform;
 			}
+            /*
 			if (VipController.vipController == null) {
 				var vipObj = new GameObject("VipController");
 				vipObj.AddComponent<VipController>();
@@ -377,6 +380,8 @@ namespace ChuMeng
 				rankObj.AddComponent<RankListController>();
 				rankObj.transform.parent = transform;
 			}
+            */
+            /*
 			if (ArenaController.arenaControoler == null) {
 				var arenaObj = new GameObject ("ArenaController");
 				arenaObj.AddComponent<ArenaController> ();
@@ -387,18 +392,21 @@ namespace ChuMeng
 				rankObj.AddComponent<RankListController> ();
 				rankObj.transform.parent = transform;
 			}
-
+            */
+            /*
 			if (VipController.vipController == null) {
 				var vipObj = new GameObject("VipController");
 				vipObj.AddComponent<VipController>();
 				vipObj.transform.parent = transform;
 			}
-
+            */
+            /*
 			if (TaskController.taskController == null) {
 				var taskobj = new GameObject("TaskController");
 				taskobj.AddComponent<TaskController>();
 				taskobj.transform.parent = transform;
 			}
+            */         
             var eff = new GameObject("EffectMainNode");
             eff.transform.parent = transform;
             EffectMainNode = eff;

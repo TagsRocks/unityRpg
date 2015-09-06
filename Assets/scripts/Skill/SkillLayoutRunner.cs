@@ -83,7 +83,18 @@ namespace ChuMeng
 						g.transform.localScale = Vector3.one;
 
 					} else {
-						if (Event.AttachToTarget) {
+                        Log.Ani("Particle TargetPos "+Event.TargetPos);
+                        if(Event.TargetPos){
+                            if (stateMachine.target != null) {
+                                //g.transform.parent = ObjectManager.objectManager.transform;
+                                //g.transform.parent = transform;
+                                //g.transform.parent = stateMachine.target.transform;
+                                g.transform.position = stateMachine.target.transform.position+skillConfig.Position;
+                                g.transform.localRotation = Quaternion.identity;
+                                g.transform.localScale = Vector3.one;
+                            }
+                        }
+						else if (Event.AttachToTarget) {
 							if (stateMachine.target != null) {
 								g.transform.parent = stateMachine.target.transform;
 								g.transform.localPosition = skillConfig.Position;

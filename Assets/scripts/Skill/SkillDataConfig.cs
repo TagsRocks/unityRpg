@@ -33,7 +33,8 @@ namespace ChuMeng
 			//设置Beam的粒子效果的GravityWell BeamTarget 的目标为Enemy的坐标
 			public bool SetBeamTarget = false;
 			public Vector3 BeamOffset = new Vector3 (0, 1, 0);
-
+            //出现在目标所在位置
+            public bool TargetPos = false;
 
 		}
 		public List<EventItem> eventList;

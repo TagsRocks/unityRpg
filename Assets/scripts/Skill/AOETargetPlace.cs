@@ -13,6 +13,7 @@ namespace ChuMeng
         string enemyTag;
 
         SkillLayoutRunner runner;
+        public Vector3 ParticlePos;
         // Use this for initialization
         void Start()
         {
@@ -20,6 +21,8 @@ namespace ChuMeng
             var attacker = runner.stateMachine.attacker; 
             enemyTag = SkillLogic.GetEnemyTag (attacker.tag);
             StartCoroutine(WaitExplosive());
+
+
         }
 
         IEnumerator WaitExplosive() {
@@ -30,7 +33,7 @@ namespace ChuMeng
                     GameObject g = Instantiate (DieParticle) as GameObject;
                     NGUITools.AddMissingComponent<RemoveSelf> (g);
                     g.transform.parent = ObjectManager.objectManager.transform;
-                    g.transform.position = runner.BeamTargetPos;
+                    g.transform.position = runner.BeamTargetPos+ParticlePos;
                 }
 
                 Collider[] col = Physics.OverlapSphere (transform.position, AOERadius, SkillDamageCaculate.GetDamageLayer());
