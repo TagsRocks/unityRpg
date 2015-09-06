@@ -1,90 +1,74 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &165010
+--- !u!1 &101012
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 4
   m_Component:
-  - 4: {fileID: 465010}
-  - 114: {fileID: 11465010}
+  - 4: {fileID: 401012}
+  - 114: {fileID: 11421014}
   m_Layer: 0
-  m_Name: AOETargetPlace
+  m_Name: WolfSpawn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!1 &165012
+--- !u!1 &135148
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 4
   m_Component:
-  - 4: {fileID: 465012}
-  - 114: {fileID: 11447862}
+  - 4: {fileID: 435148}
   m_Layer: 0
-  m_Name: ShenFaLayout
+  m_Name: WolfSpawnLayout
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &465010
+--- !u!4 &401012
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 165010}
+  m_GameObject: {fileID: 101012}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 465012}
+  m_Father: {fileID: 435148}
   m_RootOrder: 0
---- !u!4 &465012
+--- !u!4 &435148
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 165012}
+  m_GameObject: {fileID: 135148}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -.0756309032, y: 1.43177414, z: -6.79085922}
+  m_LocalPosition: {x: -8.62999916, y: -.286625385, z: 56.8044052}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 465010}
+  - {fileID: 401012}
   m_Father: {fileID: 0}
   m_RootOrder: 0
---- !u!114 &11447862
+--- !u!114 &11421014
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 165012}
+  m_GameObject: {fileID: 101012}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e033caffa2d174a929e84e191ce5945c, type: 3}
+  m_Script: {fileID: 11500000, guid: 9d80586dd4dca483f9d130d389969a97, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Position: {x: 0, y: 5.5999999, z: 0}
-  particle: {fileID: 122258, guid: 3e0ed91573af64e47b45bdf512327c75, type: 2}
-  boneName: 
---- !u!114 &11465010
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 165010}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5332d506f51ec412595d351aa6db4e01, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  DieParticle: {fileID: 144542, guid: b00ba5eb5147d4a5a9537f66998c78f4, type: 2}
-  AOERadius: 3
-  ParticlePos: {x: 0, y: 1, z: 0}
+  MonsterId: 27
+  num: 5
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
@@ -94,6 +78,6 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 165012}
+  m_RootGameObject: {fileID: 135148}
   m_IsPrefabParent: 1
   m_IsExploded: 1

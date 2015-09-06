@@ -148,6 +148,8 @@ namespace ChuMeng
 
             Combat,
             OnHit,
+
+            WolfCall,
 		}
 
 
@@ -179,6 +181,8 @@ namespace ChuMeng
 
 		public Vector3 ShakeDir;
         public GameObject attacker;
+        public GameObject target;
+
 		public MyEvent(EventType t) {
 			type = t;
 		}
