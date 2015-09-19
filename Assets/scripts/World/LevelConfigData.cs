@@ -111,6 +111,13 @@ namespace ChuMeng
             };
             LevelLayout.Add(109, l1);
 
+            l1 = new List<LevelConfig>(){
+                new LevelConfig("ENTRANCE_W_LM", 0, 0){useOtherZone=true, zoneId=42},
+                new LevelConfig("EW_PB", -1, 0){useOtherZone=true, zoneId=43},
+                new LevelConfig("EXIT_E_KG", -2, 0){useOtherZone=true, zoneId=44},
+            };
+            LevelLayout.Add(110, l1);
+
         }
     }
 }

@@ -288,6 +288,11 @@ namespace ChuMeng
 		{
 			type = AIStateEnum.DEAD;
 		}
+        public override void EnterState()
+        {
+            base.EnterState();
+            MyEventSystem.myEventSystem.PushLocalEvent(GetAttr().GetLocalId(), MyEvent.EventType.MeDead);
+        }
 
 		public override bool CheckNextState (AIStateEnum next)
 		{

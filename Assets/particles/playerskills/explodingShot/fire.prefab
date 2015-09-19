@@ -128,7 +128,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   VersionIdentifier1: 222
   ClientTransform: {fileID: 400000}
-  SyncClient: 0
+  SyncClient: 1
   Material: {fileID: 2100000, guid: 8b9447e1eb68a44ae98db7c10abe90c6, type: 2}
   RenderType: 0
   StartTime: 0
@@ -187,6 +187,7 @@ MonoBehaviour:
   OriScaleXMax: 1
   OriScaleYMin: 1
   OriScaleYMax: 1
+  OriScaleZ: 1
   ScaleAffectorEnable: 1
   ScaleType: 3
   DeltaScaleX: 0
@@ -453,6 +454,11 @@ MonoBehaviour:
   IsGravityAccelerate: 1
   IsSine: 0
   SineFreq: 1
+  SineAffectorEnable: 0
+  SineForce: {x: 0, y: 1, z: 0}
+  ModifyPos: 1
+  SineMaxFreq: 5
+  SineMinFreq: 1
   AirAffectorEnable: 0
   AirObject: {fileID: 400000}
   AirMagType: 0
@@ -552,7 +558,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   VersionIdentifier1: 222
   ClientTransform: {fileID: 400002}
-  SyncClient: 0
+  SyncClient: 1
   Material: {fileID: 2100000, guid: 51b8e7e046089473483dfd8ef0bcd050, type: 2}
   RenderType: 0
   StartTime: 0
@@ -611,6 +617,7 @@ MonoBehaviour:
   OriScaleXMax: 1
   OriScaleYMin: 1
   OriScaleYMax: 1
+  OriScaleZ: 1
   ScaleAffectorEnable: 1
   ScaleType: 3
   DeltaScaleX: 0
@@ -879,6 +886,11 @@ MonoBehaviour:
   IsGravityAccelerate: 1
   IsSine: 0
   SineFreq: 1
+  SineAffectorEnable: 0
+  SineForce: {x: 0, y: 1, z: 0}
+  ModifyPos: 1
+  SineMaxFreq: 5
+  SineMinFreq: 1
   AirAffectorEnable: 0
   AirObject: {fileID: 400002}
   AirMagType: 0
@@ -960,7 +972,7 @@ MonoBehaviour:
   BirthSubEmitter: 
   CollisionSubEmitter: 
   DeathSubEmitter: 
-  AvailableNodeCount: 0
+  AvailableNodeCount: 1
   LastClientPos: {x: 0, y: 0, z: 0}
   MyCamera: {fileID: 0}
   Owner: {fileID: 11400006}
@@ -978,7 +990,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   VersionIdentifier1: 222
   ClientTransform: {fileID: 400004}
-  SyncClient: 0
+  SyncClient: 1
   Material: {fileID: 2100000, guid: dd32a180df8d2469f998d472ef69efc1, type: 2}
   RenderType: 0
   StartTime: 0
@@ -1037,6 +1049,7 @@ MonoBehaviour:
   OriScaleXMax: .300000012
   OriScaleYMin: 1
   OriScaleYMax: 1
+  OriScaleZ: 1
   ScaleAffectorEnable: 1
   ScaleType: 3
   DeltaScaleX: 0
@@ -1298,6 +1311,11 @@ MonoBehaviour:
   IsGravityAccelerate: 1
   IsSine: 0
   SineFreq: 1
+  SineAffectorEnable: 0
+  SineForce: {x: 0, y: 1, z: 0}
+  ModifyPos: 1
+  SineMaxFreq: 5
+  SineMinFreq: 1
   AirAffectorEnable: 0
   AirObject: {fileID: 400004}
   AirMagType: 0
@@ -1397,8 +1415,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LifeTime: -1
   IgnoreTimeScale: 0
-  EditView: 0
-  Scale: 1
+  EditView: 1
+  Scale: 4
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

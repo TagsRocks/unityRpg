@@ -31,6 +31,8 @@ namespace ChuMeng
         public const int EliteRate = 10;
         public int waveNum;
         public bool Forever = false;
+        public List<MultipleSpawner> multiSpawner;
+
 
 
         public enum GroupEnum
@@ -50,6 +52,7 @@ namespace ChuMeng
         public GameObject waveText;
         int oldWaveNum = -1;
         int curWaveNum = 0;
+        public GameObject FirstMonster;
 
         void Awake()
         {
@@ -66,7 +69,47 @@ namespace ChuMeng
             isSpawnYet = false;
             ClearChildren();
             HideChild();
+            HideTracePoint();
         }
+
+        List<GameObject> tracePoint = null;
+
+        /// <summary>
+        ///翠花蛇用于行走的寻路点 
+        /// </summary>
+        /// <returns>The trace point.</returns>
+        public List<GameObject> GetTracePoint()
+        {
+            if (tracePoint == null)
+            {
+                tracePoint = new List<GameObject>();
+                foreach (Transform c in transform)
+                {
+                    if (c.name.Contains("TracePoint"))
+                    {
+                        tracePoint.Add(c.gameObject);
+                    }
+                }
+            }
+            return tracePoint;
+        }
+
+        List<GameObject> childPoint = null;
+        public List<GameObject> GetChildPoint() {
+            if (childPoint == null)
+            {
+                childPoint  = new List<GameObject>();
+                foreach (Transform c in transform)
+                {
+                    if (c.name.Contains("Child"))
+                    {
+                        childPoint.Add(c.gameObject);
+                    }
+                }
+            }
+            return childPoint ;
+        }
+
         // Use this for initialization
         void Start()
         {
@@ -106,15 +149,6 @@ namespace ChuMeng
                         GameObject.DestroyImmediate(showRes);
                         showRes = null;
                     }
-                    /*
-                    for(int i = 0; i < transform.childCount; ){
-                        if(transform.GetChild(i).name.Contains("Child")) {
-                            i++;
-                        }else {
-                            GameObject.DestroyImmediate(transform.GetChild(i).gameObject);
-                        }
-                    }
-                    */
                     ClearChildren();
                 
                     if(Resource != null) {
@@ -162,33 +196,38 @@ namespace ChuMeng
 #endif
         }
 
-        void HideChild(){
-            for(int i = 0; i < transform.childCount; ){
-                if(transform.GetChild(i).name.Contains("Child")) {
+        void HideTracePoint()
+        {
+            for (int i = 0; i < transform.childCount; i++)
+            {
+                if (transform.GetChild(i).name.Contains("TracePoint"))
+                {
                     transform.GetChild(i).gameObject.SetActive(false);
-                    i++;
-                }else {
+                } 
+            }
+        }
+
+        void HideChild()
+        {
+            for (int i = 0; i < transform.childCount; i++)
+            {
+                if (transform.GetChild(i).name.Contains("Child"))
+                {
+                    transform.GetChild(i).gameObject.SetActive(false);
                 }
             }
         }
-        void ClearChildren()
-        {
-            //List<GameObject> g = new List<GameObject>();
-            /*
-            foreach (Transform t in transform)
-            {
-                g.Add(t.gameObject);
-            }
-            foreach (GameObject g1 in g)
-            {
-                GameObject.DestroyImmediate(g1);
-            }
-            */
 
-            for(int i = 0; i < transform.childCount; ){
-                if(transform.GetChild(i).name.Contains("Child")) {
+        public void ClearChildren()
+        {
+
+            for (int i = 0; i < transform.childCount;)
+            {
+                if (transform.GetChild(i).name.Contains("Child") || transform.GetChild(i).name.Contains("TracePoint"))
+                {
                     i++;
-                }else {
+                } else
+                {
                     GameObject.DestroyImmediate(transform.GetChild(i).gameObject);
                 }
             }
@@ -204,33 +243,40 @@ namespace ChuMeng
         IEnumerator GenerateMonster()
         {
             Log.Sys("GenerateMonsters " + GroupNum);
-            for (int i = 0; i < GroupNum; i++)
             {
-                var rd = UnityEngine.Random.Range(0, 100);
-                var unitData = Util.GetUnitData(false, MonsterID, 0);
-                if(rd < EliteRate || BattleManager.battleManager.allElite)
+                for (int i = 0; i < GroupNum; i++)
                 {
-                    var elites = unitData.EliteIds;
-                    if(elites.Count > 0){
-                        var rd2 = UnityEngine.Random.Range(0, elites.Count);
-                        var id2 = elites[rd2];
-                        unitData = Util.GetUnitData(false, id2, 0);
-                        Log.Sys("CreateEliteMonster "+id2);
+                    var rd = UnityEngine.Random.Range(0, 100);
+                    var unitData = Util.GetUnitData(false, MonsterID, 0);
+                    if (rd < EliteRate || BattleManager.battleManager.allElite)
+                    {
+                        var elites = unitData.EliteIds;
+                        if (elites.Count > 0)
+                        {
+                            var rd2 = UnityEngine.Random.Range(0, elites.Count);
+                            var id2 = elites [rd2];
+                            unitData = Util.GetUnitData(false, id2, 0);
+                            Log.Sys("CreateEliteMonster " + id2);
+                        }
                     }
+
+                    ObjectManager.objectManager.CreateMonster(unitData, this);
+                    yield return new WaitForSeconds(1);
                 }
 
-                ObjectManager.objectManager.CreateMonster(unitData, this);
-                yield return new WaitForSeconds(1);
-            }
+                if(multiSpawner.Count > 0) {
+                    multiSpawner[0].SpawnChild(this);
+                }
             
-            curWaveNum++;
-            if (Forever && curWaveNum < TotalWave)
-            {
-                waveNum++;
-                isSpawnYet = false;
-                if (AddLevel)
+                curWaveNum++;
+                if (Forever && curWaveNum < TotalWave)
                 {
-                    Level++;
+                    waveNum++;
+                    isSpawnYet = false;
+                    if (AddLevel)
+                    {
+                        Level++;
+                    }
                 }
             }
             yield return null;

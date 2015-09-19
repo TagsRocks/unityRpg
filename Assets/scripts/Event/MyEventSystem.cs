@@ -68,7 +68,6 @@ namespace ChuMeng
 			MovePlayer,
 
 			MonsterDead,
-			KnockBack,
 
 			OpenShortCut,
 			UpdateShortCut,
@@ -150,6 +149,8 @@ namespace ChuMeng
             OnHit,
 
             WolfCall,
+            HuiShuLeaderDead,
+            MeDead,
 		}
 
 
@@ -182,6 +183,7 @@ namespace ChuMeng
 		public Vector3 ShakeDir;
         public GameObject attacker;
         public GameObject target;
+        public GameObject particle2;
 
 		public MyEvent(EventType t) {
 			type = t;

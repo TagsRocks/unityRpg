@@ -179,6 +179,7 @@ namespace ChuMeng
 
 		/*
 		 * When Birth is inattackable
+         * Birth Add Buff UnAttackable 
 		 */ 
 		public void OnHit(GameObject go, int damage, bool isCritical, SkillData.DamageType damageType = SkillData.DamageType.Physic,  bool showHit = true) {
 			if(attribute._characterState != CharacterState.Birth) {
@@ -225,15 +226,9 @@ namespace ChuMeng
 			if (evt.type == MyEvent.EventType.MonsterDead) {
 				fleeEvent = true;
 				fleeTime = Time.time;
-			} else if (evt.localID == photonView.GetLocalId() && evt.type == MyEvent.EventType.KnockBack) {
-				KnockBack = true;
-				WhoKnock = evt.player;
-			}
+			} 
 		}
 
-		public void RegKnockBack() {
-			AddEvent (MyEvent.EventType.KnockBack);
-		}
 	}
 
 }

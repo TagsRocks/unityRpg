@@ -304,6 +304,10 @@ namespace ChuMeng
         public void EnemyDead(GameObject go)
         {
             Log.Sys("MonsterDead " + go.name + " list " + enemyList.Count);
+            if(!enemyList.Contains(go))
+            {
+                return;
+            }
             enemyList.Remove(go);
             if (enemyList.Count > 0)
             {

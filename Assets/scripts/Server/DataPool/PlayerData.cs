@@ -57,6 +57,8 @@ namespace ChuMeng
             if (num > 0)
             {
                 SendNotify(string.Format("[ff9500]{0}+{1}[-]", itemData.ItemName, num));
+            }else if(num < 0) {
+                SendNotify(string.Format("[ff1010]{0}{1}[-]", itemData.ItemName, num));
             }
         }
 
@@ -67,7 +69,7 @@ namespace ChuMeng
             var gc = GoodsCountChange.CreateBuilder();
             gc.Type = 0;
             gc.BaseId = 4;
-            gc.Num = num;
+            gc.Num = Mathf.Max(0, num);
             var n = GCPushGoodsCountChange.CreateBuilder();
             n.AddGoodsCountChange(gc);
             ServerBundle.SendImmediatePush(n);

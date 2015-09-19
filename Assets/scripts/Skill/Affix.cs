@@ -35,6 +35,9 @@ namespace ChuMeng
             FanTan, //反弹伤害
             Ghost, //鬼魂化
             IgnoreCol, //忽略一切的碰撞
+            DamageNearBy, //献祭燃烧附近的敌人
+            Relive, //灰鼠复活buff 死亡时候释放这个buff
+            GoldSteal,
         }
 
         public EffectType effectType = EffectType.None;
@@ -73,5 +76,9 @@ namespace ChuMeng
         /// </summary>
         public bool IsOnlyOne = false;
 
+        /// <summary>
+        /// buff周期性触发伤害的粒子效果 
+        /// </summary>
+        public GameObject fireParticle;
     }
 }

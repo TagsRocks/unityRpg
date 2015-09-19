@@ -35,7 +35,6 @@ namespace ChuMeng {
 		}
 		void Start() {
 			myAnimationEvent.RegFlee ();
-			myAnimationEvent.RegKnockBack ();
 			ai.ChangeState (AIStateEnum.IDLE);
 		}
 

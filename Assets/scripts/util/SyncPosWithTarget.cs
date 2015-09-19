@@ -6,15 +6,20 @@ namespace ChuMeng
     public class SyncPosWithTarget : MonoBehaviour
     {
         public GameObject target;
+        Vector3 localPos;
+
         void Start()
         {
-    
+            localPos = transform.localPosition;
         }
     
         // Update is called once per frame
         void Update()
         {
-            transform.position = target.transform.position;
+            if (target != null)
+            {
+                transform.position = target.transform.position + localPos;
+            }
         }
     }
 

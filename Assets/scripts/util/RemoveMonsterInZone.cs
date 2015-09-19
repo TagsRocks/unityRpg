@@ -18,12 +18,20 @@ public class RemoveMonsterInZone : MonoBehaviour
             if (trigger != null || spawnNpc != null)
             {
 
-                for (int i = 0; i < t.childCount; )
+                if (trigger != null)
                 {
-                    if(t.GetChild(i).name.Contains("Child")){
-                        i++;
-                    }else {
-                        GameObject.DestroyImmediate(t.GetChild(i).gameObject);
+                    trigger.ClearChildren();
+                } else
+                {
+                    for (int i = 0; i < t.childCount;)
+                    {
+                        if (t.GetChild(i).name.Contains("Child"))
+                        {
+                            i++;
+                        } else
+                        {
+                            GameObject.DestroyImmediate(t.GetChild(i).gameObject);
+                        }
                     }
                 }
             }

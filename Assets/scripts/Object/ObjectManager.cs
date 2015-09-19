@@ -691,6 +691,7 @@ namespace ChuMeng
 				g.transform.parent = transform;
 				g.tag = GameTag.Enemy;
 				g.layer = (int)GameLayer.Npc;
+                spawn.FirstMonster = g;
 
 				var netView = g.GetComponent<KBEngine.KBNetworkView> ();
 				netView.SetID (new KBEngine.KBViewID (myPlayer.ID, myPlayer));
@@ -721,6 +722,10 @@ namespace ChuMeng
 		public void CreatePet (int monsterId, GameObject owner, Affix affix, Vector3 pos)
 		{
 			Log.Sys ("Create Pet " + monsterId + " " + owner + " " + pos);
+            if(owner == null) {
+                Debug.LogError("Own NotExist Pet Not Born");
+                return;
+            }
 			var unitData = Util.GetUnitData (false, monsterId, 1);
 
 			var Resource = Resources.Load<GameObject> (unitData.ModelName);
@@ -743,6 +748,7 @@ namespace ChuMeng
 
 
 			npc.SetOwnerId (owner.GetComponent<KBEngine.KBNetworkView> ().GetLocalId ());
+            npc.spawnTrigger = owner.GetComponent<NpcAttribute>().spawnTrigger;
 
 			//不可移动Buff
 			//持续时间Buff

@@ -187,7 +187,10 @@ namespace ChuMeng
             }
             set
             {
-                _isDead = true;
+                if(_isDead ==value) {
+                    return;
+                }
+                _isDead = value;
                 if (SetDeadDelegate != null)
                 {
                     SetDeadDelegate(gameObject);
@@ -638,78 +641,9 @@ namespace ChuMeng
             Log.Sys("DropMod "+mod+" lev "+pLev+" mlev "+myLev );
 
             return _ObjUnitData.GetRandomDrop(mod/100.0f);
-
-            /*
-            if (_ObjUnitData != null) {
-                UnitData.Treasure treasure = _ObjUnitData.GetRandomDrop();
-                if(treasure != null) {
-                    if(treasure.TreasureType == UnitData.TreasureType.Armor) {
-                        Debug.Log("Drop Treasure is what "+treasure.itemData.DropMesh);
-                        var g = Instantiate(Resources.Load<GameObject>(treasure.itemData.DropMesh)) as GameObject;
-                        var com = NGUITools.AddMissingComponent<ItemDataRef>(g);
-                        com.ItemData = treasure.itemData;
-                        g.transform.position = transform.position;
-
-                        //g.transform.localScale = new Vector3(2, 2, 2);
-
-                        var par = Instantiate(Resources.Load<GameObject>("particles/drops/generic_item")) as GameObject;
-                        //par.transform.position = transform.position;
-                        par.transform.parent = g.transform;
-                        par.transform.localPosition = Vector3.zero;
-                        com.Particle = par;
-                        com.IsOnGround = true;
-                    }
-                    //if(treasure.TreasureType == UnitData.TreasureType.Potion) {
-                    else {
-                        var g = Instantiate(Resources.Load<GameObject>(treasure.itemData.ModelName)) as GameObject;
-                        var com = NGUITools.AddMissingComponent<ItemDataRef>(g);
-                        com.ItemData = treasure.itemData;
-                        g.transform.position = transform.position;
-
-                        //g.transform.localScale = new Vector3(2, 2, 2);
-
-                        var par = Instantiate(Resources.Load<GameObject>("particles/drops/generic_item")) as GameObject;
-                        //par.transform.position = transform.position;
-                        par.transform.parent = g.transform;
-                        par.transform.localPosition = Vector3.zero;
-                        com.Particle = par;
-                        com.IsOnGround = true;
-                    }
-                }
-
-            }
-
-            //Drop Gold 
-            var rd = Random.Range (0, 100);
-            if (rd < 25) {
-
-            }
-            */
         }
 
 
-        //TODO:单人副本中获得一个怪物的随机技能
-        public SkillData GetRandomSkill()
-        {
-            /*
-            if (skills.Count == 0) {
-                return null;
-            }
-
-            int sk = Random.Range(0, skills.Count);
-            SkillFullInfo si = skills[sk];
-            int ch = Random.Range(0, 100);
-            Debug.Log ("random skill is "+ch+" "+si.skillData.Chance);
-            if(ch < si.skillData.Chance && si.CoolDownTime == 0 && si.skillData.castType == SkillData.CastType.Always) {
-                si.CoolDownTime = si.skillData.CooldownMS/1000.0f;
-                return si.skillData;
-            }
-            */
-
-            return null;
-        }
-
-        //TODO: 死亡时释放的技能
         private SkillData GetDeadSkill()
         {
             return GetComponent<SkillInfoComponent>().GetDeadSkill();
@@ -768,9 +702,7 @@ namespace ChuMeng
             StartCoroutine(AddMpProgress(duration, totalAdd));
         }
 
-        public void ShowDead()
-        {
-            IsDead = true;
+        public void OnlyShowDeadEffect() {
             _characterState = CharacterState.Dead;
             var sdata = GetDeadSkill();
             if (sdata != null)
@@ -779,10 +711,29 @@ namespace ChuMeng
                 StartCoroutine(SkillLogic.MakeSkill(gameObject, sdata, transform.position));
             }
             
+        }
+
+        /// <summary>
+        /// 死亡时一系列操作 
+        /// </summary>
+        public void ShowDead()
+        {
+            DeadIgnoreCol();
+            OnlyShowDeadEffect();
+        }
+
+        public void DeadIgnoreCol() {
+            IsDead = true;
             if (ObjectManager.objectManager != null && ObjectManager.objectManager.myPlayer != null)
             {
                 Physics.IgnoreCollision(GetComponent<CharacterController>(), ObjectManager.objectManager.GetMyPlayer().GetComponent<CharacterController>());
             }
+        }
+
+        /// <summary>
+        /// 复活时操作
+        /// </summary>
+        public void Relive() {
         }
 
         public bool CheckAni(string name)
