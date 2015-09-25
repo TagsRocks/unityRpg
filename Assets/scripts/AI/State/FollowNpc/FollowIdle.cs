@@ -34,7 +34,7 @@ namespace ChuMeng
             while(!quit) {
                 if (CheckEvent())
                 {
-                    return true;
+                    break;
                 }
                 yield return null;
             }

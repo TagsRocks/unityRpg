@@ -21,9 +21,7 @@ namespace ChuMeng
 
         void Start() {
             ai.ChangeState (AIStateEnum.IDLE);
-
-   
-            var stateMachine = SkillLogic.CreateSkillStateMachine(gameObject, Util.GetSkillData(128, 1), transform.position, null);
+            SkillLogic.CreateSkillStateMachine(gameObject, Util.GetSkillData(128, 1), transform.position, null);
         }
         
         protected override void OnDestroy() {

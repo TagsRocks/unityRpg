@@ -654,7 +654,6 @@ namespace ChuMeng
 
         public static void LevelUpGem(KBEngine.Packet packet)
         {
-            var playerInfo = ServerData.Instance.playerInfo;
             var inpb = packet.protoBody as CGLevelUpGem;
             var gemId = inpb.GemIdList [0];
             var gem = GetItemInPack(gemId);
@@ -677,7 +676,6 @@ namespace ChuMeng
 
         public static void SellUserProps(KBEngine.Packet packet)
         {
-            var playerInfo = ServerData.Instance.playerInfo;
             var inpb = packet.protoBody as CGSellUserProps;
             var item = GetItemInPack(inpb.UserPropsId);
             var num = item.PackEntry.Count;

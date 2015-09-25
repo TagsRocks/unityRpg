@@ -39,9 +39,6 @@ namespace ChuMeng
             PlayAni (activeSkill.skillData.AnimationName, rate, WrapMode.Once);
             
             var playerMove = GetAttr ().GetComponent<MoveController> ();
-            var camRight = playerMove.camRight;
-            var camForward = playerMove.camForward;
-            var vcontroller = playerMove.vcontroller;
             var physics = playerMove.GetComponent<PhysicComponent>();
 
             var targetPlayer = GetAttr().GetComponent<CommonAI>().targetPlayer;

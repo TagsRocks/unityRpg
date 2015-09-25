@@ -51,7 +51,7 @@ namespace ChuMeng
                         playerInfo = PlayerInfo.CreateBuilder().MergeFrom(buffer);
                         break;
                     }catch(Exception ex){
-                        WindowMng.windowMng.ShowNotifyLog("加载保存游戏数据出错");
+                        WindowMng.windowMng.ShowNotifyLog("加载保存游戏数据出错 "+ex.Message);
                         //InitNewPlayerInfo();
                         if(i == maxId-1){
                             InitNewPlayerInfo();
