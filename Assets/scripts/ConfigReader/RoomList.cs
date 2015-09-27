@@ -16,7 +16,7 @@ public class TypeParts
 
 public class RoomList : MonoBehaviour
 {
-    List <TypeParts> typeParts = new List<TypeParts>();
+	public List <TypeParts> typeParts = new List<TypeParts>();
 
     static Dictionary<string, Dictionary<string, GameObject>> nameToObj;
     static RoomList Instance;
@@ -105,7 +105,7 @@ public class RoomList : MonoBehaviour
         foreach (var p in fileInfo)
         {
             var n = p.FullName.Replace(Application.dataPath, "Assets");
-            Debug.Log(n);
+			Log.Sys("AddRoom "+n);
             var go = Resources.LoadAssetAtPath<GameObject>(n);
             tp1.parts.Add(go);
         }
@@ -113,16 +113,17 @@ public class RoomList : MonoBehaviour
         {
             var finfo = dir.GetFiles("*.prefab", SearchOption.TopDirectoryOnly);
             var tp = Contains(dir.Name);
+			Log.Sys("AddType "+tp.type);
             foreach (var p in finfo)
             {
                 var n = p.FullName.Replace(Application.dataPath, "Assets");
-                Debug.Log(n);
+				Log.Sys("AddRoom "+n);
                 var go = Resources.LoadAssetAtPath<GameObject>(n);
                 tp.parts.Add(go);
                 
             }
         }
-
+		Debug.Log("RoomListLength "+typeParts.Count);
 #if UNITY_EDITOR
         //EditorUtility.SetDirty(gameObject);
         EditorUtility.SetDirty(this);

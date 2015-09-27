@@ -92,12 +92,14 @@ namespace ChuMeng {
 
 
         /// <summary>
-        /// NotifyServer I has Pass This Level
+        /// 通知服务器通关成功 
         /// </summary>
         public void PassLevel(){
             var levId = SelectLevelInfo.levelLocal.id;
+            var chapterId = levId/100;
+            var lvId = levId%100;
             Log.Net("PassLevel "+levId);
-            GameInterface_Chat.chatInterface.SendChatMsg("pass_lev "+(levId-100), 0);
+            GameInterface_Chat.chatInterface.SendChatMsg("pass_lev "+chapterId+" "+lvId, 0);
 
         }
 
@@ -139,6 +141,10 @@ namespace ChuMeng {
 			return allLevels;
 		}
 
+        /// <summary>
+        /// 最后一个章节之后没有新的章节了 
+        /// </summary>
+        /// <returns>The last chapter.</returns>
 		int GetLastChapter() {
 			var last = GameData.DungeonConfig[GameData.DungeonConfig.Count-1];
 			return last.Chapter;
@@ -156,6 +162,7 @@ namespace ChuMeng {
                     Log.Sys("Chapter Lev "+c.Id);
 					return linfo1.Chapter;
 				}else {
+                    Log.Sys("PassLev "+c.Id);
 					lastId = c.Id;
 				}
 			}
@@ -165,7 +172,7 @@ namespace ChuMeng {
 			if(linfo == null) {
 				return GetLastChapter();
 			}
-			return 1;
+            return linfo.Chapter ;
 		}
 	
 		//获得当前开放的关卡

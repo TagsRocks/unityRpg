@@ -646,12 +646,12 @@ public class MakeSceneEditor : Editor
             pieces.transform.parent = root.transform;
             props.transform.parent = root.transform;
             light.transform.parent = root.transform;
-            PrefabUtility.CreatePrefab("Assets/room/" + root.name + ".prefab", root);
-            /*
-            GameObject.DestroyImmediate();
-            GameObject.DestroyImmediate();
-            GameObject.DestroyImmediate();
-            */
+            if(type != "") {
+                Directory.CreateDirectory("Assets/room/" + type); 
+                PrefabUtility.CreatePrefab("Assets/room/" +type+"/"+ root.name + ".prefab", root);
+            }else {
+                PrefabUtility.CreatePrefab("Assets/room/" + root.name + ".prefab", root);
+            }
         }
         if (GUILayout.Button("根据Layout.json结合map.json获取所有Room Pieces"))
         {

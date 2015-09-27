@@ -459,7 +459,7 @@ namespace ChuMeng
         /// First Chapter Lev 
         /// </summary>
         /// <param name="openLev">Open lev.</param>
-        public static void PassLev(int openLev)
+        public static void PassLev(int chapter, int openLev)
         {
             var pinfo = ServerData.Instance.playerInfo;
             if (!pinfo.HasCopyInfos)
@@ -472,7 +472,7 @@ namespace ChuMeng
                 var msg = au.Build();
                 pinfo.CopyInfos = msg;
             }
-            int levId = 100 + openLev;
+            int levId = chapter*100 + openLev;
             //int levId = -1;
             //int count = -1;
             bool find = false;
@@ -501,11 +501,11 @@ namespace ChuMeng
             }
 
             var open = GCPushLevelOpen.CreateBuilder();
-            open.Chapter = 1;
+            open.Chapter = chapter;
             open.Level = openLev;
             ServerBundle.SendImmediatePush(open);
 
-            Debug.Log("PassLevelData " + pinfo.Build().ToString());
+            Log.Net("PassLevelData " + pinfo.Build().ToString());
         }
 
         public static void LoadPackInfo(KBEngine.Packet packet)

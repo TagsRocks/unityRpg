@@ -2,6 +2,7 @@
 using System.Collections;
 
 using playerData = ChuMeng.PlayerData;
+using System;
 
 namespace ServerPacketHandler
 {
@@ -40,7 +41,7 @@ namespace ServerPacketHandler
                     playerData.AddExp(System.Convert.ToInt32(cmds [1]));
                 } else if (cmds [0] == "pass_lev")
                 {
-                    playerData.PassLev(System.Convert.ToInt32(cmds [1]));
+                    playerData.PassLev(System.Convert.ToInt32(cmds [1]), Convert.ToInt32(cmds[2]));
                 } else if (cmds [0] == "kill_all")
                 {
                 }else if(cmds[0] == "add_item") {

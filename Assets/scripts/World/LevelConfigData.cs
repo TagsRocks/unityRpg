@@ -8,6 +8,7 @@ namespace ChuMeng
     public class EnvConfig {
         public string waterBottom;
         public string waterFace;
+        public float offY = 8.5f;
     }
     public class LevelConfigData
     {
@@ -126,15 +127,15 @@ namespace ChuMeng
 
 
             l1 = new List<LevelConfig>(){
-                new LevelConfig("1x1_Entrance_E_LM_A", 0, 0){useOtherZone=true, zoneId=50, type="suntemple"},
+                new LevelConfig("ENTRANCE_E_LM", 0, 0){useOtherZone=true, zoneId=50, type="suntemple"},
                 //new LevelConfig("EW_PB", -1, 0){useOtherZone=true, zoneId=43},
                 //new LevelConfig("EXIT_E_KG", -2, 0){useOtherZone=true, zoneId=44},
             };
             LevelLayout.Add(201, l1);
 
             envConfig.Add("suntemple", new EnvConfig(){
-                waterBottom = "stemple_lake_light",
-                waterFace = "stemple_water",
+                waterBottom = "skyboxes/stemple_lake_light",
+                waterFace = "skyboxes/stemple_water",
             });
 
 

@@ -84,6 +84,8 @@ namespace ChuMeng
             yield return null;
             var g = new GameObject("StreamLoadLevel");
             var loader = g.AddComponent<StreamLoadLevel>();
+            var water = g.AddComponent<WaterEnvLoader>();
+
             yield return loader.StartCoroutine(loader.LoadFirstRoom());
 
             var start = GameObject.Find("PlayerStart");
@@ -159,14 +161,10 @@ namespace ChuMeng
 			//正在进入一个场景
 			yield return null;
 
-            //
-            //if(!sdata.isCity) {
-            //{
-                var g1 = new GameObject("StreamLoadLevel");
-                var loader = g1.AddComponent<StreamLoadLevel>();
-                yield return StartCoroutine(loader.LoadFirstRoom());
-            //}
-            //}
+            var g1 = new GameObject("StreamLoadLevel");
+            var loader = g1.AddComponent<StreamLoadLevel>();
+            var water = g1.AddComponent<WaterEnvLoader>();
+            yield return StartCoroutine(loader.LoadFirstRoom());
 
             var start = GameObject.Find("PlayerStart");
             CameraController.cameraController.TracePositon(start.transform.position);

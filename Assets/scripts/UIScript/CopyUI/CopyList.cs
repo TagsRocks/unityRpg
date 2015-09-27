@@ -25,6 +25,25 @@ namespace ChuMeng
             Cell.SetActive(false);
 
             grid = GetGrid("Grid");
+
+            SetCallback("last", OnLast);
+            SetCallback("next", OnNext);
+        }
+        void OnLast() {
+            if(curChapter <= 1) {
+                return;
+            }
+            curChapter--;
+            UpdateFrame();
+        }
+
+        void OnNext() {
+            var maxChapter = CopyController.copyController.GetCurrentChapter();
+            if(curChapter >= maxChapter) {
+                return;
+            }
+            curChapter++;
+            UpdateFrame();
         }
 
         protected override void OnEvent (MyEvent evt)
@@ -58,10 +77,14 @@ namespace ChuMeng
             if (curChapter == -1) {
                 return;
             }
+            Log.GUI("curChapter "+curChapter);
             
             allLevels = CopyController.copyController.GetChapterLevel (curChapter);
             bool lastUnPass = true;
             Log.GUI ("Level Count "+levels.Count+ " "+allLevels.Count);
+            for(int i = 0; i < levels.Count; i++){
+                levels[i].SetActive(false);
+            }
             for (int i = 0; i < allLevels.Count; i++) {
                 //NewCell
                 if(i >= levels.Count){
