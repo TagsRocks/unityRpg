@@ -99,6 +99,7 @@ public class MakeSceneEditor : Editor
             }
         }
     }
+
     /// <summary>
     /// 将场景中的Layout Link 组件放置到场景里面 levelSets/xxx.layout 
     /// </summary>
@@ -121,6 +122,7 @@ public class MakeSceneEditor : Editor
         TranverseLightNode(jobj, hl);
 
     }
+
     public delegate void VoidDelegate(JSONClass obj);
 
     public delegate GameObject GameObjectDelegate(string name);
@@ -163,10 +165,12 @@ public class MakeSceneEditor : Editor
             var n = jobj;
             var ln = Path.GetFileName(jobj ["FILE"].Value);
             Debug.Log("light file name " + ln);
-            var pb = "Assets/lightPrefab/" + ln.Replace(".MESH", ".prefab");
+            var pb = "Assets/lightPrefab/" + ln.Replace(".MESH", ".prefab").ToLower();
+            Debug.Log("LoadLight " + pb);
             var lobj = Resources.LoadAssetAtPath(pb, typeof(GameObject)) as GameObject;
             var copyobj = PrefabUtility.InstantiatePrefab(lobj) as GameObject;
             copyobj.transform.parent = root.transform;
+
             copyobj.transform.localPosition = new Vector3(-n ["POSITIONX"].AsFloat, n ["POSITIONY"].AsFloat, n ["POSITIONZ"].AsFloat);
             copyobj.transform.localScale = new Vector3(n ["SCALE X"].AsFloat, n ["SCALE Z"].AsFloat, 1);
             var rot = Quaternion.Euler(new Vector3(0, n ["ANGLE"].AsFloat, 0));
@@ -201,7 +205,8 @@ public class MakeSceneEditor : Editor
         root.transform.localScale = Vector3.one;
         
         
-        var config = new List<LevelConfig>(){
+        var config = new List<LevelConfig>()
+        {
             new LevelConfig("ENTRANCE_S", -1, 3),
             new LevelConfig("NS", -1, 2),
             new LevelConfig("NS", -1, 1),
@@ -268,7 +273,7 @@ public class MakeSceneEditor : Editor
             }
         }
     }
-    
+
     void handleRoomPiece(GameObject root, JSONClass mapObj, JSONClass jobj, GameObjectDelegate getG, GameObject saveData)
     {
         var guid = jobj ["GUID"].Value;
@@ -368,12 +373,15 @@ public class MakeSceneEditor : Editor
         }
         return null;
     }
-    void MakeLightOuter(string lightStr){
+
+    void MakeLightOuter(string lightStr)
+    {
         var light = Resources.LoadAssetAtPath("Assets/Config/" + lightStr + ".json", typeof(TextAsset)) as TextAsset;
         var larr = JSON.Parse(light.text) as JSONClass;
         Debug.Log("ReadFile " + lightStr);
         MakeLight(larr);
     }
+
     /// <summary>
     /// 组合场景里面的灯光
     /// </summary>
@@ -428,7 +436,11 @@ public class MakeSceneEditor : Editor
 
         GameObjectDelegate gg = delegate (string name)
         {
-            return GetPrefab(name, new List<FileInfo[]>(){ prefabs, propsPrefab});
+            return GetPrefab(name, new List<FileInfo[]>()
+            {
+                prefabs,
+                propsPrefab
+            });
         };
         VoidDelegate hd = delegate(JSONClass obj)
         {
@@ -467,6 +479,35 @@ public class MakeSceneEditor : Editor
         import.animationType = ModelImporterAnimationType.None;
         AssetDatabase.WriteImportSettingsIfDirty(ass);
     }
+
+    void CopyLight()
+    {
+        var resDir = new DirectoryInfo(Application.dataPath + "/lights");
+        var finfo = resDir.GetFiles("*.fbx", SearchOption.TopDirectoryOnly);
+
+        foreach (var f in finfo)
+        {
+            var fpath = f.FullName;
+            var fn = Path.GetFileName(fpath);
+            var prefab = fn.Replace(".fbx", ".prefab");
+            var tar = Path.Combine("Assets/lightPrefab", prefab);
+            var start = fpath.IndexOf("Assets");
+            var tarFile = Path.Combine(fpath.Substring(0, start), tar);
+
+            if (!File.Exists(tarFile))
+            {
+                Debug.Log("CopyLight " + tarFile);
+                var sub = fpath.Substring(start);
+                var g = Resources.LoadAssetAtPath<GameObject>(sub);
+                var tg = PrefabUtility.CreatePrefab(tar, g);
+            } else
+            {
+                
+            }
+
+        }
+    }
+
     //With Animation
     GameObject CombineTwo(string f, string col)
     {
@@ -516,6 +557,7 @@ public class MakeSceneEditor : Editor
         return null;
     }
 
+
     /// <summary>
     /// 融合了MineProp.dat Prop.dat Mine.dat 三个文件的map.json 组合所有的RoomPieces 模型
     /// </summary>
@@ -546,13 +588,24 @@ public class MakeSceneEditor : Editor
 
         //According to Prop.dat.json  Combine levelsets/props Model
         dataConfigStr.stringValue = GUILayout.TextField(dataConfigStr.stringValue);
-        if(GUILayout.Button("一键生成房间数据")){
+        //场景类型和组件编号
+        if (GUILayout.Button("一键生成房间数据"))
+        {
             var md = Resources.LoadAssetAtPath("Assets/Config/" + dataConfigStr.stringValue + ".json", typeof(TextAsset)) as TextAsset;
             var jobj = JSON.Parse(md.text).AsObject;
             MakeRoomPieces(jobj);
             MakeLight(jobj);
             MakeProps(jobj);
             var roomName = dataConfigStr.stringValue.Replace(".layout", "");
+            var typeAndPart = roomName.Split("/".ToCharArray());
+            var type = "";
+            if (typeAndPart.Length > 1)
+            {
+                type = typeAndPart [0];
+                roomName = typeAndPart [1];
+            }
+            Debug.LogError("type And Name " + type + " name " + roomName);
+
             var g = new GameObject(roomName);
             Util.InitGameObject(g);
             var rp = GameObject.Find("RoomPieces_data");
@@ -561,14 +614,23 @@ public class MakeSceneEditor : Editor
             rp.transform.parent = g.transform;
             lp.transform.parent = g.transform;
             pp.transform.parent = g.transform;
+            string resName = "";
+            if (type != "")
+            {
+                Directory.CreateDirectory("Assets/Resources/room/" + type); 
+                resName = "Assets/Resources/room/" + type + "/" + g.name + ".prefab";
+            } else
+            {
+                resName = "Assets/Resources/room/" + g.name + ".prefab";
+            }
 
-            var resName = "Assets/Resources/room/"+g.name+".prefab";
             PrefabUtility.CreatePrefab(resName, g);
             GameObject.DestroyImmediate(g);
             var res = Resources.LoadAssetAtPath<GameObject>(resName);
             var roomList = Resources.Load<GameObject>("RoomList");
             var rl = roomList.GetComponent<RoomList>();
-            rl.AddRoom(res);
+            rl.AddRoom(type, res);
+
             EditorUtility.SetDirty(rl);
             AssetDatabase.Refresh();
 
@@ -579,12 +641,12 @@ public class MakeSceneEditor : Editor
             var pieces = GameObject.Find("RoomPieces");
             var props = GameObject.Find("Props");
             var light = GameObject.Find("light");
-            var root = new GameObject(roomName+"_structure");
+            var root = new GameObject(roomName + "_structure");
             Util.InitGameObject(root);
             pieces.transform.parent = root.transform;
             props.transform.parent = root.transform;
             light.transform.parent = root.transform;
-            PrefabUtility.CreatePrefab("Assets/room/"+root.name+".prefab", root);
+            PrefabUtility.CreatePrefab("Assets/room/" + root.name + ".prefab", root);
             /*
             GameObject.DestroyImmediate();
             GameObject.DestroyImmediate();
@@ -714,7 +776,7 @@ public class MakeSceneEditor : Editor
                     var tar = Path.Combine("Assets/prefabs", prefab);
                     var g = Resources.LoadAssetAtPath<GameObject>(oldFile);
                     //var tg = 
-                        PrefabUtility.CreatePrefab(tar, g);
+                    PrefabUtility.CreatePrefab(tar, g);
                     //tg.AddComponent<BoxCollider>();
                 }
             }
@@ -889,7 +951,7 @@ public class MakeSceneEditor : Editor
         if (GUILayout.Button("导入带动画模型"))
         {
             var allModel = Path.Combine(Application.dataPath, modelStr.stringValue);
-            Debug.Log("Import Animation Model "+allModel);
+            Debug.Log("Import Animation Model " + allModel);
             var resDir = new DirectoryInfo(allModel);
             DirectoryInfo[] fileInfo = resDir.GetDirectories("*", SearchOption.TopDirectoryOnly);//("*.*", SearchOption.TopDirectoryOnly);
             foreach (DirectoryInfo file in fileInfo)
@@ -910,9 +972,13 @@ public class MakeSceneEditor : Editor
 
         }
 
+        if (GUILayout.Button("拷贝光照prefab"))
+        {
+            CopyLight();
+        }
 
         //调整modelStr 目录下所有的模型的shader为默认LightMapEnvshader
-        if (GUILayout.Button("设置shader 为Custom/light"))
+        if (GUILayout.Button("设置shader 为Custom/lightMapEnv"))
         {
             Debug.Log(Application.dataPath);
             
@@ -932,6 +998,32 @@ public class MakeSceneEditor : Editor
                 Debug.Log("import change state ");
                 AssetDatabase.WriteImportSettingsIfDirty(ass);
             }
+            AssetDatabase.StopAssetEditing();
+            AssetDatabase.Refresh();
+
+        }
+
+        if(GUILayout.Button("设置某个目录下面所有材质为lightMapEnv")) {
+            var allModel = Path.Combine(Application.dataPath, modelStr.stringValue);
+            var resDir = new DirectoryInfo(allModel);
+            FileInfo[] fileInfo = resDir.GetFiles("*.mat", SearchOption.AllDirectories);
+            AssetDatabase.StartAssetEditing();
+
+            foreach (FileInfo file in fileInfo)
+            {
+                Debug.Log("file is " + file.Name + " " + file.Name);
+                
+                var ass = file.FullName.Replace(Application.dataPath, "Assets");
+                var res = Resources.LoadAssetAtPath<Material>(ass);
+
+                res.shader = Shader.Find("Custom/lightMapEnv");
+                EditorUtility.SetDirty(res);
+
+                Debug.Log("import change state ");
+                AssetDatabase.WriteImportSettingsIfDirty(ass);
+            }
+
+
             AssetDatabase.StopAssetEditing();
             AssetDatabase.Refresh();
 
@@ -978,6 +1070,35 @@ public class MakeSceneEditor : Editor
     }
 
     /// <summary>
+    /// 导入灯光模型
+    /// </summary>
+    void AdjustLightModel(string rootPath)
+    {
+        Debug.Log(Application.dataPath);
+        var allModel = Path.Combine(Application.dataPath, rootPath);
+        var resDir = new DirectoryInfo(allModel);
+        FileInfo[] fileInfo = resDir.GetFiles("*.fbx", SearchOption.AllDirectories);
+        AssetDatabase.StartAssetEditing();
+        foreach (FileInfo file in fileInfo)
+        {
+            Debug.Log("file is " + file.Name + " " + file.Name);
+            var ass = file.FullName.Replace(Application.dataPath, "Assets");
+            var import = ModelImporter.GetAtPath(ass) as ModelImporter;
+            Debug.Log("import is " + import);
+            import.globalScale = 1;
+            import.importAnimation = false;
+            import.animationType = ModelImporterAnimationType.None;
+
+            Debug.Log("import change state " + import);
+            AssetDatabase.WriteImportSettingsIfDirty(ass);
+        }
+        AssetDatabase.StopAssetEditing();
+        AssetDatabase.Refresh();
+
+
+    }
+
+    /// <summary>
     /// 将模型的localScale = 1 animation为null
     /// </summary>
     /// <param name="rootPath">Root path.</param>
@@ -1005,15 +1126,18 @@ public class MakeSceneEditor : Editor
             AssetDatabase.WriteImportSettingsIfDirty(ass);
 
             //ChangeShader
+            //场景纹理需要设置为lightMapEnv的shader
             /*
             var res = Resources.LoadAssetAtPath<GameObject>(ass);
-            res.renderer.sharedMaterial.shader = Shader.Find("Custom/lightMapEnv");
-            EditorUtility.SetDirty(res.renderer.sharedMaterial);
-            
+            foreach (var m in res.renderer.sharedMaterials)
+            {
+                m.shader = Shader.Find("Custom/lightMapEnv");
+                EditorUtility.SetDirty(m);
+            }
             Debug.Log("import change state ");
             AssetDatabase.WriteImportSettingsIfDirty(ass);
             */
-            
+
         }
         AssetDatabase.StopAssetEditing();
         AssetDatabase.Refresh();
@@ -1036,7 +1160,7 @@ public class MakeSceneEditor : Editor
     GameObject CreateAniModelPrefab(FileInfo[] allFiles, string dirName)
     {
         var tar = Path.Combine("Assets/ModelPrefab", dirName + ".prefab");
-        Debug.Log("CreateAniModelPrefab "+tar);
+        Debug.Log("CreateAniModelPrefab " + tar);
         //var tg = PrefabUtility.CreatePrefab(tar, g);
         Dictionary<string, string> aniFbx = new Dictionary<string, string>();
         AssetDatabase.StartAssetEditing();
@@ -1044,7 +1168,7 @@ public class MakeSceneEditor : Editor
         foreach (var f in allFiles)
         {
             Debug.Log("fbx file is " + f.FullName);
-            if(f.FullName.Contains("npc"))
+            if (f.FullName.Contains("npc"))
             {
                 npc = true;
             }
@@ -1078,11 +1202,13 @@ public class MakeSceneEditor : Editor
         //Use First Animation FBX idle as base
 
         var prefab = PrefabUtility.CreatePrefab(tar, Resources.LoadAssetAtPath<GameObject>(aniFbx ["idle"]));
-        if(!npc) {
+        if (!npc)
+        {
             prefab.transform.Find("Armature").localRotation = Quaternion.identity;
             prefab.transform.localRotation = Quaternion.Euler(new Vector3(-90, 0, 0));
         }
-        if(aniFbx.ContainsKey("collision")) {
+        if (aniFbx.ContainsKey("collision"))
+        {
             var meshCollider = prefab.AddComponent<MeshCollider>();
             var colObj = Resources.LoadAssetAtPath<GameObject>(aniFbx ["collision"]);
             meshCollider.sharedMesh = colObj.GetComponent<MeshFilter>().sharedMesh;
@@ -1105,10 +1231,12 @@ public class MakeSceneEditor : Editor
             if (t.renderer != null)
             {
                 Debug.Log("render is " + t.name);
-                if(npc) {
+                if (npc)
+                {
                     t.renderer.sharedMaterial.shader = Shader.Find("Custom/npcShader");
                     t.renderer.sharedMaterial.color = Color.white;
-                }else {
+                } else
+                {
                     t.renderer.sharedMaterial.shader = Shader.Find("Custom/lightMapEnv");
                 }
                 EditorUtility.SetDirty(t.renderer.sharedMaterial);
@@ -1209,7 +1337,7 @@ public class MakeSceneEditor : Editor
     {
         foreach (string s1 in group)
         {
-            if (s == s1) 
+            if (s == s1)
                 return true;
         }
         return false;

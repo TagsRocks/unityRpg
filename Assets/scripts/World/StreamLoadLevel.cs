@@ -6,6 +6,7 @@ namespace ChuMeng
 {
     public class LevelConfig
     {
+        public string type = "";
         public string room;
         public int x;
         public int y;
@@ -27,61 +28,11 @@ namespace ChuMeng
     public class StreamLoadLevel : MonoBehaviour
     {
         int currentRoomIndex = -1;
-        static Dictionary<string, string> namePieces = null;
+        //static Dictionary<string, string> namePieces = null;
         List<int> loadedRoom = new List<int>();
         Dictionary<int, GameObject> loadedZone = new Dictionary<int, GameObject>();
         public static StreamLoadLevel Instance = null;
-
-        void InitNamePieces()
-        {
-            if (namePieces == null)
-            {
-                namePieces = new Dictionary<string, string>();
-
-                var elements = new HashSet<string>(){
-                "ENTRANCE",
-                "EXIT",
-                "EW",
-                "S",
-                "NE",
-                "NS",
-                "NW",
-                    "PB",
-                    "LM",
-                    "W",
-                    "E",
-                    "KG",
-                    "SW",
-                    "SE",
-                    "N",
-
-
-            };
-                var rooms = Resources.Load<GameObject>("RoomList");
-                foreach (var r in rooms.GetComponent<RoomList>().roomPieces)
-                {
-                    var ele = r.name.ToUpper().Split(char.Parse("_"));
-                    var eleStr = "";
-                    bool isFirst = true;
-                    foreach (var e in ele)
-                    {
-                        if (elements.Contains(e))
-                        {
-                            if (isFirst)
-                            {
-                                isFirst = false;
-                                eleStr += e;
-                            } else
-                            {
-                                eleStr += "_" + e;
-                            }
-                        }
-                    }
-
-                    namePieces [eleStr] = r.name;
-                }
-            }
-        }
+       
         /// <summary>
         /// 加载第一个房间
         /// </summary>
@@ -95,14 +46,18 @@ namespace ChuMeng
             var root = new GameObject("Root_0"); //FirstRoom
             Util.InitGameObject(root);
 
-            InitNamePieces();
+            //InitNamePieces();
             var first = configLists [0];
             var firstOffset = new Vector3(first.x * 96, 9, first.y * 96 + 48);
             root.transform.localPosition = firstOffset;
 
             Log.Sys("First Room NamePices "+first.room);
-            var piece = namePieces [first.room];
-            var roomConfig = Resources.Load<GameObject>("room/" + piece);
+            //var piece = namePieces [first.room];
+            //var roomConfig = Resources.Load<GameObject>("room/" + piece);
+
+            //var rooms = Resources.Load<GameObject>("RoomList");
+            //var roomConfig = rooms.GetComponent<RoomList>().GetObj("", first.room);
+            var roomConfig = RoomList.GetStaticObj(first.type, first.room);
             yield return StartCoroutine(LoadRoom(roomConfig));
             yield return null;
             yield return StartCoroutine(LoadLight(roomConfig));
@@ -277,7 +232,7 @@ namespace ChuMeng
             }
 
             inLoad = true;
-            InitNamePieces();
+            //InitNamePieces();
 
             currentRoomIndex++;
             loadedRoom.Add(currentRoomIndex);
@@ -293,8 +248,9 @@ namespace ChuMeng
                 root.transform.localScale = new Vector3(-1, 1, 1);
             }
             
-            var piece = namePieces [first.room];
-            var roomConfig = Resources.Load<GameObject>("room/" + piece);
+            //var piece = namePieces [first.room];
+            //var roomConfig = Resources.Load<GameObject>("room/" + piece);
+            var roomConfig = RoomList.GetStaticObj(first.type, first.room);
             yield return StartCoroutine(LoadRoom(roomConfig, true));
             yield return null;
             yield return StartCoroutine(LoadLight(roomConfig, true));

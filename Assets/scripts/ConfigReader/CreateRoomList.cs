@@ -11,6 +11,7 @@ public class CreateRoomList : MonoBehaviour {
     public bool Create;
     public void CreateMethod(){
 #if UNITY_EDITOR
+        /*
         var roomPath = Path.Combine(Application.dataPath, "Resources/room");
         var resDir = new DirectoryInfo(roomPath);
         FileInfo[] fileInfo = resDir.GetFiles("*.prefab", SearchOption.AllDirectories); 
@@ -29,6 +30,7 @@ public class CreateRoomList : MonoBehaviour {
         var tar = Path.Combine("Assets", "Resources/RoomList.prefab");
         Log.Sys("tar path is "+tar);
         PrefabUtility.CreatePrefab(tar, g);
+        */
 #endif
     }
 

@@ -5,10 +5,15 @@ using System.Collections.Generic;
 //SceneId ---> ConfigData List
 namespace ChuMeng
 {
+    public class EnvConfig {
+        public string waterBottom;
+        public string waterFace;
+    }
     public class LevelConfigData
     {
         static bool initYet = false;
         public static Dictionary<int, List<LevelConfig>> LevelLayout = new Dictionary<int, List<LevelConfig>>();
+        public static Dictionary<string, EnvConfig> envConfig = new Dictionary<string, EnvConfig>();
 
         public static void Init()
         {
@@ -117,6 +122,21 @@ namespace ChuMeng
                 new LevelConfig("EXIT_E_KG", -2, 0){useOtherZone=true, zoneId=44},
             };
             LevelLayout.Add(110, l1);
+
+
+
+            l1 = new List<LevelConfig>(){
+                new LevelConfig("1x1_Entrance_E_LM_A", 0, 0){useOtherZone=true, zoneId=50, type="suntemple"},
+                //new LevelConfig("EW_PB", -1, 0){useOtherZone=true, zoneId=43},
+                //new LevelConfig("EXIT_E_KG", -2, 0){useOtherZone=true, zoneId=44},
+            };
+            LevelLayout.Add(201, l1);
+
+            envConfig.Add("suntemple", new EnvConfig(){
+                waterBottom = "stemple_lake_light",
+                waterFace = "stemple_water",
+            });
+
 
         }
     }
