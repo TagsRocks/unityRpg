@@ -15,28 +15,9 @@ namespace ChuMeng
 			aiCharacter.SetIdle ();
             if(first){
                 first = false;
-                GetAttr().StartCoroutine(CheckFall());
             }
 		}
 
-        IEnumerator CheckFall(){
-            Vector3 originPos = GetAttr().OriginPos;
-            List<Vector3> samplePos = new List<Vector3>(){originPos};
-            while(true){
-                var lastOne = samplePos[0];
-                Log.Sys("lastPos nowPos "+lastOne+" now "+GetAttr().transform.position);
-                if(GetAttr().transform.position.y < (lastOne.y-3)){
-                    GetAttr().transform.position = lastOne;    
-                }else {
-                    var pos = GetAttr().transform.position;
-                    samplePos.Add(pos);
-                    if(samplePos.Count > 4){
-                        samplePos.RemoveAt(0);
-                    }
-                }
-                yield return new WaitForSeconds(1);
-            }
-        }
 
 
 

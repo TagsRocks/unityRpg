@@ -15,6 +15,7 @@ namespace ChuMeng
 		KNOCK_BACK,
 
 		CastSkill,
+        Stunned,
 	}
 
 	public class AIState
@@ -45,6 +46,9 @@ namespace ChuMeng
 		public virtual IEnumerator RunLogic ()
 		{
 			while (!quit) {
+                if(CheckEvent()){
+                    break;
+                }
 				yield return null;
 			}
 		}
@@ -217,6 +221,7 @@ namespace ChuMeng
 			return false;
 		}
 
+        protected MyAnimationEvent.Message lastMsg;
 
 		//TODO:检测一些事件 然后进行状态切换
 		//获得对应注册哪些事件， 就检测哪些事件？
@@ -227,6 +232,7 @@ namespace ChuMeng
 				return true;
 			}
             var msg = GetEvent().NextMsg();
+            lastMsg = msg;
             if(msg != null) {
                 if(msg.type == MyAnimationEvent.MsgType.IDLE) {
                     return aiCharacter.ChangeState(AIStateEnum.IDLE);
@@ -245,6 +251,10 @@ namespace ChuMeng
                         skillPart.SetActiveSkill (msg.skillData);
                         return aiCharacter.ChangeState (AIStateEnum.CastSkill);
                     }
+                }else if(msg.type == MyAnimationEvent.MsgType.STUNNED) {
+                    return aiCharacter.ChangeState(AIStateEnum.Stunned);
+                }else if(msg.type == MyAnimationEvent.MsgType.EXIT_STUNNED) {
+                    return aiCharacter.ChangeState(AIStateEnum.IDLE);
                 }
 
             }
@@ -333,4 +343,22 @@ namespace ChuMeng
 			return base.CheckNextState (next);
 		}
 	}
+
+    public class StunnedState : AIState {
+        public StunnedState(){
+            type = AIStateEnum.Stunned;
+        }
+        public override bool CheckNextState(AIStateEnum next)
+        {
+            if(next == AIStateEnum.DEAD) {
+                return true;
+            }
+            if(next == AIStateEnum.IDLE) {
+                if(lastMsg.type == MyAnimationEvent.MsgType.EXIT_STUNNED) {
+                    return true;
+                }
+            }
+            return false;
+        }
+    }
 }

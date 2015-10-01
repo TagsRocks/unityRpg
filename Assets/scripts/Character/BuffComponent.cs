@@ -38,6 +38,14 @@ namespace ChuMeng {
 		{
 			if (affix != null) {
 				Log.Sys ("AddBuff is "+gameObject.name+" " + affix.effectType);
+                //只保留最旧的Buff
+                if(affix.keepOld) {
+                    for(int i = 0; i < effectList.Count; i++) {
+                        if(effectList[i].affix.effectType == affix.effectType) {
+                            return;
+                        }
+                    }
+                }
 
 				var eft = BuffManager.buffManager.GetBuffInstance (affix.effectType);
 				var buff = (IEffect)Activator.CreateInstance (eft);

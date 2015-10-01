@@ -51,7 +51,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100002}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.73954868, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -.449999988}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400000}
@@ -129,6 +129,7 @@ MonoBehaviour:
   OriScaleXMax: 1
   OriScaleYMin: 1
   OriScaleYMax: 1
+  OriScaleZ: 1
   ScaleAffectorEnable: 0
   ScaleType: 0
   DeltaScaleX: 0
@@ -348,6 +349,7 @@ MonoBehaviour:
   VortexAffectorEnable: 0
   VortexMagType: 0
   VortexMag: 1
+  VortexMagMax: 1
   VortexCurve:
     serializedVersion: 2
     m_Curve: []
@@ -383,6 +385,11 @@ MonoBehaviour:
   IsGravityAccelerate: 1
   IsSine: 0
   SineFreq: 1
+  SineAffectorEnable: 0
+  SineForce: {x: 0, y: 1, z: 0}
+  ModifyPos: 1
+  SineMaxFreq: 5
+  SineMinFreq: 1
   AirAffectorEnable: 0
   AirObject: {fileID: 400000}
   AirMagType: 0
@@ -464,8 +471,8 @@ MonoBehaviour:
   BirthSubEmitter: 
   CollisionSubEmitter: 
   DeathSubEmitter: 
-  AvailableNodeCount: 17
-  LastClientPos: {x: 5.73954868, y: 0, z: 0}
+  AvailableNodeCount: 18
+  LastClientPos: {x: 0, y: 0, z: 0}
   MyCamera: {fileID: 0}
   Owner: {fileID: 11400002}
   mStopped: 0

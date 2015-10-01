@@ -151,6 +151,9 @@ namespace ChuMeng
             WolfCall,
             HuiShuLeaderDead,
             MeDead,
+
+            EnterSafePoint,
+            ExitSafePoint,
 		}
 
 

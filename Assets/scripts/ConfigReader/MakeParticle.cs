@@ -287,7 +287,9 @@ public class MakeParticle : MonoBehaviour
             effectLayer.RenderType = 3;
             //var mesh = modData["MESH"].Value;
             //var meshPath = mesh.Replace("media", Application.dataPath).Replace(".mesh", ".");
-
+        }else if(renderType == "RibbonTrail") {
+            Debug.LogError("RibbomTrail");
+            effectLayer.RenderType = 1;
         }
 
         var isLight = modData ["IS LIGHT"].AsBool;
@@ -317,6 +319,12 @@ public class MakeParticle : MonoBehaviour
             velScale = 1;
         }
 
+        if(effectLayer.RenderType == 1){
+            var segments = modData["SEGMENTS"];
+            var width = modData["WIDTH"];
+            effectLayer.MaxRibbonElements = (int)segments.AsDouble;
+            effectLayer.RibbonWidth = (float)width.AsDouble;
+        }
     }
 
     void SetRandomScaleCurve(EffectLayer effectLayer, float[] scale)
@@ -621,8 +629,14 @@ public class MakeParticle : MonoBehaviour
             effectLayer.Radius = modData ["RADIUS"].AsFloat;
             effectLayer.DirType = DIRECTION_TYPE.Sphere;
 
+        }else if(emitType == "Box"){
+            effectLayer.EmitType = 1;
+            var width = modData["WIDTH_"].AsFloat;
+            var height = modData["HEIGHT_"].AsFloat;
+            var depth  = modData["DEPTH_"].AsFloat;
+            effectLayer.BoxSize = new Vector3(width, height, depth);
         }
-
+            
         var scaleModData = modData ["SCALE ON LAUNCH"].Value;
         Debug.Log("scale mod data "+scaleModData);
         float[] scaleData = new float[]{0, 1};

@@ -325,6 +325,8 @@ public class EffectLayer : MonoBehaviour
     public bool VortexAffectorEnable = false;
     public MAGTYPE VortexMagType = MAGTYPE.Fixed;
     public float VortexMag = 1f;
+    public float VortexMagMax = 1f;
+
     public AnimationCurve VortexCurve;
     public Vector3 VortexDirection = Vector3.up;
     public bool VortexInheritRotation = true;
@@ -601,7 +603,7 @@ public class EffectLayer : MonoBehaviour
         if (VortexAffectorEnable)
         {
             Affector aft;
-            aft = new VortexAffector(VortexObj, VortexMagType, VortexMag, VortexCurve, VortexDirection, VortexInheritRotation, node, VortexTime);
+            aft = new VortexAffector(VortexObj, VortexMagType, VortexMag, VortexMagMax, VortexCurve, VortexDirection, VortexInheritRotation, node, VortexTime);
 
             AffectorList.Add(aft);
         }

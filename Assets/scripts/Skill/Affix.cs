@@ -38,6 +38,7 @@ namespace ChuMeng
             DamageNearBy, //献祭燃烧附近的敌人
             Relive, //灰鼠复活buff 死亡时候释放这个buff
             GoldSteal,
+            Stunned , //眩晕 参考冰冻 和 KnockBack
         }
 
         public EffectType effectType = EffectType.None;
@@ -80,5 +81,10 @@ namespace ChuMeng
         /// buff周期性触发伤害的粒子效果 
         /// </summary>
         public GameObject fireParticle;
+
+        /// <summary>
+        /// 眩晕只保持最旧的一个效果 新的效果不能添加 
+        /// </summary>
+        public bool keepOld = false;
     }
 }

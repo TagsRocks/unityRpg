@@ -1104,11 +1104,11 @@ public class MakeSceneEditor : Editor
     /// <param name="rootPath">Root path.</param>
     void AdjustNoAniModel(string rootPath)
     {
-        Debug.Log(Application.dataPath);
+        Debug.Log("AdjustNoAniModel "+rootPath);
         
         var allModel = Path.Combine(Application.dataPath, rootPath);
         var resDir = new DirectoryInfo(allModel);
-        FileInfo[] fileInfo = resDir.GetFiles("*.fbx", SearchOption.AllDirectories);
+        FileInfo[] fileInfo = resDir.GetFiles("*.fbx", SearchOption.TopDirectoryOnly);
         AssetDatabase.StartAssetEditing();
         foreach (FileInfo file in fileInfo)
         {

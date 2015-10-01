@@ -35,6 +35,8 @@ namespace ChuMeng
 			KillNpc,
 			DoSkill,
             IDLE,
+            STUNNED,
+            EXIT_STUNNED,
 		}
 		/*
 		 * Pass Message Format
@@ -212,6 +214,7 @@ namespace ChuMeng
 			KnockBack = true;
 			WhoKnock = who;
 		}
+
 
 
 

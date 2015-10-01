@@ -19,6 +19,7 @@ namespace Xft
 		protected bool IsStandTail = false;
 
 		float Magnitude;
+        float MagnitudeMax;
         
         protected bool IsFirst = true;
         protected float OriginalRadius = 0f;
@@ -29,8 +30,8 @@ namespace Xft
             IsFirst = true;
             OriginalRadius = 0f;
         }
-
-		public VortexAffector (Transform obj, MAGTYPE mtype, float mag, AnimationCurve vortexCurve, Vector3 dir, bool inhRot, EffectNode node, float vt)
+        float realMag = 1;
+        public VortexAffector (Transform obj, MAGTYPE mtype, float mag, float magMax, AnimationCurve vortexCurve, Vector3 dir, bool inhRot, EffectNode node, float vt)
             : base(node, AFFECTORTYPE.VortexAffector)
 		{
 			VortexCurve = vortexCurve;
@@ -39,6 +40,7 @@ namespace Xft
 			VortexObj = obj;
 			MType = mtype;
 			Magnitude = mag;
+            MagnitudeMax = magMax;
 
 			VortexTime = vt;
 			//ver 1.2.1
@@ -49,6 +51,9 @@ namespace Xft
 			}
 			Direction.Normalize ();
             IsFirst = true;
+            if(MType == MAGTYPE.RANDOM) {
+                realMag = Random.Range(Magnitude, MagnitudeMax);
+            }
 		}
 
 		public override void Update (float deltaTime)
@@ -90,8 +95,11 @@ namespace Xft
 						totalTime = Node.GetRealLife();
 					}
 					magnitude = VortexCurve.Evaluate (time/totalTime) * Magnitude;
-				}else
-					magnitude = Magnitude;
+                }else if(MType == MAGTYPE.Fixed) {
+					magnitude =  Magnitude;
+                }else {
+                    magnitude = realMag;
+                }
 
 				if (Node.Owner.VortexAttenuation < 1e-04f)
 				{
@@ -124,8 +132,11 @@ namespace Xft
 					}
 
 					magnitude = VortexCurve.Evaluate (time/totalTime)*Magnitude;
-				}else
-					magnitude = Magnitude;
+                }else if(MType == MAGTYPE.Fixed) {
+                    magnitude =  Magnitude;
+                }else {
+                    magnitude = realMag;
+                }
 				
 				if (Node.Owner.VortexAttenuation < 1e-04f)
 				{

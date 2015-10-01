@@ -158,6 +158,8 @@ public class EffectLayerCustom : Editor
 	protected SerializedProperty VortexAffectorEnable;
     protected SerializedProperty VortexMagType;
     protected SerializedProperty VortexMag;
+    protected SerializedProperty VortexMagMax;
+
     protected SerializedProperty VortexCurve;
     protected SerializedProperty VortexDirection;
     protected SerializedProperty VortexInheritRotation;
@@ -526,6 +528,8 @@ public class EffectLayerCustom : Editor
 		VortexAffectorEnable = serializedObject.FindProperty("VortexAffectorEnable");
 		VortexMagType = serializedObject.FindProperty("VortexMagType");
 		VortexMag = serializedObject.FindProperty("VortexMag");
+        VortexMagMax = serializedObject.FindProperty("VortexMagMax");
+
 		VortexCurve = serializedObject.FindProperty("VortexCurve");
 		VortexDirection = serializedObject.FindProperty("VortexDirection");
 		VortexInheritRotation = serializedObject.FindProperty("VortexInheritRotation");
@@ -1153,10 +1157,13 @@ public class EffectLayerCustom : Editor
 			XEditor.DrawCurve("magnitude curve:","",VortexCurve);
 			XEditor.DrawFloat("magnitude", "", VortexMag);
 		}
-		else
+        else if((MAGTYPE)VortexMagType.enumValueIndex == MAGTYPE.RANDOM)
 		{
-			XEditor.DrawFloat("magnitude:","",VortexMag);
-		}
+			XEditor.DrawFloat("magnitude Min:","",VortexMag);
+            XEditor.DrawFloat("magnitude Max:","",VortexMagMax);
+        }else {
+            XEditor.DrawFloat("magnitude:","",VortexMag);
+        }
 		
         XEditor.DrawToggle("accelerate?",TIsVortexAccelerate,IsVortexAccelerate);
         
