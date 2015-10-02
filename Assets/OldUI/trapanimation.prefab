@@ -199,13 +199,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4c404202453646c6b5ec85cddca1a9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  regEvt: 
   IsPlayer: 1
+  timeToDead: 0
   hit: 0
   onHit: 0
   attacker: {fileID: 0}
-  ShowTrail: 0
-  HideTrail: 0
   KnockBack: 0
   WhoKnock: {fileID: 0}
   fleeEvent: 0
