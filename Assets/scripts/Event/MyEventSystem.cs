@@ -10,6 +10,9 @@ using System.Collections.Generic;
 namespace ChuMeng
 {
 	public class MyEvent {
+        /// <summary>
+        /// 事件都添加到最后 放置prefab序列化的事件因为增加了新事件导致序列化 反序列化的数值错误 或者显示的表明数值？ 
+        /// </summary>
 		public enum EventType {
 			/// <summary>
 			/// 初始化我方玩家结束 进入世界
@@ -154,6 +157,8 @@ namespace ChuMeng
 
             EnterSafePoint,
             ExitSafePoint,
+
+            HitTarget,
 		}
 
 

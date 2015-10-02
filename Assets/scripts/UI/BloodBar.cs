@@ -39,6 +39,7 @@ namespace ChuMeng
             };
             RegEvent (true); 
 
+
             GetComponent<NpcAttribute>().ChangeHP(0);
         }
 

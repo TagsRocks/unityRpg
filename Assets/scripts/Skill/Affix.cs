@@ -39,6 +39,7 @@ namespace ChuMeng
             Relive, //灰鼠复活buff 死亡时候释放这个buff
             GoldSteal,
             Stunned , //眩晕 参考冰冻 和 KnockBack
+            ShiXue, //嗜血Buff 多次攻击后触发增强
         }
 
         public EffectType effectType = EffectType.None;

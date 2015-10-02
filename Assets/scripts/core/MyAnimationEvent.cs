@@ -215,14 +215,8 @@ namespace ChuMeng
 			WhoKnock = who;
 		}
 
-
-
-
 		public bool fleeEvent = false;
 		public float fleeTime = 0;
-		public void RegFlee() {
-			AddEvent (MyEvent.EventType.MonsterDead);
-		}
 
 		protected override void OnEvent (MyEvent evt)
 		{

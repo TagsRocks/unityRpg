@@ -14,6 +14,7 @@ namespace ChuMeng
 
         SkillLayoutRunner runner;
         public Vector3 ParticlePos;
+        public float WaitTime = 0.5f; //等待造成伤害的时间
         // Use this for initialization
         void Start()
         {
@@ -26,9 +27,17 @@ namespace ChuMeng
         }
 
         IEnumerator WaitExplosive() {
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(WaitTime);
+            var tarPos = Vector3.zero;
+
             if(runner.BeamTargetPos != Vector3.zero){
-                transform.position = runner.BeamTargetPos;
+                tarPos = runner.BeamTargetPos;
+            }else if(runner.stateMachine.MarkPos != Vector3.zero) {
+                tarPos = runner.stateMachine.MarkPos;
+            }
+            if(tarPos != Vector3.zero)
+            {
+                transform.position = tarPos;
                 if(DieParticle != null) {
                     GameObject g = Instantiate (DieParticle) as GameObject;
                     NGUITools.AddMissingComponent<RemoveSelf> (g);

@@ -81,6 +81,14 @@ namespace ChuMeng {
             return speedCoff;
         }
 
+        public int GetCriticalRate() {
+            int rate = 0;
+            foreach(IEffect ef in effectList) {
+                rate += ef.GetCriticalRate();
+            }
+            return rate;
+        }
+
 
 		void OnDisable() {
 			foreach(IEffect ef in effectList) {

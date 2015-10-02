@@ -89,9 +89,7 @@ namespace ChuMeng
                     {
                         if (stateMachine.target != null)
                         {
-                            //g.transform.parent = ObjectManager.objectManager.transform;
-                            //g.transform.parent = transform;
-                            //g.transform.parent = stateMachine.target.transform;
+                            stateMachine.MarkPos = stateMachine.target.transform.position;
                             g.transform.position = stateMachine.target.transform.position + skillConfig.Position;
                             g.transform.localRotation = Quaternion.identity;
                             g.transform.localScale = Vector3.one;
@@ -105,7 +103,12 @@ namespace ChuMeng
                             g.transform.localRotation = Quaternion.identity;
                             g.transform.localScale = Vector3.one;
                         }
-                    } else
+                    }else if(Event.UseMarkPos) {
+                        g.transform.position = stateMachine.MarkPos + skillConfig.Position;
+                        g.transform.localRotation = Quaternion.identity;
+                        g.transform.localScale = Vector3.one;
+                    }
+                    else
                     {
                         g.transform.parent = transform;
                         g.transform.localPosition = skillConfig.Position;

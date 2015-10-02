@@ -370,8 +370,8 @@ MonoBehaviour:
   JetMax: 0
   VortexAffectorEnable: 1
   VortexMagType: 2
-  VortexMag: -3
-  VortexMagMax: -5
+  VortexMag: -10
+  VortexMagMax: -15
   VortexCurve:
     serializedVersion: 2
     m_Curve: []

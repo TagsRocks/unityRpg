@@ -34,7 +34,6 @@ namespace ChuMeng {
             ai.AddState(new MonsterSkill());
 		}
 		void Start() {
-			myAnimationEvent.RegFlee ();
 			ai.ChangeState (AIStateEnum.IDLE);
 		}
 

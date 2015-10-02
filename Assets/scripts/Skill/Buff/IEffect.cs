@@ -60,6 +60,9 @@ namespace ChuMeng {
         public virtual float GetSpeedCoff() {
             return 1;
         }
+        public virtual int GetCriticalRate() {
+            return 0;
+        }
 
 		public virtual int GetArmor ()
 		{

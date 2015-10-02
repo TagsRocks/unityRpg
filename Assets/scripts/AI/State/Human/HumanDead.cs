@@ -11,6 +11,7 @@ namespace ChuMeng
 			base.EnterState ();
 			dieAni = "death";
 			SetAni (dieAni, 1, WrapMode.Once);
+            GetAttr().IsDead = true;
 		}
 		public override IEnumerator RunLogic ()
 		{

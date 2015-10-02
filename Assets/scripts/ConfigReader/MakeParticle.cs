@@ -9,6 +9,9 @@ using UnityEditor;
 using Xft;
 #endif
 
+/// <summary>
+///导入粒子效果之后 需要点击一下 各个属性 粒子的属性才能生效 
+/// </summary>
 public class MakeParticle : MonoBehaviour
 {
     public string configFile;
@@ -485,6 +488,22 @@ public class MakeParticle : MonoBehaviour
             effectLayer.RotateType = RSTYPE.SIMPLE;
             effectLayer.RotateSpeedMin = min;
             effectLayer.RotateSpeedMax = min;
+        }else if(((int)speed[0]) == 2) {
+            effectLayer.RotateType = RSTYPE.CURVE01;
+            effectLayer.RotateCurveWrap = WRAP_TYPE.LOOP;
+            effectLayer.RotateCurveTime = -1;
+            var max = 360;
+            effectLayer.RotateCurveMaxValue = max;
+            var ks = new Keyframe[(speed.Length-1)/2];
+
+            for(int i = 0; i < (speed.Length-1)/2; i++) {
+                var t = speed[i*2+1];
+                var angle = speed[i*2+2];
+                ks[i] = new Keyframe(t, angle*1.0f/max);
+            }
+            Log.GUI("RotateCurve "+ks.Length);
+            effectLayer.RotateCurve01 = new AnimationCurve(ks);
+
         }
     }
     float lastSpeed = 1;
@@ -512,10 +531,15 @@ public class MakeParticle : MonoBehaviour
 
     void SetEmit(EffectLayer effectLayer, JSONClass modData)
     {
-        
+        Log.Sys("SetEmit "+effectLayer.name+" modData "+modData.ToString());
         var forever = modData ["NO EXPIRATION"].AsBool;
         var rateStr = modData ["EMIT RATE"].Value;
-        var rate = ConvertToFloat(rateStr.Split(','));
+        var rate = new float[]{0, 15};//有15个 虫子在水面 waterskip
+        if(string.IsNullOrEmpty(rateStr)){
+            
+        }else {
+            rate = ConvertToFloat(rateStr.Split(','));
+        }
 
 
         int rateType = (int)rate [0];

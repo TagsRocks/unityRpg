@@ -53,7 +53,6 @@ namespace ChuMeng
 
         void Start()
         {
-            myAnimationEvent.RegFlee();
             ai.ChangeState(AIStateEnum.IDLE);
             
             gameObject.AddComponent<MonsterCheckUseSkill>();

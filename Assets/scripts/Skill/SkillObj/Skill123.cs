@@ -7,6 +7,11 @@ namespace ChuMeng
     {
         float lastTime = 0;
 
+        /// <summary>
+        /// 远离攻击目标 
+        /// </summary>
+        /// <returns><c>true</c>, if condition was checked, <c>false</c> otherwise.</returns>
+        /// <param name="owner">Owner.</param>
         public override bool CheckCondition(GameObject owner)
         {
             if (Time.time - lastTime > 3)

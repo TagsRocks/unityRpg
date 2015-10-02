@@ -6,7 +6,6 @@
 		_Amplitude_X("wave x amplitude", float) = -0.2
 		
 		_Freq_Y("wave  freq", float) = 0.06
-		_Phase_Y("wave  phase", float) = 0
 		_Amplitude_Y("wave  amplitude", float) = -0.24
 	
 	
@@ -15,7 +14,6 @@
 		_Amplitude_X1("wave x amplitude", float) = 0.05
 		
 		_Freq_Y1("wave  freq", float) = 0.02
-		_Phase_Y1("wave  phase", float) = 0
 		_Amplitude_Y1("wave  amplitude", float) = 0.05
 	}
 	

@@ -74,8 +74,16 @@ namespace KBEngine
 	{
 		protected List<ChuMeng.MyEvent.EventType> regEvt = null;
 		protected List<ChuMeng.MyEvent.EventType> regLocalEvt = null;
+        protected Dictionary<ChuMeng.MyEvent.EventType,ChuMeng.EventDel > regLocalEvtCallback = null;
 
         protected bool regYet = false;
+        /// <summary>
+        /// BloodBar 继承UIInterface
+        /// UIInterface在Awake时添加事件 Enable时注册事件 Disable时取消事件
+        ///  
+        /// BloodBar需要在Start时动态加入Local事件
+        /// </summary>
+        /// <param name="force">If set to <c>true</c> force.</param>
 		public void RegEvent (bool force=false)
 		{
             if(regYet && !force) {
@@ -117,6 +125,11 @@ namespace KBEngine
 					ChuMeng.MyEventSystem.myEventSystem.DropLocalListener(photonView.GetLocalId(), t, OnLocalEvent);
 				}
 			}
+            if(regLocalEvtCallback != null) {
+                foreach(var t in regLocalEvtCallback) {
+                    ChuMeng.MyEventSystem.myEventSystem.DropLocalListener(photonView.GetLocalId(), t.Key, t.Value);
+                }
+            }
 		}
 
 		protected virtual void OnEvent(ChuMeng.MyEvent evt) {
@@ -131,10 +144,25 @@ namespace KBEngine
 			}
 		}
 
+        /// <summary>
+        /// 注册一个全局事件 
+        /// 在RegEvent之后添加事件
+        /// </summary>
+        /// <param name="t">T.</param>
 		protected void AddEvent(ChuMeng.MyEvent.EventType t) {
 			regEvt.Add (t);
 			ChuMeng.MyEventSystem.myEventSystem.RegisterEvent (t, OnEvent);
 		}
+
+        public void AddCallBackLocalEvent(ChuMeng.MyEvent.EventType t, ChuMeng.EventDel cb) {
+            regYet = true;
+            if(regLocalEvtCallback == null) {
+                regLocalEvtCallback = new Dictionary<ChuMeng.MyEvent.EventType, ChuMeng.EventDel>();
+            }
+            regLocalEvtCallback.Add(t, cb);
+            ChuMeng.MyEventSystem.myEventSystem.RegisterLocalEvent (photonView.GetLocalId(),  t, cb);
+        }
+
 	}
 	/*
 	 * Player ---> Multiple View

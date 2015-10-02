@@ -3,6 +3,9 @@ using System.Collections;
 
 namespace ChuMeng
 {
+    /// <summary>
+    /// 靠近攻击目标时释放 
+    /// </summary>
     public class Skill125 : SkillObj 
     {
         private float lastTime = 0;

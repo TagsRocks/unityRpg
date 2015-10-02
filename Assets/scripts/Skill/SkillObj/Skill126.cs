@@ -3,6 +3,9 @@ using System.Collections;
 
 namespace ChuMeng
 {
+    /// <summary>
+    /// hp低的时候释放 
+    /// </summary>
     public class Skill126 : SkillObj 
     {
         float lastTime = 0;

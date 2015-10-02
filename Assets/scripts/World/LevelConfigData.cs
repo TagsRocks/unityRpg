@@ -128,6 +128,8 @@ namespace ChuMeng
 
             l1 = new List<LevelConfig>(){
                 new LevelConfig("ENTRANCE_E_LM", 0, 0){useOtherZone=true, zoneId=50, type="suntemple"},
+                new LevelConfig("EW_LM", 1, 0){useOtherZone=true, zoneId=51, type="suntemple"},
+                new LevelConfig("EXIT_W_LM", 2, 0){useOtherZone=true, zoneId=52, type="suntemple"},
                 //new LevelConfig("EW_PB", -1, 0){useOtherZone=true, zoneId=43},
                 //new LevelConfig("EXIT_E_KG", -2, 0){useOtherZone=true, zoneId=44},
             };

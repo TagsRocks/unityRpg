@@ -408,6 +408,9 @@ namespace ChuMeng
         public float GetSpeedCoff() {
             return GetComponent<BuffComponent>().GetSpeedCoff();
         }
+        public int GetCriticalRate() {
+            return ObjUnitData.CriticalHit +GetComponent<BuffComponent>().GetCriticalRate();
+        }
         int GetAllArmor()
         {
             int a = _Armor;

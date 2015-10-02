@@ -35,6 +35,8 @@ namespace ChuMeng
 			public Vector3 BeamOffset = new Vector3 (0, 1, 0);
             //出现在目标所在位置
             public bool TargetPos = false;
+            //使用上次事件标记的位置
+            public bool UseMarkPos = false;
 
 		}
 		public List<EventItem> eventList;

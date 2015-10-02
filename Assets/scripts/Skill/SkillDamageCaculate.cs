@@ -36,7 +36,7 @@ namespace ChuMeng {
 				var rd = Random.Range(0, 100);
 				var rate = 1;
 				bool isCritical = false;
-				if(rd < attribute.ObjUnitData.CriticalHit) {
+                if(rd < attribute.GetCriticalRate()) {
 					rate = 2;
 					isCritical = true;
 				}
@@ -45,6 +45,7 @@ namespace ChuMeng {
 				Log.Sys("calculate Damage Rate "+skillData.skillData.WeaponDamagePCT);
 				enemy.GetComponent<MyAnimationEvent> ().OnHit (attacker, damage, isCritical);
 
+                MyEventSystem.myEventSystem.PushLocalEvent(attribute.GetLocalId(), MyEvent.EventType.HitTarget);
 			}
 			//}
 		}

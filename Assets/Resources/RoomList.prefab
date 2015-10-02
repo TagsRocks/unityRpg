@@ -70,6 +70,8 @@ MonoBehaviour:
   - type: suntemple
     parts:
     - {fileID: 144092, guid: f75a77a0a71a64d589a2a1558257c4bc, type: 2}
+    - {fileID: 172638, guid: 43926b90e4a20495291e68f34549cd1e, type: 2}
+    - {fileID: 116974, guid: 2aa1d0357bab348f796ab42993d7735a, type: 2}
   LoadAllRooms: 0
 --- !u!1001 &100100000
 Prefab:

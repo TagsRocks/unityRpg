@@ -15,6 +15,8 @@ namespace ChuMeng
         public bool isStop = false;
         public Vector3 InitPos = Vector3.zero;
 
+        //需要前摇时间的技能标记目标位置
+        public Vector3 MarkPos;
         public GameObject attacker
         {
             get;
@@ -165,6 +167,7 @@ namespace ChuMeng
                     OnHit();
                     if (!string.IsNullOrEmpty(skillFullData.skillData.HitSound))
                     {
+                        Log.Sys("HitSound "+skillFullData.skillData.HitSound);
                         BackgroundSound.Instance.PlayEffect(skillFullData.skillData.HitSound);
                     }
                     break;
