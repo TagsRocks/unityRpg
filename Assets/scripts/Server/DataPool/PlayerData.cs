@@ -42,10 +42,12 @@ namespace ChuMeng
             var psp = GCPushSkillPoint.CreateBuilder();
             psp.SkillPoint = pinfo.Skill.TotalPoint;
             ServerBundle.SendImmediatePush(psp);
-            if(sp > 0) {
-                SendNotify("升级技能点+"+sp);
-            }else {
-                SendNotify("技能点"+sp);
+            if (sp > 0)
+            {
+                SendNotify("升级技能点+" + sp);
+            } else
+            {
+                SendNotify("技能点" + sp);
             }
         }
 
@@ -57,7 +59,8 @@ namespace ChuMeng
             if (num > 0)
             {
                 SendNotify(string.Format("[ff9500]{0}+{1}[-]", itemData.ItemName, num));
-            }else if(num < 0) {
+            } else if (num < 0)
+            {
                 SendNotify(string.Format("[ff1010]{0}{1}[-]", itemData.ItemName, num));
             }
         }
@@ -433,7 +436,8 @@ namespace ChuMeng
             var msg = role.Build();
             ServerData.Instance.playerInfo.Roles = msg;
 
-            var dress = new int[] {
+            var dress = new int[]
+            {
                 97, 68, 69, 70, 71, 72,
             };
             int id = 1;
@@ -472,7 +476,7 @@ namespace ChuMeng
                 var msg = au.Build();
                 pinfo.CopyInfos = msg;
             }
-            int levId = chapter*100 + openLev;
+            int levId = chapter * 100 + openLev;
             //int levId = -1;
             //int count = -1;
             bool find = false;
@@ -573,6 +577,7 @@ namespace ChuMeng
         {
             return true;
         }
+
         /// <summary>
         /// 根据ID获得背包中的道具 
         /// </summary>
@@ -608,7 +613,7 @@ namespace ChuMeng
             }
             if (packInfo != null)
             {
-                curLev = packInfo.PackEntry.Level+1;
+                curLev = packInfo.PackEntry.Level + 1;
                 var levCost = GMDataBaseSystem.SearchIdStatic<EquipLevelData>(GameData.EquipLevel, curLev);
                 if (levCost == null)
                 {
@@ -640,14 +645,14 @@ namespace ChuMeng
                     packInfo.PackEntry.Level++;
                     packInfo.PackEntry.ExtraAttack += extraAtt;
                     packInfo.PackEntry.ExtraDefense += extraDef;
-                    SendNotify("装备升级成功");
+                    SendNotify("装备升级成功, 本次概率"+rate);
 
                     var update = GCPushEquipDataUpdate.CreateBuilder();
                     update.PackInfo = packInfo;
                     ServerBundle.SendImmediatePush(update);
                 } else
                 {
-                    SendNotify("装备升级失败");
+                    SendNotify("装备升级失败, 本次概率" + rate+" 需要概率 "+levCost.rate);
                 }
             }
         }
@@ -655,22 +660,53 @@ namespace ChuMeng
         public static void LevelUpGem(KBEngine.Packet packet)
         {
             var inpb = packet.protoBody as CGLevelUpGem;
-            var gemId = inpb.GemIdList [0];
-            var gem = GetItemInPack(gemId);
-            var itemData = Util.GetItemData(0, gem.PackEntry.BaseId);
+            if (inpb.GemIdCount == 2)
+            {
+                var gemId = inpb.GemIdList [0];
+                var gem = GetItemInPack(gemId);
+                var itemData = Util.GetItemData(0, gem.PackEntry.BaseId);
 
-            var targetGem = GameInterface_Package.GetRndGem(itemData.Level + 1);
-            if (targetGem != null)
-            {
-                AddItemInPackage(targetGem.id, 1);
-                SendNotify("合成成功");
-            } else
-            {
-                SendNotify("合成失败");
-            }
-            foreach (var g in inpb.GemIdList)
-            {
-                ReduceItem(g, 1);
+                var targetGem = GameInterface_Package.GetRndGem(itemData.Level + 1);
+                if (targetGem != null)
+                {
+                    AddItemInPackage(targetGem.id, 1);
+                    SendNotify("合成成功，本次概率"+GameInterface_Package.lastPossibility);
+                } else
+                {
+                    SendNotify("合成失败, 本次概率"+GameInterface_Package.lastPossibility);
+                }
+                foreach (var g in inpb.GemIdList)
+                {
+                    ReduceItem(g, 1);
+                }
+            }else if(inpb.GemIdCount == 1) {//一键快速合成
+                var gemId = inpb.GemIdList [0];
+                var gem = GetItemInPack(gemId);
+                var itemData = Util.GetItemData(0, gem.PackEntry.BaseId);
+                int count = gem.PackEntry.Count/2;
+                int useNum = count;
+                int allRate = GameInterface_Package.GetAllGemRate(itemData.Level+1);
+                PropsConfigData targetGem = null;
+                int getNum = 0;
+                while(count > 0) {
+                    if(targetGem == null) {
+                        targetGem = GameInterface_Package.GetRndGem(itemData.Level + 1);
+                        if(targetGem != null) {
+                            getNum++;
+                        }
+                    }else {
+                        var ret = GameInterface_Package.GetRndGemForId(itemData.Level+1, targetGem.id, allRate);
+                        if(ret > 0) {
+                            getNum++;
+                        }
+                    }
+                    count--;
+                }
+                if(getNum > 0){
+                    AddItemInPackage(targetGem.id, getNum);
+                }
+
+                ReduceItem(gemId, useNum*2);
             }
         }
 
@@ -683,7 +719,7 @@ namespace ChuMeng
             ReduceItem(inpb.UserPropsId, num);
             AddGold(itemData.GoldCost * num);
         }
-    }   
+    }
 
 
 

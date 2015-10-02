@@ -72,6 +72,28 @@ namespace ChuMeng {
             return ret;
         }
 
+        public  static int GetAllGemRate(int lev) {
+            int rate = 0;
+
+            foreach(var d in GameData.PropsConfig) {
+                if(d.propsType == (int)ItemData.UnitTypeEnum.GEM) {
+                    if(d.level == lev) {
+                        rate += d.rate;
+                    }
+                }
+            }
+            return rate;
+        }
+
+        public static int GetRndGemForId(int lev, int id, int allRate) {
+            var rnd = Random.Range(0, 100);
+            if(rnd < allRate) {
+                return id;
+            }
+            return -1;
+        }
+
+        public static int lastPossibility;
         /// <summary>
         /// 获得随机的某个宝石产物 
         /// </summary>
@@ -79,6 +101,7 @@ namespace ChuMeng {
         /// <param name="lev">Lev.</param>
         public static PropsConfigData GetRndGem(int lev) {
             var rnd = Random.Range(0, 100);
+            lastPossibility = rnd;
             var lastRate = 0;
             foreach(var d in GameData.PropsConfig) {
                 if(d.propsType == (int)ItemData.UnitTypeEnum.GEM) {

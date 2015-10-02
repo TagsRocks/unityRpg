@@ -238,8 +238,9 @@ namespace ChuMeng
 			return db.SearchForKey (key);
 		}
 
-		public static void ShowMsg (string st)
+		public static void ShowMsg (string str)
 		{
+            WindowMng.windowMng.ShowNotifyLog(str);
 			//var tips = NGUITools.AddMissingComponent<TipsPanel>(GameObject.FindGameObjectWithTag("UIRoot"));
 			//tips.SetContent(st);
 			//tips.ShowTips();

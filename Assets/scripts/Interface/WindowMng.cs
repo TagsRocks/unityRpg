@@ -272,6 +272,7 @@ namespace ChuMeng
 
         public void ShowNotifyLog(string text, float time = 3, System.Action<GameObject> cb = null)
         {
+            Log.GUI("ShowNotifyLog "+text);
             NotifyUIManager.Instance.AddNotify(text, time, cb);
         }
 

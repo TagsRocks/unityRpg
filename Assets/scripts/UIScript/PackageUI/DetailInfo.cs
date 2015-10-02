@@ -1,20 +1,34 @@
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 namespace ChuMeng
 {
     public class DetailInfo : IUserInterface 
     {
-        public BackpackData backpackData;
+        private BackpackData _bd;
+        public BackpackData backpackData {
+            get {
+                return _bd;
+            }
+            set {
+                _bd = value;
+                InitButton();
+            }
+        }
         private EquipData equipData;
         UILabel Name;
-
+        GameObject OneKey;
         void Awake() {
             Name = GetLabel("Name");
             SetCallback("closeButton", Hide);
             SetCallback("LevelUp", OnLevelUp);
             SetCallback("Equip", OnEquip);
             SetCallback("Sell", OnSell);
+            OneKey = GetName("OneKey");
+            SetCallback("OneKey", OnOneKey);
+            OneKey.SetActive(false);
+
             //GetName("Sell").SetActive(false);
             GetName("Equip").SetActive(false);
 
@@ -24,6 +38,25 @@ namespace ChuMeng
             };
             RegEvent();
         }
+        void InitButton() {
+            if(equipData != null) {
+                OneKey.SetActive(false);
+            }else {
+                OneKey.SetActive(true);
+            }
+        }
+
+        void OnOneKey() {
+            if(backpackData != null) {
+                if(backpackData.entry.Count >= 2) {
+                    GameInterface_Package.playerPackage.LevelUpGem(new List<BackpackData>(){backpackData});
+                    WindowMng.windowMng.PopView();
+                }else {
+                    Util.ShowMsg("宝石数量需要大于2个才能合成");
+                }
+            }
+        }
+
         void OnLevelUp() {
             if(equipData != null) {
                 var lev = equipData.entry.Level;
@@ -50,6 +83,7 @@ namespace ChuMeng
         }
         public void SetEquip(EquipData ed) {
             equipData = ed;
+            InitButton();
         }
         protected override void OnEvent(MyEvent evt)
         {
