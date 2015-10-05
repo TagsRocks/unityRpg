@@ -71,7 +71,6 @@ namespace ChuMeng
 		}
 
 
-
     /// <summary>
             ///服务器更新背包数据  Don't ClearBag 
     /// </summary>
@@ -99,6 +98,14 @@ namespace ChuMeng
 		}
 
 
+        public BackpackData GetItemInBackPack(long propsId) {
+            foreach(var s in SlotData) {
+                if(s.id == propsId) {
+                    return s;
+                }
+            }
+            return null;
+        }
 		public EquipData EnumAction(ItemData.EquipPosition type) {
 			Log.Important("Enum Action "+type);
 			Log.Important ("count "+EquipmentData.Count);
@@ -112,18 +119,7 @@ namespace ChuMeng
 		}
 
 
-		/*
-		 * 快捷栏信息
-		 */ 
-		public class ShortCut
-		{
 
-			public ShortCut (ShortCutInfo shortInfo)
-			{
-			}
-		}
-
-		public List<ShortCut> shortCuts;
 
 		void Awake ()
 		{
@@ -138,14 +134,9 @@ namespace ChuMeng
 			backpack = this;
 		}
 
-		ItemData.EquipPosition FindEquipSlot (int backpackSlotId)
-		{
-			var id = SlotData [backpackSlotId].itemData;
-			return id.equipPosition;
-		}
 
-
-		void UseEquipNetwork(GCUserDressEquip result) {
+		void UseEquipNetworkResp(GCUserDressEquip result) {
+            Log.Net("UseEquipNetworkResp "+result);
 			if (oldEquip != null) {
 				PopEquipData(equipSlot);
 			}
@@ -192,7 +183,7 @@ namespace ChuMeng
 			if (packet.packet.responseFlag == 0) {
 				var useResult = packet.packet.protoBody as GCUserDressEquip;
 
-				UseEquipNetwork(useResult);
+				UseEquipNetworkResp(useResult);
 			} else {
 			}
 		}
@@ -284,7 +275,7 @@ namespace ChuMeng
 		 */ 
 
 
-		public void PutItemInBackpackIndex(BackpackData bd) {
+        private void PutItemInBackpackIndex(BackpackData bd) {
 			PutItemInBackpackIndex (bd.index, bd);
 		}
 		/*
@@ -292,7 +283,7 @@ namespace ChuMeng
 		 */ 
 		void PutItemInBackpackIndex (int index, BackpackData bd)
 		{
-			Log.Sys ("Backpack::PutItem From Network In backpack");
+            Log.Sys ("Backpack::PutItem From Network In backpack "+bd.packInfo);
 			if (index >= SlotData.Count || index < 0) {
 				Debug.LogError ("BackPack:: index out of Range " + index);
 				return;
@@ -353,14 +344,11 @@ namespace ChuMeng
 
 
 
-		/*
-		 * TODO:放置采集物品到背包
-		 */ 
-		public void PutInBackpack (GCCollectItems items)
-		{
-		}
-
-		bool CheckBackpackEmpty ()
+        /// <summary>
+        /// 检查背包是否有空槽可以使用 
+        /// </summary>
+        /// <returns><c>true</c>, if backpack empty was checked, <c>false</c> otherwise.</returns>
+		public bool CheckBackpackEmpty ()
 		{
 			for (int i=0; i < SlotData.Count; i++) {
 				if (SlotData [i] == null || SlotData [i].itemData == null)
@@ -369,22 +357,6 @@ namespace ChuMeng
 			return false;
 		}
 		
-		// Update is called once per frame
-		void Update ()
-		{
-		
-		}
-
-		//Load Default backpack remove this one
-		public BackPack InitPlayer ()
-		{
-			var bp = Instantiate (Resources.Load<GameObject> ("levelPublic/backpackController")) as GameObject;
-			bp.transform.parent = GameObject.Find ("levelPublic").transform;
-			//SlotData = bp.SlotData;
-			//EquipmentData = bp.EquipmentData;
-			GameObject.Destroy (gameObject);
-			return bp.GetComponent<BackPack> ();
-		}
 
 		/*
 		 * Network Init EquipmentData
@@ -414,99 +386,8 @@ namespace ChuMeng
 			}
 		}
 
-		/*
-		 * 整理背包
-		 */ 
-		public IEnumerator PackUp ()
-		{
-			UserBagClear ();
-			var packet = new KBEngine.PacketHolder ();
-			CGAutoAdjustPack.Builder pack = CGAutoAdjustPack.CreateBuilder ();
-			pack.PackType = PackType.DEFAULT_PACK;
-			yield return StartCoroutine (KBEngine.Bundle.sendSimple (this, pack, packet));
 
-			if (packet.packet.responseFlag == 0) {
-				var ret = packet.packet.protoBody as GCLoadPackInfo;
-				foreach (PackInfo pkinfo in ret.PackInfoList) {
-					Log.Sys("Read PackInfo is "+pkinfo.PackEntry.BaseId);
-					PutItemInBackpackIndex (pkinfo.PackEntry.Index, new BackpackData (pkinfo));
-				}
-			}
-		}
 
-		/*
-		 * Bag Index 
-		 * TODO::使用药品
-		 * 物品数量更新只从服务器更新本地不更新
-		 */ 
-		public IEnumerator UseItem (int slotIndex, int count)
-		{
-			yield return null;
-			/*
-			var sd = SlotData [slotIndex];
-			CGUseUserProps.Builder use = CGUseUserProps.CreateBuilder ();
-			use.UserPropsId = sd.id;
-			use.Count = count;
-
-			KBEngine.PacketHolder packet = new KBEngine.PacketHolder ();
-			yield return StartCoroutine (KBEngine.Bundle.sendSimple (this, use, packet));
-			if (packet.packet.responseFlag == 0) {
-				sd.num -= count;
-			}
-			if (sd.num == 0) {
-				ClearSlot (slotIndex);
-			} else {
-			
-			}
-			*/
-		}
-
-		/*
-		 * 商店卖出道具 +Gold
-		 */ 
-		public IEnumerator ShopSell (int slotIndex)
-		{
-			var sd = SlotData [slotIndex];
-			CGSellUserProps.Builder sell = CGSellUserProps.CreateBuilder ();
-			sell.UserPropsId = sd.id;
-			sell.GoodsType = sd.goodsType;
-			KBEngine.PacketHolder packet = new KBEngine.PacketHolder ();
-			yield return StartCoroutine (KBEngine.Bundle.sendSimple (this, sell, packet));
-
-			if (packet.packet.responseFlag == 0) {
-				//推送卖出的金币
-				/*
-				var price = Resources.Load<GraphData> ("graphics/stat/price_playerbuy_normal");
-				var gold = price.GetData (sd.itemData.Level) * sd.num;
-				PutGold ((int)gold);
-				*/
-				ClearSlot (slotIndex);
-			}
-		}
-
-		/*
-		 * 获取快捷栏信息
-		 */ 
-		public IEnumerator AskSetting ()
-		{
-			var packet = new KBEngine.PacketHolder ();
-			var askShortCut = CGLoadShortcutsInfo.CreateBuilder ();
-			yield return StartCoroutine (KBEngine.Bundle.sendSimple (this, askShortCut, packet));
-
-			if (packet.packet.responseFlag == 0) {
-				shortCuts = new List<ShortCut> ();
-				for (int i = 0; i < 8; i++) {
-					shortCuts.Add (null);
-				}
-
-				var shortCut = packet.packet.protoBody as GCLoadShortcutsInfo;
-				foreach (ShortCutInfo si in shortCut.ShortCutInfoList) {
-					shortCuts [si.Index] = new ShortCut (si);
-				}
-
-			}
-		}
-		 
 
 		/// <summary>
 		/// 每次进入一个新场景都重新初始化背包和装备信息

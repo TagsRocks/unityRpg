@@ -20,7 +20,15 @@ namespace ChuMeng
                 MyEvent.EventType.UpdateItemCoffer, //DrugNum
             };
             RegEvent();
+            SetCallback("Forge", OnForge);
         }
+
+        void OnForge() {
+            WindowMng.windowMng.PushView("UI/ForgeList");
+            
+
+        }
+           
         protected override void OnEvent(MyEvent evt)
         {
             var me = ObjectManager.objectManager.GetMyData();

@@ -27,7 +27,8 @@ namespace ChuMeng {
 		public bool ChangeState(AIStateEnum s, int layer = 0) {
 			//Log.AI ("Change State "+GetAttr().gameObject+" state "+s);
             if(!stateMap.ContainsKey(s)) {
-                Debug.LogError("Who Not Has Such State "+GetAttr().gameObject+" state "+s);
+                //Debug.LogError("Who Not Has Such State "+GetAttr().gameObject+" state "+s);
+                Log.Sys("gameObject No State "+GetAttr().gameObject+" state "+s);
                 return false;
             }
 

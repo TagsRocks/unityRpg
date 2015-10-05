@@ -2,13 +2,6 @@
 	//floor blank
 	Properties {
 		_MainTex ("Base (RGB)", 2D) = "white" {}
-		//_Color ("Ambient Color", Color) = (0.588, 0.588, 0.588, 1)
-		
-		//_LightMap ("Light Map ", 2D) = "white" {}
-		//_CamPos ("Camera pos", Vector) = (0, 0, 0, 0)
-		//_CameraSize ("Camera Size", float) = 10
-		
-		//_LightCoff ("light Cofficient", float) = 2
 	}
 	SubShader {
 		Tags { "RenderType"="Opaque" }

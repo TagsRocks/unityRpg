@@ -32,6 +32,7 @@ namespace ChuMeng
 		public MissileData Missile;
 		//产生怪物的id
 		public int MonsterId = -1;
+        public float delay = 0;
 		public enum ReleaseOrder {
 			ByRandom,
 			Clockwise,
@@ -97,6 +98,9 @@ namespace ChuMeng
         }
 
 		IEnumerator UpdateUnitSpawn() {
+            if(delay > 0) {
+                yield return new WaitForSeconds(delay);
+            }
 			float passTime = 0;
 			int lastFrame = -1;
 			float initDeg = -Angle / 2.0f;

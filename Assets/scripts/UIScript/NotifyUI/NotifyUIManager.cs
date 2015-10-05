@@ -42,13 +42,17 @@ namespace ChuMeng
 
         IEnumerator CheckNotify()
         {
+            float lastFt = 0.1f;
+            GameObject lastNotify = null;
             while (true)
             {
                 if (nd.Count > 0 && WindowMng.windowMng.GetUIRoot() != null)
                 {
                     if (NotifyUI.Instance == null || NotifyUI.Instance.activeSelf == false)
                     {
-                        yield return new WaitForSeconds(0.1f);
+                        if(lastNotify !=null && lastNotify.activeSelf) {
+                            yield return new WaitForSeconds(lastFt);
+                        }
                         var not = nd [0];
                         nd.RemoveAt(0);
                         var g = WindowMng.windowMng.PushTopNotify("UI/NotifyLog");
@@ -56,10 +60,18 @@ namespace ChuMeng
                         {
                             g.GetComponent<NotifyUI>().SetText(not.text);
                             var ft = not.time;
-                            if(nd.Count >= 3) {
+                            if(nd.Count >= 2) {
                                 ft /= 2;
                             }
+                            if(nd.Count >= 4){
+                                ft /= 4;
+                            }
+                            if(nd.Count >= 6){
+                                ft /= 4;    
+                            }
+                            lastFt = ft;
                             g.GetComponent<NotifyUI>().SetDurationTime(ft);
+                            lastNotify = g;
                         }
                         if (not.cb != null)
                         {

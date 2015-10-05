@@ -593,7 +593,7 @@ namespace ChuMeng
         {
             var dam = 0;
             foreach(var p in partToData.Values) {
-                dam += p.itemData.Damage + p.entry.ExtraAttack;
+                dam += p.itemData.Damage + p.entry.ExtraAttack+p.entry.RndAttack;
             }
             Log.Sys("GetDamage ForEquip "+gameObject+" dam "+dam);
             return dam;
@@ -614,7 +614,7 @@ namespace ChuMeng
             int arm = 0;
             foreach (var p in partToData.Values)
             {
-                arm += p.itemData.RealArmor+p.entry.ExtraDefense;
+                arm += p.itemData.RealArmor+p.entry.ExtraDefense+p.entry.RndDefense;
             }
             return arm;
         }

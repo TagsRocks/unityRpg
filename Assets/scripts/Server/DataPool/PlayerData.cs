@@ -114,6 +114,106 @@ namespace ChuMeng
             }
             return true;
         }
+
+        private static void PutEquipInPackage(PackInfo pi)
+        {
+            var pinfo = ServerData.Instance.playerInfo;
+            PackInfo[] packList = new PackInfo[BackPack.MaxBackPackNumber];
+
+            foreach (var p in pinfo.PackInfoList)
+            {
+                packList [p.PackEntry.Index] = p;
+            }
+
+            for (int i = 0; i < BackPack.MaxBackPackNumber; i++)
+            {
+                if (packList [i] == null)
+                {
+                    pi.PackEntry.Index = i;
+                    pinfo.PackInfoList.Add(pi);
+
+                    /*
+                    var push = GCPushPackInfo.CreateBuilder();
+                    push.BackpackAdjust = false;
+                    push.PackType = PackType.DEFAULT_PACK;
+                    push.PackInfoList.Add(pi);
+                    ServerBundle.SendImmediatePush(push);
+                    */
+                    return;
+                }
+            }
+
+
+
+
+        }
+
+        /// <summary>
+        /// 背包中增加新获得的武器
+        /// 背包改造为无限长度 并且没有限制 
+        /// </summary>
+        public static void AddEquipInPackage(int equipId, int initAttack, int initDefense)
+        {
+            Log.Sys("AddEquipInpackage " + equipId + " initAttack " + initAttack + " initDef " + initDefense);
+            var pinfo = ServerData.Instance.playerInfo;
+            var itemData = Util.GetItemData((int)GoodsTypeEnum.Equip, equipId);
+
+            PackInfo[] packList = new PackInfo[BackPack.MaxBackPackNumber];
+            long maxId = 0;
+            foreach (var p in pinfo.PackInfoList)
+            {
+                packList [p.PackEntry.Index] = p;
+                maxId = (long)Mathf.Max(p.PackEntry.Id + 1, maxId);
+            }
+
+            foreach (var p in pinfo.DressInfoList)
+            {
+                maxId = (long)Mathf.Max(p.PackEntry.Id + 1, maxId);
+            }
+
+            if (maxId < 0)
+            {
+                maxId++;
+            }
+            for (int i = 0; i < BackPack.MaxBackPackNumber; i++)
+            {
+                if (packList [i] == null)
+                {
+                    var pkInfo = PackInfo.CreateBuilder();
+                    var pkentry = PackEntry.CreateBuilder();
+                    pkInfo.CdTime = 0;
+
+                    pkentry.Id = maxId;
+                    pkentry.BaseId = equipId;
+                    pkentry.GoodsType = 1;
+                    pkentry.Count = 1;
+                    pkentry.Index = i;
+                    pkentry.Level = 1;
+                    pkentry.RndAttack = initAttack;
+                    pkentry.RndDefense = initDefense;
+
+                    pkInfo.PackEntry = pkentry.Build();
+                    var msg = pkInfo.Build();
+                    pinfo.PackInfoList.Add(msg);
+
+                    var push = GCPushPackInfo.CreateBuilder();
+                    push.BackpackAdjust = false;
+                    push.PackType = PackType.DEFAULT_PACK;
+                    push.PackInfoList.Add(msg);
+                    ServerBundle.SendImmediatePush(push);
+
+                    SendNotify(string.Format("[ff0a0a]{0}+{1}[-]", itemData.ItemName, 1));
+                    return;
+                }
+            }
+
+            //PackFull
+            var notify = GCPushNotify.CreateBuilder();
+            notify.Notify = "[f00b00]背包已满[-]";
+            ServerBundle.SendImmediatePush(notify);
+        }
+
+
         //Notify
         //Props Stack
         /// <summary>
@@ -645,14 +745,14 @@ namespace ChuMeng
                     packInfo.PackEntry.Level++;
                     packInfo.PackEntry.ExtraAttack += extraAtt;
                     packInfo.PackEntry.ExtraDefense += extraDef;
-                    SendNotify("装备升级成功, 本次概率"+rate);
+                    SendNotify("装备升级成功, 本次概率" + rate);
 
                     var update = GCPushEquipDataUpdate.CreateBuilder();
                     update.PackInfo = packInfo;
                     ServerBundle.SendImmediatePush(update);
                 } else
                 {
-                    SendNotify("装备升级失败, 本次概率" + rate+" 需要概率 "+levCost.rate);
+                    SendNotify("装备升级失败, 本次概率" + rate + " 需要概率 " + levCost.rate);
                 }
             }
         }
@@ -670,43 +770,50 @@ namespace ChuMeng
                 if (targetGem != null)
                 {
                     AddItemInPackage(targetGem.id, 1);
-                    SendNotify("合成成功，本次概率"+GameInterface_Package.lastPossibility);
+                    SendNotify("合成成功，本次概率" + GameInterface_Package.lastPossibility);
                 } else
                 {
-                    SendNotify("合成失败, 本次概率"+GameInterface_Package.lastPossibility);
+                    SendNotify("合成失败, 本次概率" + GameInterface_Package.lastPossibility);
                 }
                 foreach (var g in inpb.GemIdList)
                 {
                     ReduceItem(g, 1);
                 }
-            }else if(inpb.GemIdCount == 1) {//一键快速合成
+            } else if (inpb.GemIdCount == 1)
+            {//一键快速合成
                 var gemId = inpb.GemIdList [0];
                 var gem = GetItemInPack(gemId);
                 var itemData = Util.GetItemData(0, gem.PackEntry.BaseId);
-                int count = gem.PackEntry.Count/2;
+                int count = gem.PackEntry.Count / 2;
                 int useNum = count;
-                int allRate = GameInterface_Package.GetAllGemRate(itemData.Level+1);
+                int allRate = GameInterface_Package.GetAllGemRate(itemData.Level + 1);
                 PropsConfigData targetGem = null;
                 int getNum = 0;
-                while(count > 0) {
-                    if(targetGem == null) {
+                while (count > 0)
+                {
+                    if (targetGem == null)
+                    {
                         targetGem = GameInterface_Package.GetRndGem(itemData.Level + 1);
-                        if(targetGem != null) {
+                        if (targetGem != null)
+                        {
                             getNum++;
                         }
-                    }else {
-                        var ret = GameInterface_Package.GetRndGemForId(itemData.Level+1, targetGem.id, allRate);
-                        if(ret > 0) {
+                    } else
+                    {
+                        var ret = GameInterface_Package.GetRndGemForId(itemData.Level + 1, targetGem.id, allRate);
+                        if (ret > 0)
+                        {
                             getNum++;
                         }
                     }
                     count--;
                 }
-                if(getNum > 0){
+                if (getNum > 0)
+                {
                     AddItemInPackage(targetGem.id, getNum);
                 }
 
-                ReduceItem(gemId, useNum*2);
+                ReduceItem(gemId, useNum * 2);
             }
         }
 
@@ -718,6 +825,53 @@ namespace ChuMeng
             var itemData = Util.GetItemData(inpb.GoodsType, item.PackEntry.BaseId);
             ReduceItem(inpb.UserPropsId, num);
             AddGold(itemData.GoldCost * num);
+        }
+
+        public static void UserDressEquip(KBEngine.Packet packet)
+        {
+            var inpb = packet.protoBody as CGUserDressEquip;
+            var pinfo = ServerData.Instance.playerInfo;
+
+            PackInfo oldEquip = null;
+            if (inpb.DestEquipId != 0)
+            {
+                foreach (var p in pinfo.DressInfoList)
+                {
+                    if (p.PackEntry.Id == inpb.DestEquipId)
+                    {
+                        oldEquip = p;
+                        pinfo.DressInfoList.Remove(oldEquip);
+                        break;
+                    }
+                }
+            }
+            PackInfo newEquip = null;
+            if (inpb.SrcEquipId != 0)
+            {
+                foreach (var p in pinfo.PackInfoList)
+                {
+                    if (p.PackEntry.Id == inpb.SrcEquipId)
+                    {
+                        newEquip = p;
+                        pinfo.PackInfoList.Remove(newEquip);
+                        break;
+                    }
+                }
+            }
+
+            pinfo.DressInfoList.Add(newEquip);
+            if (oldEquip != null)
+            {
+                PutEquipInPackage(oldEquip);
+            }
+
+            var au = GCUserDressEquip.CreateBuilder();
+            au.DressEquip = newEquip.PackEntry;
+            if (oldEquip != null)
+            {
+                au.PackEquip = oldEquip.PackEntry;
+            }
+            ServerBundle.SendImmediate(au, packet.flowId);
         }
     }
 

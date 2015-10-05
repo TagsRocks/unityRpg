@@ -17,7 +17,33 @@ namespace ChuMeng
 	{
 		private IConfig config = null;
 		private EquipConfigData equipConfig = null;
-		private PropsConfigData propsConfig = null;
+		public PropsConfigData propsConfig = null;
+
+        public int RandomInitAttack() {
+            if(string.IsNullOrEmpty(equipConfig.randAttack)) {
+                return 0;
+            }
+
+
+            var dic = SimpleJSON.JSON.Parse(equipConfig.randAttack).AsArray;
+            var s = dic[0].AsInt;
+            var e = dic[1].AsInt;
+            var ret = Random.Range(s, e+1);
+            return ret;
+        }
+
+        public int RandomInitDefense() {
+            if(string.IsNullOrEmpty(equipConfig.randDefense)) {
+                return 0;
+            }
+
+
+            var dic = SimpleJSON.JSON.Parse(equipConfig.randDefense).AsArray;
+            var s = dic[0].AsInt;
+            var e = dic[1].AsInt;
+            var ret = Random.Range(s, e+1);
+            return ret;
+        }
 
         public int GetRndAtk() {
             if(string.IsNullOrEmpty(propsConfig.attack)) {
@@ -84,6 +110,9 @@ namespace ChuMeng
 			QUESTITEM = 9,
 			GOLD = 12,
 			MATERIAL = 13,
+
+            ForgeGraph = 16,
+
 
 		}
         public enum ItemID {
@@ -163,23 +192,10 @@ namespace ChuMeng
 			}
 		}
 
-		//远程武器的攻击范围
-		//public float Range = 0.6f;
-
-		//武器攻击音效
-		/*
-		public AudioClip FallSound;
-		public AudioClip TakeSound;
-		public AudioClip LandSound;
-		public AudioClip StrikeSound;
-		*/
 
 		//装备模型名称
 		public string ModelName {
 			get {
-				if (propsConfig != null) {
-					return propsConfig.modelId;
-				}
 				return equipConfig.modelId;
 			}
 		}
@@ -249,12 +265,10 @@ namespace ChuMeng
         //道具等级
 		public int Level {
 			get {
-                return propsConfig.level;
-                /*
 				if (propsConfig != null) {
+                    return propsConfig.level;
 				}
 				return equipConfig.equipLevel;
-                */
 			}
 		}
 		/*

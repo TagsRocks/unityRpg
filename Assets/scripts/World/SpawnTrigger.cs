@@ -248,7 +248,7 @@ namespace ChuMeng
                 {
                     var rd = UnityEngine.Random.Range(0, 100);
                     var unitData = Util.GetUnitData(false, MonsterID, 0);
-                    if (rd < EliteRate || BattleManager.battleManager.allElite)
+                    if (rd < EliteRate || BattleManager.allElite)
                     {
                         var elites = unitData.EliteIds;
                         if (elites.Count > 0)

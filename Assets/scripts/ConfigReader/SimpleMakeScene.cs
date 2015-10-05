@@ -6,6 +6,7 @@ using UnityEditor;
 using System.IO;
 using SimpleJSON;
 using System.Collections.Generic;
+using System.Linq;
 #endif
 
 public class SimpleMakeScene : MonoBehaviour
@@ -110,8 +111,10 @@ public class SimpleMakeScene : MonoBehaviour
 
 
         //Use First Animation FBX idle as base
+        var first = aniFbx.First();
+        //aniFbx ["idle"]
+        var prefab = PrefabUtility.CreatePrefab(tar, Resources.LoadAssetAtPath<GameObject>(first.Value));
 
-        var prefab = PrefabUtility.CreatePrefab(tar, Resources.LoadAssetAtPath<GameObject>(aniFbx ["idle"]));
         if (!npc)
         {
             prefab.transform.Find("Armature").localRotation = Quaternion.identity;
@@ -127,7 +130,7 @@ public class SimpleMakeScene : MonoBehaviour
         var aniPart = prefab.GetComponent<Animation>();
         foreach (var ani in aniFbx)
         {
-            if (ani.Key != "idle" && ani.Key != "collision")
+            if (ani.Key != first.Key && ani.Key != "collision")
             {
                 var aniObj = Resources.LoadAssetAtPath<GameObject>(ani.Value);
                 var clip = aniObj.animation.clip;

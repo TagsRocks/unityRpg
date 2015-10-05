@@ -35,7 +35,7 @@ public class TestClientNet : MonoBehaviour {
     }
     [ButtonCallFunc()]public bool Elite;
     public void EliteMethod(){
-        ChuMeng.BattleManager.battleManager.allElite = true;
+        ChuMeng.BattleManager.allElite = true;
     }
 
     [ButtonCallFunc()]public bool ignore;

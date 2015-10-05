@@ -19,9 +19,22 @@ namespace ChuMeng
                 else {
                     isFirst = false;
                 }
+                BackgroundSound.Instance.PlayEffect("summon3");
+                var g = GameObject.Instantiate(Resources.Load<GameObject>("particles/playerskills/impsummon")) as GameObject;
+                var xft = g.GetComponent<XffectComponent>();
+                xft.enabled = false;
+                //xft.Scale = 2;
+                //g.transform.parent = SaveGame.saveGame.EffectMainNode.transform;
+                g.transform.position = GetAttr().transform.position;
+                GetAttr().StartCoroutine(WaitEnable(xft));
+                NGUITools.AddMissingComponent<RemoveSelf>(g);
             }
         }
-
+        IEnumerator WaitEnable(XffectComponent xft) {
+            yield return new WaitForSeconds(0.05f);
+            xft.enabled = true;
+            xft.Reset();
+        }
         IEnumerator WaitForSpeakOver()
         {
             bool ret = false;

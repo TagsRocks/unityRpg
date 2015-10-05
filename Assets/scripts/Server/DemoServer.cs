@@ -306,16 +306,8 @@ namespace ChuMeng
                 au.AddReceviedLevelRewards(vip);
 
                 retPb = au;
-            } else if (className == "CGLoadVipFreeGiftReceiveInfo")
-            {
-                /*
-                var au = GCLoadVipFreeGiftReceiveInfo.CreateBuilder();
-                var vip = ReceviedReward.CreateBuilder();
-                vip.RewardId = 1;
-                au.AddReceviedFreeRewards(vip);
-                retPb = au;
-                */
-            } else if (className == "CGLoadVipInfo")
+            }
+            else if (className == "CGLoadVipInfo")
             {
                 var au = GCLoadVipInfo.CreateBuilder();
                 au.VipType = VipType.NONE_VIP;
@@ -435,24 +427,8 @@ namespace ChuMeng
                 retPb = au;
             } else if (className == "CGUserDressEquip")
             {
-                var inpb = packet.protoBody as CGUserDressEquip;
-                var au = GCUserDressEquip.CreateBuilder();
-                var pk = SimpleJSON.JSONNode.Parse(packInf).AsArray;
-                foreach (JSONNode n in pk)
-                {
-                    if (n ["id"].AsInt == inpb.SrcEquipId)
-                    {
-                        var dress = PackEntry.CreateBuilder();
-                        dress.Id = n ["id"].AsInt;
-                        dress.BaseId = n ["baseId"].AsInt;
-                        dress.GoodsType = n ["goodsType"].AsInt;
-                        dress.Count = 1;
-                        dress.Index = n ["index"].AsInt;
-                        au.DressEquip = dress.BuildPartial();
-                        break;
-                    }
-                }
-                retPb = au;
+                PlayerData.UserDressEquip(packet);
+                findHandler = true;
             } else if (className == "CGAutoRegisterAccount")
             {
                 var au = GCAutoRegisterAccount.CreateBuilder();

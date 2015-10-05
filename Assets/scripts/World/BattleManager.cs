@@ -21,11 +21,11 @@ namespace ChuMeng
     {
         /*
          * Current Wave
-         */ 
+         */
         public int waveNum = 0;
         public static BattleManager battleManager;
         //[HideInInspector]
-        public List<GameObject>enemyList;
+        public List<GameObject> enemyList;
         //public AstarPath PathInfo;
         public bool StartSpawn = false;
         public int MaxWave = 5;
@@ -40,7 +40,8 @@ namespace ChuMeng
         public bool
             killAll = false;
 
-        public bool allElite = false;
+        public static bool allElite = false;
+
         public void killAllMethod()
         {
             foreach (var e in enemyList)
@@ -50,12 +51,16 @@ namespace ChuMeng
 
             }
         }
+
         [ButtonCallFunc()]
         public bool killAndMove;
-        public void killAndMoveMethod(){
+
+        public void killAndMoveMethod()
+        {
             killAllMethod();
-            if(exitZone != null) {
-                ObjectManager.objectManager.GetMyPlayer().transform.position = exitZone.GetComponent<ExitWall>().colliderObj.transform.position+new Vector3(0, 0.5f, 0);
+            if (exitZone != null)
+            {
+                ObjectManager.objectManager.GetMyPlayer().transform.position = exitZone.GetComponent<ExitWall>().colliderObj.transform.position + new Vector3(0, 0.5f, 0);
             }
         }
 
@@ -111,7 +116,8 @@ namespace ChuMeng
             {
                 yield return null;
             }
-            regEvt = new List<MyEvent.EventType>(){
+            regEvt = new List<MyEvent.EventType>()
+            {
                 MyEvent.EventType.PlayerDead,
             };
             RegEvent();
@@ -162,10 +168,13 @@ namespace ChuMeng
             foreach (Transform t in prop)
             {
                 var spawn = t.gameObject.GetComponent<SpawnTrigger>();
-                allWaves.Add(spawn);    
-                if (spawn.waveNum >= MaxWave)
+                if (spawn != null)
                 {
-                    MaxWave = spawn.waveNum + 1;
+                    allWaves.Add(spawn);    
+                    if (spawn.waveNum >= MaxWave)
+                    {
+                        MaxWave = spawn.waveNum + 1;
+                    }
                 }
             }
 
@@ -173,7 +182,7 @@ namespace ChuMeng
         }
         /*
          * Disappear Wall Between
-         */ 
+         */
         IEnumerator GotoNextZone()
         {
             Log.Sys("GotoNextZone");
@@ -241,16 +250,20 @@ namespace ChuMeng
                 } else
                 {
                     var n = MyEventSystem.myEventSystem.GetRegEventHandler(MyEvent.EventType.LevelFinish);
-                    Log.Sys("BattleManager::NextWave No Wave Battle Finish " + MaxWave+" evtNum "+n);
-                    if(n > 0) {
+                    Log.Sys("BattleManager::NextWave No Wave Battle Finish " + MaxWave + " evtNum " + n);
+                    if (n > 0)
+                    {
                         MyEventSystem.myEventSystem.PushEvent(MyEvent.EventType.LevelFinish);
-                    }else {
+                    } else
+                    {
                         yield return StartCoroutine(LevelFinish());
                     }
                 }
             }
         }
-        public void GameOver() {
+
+        public void GameOver()
+        {
             StartCoroutine(LevelFinish());
         }
 
@@ -265,10 +278,12 @@ namespace ChuMeng
             float leftTime = 5f;
             //var notify = 
             GameObject not = null;
-            WindowMng.windowMng.ShowNotifyLog("", 5.2f, delegate(GameObject n){
+            WindowMng.windowMng.ShowNotifyLog("", 5.2f, delegate(GameObject n)
+            {
                 not = n;
             });
-            while(not == null) {
+            while (not == null)
+            {
                 yield return new WaitForSeconds(1);
             }
             var notify = not.GetComponent<NotifyUI>();
@@ -277,7 +292,7 @@ namespace ChuMeng
             {
                 while (leftTime > 0)
                 {
-                    Log.GUI("CountLeftTime "+leftTime);
+                    Log.GUI("CountLeftTime " + leftTime);
                     //notify.SetTime (leftTime);
                     notify.SetText(string.Format("退出副本倒计时{0}s", (int)leftTime));
                     leftTime -= Time.deltaTime;
@@ -285,7 +300,7 @@ namespace ChuMeng
                 }
                 notify.SetText(string.Format("退出副本倒计时{0}s", (int)0));
             }
-            Log.GUI("Finish ThisLevel "+leftTime);
+            Log.GUI("Finish ThisLevel " + leftTime);
 
             var victoryUI = WindowMng.windowMng.PushView("UI/victory").GetComponent<VictoryUI>();
             while (!victoryUI.con)
@@ -297,6 +312,19 @@ namespace ChuMeng
             yield return WorldManager.worldManager.StartCoroutine(WorldManager.worldManager.ChangeScene(2, false));
         }
 
+        IEnumerator WaitToShowNextWave()
+        {
+            yield return new WaitForSeconds(3);
+
+            if (enemyList.Count > 0)
+            {
+                Log.Sys("DeadSkill CallNewEnemy");
+                yield break;
+            }
+            enemyList.Clear();
+            StartCoroutine(NextWave());
+        }
+
         /// <summary>
         /// 怪物死亡事件 触发下一波怪
         /// </summary>
@@ -304,18 +332,17 @@ namespace ChuMeng
         public void EnemyDead(GameObject go)
         {
             Log.Sys("MonsterDead " + go.name + " list " + enemyList.Count);
-            if(!enemyList.Contains(go))
+            if (!enemyList.Contains(go))
             {
                 return;
             }
             enemyList.Remove(go);
+            //有可能死亡之后又召唤了一个怪物 因此需要等一会进入下一波
             if (enemyList.Count > 0)
             {
                 return;
             }
-
-            enemyList.Clear();
-            StartCoroutine(NextWave());
+            StartCoroutine(WaitToShowNextWave());
         }
 
 

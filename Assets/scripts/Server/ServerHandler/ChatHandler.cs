@@ -46,6 +46,8 @@ namespace ServerPacketHandler
                 {
                 }else if(cmds[0] == "add_item") {
                     playerData.AddItemInPackage(System.Convert.ToInt32(cmds[1]), System.Convert.ToInt32(cmds[2]));
+                }else if(cmds[0] == "add_forge") {
+                    ChuMeng.GameInterface_Forge.AddForgeLevel(Convert.ToInt32(cmds[1]));
                 }
             } catch (System.Exception e)
             {

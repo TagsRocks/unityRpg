@@ -89,7 +89,9 @@ namespace ChuMeng
 		}
 	
 		public BackpackData(PackEntry e) {
-			packInfo = null;
+            var pinfo = PackInfo.CreateBuilder();
+            pinfo.PackEntry = e;
+            packInfo = pinfo.Build();
 			entry = e;
 			//num = entry.Count;
 			itemData = Util.GetItemData (e.GoodsType, baseId);

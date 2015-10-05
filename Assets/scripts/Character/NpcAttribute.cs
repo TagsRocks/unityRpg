@@ -42,7 +42,7 @@ namespace ChuMeng
         /// <summary>
         /// Monster SpawnObject 
         /// </summary>
-        public GameObject  spawnTrigger;
+        public GameObject spawnTrigger;
 
         public Vector3 OriginPos{
             get;private set;

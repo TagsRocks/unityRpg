@@ -48,7 +48,7 @@ namespace ChuMeng
                 {
                     g = GameObject.Instantiate(Resources.Load<GameObject>("particles/playerskills/impsummon")) as GameObject;
                 }
-                g.transform.parent = SaveGame.saveGame.EffectMainNode.transform;
+                //g.transform.parent = SaveGame.saveGame.EffectMainNode.transform;
                 g.transform.position = GetAttr().transform.position;
                 NGUITools.AddMissingComponent<RemoveSelf>(g);
                 //yield return GetAttr ().StartCoroutine (Util.WaitForAnimation (GetAttr ().animation));

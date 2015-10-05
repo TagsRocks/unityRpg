@@ -656,6 +656,38 @@ namespace ChuMeng
             }
         }
 
+        public void CreateChest(UnitData unitData, SpawnChest spawn) {
+            Log.Sys ("Create Chest Unit " + unitData.name);
+            var Resource = Resources.Load<GameObject> (unitData.ModelName);
+            GameObject g = Instantiate (Resource) as GameObject;
+            NpcAttribute npc = NGUITools.AddMissingComponent<NpcAttribute> (g);
+            npc.spawnTrigger = spawn.gameObject;
+
+            var type = Type.GetType ("ChuMeng." + unitData.AITemplate);
+            var t = typeof(NGUITools);
+            var m = t.GetMethod ("AddMissingComponent");
+            Log.AI ("Monster Create Certain AI  " + unitData.AITemplate + " " + type);
+            var geMethod = m.MakeGenericMethod (type);
+            geMethod.Invoke (null, new object[]{g});// as AIBase;
+
+            g.transform.parent = transform;
+            g.tag = GameTag.Enemy;
+            g.layer = (int)GameLayer.Npc;
+
+            var netView = g.GetComponent<KBEngine.KBNetworkView> ();
+            netView.SetID (new KBEngine.KBViewID (myPlayer.ID, myPlayer));
+            netView.IsPlayer = false;
+
+            npc.SetObjUnitData (unitData);
+            AddObject (netView.GetServerID (), netView);
+
+            //不算怪物允许不去打
+            npc.transform.position = spawn.transform.position;
+
+            BattleManager.battleManager.enemyList.Add (npc.gameObject);
+            npc.SetDeadDelegate = BattleManager.battleManager.EnemyDead;
+        }
+
 
 		///<summary>
 		/// 副本内怪物构建流程
@@ -765,6 +797,10 @@ namespace ChuMeng
 			AddObject (netView.GetServerID (), netView);
 
 			npc.transform.position = pos;	
+
+            if(unitData.IsElite) {
+                npc.transform.localScale = new Vector3(2, 2, 2);
+            }
 
             if(npc.tag == GameTag.Enemy) {
                 BattleManager.battleManager.enemyList.Add (npc.gameObject);

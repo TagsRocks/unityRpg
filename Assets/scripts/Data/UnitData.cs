@@ -492,6 +492,7 @@ namespace ChuMeng
             } else
             {
                 jobConfig = GMDataBaseSystem.SearchIdStatic<RoleJobDescriptionsData>(GameData.RoleJobDescriptions, mid);
+                RoleUpgradeConfigData lastInfo = null;
                 foreach (RoleUpgradeConfigData r in GameData.RoleUpgradeConfig)
                 {
                     if (r.job == mid && r.level == level)
@@ -499,7 +500,16 @@ namespace ChuMeng
                         playerConfig = r;
                         break;
                     }
+                    if(r.job == mid ){
+                        lastInfo = r;
+                    }
                 }
+
+                //等级超过了配置区间
+                if(playerConfig == null) {
+                    playerConfig = lastInfo;
+                }
+
                 Log.Important("jobConfig " + jobConfig + " playerConfig " + playerConfig);
             }
         }
