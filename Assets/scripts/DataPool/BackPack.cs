@@ -85,6 +85,7 @@ namespace ChuMeng
 			foreach (PackInfo pkinfo in info.PackInfoList) {
 				PutItemInBackpackIndex (pkinfo.PackEntry.Index, new BackpackData (pkinfo));
 			}
+            MyEventSystem.myEventSystem.PushEvent(MyEvent.EventType.UpdateItemCoffer);
 		}
 
 		
@@ -100,7 +101,7 @@ namespace ChuMeng
 
         public BackpackData GetItemInBackPack(long propsId) {
             foreach(var s in SlotData) {
-                if(s.id == propsId) {
+                if(s != null && s.itemData != null && s.id == propsId) {
                     return s;
                 }
             }
@@ -293,48 +294,29 @@ namespace ChuMeng
 				Debug.LogError ("BackPack:; has object in index " + realIndex);
 				//return;
 			}
-            if(bd.itemData.IsProps() && bd.num == 0){
+            if(bd.num == 0){
                 SlotData[realIndex] = null;
             }else {
 			    SlotData [realIndex] = bd;
             }
-			//Log.Sys ("BackPack:: PutItemInBackpackIndex "+realIndex+" " + SlotData [realIndex].itemData.ItemName);
 		}
 
-		void BackpackStateUpdate ()
-		{
-            /*
-			if (pui != null) {
-				BackpackData bd2 = GetHpPotion ();
-				if (bd2 != null) {
-					pui.SetHpNum (bd2.num);
-				}
-				bd2 = GetMpPotion ();
-				if (bd2 != null) {
-					pui.SetMpNum (bd2.num);
-				}
-			}
-            */
-		}
 
 		/*
 		 * Clear All Item From BackPack 
 		 * Init From Network
 		 */ 
-		public void UserBagClear ()
+        private void UserBagClear ()
 		{
 			for (int i = 0; i < SlotData.Count; i++) {
 				ClearSlot (i);
-
 			}
-
-			BackpackStateUpdate ();
 		}
 
 		/*
 		 * Remove All Equip From Slot To Load From Network
 		 */ 
-		public void UserEquipClear ()
+        private void UserEquipClear ()
 		{
 			var values = System.Enum.GetValues (typeof(ItemData.EquipPosition)).Cast<ItemData.EquipPosition> ();
 			foreach (ItemData.EquipPosition s in values) {

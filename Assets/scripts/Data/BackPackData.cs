@@ -75,12 +75,7 @@ namespace ChuMeng
 			if (pinfo != null) {
 				packInfo = pinfo;
 				entry = packInfo.PackEntry;
-				//num = entry.Count;
-				/*
-			 * BaseId Load ItemData Template 
-			 * Resources units items  --->ItemData
-			 */
-				Log.Important ("Init ItemData is " + pinfo.PackEntry.GoodsType);
+                Log.Important ("Init ItemData is " + pinfo.PackEntry.GoodsType+" num "+entry.Count);
 				itemData = Util.GetItemData (pinfo.PackEntry.GoodsType, baseId);
 				if (itemData == null) {
 					Debug.LogError ("BackpackData:: Init Error " + baseId);

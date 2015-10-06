@@ -56,6 +56,7 @@ namespace ChuMeng
 
         void OnLearn()
         {
+            WindowMng.windowMng.PopView();
             GameInterface_Forge.LearnForgeSkill(backpackData.id);
         }
 

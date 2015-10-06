@@ -323,31 +323,21 @@ namespace ChuMeng
             {
                 if (pinfo.PackEntry.Id == userPropsId)
                 {
-                    var np = ChuMeng.PackInfo.CreateBuilder(pinfo);
-                    var pk = ChuMeng.PackEntry.CreateBuilder(np.PackEntry);
-                    pk.Count -= num;
-                    if (pk.Count < 0)
+                    if (pinfo.PackEntry.Count < num)
                     {
                         SendNotify("道具数量不足");
                         return false;
                     }
-                    var pkMsg = pk.Build();
-
-                    player.PackInfoList.Remove(pinfo);
-                    np.SetPackEntry(pkMsg);
-                    var npmsg = np.Build();
-                    if (pkMsg.Count == 0)
-                    {
-                    } else
-                    {
-                        player.AddPackInfo(npmsg);
+                    pinfo.PackEntry.Count -= num;
+                    if(pinfo.PackEntry.Count <= 0) {
+                        player.PackInfoList.Remove(pinfo);
                     }
 
 
                     var push = GCPushPackInfo.CreateBuilder();
                     push.BackpackAdjust = false;
                     push.PackType = PackType.DEFAULT_PACK;
-                    push.PackInfoList.Add(npmsg);
+                    push.PackInfoList.Add(pinfo);
                     ServerBundle.SendImmediatePush(push);
 
                     return true;

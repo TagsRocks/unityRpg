@@ -123,8 +123,8 @@ namespace ChuMeng
             var backpackData = BackPack.backpack.GetItemInBackPack(propsId);
             if (backpackData != null)
             {
-                var ud = JSON.Parse(backpackData.itemData.propsConfig.UserData);
-                var equipPos = ud.AsInt;
+                Log.Sys("LearnForgeSkill "+propsId+" userData "+backpackData.itemData.propsConfig.UserData);
+                var equipPos = (int)System.Convert.ToSingle(backpackData.itemData.propsConfig.UserData);
 
                 var ret = PlayerData.ReduceItem(propsId, 1);
                 if (ret)

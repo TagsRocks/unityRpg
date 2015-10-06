@@ -30,7 +30,7 @@ namespace ChuMeng
         }
         public override float GetSpeedCoff()
         {
-            return 2;
+            return 3;
         }
 
         public override int GetCriticalRate()

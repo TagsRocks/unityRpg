@@ -1951,7 +1951,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dbf4b7e3e3a1346029d07c96b0131b70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rateToSpawn: 100
+  rateToSpawn: 20
   ChestId: 36
   waveNum: 0
 --- !u!114 &11416956
