@@ -10,6 +10,7 @@ namespace ChuMeng
     public class StoreUI : IUserInterface
     {
         UILabel goldNum;
+        UILabel JNum;
         GameObject Cell;
         UIGrid Grid;
         List<int> storeList;
@@ -19,17 +20,31 @@ namespace ChuMeng
             storeList = new List<int>(){
                 101, 
                 102,
+                1004,
+                1007,
+                1010,
+                1011,
+                1012,
+                1013,
+                300,
+                301,
+                302,
             };
             Grid = GetName("Grid").GetComponent<UIGrid>();
             Cell = GetName("Cell");
-            //SetCallback("Buy", OnBuy);
             this.regEvt = new System.Collections.Generic.List<MyEvent.EventType>(){
-                MyEvent.EventType.UpdateItemCoffer, //DrugNum GoldNum
+                MyEvent.EventType.UpdateItemCoffer, 
             };
             RegEvent();
 
             goldNum = GetLabel("gNum");
+            JNum = GetLabel("JNum");
             SetCallback("Close", Hide);
+            SetCallback("JingShiButton", OnJingShi);
+        }
+        void OnJingShi() {
+            WindowMng.windowMng.PushView("UI/ChargeUI");
+            MyEventSystem.myEventSystem.PushEvent(MyEvent.EventType.UpdateItemCoffer);
         }
 
         protected override void OnEvent(MyEvent evt)
@@ -55,6 +70,8 @@ namespace ChuMeng
 
             var me = ObjectManager.objectManager.GetMyData();
             goldNum.text = "金币: "+me.GetProp(CharAttribute.CharAttributeEnum.GOLD_COIN);
+            JNum.text = "晶石: "+ServerData.Instance.playerInfo.JingShi;
+
         }
         public void OnBuy(int id)
         {

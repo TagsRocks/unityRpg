@@ -12,17 +12,24 @@ namespace ServerPacketHandler {
             var data = ChuMeng.GMDataBaseSystem.SearchIdStatic<ChuMeng.PropsConfigData>(ChuMeng.GameData.PropsConfig, itemId);
             var player = ChuMeng.ServerData.Instance.playerInfo;
             var has = player.Gold;
+            var hasJingShi = player.JingShi;
             //var playerData = ChuMeng.PlayerData;
             if(has < data.goldCoin) {
                 var notify = ChuMeng.GCPushNotify.CreateBuilder();
                 notify.SetNotify("金币不足");
                 ChuMeng.ServerBundle.SendImmediatePush(notify);
-            }else {
+            }else if(hasJingShi < data.JingShi) {
+                var notify = ChuMeng.GCPushNotify.CreateBuilder();
+                notify.SetNotify("[ff0a0a]晶石不足，请去晶石商店购买[-]");
+                ChuMeng.ServerBundle.SendImmediatePush(notify);
+            }
+            else {
                 if(playerData.IsPackageFull(itemId, 1)){
                     playerData.SendNotify("背包已满");
                     return;
                 }
                 playerData.SetGold(has-data.goldCoin);
+                playerData.SetJingShi(hasJingShi-data.JingShi);
                 playerData.AddItemInPackage(itemId, 1);
             }
 

@@ -107,7 +107,7 @@ namespace ChuMeng
 			SpawnParticle = 10002,
 			EventMissileDie = 10003,
 			EventEnd = 10004,
-            AnimationOver, //Skill AnimationOver
+            AnimationOver=10005, //Skill AnimationOver
 
 
 			UpdateTask,

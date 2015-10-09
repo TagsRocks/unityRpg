@@ -13,13 +13,6 @@ namespace PacketHandler
 			var pushGoods = packet.protoBody as ChuMeng.GCPushGoodsCountChange;
 			foreach (ChuMeng.GoodsCountChange gc in pushGoods.GoodsCountChangeList) {
                 ChuMeng.BackPack.backpack.UpdateGoodsCount(gc);
-                /*
-				if(gc.Num > 0) {
-					ChuMeng.BackPack.backpack.AddItemInfo (gc);	
-				}else if(gc.Num < 0) {
-					ChuMeng.BackPack.backpack.RemoveItemInfo(gc);
-				}
-                */            
 			}
 			ChuMeng.MyEventSystem.myEventSystem.PushEvent (ChuMeng.MyEvent.EventType.UpdateItemCoffer);
 		}

@@ -48,6 +48,9 @@ namespace ServerPacketHandler
                     playerData.AddItemInPackage(System.Convert.ToInt32(cmds[1]), System.Convert.ToInt32(cmds[2]));
                 }else if(cmds[0] == "add_forge") {
                     ChuMeng.GameInterface_Forge.AddForgeLevel(Convert.ToInt32(cmds[1]));
+                }else if(cmds[0] == "add_jingshi") {
+                    playerData.AddJingShi(System.Convert.ToInt32(cmds [1]));
+                }else if(cmds[0] == "show_item") {
                 }
             } catch (System.Exception e)
             {

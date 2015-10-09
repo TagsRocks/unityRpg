@@ -21,12 +21,17 @@ namespace ChuMeng
             SetCallback("StoreButton", OnStore);
             SetCallback("PackButton", OnPack);
             SetCallback("GMButton", OnGM);
+            SetCallback("JingShiButton", OnJingShi);
             this.regEvt = new System.Collections.Generic.List<MyEvent.EventType>(){
                 MyEvent.EventType.UpdateItemCoffer,
                 MyEvent.EventType.UpdateMainUI,
                 MyEvent.EventType.UpdatePlayerData,
             };
             RegEvent();
+        }
+        void OnJingShi() {
+            WindowMng.windowMng.PushView("UI/ChargeUI");
+            MyEventSystem.myEventSystem.PushEvent(MyEvent.EventType.UpdateItemCoffer);
         }
         void OnGM() {
             WindowMng.windowMng.PushView("UI/GMCmd");

@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 namespace ChuMeng
 {
@@ -59,6 +60,23 @@ namespace ChuMeng
             }
         }
 
+        public static List<NumMoney> GetChargetList() {
+            return null;
+        }
+
+
+        public static bool inTransaction = false;
+        public static NumMoney lastCharge;
+        public static void Charge(NumMoney nm) {
+            if(inTransaction) {
+                Debug.LogError("InCharing");
+                return;
+            }
+
+            inTransaction = true;
+            lastCharge = nm;
+            SimpleIAP.GetInstance().ChargeItem(nm.itemId);
+        }
     }
 
 }

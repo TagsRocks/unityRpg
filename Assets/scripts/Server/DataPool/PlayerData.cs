@@ -51,6 +51,20 @@ namespace ChuMeng
             }
         }
 
+        public static void AddJingShi(int num) {
+            var itemData = Util.GetItemData(0, (int)ItemData.ItemID.JING_SHI);
+            var has = ServerData.Instance.playerInfo.JingShi;
+            SetJingShi(has + num);
+            if (num > 0)
+            {
+                SendNotify(string.Format("[ff9500]{0}+{1}[-]", itemData.ItemName, num));
+            } else if (num < 0)
+            {
+                SendNotify(string.Format("[ff1010]{0}{1}[-]", itemData.ItemName, num));
+            }
+            ServerData.Instance.SaveUserData();
+        }
+
         public static void AddGold(int num)
         {
             var itemData = Util.GetItemData(0, (int)ItemData.ItemID.GOLD);
@@ -65,13 +79,25 @@ namespace ChuMeng
             }
         }
 
+        public static void SetJingShi(int num) {
+            ServerData.Instance.playerInfo.JingShi = num;
+            //Notify
+            var gc = GoodsCountChange.CreateBuilder();
+            gc.Type = 0;
+            gc.BaseId = (int)ItemData.ItemID.JING_SHI;
+            gc.Num = Mathf.Max(0, num);
+            var n = GCPushGoodsCountChange.CreateBuilder();
+            n.AddGoodsCountChange(gc);
+            ServerBundle.SendImmediatePush(n);
+        }
+
         public static void SetGold(int num)
         {
             ServerData.Instance.playerInfo.Gold = num;
             //Notify
             var gc = GoodsCountChange.CreateBuilder();
             gc.Type = 0;
-            gc.BaseId = 4;
+            gc.BaseId = (int)ItemData.ItemID.GOLD;
             gc.Num = Mathf.Max(0, num);
             var n = GCPushGoodsCountChange.CreateBuilder();
             n.AddGoodsCountChange(gc);
@@ -481,6 +507,8 @@ namespace ChuMeng
                 } else if (k == (int)CharAttribute.CharAttributeEnum.GOLD_COIN)
                 {
                     bd.TheInt32 = pinfo.Gold;
+                } else if(k == (int)CharAttribute.CharAttributeEnum.JING_SHI) {
+                    bd.TheInt32 = pinfo.JingShi;
                 }
                 att.BasicData = bd.Build();
                 au.AddAttributes(att);

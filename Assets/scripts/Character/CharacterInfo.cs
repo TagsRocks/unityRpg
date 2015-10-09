@@ -41,6 +41,7 @@ namespace ChuMeng
             getChar.AddParamKey((int)CharAttribute.CharAttributeEnum.LEVEL);
             getChar.AddParamKey((int)CharAttribute.CharAttributeEnum.EXP);
             getChar.AddParamKey((int)CharAttribute.CharAttributeEnum.GOLD_COIN);
+            getChar.AddParamKey((int)CharAttribute.CharAttributeEnum.JING_SHI);
 
 			NetDebug.netDebug.AddConsole ("GetChar is "+getChar.ParamKeyCount);
 
@@ -74,23 +75,12 @@ namespace ChuMeng
 
             attribute.ChangeLevel(GetProp(CharAttribute.CharAttributeEnum.LEVEL));
 
-            /*
-			//Hp MP Init From Config table
-			SetProp (CharAttribute.CharAttributeEnum.HP, attribute.ObjUnitData.HP);
-			SetProp (CharAttribute.CharAttributeEnum.HP_MAX, attribute.ObjUnitData.HP);
-			SetProp (CharAttribute.CharAttributeEnum.MP, attribute.ObjUnitData.MP);
-			SetProp (CharAttribute.CharAttributeEnum.MP_MAX, attribute.ObjUnitData.MP);
-			//SetProp (CharAttribute.CharAttributeEnum.LEVEL, attribute.ObjUnitData.Level);
-            SetProp(CharAttribute.CharAttributeEnum.EXP_MAX, (int)attribute.ObjUnitData.MaxExp);
-            */
 
             attribute.ChangeHP (0);
             attribute.ChangeMP (0);
             attribute.ChangeExp (0);
 
 
-
-            //attribute.ChangeLevel(GetProp(CharAttribute.CharAttributeEnum.LEVEL));
 			Log.Important ("Init HP "+attribute.HP);
 			Log.Important ("Init Property Over");
 			initYet = true;
@@ -104,8 +94,6 @@ namespace ChuMeng
 		public int GetProp(CharAttribute.CharAttributeEnum key) {
 			int v = 1;
 			if (!propertyValue.TryGetValue (key, out v)) {
-
-				//Debug.LogError("Object No Attribuet "+gameObject.name+" "+key);
 			}
 			return v;
 		}
@@ -113,32 +101,9 @@ namespace ChuMeng
 		//TODO:Level Up
 		public void SetProp(CharAttribute.CharAttributeEnum key, int val) {
 			propertyValue [key] = val;
-			/*
-			if (key == CharAttribute.CharAttributeEnum.LEVEL) {
-				RolesInfo.Builder rb = RolesInfo.CreateBuilder(SaveGame.saveGame.selectChar);
-				rb.Level = val;
-				SaveGame.saveGame.selectChar = rb.BuildPartial();
-			}
-			*/
+			
 		}
 	
-        /// <summary>
-        /// 某种属性当前为脏值，需要重新计算 
-        /// </summary>
-        /// <param name="key">Key.</param>
-        /*
-		public void SetDirty(CharAttribute.CharAttributeEnum key) {
-			propertyDirty [key] = true;
-		}
-		public void ClearDirty(CharAttribute.CharAttributeEnum key) {
-			propertyDirty [key] = false;
-		}
-		public bool GetDirty(CharAttribute.CharAttributeEnum key) {
-			bool ret = false;
-			propertyDirty.TryGetValue (key, out ret);
-			return ret;
-		}
-        */
 
 		// Use this for initialization
 		IEnumerator Start ()
@@ -152,19 +117,6 @@ namespace ChuMeng
 			}
 		}
 	
-		//更新玩家角色的数据缓冲池
-		//每次进入新场景 重新加载全部数据
-		public void UpdateData(PlayerRolesAttributes msg) {
-			Log.Important ("Update Character Data Msg "+msg.ToString());
-			foreach (RolesAttributes att in msg.AttributesList) {
-				CharAttribute.CharAttributeEnum key = (CharAttribute.CharAttributeEnum)att.AttrKey;
-				int value = att.BasicData.TheInt32;
-				propertyValue[key] = value;
-				if(key == CharAttribute.CharAttributeEnum.SILVER_TICKET) {
-					MyEventSystem.myEventSystem.PushEvent(MyEvent.EventType.UnitMoney);
-				}
-			}
-		}
 
 	}
 

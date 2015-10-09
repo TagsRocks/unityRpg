@@ -422,6 +422,9 @@ namespace ChuMeng
             if(gc.BaseId == 4){
                 var me = ObjectManager.objectManager.GetMyData();
                 me.SetProp(CharAttribute.CharAttributeEnum.GOLD_COIN, gc.Num);
+            }else if(gc.BaseId == 5) {
+                var me = ObjectManager.objectManager.GetMyData();
+                me.SetProp(CharAttribute.CharAttributeEnum.JING_SHI, gc.Num);
             }
         }
 

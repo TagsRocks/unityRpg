@@ -118,6 +118,7 @@ namespace ChuMeng
         public enum ItemID {
             GOLD = 4,
             DRUG = 101,
+            JING_SHI = 5,
         }
 
 		//装备对应的EquipData位置
