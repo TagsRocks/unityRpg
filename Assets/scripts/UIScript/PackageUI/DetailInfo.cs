@@ -83,6 +83,7 @@ namespace ChuMeng
                     } else if (backpackData.itemData.UnitType == ItemData.UnitTypeEnum.GEM)
                     {
                         LevelUp.SetActive(true);
+                        OneKey.SetActive(true);
                     } else if (backpackData.itemData.UnitType == ItemData.UnitTypeEnum.MATERIAL)
                     {
                     }
@@ -216,11 +217,18 @@ namespace ChuMeng
                     string extarAttr = string.Format("[fc0000]额外攻击:{0}[-]\n[fc0000]额外防御:{1}[-]\n", 
                                            entry.ExtraAttack,
                                            entry.ExtraDefense);
-                    
-                    Name.text = string.Format("[ff9500]{0}({1}级)[-]\n[0098fc]{2}金币[-]\n{3}{4}{5}[fcfc00]{6}[-]",
+
+                    var cost = "";
+                    if(itemData.GoldCost > 0) {
+                        cost = string.Format("[0098fc]{0}金币[-]", itemData.GoldCost);
+                    }else {
+                        cost = string.Format("[0098fc]{0}晶石[-]", itemData.propsConfig.JingShi);
+                    }
+
+                    Name.text = string.Format("[ff9500]{0}({1}级)[-]\n{2}\n{3}{4}{5}[fcfc00]{6}[-]",
                         itemData.ItemName, 
                         entry.Level,
-                        itemData.GoldCost,
+                        cost, 
                         baseAttr,
                         initAttr,
                         extarAttr,
@@ -229,22 +237,38 @@ namespace ChuMeng
                 }
                 else if (backpackData.itemData.IsGem())
                 {
+                    var cost = "";
+                    var itemData = backpackData.itemData;
+                    if(itemData.GoldCost > 0) {
+                        cost = string.Format("[0098fc]{0}金币[-]", itemData.GoldCost);
+                    }else {
+                        cost = string.Format("[0098fc]{0}金币[-]", itemData.propsConfig.JingShi*100);
+                    }
+
                     GetName("Equip").SetActive(false); 
-                    Name.text = string.Format("[ff9500]{0}({1}阶)[-]\n[0098fc]{2}金币[-]\n[0098fc]数量{3}[-]\n[fcfc00]{4}[-]",
+                    Name.text = string.Format("[ff9500]{0}({1}阶)[-]\n{2}\n[0098fc]数量{3}[-]\n[fcfc00]{4}[-]",
                         backpackData.itemData.ItemName,
                         backpackData.itemData.Level,
-                        backpackData.itemData.GoldCost,
+                        cost,
                         backpackData.num,
                         backpackData.itemData.Description
                     );
 
                 } else if (backpackData.itemData.IsProps())
                 {
+                    var cost = "";
+                    var itemData = backpackData.itemData;
+                    if(itemData.GoldCost > 0) {
+                        cost = string.Format("[0098fc]{0}金币[-]", itemData.GoldCost);
+                    }else {
+                        cost = string.Format("[0098fc]{0}金币[-]", itemData.propsConfig.JingShi*100);
+                    }
+
                     GetName("Equip").SetActive(false);
                     GetName("LevelUp").SetActive(false);
-                    Name.text = string.Format("[ff9500]{0}[-]\n[0098fc]{1}金币[-]\n[0098fc]数量{2}[-]\n[fcfc00]{3}[-]",
+                    Name.text = string.Format("[ff9500]{0}[-]\n{1}\n[0098fc]数量{2}[-]\n[fcfc00]{3}[-]",
                         backpackData.itemData.ItemName,
-                        backpackData.itemData.GoldCost,
+                        cost,
                         backpackData.num,
                         backpackData.itemData.Description
                     );

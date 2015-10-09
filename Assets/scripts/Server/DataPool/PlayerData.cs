@@ -842,7 +842,11 @@ namespace ChuMeng
             var num = item.PackEntry.Count;
             var itemData = Util.GetItemData(inpb.GoodsType, item.PackEntry.BaseId);
             ReduceItem(inpb.UserPropsId, num);
-            AddGold(itemData.GoldCost * num);
+            if(itemData.GoldCost > 0) {
+                AddGold(itemData.GoldCost * num);
+            }else {
+                AddGold(itemData.propsConfig.JingShi*100*num);
+            }
         }
 
         public static void UserDressEquip(KBEngine.Packet packet)
