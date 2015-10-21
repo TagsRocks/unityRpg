@@ -16,6 +16,7 @@ namespace ChuMeng
             get;
             set;
         }
+        public MyEvent triggerEvent;
 
         public void DoDamage(GameObject g)
         {
@@ -48,6 +49,10 @@ namespace ChuMeng
             }
         }
 
+        /// <summary>
+        ///显示粒子效果的时候出现在特定位置 
+        /// </summary>
+        /// <returns>The particle.</returns>
         IEnumerator ShowParticle()
         {
             var skillConfig = Event.layout.GetComponent<SkillLayoutConfig>();

@@ -15,6 +15,8 @@ namespace ChuMeng
         SkillLayoutRunner runner;
         public Vector3 ParticlePos;
         public float WaitTime = 0.5f; //等待造成伤害的时间
+        //当前位置来做AOE
+        public bool AOEHere = false;
         // Use this for initialization
         void Start()
         {
@@ -26,11 +28,18 @@ namespace ChuMeng
 
         }
 
+        /// <summary>
+        /// 根据BeamTargetPos 激光瞄准位置
+        /// 或者MarkPos 标记位置来选择攻击目标 
+        /// </summary>
+        /// <returns>The explosive.</returns>
         IEnumerator WaitExplosive() {
             yield return new WaitForSeconds(WaitTime);
             var tarPos = Vector3.zero;
-
-            if(runner.BeamTargetPos != Vector3.zero){
+            if(AOEHere) {
+                tarPos = transform.position;
+            }
+            else if(runner.BeamTargetPos != Vector3.zero){
                 tarPos = runner.BeamTargetPos;
             }else if(runner.stateMachine.MarkPos != Vector3.zero) {
                 tarPos = runner.stateMachine.MarkPos;
@@ -50,7 +59,7 @@ namespace ChuMeng
                     DoDamage (c);
                 }
             }else {
-                Debug.LogError("BeamTargetPos ");
+                Debug.LogError("BeamTargetPos Is NULL");
             }
         }
 

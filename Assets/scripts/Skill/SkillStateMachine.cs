@@ -93,6 +93,7 @@ namespace ChuMeng
                 var runner = g.AddComponent<SkillLayoutRunner>();
                 runner.stateMachine = this;
                 runner.Event = item;
+                runner.triggerEvent = evt;
                 allRunners.Add(g);
                 Log.AI("SkillLayout " + item.layout.name);
             } else if (item.childSkillId != 0 && item.childSkillId != -1)

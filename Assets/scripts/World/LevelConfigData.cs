@@ -142,6 +142,15 @@ namespace ChuMeng
             };
             LevelLayout.Add(202, l1);
 
+            l1 = new List<LevelConfig>(){
+                new LevelConfig("ENTRANCE_W_LM", 0, 0){useOtherZone=true, zoneId=56, type="suntemple"},
+                //new LevelConfig("NS_LM", 0, -1){useOtherZone=true, zoneId=54, type="suntemple"},
+                //new LevelConfig("EXIT_N_LM", 0, -2){useOtherZone=true, zoneId=55, type="suntemple"},
+            };
+            LevelLayout.Add(203, l1);
+
+
+
             envConfig.Add("suntemple", new EnvConfig(){
                 waterBottom = "skyboxes/stemple_lake_light",
                 waterFace = "skyboxes/stemple_water",

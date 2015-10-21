@@ -37,6 +37,7 @@ namespace ChuMeng
             IDLE,
             STUNNED,
             EXIT_STUNNED,
+            BOMB,
 		}
 		/*
 		 * Pass Message Format
@@ -67,12 +68,6 @@ namespace ChuMeng
 		public GameObject attacker;
 		NpcAttribute attribute;
 
-		/*
-		[HideInInspector]
-		public bool ShowTrail = false;
-		[HideInInspector]
-		public bool HideTrail = false;
-		*/
 
 		[HideInInspector]
 		public bool KnockBack = false;
@@ -158,6 +153,9 @@ namespace ChuMeng
 			var p = SimpleJSON.JSON.Parse(pos) as SimpleJSON.JSONArray;
 			particlePos = new Vector3 (p[0].AsFloat, p[1].AsFloat, p[2].AsFloat);
 		}
+        void PlaySound(string sound) {
+            BackgroundSound.Instance.PlayEffect(sound);
+        }
 		void SpawnParticle(string particle) {
 			Log.Ani ("animation spawn particle "+particle);
 			var evt = new MyEvent (MyEvent.EventType.SpawnParticle);

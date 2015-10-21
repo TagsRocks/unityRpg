@@ -52,19 +52,6 @@ namespace ChuMeng
                 if(CheckEvent()) {
                     yield break;
                 }
-                var enemy = NearestEnemy();
-                if (enemy != null)
-                {
-					Log.AI("Find Enemy is "+enemy);
-                    var dir = enemy.transform.position-GetAttr().transform.position;
-					var qua = Quaternion.LookRotation(dir, Vector3.up);
-                    //根据攻击目标调整 攻击方向
-                    GetAttr().transform.localRotation = qua;
-                    GetSkill().SetDefaultActive();
-                    //发动技能攻击
-                    aiCharacter.ChangeState (AIStateEnum.CastSkill);
-                    yield break;
-                }
                 yield return null;
             }
         }
@@ -78,6 +65,20 @@ namespace ChuMeng
             
             Log.AI ("State Logic Over "+type);
         }
+
+        protected override bool CheckEventOverride(MyAnimationEvent.Message msg)
+        {
+            Log.AI("CheckEventOverride "+msg.type);
+            if(msg.type == MyAnimationEvent.MsgType.BOMB) {
+                Log.AI("CheckBombEvent "+msg.type);
+                var sdata = Util.GetSkillData(137, 1);
+                aiCharacter.GetAttr().StartCoroutine(SkillLogic.MakeSkill(aiCharacter.GetAttr().gameObject, sdata, GetAttr().transform.position));
+                aiCharacter.ChangeState(AIStateEnum.DEAD);
+                return true;
+            }
+            return base.CheckEventOverride(msg);
+        }
+
     }
 
 }

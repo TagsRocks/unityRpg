@@ -256,6 +256,7 @@ namespace ChuMeng
             lastMsg = msg;
             if (msg != null)
             {
+                Log.AI("CheckEventIs "+msg.type);
                 if (msg.type == MyAnimationEvent.MsgType.IDLE)
                 {
                     return aiCharacter.ChangeState(AIStateEnum.IDLE);
@@ -283,6 +284,8 @@ namespace ChuMeng
                 } else if (msg.type == MyAnimationEvent.MsgType.EXIT_STUNNED)
                 {
                     return aiCharacter.ChangeState(AIStateEnum.IDLE);
+                }else {
+                    return CheckEventOverride(msg);
                 }
 
             }
@@ -290,7 +293,10 @@ namespace ChuMeng
             //return CheckAttackEvent ();
         }
 
-     
+        protected virtual bool CheckEventOverride(MyAnimationEvent.Message msg){
+            Log.AI("DefaultEvent "+msg.type);
+            return false;
+        }
 
     }
 

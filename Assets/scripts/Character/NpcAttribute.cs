@@ -178,7 +178,6 @@ namespace ChuMeng
             }
         }
 
-        [HideInInspector]
         public bool IsDead
         {
             get
@@ -428,6 +427,7 @@ namespace ChuMeng
             charInfo = GetComponent<CharacterInfo>();
             OriginPos = transform.position;
             StartCoroutine(AdjustOri());
+            gameObject.name += "_"+GetLocalId();
         }
         IEnumerator AdjustOri(){
             yield return new WaitForSeconds(0.5f);
@@ -709,7 +709,6 @@ namespace ChuMeng
             var sdata = GetDeadSkill();
             if (sdata != null)
             {
-                //StartCoroutine(GetComponent<CommonAI>().ShowDeadSkill(sdata));
                 StartCoroutine(SkillLogic.MakeSkill(gameObject, sdata, transform.position));
             }
             

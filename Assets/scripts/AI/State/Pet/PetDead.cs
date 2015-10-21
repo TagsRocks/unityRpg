@@ -9,6 +9,7 @@ namespace ChuMeng
         {
             base.EnterState();
             SetAni("die", 1, WrapMode.Once);
+            GetAttr ().ShowDead ();
         }
 
         public override IEnumerator RunLogic()

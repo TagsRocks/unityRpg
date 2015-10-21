@@ -16,7 +16,7 @@ namespace ChuMeng
 		}
 
 		public Vector3 Position = Vector3.zero;
-		public int count = 12;
+		public int count = 1;
 		public float duration = 0.5f;
 		public Direction direction = Direction.Forward;
 
