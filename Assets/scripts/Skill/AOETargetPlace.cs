@@ -21,6 +21,10 @@ namespace ChuMeng
         void Start()
         {
             runner = transform.parent.GetComponent<SkillLayoutRunner>();
+            if(runner.triggerEvent != null && runner.triggerEvent.type == MyEvent.EventType.EventMissileDie) {
+                transform.position = runner.triggerEvent.missile.transform.position;
+            }
+
             var attacker = runner.stateMachine.attacker; 
             enemyTag = SkillLogic.GetEnemyTag (attacker.tag);
             StartCoroutine(WaitExplosive());

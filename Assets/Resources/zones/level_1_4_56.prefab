@@ -652,7 +652,7 @@ Transform:
   m_GameObject: {fileID: 159816}
   m_LocalRotation: {x: 0, y: -.707106829, z: 0, w: .707106829}
   m_LocalPosition: {x: 45.1196213, y: -1.30604291, z: 36.0299911}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.00000012, y: 1, z: 1.00000012}
   m_Children: []
   m_Father: {fileID: 459826}
   m_RootOrder: 1
@@ -752,7 +752,7 @@ Transform:
   m_GameObject: {fileID: 159844}
   m_LocalRotation: {x: 0, y: -.707106829, z: 0, w: .707106829}
   m_LocalPosition: {x: 48.7540932, y: -1.23637557, z: 36.0299911}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.00000012, y: 1, z: 1.00000012}
   m_Children: []
   m_Father: {fileID: 459858}
   m_RootOrder: 1
@@ -940,7 +940,7 @@ Transform:
   m_GameObject: {fileID: 159880}
   m_LocalRotation: {x: 0, y: -.707106829, z: 0, w: .707106709}
   m_LocalPosition: {x: 46.9699936, y: -1.34945703, z: 36.0299988}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.00000012, y: 1, z: 1.00000012}
   m_Children: []
   m_Father: {fileID: 459868}
   m_RootOrder: 1
@@ -1747,7 +1747,7 @@ MonoBehaviour:
   CollisionSubEmitter: 
   DeathSubEmitter: 
   AvailableNodeCount: 10
-  LastClientPos: {x: -36.6496201, y: 1.30604291, z: 49.2000008}
+  LastClientPos: {x: -36.0299988, y: 1.30604291, z: 45.1196213}
   MyCamera: {fileID: 0}
   Owner: {fileID: 11459820}
   mStopped: 0
@@ -3017,7 +3017,7 @@ MonoBehaviour:
   CollisionSubEmitter: 
   DeathSubEmitter: 
   AvailableNodeCount: 10
-  LastClientPos: {x: -38.5, y: 1.34945703, z: 49.2000008}
+  LastClientPos: {x: -36.0299988, y: 1.34945703, z: 46.9700012}
   MyCamera: {fileID: 0}
   Owner: {fileID: 11459854}
   mStopped: 0
@@ -3870,7 +3870,7 @@ MonoBehaviour:
   CollisionSubEmitter: 
   DeathSubEmitter: 
   AvailableNodeCount: 10
-  LastClientPos: {x: -40.2840919, y: 1.23637557, z: 49.2000008}
+  LastClientPos: {x: -36.0299988, y: 1.23637557, z: 48.7540932}
   MyCamera: {fileID: 0}
   Owner: {fileID: 11459846}
   mStopped: 0
@@ -3911,8 +3911,8 @@ MonoBehaviour:
   Forever: 0
   multiSpawner: []
   Group: 0
-  Resource: {fileID: 100080, guid: 5202b6c646ac1ac4d880e2f706c3bde4, type: 2}
-  MonsterID: 37
+  Resource: {fileID: 100112, guid: 5ca383c51812b9742b964e4503f6893d, type: 2}
+  MonsterID: 2040
   reset: 0
   isSpawnYet: 0
   Level: 1
