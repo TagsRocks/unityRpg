@@ -51,7 +51,10 @@ namespace ChuMeng
             }
             Log.AI("CheckNearBy ToBomb "+goDie+" col "+col.Length+" name "+gameObject.name);
             if(goDie) {
-                GetComponent<MyAnimationEvent>().timeToDead = true;
+                //GetComponent<MyAnimationEvent>().timeToDead = true;
+                var evt = new MyAnimationEvent.Message();
+                evt.type = MyAnimationEvent.MsgType.BOMB;
+                GetComponent<MyAnimationEvent>().InsertMsg(evt);
             }
         }
     }

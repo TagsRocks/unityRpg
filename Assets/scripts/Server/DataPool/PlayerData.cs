@@ -141,6 +141,28 @@ namespace ChuMeng
             return true;
         }
 
+        private static bool RemoveEquipFromPackage(long id)
+        {
+            var player = ChuMeng.ServerData.Instance.playerInfo;
+            foreach (var pinfo in player.PackInfoList)
+            {
+                if (pinfo.PackEntry.Id == id )
+                {
+                    pinfo.PackEntry.Count = 0;
+                    player.PackInfoList.Remove(pinfo);
+
+                    var push = GCPushPackInfo.CreateBuilder();
+                    push.BackpackAdjust = false;
+                    push.PackType = PackType.DEFAULT_PACK;
+                    push.PackInfoList.Add(pinfo);
+                    ServerBundle.SendImmediatePush(push);
+                    return true;
+                }
+            }
+            SendNotify("未找到该道具");
+            return false;
+        }
+
         private static void PutEquipInPackage(PackInfo pi)
         {
             var pinfo = ServerData.Instance.playerInfo;
@@ -156,20 +178,20 @@ namespace ChuMeng
                 if (packList [i] == null)
                 {
                     pi.PackEntry.Index = i;
+                    pi.PackEntry.Count = 1;
                     pinfo.PackInfoList.Add(pi);
 
-                    /*
                     var push = GCPushPackInfo.CreateBuilder();
                     push.BackpackAdjust = false;
                     push.PackType = PackType.DEFAULT_PACK;
                     push.PackInfoList.Add(pi);
                     ServerBundle.SendImmediatePush(push);
-                    */
                     return;
                 }
             }
 
 
+            SendNotify("背包空间不足");
 
 
         }
@@ -875,18 +897,22 @@ namespace ChuMeng
                     if (p.PackEntry.Id == inpb.SrcEquipId)
                     {
                         newEquip = p;
-                        pinfo.PackInfoList.Remove(newEquip);
+                        RemoveEquipFromPackage(inpb.SrcEquipId);
                         break;
                     }
                 }
             }
 
-            pinfo.DressInfoList.Add(newEquip);
             if (oldEquip != null)
             {
                 PutEquipInPackage(oldEquip);
             }
+            Log.Net("PutEquipInPackage "+oldEquip.PackEntry.Id);
 
+            var newEquip2 = PackInfo.CreateBuilder(newEquip);
+            newEquip2.PackEntry.Count = 1;
+
+            pinfo.DressInfoList.Add(newEquip2.Build());
             var au = GCUserDressEquip.CreateBuilder();
             au.DressEquip = newEquip.PackEntry;
             if (oldEquip != null)

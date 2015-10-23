@@ -7,6 +7,7 @@ using System.IO;
 using SimpleJSON;
 using System.Collections.Generic;
 using System.Linq;
+using ChuMeng;
 #endif
 
 public class SimpleMakeScene : MonoBehaviour
@@ -286,4 +287,65 @@ public class SimpleMakeScene : MonoBehaviour
     }
 
     #endif
+
+
+    /*
+    public string path2;
+    [ButtonCallFunc()]
+    public bool MakeRoomPieces;
+    public void MakeRoomPiecesMethod() {
+        var md = Resources.LoadAssetAtPath("Assets/Config/" + path2, typeof(TextAsset)) as TextAsset;
+        var jobj = JSON.Parse(md.text).AsObject;
+        MakePieces(jobj);
+    }
+    void MakePieces(JSONClass jobj){
+    
+    }
+
+    void MakePieces(JSONClass jobj)
+    {
+        var mapJson = Resources.LoadAssetAtPath<TextAsset>("Assets/Config/map.json");
+        var mapObj = JSON.Parse(mapJson.text).AsObject;
+        var root = new GameObject("RoomPieces");
+        Util.InitGameObject(root);
+        int count = 0;
+
+        var saveData = new GameObject("RoomPieces_data");
+        saveData.AddComponent<RoomData>();
+
+        var resPath = Path.Combine(Application.dataPath, "levelPrefab");
+        var dir = new DirectoryInfo(resPath);
+
+        //var levelPrefab = dir.GetFiles("*.prefab", SearchOption.TopDirectoryOnly);
+
+
+        resPath = Path.Combine(Application.dataPath, "prefabs");
+        dir = new DirectoryInfo(resPath);
+        var prefabs = dir.GetFiles("*.prefab", SearchOption.TopDirectoryOnly);
+
+        resPath = Path.Combine(Application.dataPath, "prefabs/props");
+        dir = new DirectoryInfo(resPath);
+        var propsPrefab = dir.GetFiles("*.prefab", SearchOption.TopDirectoryOnly);
+
+
+        GameObjectDelegate gg = delegate (string name)
+        {
+            return GetPrefab(name, new List<FileInfo[]>()
+            {
+                prefabs,
+                propsPrefab
+            });
+        };
+        VoidDelegate hd = delegate(JSONClass obj)
+        {
+            handleRoomPiece(root, mapObj, obj, gg, saveData);
+            count++;
+        };
+
+        TranverseTree(jobj, hd);
+        //saveData.GetComponent<RoomData>().SaveJson();
+
+        Debug.Log("ReadRoomPiece " + count);
+    }
+    */
 }

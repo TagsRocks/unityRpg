@@ -284,7 +284,10 @@ namespace ChuMeng
                 } else if (msg.type == MyAnimationEvent.MsgType.EXIT_STUNNED)
                 {
                     return aiCharacter.ChangeState(AIStateEnum.IDLE);
-                }else {
+                } else if(msg.type == MyAnimationEvent.MsgType.DEAD) {
+                    return aiCharacter.ChangeState(AIStateEnum.DEAD);
+                }
+                else {
                     return CheckEventOverride(msg);
                 }
 

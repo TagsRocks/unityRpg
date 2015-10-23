@@ -38,6 +38,7 @@ namespace ChuMeng
             STUNNED,
             EXIT_STUNNED,
             BOMB,
+            DEAD,
 		}
 		/*
 		 * Pass Message Format
