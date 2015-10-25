@@ -913,6 +913,7 @@ namespace ChuMeng
             newEquip2.PackEntry.Count = 1;
 
             pinfo.DressInfoList.Add(newEquip2.Build());
+
             var au = GCUserDressEquip.CreateBuilder();
             au.DressEquip = newEquip.PackEntry;
             if (oldEquip != null)
