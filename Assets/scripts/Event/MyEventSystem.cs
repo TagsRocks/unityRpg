@@ -158,7 +158,7 @@ namespace ChuMeng
             EnterSafePoint,
             ExitSafePoint,
 
-            HitTarget,
+            HitTarget, //击中目标一次
 		}
 
 

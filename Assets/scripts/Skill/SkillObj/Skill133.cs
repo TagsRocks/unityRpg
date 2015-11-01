@@ -4,7 +4,8 @@ using System.Collections;
 namespace ChuMeng
 {
     /// <summary>
-    ///嗜血狼技能 
+    ///嗜血狼技能
+    /// 因为技能状态伴随 整个 怪物生命周期 因此 不用删除注册事件 
     /// </summary>
     public class Skill133 : SkillObj
     {
@@ -16,6 +17,10 @@ namespace ChuMeng
         int hitNum = 0;
         void HitTarget(MyEvent evt) {
             hitNum++;
+        }
+
+        void OnDestroy() {
+            GetComponent<MyAnimationEvent>().DropCallBackLocalEvent(MyEvent.EventType.HitTarget, HitTarget);
         }
 
         /// <summary>

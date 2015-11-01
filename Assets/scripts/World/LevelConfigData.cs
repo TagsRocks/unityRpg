@@ -149,6 +149,13 @@ namespace ChuMeng
             };
             LevelLayout.Add(203, l1);
 
+            l1 = new List<LevelConfig>(){
+                new LevelConfig("ENTRANCE_E_LM", 0, 0){useOtherZone=true, zoneId=59, type="suntemple"},
+                new LevelConfig("SW_LM", 1, 0){useOtherZone=true, zoneId=60, type="suntemple"},
+                new LevelConfig("EXIT_N_LM", 1, -1){useOtherZone=true, zoneId=61, type="suntemple"},
+            };
+            LevelLayout.Add(204, l1);
+
 
 
             envConfig.Add("suntemple", new EnvConfig(){

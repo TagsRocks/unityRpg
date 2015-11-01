@@ -10,7 +10,7 @@ GameObject:
   - 4: {fileID: 406686}
   - 114: {fileID: 11406686}
   m_Layer: 0
-  m_Name: WenZiRush
+  m_Name: RabbitRush
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -41,7 +41,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   eventList:
   - evt: 10001
-    layout: {fileID: 100002, guid: 29c0b0858267142999c9a30be3243b69, type: 2}
+    layout: {fileID: 100002, guid: e7bccd9514cbf43c3ab6d7f8338b3123, type: 2}
     affix:
       effectType: 10
       Duration: 1
@@ -64,10 +64,10 @@ MonoBehaviour:
   - evt: 10000
     layout: {fileID: 100022, guid: 1b050e456467d46d78bb554c9dce66be, type: 2}
     affix:
-      effectType: 0
-      Duration: 5
-      UnitTheme: {fileID: 0}
-      ThemePos: {x: 0, y: 0, z: 0}
+      effectType: 16
+      Duration: 2
+      UnitTheme: {fileID: 129426, guid: 10afbe9f3105f475e8197ccdfa0cb31b, type: 2}
+      ThemePos: {x: 0, y: 1, z: 0}
       addDefense: 0
       target: 0
       affixParameters: []

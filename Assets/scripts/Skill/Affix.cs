@@ -40,6 +40,7 @@ namespace ChuMeng
             GoldSteal,
             Stunned , //眩晕 参考冰冻 和 KnockBack
             ShiXue, //嗜血Buff 多次攻击后触发增强
+            OneTimeCriticalHit,
         }
 
         public EffectType effectType = EffectType.None;

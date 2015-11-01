@@ -43,11 +43,19 @@ MonoBehaviour:
   DieParticle: {fileID: 100006, guid: 04257f85ba1e649e48a12f549af319ce, type: 2}
   HitParticle: {fileID: 100006, guid: 04257f85ba1e649e48a12f549af319ce, type: 2}
   ReleaseParticle: {fileID: 0}
-  Velocity: 7
-  HomingSpeed: 0
-  Radius: .5
+  Velocity: 8
+  Radius: 1
   MaxDistance: 20
-  VerticalAiming: 1
+  NumRicochets: 0
+  RandomAngle: 45
+  GotoPosition: 0
+  piercing: 0
+  maxTurnRate: 0
+  DieWaitTime: 0
+  IsAOE: 0
+  AOERadius: 0
+  DontHurtObject: 0
+  shakeData: {fileID: 0}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

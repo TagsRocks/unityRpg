@@ -19,7 +19,7 @@ namespace ChuMeng
 
         public static SkillStateMachine CreateSkillStateMachine(GameObject attacker, SkillData activeSkill, Vector3 position, GameObject enemy = null) {
             Log.AI("create Skill State Machine "+activeSkill.SkillName);
-            var g = new GameObject ("SkillStateMachine");
+            var g = new GameObject ("SkillStateMachine_"+activeSkill.template);
             var skillStateMachine = g.AddComponent<SkillStateMachine> ();
             skillStateMachine.InitPos = position;
             skillStateMachine.transform.parent = ObjectManager.objectManager.transform;
@@ -39,7 +39,11 @@ namespace ChuMeng
             Log.AI ("Get Skill Template is "+activeSkill.template);
             if (activeSkill.template != null)
             {
-                return Resources.Load<SkillDataConfig> ("skills/" + activeSkill.template);
+                var tem =  Resources.Load<SkillDataConfig> ("skills/" + activeSkill.template);
+                if(tem == null) {
+                    Debug.LogError("NotFind Template "+activeSkill.template);
+                }
+                return tem;
             }
             return null;
         }
