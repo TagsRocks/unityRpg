@@ -42,8 +42,31 @@ namespace ChuMeng
 
         public SkillData GetShortSkillData(int shortId)
         {
-            return SkillDataController.skillDataController.GetShortSkillData(shortId);
+            var shortData = SkillDataController.skillDataController.GetShortSkillData(shortId);
+            Log.Sys("GetShortSkillData " + shortId + " d " + shortData);
+            return shortData;
         }
+
+        /// <summary>
+        /// 从ShortSkillData中获取技能的位置比较可靠 
+        /// </summary>
+        /// <returns>The skill position.</returns>
+        public static int GetSkillPos(int skillId)
+        {
+            for (var i = 0; i < 4; i++)
+            {
+                var sk = GameInterface_Skill.skillInterface.GetShortSkillData(i);
+                if (sk != null)
+                {
+                    if (sk.Id == skillId)
+                    {
+                        return i + 1;
+                    }
+                }
+            }
+            return 0;
+        }
+
 
         public string GetSkillDesc(SkillData sk)
         {
@@ -113,7 +136,8 @@ namespace ChuMeng
             charInfo.ChangeLevel(lev.Level);
         }
 
-        public static void UpdateShortcutsInfo(GCPushShortcutsInfo inpb){
+        public static void UpdateShortcutsInfo(GCPushShortcutsInfo inpb)
+        {
             SkillDataController.skillDataController.UpdateShortcutsInfo(inpb.ShortCutInfoList);
         }
     }

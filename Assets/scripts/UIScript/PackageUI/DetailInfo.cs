@@ -57,7 +57,13 @@ namespace ChuMeng
         void OnLearn()
         {
             WindowMng.windowMng.PopView();
-            GameInterface_Forge.LearnForgeSkill(backpackData.id);
+            var pt = backpackData.itemData.propsConfig.propsType;
+
+            if(pt == (int)ItemData.UnitTypeEnum.SKILL_BOOK) {
+                GameInterface_Backpack.LearnSkillBook(backpackData.id);
+            }else if(pt == (int)ItemData.UnitTypeEnum.FORGE_GRAPH)  {
+                GameInterface_Forge.LearnForgeSkill(backpackData.id);
+            }
         }
 
         void InitButton()
@@ -77,7 +83,7 @@ namespace ChuMeng
                     Equip.SetActive(true);
                 } else
                 {
-                    if (backpackData.itemData.UnitType == ItemData.UnitTypeEnum.ForgeGraph)
+                    if (backpackData.itemData.UnitType == ItemData.UnitTypeEnum.FORGE_GRAPH)
                     {
                         Learn.SetActive(true);
                     } else if (backpackData.itemData.UnitType == ItemData.UnitTypeEnum.GEM)
@@ -86,6 +92,10 @@ namespace ChuMeng
                         OneKey.SetActive(true);
                     } else if (backpackData.itemData.UnitType == ItemData.UnitTypeEnum.MATERIAL)
                     {
+                    }else if(backpackData.itemData.UnitType == ItemData.UnitTypeEnum.SKILL_BOOK) {
+                        Learn.SetActive(true);
+                    }else {
+                        Debug.LogError("Unknown Item Type "+backpackData.itemData.UnitType);
                     }
                 }
             } else

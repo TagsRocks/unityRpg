@@ -6,6 +6,8 @@ namespace ChuMeng
 {
     /// <summary>
     /// Player data InServer
+    /// 对服务器数据的修改都要通过PlayerData进行客户端不能直接修改
+    /// 对服务器对象的RPC 简化通过直接函数调用的方式命令队列话
     /// </summary>
     public static class PlayerData
     {
@@ -51,7 +53,8 @@ namespace ChuMeng
             }
         }
 
-        public static void AddJingShi(int num) {
+        public static void AddJingShi(int num)
+        {
             var itemData = Util.GetItemData(0, (int)ItemData.ItemID.JING_SHI);
             var has = ServerData.Instance.playerInfo.JingShi;
             SetJingShi(has + num);
@@ -79,7 +82,8 @@ namespace ChuMeng
             }
         }
 
-        public static void SetJingShi(int num) {
+        public static void SetJingShi(int num)
+        {
             ServerData.Instance.playerInfo.JingShi = num;
             //Notify
             var gc = GoodsCountChange.CreateBuilder();
@@ -146,7 +150,7 @@ namespace ChuMeng
             var player = ChuMeng.ServerData.Instance.playerInfo;
             foreach (var pinfo in player.PackInfoList)
             {
-                if (pinfo.PackEntry.Id == id )
+                if (pinfo.PackEntry.Id == id)
                 {
                     pinfo.PackEntry.Count = 0;
                     player.PackInfoList.Remove(pinfo);
@@ -377,7 +381,8 @@ namespace ChuMeng
                         return false;
                     }
                     pinfo.PackEntry.Count -= num;
-                    if(pinfo.PackEntry.Count <= 0) {
+                    if (pinfo.PackEntry.Count <= 0)
+                    {
                         player.PackInfoList.Remove(pinfo);
                     }
 
@@ -471,19 +476,89 @@ namespace ChuMeng
 
         }
 
+        static SkillInfo GetSkillInfo(int skillId)
+        {
+            var pinfo = ServerData.Instance.playerInfo;
+            foreach (var sk in pinfo.Skill.SkillInfosList)
+            {
+                if (sk.SkillInfoId == skillId)
+                {
+                    return sk;
+                }
+            }
+            return null;
+        }
+
+        /// <summary>
+        /// 没有初始化的时候 按照技能的ID顺序显示技能的快捷键
+        /// 技能的Pos是 1 2 3 4
+        /// 存储的Short信息是 0 1 2 3  
+        /// </summary>
+        /// <returns>The short cuts info.</returns>
+        static int[] GetShortCutsInfo()
+        {
+
+            var au = GCPushShortcutsInfo.CreateBuilder();
+            var pinfo = ServerData.Instance.playerInfo;
+            var defaultSlot = new int[4]{ 0, 0, 0, 0 };
+            if (pinfo.HasSkill)
+            {
+                int ind = 0;
+                foreach (var sk in pinfo.Skill.SkillInfosList)
+                {
+                    defaultSlot [ind] = sk.SkillInfoId;
+                    ind++;
+                    if (ind >= defaultSlot.Length)
+                    {
+                        break;
+                    }
+                }
+
+                foreach (var sk in pinfo.Skill.SkillInfosList)
+                {
+                    if (sk.Pos != 0)
+                    {
+                        defaultSlot [sk.Pos - 1] = sk.SkillInfoId;
+                    }
+                }
+
+
+                ind = 0;
+                //防止同一个技能出现两次, 同一个技能出现在default和设置的Pos里面
+                foreach (var sk in defaultSlot)
+                {
+                    var skill = GetSkillInfo(sk);
+                    if (skill != null && skill.Pos != 0 && (skill.Pos - 1) != ind)
+                    {
+                        defaultSlot [ind] = 0;
+                    }
+                    ind++;
+                }
+            }
+            return defaultSlot;
+        }
+
+        /// <summary>
+        /// 默认前4种技能占用 1 2 3 4 的槽
+        /// 当有技能设置了槽 则使用该技能占用 特定槽 
+        /// </summary>
         static void PushSkillShortcutsInfo()
         {
             var au = GCPushShortcutsInfo.CreateBuilder();
             var pinfo = ServerData.Instance.playerInfo;
             if (pinfo.HasSkill)
             {
-                int ind = 0;
-                foreach (var sk in pinfo.Skill.SkillInfosList)
+                var defaultSlot = GetShortCutsInfo(); 
+                var ind = 0;
+                foreach (var sk in defaultSlot)
                 {
-                    var sh = ShortCutInfo.CreateBuilder();
-                    sh.Index = ind;
-                    sh.BaseId = sk.SkillInfoId;
-                    au.AddShortCutInfo(sh);
+                    if (sk != 0)
+                    {
+                        var sh = ShortCutInfo.CreateBuilder();
+                        sh.Index = ind;
+                        sh.BaseId = sk;
+                        au.AddShortCutInfo(sh);
+                    }
                     ind++;
                 }
             }
@@ -496,13 +571,17 @@ namespace ChuMeng
             var pinfo = ServerData.Instance.playerInfo;
             if (pinfo.HasSkill)
             {
+                var defaultSlot = GetShortCutsInfo();
                 int ind = 0;
-                foreach (var sk in pinfo.Skill.SkillInfosList)
+                foreach (var sk in defaultSlot)
                 {
-                    var sh = ShortCutInfo.CreateBuilder();
-                    sh.Index = ind;
-                    sh.BaseId = sk.SkillInfoId;
-                    au.AddShortCutInfo(sh);
+                    if (sk != 0)
+                    {
+                        var sh = ShortCutInfo.CreateBuilder();
+                        sh.Index = ind;
+                        sh.BaseId = sk;
+                        au.AddShortCutInfo(sh);
+                    }
                     ind++;
                 }
             }
@@ -529,7 +608,8 @@ namespace ChuMeng
                 } else if (k == (int)CharAttribute.CharAttributeEnum.GOLD_COIN)
                 {
                     bd.TheInt32 = pinfo.Gold;
-                } else if(k == (int)CharAttribute.CharAttributeEnum.JING_SHI) {
+                } else if (k == (int)CharAttribute.CharAttributeEnum.JING_SHI)
+                {
                     bd.TheInt32 = pinfo.JingShi;
                 }
                 att.BasicData = bd.Build();
@@ -723,7 +803,7 @@ namespace ChuMeng
         /// </summary>
         /// <returns>The item in pack.</returns>
         /// <param name="id">Identifier.</param>
-        static PackInfo GetItemInPack(long id)
+        public static PackInfo GetItemInPack(long id)
         {
             var playerInfo = ServerData.Instance.playerInfo;
             foreach (var p in playerInfo.PackInfoList)
@@ -864,10 +944,12 @@ namespace ChuMeng
             var num = item.PackEntry.Count;
             var itemData = Util.GetItemData(inpb.GoodsType, item.PackEntry.BaseId);
             ReduceItem(inpb.UserPropsId, num);
-            if(itemData.GoldCost > 0) {
+            if (itemData.GoldCost > 0)
+            {
                 AddGold(itemData.GoldCost * num);
-            }else {
-                AddGold(itemData.propsConfig.JingShi*100*num);
+            } else
+            {
+                AddGold(itemData.propsConfig.JingShi * 100 * num);
             }
         }
 
@@ -907,7 +989,7 @@ namespace ChuMeng
             {
                 PutEquipInPackage(oldEquip);
             }
-            Log.Net("PutEquipInPackage "+oldEquip.PackEntry.Id);
+            Log.Net("PutEquipInPackage " + oldEquip.PackEntry.Id);
 
             var newEquip2 = PackInfo.CreateBuilder(newEquip);
             newEquip2.PackEntry.Count = 1;
@@ -921,6 +1003,68 @@ namespace ChuMeng
                 au.PackEquip = oldEquip.PackEntry;
             }
             ServerBundle.SendImmediate(au, packet.flowId);
+        }
+
+        public static void LearnSkill(int skillId)
+        {
+            var pinfo = ServerData.Instance.playerInfo;
+            var allSkill = pinfo.Skill;
+            var skInfo = SkillInfo.CreateBuilder();
+            skInfo.SkillInfoId = skillId;
+            skInfo.Level = 1;
+            skInfo.Pos = 0;
+            allSkill.SkillInfosList.Add(skInfo.Build());
+            var skData = Util.GetSkillData(skillId, 1);
+            SendNotify("恭喜学会技能 [ff1010]" + skData.SkillName+"[-]");
+        }
+
+
+        public static void SetSkillPos(int skillId, int pos)
+        {
+            var pinfo = ServerData.Instance.playerInfo;
+            var allSkill = pinfo.Skill;
+
+            foreach (var sk in allSkill.SkillInfosList)
+            {
+                if (sk.Pos == pos)
+                {
+                    sk.Pos = 0;
+                }
+                if (sk.SkillInfoId == skillId)
+                {
+                    sk.Pos = pos;
+                }
+            }
+            //PushSkillInfo
+            PushSkillShortcutsInfo();
+        }
+
+        public static GCLoadSkillPanel GetLearnedSkill()
+        {
+            var pinfo = ServerData.Instance.playerInfo;
+            return pinfo.Skill;
+        }
+
+        public static void HelpMe() {
+            var pinfo = ServerData.Instance.playerInfo;
+            var key = "helpme";
+            var find = false;
+            foreach (var kv1 in pinfo.GameStateList)
+            {
+                if (kv1.Key == key)
+                {
+                    find = true;
+                    break;
+                }
+            }
+            if (!find) {
+                var kv = KeyValue.CreateBuilder();
+                kv.Key = key;
+                kv.Value = "1";
+                pinfo.GameStateList.Add(kv.Build());
+                AddJingShi(350);
+            }
+
         }
     }
 

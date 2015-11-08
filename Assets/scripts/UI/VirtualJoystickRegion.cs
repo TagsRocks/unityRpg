@@ -65,6 +65,8 @@ namespace ChuMeng
 		Vector2 initPos;
 		//bool touchYet = false;
 	
+        private float lastResetTime = 0;
+
 		private void ResetJoystick ()
 		{
             useMouse = false;
@@ -74,9 +76,19 @@ namespace ChuMeng
 			fingerID = -1;
 			tapTimer = 0.150f;
 			joystick.color = inactiveColor;
+
+            //origin = Vector3.zero;
+
 			position = origin;
 			gotPosition = false;
+            //lastResetTime = Time.time;
+            ResetOrigin();
 		}
+
+        private void ResetOrigin(){
+            position = new Vector2 ((Screen.width / 3) / 2, (Screen.height / 3) / 2);
+            origin = position;
+        }
 	
         /// <summary>
         ///限制虚拟摇杆的位置和中心的位置差 
@@ -104,7 +116,7 @@ namespace ChuMeng
 		{
             useMouse = false;
             Vector3 mousePos = Input.mousePosition;
-#if UNITY_EDITOR
+//#if UNITY_EDITOR
             if(Input.GetMouseButtonDown(0)) {
                 if(mousePos.x < Screen.width/3 && mousePos.y < Screen.height/3) {
                     useMouse = true;
@@ -118,7 +130,8 @@ namespace ChuMeng
                     return;
                 }
             }
-#endif
+//#endif
+
 			foreach (Touch touch in Input.touches) {
 				fingerID = touch.fingerId;
 				if (fingerID >= 0 && fingerID < Input.touchCount) {

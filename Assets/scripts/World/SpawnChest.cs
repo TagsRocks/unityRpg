@@ -11,6 +11,8 @@ namespace ChuMeng
         bool isSpawnYet = false;
         public int waveNum = 0;
 
+        public int MonsterID = 2011;
+
         void Awake() {
             foreach(Transform t in transform){
                 t.gameObject.SetActive(false);

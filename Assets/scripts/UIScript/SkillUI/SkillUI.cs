@@ -21,6 +21,7 @@ namespace ChuMeng
             SetCallback("Close", Hide);
             regEvt = new System.Collections.Generic.List<MyEvent.EventType>(){
                 MyEvent.EventType.UpdateSkill,
+                MyEvent.EventType.UpdateShortCut,
             };
             RegEvent();
         }
@@ -48,7 +49,7 @@ namespace ChuMeng
 
                 var c = nc.GetComponent<SkillCell>();
                 var nextLevSkill = Util.GetSkillData(data.skillId, data.level+1);
-                c.SetSkillName(data.skillData.SkillName, data.level, nextLevSkill.LevelRequired, data.skillData.SkillDes, data.skillData.MaxLevel);
+                c.SetSkillName(data.skillId, data.skillData.SkillName, data.level, nextLevSkill.LevelRequired, data.skillData.SkillDes, data.skillData.MaxLevel);
 
                 c.SetCb(delegate() {
                     GameInterface_Skill.skillInterface.SkillLevelUp(data.skillId);

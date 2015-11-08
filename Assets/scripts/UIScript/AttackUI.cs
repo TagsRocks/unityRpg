@@ -23,13 +23,6 @@ namespace ChuMeng {
 	/// 右下角 攻击按钮和快捷按钮的UI
 	/// </summary>
 	public class AttackUI : IUserInterface {
-		public static int SkillButNum = 4;
-
-		//GameObject player;
-		//PlayerMoveController pmc;
-		//Transform attackUI;
-		//List<UISprite> skillIcons = new List<UISprite>();
-
 		void InitShortCut() {
 			Log.GUI ("Init Short Cut Icon");
 			for(int i=1; i <= 4; i++) {

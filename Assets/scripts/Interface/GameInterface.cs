@@ -12,10 +12,6 @@ namespace ChuMeng
 	{
 		public static GameInterface gameInterface = new GameInterface();
 	
-		public void PlayerUseSkill(int skillId) {
-			
-		}
-
 		public void PlayerAttack() {
 			var cmd = new ObjectCommand (ObjectCommand.ENUM_OBJECT_COMMAND.OC_USE_SKILL);
 			cmd.skillId = ObjectManager.objectManager.GetMyPlayer ().GetComponent<SkillInfoComponent> ().GetDefaultSkillId ();

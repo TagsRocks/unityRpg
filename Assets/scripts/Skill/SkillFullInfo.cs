@@ -22,11 +22,13 @@ namespace ChuMeng
 			}
 		}
 
+
 		public int shortSlotId {
 			get {
 				return shortInfo.Index;
 			}
 		}
+        //public int Pos;
 
 		//动态变化的技能冷却时间
 		public float CoolDownTime = 0;
@@ -47,13 +49,6 @@ namespace ChuMeng
 			return CoolDownTime == 0;
 		}
 
-		/*
-		public SkillFullInfo (SkillData sd, int lv)
-		{
-			skillData = sd;
-			level = lv;
-		}
-		*/
 
 		//TODO:初始化快捷键上面的技能数据，不包含等级等数据
 		public SkillFullInfo(int skId, int index) {
@@ -77,6 +72,7 @@ namespace ChuMeng
 		public SkillFullInfo(SkillInfo sk) {
 			//skillInfo = sk;
 			skillData = Util.GetSkillData (sk.SkillInfoId, sk.Level);
+            //Pos = sk.Pos;
 		}
 
 		//TODO:快捷键技能的信息 需要通过ShortCutInfo和普通的SkillInfo 来初始化 获得技能的等级信息
@@ -84,6 +80,7 @@ namespace ChuMeng
 		public SkillFullInfo(ShortCutInfo sh) {
 			shortInfo = sh;
 			skillData = Util.GetSkillData (sh.BaseId, 1);
+            //Pos = sh.Index;
 		}
 
 		//TODO:临时接口

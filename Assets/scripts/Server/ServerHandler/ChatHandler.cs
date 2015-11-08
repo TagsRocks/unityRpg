@@ -51,6 +51,8 @@ namespace ServerPacketHandler
                 }else if(cmds[0] == "add_jingshi") {
                     playerData.AddJingShi(System.Convert.ToInt32(cmds [1]));
                 }else if(cmds[0] == "show_item") {
+                }else if(cmds[0] == "helpme") {
+                    playerData.HelpMe();
                 }
             } catch (System.Exception e)
             {

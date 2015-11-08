@@ -17,15 +17,17 @@ using SimpleJSON;
 /// <summary>
 /// 初始化技能列表 CActionItem_Skill 管理这些技能
 /// </summary>
-namespace ChuMeng {
-	public class SkillDataController : MonoBehaviour {
-		public static SkillDataController skillDataController;
+namespace ChuMeng
+{
+    public class SkillDataController : MonoBehaviour
+    {
+        public static SkillDataController skillDataController;
 
-		//SkillPanel skillPanelCom;
-		GameObject uiRoot;
-		GameObject skillPanel;
+        //SkillPanel skillPanelCom;
+        GameObject uiRoot;
+        GameObject skillPanel;
 
-		/*
+        /*
 		[System.Serializable]
 		public class SkillSlot {
 			public SkillData skillData;
@@ -33,288 +35,273 @@ namespace ChuMeng {
 		}
 		*/
 
-		//右下角快捷栏 里面的 技能  还包括 使用药品的技能
-		//TODO: 初始化结束之后 玩家 SkillinfoComponent 从这里获取快捷栏里面的技能  不包括普通攻击技能  普通技能的ID 根据单位的BaseSkill 确定
-		//防御和闪避 也是固定的
-		List<SkillFullInfo> skillSlots = new List<SkillFullInfo>();
+        //右下角快捷栏 里面的 技能  还包括 使用药品的技能
+        //TODO: 初始化结束之后 玩家 SkillinfoComponent 从这里获取快捷栏里面的技能  不包括普通攻击技能  普通技能的ID 根据单位的BaseSkill 确定
+        //防御和闪避 也是固定的
+        List<SkillFullInfo> skillSlots = new List<SkillFullInfo>();
 
-		//CharacterData charData;
-		//int distributedSkillPoint;
-		int totalSkillPoint; //LeftSkillPoint Can Be Use
-		public int TotalSp {
-			get {
-				return totalSkillPoint;
-			}
-            set {
+        //CharacterData charData;
+        //int distributedSkillPoint;
+        int totalSkillPoint;
+        //LeftSkillPoint Can Be Use
+        public int TotalSp
+        {
+            get
+            {
+                return totalSkillPoint;
+            }
+            set
+            {
                 totalSkillPoint = value;
             }
-		}
-		public int DistriSp {
-			get {
+        }
+
+        public int DistriSp
+        {
+            get
+            {
                 return 0;
-				//return distributedSkillPoint;
-			}
-		}
+                //return distributedSkillPoint;
+            }
+        }
 
-		//TODO:增加技能状态 变化接口
-		//public VoidDelegate UpdateSkill;
+        //TODO:增加技能状态 变化接口
+        //public VoidDelegate UpdateSkill;
 
-		List<SkillFullInfo> activeSkill = new List<SkillFullInfo>();
-		List<SkillFullInfo> passiveSkill = new List<SkillFullInfo>();
-		public List<SkillFullInfo> activeSkillData {
-			get {
-				return activeSkill;
-			}
-		}
-		public List<SkillFullInfo> passive {
-			get {
-				return passiveSkill;
-			}
-		}
+        List<SkillFullInfo> activeSkill = new List<SkillFullInfo>();
+        List<SkillFullInfo> passiveSkill = new List<SkillFullInfo>();
 
-		void LevelDown(int skId) {
-			foreach (SkillFullInfo sk in activeSkill) {
-				if(sk.skillId == skId) {
-					sk.skillData = Util.GetSkillData(sk.skillId, sk.level-1);
-					return;
-				}
-			}
+        public List<SkillFullInfo> activeSkillData
+        {
+            get
+            {
+                return activeSkill;
+            }
+        }
 
-			foreach (SkillFullInfo sk in passiveSkill) {
-				if(sk.skillId == skId) {
-					sk.skillData = Util.GetSkillData(sk.skillId, sk.level-1);
-					return;
-				}
-			}
-		}
+        public List<SkillFullInfo> passive
+        {
+            get
+            {
+                return passiveSkill;
+            }
+        }
+
+        void LevelDown(int skId)
+        {
+            foreach (SkillFullInfo sk in activeSkill)
+            {
+                if (sk.skillId == skId)
+                {
+                    sk.skillData = Util.GetSkillData(sk.skillId, sk.level - 1);
+                    return;
+                }
+            }
+
+            foreach (SkillFullInfo sk in passiveSkill)
+            {
+                if (sk.skillId == skId)
+                {
+                    sk.skillData = Util.GetSkillData(sk.skillId, sk.level - 1);
+                    return;
+                }
+            }
+        }
 
 	
-		public IEnumerator DownLevelSkill(int skillId) {
-			var packet = new KBEngine.PacketHolder ();
-			var levelDown = CGSkillLevelDown.CreateBuilder ();
-			levelDown.SkillId = skillId;
-			yield return StartCoroutine (KBEngine.Bundle.sendSimple (this, levelDown, packet));
-			//skillList.LevelUpWithProps (packet.packet.protoBody as GCInjectPropsLevelUp);
-			LevelDown (skillId);
-			MyEventSystem.myEventSystem.PushEvent (MyEvent.EventType.UpdateSkill);
-		}
-		public SkillData GetShortSkillData(int index) {
-            Log.Sys("GetShortSkillData");
-			foreach (SkillFullInfo s in skillSlots) {
-				if(s.shortSlotId == index) {
-					return s.skillData;
-				}
-			}
-			return null;
-		}
+        public IEnumerator DownLevelSkill(int skillId)
+        {
+            var packet = new KBEngine.PacketHolder();
+            var levelDown = CGSkillLevelDown.CreateBuilder();
+            levelDown.SkillId = skillId;
+            yield return StartCoroutine(KBEngine.Bundle.sendSimple(this, levelDown, packet));
+            //skillList.LevelUpWithProps (packet.packet.protoBody as GCInjectPropsLevelUp);
+            LevelDown(skillId);
+            MyEventSystem.myEventSystem.PushEvent(MyEvent.EventType.UpdateSkill);
+        }
 
-		void SetShortSkillData(int skId, int index) {
-			foreach (SkillFullInfo s in skillSlots) {
-				if(s.skillId == skId) {
-					skillSlots.Remove(s);
-					break;
-				}
-			}
-			foreach (SkillFullInfo s in skillSlots) {
-				if(s.shortSlotId == index) {
-					skillSlots.Remove(s);
-					break;
-				}
-			}
-			var full = new SkillFullInfo (skId, index);
-			skillSlots.Add (full);
-			MyEventSystem.myEventSystem.PushEvent (MyEvent.EventType.UpdateShortCut);
-		}
+        public SkillData GetShortSkillData(int index)
+        {
+            Log.Sys("GetShortSkillData "+index);
+            foreach (SkillFullInfo s in skillSlots)
+            {
+                if (s.shortSlotId == index)
+                {
+                    return s.skillData;
+                }
+            }
+            return null;
+        }
 
-		public IEnumerator SetSkillShortCut(int skId, int index) {
-			var packet = new KBEngine.PacketHolder ();
-			var b = CGModifyShortcutsInfo.CreateBuilder ();
-			b.IdAdd = true;
-			var shortInfo = ShortCutInfo.CreateBuilder ();
-			shortInfo.Index = index;
-			shortInfo.IndexId = index;
-			shortInfo.BaseId = skId;
-			shortInfo.Type = 0;
-			b.SetShortCutInfo (shortInfo);
+        void SetShortSkillData(int skId, int index)
+        {
+            foreach (SkillFullInfo s in skillSlots)
+            {
+                if (s.skillId == skId)
+                {
+                    skillSlots.Remove(s);
+                    break;
+                }
+            }
+            foreach (SkillFullInfo s in skillSlots)
+            {
+                if (s.shortSlotId == index)
+                {
+                    skillSlots.Remove(s);
+                    break;
+                }
+            }
+            var full = new SkillFullInfo(skId, index);
+            skillSlots.Add(full);
+            MyEventSystem.myEventSystem.PushEvent(MyEvent.EventType.UpdateShortCut);
+        }
 
-			yield return StartCoroutine (KBEngine.Bundle.sendSimple(this, b, packet));
-			//var ret = packet.packet.protoBody as GCModifyShortcutsInfo;
-			SetShortSkillData (skId, index);
-		}
+        public IEnumerator SetSkillShortCut(int skId, int index)
+        {
+            var packet = new KBEngine.PacketHolder();
+            var b = CGModifyShortcutsInfo.CreateBuilder();
+            b.IdAdd = true;
+            var shortInfo = ShortCutInfo.CreateBuilder();
+            shortInfo.Index = index;
+            shortInfo.IndexId = index;
+            shortInfo.BaseId = skId;
+            shortInfo.Type = 0;
+            b.SetShortCutInfo(shortInfo);
 
-        public void UpdateShortcutsInfo(IList<ShortCutInfo> shortCutInfo){
-            skillSlots = new List<SkillFullInfo> ();
-            foreach (ShortCutInfo s in shortCutInfo) {
+            yield return StartCoroutine(KBEngine.Bundle.sendSimple(this, b, packet));
+            //var ret = packet.packet.protoBody as GCModifyShortcutsInfo;
+            SetShortSkillData(skId, index);
+        }
+
+        public void UpdateShortcutsInfo(IList<ShortCutInfo> shortCutInfo)
+        {
+            skillSlots = new List<SkillFullInfo>();
+            foreach (ShortCutInfo s in shortCutInfo)
+            {
                 var full = new SkillFullInfo(s);
                 skillSlots.Add(full);
             }
-            MyEventSystem.myEventSystem.PushEvent (MyEvent.EventType.UpdateShortCut);
+            MyEventSystem.myEventSystem.PushEvent(MyEvent.EventType.UpdateShortCut);
         }
+
         /// <summary>
         /// 初始化右下角的技能快捷栏
         /// 初始化技能列表 
         /// </summary>
         /// <returns>The from network.</returns>
-		public IEnumerator InitFromNetwork() {
-			Log.Net ("Init Skill slots");
-			CGLoadShortcutsInfo.Builder b = CGLoadShortcutsInfo.CreateBuilder ();
-			KBEngine.PacketHolder p = new KBEngine.PacketHolder ();
-			yield return StartCoroutine (KBEngine.Bundle.sendSimple(this, b, p));
-			var shortData = p.packet.protoBody as GCLoadShortcutsInfo;
-			skillSlots = new List<SkillFullInfo> ();
-			foreach (ShortCutInfo s in shortData.ShortCutInfoList) {
-				var full = new SkillFullInfo(s);
-				skillSlots.Add(full);
-			}
-			Log.Net ("Init Skill slots over "+skillSlots.Count);
-			MyEventSystem.myEventSystem.PushEvent (MyEvent.EventType.UpdateShortCut);
+        public IEnumerator InitFromNetwork()
+        {
+            Log.Net("Init Skill slots");
+            CGLoadShortcutsInfo.Builder b = CGLoadShortcutsInfo.CreateBuilder();
+            KBEngine.PacketHolder p = new KBEngine.PacketHolder();
+            yield return StartCoroutine(KBEngine.Bundle.sendSimple(this, b, p));
+            var shortData = p.packet.protoBody as GCLoadShortcutsInfo;
+            skillSlots = new List<SkillFullInfo>();
+            foreach (ShortCutInfo s in shortData.ShortCutInfoList)
+            {
+                var full = new SkillFullInfo(s);
+                skillSlots.Add(full);
+            }
+            Log.Net("Init Skill slots over " + skillSlots.Count);
+            MyEventSystem.myEventSystem.PushEvent(MyEvent.EventType.UpdateShortCut);
 
 			
             Log.Sys("LoadSkillPanel");
-			//获取特定技能面板的技能点 所有面板公用这些技能点
-			CGLoadSkillPanel.Builder ls = CGLoadSkillPanel.CreateBuilder ();
-			ls.SkillSort = SkillSort.ACTIVE_SKILL;
-			KBEngine.PacketHolder p2 = new KBEngine.PacketHolder ();
-			yield return StartCoroutine (KBEngine.Bundle.sendSimple(this, ls, p2));
+            //获取特定技能面板的技能点 所有面板公用这些技能点
+            CGLoadSkillPanel.Builder ls = CGLoadSkillPanel.CreateBuilder();
+            ls.SkillSort = SkillSort.ACTIVE_SKILL;
+            KBEngine.PacketHolder p2 = new KBEngine.PacketHolder();
+            yield return StartCoroutine(KBEngine.Bundle.sendSimple(this, ls, p2));
 
             Log.Net("FinishLoad");
             var data = p2.packet.protoBody as GCLoadSkillPanel;
             //distributedSkillPoint = data.Distributed;
-            if(data.HasTotalPoint) {
+            if (data.HasTotalPoint)
+            {
                 totalSkillPoint = data.TotalPoint;
-            }else {
+            } else
+            {
                 totalSkillPoint = 0;
             }
             Dictionary<int, SkillInfo> skIdToInfo = new Dictionary<int, SkillInfo>();
-            Log.GUI("SkillInfoList "+data.SkillInfosList.Count+" totalPoint "+totalSkillPoint);
+            Log.GUI("SkillInfoList " + data.SkillInfosList.Count + " totalPoint " + totalSkillPoint);
 
-            foreach (SkillInfo sk in data.SkillInfosList) {
-                skIdToInfo[sk.SkillInfoId] = sk;
+            foreach (SkillInfo sk in data.SkillInfosList)
+            {
+                skIdToInfo [sk.SkillInfoId] = sk;
             }
 
             var myJob = ChuMeng.ObjectManager.objectManager.GetMyJob();
-            Log.Sys("SkillMyJob AndList "+myJob);
-            foreach(var s in GameData.SkillConfig){
-                if(s.job == myJob ){
-                    if(skIdToInfo.ContainsKey(s.id)){
-                        activeSkill.Add(new SkillFullInfo(skIdToInfo[s.id]));
-                    }else {
+            Log.Sys("SkillMyJob AndList " + myJob);
+            //从服务器加载对应的技能数据 两部分： 配置的职业技能 服务器加载的技能
+            foreach (var s in GameData.SkillConfig)
+            {
+                if (s.job == myJob)
+                {
+                    if (skIdToInfo.ContainsKey(s.id))
+                    {
+                        activeSkill.Add(new SkillFullInfo(skIdToInfo [s.id]));
+                    } else
+                    {
                         var skInfo = SkillInfo.CreateBuilder();
                         skInfo.SkillInfoId = s.id;
                         skInfo.Level = 0;
+                        skInfo.Pos = 0;
                         activeSkill.Add(new SkillFullInfo(skInfo.Build()));
                     }
                 }
             }
-            Log.Sys("MySkillCount "+activeSkill.Count);
 
-
-            /*
-
-			Log.Sys ("Init Active Skill "+activeSkill.Count);
-
-			CGLoadSkillPanel.Builder ls2 = CGLoadSkillPanel.CreateBuilder ();
-			ls2.SkillSort = SkillSort.PASV_SKILL;
-			yield return StartCoroutine (KBEngine.Bundle.sendSimple(this, ls2, p2));
-			data = p2.packet.protoBody as GCLoadSkillPanel;
-
-			foreach (SkillInfo sk in data.SkillInfosList) {
-				passiveSkill.Add(new SkillFullInfo(sk));
-			}
-			Log.Sys ("Init Passive Skill "+passiveSkill.Count);
-			*/
-
-		}
+            var learnedSkill = PlayerData.GetLearnedSkill();
+            foreach (var s in learnedSkill.SkillInfosList)
+            {
+                var old = activeSkill.Find(item => item.skillId == s.SkillInfoId);
+                if (old != null)
+                {
+                    //old.Pos = s.Pos;
+                } else
+                {
+                    var skInfo = SkillInfo.CreateBuilder(s);
+                    activeSkill.Add(new SkillFullInfo(skInfo.Build()));
+                }
+            }
+            Log.Sys("MySkillCount " + activeSkill.Count);
+        }
 
 
 
-
-		void Awake() {
-			skillDataController = this;
-			DontDestroyOnLoad (gameObject);
+        void Awake()
+        {
+            skillDataController = this;
+            DontDestroyOnLoad(gameObject);
 	
-		}
+        }
 
-
-		//TODO: 学习一个新技能 
-		void OnLearn(GameObject g) {
-			/*
-            if (totalSkillPoint - distributedSkillPoint > 0) {
-				
-			}
-            */
-			/*
-			if (charData.SkillPoint > 0) {
-				var sk = GetSkill(g.name);
-				if(sk != null) {
-					if(charData.Level >= sk.skillData.LevelRequired) {
-						sk.Level += 1;
-						charData.SkillPoint--;
-						if(UpdateSkill != null) {
-							UpdateSkill(null);
-						}
-					}
-				}
-			}
-			*/
-		}
-
-
-		//TODO: 添加技能学习 或者 降级的花费
         /*
-		void LevelUpSkill(int skId) {
-			foreach (SkillFullInfo sk in activeSkill) {
-				if(sk.skillId == skId) {
-					sk.skillData = Util.GetSkillData(skId, sk.level+1);
-					break;
-				}
-			}
-			foreach (SkillFullInfo sk in passiveSkill) {
-				if(sk.skillId == skId) {
-					sk.skillData = Util.GetSkillData(skId, sk.level+1);
-					break;
-				}
-			}
-		}
-        */
-
-		/*
 		 * 需要道具升级技能
 		 * TODO:Push SP点数更新
-		 */ 
-		public void SkillLevelUpWithSp(int skillId) {
-			//var packet = new KBEngine.PacketHolder ();
-			var levelUp = CGSkillLevelUp.CreateBuilder ();
-			levelUp.SkillId = skillId;
-			//yield return StartCoroutine (KBEngine.Bundle.sendSimple (this, levelUp, packet));
+		 */
+        public void SkillLevelUpWithSp(int skillId)
+        {
+            var levelUp = CGSkillLevelUp.CreateBuilder();
+            levelUp.SkillId = skillId;
             KBEngine.Bundle.sendImmediate(levelUp);
-			
-            //skillList.LevelUpWithProps (packet.packet.protoBody as GCInjectPropsLevelUp);
-			//LevelUpSkill (skillId);
-			
-            //MyEventSystem.myEventSystem.PushEvent (MyEvent.EventType.UpdateSkill);
-		}
+        }
 
 
-		/*
-		 * 推送角色技能CD时间
-		 * ObjectManager Player Skill Update
-		 */ 
-		public void UpdateCoolDown(GCPushMemberSkillCD coolDown) {
-			
-		}
-
-
-		public void ActivateSkill(GCPushActivateSkill skill) {
-            foreach(var a in activeSkill){
-                if(a.skillId == skill.SkillId) {
+        public void ActivateSkill(GCPushActivateSkill skill)
+        {
+            foreach (var a in activeSkill)
+            {
+                if (a.skillId == skill.SkillId)
+                {
                     a.SetLevel(skill.Level);
                     break;
                 }
             }
             MyEventSystem.PushEventStatic(MyEvent.EventType.UpdateSkill);
-		}
+        }
 
-	}
+    }
 
 }

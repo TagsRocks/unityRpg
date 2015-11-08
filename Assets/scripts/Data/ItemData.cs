@@ -106,12 +106,13 @@ namespace ChuMeng
 			POTION = 1,
 			GEM = 2,
             UPGRADE = 3,
+            SKILL_BOOK = 4,
 
 			QUESTITEM = 9,
 			GOLD = 12,
 			MATERIAL = 13,
 
-            ForgeGraph = 16,
+            FORGE_GRAPH = 16,
 
 
 		}
