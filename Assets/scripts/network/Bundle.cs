@@ -240,6 +240,14 @@ namespace KBEngine
 			
 		}
 
+        public static byte[] GetPacket(IBuilderLite build) {
+            var bundle = new Bundle();
+            var data = build.WeakBuild();
+            bundle.newMessage(data.GetType());
+            var fid = bundle.writePB(data);
+            return bundle.stream.getbuffer();
+        }
+
 		public static IMessageLite sendImmediate(IBuilderLite build) {
 			var bundle = new Bundle ();
 			var data = build.WeakBuild ();

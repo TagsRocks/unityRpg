@@ -1,4 +1,4 @@
-﻿
+
 /*
 Author: liyonghelpme
 Email: 233242872@qq.com
@@ -66,11 +66,6 @@ START_RUN:
 	public class KBEngineApp
 	{
 		public static KBEngineApp app = null;
-
-		//public KBPlayer player;
-
-		//public NetworkPeer networkPeer;
-
 		public float KBE_FLT_MAX = float.MaxValue;
 		private NetworkInterface networkInterface_ = null;
 		
@@ -127,9 +122,6 @@ START_RUN:
 		public Dictionary<Int32, Entity> entities = new Dictionary<Int32, Entity>();
 		public List<Int32> entityIDAliasIDList = new List<Int32>();
 		private Dictionary<Int32, MemoryStream> bufferedCreateEntityMessage = new Dictionary<Int32, MemoryStream>(); 
-
-
-
 
 		public struct ServerErr
 		{
@@ -261,30 +253,11 @@ START_RUN:
 			{
 				Event.processInEvents();
 				networkInterface_.process();
-				sendTick();
 			}
 			
 			Dbg.WARNING_MSG("KBEngine::process(): break!");
 		}
 
-		private void sendTick()
-		{
-			return;
-			if(!networkInterface_.valid()) {
-                MyEventSystem.myEventSystem.PushEvent(MyEvent.EventType.ReConnect);
-                return;
-            }
-
-			TimeSpan span = DateTime.Now - lastticktime_; 
-			if (span.Seconds > client.heartBeat) {
-				CGHeartBeat.Builder heartBeat = CGHeartBeat.CreateBuilder();
-				//Bundle.sendSimple
-				Bundle.sendImmediate(heartBeat);
-				lastticktime_ = System.DateTime.Now;
-			}
-
-		}
-		
 		/*
 		 * Connect to login Server 
 		 */ 
@@ -300,12 +273,6 @@ START_RUN:
 			Dbg.DEBUG_MSG(string.Format("KBEngine::login_loginapp(): connect {0}:{1} is successfylly!", ip, port));
 			return true;
 		}
-		
-			
-
-		
-				
-
 	
 		public void queueInLoop(Callback cb) {
 			lock (this) {

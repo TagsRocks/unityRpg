@@ -62,13 +62,9 @@ public class ClientApp : UnityEngine.MonoBehaviour
             KBEngineApp.app.port = Convert.ToUInt16(port);
         }
 
-        //ConnectServer();
         StartCoroutine(CheckConnectState());
     }
 
-    void ConnectServer()
-    {
-    }
     //First Connect
     //Check State OK?
     IEnumerator CheckConnectState()
