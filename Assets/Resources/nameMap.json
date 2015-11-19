@@ -478,6 +478,8 @@
         "CGGetKeyValue": 45, 
         "GCGetKeyValue": 46, 
         "CGSetKeyValue": 47, 
+        "CGPlayerCmd": 48, 
+        "GCPlayerCmd": 49, 
         "GCPushNotice2Kick": 1000, 
         "GCPushAttribute2Members": 1001, 
         "GCPushLevelUpgrade": 1002, 

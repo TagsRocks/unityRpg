@@ -364,6 +364,11 @@ public partial class Util {
 		return retMsg;
 	}	
 
+	static IMessageLite GetCGPlayerCmd(ByteString buf) {
+		var retMsg = ChuMeng.CGPlayerCmd.ParseFrom(buf);
+		return retMsg;
+	}	
+
 	static IMessageLite GetGCPushLootReward(ByteString buf) {
 		var retMsg = ChuMeng.GCPushLootReward.ParseFrom(buf);
 		return retMsg;
@@ -511,6 +516,11 @@ public partial class Util {
 
 	static IMessageLite GetGCPlayerMove(ByteString buf) {
 		var retMsg = ChuMeng.GCPlayerMove.ParseFrom(buf);
+		return retMsg;
+	}	
+
+	static IMessageLite GetGCPlayerCmd(ByteString buf) {
+		var retMsg = ChuMeng.GCPlayerCmd.ParseFrom(buf);
 		return retMsg;
 	}	
 
@@ -2204,6 +2214,8 @@ public partial class Util {
 
 	{"CGHeartBeat", GetCGHeartBeat},
 
+	{"CGPlayerCmd", GetCGPlayerCmd},
+
 	{"GCPushLootReward", GetGCPushLootReward},
 
 	{"CGBindingSession", GetCGBindingSession},
@@ -2263,6 +2275,8 @@ public partial class Util {
 	{"GCPushPlayerResurrect", GetGCPushPlayerResurrect},
 
 	{"GCPlayerMove", GetGCPlayerMove},
+
+	{"GCPlayerCmd", GetGCPlayerCmd},
 
 	{"GCModifyPlayerName", GetGCModifyPlayerName},
 

@@ -21,13 +21,36 @@ namespace ChuMeng
             }
         }
     }
-
     public class RemoteClient
     {
+        uint myId = 0;
+        byte[] mTemp = new byte[8192];
+        KBEngine.MessageReader msgReader = new KBEngine.MessageReader();
+
         Socket mSocket;
         IPEndPoint endPoint;
         public bool IsClose = false;
         List<MsgBuffer> msgBuffer = new List<MsgBuffer>();
+        public KBEngine.MessageHandler msgHandler;
+
+        public RemoteClient(IMainLoop loop) {
+            msgReader.msgHandle = HandleMsg;
+            msgReader.mainLoop = loop; 
+        }
+
+        void HandleMsg(KBEngine.Packet packet) {
+            Debug.LogError("HandlerMsg "+packet.protoBody);
+            if(msgHandler != null) {
+                msgHandler(packet);
+            }
+            if(packet.protoBody.GetType() == typeof(GCPlayerCmd)) {
+                var proto = packet.protoBody as GCPlayerCmd;
+                var cmds = proto.Result.Split(' ');
+                if(cmds[0] == "Login") {
+                    myId = Convert.ToUInt32(cmds[1]);
+                }
+            }
+        }
 
         public void Connect(string ip1, int port1)
         {
@@ -43,6 +66,38 @@ namespace ChuMeng
                 Debug.LogError(exception.Message);
             }
         }
+        public void StartReceive() {
+            Debug.LogError("StartReceive");
+            try {
+                mSocket.BeginReceive(mTemp, 0, mTemp.Length, SocketFlags.None, OnReceive, null);
+            }catch(Exception exception) {
+                Debug.LogError(exception.ToString());
+                Close();
+            }
+        }
+
+        void OnReceive(IAsyncResult result) {
+            int bytes = 0;
+            try {
+                bytes = mSocket.EndReceive(result);
+            }catch(Exception exception){
+                Debug.LogError(exception.ToString());
+                Close();
+            }
+            Debug.LogError("OnReceive "+bytes);
+            if(bytes <= 0){
+                Close();
+            }else {
+                uint num = (uint)bytes;
+                msgReader.process(mTemp, num, null);
+                try {
+                    mSocket.BeginReceive(mTemp, 0, mTemp.Length, SocketFlags.None, OnReceive, null);
+                }catch(Exception exception){
+                    Debug.LogError(exception.ToString());
+                    Close();
+                }
+            }
+        }
 
         void OnConnectResult(IAsyncResult result)
         {
@@ -55,6 +110,7 @@ namespace ChuMeng
             {
                 mSocket.EndConnect(result);
                 success = true;
+
             } catch (Exception exception)
             {
                 mSocket.Close();
@@ -71,7 +127,9 @@ namespace ChuMeng
                 Close();
             }
         }
-
+        public void Disconnect() {
+            Close();
+        }
         void Close()
         {
             if (IsClose)
@@ -121,6 +179,8 @@ namespace ChuMeng
                     Debug.LogError(exception.Message);
                 }
                 Close();
+            }else {
+                StartReceive();
             }
         }
 

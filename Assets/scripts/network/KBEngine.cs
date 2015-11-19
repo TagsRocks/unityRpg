@@ -63,7 +63,7 @@ START_RUN:
         }
     }
 
-	public class KBEngineApp
+	public class KBEngineApp : IMainLoop
 	{
 		public static KBEngineApp app = null;
 		public float KBE_FLT_MAX = float.MaxValue;
@@ -142,7 +142,7 @@ START_RUN:
 		public static EntityDef entityDef = new EntityDef();
 		
 		public bool isbreak = false;
-		public List<Callback> pendingCallbacks = new List<Callback>();
+		public List<System.Action> pendingCallbacks = new List<System.Action>();
 
 		//public ObjectManager objectManager;
 
@@ -274,7 +274,7 @@ START_RUN:
 			return true;
 		}
 	
-		public void queueInLoop(Callback cb) {
+		public void queueInLoop(System.Action cb) {
 			lock (this) {
 				pendingCallbacks.Add(cb);
 			}
@@ -287,7 +287,7 @@ START_RUN:
 		 */
 		public void UpdateMain() {
 			lock (this) {
-				foreach(Callback cb in pendingCallbacks) {
+				foreach(var cb in pendingCallbacks) {
 					cb();
 				}
 				pendingCallbacks.Clear();

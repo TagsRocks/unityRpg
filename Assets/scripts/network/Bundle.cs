@@ -351,6 +351,9 @@ namespace KBEngine
 		 */ 
 		public uint writePB(byte[] v) {
 			uint fid = flowId++;
+            if(fid == 0){
+                fid++;
+            }
 
 			int bodyLength = 4 + 1 + 2 + v.Length;
 			int totalLength = 1 + 4 + bodyLength;

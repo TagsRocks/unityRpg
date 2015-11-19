@@ -46,6 +46,7 @@ namespace KBEngine
         	this.app_ = app;
 			bindMessage();
         	packets_ = new List<MemoryStream>();
+            msgReader.mainLoop = KBEngine.KBEngineApp.app;
         }
 		
 		public void reset()
@@ -55,6 +56,7 @@ namespace KBEngine
 			
 			socket_ = null;
 			msgReader = new MessageReader();
+            msgReader.mainLoop = KBEngineApp.app;
 			packets_.Clear();
 			TimeoutObject.Set();
 		}
