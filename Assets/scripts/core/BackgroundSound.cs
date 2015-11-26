@@ -14,6 +14,7 @@ namespace ChuMeng
             Instance = this;
             DontDestroyOnLoad(gameObject);
             source = GetComponent<AudioSource>();
+            //gameObject.GetComponent<AudioListener>().enabled = false;
         }
 
         public void PlaySound(string sound)

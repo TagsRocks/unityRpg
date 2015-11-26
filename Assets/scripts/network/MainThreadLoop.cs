@@ -24,7 +24,11 @@ public class MainThreadLoop : MonoBehaviour, IMainLoop {
 	void Update () {
         lock(pendingCallbacks) {
             foreach(var p in pendingCallbacks) {
-                p();
+                try {
+                    p();
+                }catch(Exception e) {
+                    Debug.LogError("CallBacks: "+e.ToString());
+                }
             }
             pendingCallbacks.Clear();
         }

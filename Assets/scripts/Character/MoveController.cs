@@ -10,7 +10,8 @@ namespace ChuMeng
 	}
 
     /// <summary>
-    ///接受键盘和屏幕虚拟摇杆移动输入 
+    ///接受键盘和屏幕虚拟摇杆移动输入
+    /// 以及网络命令移动 
     /// </summary>
 	public class MoveController : KBEngine.MonoBehaviour
 	{

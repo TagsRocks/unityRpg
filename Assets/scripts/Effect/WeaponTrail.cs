@@ -25,8 +25,6 @@ class TronTrailSection
 [RequireComponent(typeof(MeshFilter))]
 [AddComponentMenu("PocketRPG/Weapon Trail")]
 public class WeaponTrail : MonoBehaviour {
-
-
     /*
      Generates a trail that is always facing upwards using the scriptable mesh interface. (This is from the Tron Trails in Unity)
      vertex colors and uv's are generated similar to the builtin Trail Renderer. But it DOES NOT RUN ITSELF LIKE THE TRAIL RENDERER. (there is no update method)

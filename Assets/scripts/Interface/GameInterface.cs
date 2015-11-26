@@ -17,7 +17,6 @@ namespace ChuMeng
 			cmd.skillId = ObjectManager.objectManager.GetMyPlayer ().GetComponent<SkillInfoComponent> ().GetDefaultSkillId ();
 			Log.GUI ("Player Attack LogicCommand");
 			ObjectManager.objectManager.GetMyPlayer ().GetComponent<LogicCommand> ().PushCommand (cmd);
-			//ObjectManager.objectManager.GetMyPlayer ().GetComponent<MyAnimationEvent> ().InsertMsg (new MyAnimationEvent.Message(MyAnimationEvent.MsgType.DoAttack));
 		}
 
 

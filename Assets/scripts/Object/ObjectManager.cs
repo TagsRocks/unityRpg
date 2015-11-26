@@ -296,30 +296,9 @@ namespace ChuMeng
 		public void ClearPlayer (HideSprite hp)
 		{
 			Debug.Log ("ObjectManager::ClearPlayer clearPlayer Quit Game " + hp);
-			DestroyObject (hp.UnitId.Id);
+			DestroyPlayer (hp.UnitId.Id);
 		}
 
-        /// <summary>
-        /// Save AStar Cooord To Grid
-        /// </summary>
-		void SaveMyPosAndRot ()
-		{
-			if (WorldManager.worldManager.GetActive ().IsCity) {
-				//var my = GetMyPlayer ();
-				/*
-                var grid = Util.CoordToGrid (my.transform.position);
-
-				GCBindingSession.Builder bind = GCBindingSession.CreateBuilder (SaveGame.saveGame.bindSession);
-				bind.X = System.Convert.ToInt32 (grid.x);
-				bind.Y = (int)grid.y;
-				bind.Z = (int)grid.z;
-				bind.Direction = (int)transform.localRotation.eulerAngles.y;
-
-                SaveGame.saveGame.bindSession = bind.BuildPartial ();
-                */            
-				
-			}
-		}
 
 		public void DestroyByLocalId (int localId)
 		{
@@ -335,13 +314,12 @@ namespace ChuMeng
 		}
 
 		//删除Player和PhotonView
-		public void DestroyObject (long playerID)
+		public void DestroyPlayer (long playerID)
 		{
 			///<summary>
 			/// 删除自己玩家的时候需要保存玩家的位置和角度
 			/// </summary>
 			if (myPlayer != null && myPlayer.ID == playerID) {
-				SaveMyPosAndRot ();
 				myPlayer = null;
 			}
 
@@ -372,7 +350,7 @@ namespace ChuMeng
 			MyEventSystem.myEventSystem.PushEvent (MyEvent.EventType.PlayerLeaveWorld);
 			//删除我自己玩家
             if(myPlayer !=null) {
-			    DestroyObject (myPlayer.ID);
+			    DestroyPlayer (myPlayer.ID);
             }
 
 		}
@@ -487,9 +465,6 @@ namespace ChuMeng
 
 		void SetCityStartPos(GameObject player) {
             SetStartPointPosition(player);
-			//player.transform.position = GetMyInitPos ();
-			//player.transform.forward = GetMyInitRot ();
-
 		}
 		///<summary>
 		/// 主城内
@@ -563,6 +538,53 @@ namespace ChuMeng
            cacheNpc .Clear ();
         }
 
+        /// <summary>
+        /// 创建其它玩家
+        /// 玩家所在场景
+        /// </summary>
+        /// <param name="ainfo">Ainfo.</param>
+        public void CreateOtherPlayer(AvatarInfo ainfo) {
+            if (WorldManager.worldManager.station == WorldManager.WorldStation.Enter) {
+                Log.Sys("CreateOtherPlayer: "+ainfo);
+                var oldPlayer = GetPlayer(ainfo.Id);
+                if(oldPlayer != null) {
+                    Debug.LogError("PlayerExists: "+ainfo);
+                }
+
+                var kbplayer = new KBEngine.KBPlayer ();
+                kbplayer.ID = ainfo.Id;
+
+                var udata = Util.GetUnitData (true, (int)1, 1);
+                var player = GameObject.Instantiate (Resources.Load<GameObject> (udata.ModelName)) as GameObject;
+
+                NGUITools.AddMissingComponent<NpcAttribute> (player);
+                //状态机类似 之后可能需要修改为其它玩家状态机
+                NGUITools.AddMissingComponent<OtherPlayerAI> (player);
+
+                player.tag = "Player";
+                player.layer = (int)GameLayer.Npc;
+
+                NGUITools.AddMissingComponent<SkillInfoComponent> (player);
+                player.GetComponent<NpcAttribute> ().SetObjUnitData (udata);
+                player.GetComponent<NpcEquipment> ().InitDefaultEquip ();
+
+                player.name = "player_" + ainfo.Id;
+                player.transform.parent = gameObject.transform;
+
+                var netview = player.GetComponent<KBEngine.KBNetworkView> ();
+                netview.SetID (new KBEngine.KBViewID (kbplayer.ID, kbplayer));
+                
+
+                AddPlayer (kbplayer.ID, kbplayer);
+                AddObject (netview.GetServerID (), netview);
+
+                var sync = player.GetComponent<ChuMeng.PlayerSync> ();
+                sync.SetPosition(ainfo);
+            }else {
+                 
+            }
+        }
+
 		///<summary>
 		/// 其它玩家构建流程  主城内 或者副本内
 		/// </summary> 
@@ -571,6 +593,7 @@ namespace ChuMeng
 		public void CreatePlayer (ViewPlayer vp)
 		{
 			if (WorldManager.worldManager.station == WorldManager.WorldStation.Enter) {
+
 				Log.Trivial (Log.Category.System, "Init Player is " + vp);
 				Debug.Log ("GCPushSpriteInfo::CreatePlayer  Create OtherPlayer");
 	

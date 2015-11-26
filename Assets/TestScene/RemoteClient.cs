@@ -21,9 +21,15 @@ namespace ChuMeng
             }
         }
     }
+
+    public enum RemoteClientEvent {
+        None,
+        Connected,
+        Close,
+    }
+
     public class RemoteClient
     {
-        uint myId = 0;
         byte[] mTemp = new byte[8192];
         KBEngine.MessageReader msgReader = new KBEngine.MessageReader();
 
@@ -32,23 +38,23 @@ namespace ChuMeng
         public bool IsClose = false;
         List<MsgBuffer> msgBuffer = new List<MsgBuffer>();
         public KBEngine.MessageHandler msgHandler;
+        public System.Action<RemoteClientEvent> evtHandler;
 
         public RemoteClient(IMainLoop loop) {
             msgReader.msgHandle = HandleMsg;
             msgReader.mainLoop = loop; 
         }
 
+        /// <summary>
+        /// 当消息处理器已经退出场景则关闭网络连接 
+        /// </summary>
+        /// <param name="packet">Packet.</param>
         void HandleMsg(KBEngine.Packet packet) {
             Debug.LogError("HandlerMsg "+packet.protoBody);
             if(msgHandler != null) {
                 msgHandler(packet);
-            }
-            if(packet.protoBody.GetType() == typeof(GCPlayerCmd)) {
-                var proto = packet.protoBody as GCPlayerCmd;
-                var cmds = proto.Result.Split(' ');
-                if(cmds[0] == "Login") {
-                    myId = Convert.ToUInt32(cmds[1]);
-                }
+            }else {
+                Close();
             }
         }
 
@@ -64,6 +70,7 @@ namespace ChuMeng
             } catch (Exception exception)
             {
                 Debug.LogError(exception.Message);
+                Close();
             }
         }
         public void StartReceive() {
@@ -121,12 +128,22 @@ namespace ChuMeng
             if (success)
             {
                 Debug.LogError("Connect Success");
-
+                SendEvt(RemoteClientEvent.Connected);
             } else
             {
                 Close();
             }
         }
+
+        //事件的Evt处理机制已经删除掉了
+        void SendEvt(RemoteClientEvent evt) {
+            if(evtHandler != null) {
+                evtHandler(evt);
+            }else {
+                Close();
+            }
+        }
+
         public void Disconnect() {
             Close();
         }
@@ -159,6 +176,10 @@ namespace ChuMeng
             }
             mSocket = null;
             IsClose = true;
+
+            if(evtHandler != null) {
+                SendEvt(RemoteClientEvent.Close);
+            }
         }
 
         void CancelConnect(object obj)

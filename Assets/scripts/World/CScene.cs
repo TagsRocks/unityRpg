@@ -65,7 +65,7 @@ namespace ChuMeng
 			var keys = ObjectManager.objectManager.Actors.ToArray ();
 
 			foreach (var k in keys) {
-				ObjectManager.objectManager.DestroyObject(k.Key);
+				ObjectManager.objectManager.DestroyPlayer(k.Key);
 			}
 
 			//销毁本地怪物 本地玩家对象

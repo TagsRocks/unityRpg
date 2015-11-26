@@ -24,6 +24,8 @@ namespace ChuMeng
         public bool
             Connect;
 
+        void EvtHandler(RemoteClientEvent evt) {
+        }
         RemoteClient rc;
         public void ConnectMethod()
         {
@@ -35,6 +37,7 @@ namespace ChuMeng
                     myId = Convert.ToInt32(cmds[1]);
                 }
             };
+            rc.evtHandler = EvtHandler;
 
             rc.Connect("127.0.0.1", 10001);
 

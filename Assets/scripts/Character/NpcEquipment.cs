@@ -638,40 +638,17 @@ namespace ChuMeng
                 }
                 GetComponent<AnimationController>().AddTrail(trail.GetComponent<WeaponTrail>());
                 var wt = trail.GetComponent<WeaponTrail>();
-                //wt.SetTime(0, 0, 1);
                 float duration = Mathf.Max(1, evt.floatArg);
                 wt.SetTime(duration, 0.1f, 1);
                 weaponTrail.SetActive(true);
 
-                /*
-                GameObject trail = Instantiate (Resources.Load<GameObject> ("particles/weaponTrail")) as GameObject;
-                weaponTrail = trail;
-                //weaponTrail.GetComponent<XffectComponent>().enabled = false;
-                if (rightHand != null) {
-                    trail.transform.parent = rightHand;
-                    trail.transform.localPosition = Vector3.zero;
-                    trail.transform.localScale = Vector3.one;
-                    //X Rotate 90 For New Game Model
-                    //模型的挂点的z轴向上 因此需要调整 weaponTrail 的Y轴和模型z轴一致
-                    trail.transform.localRotation = Quaternion.Euler (90, 0, 0);
-                    
-                    //weaponTrail.GetComponent<XffectComponent> ().Reset ();
-                    weaponTrail.SetActive(true);
-                    weaponTrail.GetComponent<XffectComponent> ().enabled = true;
-                }else {
-                    Debug.Log("WeaponTrail Not Find RightHand");
-                }
-                */
             } else
             {
-                //weaponTrail.GetComponent<XffectComponent> ().Reset ();
-                //weaponTrail.GetComponent<XffectComponent>().enabled = false;
                 var wt = weaponTrail.GetComponent<WeaponTrail>();
                 float duration = Mathf.Max(1, evt.floatArg);
 
                 wt.SetTime(duration, 0.1f, 1);
                 weaponTrail.SetActive(true);
-                //weaponTrail.GetComponent<XffectComponent> ().enabled = true;
             }
             GetComponent<AnimationController>().SetAnimationSampleRate(100);
         }

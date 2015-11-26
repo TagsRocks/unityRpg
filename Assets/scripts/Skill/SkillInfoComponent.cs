@@ -4,11 +4,9 @@ using System;
 
 namespace ChuMeng
 {
-/// <summary>
-/// 玩家或者Boss的技能相关的的组件
-/// 
-/// 
-/// </summary>
+    /// <summary>
+    /// 玩家或者Boss的技能相关的的组件
+    /// </summary>
     public class SkillInfoComponent : MonoBehaviour
     {
         SkillData activeSkill;

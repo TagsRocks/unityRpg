@@ -15,6 +15,7 @@ using System.Collections.Generic;
 namespace ChuMeng {
 	/// <summary>
 	/// 通用逻辑需要的 数据池 和 相关逻辑代码
+    /// 黑板放入AI需要分享的一些数据
     /// Billboard
 	/// </summary>
 	public class CommonAI : MonoBehaviour {

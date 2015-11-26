@@ -16,6 +16,7 @@ namespace ChuMeng
 	/// 角色或者怪物的属性
 	/// 角色的属性通过网络来初始化
 	///	怪物的属性 通过本地数据库加载来初始化
+    /// 角色或者怪物的网络数据
 	/// </summary>
 	//TODO::怪物的属性 通过本地数据库加载来初始化
 	public class CharacterInfo : KBEngine.MonoBehaviour

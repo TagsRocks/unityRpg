@@ -20,7 +20,6 @@ namespace ChuMeng
 	[RequireComponent(typeof(SkillInfoComponent))]
 	[RequireComponent(typeof(PhysicComponent))]
 	[RequireComponent(typeof(BuffComponent))]
-	[RequireComponent(typeof(NetworkAttribute))]
 	[RequireComponent(typeof(LogicCommand))]
 	[RequireComponent(typeof(MoveController))]
 	[RequireComponent(typeof(NpcEquipment))]

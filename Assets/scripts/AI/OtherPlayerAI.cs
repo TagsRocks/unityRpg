@@ -1,23 +1,15 @@
-﻿
-/*
-Author: liyonghelpme
-Email: 233242872@qq.com
-*/
-
-/*
-Author: liyonghelpme
-Email: 233242872@qq.com
-*/
-using UnityEngine;
+﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-using System;
 
 namespace ChuMeng
 {
+    /// <summary>
+    /// 增加网络命令缓冲池 
+    /// </summary>
     [RequireComponent(typeof(AnimationController))]
     [RequireComponent(typeof(PlayerSync))]
-    public class PlayerAIController : AIBase
+    public class OtherPlayerAI : AIBase
     {
         void Awake()
         {
@@ -42,7 +34,6 @@ namespace ChuMeng
 
         }
 
-
         List<Vector3> samplePos;
         IEnumerator CheckFall()
         {
@@ -59,18 +50,6 @@ namespace ChuMeng
                 {
                     if (!inSafe)
                     {
-                        /*
-                        //检查所有相邻的高度 < 3 则表示没有坠落 若存在相邻s > 3 则跳回
-                        for (int i = 1; i < samplePos.Count; i++)
-                        {
-                            var dy = samplePos [i].y - samplePos [i - 1].y;
-                            if (Mathf.Abs(dy) > 1f)
-                            {
-                                break;
-                            }
-                        }
-                        */
-
                         transform.position = lastOne;    
                     }
                 } else
@@ -78,7 +57,6 @@ namespace ChuMeng
                     if (inSafe)
                     {
                         samplePos.Clear();
-                        //samplePos.Add(transform.position);
                     } else
                     {
                         var pos = transform.position;
@@ -113,10 +91,7 @@ namespace ChuMeng
         {
             ai.ChangeState(AIStateEnum.IDLE);
             StartCoroutine(CheckFall());
-        }
+        } 
 
     }
-
-
-
 }
