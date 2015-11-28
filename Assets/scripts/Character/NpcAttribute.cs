@@ -421,14 +421,21 @@ namespace ChuMeng
             return a;
         }
 
-        void Start()
-        {
+        public void Init() {
             npcEquipment = GetComponent<NpcEquipment>();
             charInfo = GetComponent<CharacterInfo>();
+        }
+        void Start()
+        {
+            Init();
             OriginPos = transform.position;
             StartCoroutine(AdjustOri());
             gameObject.name += "_"+GetLocalId();
         }
+        /// <summary>
+        /// 等人物掉 地面上再初始化 
+        /// </summary>
+        /// <returns>The ori.</returns>
         IEnumerator AdjustOri(){
             yield return new WaitForSeconds(0.5f);
             OriginPos = transform.position;

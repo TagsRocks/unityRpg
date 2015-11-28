@@ -175,35 +175,7 @@ namespace ChuMeng {
 				
 				if(myAnimationEvent.hit) {
 					myAnimationEvent.hit = false;
-					/*
-					 * Cast Missile
-					 */ 
-					/*
-					if (sd.Missile != null) {
-						GameObject bullet = new GameObject();
-						var bc = bullet.AddComponent<BulletSpawn>();
-						bc.skillData = sd;
-						bc.attacker = gameObject;
-						//bc.enemyTag = "Player";
-					}else {
-						DoHit(sd.WeaponDamagePCT);
-
-						if(sd.KnockBackEffect) {
-							targetPlayer.GetComponent<MyAnimationEvent>().KnockBackWho(gameObject);
-						}
-
-					}
-					*/
 				}
-				/*
-				if(sd.TurnToTarget) {
-					Vector3 dir = targetPlayer.transform.position-transform.position;
-					dir.y = 0;
-					var rotation = Quaternion.LookRotation(dir);
-					transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime*attribute.FastRotateSpeed);
-				}
-				*/
-
 				yield return null;
 			}
 		}

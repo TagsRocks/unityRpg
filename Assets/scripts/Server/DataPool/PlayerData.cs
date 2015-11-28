@@ -497,8 +497,6 @@ namespace ChuMeng
         /// <returns>The short cuts info.</returns>
         static int[] GetShortCutsInfo()
         {
-
-            var au = GCPushShortcutsInfo.CreateBuilder();
             var pinfo = ServerData.Instance.playerInfo;
             var defaultSlot = new int[4]{ 0, 0, 0, 0 };
             if (pinfo.HasSkill)

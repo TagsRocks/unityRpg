@@ -3,7 +3,7 @@ using System.Collections;
 
 namespace ChuMeng
 {
-    public class SkillLogic
+    public static class SkillLogic
     {
         /// <summary>
         /// 释放一个技能状态机 
@@ -48,7 +48,7 @@ namespace ChuMeng
             return null;
         }
 
-		public static string GetEnemyTag(string tag) {
+        private static string GetEnemyTag(string tag) {
 			string enemyTag;
 			if (tag == "Player") {
 				enemyTag = "Enemy";
@@ -59,7 +59,6 @@ namespace ChuMeng
 		}
 		//找到最近的敌人 不考虑朝向方向
 		public static GameObject FindNearestEnemy(GameObject attacker) {
-			var enemyTag = SkillLogic.GetEnemyTag (attacker.tag);
 			LayerMask mask = SkillDamageCaculate.GetDamageLayer();
 			var enemies = Physics.OverlapSphere (attacker.transform.position, attacker.GetComponent<NpcAttribute>().AttackRange, mask);
 			float minDist = 999999;
@@ -68,7 +67,7 @@ namespace ChuMeng
 			var transform = attacker.transform;
 			
 			foreach (var ene in enemies) {
-				if(ene.tag == enemyTag) {
+                if(IsEnemy(attacker, ene.gameObject)) {
 					var d = (ene.transform.position - transform.position).sqrMagnitude;
 					if (d < minDist) {
 						minDist = d;
@@ -80,6 +79,30 @@ namespace ChuMeng
 			
 			return enemy;
 		}
+
+        /// <summary>
+        /// 首先判断场景模式：
+        ///     普通场景
+        ///     网络场景 
+        ///    
+        /// 
+        /// </summary>
+        /// <returns><c>true</c> if is enemy the specified a b; otherwise, <c>false</c>.</returns>
+        /// <param name="a">The alpha component.</param>
+        /// <param name="b">The blue component.</param>
+        public static bool IsEnemy(GameObject a, GameObject b) {
+            var scene = WorldManager.worldManager.GetActive();
+            if(scene.IsNet) {
+                if(a != b) {
+                    return true;
+                }
+            }
+            var enemyTag = SkillLogic.GetEnemyTag (a.tag);
+            if(b.tag == enemyTag) {
+                return true;
+            }
+            return false;
+        }
 
     }
 

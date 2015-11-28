@@ -196,7 +196,6 @@ namespace ChuMeng {
 		}
 
         public void OpenLev(GCPushLevelOpen open){
-            var chapter = GetAllChapterLevelInfo(open.Chapter);
             var levId = open.Chapter*100+open.Level;
 
             bool find = false;

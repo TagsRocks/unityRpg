@@ -84,6 +84,10 @@ namespace ChuMeng
             GetComponent<LogicCommand>().PushCommand(cmd);
         }
 
+        public void SetLevel(AvatarInfo info) {
+            GetComponent<NpcAttribute>().ChangeLevel(info.Level);
+        }
+
         public void SetPosition(AvatarInfo info) {
             Vector3 vxz = new Vector3(info.X/100.0f, info.Y/100.0f+0.2f, info.Z/100.0f);
             Log.Sys("SetPosition: "+info+" vxz "+vxz+" n "+gameObject.name);

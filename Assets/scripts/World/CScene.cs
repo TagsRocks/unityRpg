@@ -14,6 +14,12 @@ namespace ChuMeng
 				return def.isCity;
 			}
 		}
+        public virtual bool IsNet {
+            get {
+                return false;
+            }
+        }
+
 		public DungeonConfigData def;
         protected virtual void Awake() {
             GameObject.DontDestroyOnLoad(gameObject);
@@ -72,6 +78,14 @@ namespace ChuMeng
 			ObjectManager.objectManager.DestroyMySelf ();
 
 		}
+
+        /// <summary>
+        /// 客户端向服务器广播消息 Map3重写 
+        /// </summary>
+        /// <param name="cmd">Cmd.</param>
+        public virtual void BroadcastMsg(CGPlayerCmd.Builder cmd) {
+            
+        }
 
 	}
 }

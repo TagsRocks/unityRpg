@@ -25,26 +25,16 @@ namespace ChuMeng
 		float velocity;
 		float maxDistance;
 		Vector3 initPos;
-		string enemyTag;
-		//忽略碰撞检测的时间用于新生成的子弹逃离碰撞区域
-		//弹射忽略掉上一个 对象即可 不用sleep 时间
-		//float sleepTime = 0;
 		Collider lastColobj = null;
-		//static float IgnoreTime = 0.2f;
 		//子弹相对于发射者的位置偏移
 		public Vector3 OffsetPos;
 		GameObject activeParticle;
-		//TODO: 支持玩家或者怪物发射的子弹或者技能 根据attacker的tag Player 还是Enemy 确定其它Tag
-		//bool HitYet = false;
 		void Start ()
 		{
 			LeftRicochets = missileData.NumRicochets;
 			velocity = missileData.Velocity;
 			maxDistance = missileData.MaxDistance;
 			initPos = transform.position;
-			enemyTag = SkillLogic.GetEnemyTag (attacker.tag);
-
-			Log.AI ("bullet enemy is " + enemyTag);
 
 			var playerForward = Quaternion.Euler (new Vector3 (0, 0 + attacker.transform.rotation.eulerAngles.y, 0));
 			if (missileData.ReleaseParticle != null) {
@@ -103,7 +93,7 @@ namespace ChuMeng
         /// </summary>
         /// <param name="other">Other.</param>
 		void DoDamage(Collider other){
-			if (other.tag == enemyTag && !missileData.DontHurtObject) {
+            if (SkillLogic.IsEnemy(attacker, other.gameObject) && !missileData.DontHurtObject) {
                 if(!string.IsNullOrEmpty(skillData.HitSound)) {
                     BackgroundSound.Instance.PlayEffect(skillData.HitSound);
                 }
@@ -200,7 +190,7 @@ namespace ChuMeng
 		void OnTriggerEnter (Collider other)
 		{
 			Log.AI ("Bullet collider enemy " + other.name + " " + other.tag);
-			if (other.tag == enemyTag) {
+            if (SkillLogic.IsEnemy(attacker, other.gameObject)) {
 				//攻击多个目标只释放一次 DieParticle
 				CreateHitParticle();
 

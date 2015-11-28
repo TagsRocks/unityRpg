@@ -189,26 +189,6 @@ public partial class Util {
 		return retMsg;
 	}	
 
-	static IMessageLite GetGCActiveFight(ByteString buf) {
-		var retMsg = ChuMeng.GCActiveFight.ParseFrom(buf);
-		return retMsg;
-	}	
-
-	static IMessageLite GetCGActiveFight(ByteString buf) {
-		var retMsg = ChuMeng.CGActiveFight.ParseFrom(buf);
-		return retMsg;
-	}	
-
-	static IMessageLite GetGCPushFightReport(ByteString buf) {
-		var retMsg = ChuMeng.GCPushFightReport.ParseFrom(buf);
-		return retMsg;
-	}	
-
-	static IMessageLite GetGCPushPlayerFightingStatus(ByteString buf) {
-		var retMsg = ChuMeng.GCPushPlayerFightingStatus.ParseFrom(buf);
-		return retMsg;
-	}	
-
 	static IMessageLite GetCGActHoroscope(ByteString buf) {
 		var retMsg = ChuMeng.CGActHoroscope.ParseFrom(buf);
 		return retMsg;
@@ -301,11 +281,6 @@ public partial class Util {
 
 	static IMessageLite GetCGRegisterAccount(ByteString buf) {
 		var retMsg = ChuMeng.CGRegisterAccount.ParseFrom(buf);
-		return retMsg;
-	}	
-
-	static IMessageLite GetGCPushSpireInfo(ByteString buf) {
-		var retMsg = ChuMeng.GCPushSpireInfo.ParseFrom(buf);
 		return retMsg;
 	}	
 
@@ -546,11 +521,6 @@ public partial class Util {
 
 	static IMessageLite GetGCPushPlayerDressAttributeChanges(ByteString buf) {
 		var retMsg = ChuMeng.GCPushPlayerDressAttributeChanges.ParseFrom(buf);
-		return retMsg;
-	}	
-
-	static IMessageLite GetGCPushRevisePoint(ByteString buf) {
-		var retMsg = ChuMeng.GCPushRevisePoint.ParseFrom(buf);
 		return retMsg;
 	}	
 
@@ -2144,14 +2114,6 @@ public partial class Util {
 
 	{"CGLoadNewVerifyCount", GetCGLoadNewVerifyCount},
 
-	{"GCActiveFight", GetGCActiveFight},
-
-	{"CGActiveFight", GetCGActiveFight},
-
-	{"GCPushFightReport", GetGCPushFightReport},
-
-	{"GCPushPlayerFightingStatus", GetGCPushPlayerFightingStatus},
-
 	{"CGActHoroscope", GetCGActHoroscope},
 
 	{"CGLoadHoroscope", GetCGLoadHoroscope},
@@ -2189,8 +2151,6 @@ public partial class Util {
 	{"GCPushAttribute2Members", GetGCPushAttribute2Members},
 
 	{"CGRegisterAccount", GetCGRegisterAccount},
-
-	{"GCPushSpireInfo", GetGCPushSpireInfo},
 
 	{"CGSetKeyValue", GetCGSetKeyValue},
 
@@ -2287,8 +2247,6 @@ public partial class Util {
 	{"CGSetProp", GetCGSetProp},
 
 	{"GCPushPlayerDressAttributeChanges", GetGCPushPlayerDressAttributeChanges},
-
-	{"GCPushRevisePoint", GetGCPushRevisePoint},
 
 	{"GCLoginAccount", GetGCLoginAccount},
 

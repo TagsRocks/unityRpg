@@ -23,20 +23,7 @@ namespace KBEngine
     /// </summary>
     public class KBPlayer
     {
-        public long ID = -1;
-        /*
-		 * 0 Player 1 Monster 2 pet
-		 */
-        public enum PlayerType
-        {
-            Player = 0,
-            Monster = 1,
-            Pet = 2,
-        }
-
-        public PlayerType type = PlayerType.Player;
-	
-
+        public int ID = -1;
     }
 
     /*
@@ -51,7 +38,6 @@ namespace KBEngine
     /// </summary>
     public class KBViewID
     {
-        long internalID = -1;
         KBPlayer internalPlayer;
 
         public KBPlayer owner
@@ -62,17 +48,8 @@ namespace KBEngine
             }
         }
 
-        public long ServerID
+        public KBViewID(int id, KBPlayer player)
         {
-            get
-            {
-                return internalID;
-            }
-        }
-
-        public KBViewID(long id, KBPlayer player)
-        {
-            internalID = id;
             internalPlayer = player;
         }
     }
@@ -256,7 +233,7 @@ namespace KBEngine
 		 */
         KBViewID ID = new KBViewID(0, null);
 
-        public long GetServerID()
+        public int GetServerID()
         {
             if (ID.owner == null)
             {

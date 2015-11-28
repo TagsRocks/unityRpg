@@ -10,7 +10,6 @@ namespace ChuMeng
     {
         public GameObject DieParticle;
         public float AOERadius;
-        string enemyTag;
 
         SkillLayoutRunner runner;
         public Vector3 ParticlePos;
@@ -26,7 +25,6 @@ namespace ChuMeng
             }
 
             var attacker = runner.stateMachine.attacker; 
-            enemyTag = SkillLogic.GetEnemyTag (attacker.tag);
             StartCoroutine(WaitExplosive());
 
 
@@ -72,7 +70,7 @@ namespace ChuMeng
         /// </summary>
         /// <param name="other">Other.</param>
         void DoDamage(Collider other){
-            if (other.tag == enemyTag) {
+            if (SkillLogic.IsEnemy(runner.stateMachine.attacker, other.gameObject)) {
                 var skillData = runner.stateMachine.skillFullData.skillData;
                 if(!string.IsNullOrEmpty(skillData.HitSound)) {
                     BackgroundSound.Instance.PlayEffect(skillData.HitSound);

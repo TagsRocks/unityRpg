@@ -28,7 +28,6 @@ namespace ChuMeng
         //火焰陷阱喷出的火焰 只造成一次伤害，伤害之后，则失效，因此默认DamageShape enable为true 且e 为true，
         public bool enable;
         public float radius = 2f;
-        string enemytTag;
         float cosAngle;
         //是否只产生一次伤害  
         public bool Once = false;
@@ -36,15 +35,11 @@ namespace ChuMeng
         HashSet<GameObject> hurtEnemy = new HashSet<GameObject>();
         Vector3 InitPosition;
 
-
         //向前冲击技能需要 DamageShape 和玩家的位置重合在一起
         public bool SyncWithPlayer = false;
         //是否造成伤害
         public bool NoHurt = false;
 
-        //是否会移动主角 多长时间 多长距离
-        //public bool needMove = false;
-        //public float distance = 0;
         //冲击移动速度 冲刺的最终距离
         public float speed = 6;
         bool enableYet = false;
@@ -62,7 +57,6 @@ namespace ChuMeng
         void Start()
         {
             runner = transform.parent.GetComponent<SkillLayoutRunner>();
-            enemytTag = ObjectManager.GetEnemyTag(runner.stateMachine.attacker.tag);
             cosAngle = Mathf.Cos(Mathf.Deg2Rad * angle);
             if (runner != null && runner.Event.attachOwner)
             {
@@ -110,7 +104,7 @@ namespace ChuMeng
 
                         for (int i = 0; i < hitColliders.Length; i++)
                         {
-                            if (hitColliders [i].tag == enemytTag)
+                            if (SkillLogic.IsEnemy(runner.stateMachine.attacker, hitColliders[i].gameObject))
                             {
                                 if (!hurtEnemy.Contains(hitColliders [i].gameObject))
                                 {
@@ -129,13 +123,6 @@ namespace ChuMeng
                                             hurtEnemy.Add(hitColliders [i].gameObject);
                                         }
                                     }
-                                    /*
-                                else if (shape == Shape.Line)
-                                {
-                                    Log.AI("Line Hit " + runner.stateMachine.name + " " + hitColliders [i].name);
-                                    StartCoroutine(CheckLineDamage());
-                                }
-                                */
                                 }
                             }
                         }

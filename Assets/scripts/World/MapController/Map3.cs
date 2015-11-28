@@ -35,6 +35,13 @@ namespace ChuMeng
             }
         }
 
+        public override bool IsNet
+        {
+            get
+            { 
+                return true;
+            }
+        }
 
         protected override void Awake() {
             base.Awake();
@@ -77,14 +84,14 @@ namespace ChuMeng
             ainfo.Z = (int)(pos.z*100);
             ainfo.Y = (int)(pos.y*100);
             cg.AvatarInfo = ainfo.Build();
-            var data = KBEngine.Bundle.GetPacket(cg);
-            rc.Send(data);
+
+            BroadcastMsg(cg);
         }
 
         IEnumerator SendCommandToServer() {
             while(state == WorldState.Connected) {
                 SyncMyPos();
-                yield return new WaitForSeconds(0.1f);
+                yield return new WaitForSeconds(0.5f);
             }
         }
 
@@ -102,6 +109,12 @@ namespace ChuMeng
             ainfo.X = (int)(pos.x*100);
             ainfo.Z = (int)(pos.z*100);
             ainfo.Y = (int)(pos.y*100);
+            var pinfo = ServerData.Instance.playerInfo;
+            foreach(var d in pinfo.DressInfoList) {
+                ainfo.DressInfoList.Add(d);
+            }
+            ainfo.Level = ObjectManager.objectManager.GetMyProp(CharAttribute.CharAttributeEnum.LEVEL);
+
             cg.AvatarInfo = ainfo.Build();
             var data = KBEngine.Bundle.GetPacket(cg);
             rc.Send(data);
@@ -156,6 +169,7 @@ namespace ChuMeng
                 myId = Convert.ToUInt32(cmds[1]);
             }else if(cmds[0] == "Add") {
                 ObjectManager.objectManager.CreateOtherPlayer(proto.AvatarInfo);
+                PlayerDataInterface.DressEquip(proto.AvatarInfo);
 
             }else if(cmds[0] == "Remove") {
                 ObjectManager.objectManager.DestroyPlayer(proto.AvatarInfo.Id); 
@@ -165,6 +179,8 @@ namespace ChuMeng
                     var sync = player.GetComponent<PlayerSync>();
                     sync.NetworkMove(proto.AvatarInfo);
                 }
+            }else if(cmds[0] == "Damage") {
+                SkillDamageCaculate.DoNetworkDamage(proto);
             }
         }
 
@@ -175,8 +191,15 @@ namespace ChuMeng
             rc.Disconnect();
         }
 
-        void OnDestroy() {
+        protected override void  OnDestroy() {
+            base.OnDestroy();
             QuitWorld();
+        }
+
+        public override void BroadcastMsg(CGPlayerCmd.Builder cg)
+        {
+            var data = KBEngine.Bundle.GetPacket(cg);
+            rc.Send(data);
         }
     }
 

@@ -25,7 +25,7 @@ namespace ChuMeng
 		/*
 		 * Player And Player Related GameObject
 		 */ 
-		public Dictionary<long, KBEngine.KBPlayer> Actors = new Dictionary<long, KBEngine.KBPlayer> ();
+		public Dictionary<int, KBEngine.KBPlayer> Actors = new Dictionary<int, KBEngine.KBPlayer> ();
 		List<KBEngine.KBNetworkView> photonViewList = new List<KBEngine.KBNetworkView> ();
 		/*
 		 * Monster Killed By Player
@@ -36,7 +36,7 @@ namespace ChuMeng
 		/// <summary>
 		/// 获得玩家实体对象
 		/// </summary>
-		public KBEngine.KBNetworkView GetPhotonView (long viewID)
+		public KBEngine.KBNetworkView GetPhotonView (int viewID)
 		{
 			//KBEngine.KBNetworkView result = null;
 			foreach (KBEngine.KBNetworkView view in photonViewList) {
@@ -103,7 +103,7 @@ namespace ChuMeng
 		}
 
 		//获得玩家自身或者其它玩家的属性数据
-		public GameObject GetPlayer (long playerId)
+		public GameObject GetPlayer (int playerId)
 		{
 			var view = GetPhotonView (playerId);
 			if (view != null) {
@@ -132,7 +132,7 @@ namespace ChuMeng
 		 * SaveGame selectChar has My PlayerID
 		 * But Here just Return -1 As My Id
 		 */ 
-		public long GetMyServerID ()
+		public int GetMyServerID ()
 		{
 			if (myPlayer != null) {
 				return myPlayer.ID;
@@ -236,7 +236,7 @@ namespace ChuMeng
 		 * TODO:如果WorldManager正在进入新的场景，则缓存当前的服务器推送的Player,等待彻底进入场景再初始化Player
 		 * TODO:CScene 进入场景之后解开缓存的Player数据
 		 */
-		private void AddPlayer (long unitId, KBEngine.KBPlayer player)
+		private void AddPlayer (int unitId, KBEngine.KBPlayer player)
 		{
 			if (WorldManager.worldManager.station == WorldManager.WorldStation.Enter) {
 				Actors.Add (unitId, player);
@@ -290,16 +290,6 @@ namespace ChuMeng
 
 
 
-		/*
-		 * Remove View's Owner ID == PlayerID
-		 */ 
-		public void ClearPlayer (HideSprite hp)
-		{
-			Debug.Log ("ObjectManager::ClearPlayer clearPlayer Quit Game " + hp);
-			DestroyPlayer (hp.UnitId.Id);
-		}
-
-
 		public void DestroyByLocalId (int localId)
 		{
 			var keys = photonViewList.Where (f => true).ToArray ();
@@ -314,7 +304,7 @@ namespace ChuMeng
 		}
 
 		//删除Player和PhotonView
-		public void DestroyPlayer (long playerID)
+		public void DestroyPlayer (int playerID)
 		{
 			///<summary>
 			/// 删除自己玩家的时候需要保存玩家的位置和角度
@@ -415,8 +405,7 @@ namespace ChuMeng
 
 		GameObject CreateMyPlayerInternal() {
 			var kbplayer = new KBEngine.KBPlayer ();
-			kbplayer.ID = SaveGame.saveGame.selectChar.PlayerId;
-			kbplayer.type = KBEngine.KBPlayer.PlayerType.Player;
+            kbplayer.ID = (int)SaveGame.saveGame.selectChar.PlayerId;
 			if (myPlayer != null) {
 				throw new System.Exception ("myPlayer not null");
 			}
@@ -438,7 +427,7 @@ namespace ChuMeng
 			//设置自己玩家的View属性
 			var view = player.GetComponent<KBEngine.KBNetworkView> ();
 			NetDebug.netDebug.AddConsole ("SelectCharID " + SaveGame.saveGame.selectChar.PlayerId);
-			view.SetID (new KBEngine.KBViewID (SaveGame.saveGame.selectChar.PlayerId, kbplayer));
+            view.SetID (new KBEngine.KBViewID ((int)SaveGame.saveGame.selectChar.PlayerId, kbplayer));
 			
 			NetDebug.netDebug.AddConsole ("Set UnitData of Certain Job " + udata);
 			player.GetComponent<NpcAttribute> ().SetObjUnitData (udata);
@@ -557,7 +546,7 @@ namespace ChuMeng
                 var udata = Util.GetUnitData (true, (int)1, 1);
                 var player = GameObject.Instantiate (Resources.Load<GameObject> (udata.ModelName)) as GameObject;
 
-                NGUITools.AddMissingComponent<NpcAttribute> (player);
+                var attr = NGUITools.AddMissingComponent<NpcAttribute> (player);
                 //状态机类似 之后可能需要修改为其它玩家状态机
                 NGUITools.AddMissingComponent<OtherPlayerAI> (player);
 
@@ -577,9 +566,10 @@ namespace ChuMeng
 
                 AddPlayer (kbplayer.ID, kbplayer);
                 AddObject (netview.GetServerID (), netview);
-
+                attr.Init();
                 var sync = player.GetComponent<ChuMeng.PlayerSync> ();
                 sync.SetPosition(ainfo);
+                sync.SetLevel(ainfo);
             }else {
                  
             }
@@ -598,7 +588,7 @@ namespace ChuMeng
 				Debug.Log ("GCPushSpriteInfo::CreatePlayer  Create OtherPlayer");
 	
 				var kbplayer = new KBEngine.KBPlayer ();
-				kbplayer.ID = vp.UnitId.Id;
+                kbplayer.ID = (int)vp.UnitId.Id;
 
 				var udata = Util.GetUnitData (true, (int)vp.Job, vp.PlayerLevel);
 				var player = GameObject.Instantiate (Resources.Load<GameObject> (udata.ModelName)) as GameObject;
@@ -830,15 +820,7 @@ namespace ChuMeng
                 npc.SetDeadDelegate = BattleManager.battleManager.EnemyDead;
             }
 		}
-		//Npc构建流程 副本或者主城内
 
-		public static string GetEnemyTag (string tag)
-		{
-			if (tag == GameTag.Player) {
-				return GameTag.Enemy;
-			}
-			return GameTag.Player;
-		}
         public List<GameObject> GetSummons(int localId) {
             var ret = new List<GameObject>();
             foreach(var g in photonViewList){

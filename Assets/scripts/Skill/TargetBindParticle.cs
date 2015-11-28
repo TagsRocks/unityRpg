@@ -12,12 +12,10 @@ namespace ChuMeng
         public Vector3 ParticlePos;
 
         SkillLayoutRunner runner;
-        string enemyTag;
         void Start()
         {
             runner = transform.parent.GetComponent<SkillLayoutRunner>();
             var attacker = runner.stateMachine.attacker; 
-            enemyTag = SkillLogic.GetEnemyTag (attacker.tag);
         
             if(runner.BeamTargetPos != Vector3.zero){
                 if(Particle != null) {

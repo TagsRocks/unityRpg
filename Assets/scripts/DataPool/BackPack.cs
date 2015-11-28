@@ -360,9 +360,7 @@ namespace ChuMeng
 				var ret = packet.packet.protoBody as GCLoadPackInfo;
 				foreach (PackInfo pkinfo in ret.PackInfoList) {
 					var eqData = new EquipData (pkinfo);
-					//EquipmentData.Add(eqData);
 					UseEquip (eqData);
-					//UpdateEquipUIState(eqData);
 				}
 			} else {
 			}

@@ -136,7 +136,6 @@ namespace ChuMeng
                 }
 
 
-
                 Vector3 tarPos = currentLogicCommand.targetPos;
                 float dx = tarPos.x - mypos.x;
                 float dz = tarPos.z - mypos.z;

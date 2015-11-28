@@ -8,6 +8,9 @@
     "MArenaProtoc": {
         "id": 24
     }, 
+    "MFightProtoc": {
+        "id": 25
+    }, 
     "MWelfareProtoc": {
         "id": 26
     }, 
@@ -28,13 +31,6 @@
         "CGActHoroscope": 3, 
         "GCActHoroscope": 4, 
         "id": 14
-    }, 
-    "MFightProtoc": {
-        "CGActiveFight": 1, 
-        "GCActiveFight": 2, 
-        "id": 25, 
-        "GCPushFightReport": 1000, 
-        "GCPushPlayerFightingStatus": 1001
     }, 
     "MLotteryProtoc": {
         "CGLoadRecordInfo": 1, 
@@ -485,8 +481,6 @@
         "GCPushLevelUpgrade": 1002, 
         "GCPushAttrChange": 1003, 
         "GCPushExpChange": 1004, 
-        "GCPushRevisePoint": 1005, 
-        "GCPushSpireInfo": 1006, 
         "GCPushPlayerModifyName": 1007, 
         "GCPushPlayerDressAttributeChanges": 1008, 
         "GCPushPlayerPower": 1009, 
