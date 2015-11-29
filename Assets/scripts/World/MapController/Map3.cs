@@ -58,6 +58,11 @@ namespace ChuMeng
         /// </summary>
         /// <returns>The connect.</returns>
         IEnumerator InitConnect() {
+            //玩家自己模型尚未初始化准备完毕则不要连接服务器放置Logic之后玩家的ID没有设置
+            while(ObjectManager.objectManager.GetMyPlayer() == null) {
+                yield return null;
+            }
+
             rc.Connect("127.0.0.1", 10001);
             while(lastEvt == RemoteClientEvent.None && state == WorldState.Connecting) {
                 yield return new WaitForSeconds(1);
