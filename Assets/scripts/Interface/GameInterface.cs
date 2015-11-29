@@ -18,7 +18,7 @@ namespace ChuMeng
 			Log.GUI ("Player Attack LogicCommand");
 			ObjectManager.objectManager.GetMyPlayer ().GetComponent<LogicCommand> ().PushCommand (cmd);
 
-            NetDateInterface.SyncPosAndDir();
+            NetDateInterface.FastMoveAndPos();
 
             var sc = WorldManager.worldManager.GetActive();
             var cg = CGPlayerCmd.CreateBuilder();
