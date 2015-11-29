@@ -59,8 +59,6 @@ namespace ChuMeng {
 
 
 		void OnAttack(GameObject g) {
-
-
 			GameInterface.gameInterface.PlayerAttack ();
 		}
 		protected override void OnEvent (MyEvent evt)
