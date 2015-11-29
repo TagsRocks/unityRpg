@@ -18,13 +18,16 @@ namespace ChuMeng
 			Log.GUI ("Player Attack LogicCommand");
 			ObjectManager.objectManager.GetMyPlayer ().GetComponent<LogicCommand> ().PushCommand (cmd);
 
+            NetDateInterface.SyncPosAndDir();
+
+            var sc = WorldManager.worldManager.GetActive();
             var cg = CGPlayerCmd.CreateBuilder();
             var skInfo = SkillAction.CreateBuilder();
             skInfo.Who = ObjectManager.objectManager.GetMyServerID(); 
             skInfo.SkillId = cmd.skillId;
             cg.SkillAction = skInfo.Build();
             cg.Cmd = "Skill";
-            WorldManager.worldManager.GetActive().BroadcastMsg(cg);
+            sc.BroadcastMsg(cg);
 		}
 
 

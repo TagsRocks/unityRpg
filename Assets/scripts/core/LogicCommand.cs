@@ -36,6 +36,7 @@ namespace ChuMeng
         public uint startTime;
 
         public Vector3 targetPos;
+        public int dir;
 
         public GCPushUnitAddBuffer buffInfo;
 
@@ -122,6 +123,7 @@ namespace ChuMeng
             while (currentLogicCommand != null)
             {
                 Vector3 mypos = transform.position;
+
                 var lastOne = samplePos;
                 var diff = Util.XZSqrMagnitude(lastOne, mypos);
                 if (diff < 1)
@@ -151,13 +153,6 @@ namespace ChuMeng
                 //超过1s卡在某个位置 和目标位置相差超过1距离 使用超能移动 和目标相距3长时间
                 if (lastSameTime != 0 && (Time.time - lastSameTime > 1) && vdir.sqrMagnitude >= 2)
                 {
-                    /*
-                    var cmd = new ObjectCommand();
-                    cmd.targetPos = currentLogicCommand.targetPos;
-                    cmd.commandID = ObjectCommand.ENUM_OBJECT_COMMAND.OC_SUPER_MOVE;
-                    GetComponent<LogicCommand>().PushCommand(cmd);
-                    */
-                    //直接拉到目标位置
                     transform.position = tarPos;
                     break;
                 }
@@ -174,6 +169,22 @@ namespace ChuMeng
                 mvController.vcontroller.inputVector.y = vval;
                 yield return null;
             }
+
+            //两个阶段问题
+            //移动到目标和确保朝向一致性
+            //方向平滑过渡
+            /*
+            while(currentLogicCommand != null) {
+                var myDir = transform.localRotation.eulerAngles.y;
+                var tarDir = currentLogicCommand.dir;
+                var dd = tarDir - myDir;
+            }
+            */
+            //简单实现
+            if(currentLogicCommand != null) {
+                transform.localRotation = Quaternion.Euler(new Vector3(0, currentLogicCommand.dir, 0));
+            }
+            //再次检测Move位置状态，如果不正常则重新开始
 
             currentLogicCommand = null;
         }

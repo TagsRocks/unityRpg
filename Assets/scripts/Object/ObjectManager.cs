@@ -550,7 +550,7 @@ namespace ChuMeng
                 AddObject (netview.GetServerID (), netview);
                 attr.Init();
                 var sync = player.GetComponent<ChuMeng.PlayerSync> ();
-                sync.SetPosition(ainfo);
+                sync.SetPositionAndDir(ainfo);
                 sync.SetLevel(ainfo);
             }else {
                  

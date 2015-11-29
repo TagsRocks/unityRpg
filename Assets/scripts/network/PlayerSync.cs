@@ -71,7 +71,7 @@ namespace ChuMeng
 
 		}
 
-		public void SetPosition(ViewPlayer ms) {
+		public void SetPositionAndDir(ViewPlayer ms) {
             return;
             Log.Sys("PlayerSync::SetPosition init other player "+ms);
 			Vector2 vxz = Util.GridToCoord (ms.X, ms.Z);
@@ -84,6 +84,7 @@ namespace ChuMeng
             var mvTarget = new Vector3(info.X/100.0f, info.Y/100.0f+0.2f, info.Z/100.0f);
             var cmd = new ObjectCommand();
             cmd.targetPos = mvTarget;
+            cmd.dir = info.Dir;
             cmd.commandID = ObjectCommand.ENUM_OBJECT_COMMAND.OC_MOVE;
             GetComponent<LogicCommand>().PushCommand(cmd);
         }
@@ -98,11 +99,11 @@ namespace ChuMeng
             GetComponent<NpcAttribute>().ChangeLevel(info.Level);
         }
 
-        public void SetPosition(AvatarInfo info) {
+        public void SetPositionAndDir(AvatarInfo info) {
             Vector3 vxz = new Vector3(info.X/100.0f, info.Y/100.0f+0.2f, info.Z/100.0f);
             Log.Sys("SetPosition: "+info+" vxz "+vxz+" n "+gameObject.name);
             transform.position = new Vector3(vxz.x, vxz.y, vxz.y);
-            transform.rotation = Quaternion.Euler (new Vector3(0, 0, 0));
+            transform.rotation = Quaternion.Euler (new Vector3(0, info.Dir, 0));
             StartCoroutine(SetPos(vxz));
         }
         /// <summary>

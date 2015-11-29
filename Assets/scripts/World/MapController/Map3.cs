@@ -76,21 +76,7 @@ namespace ChuMeng
 
 
         void SyncMyPos() {
-            var me = ObjectManager.objectManager.GetMyPlayer();
-            if(me == null) {
-                return;
-            }
-            var pos = me.transform.position;
-
-            var cg = CGPlayerCmd.CreateBuilder();
-            cg.Cmd = "UpdateData";
-            var ainfo = AvatarInfo.CreateBuilder();
-            ainfo.X = (int)(pos.x*100);
-            ainfo.Z = (int)(pos.z*100);
-            ainfo.Y = (int)(pos.y*100);
-            cg.AvatarInfo = ainfo.Build();
-
-            BroadcastMsg(cg);
+            NetDateInterface.SyncPosAndDir();
         }
 
         IEnumerator SendCommandToServer() {
