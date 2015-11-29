@@ -76,7 +76,7 @@ namespace ChuMeng
 
 
         void SyncMyPos() {
-            NetDateInterface.SyncPosAndDir();
+            NetDateInterface.SyncPosDirHP();
         }
 
         IEnumerator SendCommandToServer() {

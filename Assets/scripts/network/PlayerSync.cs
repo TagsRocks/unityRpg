@@ -87,7 +87,11 @@ namespace ChuMeng
             cmd.dir = info.Dir;
             cmd.commandID = ObjectCommand.ENUM_OBJECT_COMMAND.OC_MOVE;
             GetComponent<LogicCommand>().PushCommand(cmd);
+            if(info.HasHP) {
+                GetComponent<NpcAttribute>().SetHPNet(info.HP);    
+            }
         }
+
         public void NetworkAttack(SkillAction sk) {
             var cmd = new ObjectCommand (ObjectCommand.ENUM_OBJECT_COMMAND.OC_USE_SKILL);
             cmd.skillId = sk.SkillId;

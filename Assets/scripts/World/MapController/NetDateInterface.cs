@@ -28,7 +28,7 @@ namespace ChuMeng
             s.BroadcastMsg(cg);
         }
 
-        public static void SyncPosAndDir()
+        public static void SyncPosDirHP()
         {
             var me = ObjectManager.objectManager.GetMyPlayer();
             if (me == null)
@@ -37,6 +37,7 @@ namespace ChuMeng
             }
             var pos = me.transform.position;
             var dir = (int)me.transform.localRotation.eulerAngles.y;
+            var meAttr = me.GetComponent<NpcAttribute>();
 
             var cg = CGPlayerCmd.CreateBuilder();
             cg.Cmd = "UpdateData";
@@ -45,6 +46,8 @@ namespace ChuMeng
             ainfo.Z = (int)(pos.z*100);
             ainfo.Y = (int)(pos.y*100);
             ainfo.Dir = dir;
+            ainfo.HP = meAttr.HP;
+
             cg.AvatarInfo = ainfo.Build();
 
             var s = WorldManager.worldManager.GetActive();

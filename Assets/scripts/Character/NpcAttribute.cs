@@ -44,9 +44,12 @@ namespace ChuMeng
         /// </summary>
         public GameObject spawnTrigger;
 
-        public Vector3 OriginPos{
-            get;private set;
+        public Vector3 OriginPos
+        {
+            get;
+            private set;
         }
+
         public void SetOwnerId(int ownerId)
         {
             OwnerId = ownerId;
@@ -87,6 +90,10 @@ namespace ChuMeng
             }
         }
 
+        /// <summary>
+        /// 远程网络直接设置控制HP 
+        /// </summary>
+        /// <value>The H.</value>
         public int HP
         {
             get
@@ -97,6 +104,13 @@ namespace ChuMeng
             {
                 GetComponent<CharacterInfo>().SetProp(CharAttribute.CharAttributeEnum.HP, value);
             }
+        }
+
+        public void SetHPNet(int hp) {
+            GetComponent<CharacterInfo>().SetProp(CharAttribute.CharAttributeEnum.HP, hp);
+            var evt1 = new MyEvent(MyEvent.EventType.UnitHP);
+            evt1.localID = GetLocalId();
+            MyEventSystem.myEventSystem.PushLocalEvent(evt1.localID, evt1);
         }
 
         public int HP_Max
@@ -186,7 +200,8 @@ namespace ChuMeng
             }
             set
             {
-                if(_isDead ==value) {
+                if (_isDead == value)
+                {
                     return;
                 }
                 _isDead = value;
@@ -321,31 +336,6 @@ namespace ChuMeng
                 Log.Important("Init Obj Data  " + gameObject.name + " " + HP + " " + _ObjUnitData.HP);
                 ChangeHP(0);
                 ChangeMP(0);
-                /*
-                //自己玩家的属性 通过CharacterInfo 来初始化
-                if(view.IsPlayer && view.IsMine) {
-                
-                    //TODO:其它玩家属性  从网络同步数据
-                }else if(view.IsPlayer && !view.IsMine) {
-                    HP_Max = _ObjUnitData.HP;
-                    HP = HP_Max;
-                    MP_Max = _ObjUnitData.MP;
-                    MP = MP_Max;
-                    Debug.Log("NpcAttribute::InitData Use Animation In ");
-                    gameObject.tag = "Player";
-
-                }else {
-                    Log.Important("Init Local Monster Data "+gameObject.name);
-                    //普通单人副本怪物 从本地初始化属性
-                    HP_Max = _ObjUnitData.HP;
-                    HP = HP_Max;
-
-                    ChangeHP(0);
-                    Log.Important("Init MonsterData "+HP);
-                }
-                */
-
-                //CharacterController ch = GetComponent<CharacterController>();
             }
         }
 
@@ -355,10 +345,10 @@ namespace ChuMeng
         {
             _ObjUnitData = Util.GetUnitData(_ObjUnitData.GetIsPlayer(), _ObjUnitData.ID, Level);
             charInfo.SetProp(CharAttribute.CharAttributeEnum.EXP_MAX, (int)_ObjUnitData.MaxExp);
-            charInfo.SetProp (CharAttribute.CharAttributeEnum.HP, _ObjUnitData.HP);
-            charInfo.SetProp (CharAttribute.CharAttributeEnum.HP_MAX, _ObjUnitData.HP);
-            charInfo.SetProp (CharAttribute.CharAttributeEnum.MP, _ObjUnitData.MP);
-            charInfo.SetProp (CharAttribute.CharAttributeEnum.MP_MAX, _ObjUnitData.MP);
+            charInfo.SetProp(CharAttribute.CharAttributeEnum.HP, _ObjUnitData.HP);
+            charInfo.SetProp(CharAttribute.CharAttributeEnum.HP_MAX, _ObjUnitData.HP);
+            charInfo.SetProp(CharAttribute.CharAttributeEnum.MP, _ObjUnitData.MP);
+            charInfo.SetProp(CharAttribute.CharAttributeEnum.MP_MAX, _ObjUnitData.MP);
             ChangeHP(0);
         }
 
@@ -378,7 +368,7 @@ namespace ChuMeng
         /*
          * Player Equipment PoisonDefense
          * Monster Define in UnitData
-         */ 
+         */
         int GetWaterDefense()
         {
             int d = 0;
@@ -392,7 +382,7 @@ namespace ChuMeng
         /*
          * BaseWeapon Damage
          * Fire Element Damage  Ice Element Electric
-         */ 
+         */
         int GetAllDamage()
         {
             int d = _Damage;
@@ -400,16 +390,20 @@ namespace ChuMeng
             {
                 d += npcEquipment.GetDamage();
             }
-            Log.Sys("Damage is what  " + d+" g "+gameObject);
+            Log.Sys("Damage is what  " + d + " g " + gameObject);
             return d;
         }
 
-        public float GetSpeedCoff() {
+        public float GetSpeedCoff()
+        {
             return GetComponent<BuffComponent>().GetSpeedCoff();
         }
-        public int GetCriticalRate() {
-            return ObjUnitData.CriticalHit +GetComponent<BuffComponent>().GetCriticalRate();
+
+        public int GetCriticalRate()
+        {
+            return ObjUnitData.CriticalHit + GetComponent<BuffComponent>().GetCriticalRate();
         }
+
         int GetAllArmor()
         {
             int a = _Armor;
@@ -421,22 +415,26 @@ namespace ChuMeng
             return a;
         }
 
-        public void Init() {
+        public void Init()
+        {
             npcEquipment = GetComponent<NpcEquipment>();
             charInfo = GetComponent<CharacterInfo>();
         }
+
         void Start()
         {
             Init();
             OriginPos = transform.position;
             StartCoroutine(AdjustOri());
-            gameObject.name += "_"+GetLocalId();
+            gameObject.name += "_" + GetLocalId();
         }
+
         /// <summary>
         /// 等人物掉 地面上再初始化 
         /// </summary>
         /// <returns>The ori.</returns>
-        IEnumerator AdjustOri(){
+        IEnumerator AdjustOri()
+        {
             yield return new WaitForSeconds(0.5f);
             OriginPos = transform.position;
         }
@@ -462,7 +460,8 @@ namespace ChuMeng
         /// 代理释放的技能不会产生伤害
         /// </summary>
         /// <returns><c>true</c> if this instance is proxy; otherwise, <c>false</c>.</returns>
-        public bool IsProxy() {
+        public bool IsProxy()
+        {
             return !GetComponent<KBEngine.KBNetworkView>().IsMe;
         }
 
@@ -470,22 +469,29 @@ namespace ChuMeng
         {
             return GetComponent<KBEngine.KBNetworkView>().GetLocalId();
         }
-
+        /// <summary>
+        /// 属性的修改都是对象自己负责自己的 其它人不能修改 
+        /// 属性是可以同步的
+        /// </summary>
+        /// <param name="c">C.</param>
         public void ChangeHP(int c)
         {
-            HP += c;
-            HP = Mathf.Min(Mathf.Max(0, HP), HP_Max);
-            Log.Important("Init GameObject HP " + gameObject.name);
+            if (IsMe())
+            { 
+                HP += c;
+                HP = Mathf.Min(Mathf.Max(0, HP), HP_Max);
+                Log.Important("Init GameObject HP " + gameObject.name);
 
-            var evt1 = new MyEvent(MyEvent.EventType.UnitHP);
-            evt1.localID = GetLocalId();
-            evt1.intArg = HP;
-            evt1.intArg1 = HP_Max;
-            MyEventSystem.myEventSystem.PushLocalEvent(evt1.localID, evt1);
+                var evt1 = new MyEvent(MyEvent.EventType.UnitHP);
+                evt1.localID = GetLocalId();
+                evt1.intArg = HP;
+                evt1.intArg1 = HP_Max;
+                MyEventSystem.myEventSystem.PushLocalEvent(evt1.localID, evt1);
 
-            if (GetLocalId() == ObjectManager.objectManager.GetMyLocalId())
-            {
-                MyEventSystem.myEventSystem.PushEvent(MyEvent.EventType.UpdateMainUI);
+                if (GetLocalId() == ObjectManager.objectManager.GetMyLocalId())
+                {
+                    MyEventSystem.myEventSystem.PushEvent(MyEvent.EventType.UpdateMainUI);
+                }
             }
         }
 
@@ -515,7 +521,7 @@ namespace ChuMeng
 
         /*
          * Damage Type 
-         */ 
+         */
         public void DoHurt(int v, bool isCritical, SkillData.DamageType dt = SkillData.DamageType.Physic)
         {
             Debug.Log("NpcAttribute::DoHurt Name:" + gameObject.name + " hurtValue:" + v + " Armor:" + Armor + " DamageType " + dt);
@@ -617,7 +623,7 @@ namespace ChuMeng
             Level += 1;
             Exp = 0;
 
-            Log.Net("AddLevelUp "+IsMe());
+            Log.Net("AddLevelUp " + IsMe());
             if (IsMe())
             {
                 var setSync = CGSetProp.CreateBuilder();
@@ -646,19 +652,20 @@ namespace ChuMeng
 
 
 
-        //TODO: 掉落物品机制重新设计 掉落物品和掉落黄金 
+        //TODO: 掉落物品机制重新设计 掉落物品和掉落黄金
         public List<List<float>> GetDropTreasure()
         {
             var myLev = _ObjUnitData.Level;
             var pLev = ObjectManager.objectManager.GetMyAttr().Level;
-            var num = (pLev-myLev)/10;
+            var num = (pLev - myLev) / 10;
             var mod = 100;
-            if(num > 0) {
+            if (num > 0)
+            {
                 mod = mod >> num;
             }
-            Log.Sys("DropMod "+mod+" lev "+pLev+" mlev "+myLev );
+            Log.Sys("DropMod " + mod + " lev " + pLev + " mlev " + myLev);
 
-            return _ObjUnitData.GetRandomDrop(mod/100.0f);
+            return _ObjUnitData.GetRandomDrop(mod / 100.0f);
         }
 
 
@@ -720,7 +727,8 @@ namespace ChuMeng
             StartCoroutine(AddMpProgress(duration, totalAdd));
         }
 
-        public void OnlyShowDeadEffect() {
+        public void OnlyShowDeadEffect()
+        {
             _characterState = CharacterState.Dead;
             var sdata = GetDeadSkill();
             if (sdata != null)
@@ -739,7 +747,8 @@ namespace ChuMeng
             OnlyShowDeadEffect();
         }
 
-        public void DeadIgnoreCol() {
+        public void DeadIgnoreCol()
+        {
             IsDead = true;
             if (ObjectManager.objectManager != null && ObjectManager.objectManager.myPlayer != null)
             {
@@ -750,7 +759,8 @@ namespace ChuMeng
         /// <summary>
         /// 复活时操作
         /// </summary>
-        public void Relive() {
+        public void Relive()
+        {
         }
 
         public bool CheckAni(string name)
