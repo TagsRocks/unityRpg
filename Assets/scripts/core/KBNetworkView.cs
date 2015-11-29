@@ -242,6 +242,10 @@ namespace KBEngine
             }
             return ID.owner.ID;
         }
+        public void SetServerID(int id) {
+            ID.owner.ID = id;
+        }
+
 
         public void SetID(KBViewID id)
         {

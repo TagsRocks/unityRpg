@@ -18,7 +18,7 @@ namespace ChuMeng
     /// </summary>
     public class Map3 : CScene
     {
-        private uint myId = 0;
+        private int  myId = 0;
         MainThreadLoop ml;
         RemoteClient rc;
         private WorldState _s = WorldState.Idle;
@@ -166,7 +166,8 @@ namespace ChuMeng
             Log.Net("Map3Receive: "+proto);
             var cmds = proto.Result.Split(' ');
             if(cmds[0] == "Login") {
-                myId = Convert.ToUInt32(cmds[1]);
+                myId = Convert.ToInt32(cmds[1]);
+                ObjectManager.objectManager.RefreshMyServerId(myId);
             }else if(cmds[0] == "Add") {
                 ObjectManager.objectManager.CreateOtherPlayer(proto.AvatarInfo);
                 PlayerDataInterface.DressEquip(proto.AvatarInfo);

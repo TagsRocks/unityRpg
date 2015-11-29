@@ -507,9 +507,11 @@ namespace ChuMeng
 
 		void InitCachePlayer ()
 		{
+            /*
 			foreach (ViewPlayer vp in cacheInitPlayer) {
 				CreatePlayer (vp);
 			}
+            */
 			cacheInitPlayer.Clear ();
 		}
 
@@ -538,6 +540,12 @@ namespace ChuMeng
                 var oldPlayer = GetPlayer(ainfo.Id);
                 if(oldPlayer != null) {
                     Debug.LogError("PlayerExists: "+ainfo);
+                    return;
+                }
+
+                if(myPlayer != null && myPlayer.ID == ainfo.Id) {
+                    Debug.LogError("CreateMeAgain");
+                    return;
                 }
 
                 var kbplayer = new KBEngine.KBPlayer ();
@@ -575,58 +583,12 @@ namespace ChuMeng
             }
         }
 
-		///<summary>
-		/// 其它玩家构建流程  主城内 或者副本内
-		/// </summary> 
-		//TODO:ViewPlayer 需要增加一个场景ID用于标示这个player当前场景，如果和游戏场景不同则不能初始化
-		//TODO:初始化其它玩家的装备
-		public void CreatePlayer (ViewPlayer vp)
-		{
-			if (WorldManager.worldManager.station == WorldManager.WorldStation.Enter) {
+        public void RefreshMyServerId(int id) {
+            if(myPlayer != null) {
+                myPlayer.ID = id;
+            }
+        }
 
-				Log.Trivial (Log.Category.System, "Init Player is " + vp);
-				Debug.Log ("GCPushSpriteInfo::CreatePlayer  Create OtherPlayer");
-	
-				var kbplayer = new KBEngine.KBPlayer ();
-                kbplayer.ID = (int)vp.UnitId.Id;
-
-				var udata = Util.GetUnitData (true, (int)vp.Job, vp.PlayerLevel);
-				var player = GameObject.Instantiate (Resources.Load<GameObject> (udata.ModelName)) as GameObject;
-
-
-				NGUITools.AddMissingComponent<NpcAttribute> (player);
-				NGUITools.AddMissingComponent<PlayerAIController> (player);
-				player.tag = "Player";
-				player.layer = (int)GameLayer.Npc;
-				//NGUITools.AddMissingComponent<PhysicComponent>(player);
-
-				NGUITools.AddMissingComponent<SkillInfoComponent> (player);
-				player.GetComponent<NpcAttribute> ().SetObjUnitData (udata);
-				player.GetComponent<NpcEquipment> ().InitDefaultEquip ();
-
-				player.name = "player_" + vp.UnitId.Id;
-				player.transform.parent = gameObject.transform;
-				
-				
-				var netview = player.GetComponent<KBEngine.KBNetworkView> ();
-				netview.SetID (new KBEngine.KBViewID (kbplayer.ID, kbplayer));
-				
-				var sync = player.GetComponent<ChuMeng.PlayerSync> ();
-				sync.SetPosition (vp);
-				
-				//CallNetwork Instantiate Object
-				AddPlayer (kbplayer.ID, kbplayer);
-				AddObject (netview.GetServerID (), netview);
-
-
-			} else if (WorldManager.worldManager.station == WorldManager.WorldStation.Entering) {
-				//正在加载新的场景的静态资源，因此需要缓存其它的玩家，等初始化完成再 构建玩家
-				cacheInitPlayer.Add (vp);
-
-			} else {
-				Debug.LogError ("该状态不能接受其它玩家的构建请求 " + WorldManager.worldManager.station + "  " + vp.ToString ());
-			}
-		}
 
         public void CreateNpc(UnitData unitData, GameObject spawn) {
             if (WorldManager.worldManager.station == WorldManager.WorldStation.Enter) {
