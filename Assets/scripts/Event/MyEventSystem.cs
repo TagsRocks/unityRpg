@@ -162,7 +162,7 @@ namespace ChuMeng
 		}
 
 
-		public long localID = -1;
+		public int localID = -1;
 		public EventType type;
 		public string strArg;
 		public int intArg = -1;

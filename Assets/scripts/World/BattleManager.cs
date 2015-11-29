@@ -127,7 +127,11 @@ namespace ChuMeng
         {
             if (evt.type == MyEvent.EventType.PlayerDead)
             {
-                OnPlayerDead(null);
+                var localId = evt.localID;
+                var p = ObjectManager.objectManager.GetLocalPlayer(localId);
+                if(p != null && p.GetComponent<NpcAttribute>().IsMe()) {
+                    OnPlayerDead(null);
+                }
             }
         }
 

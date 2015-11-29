@@ -105,6 +105,7 @@ namespace ChuMeng
                 ainfo.DressInfoList.Add(d);
             }
             ainfo.Level = ObjectManager.objectManager.GetMyProp(CharAttribute.CharAttributeEnum.LEVEL);
+            ainfo.HP = ObjectManager.objectManager.GetMyProp(CharAttribute.CharAttributeEnum.HP);
 
             cg.AvatarInfo = ainfo.Build();
             var data = KBEngine.Bundle.GetPacket(cg);
