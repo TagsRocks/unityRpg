@@ -189,6 +189,15 @@ namespace ChuMeng
                 }
             }else if(cmds[0] == "Damage") {
                 SkillDamageCaculate.DoNetworkDamage(proto);
+            }else if(cmds[0] == "Skill") {
+                var sk = proto.SkillAction;
+                var player = ObjectManager.objectManager.GetPlayer(sk.Who);
+                if(player != null) {
+                    var sync = player.GetComponent<PlayerSync>();
+                    if(sync != null) {
+                        sync.NetworkAttack(sk);
+                    }
+                }
             }
         }
 

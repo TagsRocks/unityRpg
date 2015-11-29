@@ -87,6 +87,12 @@ namespace ChuMeng
             cmd.commandID = ObjectCommand.ENUM_OBJECT_COMMAND.OC_MOVE;
             GetComponent<LogicCommand>().PushCommand(cmd);
         }
+        public void NetworkAttack(SkillAction sk) {
+            var cmd = new ObjectCommand (ObjectCommand.ENUM_OBJECT_COMMAND.OC_USE_SKILL);
+            cmd.skillId = sk.SkillId;
+            Log.GUI ("Other Player Attack LogicCommand");
+            ObjectManager.objectManager.GetMyPlayer ().GetComponent<LogicCommand> ().PushCommand (cmd);
+        }
 
         public void SetLevel(AvatarInfo info) {
             GetComponent<NpcAttribute>().ChangeLevel(info.Level);
