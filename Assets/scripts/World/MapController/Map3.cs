@@ -18,7 +18,7 @@ namespace ChuMeng
     /// </summary>
     public class Map3 : CScene
     {
-        private int  myId = 0;
+        public int  myId = 0;
         MainThreadLoop ml;
         RemoteClient rc;
         private WorldState _s = WorldState.Idle;
@@ -178,7 +178,9 @@ namespace ChuMeng
                 var player = ObjectManager.objectManager.GetPlayer(proto.AvatarInfo.Id);
                 if(player != null) {
                     var sync = player.GetComponent<PlayerSync>();
-                    sync.NetworkMove(proto.AvatarInfo);
+                    if(sync != null) {
+                        sync.NetworkMove(proto.AvatarInfo);
+                    }
                 }
             }else if(cmds[0] == "Damage") {
                 SkillDamageCaculate.DoNetworkDamage(proto);

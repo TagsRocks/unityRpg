@@ -16,7 +16,7 @@ using System;
 namespace ChuMeng
 {
     [RequireComponent(typeof(AnimationController))]
-    [RequireComponent(typeof(PlayerSync))]
+    //[RequireComponent(typeof(PlayerSync))]
     public class PlayerAIController : AIBase
     {
         void Awake()

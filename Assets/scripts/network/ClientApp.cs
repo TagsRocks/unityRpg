@@ -130,8 +130,6 @@ public class ClientApp : UnityEngine.MonoBehaviour
         //处理主角移动和其它玩家移动报文
         if (Environment.TickCount > this.nextSendTickCountOnSerialize && ChuMeng.ObjectManager.objectManager != null)
         {
-            //KBEngineApp.app.RunViewUpdate();
-            ChuMeng.ObjectManager.objectManager.RunViewUpdate();
             nextSendTickCountOnSerialize = Environment.TickCount + updateIntervalOnSerialize;
         }
         //KBEngine.Event.processOutEvents ();

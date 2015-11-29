@@ -245,32 +245,6 @@ namespace ChuMeng
 			}
 		}
 
-		/*
-		 * Synchronize All Local KBNetworkview Data To Server
-		 * Position direction
-		 */ 
-		public void RunViewUpdate ()
-		{
-			//单人副本不用更新我的状态到服务器
-			if (WorldManager.worldManager.sceneType == WorldManager.SceneType.Single) {
-				return;
-			}
-			var player = GetMyPlayer ();
-			if (player != null) {
-				var sync = player.GetComponent<PlayerSync> ();
-
-				KBEngine.Packet packet = new KBEngine.Packet ();
-				sync.OnPhotonSerializeView (packet);
-				if (packet.protoBody != null) {
-
-					KBEngine.Bundle bundle = new KBEngine.Bundle ();
-					bundle.newMessage (packet.protoBody.GetType ());
-					var fid = bundle.writePB (packet.protoBody);
-					bundle.send (KBEngine.KBEngineApp.app.networkInterface (), null, fid);
-				}
-			}
-
-		}
 
 		/*
 		 * OnDestroy Clean PhotonView 

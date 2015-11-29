@@ -16,6 +16,10 @@ using KBEngine;
 
 namespace ChuMeng
 {
+
+    /// <summary>
+    /// 网络对象的本地代理 
+    /// </summary>
 	public class PlayerSync : KBEngine.MonoBehaviour
 	{
 		/*

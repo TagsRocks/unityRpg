@@ -55,6 +55,12 @@ namespace ChuMeng {
 
 			}
 		}
+
+        /// <summary>
+        /// 本地控制对象接受网络命令
+        /// 本地代理接受网络命令
+        /// </summary>
+        /// <param name="cmd">Cmd.</param>
         public static void DoNetworkDamage(GCPlayerCmd cmd) {
             var eid = cmd.DamageInfo.Enemy;
             var attacker = ObjectManager.objectManager.GetPlayer(cmd.DamageInfo.Attacker);
