@@ -457,6 +457,15 @@ namespace ChuMeng
             return GetComponent<KBEngine.KBNetworkView>().IsMe;
         }
 
+        /// <summary>
+        /// 不是自己控制的对象则是代理
+        /// 代理释放的技能不会产生伤害
+        /// </summary>
+        /// <returns><c>true</c> if this instance is proxy; otherwise, <c>false</c>.</returns>
+        public bool IsProxy() {
+            return !GetComponent<KBEngine.KBNetworkView>().IsMe;
+        }
+
         public int GetLocalId()
         {
             return GetComponent<KBEngine.KBNetworkView>().GetLocalId();
