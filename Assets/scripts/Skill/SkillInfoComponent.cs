@@ -35,7 +35,7 @@ namespace ChuMeng
             return sk;
         }
 
-        //检测是否是玩家的普通攻击
+        //检测是否是玩家的普通攻击 没有技能数据则为默认技能
         public bool IsDefaultSkill(SkillData sd)
         {
             if (sd == null)

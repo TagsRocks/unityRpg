@@ -103,14 +103,12 @@ namespace ChuMeng
         void EnterUseSkill(ObjectCommand cmd)
         {
             //判断是否可以使用技能
-
-            //向MyAnimationEvent 注入消息
             var msg = new MyAnimationEvent.Message(MyAnimationEvent.MsgType.DoSkill);
-            msg.cmd = cmd;
+            msg.skillData = Util.GetSkillData(cmd.skillId, 1);
             GetComponent<MyAnimationEvent>().InsertMsg(msg);
-
             currentLogicCommand = null;
         }
+
 
         /*
          * 监督执行移动命令当有新的移动命令注入的时候当前的移动命令则失效 

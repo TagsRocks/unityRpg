@@ -46,7 +46,6 @@ namespace ChuMeng
 		public class Message {
 			public MsgType type;
 			public GCPushFightReport fightReport;
-			public ObjectCommand cmd;
 
 			public SkillData skillData;
 			public Message(MsgType t) {
@@ -111,6 +110,8 @@ namespace ChuMeng
 			var msg = new Message (MsgType.DoSkill);
 			msg.skillData = skillData;
 			InsertMsg (msg);
+            //通知其它客户端上的代理释放技能
+
 		}
 
 		public class DamageData {

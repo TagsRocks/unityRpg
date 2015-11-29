@@ -12,22 +12,23 @@ namespace ChuMeng
 	{
 		public static GameInterface gameInterface = new GameInterface();
 	
+        /// <summary>
+        /// 和使用普通技能一样 
+        /// </summary>
 		public void PlayerAttack() {
+            /*
 			var cmd = new ObjectCommand (ObjectCommand.ENUM_OBJECT_COMMAND.OC_USE_SKILL);
 			cmd.skillId = ObjectManager.objectManager.GetMyPlayer ().GetComponent<SkillInfoComponent> ().GetDefaultSkillId ();
 			Log.GUI ("Player Attack LogicCommand");
 			ObjectManager.objectManager.GetMyPlayer ().GetComponent<LogicCommand> ().PushCommand (cmd);
+            */
+            //连击3招
+            var skillId = ObjectManager.objectManager.GetMyPlayer ().GetComponent<SkillInfoComponent> ().GetDefaultSkillId ();
+            var skillData = Util.GetSkillData(skillId, 1);
+            ObjectManager.objectManager.GetMyPlayer().GetComponent<MyAnimationEvent>().OnSkill(skillData);
 
             NetDateInterface.FastMoveAndPos();
-
-            var sc = WorldManager.worldManager.GetActive();
-            var cg = CGPlayerCmd.CreateBuilder();
-            var skInfo = SkillAction.CreateBuilder();
-            skInfo.Who = ObjectManager.objectManager.GetMyServerID(); 
-            skInfo.SkillId = cmd.skillId;
-            cg.SkillAction = skInfo.Build();
-            cg.Cmd = "Skill";
-            sc.BroadcastMsg(cg);
+            NetDateInterface.FastUseSkill(skillId);
 		}
 
 

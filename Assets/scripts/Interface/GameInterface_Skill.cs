@@ -99,7 +99,19 @@ namespace ChuMeng
             }
             Log.GUI("ItemUseSkill " + skillId);
             var skillData = Util.GetSkillData(skillId, 1);
+            UseSkill(skillData);
+
+        }
+        /// <summary>
+        /// 本地使用技能同时通知代理
+        /// 绕过LogicCommand 本地执行不需要LogicCommand队列 
+        /// </summary>
+        /// <param name="skillData">Skill data.</param>
+        static void UseSkill(SkillData skillData) {
             ObjectManager.objectManager.GetMyPlayer().GetComponent<MyAnimationEvent>().OnSkill(skillData);
+
+            NetDateInterface.FastMoveAndPos();
+            NetDateInterface.FastUseSkill(skillData.Id);
         }
 
         /// <summary>
@@ -120,7 +132,8 @@ namespace ChuMeng
                 }
                 var npc = ObjectManager.objectManager.GetMyAttr();
                 npc.ChangeMP(-cost);
-                ObjectManager.objectManager.GetMyPlayer().GetComponent<MyAnimationEvent>().OnSkill(skillData);
+                //ObjectManager.objectManager.GetMyPlayer().GetComponent<MyAnimationEvent>().OnSkill(skillData);
+                UseSkill(skillData);
             }
         }
 

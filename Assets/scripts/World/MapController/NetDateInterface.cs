@@ -5,6 +5,16 @@ namespace ChuMeng
 {
     public static class NetDateInterface
     {
+        public static void FastUseSkill(int skillId) {
+            var sc = WorldManager.worldManager.GetActive();
+            var cg = CGPlayerCmd.CreateBuilder();
+            var skInfo = SkillAction.CreateBuilder();
+            skInfo.Who = ObjectManager.objectManager.GetMyServerID(); 
+            skInfo.SkillId = skillId;
+            cg.SkillAction = skInfo.Build();
+            cg.Cmd = "Skill";
+            sc.BroadcastMsg(cg);
+        }
 
         public static void FastMoveAndPos() {
             var me = ObjectManager.objectManager.GetMyPlayer();
