@@ -47,7 +47,7 @@ namespace ChuMeng
             {
                 if (!skillConfigCache.ContainsKey(activeSkill.template))
                 {
-                    var tem = Resources.Load<SkillDataConfig>("skills/" + activeSkill.template);
+                    var tem = Resources.Load<GameObject>("skills/" + activeSkill.template);
                     if (tem == null)
                     {
                         Debug.LogError("NotFind Template " + activeSkill.template);
