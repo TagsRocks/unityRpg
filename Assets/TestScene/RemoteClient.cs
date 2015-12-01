@@ -94,7 +94,7 @@ namespace ChuMeng
                 Close();
             }
             //Debug.LogError("OnReceive "+bytes);
-            Log.Net("OnReceive: "+bytes);
+            //Log.Net("OnReceive: "+bytes);
             if(bytes <= 0){
                 Close();
             }else {

@@ -29,6 +29,7 @@ namespace ChuMeng
                 if(g.GetComponent<NpcAttribute>().IsMine())
                 {
                     g.GetComponent<BuffComponent>().AddBuff(Event.affix, stateMachine.attacker);
+                    NetDateInterface.FastMoveAndPos();
                     NetDateInterface.FastAddBuff(Event.affix, stateMachine.attacker, g, stateMachine.skillFullData.skillId, Event.EvtId);
                 }
             }
@@ -157,6 +158,7 @@ namespace ChuMeng
                 if (stateMachine.attacker != null && stateMachine.attacker.GetComponent<NpcAttribute>().IsMine())
                 {
                     stateMachine.attacker.GetComponent<BuffComponent>().AddBuff(Event.affix);
+                    NetDateInterface.FastMoveAndPos();
                     NetDateInterface.FastAddBuff(Event.affix, stateMachine.attacker, stateMachine.attacker, stateMachine.skillFullData.skillId, Event.EvtId);
                 }
             }
