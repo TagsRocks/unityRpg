@@ -193,6 +193,11 @@ namespace ChuMeng
                         sync.NetworkAttack(sk);
                     }
                 }
+            }else if(cmds[0] == "Buff") {
+                var sync = NetDateInterface.GetPlayer(proto.BuffInfo.Target);
+                if(sync != null) {
+                    sync.NetworkBuff(proto);
+                }
             }
         }
 

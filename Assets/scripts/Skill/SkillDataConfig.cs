@@ -55,5 +55,12 @@ namespace ChuMeng
                 e.EvtId = num++;
             }
         }
+        public EventItem GetEvent(int evtId) {
+            if(evtId >= 0 && evtId < eventList.Count) {
+                return eventList[evtId];
+            }else {
+                return null;
+            }
+        }
 	}
 }

@@ -85,6 +85,18 @@ namespace ChuMeng
                 gameObject.GetComponent<MyAnimationEvent>().OnHit(attacker, cmd.DamageInfo.Damage, cmd.DamageInfo.IsCritical);
             }
         }
+
+        public void NetworkBuff(GCPlayerCmd cmd) {
+            var attacker = ObjectManager.objectManager.GetPlayer(cmd.BuffInfo.Attacker);
+            if(attacker != null) {
+                var sk = Util.GetSkillData(cmd.BuffInfo.SkillId, 1);
+                var skConfig = SkillLogic.GetSkillInfo(sk);
+                var evt = skConfig.GetEvent(cmd.BuffInfo.EventId);
+                if(evt != null) {
+                    gameObject.GetComponent<BuffComponent>().AddBuff(evt.affix, attacker);
+                }
+            }
+        }
 	}
 
 }

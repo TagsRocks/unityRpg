@@ -20,6 +20,7 @@ namespace ChuMeng
             binfo.SkillId = skillId;
             binfo.EventId = evtId;
             cg.BuffInfo = binfo.Build();
+            cg.Cmd = "Buff";
             var sc = WorldManager.worldManager.GetActive();
             sc.BroadcastMsg(cg);
         }
@@ -93,6 +94,15 @@ namespace ChuMeng
 
             var s = WorldManager.worldManager.GetActive();
             s.BroadcastMsg(cg);
+        }
+
+        public static PlayerSync GetPlayer(int id) {
+            var player = ObjectManager.objectManager.GetPlayer(id);
+            if(player != null) {
+                var sync = player.GetComponent<PlayerSync>();
+                return sync;
+            }
+            return null;
         }
     }
 }
