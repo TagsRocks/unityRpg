@@ -175,7 +175,15 @@ namespace ChuMeng
                     }
                 }
             }else if(cmds[0] == "Damage") {
-                SkillDamageCaculate.DoNetworkDamage(proto);
+                //SkillDamageCaculate.DoNetworkDamage(proto);
+                var dinfo = proto.DamageInfo;
+                var enemy = ObjectManager.objectManager.GetPlayer(dinfo.Enemy);
+                if(enemy != null) {
+                    var sync = enemy.GetComponent<PlayerSync>();
+                    if(sync != null) {
+                        sync.DoNetworkDamage(proto);
+                    }
+                }
             }else if(cmds[0] == "Skill") {
                 var sk = proto.SkillAction;
                 var player = ObjectManager.objectManager.GetPlayer(sk.Who);

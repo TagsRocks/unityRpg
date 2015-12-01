@@ -70,7 +70,7 @@ namespace KBEngine
 
         public void process(byte[] datas, MessageLength length, Dictionary<uint, MessageHandler> flowHandler)
         {
-            Debug.LogError("process receive Data " + length + " state " + state);
+            //Log.Net("process receive Data " + length + " state " + state);
             MessageLength totallen = 0;
             while (length > 0 && expectSize > 0)
             {
@@ -262,17 +262,11 @@ namespace KBEngine
                         Packet p = new Packet(flag, msglen, flowId, moduleId, msgid, responseTime, responseFlag, pbmsg);
                         var fullName = pbmsg.GetType().FullName;
                         //Bundle.recvMsg.Add("recvMsg " + fullName + " : " + flowId);
-                        Debug.Log("RecvMsg: "+fullName+" f "+flowId);
-                        /*
-                        if (Bundle.recvMsg.Count > 20)
-                        {
-                            Bundle.recvMsg.RemoveRange(0, Bundle.recvMsg.Count - 20);
-                        }
-                        */
+                        //Log.Net("RecvMsg: "+fullName+" f "+flowId);
 
                         if (fullName.Contains("Push"))
                         {
-                            Debug.LogError("MessageReader Handler PushMessage");
+                            //Log.Net("MessageReader Handler PushMessage");
                             if (mainLoop != null)
                             {
                                 mainLoop.queueInLoop(delegate
@@ -281,7 +275,7 @@ namespace KBEngine
                                     var tp = Type.GetType(handlerName);
                                     if (tp == null)
                                     {
-                                        Dbg.ERROR_MSG("PushMessage noHandler " + handlerName);
+                                        Debug.LogError("PushMessage noHandler " + handlerName);
                                     } else
                                     {
                                         //Debug.Log("Handler Push Message here "+handlerName);
@@ -325,8 +319,8 @@ namespace KBEngine
                 Debug.LogError("MessageReader:: read Error Packet " + responseFlag);
             }
 
-            Debug.LogError("current state after " + state + " msglen " + msglen + " " + length);
-            Debug.LogError("MessageReader::  prop  flag" + flag + "  msglen " + msglen + " flowId " + flowId + " moduleId " + moduleId + " msgid " + msgid + " responseTime " + responseTime + " responseFlag " + responseFlag + " expectSize " + expectSize);
+            //Log.Net("current state after " + state + " msglen " + msglen + " " + length);
+            //Log.Net("MessageReader::  prop  flag" + flag + "  msglen " + msglen + " flowId " + flowId + " moduleId " + moduleId + " msgid " + msgid + " responseTime " + responseTime + " responseFlag " + responseFlag + " expectSize " + expectSize);
         }
         
     }

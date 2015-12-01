@@ -50,7 +50,9 @@ namespace ChuMeng
         /// </summary>
         /// <param name="packet">Packet.</param>
         void HandleMsg(KBEngine.Packet packet) {
-            Debug.LogError("HandlerMsg "+packet.protoBody);
+            //Debug.LogError("HandlerMsg "+packet.protoBody);
+            Log.Net("HandlerMsg "+packet.protoBody);
+
             if(msgHandler != null) {
                 msgHandler(packet);
             }else {
@@ -91,7 +93,8 @@ namespace ChuMeng
                 Debug.LogError(exception.ToString());
                 Close();
             }
-            Debug.LogError("OnReceive "+bytes);
+            //Debug.LogError("OnReceive "+bytes);
+            Log.Net("OnReceive: "+bytes);
             if(bytes <= 0){
                 Close();
             }else {

@@ -9,15 +9,23 @@ namespace ChuMeng
         {
             if (enemy.GetComponent<MyAnimationEvent>() != null)
             {
-                var attribute = attacker.GetComponent<NpcAttribute>();
-                var rate = 1;
-                bool isCritical = false;
+                if (enemy.GetComponent<NpcAttribute>().IsMine())
+                {
+                    var attribute = attacker.GetComponent<NpcAttribute>();
+                    var rate = 1;
+                    bool isCritical = false;
 
-                //在基础攻击力上面提升的比例
-                var damage = (int)(attribute.Damage * (1.0f + WeaponDamagePCT / 100.0f - 1.0f + rate - 1.0f));
-                Log.Sys("calculate Damage Rate SimpleDamage " + WeaponDamagePCT);
-                enemy.GetComponent<MyAnimationEvent>().OnHit(attacker, damage, isCritical);
-
+                    //在基础攻击力上面提升的比例
+                    var damage = (int)(attribute.Damage * (1.0f + WeaponDamagePCT / 100.0f - 1.0f + rate - 1.0f));
+                    Log.Sys("calculate Damage Rate SimpleDamage " + WeaponDamagePCT);
+                    NetDateInterface.FastDamage(
+                        attribute.GetComponent<KBEngine.KBNetworkView>().GetServerID(),
+                        enemy.GetComponent<KBEngine.KBNetworkView>().GetServerID(),
+                        damage,
+                        isCritical
+                    );
+                    enemy.GetComponent<MyAnimationEvent>().OnHit(attacker, damage, isCritical);
+                }
             }
         }
         //TODO::支持单人副本和多人副本功能 取决于  是否直接通知MyAnimationEvent
@@ -34,7 +42,7 @@ namespace ChuMeng
             {
                 var attribute = attacker.GetComponent<NpcAttribute>();
                 //技能施展方是我方则可以计算技能伤害否则只做技能表现
-                if (attribute.IsMe())
+                if (enemy.GetComponent<NpcAttribute>().IsMine())
                 {
                     var rd = Random.Range(0, 100);
                     var rate = 1;
@@ -48,16 +56,12 @@ namespace ChuMeng
                     var damage = (int)(attribute.Damage * (1.0f + skillData.skillData.WeaponDamagePCT / 100.0f - 1.0f + rate - 1.0f));
                     Log.Sys("calculate Damage Rate " + skillData.skillData.WeaponDamagePCT);
 
-                    var cg = CGPlayerCmd.CreateBuilder();
-                    var dinfo = DamageInfo.CreateBuilder();
-
-                    dinfo.Attacker = attribute.GetComponent<KBEngine.KBNetworkView>().GetServerID();
-                    dinfo.Enemy = enemy.GetComponent<KBEngine.KBNetworkView>().GetServerID();
-                    dinfo.Damage = damage;
-                    dinfo.IsCritical = isCritical;
-                    cg.DamageInfo = dinfo.Build();
-                    cg.Cmd = "Damage";
-                    WorldManager.worldManager.GetActive().BroadcastMsg(cg);
+                    NetDateInterface.FastDamage(
+                        attribute.GetComponent<KBEngine.KBNetworkView>().GetServerID(),
+                        enemy.GetComponent<KBEngine.KBNetworkView>().GetServerID(),
+                        damage,
+                        isCritical
+                    );
 
                     enemy.GetComponent<MyAnimationEvent>().OnHit(attacker, damage, isCritical);
                     MyEventSystem.myEventSystem.PushLocalEvent(attribute.GetLocalId(), MyEvent.EventType.HitTarget);
@@ -65,29 +69,6 @@ namespace ChuMeng
             }
         }
 
-        /// <summary>
-        /// 本地控制对象接受网络命令
-        /// 本地代理接受网络命令
-        /// </summary>
-        /// <param name="cmd">Cmd.</param>
-        public static void DoNetworkDamage(GCPlayerCmd cmd)
-        {
-            var eid = cmd.DamageInfo.Enemy;
-            var attacker = ObjectManager.objectManager.GetPlayer(cmd.DamageInfo.Attacker);
-            //发起方忽略掉网络
-            if (attacker != null && attacker.GetComponent<NpcAttribute>().IsMe())
-            {
-                return;
-            }
-
-
-            var enemy = ObjectManager.objectManager.GetPlayer(eid);
-            if (enemy != null)
-            {
-                enemy.GetComponent<MyAnimationEvent>().OnHit(attacker, cmd.DamageInfo.Damage, cmd.DamageInfo.IsCritical);
-            }
-            
-        }
 
         /// <summary>
         /// 得到伤害计算层 

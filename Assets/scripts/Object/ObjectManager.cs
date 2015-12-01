@@ -246,22 +246,6 @@ namespace ChuMeng
 		}
 
 
-		/*
-		 * OnDestroy Clean PhotonView 
-		 */ 
-		public void RunViewUpdate (KBEngine.KBNetworkView view, Google.ProtocolBuffers.IMessageLite msg)
-		{
-			if (!view.gameObject.activeSelf) {
-			} else {
-				KBEngine.Packet packet = new KBEngine.Packet ();
-				packet.protoBody = msg;
-				var monob = view.GetComponent<PlayerSync> ();
-				monob.OnPhotonSerializeView(packet);
-
-			}
-
-		}
-
 
 
 		public void DestroyByLocalId (int localId)
@@ -450,7 +434,6 @@ namespace ChuMeng
 			return player;
 		}
 
-		List<ViewPlayer> cacheInitPlayer = new List<ViewPlayer> ();
 		class MonsterInit
 		{
 			public UnitData unitData;
@@ -486,7 +469,6 @@ namespace ChuMeng
 				CreatePlayer (vp);
 			}
             */
-			cacheInitPlayer.Clear ();
 		}
 
 		void InitCacheMonster ()

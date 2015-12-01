@@ -11,6 +11,7 @@ namespace ChuMeng {
 		public GameObject attacker;
 		protected float passTime = 0;
 		GameObject unitTheme;
+        protected NpcAttribute attri;
 
         /// <summary>
         /// 初始化Buff
@@ -20,6 +21,7 @@ namespace ChuMeng {
 		public virtual void Init(Affix af, GameObject o) {
 			affix = af;
 			obj = o;
+            attri = obj.GetComponent<NpcAttribute>();
 			if (affix.UnitTheme != null) {
 				var par = GameObject.Instantiate(affix.UnitTheme) as GameObject;
 				//par.transform.parent = obj.transform;

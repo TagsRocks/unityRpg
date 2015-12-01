@@ -6,9 +6,7 @@ namespace ChuMeng
 {
 	public class SkillDataConfig : MonoBehaviour
 	{
-		//枪械师的发射时枪口的粒子效果
-		//public Vector3 ParticleOffset;
-
+        private int EvtId = 0;
 		[System.Serializable]
 		public class EventItem {
 			//attachOwner 是带动玩家和DamageShape一起动
@@ -38,6 +36,8 @@ namespace ChuMeng
             //使用上次事件标记的位置
             public bool UseMarkPos = false;
 
+            public int EvtId = 0; //当前技能的事件ID编号
+
 		}
 		public List<EventItem> eventList;
 
@@ -46,5 +46,14 @@ namespace ChuMeng
         public bool animationLoop = false;
         public float attackDuration = 1;
 
+        /// <summary>
+        ///初始哈每个Event事件的ID编号 
+        /// </summary>
+        void Awake() {
+            var num = 0;
+            foreach(var e in eventList) {
+                e.EvtId = num++;
+            }
+        }
 	}
 }

@@ -262,20 +262,23 @@ namespace KBEngine
             get
             {
                 return localId == ChuMeng.ObjectManager.objectManager.GetMyLocalId(); 
+                //return ID.owner.ID 
+                //return true;
             }
         }
+
         //是否是本地玩家
         public bool IsMine
         {
             get
             {
-                //return viewID.owner == KBEngineApp.app.player;
                 if (ID.owner == null)
                 {
                     Debug.Log("KBNetworkView:: No NetworkConnect Init Player Is Mine");
                     return true;
                 }
-                return ID.owner == ChuMeng.ObjectManager.objectManager.myPlayer && IsPlayer;
+                //return ID.owner == ChuMeng.ObjectManager.objectManager.myPlayer && IsPlayer;
+                return ID.owner == ChuMeng.ObjectManager.objectManager.myPlayer;
             }
         }
 

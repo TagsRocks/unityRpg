@@ -10,7 +10,7 @@ namespace ChuMeng
         public override void Init(Affix af, GameObject o)
         {
             base.Init(af, o);
-            type = Affix.EffectType.ReduceHP;
+            type = Affix.EffectType.DamageNearBy;
             audio = BackgroundSound.Instance.PlayEffectLoop("skill/loopfirelarge1");
             audio.Play();
             localId = obj.GetComponent<NpcAttribute>().GetLocalId();

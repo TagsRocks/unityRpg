@@ -113,7 +113,7 @@ namespace ChuMeng
 				yield return null;
 			}
 			attribute = GetComponent<NpcAttribute> ();
-			if(photonView.IsMine) {
+            if(photonView.IsMe) {
 				StartCoroutine(InitProperty());
 			}
 		}

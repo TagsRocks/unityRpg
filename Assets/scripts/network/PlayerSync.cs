@@ -18,7 +18,8 @@ namespace ChuMeng
 {
 
     /// <summary>
-    /// 网络对象的本地代理 
+    /// 网络对象的本地代理
+    /// Proxy 接受网络同步 
     /// </summary>
 	public class PlayerSync : KBEngine.MonoBehaviour
 	{
@@ -26,60 +27,6 @@ namespace ChuMeng
 		 * Write Message Send To Server
 		 * PlayerManagerment  PhotonView Manager 
 		 */ 
-		int lastGridX = -1;
-		int lastGridZ = -1;
-		public void OnPhotonSerializeView (Packet packet)
-		{
-            return;
-			if (photonView.IsMine) {
-				if(AstarPath.active != null && AstarPath.active.graphs.Length > 0) {
-					CGPlayerMove.Builder mv = CGPlayerMove.CreateBuilder ();
-					var vxz = Util.CoordToGrid(transform.position.x, transform.position.z);
-					//MapY Offset Height
-					mv.X = Convert.ToInt32( vxz.x);
-					mv.Y = Util.IntYOffset(transform.position.y);
-					mv.Z = Convert.ToInt32(vxz.y);
-					if(mv.X == lastGridX && mv.Z == lastGridZ) {
-						return;
-					}
-					if(Util.CheckMovable((int)mv.X, (int)mv.Z)) {
-						lastGridX = mv.X;
-						lastGridZ = mv.Z;
-						packet.protoBody = mv.BuildPartial ();
-						return;
-					}else {
-						Log.Sys("Can't Move Grid "+mv.X+" "+mv.Z+" "+gameObject.name);
-					}
-				}
-
-				packet.protoBody = null;
-
-			} else {
-				//Debug.Log("Not Mine Push Move Command");
-                Log.AI("PushMoveCommand");
-				var ms = packet.protoBody as MotionSprite;
-				var vxz = Util.GridToCoord(ms.X, ms.Z);
-
-				var mvTarget = new Vector3(vxz.x, 0, vxz.y);
-
-				var cmd = new ObjectCommand();
-				cmd.targetPos = mvTarget;
-				cmd.commandID = ObjectCommand.ENUM_OBJECT_COMMAND.OC_MOVE;
-				GetComponent<LogicCommand>().PushCommand(cmd);
-
-			}
-
-		}
-
-		public void SetPositionAndDir(ViewPlayer ms) {
-            return;
-            Log.Sys("PlayerSync::SetPosition init other player "+ms);
-			Vector2 vxz = Util.GridToCoord (ms.X, ms.Z);
-			float y = ObjectManager.objectManager.GetSceneHeight (ms.X, ms.Z);
-			transform.position = new Vector3(vxz.x, y, vxz.y);
-			transform.rotation = Quaternion.Euler (new Vector3(0, ms.Dir, 0));
-		}
-
         public void NetworkMove(AvatarInfo info) {
             var mvTarget = new Vector3(info.X/100.0f, info.Y/100.0f+0.2f, info.Z/100.0f);
             var cmd = new ObjectCommand();
@@ -124,6 +71,20 @@ namespace ChuMeng
             }
         }
 	
+
+        /// <summary>
+        /// 本地控制对象接受网络命令
+        /// 本地代理接受网络命令
+        /// </summary>
+        /// <param name="cmd">Cmd.</param>
+        public void DoNetworkDamage(GCPlayerCmd cmd)
+        {
+            var eid = cmd.DamageInfo.Enemy;
+            var attacker = ObjectManager.objectManager.GetPlayer(cmd.DamageInfo.Attacker);
+            if(attacker != null) {
+                gameObject.GetComponent<MyAnimationEvent>().OnHit(attacker, cmd.DamageInfo.Damage, cmd.DamageInfo.IsCritical);
+            }
+        }
 	}
 
 }

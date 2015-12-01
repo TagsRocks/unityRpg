@@ -5,6 +5,25 @@ namespace ChuMeng
 {
     public static class NetDateInterface
     {
+        /// <summary>
+        ///相同的技能 Skill Configure来触发Buff 但是不要触发 Buff修改非表现属性
+        /// </summary>
+        /// <param name="affix">Affix.</param>
+        /// <param name="attacker">Attacker.</param>
+        /// <param name="target">Target.</param>
+        public static void FastAddBuff(Affix affix, GameObject attacker, GameObject target, int skillId, int evtId) {
+            var cg = CGPlayerCmd.CreateBuilder();
+            var binfo = BuffInfo.CreateBuilder();
+            binfo.BuffType = (int)affix.effectType;
+            binfo.Attacker = attacker.GetComponent<KBEngine.KBNetworkView>().GetServerID();
+            binfo.Target = target.GetComponent<KBEngine.KBNetworkView>().GetServerID();
+            binfo.SkillId = skillId;
+            binfo.EventId = evtId;
+            cg.BuffInfo = binfo.Build();
+            var sc = WorldManager.worldManager.GetActive();
+            sc.BroadcastMsg(cg);
+        }
+
         public static void FastUseSkill(int skillId) {
             var sc = WorldManager.worldManager.GetActive();
             var cg = CGPlayerCmd.CreateBuilder();
@@ -14,6 +33,18 @@ namespace ChuMeng
             cg.SkillAction = skInfo.Build();
             cg.Cmd = "Skill";
             sc.BroadcastMsg(cg);
+        }
+
+        public static void FastDamage(int attackerId, int enemyId, int damage, bool isCritical) {
+            var cg = CGPlayerCmd.CreateBuilder();
+            var dinfo = DamageInfo.CreateBuilder();
+            dinfo.Attacker = attackerId;
+            dinfo.Enemy = enemyId;
+            dinfo.Damage = damage;
+            dinfo.IsCritical = isCritical;
+            cg.DamageInfo = dinfo.Build();
+            cg.Cmd = "Damage";
+            WorldManager.worldManager.GetActive().BroadcastMsg(cg);
         }
 
         public static void FastMoveAndPos() {

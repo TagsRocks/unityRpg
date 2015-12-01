@@ -129,7 +129,7 @@ namespace ChuMeng
             {
                 var localId = evt.localID;
                 var p = ObjectManager.objectManager.GetLocalPlayer(localId);
-                if(p != null && p.GetComponent<NpcAttribute>().IsMe()) {
+                if(p != null && p.GetComponent<NpcAttribute>().IsMine()) {
                     OnPlayerDead(null);
                 }
             }

@@ -106,7 +106,8 @@ namespace ChuMeng
             }
         }
 
-        public void SetHPNet(int hp) {
+        public void SetHPNet(int hp)
+        {
             GetComponent<CharacterInfo>().SetProp(CharAttribute.CharAttributeEnum.HP, hp);
             var evt1 = new MyEvent(MyEvent.EventType.UnitHP);
             evt1.localID = GetLocalId();
@@ -450,9 +451,13 @@ namespace ChuMeng
             */
         }
 
-        public bool IsMe()
+        /// <summary>
+        /// 是否是本地玩家控制对象 
+        /// </summary>
+        /// <returns><c>true</c> if this instance is me; otherwise, <c>false</c>.</returns>
+        public bool IsMine()
         {
-            return GetComponent<KBEngine.KBNetworkView>().IsMe;
+            return GetComponent<KBEngine.KBNetworkView>().IsMine;
         }
 
         /// <summary>
@@ -462,13 +467,14 @@ namespace ChuMeng
         /// <returns><c>true</c> if this instance is proxy; otherwise, <c>false</c>.</returns>
         public bool IsProxy()
         {
-            return !GetComponent<KBEngine.KBNetworkView>().IsMe;
+            return !GetComponent<KBEngine.KBNetworkView>().IsMine;
         }
 
         public int GetLocalId()
         {
             return GetComponent<KBEngine.KBNetworkView>().GetLocalId();
         }
+
         /// <summary>
         /// 属性的修改都是对象自己负责自己的 其它人不能修改 
         /// 属性是可以同步的
@@ -476,7 +482,7 @@ namespace ChuMeng
         /// <param name="c">C.</param>
         public void ChangeHP(int c)
         {
-            if (IsMe())
+            if (IsMine())
             { 
                 HP += c;
                 HP = Mathf.Min(Mathf.Max(0, HP), HP_Max);
@@ -497,25 +503,28 @@ namespace ChuMeng
 
         public void ChangeMP(int c)
         {
-            MP += c;
-            MP = Mathf.Min(Mathf.Max(0, MP), MP_Max);
-            var rate = MP * 1.0f / MP_Max * 1.0f;
-
-            var evt = new MyEvent(MyEvent.EventType.UnitMPPercent);
-            evt.localID = GetLocalId();
-
-            evt.floatArg = rate;
-            MyEventSystem.myEventSystem.PushEvent(evt);
-
-            var evt1 = new MyEvent(MyEvent.EventType.UnitMP);
-            evt1.localID = GetLocalId();
-            evt1.intArg = MP;
-            evt1.intArg1 = MP_Max;
-            MyEventSystem.myEventSystem.PushEvent(evt1);
-
-            if (GetLocalId() == ObjectManager.objectManager.GetMyLocalId())
+            if (IsMine())
             {
-                MyEventSystem.myEventSystem.PushEvent(MyEvent.EventType.UpdateMainUI);
+                MP += c;
+                MP = Mathf.Min(Mathf.Max(0, MP), MP_Max);
+                var rate = MP * 1.0f / MP_Max * 1.0f;
+
+                var evt = new MyEvent(MyEvent.EventType.UnitMPPercent);
+                evt.localID = GetLocalId();
+
+                evt.floatArg = rate;
+                MyEventSystem.myEventSystem.PushEvent(evt);
+
+                var evt1 = new MyEvent(MyEvent.EventType.UnitMP);
+                evt1.localID = GetLocalId();
+                evt1.intArg = MP;
+                evt1.intArg1 = MP_Max;
+                MyEventSystem.myEventSystem.PushEvent(evt1);
+
+                if (GetLocalId() == ObjectManager.objectManager.GetMyLocalId())
+                {
+                    MyEventSystem.myEventSystem.PushEvent(MyEvent.EventType.UpdateMainUI);
+                }
             }
         }
 
@@ -572,7 +581,7 @@ namespace ChuMeng
         public void SetExp(int e)
         {
             Exp = e;
-            if (IsMe())
+            if (IsMine())
             {
                 MyEventSystem.PushEventStatic(MyEvent.EventType.UpdatePlayerData);
             }
@@ -589,7 +598,7 @@ namespace ChuMeng
                 LevelUp();
             } else
             {
-                if (IsMe())
+                if (IsMine())
                 {
                     var sync = CGAddProp.CreateBuilder();
                     sync.Key = (int)CharAttribute.CharAttributeEnum.EXP;
@@ -601,7 +610,7 @@ namespace ChuMeng
             var evt = new MyEvent(MyEvent.EventType.UpdatePlayerData);
             evt.localID = GetLocalId();
             MyEventSystem.myEventSystem.PushEvent(evt);
-            if (IsMe())
+            if (IsMine())
             {
                 MyEventSystem.PushEventStatic(MyEvent.EventType.UpdatePlayerData);
             }
@@ -623,8 +632,8 @@ namespace ChuMeng
             Level += 1;
             Exp = 0;
 
-            Log.Net("AddLevelUp " + IsMe());
-            if (IsMe())
+            Log.Net("AddLevelUp " + IsMine());
+            if (IsMine())
             {
                 var setSync = CGSetProp.CreateBuilder();
                 setSync.Key = (int)CharAttribute.CharAttributeEnum.EXP;
@@ -643,7 +652,7 @@ namespace ChuMeng
             par.transform.parent = ObjectManager.objectManager.transform;
             par.transform.position = transform.position;
 
-            if (IsMe())
+            if (IsMine())
             {
                 //MyEventSystem.myEventSystem.PushEvent(MyEvent.EventType.UpdateMainUI);
                 MyEventSystem.myEventSystem.PushEvent(MyEvent.EventType.UpdatePlayerData);

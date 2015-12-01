@@ -23,7 +23,14 @@ namespace ChuMeng
             Log.AI("SkillLayout DoDamage " + Event.affix.effectType);
             if (Event.affix.effectType != Affix.EffectType.None && Event.affix.target == Affix.TargetType.Enemy)
             {
-                g.GetComponent<BuffComponent>().AddBuff(Event.affix, stateMachine.attacker);
+                //Buff目标是本地控制
+                //通过ID来控制复制信息 实体都要有ID才便于复制
+                //if(stateMachine.attacker.GetComponent<NpcAttribute>().IsMine()) {
+                if(g.GetComponent<NpcAttribute>().IsMine())
+                {
+                    g.GetComponent<BuffComponent>().AddBuff(Event.affix, stateMachine.attacker);
+                    NetDateInterface.FastAddBuff(Event.affix, stateMachine.attacker, g, stateMachine.skillFullData.skillId, Event.EvtId);
+                }
             }
             stateMachine.DoDamage(g);
         }
@@ -147,9 +154,10 @@ namespace ChuMeng
 
             if (Event.affix.effectType != Affix.EffectType.None && Event.affix.target == Affix.TargetType.Self)
             {
-                if (stateMachine.attacker != null)
+                if (stateMachine.attacker != null && stateMachine.attacker.GetComponent<NpcAttribute>().IsMine())
                 {
                     stateMachine.attacker.GetComponent<BuffComponent>().AddBuff(Event.affix);
+                    NetDateInterface.FastAddBuff(Event.affix, stateMachine.attacker, stateMachine.attacker, stateMachine.skillFullData.skillId, Event.EvtId);
                 }
             }
             

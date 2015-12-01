@@ -15,8 +15,11 @@ namespace ChuMeng
         public override void OnActive()
         {
             base.OnActive();
-            var abs  = System.Convert.ToInt32(affix.GetPara(PairEnum.Abs));
-            PlayerData.AddGold(-abs);
+            if (attri.IsMine())
+            {
+                var abs = System.Convert.ToInt32(affix.GetPara(PairEnum.Abs));
+                PlayerData.AddGold(-abs);
+            }
         }
 
 
