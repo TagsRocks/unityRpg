@@ -33,8 +33,7 @@ namespace ChuMeng {
             } 
             return false;
         }
-
-		public void AddBuff (Affix affix, GameObject attacker = null)
+        public void AddBuff (Affix affix, Vector3 attackerPos = default(Vector3))
 		{
 			if (affix != null) {
 				Log.Sys ("AddBuff is "+gameObject.name+" " + affix.effectType);
@@ -50,7 +49,9 @@ namespace ChuMeng {
 				var eft = BuffManager.buffManager.GetBuffInstance (affix.effectType);
 				var buff = (IEffect)Activator.CreateInstance (eft);
 				buff.Init (affix, gameObject);
-				buff.attacker = attacker;
+				//buff.attacker = attacker;
+                buff.attackerPos = attackerPos;
+
 
                 if(affix.IsOnlyOne) {
                     for(int i=0; i < effectList.Count; i++) {

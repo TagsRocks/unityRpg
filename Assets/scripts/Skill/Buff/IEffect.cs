@@ -9,6 +9,8 @@ namespace ChuMeng {
 		protected Affix.EffectType type;
 		public bool IsDie = false;
 		public GameObject attacker;
+        public Vector3 attackerPos;
+
 		protected float passTime = 0;
 		GameObject unitTheme;
         protected NpcAttribute attri;

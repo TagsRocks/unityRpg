@@ -71,7 +71,8 @@ namespace ChuMeng
 
 		[HideInInspector]
 		public bool KnockBack = false;
-		public GameObject WhoKnock;
+		//public GameObject WhoKnock;
+        public Vector3 KnockWhoPos;
 
 		[HideInInspector]
 		List<Message> messages = new List<Message>();
@@ -209,10 +210,11 @@ namespace ChuMeng
 		}
 
 		//FIXME: Npc的KnockBack 接受击退攻击
-		public void KnockBackWho(GameObject who) {
-			Log.AI ("KnockBack Who "+who.gameObject);
+        public void KnockBackWho(Vector3 pos) {
+			Log.AI ("KnockBack Who "+pos);
 			KnockBack = true;
-			WhoKnock = who;
+			//WhoKnock = who;
+            KnockWhoPos = pos;
 		}
 
 		public bool fleeEvent = false;

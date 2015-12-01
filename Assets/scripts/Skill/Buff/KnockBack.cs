@@ -15,7 +15,7 @@ namespace ChuMeng
 		public override void OnActive ()
 		{
 			Log.AI ("KnockBack Buff Active");
-			obj.GetComponent<MyAnimationEvent> ().KnockBackWho (attacker);
+            obj.GetComponent<MyAnimationEvent> ().KnockBackWho (attackerPos);
 		}
 
 	}

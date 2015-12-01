@@ -93,7 +93,11 @@ namespace ChuMeng
                 var skConfig = SkillLogic.GetSkillInfo(sk);
                 var evt = skConfig.GetEvent(cmd.BuffInfo.EventId);
                 if(evt != null) {
-                    gameObject.GetComponent<BuffComponent>().AddBuff(evt.affix, attacker);
+                    var pos = cmd.BuffInfo.AttackerPosList;
+                    var px = pos[0]/100.0f;
+                    var py = pos[1]/100.0f;
+                    var pz = pos[2]/100.0f;
+                    gameObject.GetComponent<BuffComponent>().AddBuff(evt.affix, new Vector3(px, py, pz));
                 }
             }
         }

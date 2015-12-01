@@ -31,7 +31,7 @@ namespace ChuMeng
 		public override IEnumerator RunLogic ()
 		{
 			var physic = GetAttr ().GetComponent<PhysicComponent> ();
-			Vector3 moveDirection = GetAttr().transform.position - GetEvent().WhoKnock.transform.position;
+            Vector3 moveDirection = GetAttr().transform.position - GetEvent().KnockWhoPos;
 			moveDirection.y = 0;
 
 			float curFlySpeed = 0;

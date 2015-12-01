@@ -19,6 +19,11 @@ namespace ChuMeng
             binfo.Target = target.GetComponent<KBEngine.KBNetworkView>().GetServerID();
             binfo.SkillId = skillId;
             binfo.EventId = evtId;
+            var pos = attacker.transform.position;
+            binfo.AddAttackerPos((int)(pos.x*100));
+            binfo.AddAttackerPos((int)(pos.y*100));
+            binfo.AddAttackerPos((int)(pos.z*100));
+
             cg.BuffInfo = binfo.Build();
             cg.Cmd = "Buff";
             var sc = WorldManager.worldManager.GetActive();
