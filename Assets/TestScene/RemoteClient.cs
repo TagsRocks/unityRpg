@@ -131,6 +131,7 @@ namespace ChuMeng
             if (success)
             {
                 Debug.LogError("Connect Success");
+
                 SendEvt(RemoteClientEvent.Connected);
             } else
             {
@@ -141,7 +142,9 @@ namespace ChuMeng
         //事件的Evt处理机制已经删除掉了
         void SendEvt(RemoteClientEvent evt) {
             if(evtHandler != null) {
-                evtHandler(evt);
+                msgReader.mainLoop.queueInLoop(()=>{
+                    evtHandler(evt);
+                });
             }else {
                 Close();
             }
@@ -181,6 +184,7 @@ namespace ChuMeng
             IsClose = true;
 
             if(evtHandler != null) {
+                
                 SendEvt(RemoteClientEvent.Close);
             }
         }

@@ -26,11 +26,11 @@ public class ClientApp : UnityEngine.MonoBehaviour
     public int updateIntervalOnSerialize;
     int nextSendTickCount = Environment.TickCount;
     int nextSendTickCountOnSerialize = Environment.TickCount;
-    public string url = "10.1.2.223";
-    public int port = 17000;
-    public string testUrl = "192.168.2.5";
+    //public string url = "10.1.2.223";
+    //public int port = 17000;
+    //public string testUrl = "192.168.2.5";
     public int testPort = 20000;
-    public bool debug = false;
+    //public bool debug = false;
     public int heartBeat = 8;
 
     void Awake()
@@ -48,19 +48,22 @@ public class ClientApp : UnityEngine.MonoBehaviour
         KBEngineApp.url = "http://10.1.2.210";
 
         KBEngineApp.app.clientType = 1; //Mobile 
+
+        KBEngineApp.app.ip = "127.0.0.1";
+        KBEngineApp.app.port = Convert.ToUInt16(testPort);
+
+        //var s = 
+        new ChuMeng.DemoServer();
+        /*
         if (debug)
         {
-            KBEngineApp.app.ip = testUrl;
-            KBEngineApp.app.port = Convert.ToUInt16(testPort);
-
-            //var s = 
-            new ChuMeng.DemoServer();
 
         } else
         {
             KBEngineApp.app.ip = url;
             KBEngineApp.app.port = Convert.ToUInt16(port);
         }
+        */
 
         StartCoroutine(CheckConnectState());
     }

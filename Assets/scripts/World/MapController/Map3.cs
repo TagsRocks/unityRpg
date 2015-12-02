@@ -42,6 +42,7 @@ namespace ChuMeng
                 return true;
             }
         }
+        private string ServerIP = "127.0.0.1";
 
         protected override void Awake() {
             base.Awake();
@@ -50,6 +51,14 @@ namespace ChuMeng
             rc.evtHandler = EvtHandler;
             rc.msgHandler = MsgHandler;
             state = WorldState.Connecting;
+
+            TextAsset bindata = Resources.Load("Config") as TextAsset;
+            Debug.Log("nameMap " + bindata);
+            if(bindata != null) {
+                ServerIP = SimpleJSON.JSON.Parse(bindata.text).AsObject["Server"];
+            }
+            Debug.LogError("ServerIP: "+ServerIP);
+
             StartCoroutine(InitConnect());
         }
 
@@ -63,7 +72,7 @@ namespace ChuMeng
                 yield return null;
             }
 
-            rc.Connect("127.0.0.1", 10001);
+            rc.Connect(ServerIP, 10001);
             while(lastEvt == RemoteClientEvent.None && state == WorldState.Connecting) {
                 yield return new WaitForSeconds(1);
             }
