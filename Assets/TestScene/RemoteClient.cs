@@ -162,6 +162,8 @@ namespace ChuMeng
             {
                 return;
             }
+            Debug.LogError("CloseRemoteClient");
+            /*
             if (mSocket != null && mSocket.Connected)
             {
                 try
@@ -173,10 +175,12 @@ namespace ChuMeng
                     Debug.LogError(exception.ToString());
                 }
             }
+            */
             if (mSocket != null)
             {
                 try
                 {
+                    mSocket.Shutdown(SocketShutdown.Both);
                     mSocket.Close();
                 } catch (Exception exception)
                 {
@@ -187,9 +191,10 @@ namespace ChuMeng
             IsClose = true;
 
             if(evtHandler != null) {
-                
                 SendEvt(RemoteClientEvent.Close);
             }
+            evtHandler = null;
+            msgHandler = null;
         }
 
         void CancelConnect(object obj)
