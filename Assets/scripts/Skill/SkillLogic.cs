@@ -45,7 +45,7 @@ namespace ChuMeng
             Log.AI("Get Skill Template is " + activeSkill.template);
             if (activeSkill.template != null)
             {
-                if (!skillConfigCache.ContainsKey(activeSkill.template))
+                if (!skillConfigCache.ContainsKey(activeSkill.template) || skillConfigCache[activeSkill.template] == null)
                 {
                     var tem = Resources.Load<GameObject>("skills/" + activeSkill.template);
                     if (tem == null)
@@ -53,7 +53,9 @@ namespace ChuMeng
                         Debug.LogError("NotFind Template " + activeSkill.template);
                         return null;
                     }else {
+                        //切换场景不要摧毁对象
                         var go = GameObject.Instantiate(tem) as GameObject;
+                        GameObject.DontDestroyOnLoad(go);
                         skillConfigCache.Add(activeSkill.template, go);
                     }
                 }

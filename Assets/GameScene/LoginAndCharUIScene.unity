@@ -376,11 +376,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   updateInterval: 55
   updateIntervalOnSerialize: 1000
-  url: 10.1.2.222
-  port: 17000
-  testUrl: 127.0.0.1
   testPort: 20000
-  debug: 1
   heartBeat: 8
   IsPause: 0
 --- !u!4 &775957294

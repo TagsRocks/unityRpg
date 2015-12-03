@@ -76,10 +76,13 @@ namespace ChuMeng
             while(lastEvt == RemoteClientEvent.None && state == WorldState.Connecting) {
                 yield return new WaitForSeconds(1);
             }
+            Debug.LogError("StartInitData: "+lastEvt);
             if(lastEvt == RemoteClientEvent.Connected) {
                 state = WorldState.Connected;
                 yield return StartCoroutine(InitData());       
                 yield return StartCoroutine(SendCommandToServer());
+            }else {
+                //StartCoroutine(RetryConnect());
             }
         }
 
@@ -89,6 +92,7 @@ namespace ChuMeng
         }
 
         IEnumerator SendCommandToServer() {
+            Debug.LogError("SendCommandToServer");
             while(state == WorldState.Connected) {
                 SyncMyPos();
                 yield return new WaitForSeconds(0.5f);
@@ -97,6 +101,7 @@ namespace ChuMeng
 
 
         void SendUserData() {
+            Debug.Log("SendUserData");
             if(state != WorldState.Connected) {
                 return;
             }
@@ -122,10 +127,12 @@ namespace ChuMeng
         }
 
         IEnumerator InitData() {
+            Debug.LogError("InitData");
             var cg = CGPlayerCmd.CreateBuilder();
             cg.Cmd = "Login";
             var data = KBEngine.Bundle.GetPacket(cg);
             rc.Send(data);
+            Debug.Log("SendLogin");
 
             while(myId == 0 && state == WorldState.Connected) {
                 yield return new WaitForSeconds(1);
@@ -151,7 +158,8 @@ namespace ChuMeng
         /// </summary>
         /// <returns>The connect.</returns>
         IEnumerator RetryConnect() {
-            yield return new WaitForSeconds(2);
+            yield return new WaitForSeconds(4);
+            Debug.LogError("RetryConnect");
             //重试是否连接重置用户ID
             lastEvt = RemoteClientEvent.None;
             myId = 0;
@@ -164,7 +172,7 @@ namespace ChuMeng
 
         void MsgHandler(KBEngine.Packet packet) {
             var proto = packet.protoBody as GCPlayerCmd;
-            Log.Net("Map3Receive: "+proto);
+            Debug.Log("Map3Receive: "+proto);
             var cmds = proto.Result.Split(' ');
             if(cmds[0] == "Login") {
                 myId = Convert.ToInt32(cmds[1]);
@@ -211,6 +219,7 @@ namespace ChuMeng
         }
 
         void QuitWorld() {
+            Debug.LogError("QuitWorld");
             state = WorldState.Closed;
             rc.evtHandler = null;
             rc.msgHandler = null;

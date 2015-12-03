@@ -66,6 +66,8 @@ namespace ChuMeng
             try
             {
                 mSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+                //mSocket.SetSocketOption(SocketOptionLevel.Tcp, SocketOptionName.NoDelay, true);//NoBuff JustSend
+
                 var result = mSocket.BeginConnect(endPoint, new AsyncCallback(OnConnectResult), null);
                 var th = new Thread(CancelConnect);
                 th.Start(result);
@@ -141,6 +143,7 @@ namespace ChuMeng
 
         //事件的Evt处理机制已经删除掉了
         void SendEvt(RemoteClientEvent evt) {
+            Debug.LogError("SendEvt: "+evt);
             if(evtHandler != null) {
                 msgReader.mainLoop.queueInLoop(()=>{
                     evtHandler(evt);
@@ -192,26 +195,25 @@ namespace ChuMeng
         void CancelConnect(object obj)
         {
             var res = (IAsyncResult)obj;
-            if (res != null && !res.AsyncWaitHandle.WaitOne(3000, true))
+            if (res != null && !res.AsyncWaitHandle.WaitOne(3000))
             {
                 Debug.LogError("ConnectError");
-                try
-                {
-                    if (mSocket != null)
-                    {
-                        mSocket.Close();
-                        mSocket = null;
-                    }
-                } catch (Exception exception)
-                {
-                    Debug.LogError(exception.Message);
-                }
                 Close();
             }else {
                 StartReceive();
             }
         }
-
+        private void SendTimeOut(object data) {
+            try {
+                IAsyncResult ret = data as IAsyncResult;
+                if(!ret.AsyncWaitHandle.WaitOne(3000)) {
+                    Debug.LogError("SendTimeOut");
+                    Close();
+                }
+            }catch(Exception e) {
+                Debug.LogError(e.ToString());
+            }
+        }
         public void Send(byte[] data)
         {
             lock (msgBuffer)
@@ -222,7 +224,8 @@ namespace ChuMeng
                 {
                     try
                     {
-                        mSocket.BeginSend(mb.buffer, mb.position, mb.Size, SocketFlags.None, OnSend, null);
+                        var asyncRet = mSocket.BeginSend(mb.buffer, mb.position, mb.Size, SocketFlags.None, OnSend, null);
+                        ThreadPool.QueueUserWorkItem(SendTimeOut, asyncRet);
                     } catch (Exception exception)
                     {
                         Debug.LogError(exception.ToString());

@@ -86,6 +86,11 @@ namespace ChuMeng
         public virtual void BroadcastMsg(CGPlayerCmd.Builder cmd) {
             
         }
+        protected override void OnDestroy()
+        {
+            base.OnDestroy();
+            Debug.LogError("QuitScene: "+this);
+        }
 
 	}
 }
