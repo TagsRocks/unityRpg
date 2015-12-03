@@ -94,7 +94,7 @@ namespace ChuMeng
             rc.Connect(ServerIP, 10001);
             while (lastEvt == RemoteClientEvent.None && state == WorldState.Connecting)
             {
-                yield return new WaitForSeconds(1);
+                yield return null ;
             }
             Debug.LogError("StartInitData: " + lastEvt);
             if (lastEvt == RemoteClientEvent.Connected)
@@ -187,12 +187,15 @@ namespace ChuMeng
             lastEvt = evt;
             if (lastEvt == RemoteClientEvent.Close)
             {
+                WindowMng.windowMng.ShowNotifyLog("和服务器断开连接："+state);
                 if (state != WorldState.Closed)
                 {
                     Debug.LogError("ConnectionClosed But WorldNotClosed");
                     state = WorldState.Idle;
                     StartCoroutine(RetryConnect());
                 }
+            }else if(lastEvt == RemoteClientEvent.Connected) {
+                WindowMng.windowMng.ShowNotifyLog("连接服务器成功："+state);
             }
         }
 
