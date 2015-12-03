@@ -145,8 +145,9 @@ namespace ChuMeng
         void SendEvt(RemoteClientEvent evt) {
             Debug.LogError("SendEvt: "+evt);
             if(evtHandler != null) {
+                var eh = evtHandler;
                 msgReader.mainLoop.queueInLoop(()=>{
-                    evtHandler(evt);
+                    eh(evt);
                 });
             }else {
                 Close();
