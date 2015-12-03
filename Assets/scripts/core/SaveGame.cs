@@ -388,25 +388,6 @@ namespace ChuMeng
                 friendsObj.AddComponent<FriendsController>();
                 friendsObj.transform.parent = transform;
             }
-            if (CombatController.combatController == null)
-            {
-                var combatObj = new GameObject("CombatController");
-                combatObj.AddComponent<FriendsController>();
-                combatObj.transform.parent = transform;
-            }
-            /*
-            if (AchievementController.achievementController == null) {
-                var achievementObj = new GameObject("AchievementController");
-                achievementObj.AddComponent<AchievementController>();
-                achievementObj.transform.parent = transform;
-            }
-            */
-            if (CombatController.combatController == null)
-            {
-                var combatObj = new GameObject("CombatController");
-                combatObj.AddComponent<FriendsController>();
-                combatObj.transform.parent = transform;
-            }
             if (AuctionController.auctionController == null)
             {
                 var auctionObj = new GameObject("AuctionController");

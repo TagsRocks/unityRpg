@@ -76,12 +76,8 @@ namespace ChuMeng
 			fingerID = -1;
 			tapTimer = 0.150f;
 			joystick.color = inactiveColor;
-
-            //origin = Vector3.zero;
-
 			position = origin;
 			gotPosition = false;
-            //lastResetTime = Time.time;
             ResetOrigin();
 		}
 
@@ -116,7 +112,8 @@ namespace ChuMeng
 		{
             useMouse = false;
             Vector3 mousePos = Input.mousePosition;
-//#if UNITY_EDITOR
+            //Mouse 和手机上的Finger冲突了
+#if UNITY_EDITOR
             if(Input.GetMouseButtonDown(0)) {
                 if(mousePos.x < Screen.width/3 && mousePos.y < Screen.height/3) {
                     useMouse = true;
@@ -130,7 +127,7 @@ namespace ChuMeng
                     return;
                 }
             }
-//#endif
+#endif
 
 			foreach (Touch touch in Input.touches) {
 				fingerID = touch.fingerId;

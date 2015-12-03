@@ -11,7 +11,8 @@ namespace ChuMeng
         /// <param name="affix">Affix.</param>
         /// <param name="attacker">Attacker.</param>
         /// <param name="target">Target.</param>
-        public static void FastAddBuff(Affix affix, GameObject attacker, GameObject target, int skillId, int evtId) {
+        public static void FastAddBuff(Affix affix, GameObject attacker, GameObject target, int skillId, int evtId)
+        {
             var cg = CGPlayerCmd.CreateBuilder();
             var binfo = BuffInfo.CreateBuilder();
             binfo.BuffType = (int)affix.effectType;
@@ -20,9 +21,9 @@ namespace ChuMeng
             binfo.SkillId = skillId;
             binfo.EventId = evtId;
             var pos = attacker.transform.position;
-            binfo.AddAttackerPos((int)(pos.x*100));
-            binfo.AddAttackerPos((int)(pos.y*100));
-            binfo.AddAttackerPos((int)(pos.z*100));
+            binfo.AddAttackerPos((int)(pos.x * 100));
+            binfo.AddAttackerPos((int)(pos.y * 100));
+            binfo.AddAttackerPos((int)(pos.z * 100));
             //Log.Net(binfo.AttackerPosCount);
 
             cg.BuffInfo = binfo.Build();
@@ -31,18 +32,23 @@ namespace ChuMeng
             sc.BroadcastMsg(cg);
         }
 
-        public static void FastUseSkill(int skillId) {
+        public static void FastUseSkill(int skillId)
+        {
             var sc = WorldManager.worldManager.GetActive();
-            var cg = CGPlayerCmd.CreateBuilder();
-            var skInfo = SkillAction.CreateBuilder();
-            skInfo.Who = ObjectManager.objectManager.GetMyServerID(); 
-            skInfo.SkillId = skillId;
-            cg.SkillAction = skInfo.Build();
-            cg.Cmd = "Skill";
-            sc.BroadcastMsg(cg);
+            if (sc.IsNet)
+            {
+                var cg = CGPlayerCmd.CreateBuilder();
+                var skInfo = SkillAction.CreateBuilder();
+                skInfo.Who = ObjectManager.objectManager.GetMyServerID(); 
+                skInfo.SkillId = skillId;
+                cg.SkillAction = skInfo.Build();
+                cg.Cmd = "Skill";
+                sc.BroadcastMsg(cg);
+            }
         }
 
-        public static void FastDamage(int attackerId, int enemyId, int damage, bool isCritical) {
+        public static void FastDamage(int attackerId, int enemyId, int damage, bool isCritical)
+        {
             var cg = CGPlayerCmd.CreateBuilder();
             var dinfo = DamageInfo.CreateBuilder();
             dinfo.Attacker = attackerId;
@@ -54,26 +60,30 @@ namespace ChuMeng
             WorldManager.worldManager.GetActive().BroadcastMsg(cg);
         }
 
-        public static void FastMoveAndPos() {
-            var me = ObjectManager.objectManager.GetMyPlayer();
-            if (me == null)
-            {
-                return;
-            }
-            var pos = me.transform.position;
-            var dir = (int)me.transform.localRotation.eulerAngles.y;
-
-            var cg = CGPlayerCmd.CreateBuilder();
-            cg.Cmd = "Move";
-            var ainfo = AvatarInfo.CreateBuilder();
-            ainfo.X = (int)(pos.x*100);
-            ainfo.Z = (int)(pos.z*100);
-            ainfo.Y = (int)(pos.y*100);
-            ainfo.Dir = dir;
-            cg.AvatarInfo = ainfo.Build();
-
+        public static void FastMoveAndPos()
+        {
             var s = WorldManager.worldManager.GetActive();
-            s.BroadcastMsg(cg);
+            if (s.IsNet)
+            {
+                var me = ObjectManager.objectManager.GetMyPlayer();
+                if (me == null)
+                {
+                    return;
+                }
+                var pos = me.transform.position;
+                var dir = (int)me.transform.localRotation.eulerAngles.y;
+
+                var cg = CGPlayerCmd.CreateBuilder();
+                cg.Cmd = "Move";
+                var ainfo = AvatarInfo.CreateBuilder();
+                ainfo.X = (int)(pos.x * 100);
+                ainfo.Z = (int)(pos.z * 100);
+                ainfo.Y = (int)(pos.y * 100);
+                ainfo.Dir = dir;
+                cg.AvatarInfo = ainfo.Build();
+
+                s.BroadcastMsg(cg);
+            }
         }
 
         public static void SyncPosDirHP()
@@ -90,9 +100,9 @@ namespace ChuMeng
             var cg = CGPlayerCmd.CreateBuilder();
             cg.Cmd = "UpdateData";
             var ainfo = AvatarInfo.CreateBuilder();
-            ainfo.X = (int)(pos.x*100);
-            ainfo.Z = (int)(pos.z*100);
-            ainfo.Y = (int)(pos.y*100);
+            ainfo.X = (int)(pos.x * 100);
+            ainfo.Z = (int)(pos.z * 100);
+            ainfo.Y = (int)(pos.y * 100);
             ainfo.Dir = dir;
             ainfo.HP = meAttr.HP;
 
@@ -102,9 +112,11 @@ namespace ChuMeng
             s.BroadcastMsg(cg);
         }
 
-        public static PlayerSync GetPlayer(int id) {
+        public static PlayerSync GetPlayer(int id)
+        {
             var player = ObjectManager.objectManager.GetPlayer(id);
-            if(player != null) {
+            if (player != null)
+            {
                 var sync = player.GetComponent<PlayerSync>();
                 return sync;
             }

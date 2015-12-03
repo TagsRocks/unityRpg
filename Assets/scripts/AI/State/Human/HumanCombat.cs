@@ -139,22 +139,17 @@ namespace ChuMeng
 			Log.AI ("Run HumanCombat Logic");
 			bool first = true;
 
-
-
 			while (!quit) {
 				attackAniName = GetAttackAniName (); 
 
                 var realAttackTime = activeSkill.skillData.AttackAniTime/GetAttr().GetSpeedCoff();
                 var rate = GetAttr().animation[attackAniName].length/realAttackTime;
-				//var realAttackTime = GetAttr ().ObjUnitData.AttackAniSpeed;
-				//var rate = GetAttr().animation[attackAniName].length/realAttackTime;
 				if(first) {
 					PlayAni(attackAniName, rate, WrapMode.Once);
 					first = false;
 				}else {
 					SetAni (attackAniName, rate, WrapMode.Once);
 				}
-                //BackgroundSound.Instance.PlayEffect("blast"+((attackId%3)+1));
                 var rd = Random.Range(1, 10);
                 if(rd <= 3){
                     BackgroundSound.Instance.PlayEffect("destroyereffort"+rd);

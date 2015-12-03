@@ -74,11 +74,8 @@ namespace ChuMeng
 
 				var movement = moveDirection * moveSpeed;
 
-				//playerMove.GetComponent<PhysicComponent>().MoveSpeed(movement);
                 physics.MoveSpeed(movement);
-				//playerMove.transform.rotation = Quaternion.LookRotation (moveDirection);
                 physics.TurnTo(moveDirection);
-
 				yield return null;
 			}
 		}
