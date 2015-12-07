@@ -3,8 +3,8 @@
 		_Color ("Main Color", Color) = (1,1,1,1)
 		_MainTex ("Base (RGB)", 2D) = "white" {}
 		
-		_LightDir ("World light Dir", Vector) = (-1, -1, 1, 0)
-		_ShadowColor ("Shadow Color", Color) = (0, 0, 0, 1)
+		//_LightDir ("World light Dir", Vector) = (-1, -1, 1, 0)
+		//_ShadowColor ("Shadow Color", Color) = (0, 0, 0, 1)
 		
 		_Cutoff("Base alpha cutoff", Range(0, 0.9)) = 0.5
 	}
@@ -56,11 +56,19 @@
 	        struct v2f {
 	        	fixed4 pos : SV_POSITION;
 	        	fixed2 uv : TEXCOORD0;
+	        	fixed3 offPos : TEXCOORD2;
 	        };
 	        
 	        uniform sampler2D _MainTex;
 	        uniform fixed4 _Color;
 	        float _Cutoff;
+
+	        uniform sampler2D _LightMap;
+		    uniform float4 _CamPos;
+		    uniform float _CameraSize;
+		    uniform float4 _AmbientCol;
+		    uniform sampler2D _LightMask;
+			uniform float _LightCoff;
 	        
 	        
 	        v2f vert(appdata_base v) 
@@ -68,6 +76,8 @@
 				v2f o;
 				o.pos = mul(UNITY_MATRIX_MVP, v.vertex);
 				o.uv = MultiplyUV(UNITY_MATRIX_TEXTURE0, v.texcoord);
+
+				o.offPos = mul(_Object2World, v.vertex).xyz-(_WorldSpaceCameraPos+_CamPos);
 				
 				return o;
 			}
@@ -75,7 +85,13 @@
 			fixed4 frag(v2f i) : Color {
 				fixed4 col = tex2D(_MainTex, i.uv)*_Color;
 				clip(col.a-_Cutoff);
-				return col;
+
+				fixed4 retCol;
+				fixed2 mapUV = (i.offPos.xz+float2(_CameraSize, _CameraSize))/(2*_CameraSize);
+				retCol.rgb = col.rgb*(_AmbientCol.rgb+tex2D(_LightMap, mapUV).rgb * (1-tex2D(_LightMask, mapUV).a)*_LightCoff );
+				retCol.a = col.a;
+				return retCol;
+
 			}
 		
 	        ENDCG	
@@ -96,9 +112,6 @@
 	         uniform float4x4 _World2Receiver; // transformation from 
 	         uniform float4 _LightDir;
 	         
-	         
-			
-	            // world coordinates to the coordinate system of the plane
 	 
 	         float4 vert(float4 vertexPos : POSITION) : SV_POSITION
 	         {

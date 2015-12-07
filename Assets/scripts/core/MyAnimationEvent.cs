@@ -108,6 +108,11 @@ namespace ChuMeng
         /// <param name="skillData">Skill data.</param>
 		public void OnSkill (SkillData skillData)
 		{
+            var buff = GetComponent<BuffComponent>();
+            if(!buff.CanUseSkill()) {
+                return;
+            }
+
 			var msg = new Message (MsgType.DoSkill);
 			msg.skillData = skillData;
 			InsertMsg (msg);

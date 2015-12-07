@@ -41,6 +41,8 @@ namespace ChuMeng
             Stunned , //眩晕 参考冰冻 和 KnockBack
             ShiXue, //嗜血Buff 多次攻击后触发增强
             OneTimeCriticalHit,
+            Blind, //玩家致盲
+            Silent, //随机沉默
         }
 
         public EffectType effectType = EffectType.None;

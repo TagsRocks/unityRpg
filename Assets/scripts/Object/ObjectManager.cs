@@ -286,7 +286,7 @@ namespace ChuMeng
 			if (Actors.ContainsKey (playerID)) {
 				Actors.Remove (playerID);
 			} else {
-				Debug.LogError ("ObjectManager::clearPlayer No Such Player " + playerID);
+				//Debug.LogError ("ObjectManager::clearPlayer No Such Player " + playerID);
 			}
 
 		}

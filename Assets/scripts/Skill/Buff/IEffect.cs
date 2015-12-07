@@ -75,5 +75,8 @@ namespace ChuMeng {
 		protected BuffComponent GetBuffCom() {
 			return obj.GetComponent<BuffComponent> ();
 		}
+        public virtual bool CanUseSkill() {
+            return true;
+        }
 	}
 }

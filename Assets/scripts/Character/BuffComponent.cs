@@ -49,9 +49,7 @@ namespace ChuMeng {
 				var eft = BuffManager.buffManager.GetBuffInstance (affix.effectType);
 				var buff = (IEffect)Activator.CreateInstance (eft);
 				buff.Init (affix, gameObject);
-				//buff.attacker = attacker;
                 buff.attackerPos = attackerPos;
-
 
                 if(affix.IsOnlyOne) {
                     for(int i=0; i < effectList.Count; i++) {
@@ -88,6 +86,15 @@ namespace ChuMeng {
                 rate += ef.GetCriticalRate();
             }
             return rate;
+        }
+        public bool CanUseSkill() {
+            foreach(var ef in effectList) {
+                if(!ef.CanUseSkill())
+                {
+                    return false;
+                }
+            }
+            return true;
         }
 
 

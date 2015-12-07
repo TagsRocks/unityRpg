@@ -5,6 +5,11 @@ namespace ChuMeng
 {
 	public class GraphInit : MonoBehaviour
 	{
+        public static GraphInit Instance;
+        void Awake() {
+            Instance = this;
+        }
+
         public Texture lightMap;
         //public Vector3 camPos = Vector3.zero;
 
@@ -61,6 +66,52 @@ namespace ChuMeng
         public bool InitNow;
         public void InitNowMethod() {
             InitAll();
+        }
+
+        public bool IsBlind = false;
+        public void SetBlind(bool b) {
+            IsBlind = b;
+            if(IsBlind) {
+                Blind();
+            }else {
+                Clear();
+            }
+        }
+
+        //当前Room的Light和Props关闭
+        private void Blind() {
+            Shader.SetGlobalVector("_AmbientCol", Vector3.zero);
+            var zone = BattleManager.battleManager.Zones;
+            var cz = BattleManager.battleManager.currentZone;
+            if(cz >= 0 && cz < zone.Count) {
+                //var z = zone[cz];
+                var z = GameObject.Find("Root_"+cz);
+                if(z != null) {
+                    var props = z.transform.Find("Props");
+                    var light = z.transform.Find("Light");
+                    if(props != null && light != null) {
+                        props.gameObject.SetActive(false);
+                        light.gameObject.SetActive(false);
+                    }
+                }
+            }
+        }
+
+        private void Clear() {
+            Shader.SetGlobalVector("_AmbientCol", ambient);
+            var zone = BattleManager.battleManager.Zones;
+            var cz = BattleManager.battleManager.currentZone;
+            if(cz >= 0 && cz < zone.Count) {
+                var z = GameObject.Find("Root_"+cz);
+                if(z != null) {
+                    var props = z.transform.Find("Props");
+                    var light = z.transform.Find("Light");
+                    if(props != null && light != null) {
+                        props.gameObject.SetActive(true);
+                        light.gameObject.SetActive(true);
+                    }
+                }
+            }
         }
 
 	}

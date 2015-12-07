@@ -286,12 +286,12 @@ namespace ChuMeng
 		{
             Log.Sys ("Backpack::PutItem From Network In backpack "+bd.packInfo);
 			if (index >= SlotData.Count || index < 0) {
-				Debug.LogError ("BackPack:: index out of Range " + index);
+				//Debug.LogError ("BackPack:: index out of Range " + index);
 				return;
 			}
 			int realIndex = GetIndex(index);
 			if (SlotData [realIndex] != null && SlotData [realIndex].itemData != null) {
-				Debug.LogError ("BackPack:; has object in index " + realIndex);
+				//Debug.LogError ("BackPack:; has object in index " + realIndex);
 				//return;
 			}
             if(bd.num == 0){
