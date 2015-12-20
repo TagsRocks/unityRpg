@@ -6,11 +6,12 @@ namespace ChuMeng
     public class SpawnChest : MonoBehaviour
     {
         public int rateToSpawn = 100;
+        //宝箱模型ID
         public int ChestId = 36;
 
         bool isSpawnYet = false;
         public int waveNum = 0;
-
+        //宝箱所召唤的Boss的ID
         public int MonsterID = 2011;
 
         void Awake() {

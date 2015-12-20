@@ -52,6 +52,15 @@ namespace ChuMeng
             }
         }
 
+        public void AddEnemy(GameObject g) {
+            enemyList.Add(g);
+            if(AlwaysKill) {
+                var npc = g.GetComponent<NpcAttribute>();
+                npc.ChangeHP(-npc.HP_Max);
+            }
+        }
+        public bool AlwaysKill = false;
+
         [ButtonCallFunc()]
         public bool killAndMove;
 

@@ -99,6 +99,14 @@ namespace ChuMeng
 		}
 
 
+        public BackpackData GetItemByTypeId(int id) {
+            foreach(var s in SlotData) {
+                if(s != null && s.itemData != null && s.itemData.ObjectId == id ) {
+                    return s;
+                }
+            }
+            return null;
+        }
         public BackpackData GetItemInBackPack(long propsId) {
             foreach(var s in SlotData) {
                 if(s != null && s.itemData != null && s.id == propsId) {

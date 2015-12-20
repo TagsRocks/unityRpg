@@ -138,6 +138,14 @@ namespace ChuMeng {
             sell.UserPropsId = bd.id;
             sell.GoodsType = (int)bd.itemData.GetGoodsType();
             KBEngine.Bundle.sendImmediate(sell);
+            WindowMng.windowMng.ShowNotifyLog(bd.itemData.ItemName+"-"+bd.num);
+        }
+
+        public static void SellQuestItem(int itemId) {
+            var item = BackPack.backpack.GetItemByTypeId(itemId);
+            if(item != null) {
+                SellItem(item);
+            }
         }
 
 	}

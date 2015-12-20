@@ -14,7 +14,7 @@ using System.Collections.Generic;
 
 namespace ChuMeng
 {
-/*
+    /*
  * 配置的数据均为百分比数据  需要从相关的曲线数据中获取时机的数据
  * 例如HP = 100 表示100% 的生命值， 根据Level 在 Health_monster 表格中查到对应Level怪兽的数据 接着按照百分比调整即可 
  */
@@ -67,7 +67,7 @@ namespace ChuMeng
                         {
                             ret.Add(elite.id);
                         }
-                        for (int i=1; i < 10; i++)
+                        for (int i = 1; i < 10; i++)
                         {
                             var elite1 = GMDataBaseSystem.database.SearchId<MonsterFightConfigData>(GameData.MonsterFightConfig, 10 * (mid + 1000) + i);
                             if (elite1 != null)
@@ -181,6 +181,7 @@ namespace ChuMeng
                 return config.LogicTemplate;
             }
         }
+
         public class Treasure
         {
             public ItemData itemData;
@@ -238,6 +239,7 @@ namespace ChuMeng
                 }
             }
         }
+
         ///<summary>
         /// 人物自身属性都是静态的，装备只提供加成不会影响静态的基础
         /// </summary> 
@@ -451,9 +453,16 @@ namespace ChuMeng
                 var rd = Random.Range(0, 1.0f);
                 Log.Sys("random " + rd + " last " + " d " + d [1]);
 
-                if (rd < d [1] * modify)
+                //100% 掉落
+                if (d.Count >= 4)
                 {
                     allDrops.Add(d);
+                } else
+                {
+                    if (rd < d [1] * modify)
+                    {
+                        allDrops.Add(d);
+                    }
                 }
             }
             return allDrops;
@@ -473,6 +482,7 @@ namespace ChuMeng
         {
             npcConfig = n;
         }
+
         /// <summary>
         /// 0 Monster
         /// 1 Player 
@@ -500,13 +510,15 @@ namespace ChuMeng
                         playerConfig = r;
                         break;
                     }
-                    if(r.job == mid ){
+                    if (r.job == mid)
+                    {
                         lastInfo = r;
                     }
                 }
 
                 //等级超过了配置区间
-                if(playerConfig == null) {
+                if (playerConfig == null)
+                {
                     playerConfig = lastInfo;
                 }
 

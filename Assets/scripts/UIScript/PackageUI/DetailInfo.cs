@@ -17,7 +17,9 @@ namespace ChuMeng
             set
             {
                 _bd = value;
-                InitButton();
+                if(_bd != null) {
+                    InitButton();
+                }
             }
         }
 
@@ -27,6 +29,7 @@ namespace ChuMeng
         GameObject Learn;
         GameObject LevelUp;
         GameObject Equip;
+        GameObject Sell;
 
         void Awake()
         {
@@ -38,6 +41,7 @@ namespace ChuMeng
             SetCallback("Sell", OnSell);
             OneKey = GetName("OneKey");
             Learn = GetName("Learn");
+            Sell = GetName("Sell");
             Learn.SetActive(false);
             SetCallback("Learn", OnLearn);
 
@@ -72,33 +76,49 @@ namespace ChuMeng
             Learn.SetActive(false);
             LevelUp.SetActive(false);
             Equip.SetActive(false);
+            Sell.SetActive(false);
+            Log.GUI("InitButton: "+backpackData);
 
             if (equipData != null)
             {
                 LevelUp.SetActive(true);
-            } else if (backpackData != null)
+            } 
+            else if (backpackData != null)
             {
                 if (backpackData.itemData.IsEquip())
                 {
                     Equip.SetActive(true);
                 } else
                 {
+                    var itemD = backpackData.itemData;
+                    Log.GUI("PropsTYpe: "+itemD.UnitType);
                     if (backpackData.itemData.UnitType == ItemData.UnitTypeEnum.FORGE_GRAPH)
                     {
                         Learn.SetActive(true);
+                        Sell.SetActive(true);
                     } else if (backpackData.itemData.UnitType == ItemData.UnitTypeEnum.GEM)
                     {
                         LevelUp.SetActive(true);
                         OneKey.SetActive(true);
+                        Sell.SetActive(true);
                     } else if (backpackData.itemData.UnitType == ItemData.UnitTypeEnum.MATERIAL)
                     {
+                        Sell.SetActive(true);
                     }else if(backpackData.itemData.UnitType == ItemData.UnitTypeEnum.SKILL_BOOK) {
                         Learn.SetActive(true);
-                    }else {
+                        Sell.SetActive(true);
+                    }
+                    else if(itemD.UnitType == ItemData.UnitTypeEnum.QUESTITEM) {
+                        Sell.SetActive(false);
+                        Log.GUI("PropsTYpe Quest: "+itemD.UnitType);
+                    }
+                    else {
+                        Sell.SetActive(true);
                         Debug.LogError("Unknown Item Type "+backpackData.itemData.UnitType);
                     }
                 }
-            } else
+            } 
+            else
             {
                 Debug.LogError("Data is Null ");
             }
@@ -155,8 +175,9 @@ namespace ChuMeng
         public void SetEquip(EquipData ed)
         {
             equipData = ed;
-            //backpackData = ed;
-            InitButton();
+            if(equipData != null) {
+                InitButton();
+            }
         }
 
         protected override void OnEvent(MyEvent evt)
@@ -176,8 +197,8 @@ namespace ChuMeng
                 //var label = GetLabel("Equip/Label");
                 //label.text = "卸下";
 
-                GetName("Equip").SetActive(false);
-                GetName("Sell").SetActive(false);
+                //GetName("Equip").SetActive(false);
+                //GetName("Sell").SetActive(false);
 
                 string baseAttr = "";
                 if (equipData.itemData.Damage > 0)
@@ -207,7 +228,7 @@ namespace ChuMeng
                     equipData.itemData.Description);
             } else if (backpackData != null)
             {
-                GetName("Sell").SetActive(true);
+                //GetName("Sell").SetActive(true);
                 if(backpackData.itemData.IsEquip()) {
                     string baseAttr = "";
                     var itemData = backpackData.itemData;

@@ -33,12 +33,15 @@ namespace ChuMeng
 		// Use this for initialization
 		void Start ()
 		{
+            /*
 			if (itemData != null && itemData.UnitType == ItemData.UnitTypeEnum.QUESTITEM) {
 				var c = NGUITools.AddMissingComponent<SphereCollider>(gameObject);
 				c.radius = 2;
 				c.isTrigger = true;
 			}
-			else if (itemData != null && IsOnGround) {
+			else 
+                */
+            if (itemData != null && IsOnGround) {
 				var c = gameObject.AddComponent<CharacterController>();
 				c.center = new Vector3(0, 0.2f, 0);
 				c.radius = 0.1f;

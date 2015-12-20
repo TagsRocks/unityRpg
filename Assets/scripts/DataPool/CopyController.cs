@@ -98,11 +98,28 @@ namespace ChuMeng {
             var levId = SelectLevelInfo.levelLocal.id;
             var chapterId = levId/100;
             var lvId = levId%100;
+            if(IsPassLevelYet(chapterId, lvId)) {
+                return;
+            }
             Log.Net("PassLevel "+levId);
             GameInterface_Chat.chatInterface.SendChatMsg("pass_lev "+chapterId+" "+lvId, 0);
 
         }
 
+        public bool IsPassLevelYet(int chapter, int level) {
+            int curChapter = GetCurrentChapter ();
+            int curLevel = GetCurrentLevel ();
+            if(curChapter > chapter) {
+                return true;
+            }
+            if(curChapter < chapter) {
+                return false;
+            }
+            if(curLevel >= level) {
+                return true;
+            }
+            return false;
+        }
 		//获得某个的章节的level信息
 		public List<LevelInfo> GetChapterLevel(int chapter) {
 			Log.GUI ("GetChapterLevel "+chapter);

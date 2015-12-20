@@ -23,8 +23,22 @@ namespace ChuMeng
                 }else {
                     StartCoroutine(ZhiRuo3());    
                 }
+            }else if(step == 3) {
+                ZhiRuo5();
             }
         }
+
+        void ZhiRuo5() {
+            string[] text = new string[]{
+                "至若快和我一起去寻苍冥水，救东湖", 
+                "好的哥哥。",
+            };
+
+            NpcDialogInterface.ShowTextList(new System.Collections.Generic.List<string>(text), delegate() {
+                GameInterface_Player.SetIntState(GameBool.cunZhangState, 4);
+            });
+        }
+
         IEnumerator  ZhiRuo3() {
             string[] text = new string[]{
                 "至若要和我一起去，找宝贝么？", 

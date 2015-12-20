@@ -35,4 +35,5 @@ public static class NpcDialogInterface  {
         var dia = npcDialog.GetComponent<NpcDialog>();
         dia.StartCoroutine(ShowList(dia, text, cb));
     }
+
 }

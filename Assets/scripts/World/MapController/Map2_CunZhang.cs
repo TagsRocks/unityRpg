@@ -83,12 +83,41 @@ namespace ChuMeng
             var dia = npcDialog.GetComponent<NpcDialog>();
             dia.ShowText(string.Format(text [0], ObjectManager.objectManager.GetMyName()));
         }
-        void CunZhang5(){
+
+       void CunZhang5(){
             string[] text = new string[]{
-                "孩子你终于安全回来了！后面故事待续", 
+                "东湖受了魔气侵袭，需要苍冥水方能恢复，此物在试炼之境可以寻到，你快快和至若一起去寻回来，晚了，怕东湖会有危险。",
+                "巨牙子爷爷放心，我这就去找至若，一起去苍冥水。",
+            };
+
+            NpcDialogInterface.ShowTextList(new System.Collections.Generic.List<string>(text), delegate() {
+                GameInterface_Player.SetIntState(GameBool.cunZhangState, 3);
+            });
+
+        }
+
+        void CunZhang6() {
+            string[] text = new string[]{
+                @"早去早回呀。", 
+            };
+            NpcDialogInterface.ShowTextList(new System.Collections.Generic.List<string>(text), null);
+        }
+        void CunZhang7() {
+            var text = new string[]{
+                @"你们终于回来了，找到苍冥水了么？",
+                @"至若：不知道这个是不是，我们遇到了一只苍狼，从它身上找到的",
+                @"正是此物，苍冥水本是苍狼性命本源，拥有无限生机,正好可以用来治好东湖身上伤",
+                @"不过这苍冥水有些浑浊，怕是那狼恐是暮年",
+                @"至若：怪不得这么好对付呢",
+                @"巨牙子：东湖那边现在危在旦夕，此物需速速给他服下，你们同我一起去吧。",
+                @"是的爷爷",
             };
             NpcDialogInterface.ShowTextList(text, null);
+            GameInterface_Package.SellQuestItem((int)ItemData.ItemID.CANG_MING_SHUI);
+            GameInterface_Player.SetIntState(GameBool.cunZhangState, 6);
         }
+
+
         void TalkToCunZhang()
         {
             Log.GUI("TalkTOCunZhange");
@@ -117,8 +146,12 @@ namespace ChuMeng
                     }
                 }else if(step == 1){
                     CunZhang4();
-                }else {
+                }else if(step == 2){
                     CunZhang5();
+                }else if(step == 3){
+                    CunZhang6();
+                }else if(step == 5) {
+                    CunZhang7();
                 }
             }
         }

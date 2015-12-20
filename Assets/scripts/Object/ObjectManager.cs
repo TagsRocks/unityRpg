@@ -615,7 +615,7 @@ namespace ChuMeng
             //不算怪物允许不去打
             npc.transform.position = spawn.transform.position;
 
-            BattleManager.battleManager.enemyList.Add (npc.gameObject);
+            BattleManager.battleManager.AddEnemy (npc.gameObject);
             npc.SetDeadDelegate = BattleManager.battleManager.EnemyDead;
         }
 
@@ -674,7 +674,7 @@ namespace ChuMeng
                     npc.transform.localScale = new Vector3(2, 2, 2);
                 }
 
-				BattleManager.battleManager.enemyList.Add (npc.gameObject);
+                BattleManager.battleManager.AddEnemy (npc.gameObject);
 				npc.SetDeadDelegate = BattleManager.battleManager.EnemyDead;
 				//npc.Level = spawn.Level;
 			} else {
@@ -734,7 +734,7 @@ namespace ChuMeng
             }
 
             if(npc.tag == GameTag.Enemy) {
-                BattleManager.battleManager.enemyList.Add (npc.gameObject);
+                BattleManager.battleManager.AddEnemy (npc.gameObject);
                 npc.SetDeadDelegate = BattleManager.battleManager.EnemyDead;
             }
 		}

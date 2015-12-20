@@ -115,11 +115,13 @@ namespace ChuMeng
             FORGE_GRAPH = 16,
 
 
+
 		}
         public enum ItemID {
             GOLD = 4,
             DRUG = 101,
             JING_SHI = 5,
+            CANG_MING_SHUI = 6,
         }
 
 		//装备对应的EquipData位置
