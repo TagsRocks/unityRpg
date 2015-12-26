@@ -112,6 +112,10 @@ namespace ChuMeng
                 return true;
             }
 
+            if(BattleManager.battleManager.StopAttack) {
+                return false;
+            }
+
             GameObject player = ObjectManager.objectManager.GetMyPlayer();
             if (player && !player.GetComponent<NpcAttribute>().IsDead)
             {

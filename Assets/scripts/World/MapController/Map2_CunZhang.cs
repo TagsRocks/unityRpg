@@ -117,6 +117,17 @@ namespace ChuMeng
             GameInterface_Player.SetIntState(GameBool.cunZhangState, 6);
         }
 
+        void CunZhang8() {
+            var text = new string[] {
+                @"巨牙子：东湖体内魔气现在已经被清除干净，还是静养数日，你和至若，最近不要再靠近试炼之地了，那里危机重重。",
+                @"是的巨牙子爷爷",
+                @"你去把我的吩咐告诉至若吧。",
+            };
+            NpcDialogInterface.ShowTextList(text, null);
+            GameInterface_Player.SetIntState(GameBool.cunZhangState, 9);
+        }
+
+
 
         void TalkToCunZhang()
         {
@@ -152,6 +163,8 @@ namespace ChuMeng
                     CunZhang6();
                 }else if(step == 5) {
                     CunZhang7();
+                }else if(step == 8) {
+                    CunZhang8();
                 }
             }
         }

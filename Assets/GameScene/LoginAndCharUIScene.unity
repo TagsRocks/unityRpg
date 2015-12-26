@@ -341,8 +341,8 @@ GameObject:
   - 114: {fileID: 775957293}
   - 114: {fileID: 775957295}
   - 114: {fileID: 775957292}
-  - 114: {fileID: 775957297}
   - 114: {fileID: 775957296}
+  - 114: {fileID: 775957297}
   m_Layer: 0
   m_Name: kbengine
   m_TagString: Untagged
@@ -432,17 +432,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 775957291}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3845e45d7b2614c0b845bd378da9e92f, type: 3}
+  m_Script: {fileID: 11500000, guid: bce28ee18150946fc9a8a137e62c6634, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CloseNet: 0
-  TestServer: 0
-  Save: 0
-  file: server0_5.json
-  ReadFile: 0
-  Kill: 0
-  Elite: 0
-  ignore: 0
+  v: 4
+  SetBool: 0
 --- !u!1 &1161206340
 GameObject:
   m_ObjectHideFlags: 0

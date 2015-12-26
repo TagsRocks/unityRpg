@@ -1208,6 +1208,40 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &111784
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 411784}
+  - 33: {fileID: 3311784}
+  - 65: {fileID: 6511784}
+  - 23: {fileID: 2311784}
+  m_Layer: 0
+  m_Name: Cube
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &111786
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 411786}
+  - 114: {fileID: 11411784}
+  m_Layer: 0
+  m_Name: treasureChest
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!4 &400000
 Transform:
   m_ObjectHideFlags: 1
@@ -1856,6 +1890,7 @@ Transform:
   - {fileID: 400004}
   - {fileID: 400002}
   - {fileID: 400000}
+  - {fileID: 411786}
   m_Father: {fileID: 400102}
   m_RootOrder: 0
 --- !u!4 &400100
@@ -1866,7 +1901,7 @@ Transform:
   m_GameObject: {fileID: 100100}
   m_LocalRotation: {x: 0, y: -.707106829, z: 0, w: .707106829}
   m_LocalPosition: {x: 48.8290443, y: -.921869755, z: 45.8825684}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.00000012, y: 1, z: 1.00000012}
   m_Children: []
   m_Father: {fileID: 400092}
   m_RootOrder: 1
@@ -1933,7 +1968,7 @@ Transform:
   m_GameObject: {fileID: 100110}
   m_LocalRotation: {x: 0, y: -.707106829, z: 0, w: .707106829}
   m_LocalPosition: {x: 45.1945724, y: -.991537094, z: 45.8825684}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.00000012, y: 1, z: 1.00000012}
   m_Children: []
   m_Father: {fileID: 400106}
   m_RootOrder: 1
@@ -1998,7 +2033,7 @@ Transform:
   m_GameObject: {fileID: 100120}
   m_LocalRotation: {x: 0, y: -.707106829, z: 0, w: .707106709}
   m_LocalPosition: {x: 47.0449448, y: -1.03495121, z: 45.882576}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.00000012, y: 1, z: 1.00000012}
   m_Children: []
   m_Father: {fileID: 400090}
   m_RootOrder: 1
@@ -2182,6 +2217,31 @@ Transform:
   - {fileID: 400136}
   m_Father: {fileID: 400142}
   m_RootOrder: 2
+--- !u!4 &411784
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 111784}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 411786}
+  m_RootOrder: 0
+--- !u!4 &411786
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 111786}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -10.0200005, y: .0900000036, z: 20.0799999}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 411784}
+  m_Father: {fileID: 400098}
+  m_RootOrder: 46
 --- !u!23 &2300000
 Renderer:
   m_ObjectHideFlags: 1
@@ -2302,6 +2362,26 @@ Renderer:
   m_ScaleInLightmap: 1
   m_SortingLayerID: 0
   m_SortingOrder: 0
+--- !u!23 &2311784
+Renderer:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 111784}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_LightmapIndex: 255
+  m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
+  m_Materials:
+  - {fileID: 10302, guid: 0000000000000000f000000000000000, type: 0}
+  m_SubsetIndices: 
+  m_StaticBatchRoot: {fileID: 0}
+  m_UseLightProbes: 0
+  m_LightProbeAnchor: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
 --- !u!33 &3300000
 MeshFilter:
   m_ObjectHideFlags: 1
@@ -2344,6 +2424,13 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100140}
   m_Mesh: {fileID: 0}
+--- !u!33 &3311784
+MeshFilter:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 111784}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!65 &6500000
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -2380,6 +2467,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 13, y: 3, z: .5}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!65 &6511784
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 111784}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2393,6 +2492,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waveNum: 7
   Forever: 0
+  multiSpawner: []
   Group: 0
   Resource: {fileID: 100096, guid: 600a08fea60c8da4295f4aa39d250c65, type: 2}
   MonsterID: 306
@@ -2404,6 +2504,7 @@ MonoBehaviour:
   AddLevel: 0
   TotalWave: 5
   waveText: {fileID: 0}
+  FirstMonster: {fileID: 0}
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2417,6 +2518,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waveNum: 7
   Forever: 0
+  multiSpawner: []
   Group: 0
   Resource: {fileID: 100096, guid: 600a08fea60c8da4295f4aa39d250c65, type: 2}
   MonsterID: 306
@@ -2428,6 +2530,7 @@ MonoBehaviour:
   AddLevel: 0
   TotalWave: 5
   waveText: {fileID: 0}
+  FirstMonster: {fileID: 0}
 --- !u!114 &11400004
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2441,6 +2544,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waveNum: 7
   Forever: 0
+  multiSpawner: []
   Group: 0
   Resource: {fileID: 100096, guid: 600a08fea60c8da4295f4aa39d250c65, type: 2}
   MonsterID: 306
@@ -2452,6 +2556,7 @@ MonoBehaviour:
   AddLevel: 0
   TotalWave: 5
   waveText: {fileID: 0}
+  FirstMonster: {fileID: 0}
 --- !u!114 &11400006
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2465,6 +2570,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waveNum: 7
   Forever: 0
+  multiSpawner: []
   Group: 0
   Resource: {fileID: 100096, guid: 600a08fea60c8da4295f4aa39d250c65, type: 2}
   MonsterID: 306
@@ -2476,6 +2582,7 @@ MonoBehaviour:
   AddLevel: 0
   TotalWave: 5
   waveText: {fileID: 0}
+  FirstMonster: {fileID: 0}
 --- !u!114 &11400008
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2489,6 +2596,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waveNum: 6
   Forever: 0
+  multiSpawner: []
   Group: 0
   Resource: {fileID: 100096, guid: 600a08fea60c8da4295f4aa39d250c65, type: 2}
   MonsterID: 306
@@ -2500,6 +2608,7 @@ MonoBehaviour:
   AddLevel: 0
   TotalWave: 5
   waveText: {fileID: 0}
+  FirstMonster: {fileID: 0}
 --- !u!114 &11400010
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2513,6 +2622,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waveNum: 6
   Forever: 0
+  multiSpawner: []
   Group: 0
   Resource: {fileID: 100102, guid: a96cb172c60e5d049832f4076bdec458, type: 2}
   MonsterID: 119
@@ -2524,6 +2634,7 @@ MonoBehaviour:
   AddLevel: 0
   TotalWave: 5
   waveText: {fileID: 0}
+  FirstMonster: {fileID: 0}
 --- !u!114 &11400012
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2537,6 +2648,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waveNum: 6
   Forever: 0
+  multiSpawner: []
   Group: 0
   Resource: {fileID: 100102, guid: a96cb172c60e5d049832f4076bdec458, type: 2}
   MonsterID: 119
@@ -2548,6 +2660,7 @@ MonoBehaviour:
   AddLevel: 0
   TotalWave: 5
   waveText: {fileID: 0}
+  FirstMonster: {fileID: 0}
 --- !u!114 &11400014
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2561,6 +2674,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waveNum: 6
   Forever: 0
+  multiSpawner: []
   Group: 0
   Resource: {fileID: 100000, guid: 2d0d4abcd2c3b4db1903d1be92fde4f3, type: 2}
   MonsterID: 10
@@ -2572,6 +2686,7 @@ MonoBehaviour:
   AddLevel: 0
   TotalWave: 5
   waveText: {fileID: 0}
+  FirstMonster: {fileID: 0}
 --- !u!114 &11400016
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2585,6 +2700,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waveNum: 6
   Forever: 0
+  multiSpawner: []
   Group: 0
   Resource: {fileID: 100000, guid: 2d0d4abcd2c3b4db1903d1be92fde4f3, type: 2}
   MonsterID: 10
@@ -2596,6 +2712,7 @@ MonoBehaviour:
   AddLevel: 0
   TotalWave: 5
   waveText: {fileID: 0}
+  FirstMonster: {fileID: 0}
 --- !u!114 &11400018
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2609,6 +2726,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waveNum: 6
   Forever: 0
+  multiSpawner: []
   Group: 0
   Resource: {fileID: 100096, guid: 600a08fea60c8da4295f4aa39d250c65, type: 2}
   MonsterID: 306
@@ -2620,6 +2738,7 @@ MonoBehaviour:
   AddLevel: 0
   TotalWave: 5
   waveText: {fileID: 0}
+  FirstMonster: {fileID: 0}
 --- !u!114 &11400020
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2633,6 +2752,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waveNum: 5
   Forever: 0
+  multiSpawner: []
   Group: 0
   Resource: {fileID: 100096, guid: 600a08fea60c8da4295f4aa39d250c65, type: 2}
   MonsterID: 306
@@ -2644,6 +2764,7 @@ MonoBehaviour:
   AddLevel: 0
   TotalWave: 5
   waveText: {fileID: 0}
+  FirstMonster: {fileID: 0}
 --- !u!114 &11400022
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2657,6 +2778,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waveNum: 5
   Forever: 0
+  multiSpawner: []
   Group: 0
   Resource: {fileID: 100102, guid: a96cb172c60e5d049832f4076bdec458, type: 2}
   MonsterID: 119
@@ -2668,6 +2790,7 @@ MonoBehaviour:
   AddLevel: 0
   TotalWave: 5
   waveText: {fileID: 0}
+  FirstMonster: {fileID: 0}
 --- !u!114 &11400024
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2681,6 +2804,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waveNum: 5
   Forever: 0
+  multiSpawner: []
   Group: 0
   Resource: {fileID: 100102, guid: a96cb172c60e5d049832f4076bdec458, type: 2}
   MonsterID: 119
@@ -2692,6 +2816,7 @@ MonoBehaviour:
   AddLevel: 0
   TotalWave: 5
   waveText: {fileID: 0}
+  FirstMonster: {fileID: 0}
 --- !u!114 &11400026
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2705,6 +2830,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waveNum: 5
   Forever: 0
+  multiSpawner: []
   Group: 0
   Resource: {fileID: 100102, guid: a96cb172c60e5d049832f4076bdec458, type: 2}
   MonsterID: 119
@@ -2716,6 +2842,7 @@ MonoBehaviour:
   AddLevel: 0
   TotalWave: 5
   waveText: {fileID: 0}
+  FirstMonster: {fileID: 0}
 --- !u!114 &11400028
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2729,6 +2856,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waveNum: 5
   Forever: 0
+  multiSpawner: []
   Group: 0
   Resource: {fileID: 100102, guid: a96cb172c60e5d049832f4076bdec458, type: 2}
   MonsterID: 119
@@ -2740,6 +2868,7 @@ MonoBehaviour:
   AddLevel: 0
   TotalWave: 5
   waveText: {fileID: 0}
+  FirstMonster: {fileID: 0}
 --- !u!114 &11400030
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2753,6 +2882,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waveNum: 4
   Forever: 0
+  multiSpawner: []
   Group: 0
   Resource: {fileID: 100102, guid: a96cb172c60e5d049832f4076bdec458, type: 2}
   MonsterID: 119
@@ -2764,6 +2894,7 @@ MonoBehaviour:
   AddLevel: 0
   TotalWave: 5
   waveText: {fileID: 0}
+  FirstMonster: {fileID: 0}
 --- !u!114 &11400032
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2777,6 +2908,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waveNum: 4
   Forever: 0
+  multiSpawner: []
   Group: 0
   Resource: {fileID: 100000, guid: 2d0d4abcd2c3b4db1903d1be92fde4f3, type: 2}
   MonsterID: 10
@@ -2788,6 +2920,7 @@ MonoBehaviour:
   AddLevel: 0
   TotalWave: 5
   waveText: {fileID: 0}
+  FirstMonster: {fileID: 0}
 --- !u!114 &11400034
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2801,6 +2934,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waveNum: 4
   Forever: 0
+  multiSpawner: []
   Group: 0
   Resource: {fileID: 100000, guid: 2d0d4abcd2c3b4db1903d1be92fde4f3, type: 2}
   MonsterID: 10
@@ -2812,6 +2946,7 @@ MonoBehaviour:
   AddLevel: 0
   TotalWave: 5
   waveText: {fileID: 0}
+  FirstMonster: {fileID: 0}
 --- !u!114 &11400036
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2825,6 +2960,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waveNum: 4
   Forever: 0
+  multiSpawner: []
   Group: 0
   Resource: {fileID: 100096, guid: 600a08fea60c8da4295f4aa39d250c65, type: 2}
   MonsterID: 306
@@ -2836,6 +2972,7 @@ MonoBehaviour:
   AddLevel: 0
   TotalWave: 5
   waveText: {fileID: 0}
+  FirstMonster: {fileID: 0}
 --- !u!114 &11400038
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2849,6 +2986,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waveNum: 4
   Forever: 0
+  multiSpawner: []
   Group: 0
   Resource: {fileID: 100096, guid: 600a08fea60c8da4295f4aa39d250c65, type: 2}
   MonsterID: 306
@@ -2860,6 +2998,7 @@ MonoBehaviour:
   AddLevel: 0
   TotalWave: 5
   waveText: {fileID: 0}
+  FirstMonster: {fileID: 0}
 --- !u!114 &11400040
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2873,6 +3012,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waveNum: 4
   Forever: 0
+  multiSpawner: []
   Group: 0
   Resource: {fileID: 100096, guid: 600a08fea60c8da4295f4aa39d250c65, type: 2}
   MonsterID: 306
@@ -2884,6 +3024,7 @@ MonoBehaviour:
   AddLevel: 0
   TotalWave: 5
   waveText: {fileID: 0}
+  FirstMonster: {fileID: 0}
 --- !u!114 &11400042
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2897,6 +3038,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waveNum: 3
   Forever: 0
+  multiSpawner: []
   Group: 0
   Resource: {fileID: 100096, guid: 600a08fea60c8da4295f4aa39d250c65, type: 2}
   MonsterID: 306
@@ -2908,6 +3050,7 @@ MonoBehaviour:
   AddLevel: 0
   TotalWave: 5
   waveText: {fileID: 0}
+  FirstMonster: {fileID: 0}
 --- !u!114 &11400044
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2921,6 +3064,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waveNum: 3
   Forever: 0
+  multiSpawner: []
   Group: 0
   Resource: {fileID: 100096, guid: 600a08fea60c8da4295f4aa39d250c65, type: 2}
   MonsterID: 306
@@ -2932,6 +3076,7 @@ MonoBehaviour:
   AddLevel: 0
   TotalWave: 5
   waveText: {fileID: 0}
+  FirstMonster: {fileID: 0}
 --- !u!114 &11400046
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2945,6 +3090,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waveNum: 3
   Forever: 0
+  multiSpawner: []
   Group: 0
   Resource: {fileID: 100096, guid: 600a08fea60c8da4295f4aa39d250c65, type: 2}
   MonsterID: 306
@@ -2956,6 +3102,7 @@ MonoBehaviour:
   AddLevel: 0
   TotalWave: 5
   waveText: {fileID: 0}
+  FirstMonster: {fileID: 0}
 --- !u!114 &11400048
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2969,6 +3116,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waveNum: 3
   Forever: 0
+  multiSpawner: []
   Group: 0
   Resource: {fileID: 100096, guid: 600a08fea60c8da4295f4aa39d250c65, type: 2}
   MonsterID: 306
@@ -2980,6 +3128,7 @@ MonoBehaviour:
   AddLevel: 0
   TotalWave: 5
   waveText: {fileID: 0}
+  FirstMonster: {fileID: 0}
 --- !u!114 &11400050
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2993,6 +3142,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waveNum: 3
   Forever: 0
+  multiSpawner: []
   Group: 0
   Resource: {fileID: 100096, guid: 600a08fea60c8da4295f4aa39d250c65, type: 2}
   MonsterID: 306
@@ -3004,6 +3154,7 @@ MonoBehaviour:
   AddLevel: 0
   TotalWave: 5
   waveText: {fileID: 0}
+  FirstMonster: {fileID: 0}
 --- !u!114 &11400052
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3017,6 +3168,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waveNum: 3
   Forever: 0
+  multiSpawner: []
   Group: 0
   Resource: {fileID: 100096, guid: 600a08fea60c8da4295f4aa39d250c65, type: 2}
   MonsterID: 306
@@ -3028,6 +3180,7 @@ MonoBehaviour:
   AddLevel: 0
   TotalWave: 5
   waveText: {fileID: 0}
+  FirstMonster: {fileID: 0}
 --- !u!114 &11400054
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3041,6 +3194,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waveNum: 3
   Forever: 0
+  multiSpawner: []
   Group: 0
   Resource: {fileID: 100096, guid: 600a08fea60c8da4295f4aa39d250c65, type: 2}
   MonsterID: 306
@@ -3052,6 +3206,7 @@ MonoBehaviour:
   AddLevel: 0
   TotalWave: 5
   waveText: {fileID: 0}
+  FirstMonster: {fileID: 0}
 --- !u!114 &11400056
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3065,6 +3220,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waveNum: 3
   Forever: 0
+  multiSpawner: []
   Group: 0
   Resource: {fileID: 100096, guid: 600a08fea60c8da4295f4aa39d250c65, type: 2}
   MonsterID: 306
@@ -3076,6 +3232,7 @@ MonoBehaviour:
   AddLevel: 0
   TotalWave: 5
   waveText: {fileID: 0}
+  FirstMonster: {fileID: 0}
 --- !u!114 &11400058
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3089,6 +3246,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waveNum: 3
   Forever: 0
+  multiSpawner: []
   Group: 0
   Resource: {fileID: 100096, guid: 600a08fea60c8da4295f4aa39d250c65, type: 2}
   MonsterID: 306
@@ -3100,6 +3258,7 @@ MonoBehaviour:
   AddLevel: 0
   TotalWave: 5
   waveText: {fileID: 0}
+  FirstMonster: {fileID: 0}
 --- !u!114 &11400060
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3113,6 +3272,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waveNum: 2
   Forever: 0
+  multiSpawner: []
   Group: 0
   Resource: {fileID: 100102, guid: a96cb172c60e5d049832f4076bdec458, type: 2}
   MonsterID: 119
@@ -3124,6 +3284,7 @@ MonoBehaviour:
   AddLevel: 0
   TotalWave: 5
   waveText: {fileID: 0}
+  FirstMonster: {fileID: 0}
 --- !u!114 &11400062
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3137,6 +3298,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waveNum: 2
   Forever: 0
+  multiSpawner: []
   Group: 0
   Resource: {fileID: 100102, guid: a96cb172c60e5d049832f4076bdec458, type: 2}
   MonsterID: 119
@@ -3148,6 +3310,7 @@ MonoBehaviour:
   AddLevel: 0
   TotalWave: 5
   waveText: {fileID: 0}
+  FirstMonster: {fileID: 0}
 --- !u!114 &11400064
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3161,6 +3324,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waveNum: 2
   Forever: 0
+  multiSpawner: []
   Group: 0
   Resource: {fileID: 100000, guid: 2d0d4abcd2c3b4db1903d1be92fde4f3, type: 2}
   MonsterID: 10
@@ -3172,6 +3336,7 @@ MonoBehaviour:
   AddLevel: 0
   TotalWave: 5
   waveText: {fileID: 0}
+  FirstMonster: {fileID: 0}
 --- !u!114 &11400066
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3185,6 +3350,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waveNum: 2
   Forever: 0
+  multiSpawner: []
   Group: 0
   Resource: {fileID: 100000, guid: 2d0d4abcd2c3b4db1903d1be92fde4f3, type: 2}
   MonsterID: 10
@@ -3196,6 +3362,7 @@ MonoBehaviour:
   AddLevel: 0
   TotalWave: 5
   waveText: {fileID: 0}
+  FirstMonster: {fileID: 0}
 --- !u!114 &11400068
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3209,6 +3376,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waveNum: 2
   Forever: 0
+  multiSpawner: []
   Group: 0
   Resource: {fileID: 100000, guid: 2d0d4abcd2c3b4db1903d1be92fde4f3, type: 2}
   MonsterID: 10
@@ -3220,6 +3388,7 @@ MonoBehaviour:
   AddLevel: 0
   TotalWave: 5
   waveText: {fileID: 0}
+  FirstMonster: {fileID: 0}
 --- !u!114 &11400070
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3233,6 +3402,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waveNum: 2
   Forever: 0
+  multiSpawner: []
   Group: 0
   Resource: {fileID: 100000, guid: 2d0d4abcd2c3b4db1903d1be92fde4f3, type: 2}
   MonsterID: 10
@@ -3244,6 +3414,7 @@ MonoBehaviour:
   AddLevel: 0
   TotalWave: 5
   waveText: {fileID: 0}
+  FirstMonster: {fileID: 0}
 --- !u!114 &11400072
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3257,6 +3428,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waveNum: 1
   Forever: 0
+  multiSpawner: []
   Group: 0
   Resource: {fileID: 100102, guid: a96cb172c60e5d049832f4076bdec458, type: 2}
   MonsterID: 119
@@ -3268,6 +3440,7 @@ MonoBehaviour:
   AddLevel: 0
   TotalWave: 5
   waveText: {fileID: 0}
+  FirstMonster: {fileID: 0}
 --- !u!114 &11400074
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3281,6 +3454,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waveNum: 1
   Forever: 0
+  multiSpawner: []
   Group: 0
   Resource: {fileID: 100102, guid: a96cb172c60e5d049832f4076bdec458, type: 2}
   MonsterID: 119
@@ -3292,6 +3466,7 @@ MonoBehaviour:
   AddLevel: 0
   TotalWave: 5
   waveText: {fileID: 0}
+  FirstMonster: {fileID: 0}
 --- !u!114 &11400076
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3305,6 +3480,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waveNum: 1
   Forever: 0
+  multiSpawner: []
   Group: 0
   Resource: {fileID: 100096, guid: 600a08fea60c8da4295f4aa39d250c65, type: 2}
   MonsterID: 306
@@ -3316,6 +3492,7 @@ MonoBehaviour:
   AddLevel: 0
   TotalWave: 5
   waveText: {fileID: 0}
+  FirstMonster: {fileID: 0}
 --- !u!114 &11400078
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3329,6 +3506,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waveNum: 1
   Forever: 0
+  multiSpawner: []
   Group: 0
   Resource: {fileID: 100096, guid: 600a08fea60c8da4295f4aa39d250c65, type: 2}
   MonsterID: 306
@@ -3340,6 +3518,7 @@ MonoBehaviour:
   AddLevel: 0
   TotalWave: 5
   waveText: {fileID: 0}
+  FirstMonster: {fileID: 0}
 --- !u!114 &11400080
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3353,6 +3532,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waveNum: 1
   Forever: 0
+  multiSpawner: []
   Group: 0
   Resource: {fileID: 100096, guid: 600a08fea60c8da4295f4aa39d250c65, type: 2}
   MonsterID: 306
@@ -3364,6 +3544,7 @@ MonoBehaviour:
   AddLevel: 0
   TotalWave: 5
   waveText: {fileID: 0}
+  FirstMonster: {fileID: 0}
 --- !u!114 &11400082
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3377,6 +3558,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waveNum: 1
   Forever: 0
+  multiSpawner: []
   Group: 0
   Resource: {fileID: 100096, guid: 600a08fea60c8da4295f4aa39d250c65, type: 2}
   MonsterID: 306
@@ -3388,6 +3570,7 @@ MonoBehaviour:
   AddLevel: 0
   TotalWave: 5
   waveText: {fileID: 0}
+  FirstMonster: {fileID: 0}
 --- !u!114 &11400084
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3401,6 +3584,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waveNum: 0
   Forever: 0
+  multiSpawner: []
   Group: 0
   Resource: {fileID: 100000, guid: 2d0d4abcd2c3b4db1903d1be92fde4f3, type: 2}
   MonsterID: 10
@@ -3412,6 +3596,7 @@ MonoBehaviour:
   AddLevel: 0
   TotalWave: 5
   waveText: {fileID: 0}
+  FirstMonster: {fileID: 0}
 --- !u!114 &11400086
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3425,6 +3610,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waveNum: 0
   Forever: 0
+  multiSpawner: []
   Group: 0
   Resource: {fileID: 100000, guid: 2d0d4abcd2c3b4db1903d1be92fde4f3, type: 2}
   MonsterID: 10
@@ -3436,6 +3622,7 @@ MonoBehaviour:
   AddLevel: 0
   TotalWave: 5
   waveText: {fileID: 0}
+  FirstMonster: {fileID: 0}
 --- !u!114 &11400088
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3449,6 +3636,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waveNum: 0
   Forever: 0
+  multiSpawner: []
   Group: 0
   Resource: {fileID: 100000, guid: 2d0d4abcd2c3b4db1903d1be92fde4f3, type: 2}
   MonsterID: 10
@@ -3460,6 +3648,7 @@ MonoBehaviour:
   AddLevel: 0
   TotalWave: 5
   waveText: {fileID: 0}
+  FirstMonster: {fileID: 0}
 --- !u!114 &11400090
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3782,6 +3971,7 @@ MonoBehaviour:
   VortexAffectorEnable: 0
   VortexMagType: 0
   VortexMag: 1
+  VortexMagMax: 1
   VortexCurve:
     serializedVersion: 2
     m_Curve: []
@@ -3904,7 +4094,7 @@ MonoBehaviour:
   CollisionSubEmitter: 
   DeathSubEmitter: 
   AvailableNodeCount: 10
-  LastClientPos: {x: -1.49606979, y: .921869755, z: 94.3969421}
+  LastClientPos: {x: -45.882576, y: .921869755, z: 48.8290443}
   MyCamera: {fileID: 0}
   Owner: {fileID: 11400092}
   mStopped: 0
@@ -4255,6 +4445,7 @@ MonoBehaviour:
   VortexAffectorEnable: 0
   VortexMagType: 0
   VortexMag: 1
+  VortexMagMax: 1
   VortexCurve:
     serializedVersion: 2
     m_Curve: []
@@ -4377,7 +4568,7 @@ MonoBehaviour:
   CollisionSubEmitter: 
   DeathSubEmitter: 
   AvailableNodeCount: 10
-  LastClientPos: {x: 2.13840199, y: .991537094, z: 94.3969421}
+  LastClientPos: {x: -45.882576, y: .991537094, z: 45.1945724}
   MyCamera: {fileID: 0}
   Owner: {fileID: 11400100}
   mStopped: 0
@@ -4684,6 +4875,7 @@ MonoBehaviour:
   VortexAffectorEnable: 0
   VortexMagType: 0
   VortexMag: 1
+  VortexMagMax: 1
   VortexCurve:
     serializedVersion: 2
     m_Curve: []
@@ -4806,7 +4998,7 @@ MonoBehaviour:
   CollisionSubEmitter: 
   DeathSubEmitter: 
   AvailableNodeCount: 10
-  LastClientPos: {x: .288022041, y: 1.03495121, z: 94.3969421}
+  LastClientPos: {x: -45.882576, y: 1.03495121, z: 47.0449524}
   MyCamera: {fileID: 0}
   Owner: {fileID: 11400090}
   mStopped: 0
@@ -5102,6 +5294,7 @@ MonoBehaviour:
   VortexAffectorEnable: 0
   VortexMagType: 0
   VortexMag: 1
+  VortexMagMax: 1
   VortexCurve:
     serializedVersion: 2
     m_Curve: []
@@ -5241,6 +5434,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waveNum: 0
   Forever: 0
+  multiSpawner: []
   Group: 0
   Resource: {fileID: 100000, guid: 2d0d4abcd2c3b4db1903d1be92fde4f3, type: 2}
   MonsterID: 10
@@ -5252,6 +5446,7 @@ MonoBehaviour:
   AddLevel: 0
   TotalWave: 5
   waveText: {fileID: 0}
+  FirstMonster: {fileID: 0}
 --- !u!114 &11400114
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5544,6 +5739,7 @@ MonoBehaviour:
   VortexAffectorEnable: 0
   VortexMagType: 0
   VortexMag: 1
+  VortexMagMax: 1
   VortexCurve:
     serializedVersion: 2
     m_Curve: []
@@ -5977,6 +6173,7 @@ MonoBehaviour:
   VortexAffectorEnable: 0
   VortexMagType: 0
   VortexMag: 1
+  VortexMagMax: 1
   VortexCurve:
     serializedVersion: 2
     m_Curve: []
@@ -6395,6 +6592,7 @@ MonoBehaviour:
   VortexAffectorEnable: 0
   VortexMagType: 0
   VortexMag: 1
+  VortexMagMax: 1
   VortexCurve:
     serializedVersion: 2
     m_Curve: []
@@ -6547,6 +6745,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 413e32afe718f4a86a6c893f52d914ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  colliderObj: {fileID: 0}
 --- !u!114 &11400126
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -6854,6 +7053,7 @@ MonoBehaviour:
   VortexAffectorEnable: 0
   VortexMagType: 0
   VortexMag: 1
+  VortexMagMax: 1
   VortexCurve:
     serializedVersion: 2
     m_Curve: []
@@ -6995,6 +7195,21 @@ MonoBehaviour:
   IgnoreTimeScale: 0
   EditView: 0
   Scale: 1
+--- !u!114 &11411784
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 111786}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbf4b7e3e3a1346029d07c96b0131b70, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rateToSpawn: 100
+  ChestId: 36
+  waveNum: 0
+  MonsterID: 2049
 --- !u!135 &13500000
 SphereCollider:
   m_ObjectHideFlags: 1

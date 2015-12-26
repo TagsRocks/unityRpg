@@ -38,6 +38,8 @@ namespace ChuMeng
                 {
                     DongHu4();
                 }
+            }else if(step == 6) {
+                DongHu6();
             }
         }
 
@@ -55,6 +57,18 @@ namespace ChuMeng
                 "我们快点出发吧。", 
             }; 
             NpcDialogInterface.ShowTextList(new System.Collections.Generic.List<string>(text), null);
+        }
+        void DongHu6() {
+            var text = new string[] {
+                "巨牙子爷爷，快给东湖服下这药水吧！",
+                "好的",
+                "咕噜噜...",
+                "突然一道血光从东湖嘴里喷薄而出，传来阴森森的声音，哈哈哈，终于等到这一天了",
+                "巨牙子：不好，你们快快离开，我要施法封住魔神之灵。",
+                "遵命",
+            };
+            NpcDialogInterface.ShowTextList(text, null);
+            GameInterface_Player.SetIntState(GameBool.cunZhangState, 8);
         }
 
         IEnumerator  DongHu1()

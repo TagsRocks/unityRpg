@@ -709,10 +709,10 @@ namespace ChuMeng
             }
             if (!find)
             {
-                var cinfo = new CopyInfo();
+                var cinfo = CopyInfo.CreateBuilder();
                 cinfo.Id = levId;
                 cinfo.IsPass = true;
-                pinfo.CopyInfos.CopyInfoList.Add(cinfo);
+                pinfo.CopyInfos.CopyInfoList.Add(cinfo.Build());
             }
             foreach (var c in pinfo.CopyInfos.CopyInfoList)
             {

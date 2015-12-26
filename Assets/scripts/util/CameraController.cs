@@ -36,7 +36,11 @@ namespace ChuMeng
 		public float ScrollCoff = 1;
 		// Use this for initialization
 		public static CameraController cameraController;
+        int cullMask;
+
+        public static CameraController Instance;
 		void Awake() {
+            Instance = this;
             Util.InitGameObject(gameObject);
             transform.localRotation = Quaternion.Euler(new Vector3(0, YRot, 0));
 			cameraController = this;
@@ -55,6 +59,7 @@ namespace ChuMeng
 
 			};
 			RegEvent ();
+            cullMask =  camera.cullingMask;
 		}
 		Vector3 shakeInitPos;
 		Vector3 shakeDir;
@@ -125,6 +130,14 @@ namespace ChuMeng
                 AdjustCameraPos();
             }
 		}
+        public void SetBlack() {
+            //camera.cullingMask = 0;
+            camera.enabled = false;
+        }
+        public void Reset() {
+            //camera.cullingMask = cullMask;
+            camera.enabled = true;
+        }
 	}
 
 }

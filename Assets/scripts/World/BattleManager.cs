@@ -41,6 +41,8 @@ namespace ChuMeng
             killAll = false;
 
         public static bool allElite = false;
+        public bool StopAttack = false;
+
 
         public void killAllMethod()
         {

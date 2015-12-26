@@ -25,6 +25,8 @@ namespace ChuMeng
                 }
             }else if(step == 3) {
                 ZhiRuo5();
+            }else if(step == 9) {
+                ZhiRuo9();
             }
         }
 
@@ -108,6 +110,18 @@ namespace ChuMeng
 
         }
 
+        void ZhiRuo9() {
+            var text = new string[]{
+                "至若，巨牙子爷爷吩咐今后不能靠近试炼之地，那里现在危机重重",
+                "恩，哥哥我知道你出村心切，但是你也万万不可再进入呀",
+                "那日你我和魔神交手，它也不过尔尔，若不能尽早找到父母留给我的东西，又怎能尽早出村呢，你不必劝我了，今夜我自己去一趟，寻得宝物",
+                "哥哥，我知道劝你也劝不住，不过你要万分小心呀，这是我们传家之宝--九曜石，也许在你危险的时候可以帮你。",
+                "多谢至若，东湖就拜托你多多照顾一下了",
+                "恩哥哥，万事要小心呀",
+            };
+            NpcDialogInterface.ShowTextList(text, null);
+            GameInterface_Player.SetIntState(GameBool.cunZhangState, 10);
+        }
     
     }
 

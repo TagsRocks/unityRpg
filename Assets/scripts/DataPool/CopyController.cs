@@ -173,14 +173,19 @@ namespace ChuMeng {
             if(copyInfo == null) {
                 return 1;
             }
+            var maxNotPassId = -1;
+
 			foreach(CopyInfo c in copyInfo.CopyInfoList) {
 				if(!c.IsPass) {
+                    /*
 					var linfo1 = GetLevelInfo(c.Id);
                     Log.Sys("Chapter Lev "+c.Id);
 					return linfo1.Chapter;
+                    */
+                    maxNotPassId = Mathf.Max(c.Id, maxNotPassId);
 				}else {
                     Log.Sys("PassLev "+c.Id);
-					lastId = c.Id;
+                    lastId = Mathf.Max(c.Id, lastId);
 				}
 			}
 
@@ -195,13 +200,16 @@ namespace ChuMeng {
 		//获得当前开放的关卡
 		int GetCurrentLevel() {
 			int lastId = 0;
+            var maxNotPass = -1;
 			foreach(CopyInfo c in copyInfo.CopyInfoList) {
 				if(!c.IsPass) {
-					return c.Id-1;
+					//return c.Id-1;
+                    maxNotPass = Mathf.Max(c.Id, maxNotPass);
 				}else {
-					lastId = c.Id;
+                    lastId = Mathf.Max(c.Id, lastId);
 				}
 			}
+
             Log.GUI("PassedLevel Max "+lastId);
 			lastId++;
 			var linfo = GetLevelInfo (lastId);
