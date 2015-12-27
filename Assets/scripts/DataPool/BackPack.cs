@@ -25,7 +25,7 @@ namespace ChuMeng
     /// </summary>
 	public class BackPack : MonoBehaviour
 	{
-		public const int MaxBackPackNumber = 25;
+		public const int MaxBackPackNumber = 100;
 
 		public static BackPack backpack;
 		GameObject uiRoot;

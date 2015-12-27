@@ -300,12 +300,6 @@ namespace ChuMeng
             {
                 g.AddComponent<NotifyUIManager>();
             }
-            if (SoundManager.Instance == null)
-            {
-                var sound = new GameObject("Sound");
-                sound.transform.parent = transform;
-                sound.AddComponent<SoundManager>();
-            }
             if (BackPack.backpack == null)
             {
                 var back = new GameObject("backpack");

@@ -53,6 +53,10 @@ namespace ServerPacketHandler
                 }else if(cmds[0] == "show_item") {
                 }else if(cmds[0] == "helpme") {
                     playerData.HelpMe();
+                }else if(cmds[0] == "pass_task") 
+                {
+                    var l = Convert.ToInt32(cmds[1]);
+                    ChuMeng.GameInterface_Player.SetIntState(ChuMeng.GameBool.cunZhangState, l);
                 }
             } catch (System.Exception e)
             {

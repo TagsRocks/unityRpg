@@ -4,7 +4,7 @@ using System.Collections;
 using UnityEditor.VersionControl;
 using System.IO;
 
-[CustomEditor(typeof(TestModelmport))]
+//[CustomEditor(typeof(TestModelmport))]
 public class ImportFbx : Editor
 {
     void Awake()

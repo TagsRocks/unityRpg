@@ -57,7 +57,6 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 400006}
-  - 95: {fileID: 9500000}
   m_Layer: 0
   m_Name: Assassin_kapai_weapon
   m_TagString: Untagged
@@ -184,6 +183,7 @@ Animator:
   m_UpdateMode: 0
   m_ApplyRootMotion: 1
   m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
