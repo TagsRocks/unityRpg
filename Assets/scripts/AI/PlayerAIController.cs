@@ -19,6 +19,7 @@ namespace ChuMeng
     //远端玩家接受服务器控制
     [RequireComponent(typeof(AnimationController))]
     //[RequireComponent(typeof(PlayerSync))]
+    [RequireComponent(typeof(SkillCombineBuff))]
     public class PlayerAIController : AIBase
     {
         void Awake()

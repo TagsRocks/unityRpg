@@ -192,6 +192,7 @@ namespace ChuMeng
         public GameObject attacker;
         public GameObject target;
         public GameObject particle2;
+        public SkillData skill;
 
 		public MyEvent(EventType t) {
 			type = t;

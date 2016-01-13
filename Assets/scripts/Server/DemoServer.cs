@@ -147,7 +147,7 @@ namespace ChuMeng
             Debug.LogError("InitListenSocket "+random.Next());
             socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
             socket.SetSocketOption(System.Net.Sockets.SocketOptionLevel.Socket, SocketOptionName.ReuseAddress, true);
-            IPEndPoint ip = new IPEndPoint(IPAddress.Parse("127.0.0.1"), 20000);
+            IPEndPoint ip = new IPEndPoint(IPAddress.Parse("127.0.0.1"), ClientApp.Instance.testPort);
             socket.Bind(ip);
             socket.Listen(1);
             //msgReader.Reset();

@@ -10,6 +10,7 @@ namespace ChuMeng
     public enum PairEnum {
         Percent = 0,
         Abs = 1,
+        Rot = 2,
     }
     [System.Serializable]
     public struct Pair
@@ -43,6 +44,7 @@ namespace ChuMeng
             OneTimeCriticalHit,
             Blind, //玩家致盲
             Silent, //随机沉默
+            WeaponBuff,//武器Buff
         }
 
         public EffectType effectType = EffectType.None;
@@ -90,5 +92,7 @@ namespace ChuMeng
         /// 眩晕只保持最旧的一个效果 新的效果不能添加 
         /// </summary>
         public bool keepOld = false;
+
+        public GameObject buffParticle;
     }
 }

@@ -104,6 +104,9 @@ namespace ChuMeng
             };
             RegEvent();
         }
+        public Transform  GetRightHand() {
+            return rightHand;
+        }
 
         void SetDefaultEquip(GameObject fullSet, ItemData.EquipPosition pos, out GameObject g)
         {
@@ -321,11 +324,6 @@ namespace ChuMeng
                     }
 
                     WeaponData = ed;
-                //Sword 1 Has Scabbard
-                /*
-                 * leftHand Point003
-                 * back  Point004
-                 */ 
                 //是否有刀鞘
                     if (WeaponData.itemData.HasScabbard)
                     {
@@ -394,7 +392,6 @@ namespace ChuMeng
                         {
                             if (back != null)
                             {
-
                                 var Point3 = Util.FindChildRecursive(Weapon.transform, "Point3");
                                 Log.Sys("Wield Weapon in Back " + Point3);
                                 var mat = Matrix4x4.TRS(Point3.localPosition, Point3.localRotation, Point3.localScale);

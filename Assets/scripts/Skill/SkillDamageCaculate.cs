@@ -5,6 +5,12 @@ namespace ChuMeng
 {
     public class SkillDamageCaculate
     {
+        /// <summary>
+        /// 反弹伤害无法触发HitTarget事件 
+        /// </summary>
+        /// <param name="attacker">Attacker.</param>
+        /// <param name="WeaponDamagePCT">Weapon damage PC.</param>
+        /// <param name="enemy">Enemy.</param>
         public static void DoDamage(GameObject attacker, int WeaponDamagePCT, GameObject enemy)
         {
             if (enemy.GetComponent<MyAnimationEvent>() != null)
@@ -16,7 +22,8 @@ namespace ChuMeng
                     bool isCritical = false;
 
                     //在基础攻击力上面提升的比例
-                    var damage = (int)(attribute.Damage * (1.0f + WeaponDamagePCT / 100.0f - 1.0f + rate - 1.0f));
+                    //调整基础比例
+                    var damage = (int)(attribute.Damage * ( WeaponDamagePCT / 100.0f) * rate);
                     Log.Sys("calculate Damage Rate SimpleDamage " + WeaponDamagePCT);
                     NetDateInterface.FastDamage(
                         attribute.GetComponent<KBEngine.KBNetworkView>().GetServerID(),
@@ -25,9 +32,17 @@ namespace ChuMeng
                         isCritical
                     );
                     enemy.GetComponent<MyAnimationEvent>().OnHit(attacker, damage, isCritical);
+
+                    /*
+                    var hitTarget = new MyEvent(MyEvent.EventType.HitTarget);
+                    hitTarget.target = enemy;
+                    hitTarget.skill = null;
+                    MyEventSystem.myEventSystem.PushLocalEvent(attribute.GetLocalId(), hitTarget);
+                    */
                 }
             }
         }
+
         //TODO::支持单人副本和多人副本功能 取决于  是否直接通知MyAnimationEvent
         //根据技能信息和玩家信息 得到实际的 伤害  NpcAttribute  SkillFullInfo
         /*
@@ -53,7 +68,7 @@ namespace ChuMeng
                         isCritical = true;
                     }
                     //在基础攻击力上面提升的比例
-                    var damage = (int)(attribute.Damage * (1.0f + skillData.skillData.WeaponDamagePCT / 100.0f - 1.0f + rate - 1.0f));
+                    var damage = (int)(attribute.Damage * (skillData.skillData.WeaponDamagePCT / 100.0f) * rate );
                     Log.Sys("calculate Damage Rate " + skillData.skillData.WeaponDamagePCT);
 
                     NetDateInterface.FastDamage(
@@ -64,7 +79,10 @@ namespace ChuMeng
                     );
 
                     enemy.GetComponent<MyAnimationEvent>().OnHit(attacker, damage, isCritical);
-                    MyEventSystem.myEventSystem.PushLocalEvent(attribute.GetLocalId(), MyEvent.EventType.HitTarget);
+                    var hitTarget = new MyEvent(MyEvent.EventType.HitTarget);
+                    hitTarget.target = enemy;
+                    hitTarget.skill = skillData.skillData;
+                    MyEventSystem.myEventSystem.PushLocalEvent(attribute.GetLocalId(), hitTarget);
                 }
             }
         }
