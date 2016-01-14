@@ -6,6 +6,7 @@ namespace ChuMeng
 {
     public class TestRemoteServer : MonoBehaviour
     {
+        #if UNITY_EDITOR
         public int myId ;
         MainThreadLoop ml;
         void Awake() {
@@ -87,7 +88,7 @@ namespace ChuMeng
         public void CloseMethod() {
             rc.Disconnect();
         }
-
+        #endif
     }
 
 }

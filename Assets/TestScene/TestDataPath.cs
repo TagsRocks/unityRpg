@@ -2,6 +2,7 @@
 using System.Collections;
 
 public class TestDataPath : MonoBehaviour {
+    #if UNITY_EDITOR
     [ButtonCallFunc()]
     public bool Path;
     public void PathMethod() {
@@ -16,4 +17,5 @@ public class TestDataPath : MonoBehaviour {
 	void Update () {
 	
 	}
+    #endif
 }
