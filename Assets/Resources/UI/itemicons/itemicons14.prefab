@@ -41,60 +41,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   material: {fileID: 2100000, guid: c51d28b669fc749d190aaddaa2e4e385, type: 2}
   mSprites:
+  - name: icon_potion_health_small
+    x: 0
+    y: 426
+    width: 49
+    height: 86
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 5
+    paddingRight: 10
+    paddingTop: 10
+    paddingBottom: 0
   - name: skill_bighit
-    x: 65
-    y: 58
-    width: 64
-    height: 64
-    borderLeft: 0
-    borderRight: 0
-    borderTop: 0
-    borderBottom: 0
-    paddingLeft: 0
-    paddingRight: 0
-    paddingTop: 0
-    paddingBottom: 0
-  - name: skill_bighit_gray
-    x: 65
-    y: 123
-    width: 64
-    height: 64
-    borderLeft: 0
-    borderRight: 0
-    borderTop: 0
-    borderBottom: 0
-    paddingLeft: 0
-    paddingRight: 0
-    paddingTop: 0
-    paddingBottom: 0
-  - name: skill_chainvortex
-    x: 65
-    y: 188
-    width: 64
-    height: 64
-    borderLeft: 0
-    borderRight: 0
-    borderTop: 0
-    borderBottom: 0
-    paddingLeft: 0
-    paddingRight: 0
-    paddingTop: 0
-    paddingBottom: 0
-  - name: skill_defensemagicmastery
-    x: 65
-    y: 253
-    width: 64
-    height: 64
-    borderLeft: 0
-    borderRight: 0
-    borderTop: 0
-    borderBottom: 0
-    paddingLeft: 0
-    paddingRight: 0
-    paddingTop: 0
-    paddingBottom: 0
-  - name: skill_defensemagicmastery_gray
-    x: 65
+    x: 180
     y: 318
     width: 64
     height: 64
@@ -106,9 +67,61 @@ MonoBehaviour:
     paddingRight: 0
     paddingTop: 0
     paddingBottom: 0
+  - name: skill_bighit_gray
+    x: 115
+    y: 58
+    width: 64
+    height: 64
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: skill_chainvortex
+    x: 115
+    y: 123
+    width: 64
+    height: 64
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: skill_defensemagicmastery
+    x: 115
+    y: 188
+    width: 64
+    height: 64
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: skill_defensemagicmastery_gray
+    x: 115
+    y: 253
+    width: 64
+    height: 64
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
   - name: skill_dualwield
-    x: 390
-    y: 383
+    x: 115
+    y: 318
     width: 64
     height: 64
     borderLeft: 0
@@ -120,7 +133,7 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: skill_dualwield_gray
-    x: 325
+    x: 440
     y: 383
     width: 64
     height: 64
@@ -133,8 +146,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: skill_embersentry
-    x: 130
-    y: 318
+    x: 375
+    y: 383
     width: 64
     height: 64
     borderLeft: 0
@@ -146,7 +159,7 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: skill_explosiveshot
-    x: 260
+    x: 310
     y: 383
     width: 64
     height: 64
@@ -159,7 +172,7 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: skill_flametrap
-    x: 195
+    x: 245
     y: 383
     width: 64
     height: 64
@@ -172,7 +185,7 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: skill_frostshield
-    x: 130
+    x: 180
     y: 383
     width: 64
     height: 64
@@ -185,7 +198,7 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: skill_infuse
-    x: 65
+    x: 115
     y: 383
     width: 64
     height: 64
@@ -198,7 +211,7 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: skill_infuse_gray
-    x: 0
+    x: 50
     y: 58
     width: 64
     height: 64
@@ -211,7 +224,7 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: skill_magicitem_mastery
-    x: 0
+    x: 50
     y: 123
     width: 64
     height: 64
@@ -224,7 +237,7 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: skill_magicitem_mastery_gray
-    x: 0
+    x: 50
     y: 188
     width: 64
     height: 64
@@ -237,7 +250,7 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: skill_needlearc
-    x: 0
+    x: 50
     y: 253
     width: 64
     height: 64
@@ -250,7 +263,7 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: skill_quake
-    x: 0
+    x: 50
     y: 318
     width: 64
     height: 64
@@ -263,7 +276,7 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: skill_ricochet
-    x: 0
+    x: 50
     y: 383
     width: 64
     height: 64
@@ -276,7 +289,7 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: skill_seismicburst
-    x: 390
+    x: 440
     y: 448
     width: 64
     height: 64
@@ -289,7 +302,7 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: skill_slash
-    x: 325
+    x: 375
     y: 448
     width: 64
     height: 64
@@ -302,7 +315,7 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: skill_slash_gray
-    x: 260
+    x: 310
     y: 448
     width: 64
     height: 64
@@ -315,7 +328,7 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: skill_spellmastery
-    x: 195
+    x: 245
     y: 448
     width: 64
     height: 64
@@ -328,7 +341,7 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: skill_spellmastery_gray
-    x: 130
+    x: 180
     y: 448
     width: 64
     height: 64
@@ -341,7 +354,7 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: skill_stampede
-    x: 65
+    x: 115
     y: 448
     width: 64
     height: 64
@@ -354,7 +367,7 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: skill_stampede_gray
-    x: 0
+    x: 50
     y: 448
     width: 64
     height: 64

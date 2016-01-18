@@ -72,8 +72,8 @@ PlayerSettings:
   metroEnableIndependentInputSource: 0
   metroEnableLowLatencyPresentationAPI: 0
   productGUID: 88c0bdb5914304272974907ffb717022
-  iPhoneBundleVersion: 3.6
-  iPhoneShortBundleVersion: 3.6
+  iPhoneBundleVersion: 3.7
+  iPhoneShortBundleVersion: 3.7
   AndroidBundleVersionCode: 1
   AndroidMinSdkVersion: 9
   AndroidPreferredInstallLocation: 1
@@ -275,8 +275,10 @@ PlayerSettings:
   wp8UnprocessedPlugins: []
   intPropertyNames:
   - iOS::Architecture
+  - iOS::EnableIncrementalBuildSupportForIl2cpp
   - iOS::ScriptingBackend
   iOS::Architecture: 2
+  iOS::EnableIncrementalBuildSupportForIl2cpp: 1
   iOS::ScriptingBackend: 1
   firstStreamedLevelWithResources: 0
   unityRebuildLibraryVersion: 9

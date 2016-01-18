@@ -295,6 +295,7 @@ namespace ChuMeng
         /// </summary>
         public void InitData()
         {
+			CScene.InitStatic();
             var g = gameObject;
             if (NotifyUIManager.Instance == null)
             {
@@ -321,7 +322,6 @@ namespace ChuMeng
                 copy.transform.parent = g.transform;
             }
 
-
             if (WorldManager.worldManager == null)
             {
                 var world = new GameObject("WorldManager");
@@ -334,6 +334,7 @@ namespace ChuMeng
                 var go = new GameObject("ObjectManager");
                 go.AddComponent<ObjectManager>();
             }
+
 
             if (CursorManager.cursorManager == null)
             {

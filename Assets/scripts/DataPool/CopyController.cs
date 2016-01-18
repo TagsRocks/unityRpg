@@ -169,7 +169,7 @@ namespace ChuMeng {
 
 		//获得当前章节的id
 		public int GetCurrentChapter() {
-			int lastId = 0;
+			int lastId = 100;
             if(copyInfo == null) {
                 return 1;
             }
