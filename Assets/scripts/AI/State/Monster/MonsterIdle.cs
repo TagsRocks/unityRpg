@@ -167,6 +167,7 @@ namespace ChuMeng
 
                 aiCharacter.SetRun();
                 passTime = directionChangeInterval;
+                var attr = GetAttr();
                 while (passTime > 0)
                 {
                     if (CheckTarget())

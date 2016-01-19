@@ -651,6 +651,7 @@ namespace ChuMeng
             //playerId++;
             role.Level = 1;
             role.Job = inpb.Job;
+
             var msg = role.Build();
             ServerData.Instance.playerInfo.Roles = msg;
 
@@ -659,6 +660,7 @@ namespace ChuMeng
                 97, 68, 69, 70, 71, 72,
             };
             int id = 1;
+            var pinfo = ServerData.Instance.playerInfo;
             foreach (var d in dress)
             {
                 var pkinfo = PackInfo.CreateBuilder();
@@ -668,9 +670,9 @@ namespace ChuMeng
                 pkEntry.GoodsType = 1;
                 pkEntry.Level = 1;
                 pkinfo.PackEntry = pkEntry.Build();
-                var pinfo = ServerData.Instance.playerInfo;
                 pinfo.AddDressInfo(pkinfo);
             }
+
             au.AddRolesInfos(msg);
 
 

@@ -106,7 +106,8 @@ namespace ChuMeng {
 						back = Vector3.zero;
 					}
 
-					physic.MoveSpeed(right*WalkSpeed+back*WalkSpeed);
+                    var speed = right*WalkSpeed+back*WalkSpeed;
+                    physic.MoveSpeed(speed);
 					passTime += Time.deltaTime;
 					yield return null;
 				}
@@ -131,8 +132,7 @@ namespace ChuMeng {
                     var newDir = Vector3.Slerp(GetAttr().transform.forward, dir, Time.deltaTime*FastRotateSpeed);
                     physic.TurnTo(newDir);
 					var forward = GetAttr().transform.TransformDirection(Vector3.forward);
-					
-					physic.MoveSpeed(forward*RunSpeed);
+                    physic.MoveSpeed(forward*RunSpeed);
 					yield return null;
 				}
 

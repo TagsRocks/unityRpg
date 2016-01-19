@@ -193,6 +193,7 @@ namespace ChuMeng
         //Todo:根据技能决定是否 击退
         void DoDamage(GameObject g)
         {
+            Log.Sys("DoDamage: "+g+" runner "+runner);
             runner.DoDamage(g);
         }
 
