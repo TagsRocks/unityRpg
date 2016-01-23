@@ -10,7 +10,7 @@ GameObject:
   - 4: {fileID: 400000}
   - 114: {fileID: 11400000}
   m_Layer: 0
-  m_Name: forwardblast2
+  m_Name: forwardblast3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -40,8 +40,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   eventList:
-  - evt: 10001
-    layout: {fileID: 100002, guid: 33aa1fb4e63044d38bff21b4457bf938, type: 2}
+  - evt: 10000
+    layout: {fileID: 100022, guid: 8032df80ee0aa4810bd478b7f216327e, type: 2}
     affix:
       effectType: 3
       Duration: .800000012
@@ -54,31 +54,8 @@ MonoBehaviour:
       fireParticle: {fileID: 0}
       keepOld: 0
       buffParticle: {fileID: 0}
-    attachOwner: 1
-    attaches: 0
-    childSkillId: -1
-    AttachToTarget: 0
-    SetBeamTarget: 0
-    BeamOffset: {x: 0, y: 1, z: 0}
-    TargetPos: 0
-    UseMarkPos: 0
-    EvtId: 0
-  - evt: 10000
-    layout: {fileID: 100022, guid: dfe276a215189464ebb57d6bc7fcb87c, type: 2}
-    affix:
-      effectType: 7
-      Duration: 10
-      UnitTheme: {fileID: 130650, guid: 3dc62b5f5d2494e65b7bcd9dc7b21fad, type: 2}
-      ThemePos: {x: 0, y: 1, z: 0}
-      addDefense: 0
-      target: 2
-      affixParameters: []
-      IsOnlyOne: 0
-      fireParticle: {fileID: 0}
-      keepOld: 1
-      buffParticle: {fileID: 0}
     attachOwner: 0
-    attaches: 1
+    attaches: 0
     childSkillId: -1
     AttachToTarget: 0
     SetBeamTarget: 0
