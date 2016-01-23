@@ -10,13 +10,26 @@ namespace ChuMeng
     /// </summary>
     public class SkillStateMachine : MonoBehaviour
     {
+        /// <summary>
+        /// 默认技能状态机 存在时间 不超过5s 
+        /// </summary>
         float lifeTime = 5;
+        /// <summary>
+        /// 所有技能运行层 
+        /// </summary>
         List<GameObject> allRunners = new List<GameObject>();
+        /// <summary>
+        /// 技能状态机是否已经停止了 
+        /// </summary>
         public bool isStop = false;
+        /// <summary>
+        /// 技能状态机初始位置 
+        /// </summary>
         public Vector3 InitPos = Vector3.zero;
 
-        //需要前摇时间的技能标记目标位置
+        //需要前摇时间的技能标记目标位置 记录当前攻击目标的位置
         public Vector3 MarkPos;
+        //攻击者 攻击目标
         public GameObject attacker
         {
             get;
@@ -28,7 +41,7 @@ namespace ChuMeng
             get;
             set;
         }
-
+        //技能相关数据
         public SkillFullInfo skillFullData
         {
             get;
@@ -42,17 +55,19 @@ namespace ChuMeng
         }
 
         public int ownerLocalId = -1;
+        //注册监听技能相关事件  攻击命中事件 子弹命中或者死亡 攻击动画结束
         static List<MyEvent.EventType> regEvt = new List<MyEvent.EventType>(){
             MyEvent.EventType.EventTrigger,
             MyEvent.EventType.EventMissileDie,
             MyEvent.EventType.AnimationOver,
         };
 
+        //计算技能伤害
         public void DoDamage(GameObject g)
         {
             SkillDamageCaculate.DoDamage(attacker, skillFullData, g);
         }
-
+        //注册事件处理
         void RegEvent()
         {
             Log.AI("regevent is " + regEvt.Count);
@@ -61,7 +76,7 @@ namespace ChuMeng
                 MyEventSystem.myEventSystem.RegisterLocalEvent(ownerLocalId, e, OnEvent);
             }
         }
-
+        //取消事件处理
         void UnRegEvent()
         {
             foreach (MyEvent.EventType e in regEvt)
@@ -69,12 +84,18 @@ namespace ChuMeng
                 MyEventSystem.myEventSystem.DropLocalListener(ownerLocalId, e, OnEvent);
             }
         }
-
+        //取消特定事件 防止当前状态机接收到 玩家新的动作事件
         void UnRegEvent(MyEvent.EventType evt)
         {
             MyEventSystem.myEventSystem.DropLocalListener(ownerLocalId, evt, OnEvent);
         }
 
+        /// <summary>
+        /// 初始化特定事件发生时候的技能层
+        /// 或者 创建孩子技能 
+        /// </summary>
+        /// <param name="item">Item.</param>
+        /// <param name="evt">Evt.</param>
         void InitLayout(SkillDataConfig.EventItem item, MyEvent evt)
         {
             if (item.layout != null)
@@ -104,11 +125,18 @@ namespace ChuMeng
             
         }
 
+        /// <summary>
+        /// 动画结束 取消对命中事件处理
+        /// </summary>
         void OnAnimationOver()
         {
             UnRegEvent(MyEvent.EventType.EventTrigger); 
         }
 
+        /// <summary>
+        /// 有可能存在多次命中事件 
+        /// 格斗游戏 每一帧的 伤害判定窗口
+        /// </summary>
         void OnHit()
         {
             Log.AI("Show Skill Hit Event " + gameObject.name);
@@ -125,9 +153,12 @@ namespace ChuMeng
                     }
                 }
             }
-            //UnRegEvent(MyEvent.EventType.EventTrigger);
         }
 
+        /// <summary>
+        /// 子弹命中目标 取消命中判定 单个子弹命中
+        /// </summary>
+        /// <param name="evt">Evt.</param>
         void OnMissileDie(MyEvent evt)
         {
             Log.AI("Missile Die Receive");
@@ -142,6 +173,9 @@ namespace ChuMeng
             UnRegEvent(MyEvent.EventType.EventMissileDie);
         }
 
+        /// <summary>
+        /// 开始事件处理 
+        /// </summary>
         void OnStart()
         {
             if (skillDataConfig != null)
@@ -193,6 +227,10 @@ namespace ChuMeng
             OnStart();
         }
 
+        /// <summary>
+        /// 一定时间之后销毁所有的技能对象清理 
+        /// </summary>
+        /// <returns>The skill.</returns>
         IEnumerator FinishSkill()
         {
             Log.AI("Finish Skill Here " + gameObject.name);
@@ -203,6 +241,7 @@ namespace ChuMeng
             }
             GameObject.Destroy(gameObject);
         }
+
         //玩家连击伤害的时候，一个动作结束则 终止这个动作的技能状态机
         public void Stop()
         {
