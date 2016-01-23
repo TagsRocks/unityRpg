@@ -29,6 +29,11 @@ namespace ChuMeng
 		//子弹相对于发射者的位置偏移
 		public Vector3 OffsetPos;
 		GameObject activeParticle;
+
+        /// <summary>
+        /// 释放子弹的粒子
+        /// 子弹飞行粒子
+        /// </summary>
 		void Start ()
 		{
 			LeftRicochets = missileData.NumRicochets;
@@ -75,8 +80,6 @@ namespace ChuMeng
 			if (isDie) {
 				return;
 			}
-			//if (sleepTime <= 0) {
-			//子弹不仅仅和动态对象碰撞不和 环境 墙体 碰撞
 			Collider[] col = Physics.OverlapSphere (transform.position, missileData.Radius, SkillDamageCaculate.GetDamageLayer());
 			foreach (Collider c in col) {
 				//和多个不同的敌人目标碰撞
@@ -186,7 +189,6 @@ namespace ChuMeng
 		/*
          *客户端表现粒子和服务器计算伤害的数值分离开来
          */ 
-		//TODO:撞击墙壁如何处理
 		void OnTriggerEnter (Collider other)
 		{
 			Log.AI ("Bullet collider enemy " + other.name + " " + other.tag);

@@ -10,13 +10,23 @@ namespace ChuMeng
     {
         SkillLayoutRunner runner;
 
+        /// <summary>
+        /// 子弹向前
+        /// 子弹由中心 向四周 
+        /// </summary>
         public enum Direction
         {
             Forward,
             OutwardFromCenter,
         }
 
+        /// <summary>
+        /// 子弹初始偏移位置 
+        /// </summary>
         public Vector3 Position = Vector3.zero;
+        /// <summary>
+        /// 发射子弹的数量 
+        /// </summary>
         public int count = 1;
         public float duration = 0.5f;
         public Direction direction = Direction.Forward;
@@ -42,7 +52,9 @@ namespace ChuMeng
         }
 
         public ReleaseOrder releaseOrder = ReleaseOrder.ByRandom;
-        // Use this for initialization
+        /// <summary>
+        /// 初始化Runner
+        /// </summary>
         void Start()
         {
             runner = transform.parent.GetComponent<SkillLayoutRunner>();
@@ -88,8 +100,6 @@ namespace ChuMeng
             var bulletForward = Quaternion.Euler(new Vector3(0, deg + attacker.transform.eulerAngles.y, 0));
             bullet.transform.localPosition = attacker.transform.localPosition + playerForward * Position;
             bullet.transform.localRotation = bulletForward;
-			
-
         }
 
         void MakeMonster()
@@ -120,6 +130,10 @@ namespace ChuMeng
                 pos); 
         }
 
+        /// <summary>
+        /// 子弹生成 
+        /// </summary>
+        /// <returns>The unit spawn.</returns>
         IEnumerator UpdateUnitSpawn()
         {
             if (delay > 0)
