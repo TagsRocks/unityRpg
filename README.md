@@ -1,4 +1,51 @@
-#unityRpg
+##unityRpg
+
+http://www.taikr.com/course/297
+
+该工程是为了结合以上视频课程而开发的游戏
+
+该游戏为一款网络MMO Unity RPG游戏
+
+主要使用了C#作为工程的开发语言
+
+通过python protobuffer等技术用于配置表管理和网络协议生成
+
+该RPG游戏主要包含以下功能：
+
+AI状态机
+
+换装系统
+
+技能系统
+
+网络系统
+
+UI系统等
+
+可以以该工程为基础开发出完善的MMO游戏， 相关服务器代码可以从这里下载：
+
+http://git.oschina.net/liyonghelpme/GameServerCsharp
+
+可以从这里下载工程配置表
+
+http://git.oschina.net/liyonghelpme/xlsxExportDll
+
+可以从这里下载工程的网络协议
+
+http://git.oschina.net/liyonghelpme/protobufferUnity
+
+工程讨论群组：
+
+390313628
+
+##工程Unity环境
+
+Unity 4.7 或者Unity 4.6.7  Pro版本
+
+工程不支持 Unity 5.0 以上版本
+
+
+##工程主要的目录结构：
 
 1:Assets 中目录结构
 
@@ -17,3 +64,8 @@
     Resources 游戏打包需要的资源
 
 2: Login 场景是游戏的主登陆场景
+
+##Wiki
+
+可以查看工程的Wiki 了解工程的下一步开发计划
+
