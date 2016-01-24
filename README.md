@@ -75,3 +75,8 @@ Unity 4.7 或者Unity 4.6.7  Pro版本
 
 链接: http://pan.baidu.com/s/1bnQqGer 密码: qwk6
 
+##网络版运行
+
+可以查看上面第一课时免费视频中的介绍
+
+http://www.taikr.com/course/297/learn#lesson/5349
