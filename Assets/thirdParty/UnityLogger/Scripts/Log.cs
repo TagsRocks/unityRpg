@@ -156,7 +156,11 @@ public class Log
 			if( Instance.messages.Count > Instance.messageQueueSize )
 			{
 				Instance.messages.RemoveAt( 0 );
-				Instance.action.Invoke( );
+                try {
+				    Instance.action.Invoke( );
+                }catch(Exception ex) {
+                    
+                }
 			}
 		}
 	}

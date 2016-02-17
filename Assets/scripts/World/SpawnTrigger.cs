@@ -20,7 +20,7 @@ using UnityEditor;
 
 /*
  * Configure Level Monster Spawn Position And Monster Type And Number 
- */ 
+ */
 namespace ChuMeng
 {
     /// <summary>
@@ -39,6 +39,7 @@ namespace ChuMeng
         {
             Monster,
         }
+
         public GroupEnum Group;
         public GameObject Resource;
         public int MonsterID = -1;
@@ -95,10 +96,12 @@ namespace ChuMeng
         }
 
         List<GameObject> childPoint = null;
-        public List<GameObject> GetChildPoint() {
+
+        public List<GameObject> GetChildPoint()
+        {
             if (childPoint == null)
             {
-                childPoint  = new List<GameObject>();
+                childPoint = new List<GameObject>();
                 foreach (Transform c in transform)
                 {
                     if (c.name.Contains("Child"))
@@ -107,7 +110,7 @@ namespace ChuMeng
                     }
                 }
             }
-            return childPoint ;
+            return childPoint;
         }
 
         // Use this for initialization
@@ -134,32 +137,40 @@ namespace ChuMeng
         {
 
 #if UNITY_EDITOR
-            if(!EditorApplication.isPlaying) {
+            if (!EditorApplication.isPlaying)
+            {
                 string replaceTexture = "";
-                if(MonsterID != -1) {
+                if (MonsterID != -1)
+                {
                     var mData = GMDataBaseSystem.database.SearchId<MonsterFightConfigData>(GameData.MonsterFightConfig, MonsterID);
-                    if(mData != null) {
-                    Resource = Resources.Load<GameObject>(mData.model);
-                    replaceTexture = mData.textureReplace;
+                    if (mData != null)
+                    {
+                        Resource = Resources.Load<GameObject>(mData.model);
+                        replaceTexture = mData.textureReplace;
                     }
                 }
 
-                if(oldResource != Resource) {
-                    if(showRes != null) {
+                if (oldResource != Resource)
+                {
+                    if (showRes != null)
+                    {
                         GameObject.DestroyImmediate(showRes);
                         showRes = null;
                     }
                     ClearChildren();
                 
-                    if(Resource != null) {
+                    if (Resource != null)
+                    {
                         showRes = GameObject.Instantiate(Resource) as GameObject;
                         showRes.transform.parent = transform;
                         showRes.transform.localPosition = Vector3.zero;
-                        if(replaceTexture.Length > 0) {
-                            var skins = showRes.GetComponentInChildren<SkinnedMeshRenderer> ();
+                        if (replaceTexture.Length > 0)
+                        {
+                            var skins = showRes.GetComponentInChildren<SkinnedMeshRenderer>();
                             var tex = Resources.Load<Texture>(replaceTexture);
-                            if(skins != null && tex != null){
-                                Log.Sys("Set Texture "+tex);
+                            if (skins != null && tex != null)
+                            {
+                                Log.Sys("Set Texture " + tex);
                                 var mat = new Material(skins.renderer.sharedMaterial);
                                 mat.mainTexture = tex;
                                 skins.renderer.sharedMaterial = mat;
@@ -168,22 +179,28 @@ namespace ChuMeng
                     }
                     oldResource = Resource;
                 }
-                if(showRes != null) {
+                if (showRes != null)
+                {
                     showRes.transform.localPosition = Vector3.zero;
                 }
-                if(reset) {
+                if (reset)
+                {
                     ClearChildren();
                 }
-            }else {
-                if(showRes != null) {
+            } else
+            {
+                if (showRes != null)
+                {
                     GameObject.Destroy(showRes);
                     showRes = null;
                     oldResource = null;
                 }
             }
             GetWave();
-            if(oldWaveNum != waveNum || waveText == null) {
-                if(waveText != null) {
+            if (oldWaveNum != waveNum || waveText == null)
+            {
+                if (waveText != null)
+                {
                     GameObject.DestroyImmediate(waveText);
                     waveText = null;
                 }
@@ -236,6 +253,7 @@ namespace ChuMeng
             showRes = null;
             oldResource = null;
         }
+
         /// <summary>
         /// 通过ObjectManager来生成新的怪物对象
         /// </summary>
@@ -243,40 +261,39 @@ namespace ChuMeng
         IEnumerator GenerateMonster()
         {
             Log.Sys("GenerateMonsters " + GroupNum);
+            for (int i = 0; i < GroupNum; i++)
             {
-                for (int i = 0; i < GroupNum; i++)
+                var rd = UnityEngine.Random.Range(0, 100);
+                var unitData = Util.GetUnitData(false, MonsterID, 0);
+                if (rd < EliteRate || BattleManager.allElite)
                 {
-                    var rd = UnityEngine.Random.Range(0, 100);
-                    var unitData = Util.GetUnitData(false, MonsterID, 0);
-                    if (rd < EliteRate || BattleManager.allElite)
+                    var elites = unitData.EliteIds;
+                    if (elites.Count > 0)
                     {
-                        var elites = unitData.EliteIds;
-                        if (elites.Count > 0)
-                        {
-                            var rd2 = UnityEngine.Random.Range(0, elites.Count);
-                            var id2 = elites [rd2];
-                            unitData = Util.GetUnitData(false, id2, 0);
-                            Log.Sys("CreateEliteMonster " + id2);
-                        }
+                        var rd2 = UnityEngine.Random.Range(0, elites.Count);
+                        var id2 = elites [rd2];
+                        unitData = Util.GetUnitData(false, id2, 0);
+                        Log.Sys("CreateEliteMonster " + id2);
                     }
-
-                    ObjectManager.objectManager.CreateMonster(unitData, this);
-                    yield return new WaitForSeconds(1);
                 }
 
-                if(multiSpawner.Count > 0) {
-                    multiSpawner[0].SpawnChild(this);
-                }
+                ObjectManager.objectManager.CreateMonster(unitData, this);
+                yield return new WaitForSeconds(1);
+            }
+
+            if (multiSpawner.Count > 0)
+            {
+                multiSpawner [0].SpawnChild(this);
+            }
             
-                curWaveNum++;
-                if (Forever && curWaveNum < TotalWave)
+            curWaveNum++;
+            if (Forever && curWaveNum < TotalWave)
+            {
+                waveNum++;
+                isSpawnYet = false;
+                if (AddLevel)
                 {
-                    waveNum++;
-                    isSpawnYet = false;
-                    if (AddLevel)
-                    {
-                        Level++;
-                    }
+                    Level++;
                 }
             }
             yield return null;

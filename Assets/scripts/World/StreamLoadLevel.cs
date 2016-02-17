@@ -46,17 +46,11 @@ namespace ChuMeng
             var root = new GameObject("Root_0"); //FirstRoom
             Util.InitGameObject(root);
 
-            //InitNamePieces();
             var first = configLists [0];
             var firstOffset = new Vector3(first.x * 96, 9, first.y * 96 + 48);
             root.transform.localPosition = firstOffset;
 
             Log.Sys("First Room NamePices "+first.room);
-            //var piece = namePieces [first.room];
-            //var roomConfig = Resources.Load<GameObject>("room/" + piece);
-
-            //var rooms = Resources.Load<GameObject>("RoomList");
-            //var roomConfig = rooms.GetComponent<RoomList>().GetObj("", first.room);
             var roomConfig = RoomList.GetStaticObj(first.type, first.room);
             yield return StartCoroutine(LoadRoom(roomConfig));
             yield return null;

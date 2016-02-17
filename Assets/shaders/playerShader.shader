@@ -4,26 +4,18 @@
 		_Ambient ("Ambient Color", Color) = (0.588, 0.588, 0.588, 1)
 		_MainTex ("Base (RGB)", 2D) = "white" {}
 		
-	
-		
-		//_OverlayColor ("Overlay Color", Color) = (0.1, 0.1, 0.8, 0.5)
-	
-		//_Emissive ("Emissive Color", Color) = (0.588, 0.588, 0.588, 1)
-		//_Diffuse ("Diffuse Color", Color) = (1, 1, 1, 1)
 	}
 	
 	SubShader {
 		Tags { 
 			"Queue"="Geometry+5" 
 			"IgnoreProjector"="True"
-			//"RenderType"="Transparent"	
 		 }
-		 
+
 		 Pass {
 			Name "Overlay"
-			//Blend SrcAlpha OneMinusSrcAlpha
 			zwrite off
-			ztest greater
+			ztest greater  
 			
 			CGPROGRAM
 			#pragma vertex vert 
@@ -50,9 +42,9 @@
 			}
 			
 	        ENDCG
-			
 		}
-		
+
+
 		Pass {
 			Name "BASE"
 			
@@ -67,14 +59,11 @@
 	        uniform fixed4 _Color;
 			uniform fixed4 _HighLightDir;
 			uniform fixed4 _Ambient;
-			//uniform fixed4 _Emissive;
 			uniform fixed4 _LightDiffuseColor;
-			//uniform fixed4 _Diffuse;
-			
+
 	        struct v2f {
 	        	float4 pos : SV_POSITION;
 	        	float2 uv : TEXCOORD0;
-	        	//fixed3 diff;
 	        	float4 colour : TEXCOORD1;
 	        };
 	        
@@ -98,8 +87,7 @@
 			}
 	        ENDCG
 		}
-		
-		
+
 		Pass {
 			Name "SHADOW"
 			Blend One Zero
@@ -111,7 +99,6 @@
 	 
 	         #include "UnityCG.cginc"
 	 
-	         // User-specified uniforms
 	         uniform fixed4 _ShadowColor;
 	         uniform fixed4x4 _World2Receiver; // transformation from 
 	         uniform fixed4 _LightDir;
@@ -148,13 +135,10 @@
 	            else
 	            {
 	               lightDirection = float4(0.0, 0.0, 0.0, 0.0); 
-	                  // don't move vertex
 	            }
 	 
 	            return mul(UNITY_MATRIX_P, mul(viewMatrix, 
 	               vertexInWorldSpace + lightDirection));
-	         	//return mul(UNITY_MATRIX_P, mul(viewMatrix, vertexInWorldSpace));
-	         	
 	         }
 	 
 	         float4 frag(void) : COLOR 

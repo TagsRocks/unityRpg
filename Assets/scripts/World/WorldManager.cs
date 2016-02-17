@@ -153,8 +153,6 @@ namespace ChuMeng
             }
             activeScene.ManagerInitOver();
 
-              
-
             Log.Sys("Cameramain "+Camera.main);
 
 			MyEventSystem.myEventSystem.PushEvent (MyEvent.EventType.EnterScene);

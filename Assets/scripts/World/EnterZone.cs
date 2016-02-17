@@ -8,31 +8,39 @@ using System.Collections;
 
 /*
  * A Trigger To Check Whether Enter A Zone
- */ 
-public class EnterZone : MonoBehaviour {
-	public OnVoidDelegate OnEnter;
-	public bool Enter = false;
+ */
+public class EnterZone : MonoBehaviour
+{
+    public OnVoidDelegate OnEnter;
+    public bool Enter = false;
 
-	void Awake() {
-		Enter = false;
-	}
-	// Use this for initialization
-	void Start () {
+    void Awake()
+    {
+        Enter = false;
+    }
+    // Use this for initialization
+    void Start()
+    {
 	
-	}
+    }
 	
-	// Update is called once per frame
-	void Update () {
+    // Update is called once per frame
+    void Update()
+    {
 	
-	}
+    }
 
-	void OnTriggerEnter(Collider col) {
-		if (col.tag == "Player") {
+    void OnTriggerEnter(Collider col)
+    {
+        if (col.tag == "Player")
+        {
 			
-			Enter = true;
-			if(OnEnter != null) {
-				OnEnter();
-			}
-		}
-	}
+            Enter = true;
+            if (OnEnter != null)
+            {
+                OnEnter();
+            }
+        }
+    }
 }
+

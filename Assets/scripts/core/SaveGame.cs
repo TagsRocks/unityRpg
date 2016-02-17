@@ -136,23 +136,8 @@ namespace ChuMeng
                 Log.Net("Save game Init");
                 yield return StartCoroutine(BackPack.backpack.InitFromNetwork());
 
-                //TODO: Not Test these Data
-                
                 yield return StartCoroutine(SkillDataController.skillDataController.InitFromNetwork());
-
-                //yield return StartCoroutine(MailController.mailController.LoadMail ());
-                //yield return StartCoroutine(FriendsController.friendsController.LoadList(FriendType.FRIENDLY_RELATION));
-                
-                //yield return StartCoroutine (MallController.mallController.LoadSaleItems ());
-                //yield return StartCoroutine (TeamController.teamController.ListAllTeams ());
-
                 yield return StartCoroutine(CopyController.copyController.InitFromNetwork());
-
-
-                //yield return StartCoroutine(AchievementController.achievementController.LoadAchievenment());
-                //yield return StartCoroutine(VipController.vipController.LoadVip());
-
-                //yield return StartCoroutine(TaskController.taskController.LoadTask());
 
                 DataInitFromNetworkYet = true;
                 NetDebug.netDebug.AddConsole("SaveGame:: DataInitOver");
