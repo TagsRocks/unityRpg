@@ -8,13 +8,6 @@ namespace ChuMeng
         protected override void Awake()
         {
             base.Awake();
-            this.regEvt = new System.Collections.Generic.List<MyEvent.EventType>(){
-                MyEvent.EventType.EnterNextZone, 
-                MyEvent.EventType.BossSpawn,
-                MyEvent.EventType.BossDead,
-                MyEvent.EventType.LevelFinish,
-            };
-            RegEvent();
         }
         bool inNextZone = false;
         bool bossSpawn = false;
@@ -58,6 +51,15 @@ namespace ChuMeng
 
 
         IEnumerator CreateZhiRuoAndDongHu() {
+            this.regEvt = new System.Collections.Generic.List<MyEvent.EventType>(){
+                MyEvent.EventType.EnterNextZone, 
+                MyEvent.EventType.BossSpawn,
+                MyEvent.EventType.BossDead,
+                MyEvent.EventType.LevelFinish,
+            };
+            RegEvent();
+
+
             GameObject  myplayer = null;
             while(myplayer == null) {
                 yield return new WaitForSeconds(1);
