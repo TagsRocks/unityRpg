@@ -100,8 +100,6 @@ namespace ChuMeng
         {
 
             otherAccounts = new List<JSONClass>();
-            //currentSelect = 0;
-            //level = 0;
             saveGame = this;
             DontDestroyOnLoad(gameObject);
 
@@ -135,7 +133,6 @@ namespace ChuMeng
                 NetDebug.netDebug.AddConsole("SaveGame:InitData");
                 Log.Net("Save game Init");
                 yield return StartCoroutine(BackPack.backpack.InitFromNetwork());
-
                 yield return StartCoroutine(SkillDataController.skillDataController.InitFromNetwork());
                 yield return StartCoroutine(CopyController.copyController.InitFromNetwork());
 
@@ -344,12 +341,14 @@ namespace ChuMeng
             */
             MyEventSystem.myEventSystem.InitEventHandler();
 
+            /*
             if (TeamController.teamController == null)
             {
                 var tempObj = new GameObject("TeamController");
                 tempObj.AddComponent<TeamController>();
                 tempObj.transform.parent = transform;
             }
+            */
             if (BuffManager.buffManager == null)
             {
                 var tempObj = new GameObject("BuffManager");

@@ -26,7 +26,6 @@ namespace ChuMeng
         }
 
 
-
         void  Start()
         {
             var step = GameInterface_Player.GetIntState(GameBool.cunZhangState);
@@ -177,9 +176,7 @@ namespace ChuMeng
             }
 
             GameInterface_Player.SetIntState(GameBool.cunZhangState, 2);
-            //MyEventSystem.myEventSystem.PushEvent(MyEvent.EventType.GameOver);
             BattleManager.battleManager.GameOver();
-
         }
     
     }

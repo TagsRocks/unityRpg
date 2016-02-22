@@ -12,7 +12,6 @@ namespace ChuMeng {
 			SetAttrState (CharacterState.Attacking);	
 			WalkSpeed = GetAttr ().WalkSpeed;
 			RunSpeed = WalkSpeed*2;
-            //MyEventSystem.myEventSystem.PushLocalEvent(GetAttr().GetLocalId(), MyEvent.EventType.Combat);
 		}
 
 
@@ -35,8 +34,6 @@ namespace ChuMeng {
 				Vector3 dir = targetPlayer.transform.position - GetAttr ().transform.position;
 				dir.y = 0;
                 var newDir = Vector3.Slerp(GetAttr().transform.forward, dir, Time.deltaTime * FastRotateSpeed );
-				//var rotation = Quaternion.LookRotation (dir);
-				//GetAttr ().transform.rotation = Quaternion.Slerp (GetAttr ().transform.rotation, rotation, Time.deltaTime * FastRotateSpeed);
                 physic.TurnTo(newDir);
 				yield return null;
 			}
@@ -52,8 +49,6 @@ namespace ChuMeng {
                 yield return new WaitForSeconds(1);
             }
         }
-
-       
 
 		public override IEnumerator RunLogic ()
 		{

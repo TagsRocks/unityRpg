@@ -13,13 +13,10 @@ namespace ChuMeng
 		{
 			base.EnterState ();
 			aiCharacter.SetIdle ();
-			//aiCharacter.SetBeHit ();
-			//GetAttr ().GetComponent<PhysicComponent> ().StopMove = true;
 		}
 		public override void ExitState ()
 		{
 			base.ExitState ();
-			//GetAttr ().GetComponent<PhysicComponent> ().StopMove = false;
 		}
 		public override bool CheckNextState (AIStateEnum next)
 		{

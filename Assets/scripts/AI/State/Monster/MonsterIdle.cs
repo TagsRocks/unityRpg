@@ -164,7 +164,6 @@ namespace ChuMeng
                 }
                 yield return GetAttr().StartCoroutine(NewHeadingRoutine());
 
-
                 aiCharacter.SetRun();
                 passTime = directionChangeInterval;
                 var attr = GetAttr();

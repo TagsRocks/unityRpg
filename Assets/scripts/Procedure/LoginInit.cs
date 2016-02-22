@@ -22,7 +22,6 @@ namespace ChuMeng
 		public static LoginInit GetLogin() {
 			return loginInit;
 		}
-		//SaveGame sg;
 		void Awake ()
 		{
 			loginInit = this;
@@ -33,7 +32,6 @@ namespace ChuMeng
 				saveGame.GetComponent<SaveGame>().InitData();
 				saveGame.GetComponent<SaveGame>().InitServerList();
 			}
-			//sg = SaveGame.saveGame;
 		}
         public void TryToLogin(){
             Log.Net("TryToLogin");
@@ -60,21 +58,13 @@ namespace ChuMeng
 			yield return StartCoroutine (bundle.sendCoroutine(KBEngineApp.app.networkInterface(), fid, packet));
 
 			if (packet.packet.responseFlag == 0) {
-				//charInfo = packet.packet.protoBody as GCLoginAccount;
 				SaveGame.saveGame.charInfo = packet.packet.protoBody as GCLoginAccount;
-
-				//ShowCharacterPanel();
 				Application.LoadLevel("XuanZeRenWu");
-				//var g = new GameObject("CharSelectLogic");
-				//g.AddComponent<CharSelectLogic>();
 
 			} else {
-				//loginUI.showLog(Util.GetString("loginError"));
 				WindowMng.windowMng.ShowNotifyLog(Util.GetString("loginError"), 3);
 			}
-
 			Debug.Log ("LoginInit::loginCoroutine finish login");
-
 		}
 
 		
@@ -152,7 +142,6 @@ namespace ChuMeng
 		{
             WindowMng.windowMng.PushView ("UI/loginUI2");
 			MyEventSystem.myEventSystem.PushEvent (MyEvent.EventType.UpdateLogin);
-
 		}
 
 
