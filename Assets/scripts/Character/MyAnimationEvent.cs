@@ -212,11 +212,9 @@ namespace ChuMeng
 			MyEventSystem.myEventSystem.PushLocalEvent (photonView.GetLocalId (), MyEvent.EventType.HideWeaponTrail);
 		}
 
-		//FIXME: Npc的KnockBack 接受击退攻击
         public void KnockBackWho(Vector3 pos) {
 			Log.AI ("KnockBack Who "+pos);
 			KnockBack = true;
-			//WhoKnock = who;
             KnockWhoPos = pos;
 		}
 
