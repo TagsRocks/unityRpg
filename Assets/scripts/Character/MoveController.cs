@@ -46,7 +46,6 @@ namespace ChuMeng
 		{
 			if (evt.type == MyEvent.EventType.MovePlayer) {
 				vcontroller.inputVector = evt.vec2;
-				//Log.AI("read controller event "+evt.vec2);
 			}
 		}
 	}

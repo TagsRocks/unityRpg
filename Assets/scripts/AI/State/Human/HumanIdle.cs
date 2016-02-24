@@ -18,9 +18,6 @@ namespace ChuMeng
             }
 		}
 
-
-
-
 		public override IEnumerator RunLogic ()
 		{
 			var playerMove = GetAttr ().GetComponent<MoveController> ();
@@ -30,7 +27,6 @@ namespace ChuMeng
 				if(CheckEvent()) {
 					yield break;
 				}
-
 
 				float v = 0;
 				float h = 0;

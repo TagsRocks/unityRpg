@@ -194,11 +194,6 @@ namespace ChuMeng
                     }
                 }
 
-                //var label = GetLabel("Equip/Label");
-                //label.text = "卸下";
-
-                //GetName("Equip").SetActive(false);
-                //GetName("Sell").SetActive(false);
 
                 string baseAttr = "";
                 if (equipData.itemData.Damage > 0)

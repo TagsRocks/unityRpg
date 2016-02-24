@@ -1,5 +1,9 @@
 ##unityRpg
 
+常见报错：
+    Log.cs 报错
+    打开 WIndow / Log View 这个窗口即可消除报错
+
 http://www.taikr.com/course/297
 
 该工程是为了结合以上视频课程而开发的游戏

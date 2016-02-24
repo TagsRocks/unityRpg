@@ -52,8 +52,6 @@ namespace ChuMeng
             return name;
         }
 
-        //TODO:使用ObjectManager 来寻找目标敌人
-
         public override bool CheckNextState(AIStateEnum next)
         {
             if (next == AIStateEnum.COMBAT)
