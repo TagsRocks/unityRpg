@@ -361,12 +361,6 @@ namespace ChuMeng
                 mailObj.AddComponent<MailController>();
                 mailObj.transform.parent = transform;
             }
-            if (FriendsController.friendsController == null)
-            {
-                var friendsObj = new GameObject("FriendsController");
-                friendsObj.AddComponent<FriendsController>();
-                friendsObj.transform.parent = transform;
-            }
             if (AuctionController.auctionController == null)
             {
                 var auctionObj = new GameObject("AuctionController");
