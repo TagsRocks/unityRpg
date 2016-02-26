@@ -66,27 +66,6 @@ namespace KBEngine
 			argtypes = null;
 		}
 
-		public Message(MessageID msgid, string msgname, Int16 length, sbyte argstype, List<Byte> msgargtypes, System.Reflection.MethodInfo msghandler)
-		{
-			id = msgid;
-			name = msgname;
-			msglen = length;
-			handler = msghandler;
-			argsType = argstype;
-			
-			argtypes = new System.Reflection.MethodInfo[msgargtypes.Count];
-			for(int i=0; i<msgargtypes.Count; i++)
-			{
-				argtypes[i] = StreamRWBinder.bindReader(msgargtypes[i]);
-				if(argtypes[i] == null)
-				{
-					Dbg.ERROR_MSG("Message::Message(): bindReader(" + msgargtypes[i] + ") is error!");
-				}
-			}
-			
-			// Dbg.DEBUG_MSG(string.Format("Message::Message(): ({0}/{1}/{2})!", 
-			//	msgname, msgid, msglen));
-		}
 		
 		public object[] createFromStream(MemoryStream msgstream)
 		{

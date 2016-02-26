@@ -119,7 +119,6 @@ START_RUN:
 		public Vector3 entityServerPos = new Vector3(0f, 0f, 0f);
 		Dictionary<string, string> spacedatas = new Dictionary<string, string>();
 		
-		public Dictionary<Int32, Entity> entities = new Dictionary<Int32, Entity>();
 		public List<Int32> entityIDAliasIDList = new List<Int32>();
 		private Dictionary<Int32, MemoryStream> bufferedCreateEntityMessage = new Dictionary<Int32, MemoryStream>(); 
 
@@ -139,7 +138,6 @@ START_RUN:
 		public string spaceResPath = "";
 		public bool isLoadedGeometry = false;
 		
-		public static EntityDef entityDef = new EntityDef();
 		
 		public bool isbreak = false;
 		public List<System.Action> pendingCallbacks = new List<System.Action>();
@@ -181,7 +179,6 @@ START_RUN:
         	t_ = null;
         	
         	reset();
-        	KBEngine.Event.clear();
         }
         
         public Thread t(){
@@ -207,15 +204,10 @@ START_RUN:
 			isImportServerErrorsDescr_ = false;
 			serverErrs.Clear ();
 			Message.reset ();
-			EntityDef.reset ();
         }
         
 		public void reset()
 		{
-			KBEngine.Event.clearFiredEvents();
-			
-			foreach(Entity e in entities.Values)
-				e.destroy();
 			
 			currserver = "loginapp";
 			currstate = "create";
@@ -224,7 +216,6 @@ START_RUN:
 			serverVersion = "";
 			serverScriptVersion = "";
 			
-			entities.Clear();
 			entity_uuid = 0;
 			entity_id = 0;
 			entity_type = "";
@@ -251,7 +242,6 @@ START_RUN:
 		{
 			while(!isbreak)
 			{
-				Event.processInEvents();
 				networkInterface_.process();
 			}
 			

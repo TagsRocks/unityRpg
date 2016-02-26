@@ -44,7 +44,6 @@ namespace KBEngine
         public NetworkInterface(KBEngineApp app)
         {
         	this.app_ = app;
-			bindMessage();
         	packets_ = new List<MemoryStream>();
             msgReader.mainLoop = KBEngine.KBEngineApp.app;
         }
@@ -72,19 +71,7 @@ namespace KBEngine
 		}
 
 		
-		public void bindMessage()
-		{
-			if(Message.messages.Count == 0)
-			{
-				Message.messages["Loginapp_importClientMessages"] = new Message(5, "importClientMessages", 0, 0, new List<Byte>(), null);
-				Message.messages["Baseapp_importClientMessages"] = new Message(207, "importClientMessages", 0, 0, new List<Byte>(), null);
-				Message.messages["Baseapp_importClientEntityDef"] = new Message(208, "importClientMessages", 0, 0, new List<Byte>(), null);
-				
-				Message.messages["Client_onImportClientMessages"] = new Message(518, "Client_onImportClientMessages", -1, -1, new List<Byte>(), 
-					this.app_.GetType().GetMethod("Client_onImportClientMessages"));
-				Message.clientMessages[Message.messages["Client_onImportClientMessages"].id] = Message.messages["Client_onImportClientMessages"];
-			}
-		}
+		
 		
 		private static void connectCB(IAsyncResult asyncresult)
 		{
@@ -142,11 +129,9 @@ __RETRY:
 			
 			if(!valid())
 			{
-				Event.fireAll("onConnectStatus", new object[]{false});
 				return false;
 			}
 			
-			Event.fireAll("onConnectStatus", new object[]{true});
 			return true;
 		}
         
@@ -194,7 +179,6 @@ __RETRY:
 						socket_.Close();
 					
 					socket_ = null;
-					Event.fireAll("onDisableConnect", new object[]{});
 				}
 				else{
 					Dbg.ERROR_MSG(string.Format("NetworkInterface::send(): socket error(" + err.ErrorCode + ")!"));
@@ -228,7 +212,6 @@ __RETRY:
 						socket_.Close();
 					
 					socket_ = null;
-					Event.fireAll("onDisableConnect", new object[]{});
                 }
 				else{
 					Dbg.ERROR_MSG(string.Format("NetworkInterface::send(): socket error(" + err.ErrorCode + ")!"));
@@ -272,7 +255,6 @@ __RETRY:
 						Dbg.ERROR_MSG(string.Format("NetworkInterface::recv(): socket error(" + err.ErrorCode + ")!"));
 					}
 					
-					Event.fireAll("onDisableConnect", new object[]{});
 					return;
 				}
 				
@@ -287,7 +269,6 @@ __RETRY:
 						socket_.Close();
 					socket_ = null;
 					
-					Event.fireAll("onDisableConnect", new object[]{});
 				}
 				else
 				{
@@ -297,7 +278,6 @@ __RETRY:
 						socket_.Close();
 					socket_ = null;
 					
-					Event.fireAll("onDisableConnect", new object[]{});
 					return;
 				}
 				Debug.Log("success received Data "+successReceiveBytes);
