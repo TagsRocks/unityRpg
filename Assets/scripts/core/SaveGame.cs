@@ -361,56 +361,12 @@ namespace ChuMeng
                 mailObj.AddComponent<MailController>();
                 mailObj.transform.parent = transform;
             }
-            if (AuctionController.auctionController == null)
-            {
-                var auctionObj = new GameObject("AuctionController");
-                auctionObj.AddComponent<AuctionController>();
-                auctionObj.transform.parent = transform;
-            }
             if (GuildController.guildController == null)
             {
                 var guildObj = new GameObject("GuildController");
                 guildObj.AddComponent<GuildController>();
                 guildObj.transform.parent = transform;
             }
-            /*
-            if (VipController.vipController == null) {
-                var vipObj = new GameObject("VipController");
-                vipObj.AddComponent<VipController>();
-                vipObj.transform.parent = transform;
-            }
-            if (RankListController.rankListController == null) {
-                var rankObj = new GameObject("RankListController");
-                rankObj.AddComponent<RankListController>();
-                rankObj.transform.parent = transform;
-            }
-            */
-            /*
-            if (ArenaController.arenaControoler == null) {
-                var arenaObj = new GameObject ("ArenaController");
-                arenaObj.AddComponent<ArenaController> ();
-                arenaObj.transform.parent = transform;
-            }
-            if (RankListController.rankListController == null) {
-                var rankObj = new GameObject ("RankListController");
-                rankObj.AddComponent<RankListController> ();
-                rankObj.transform.parent = transform;
-            }
-            */
-            /*
-            if (VipController.vipController == null) {
-                var vipObj = new GameObject("VipController");
-                vipObj.AddComponent<VipController>();
-                vipObj.transform.parent = transform;
-            }
-            */
-            /*
-            if (TaskController.taskController == null) {
-                var taskobj = new GameObject("TaskController");
-                taskobj.AddComponent<TaskController>();
-                taskobj.transform.parent = transform;
-            }
-            */         
             var eff = new GameObject("EffectMainNode");
             eff.transform.parent = transform;
             EffectMainNode = eff;
