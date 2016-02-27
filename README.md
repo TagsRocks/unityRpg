@@ -1,4 +1,6 @@
 ##unityRpg
+Demo 游戏下载地址：
+https://itunes.apple.com/cn/app/id1016771030?mt=8
 
 常见报错：
     Log.cs 报错
