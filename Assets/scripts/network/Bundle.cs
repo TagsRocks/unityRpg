@@ -72,30 +72,6 @@ namespace KBEngine
 				numMessage = 0;
 			}
 		}
-		public void send(NetworkInterface networkInterface) {
-			Debug.LogError ("Bundle::send networkInterface not used");
-		}
-
-		public void send(NetworkInterface networkInterface, MessageHandler handler, uint fId) {
-			Debug.Log("send Message "+networkInterface+" "+fId);
-			fini (true);
-			Debug.Log ("message Number " + streamList.Count);
-			if(networkInterface.valid())
-			{
-				for(int i=0; i<streamList.Count; i++)
-				{
-					stream = streamList[i];
-					networkInterface.send(stream.getbuffer(), handler, fId);
-				}
-			}
-			else
-			{
-				Dbg.ERROR_MSG("Bundle::send: networkInterface invalid!");  
-			}
-			
-			streamList.Clear();
-			stream = new MemoryStream();
-		}
 
 		public IEnumerator sendCoroutine(NetworkInterface networkInterface, uint fId, PacketHolder par) {
 			fini (true);
