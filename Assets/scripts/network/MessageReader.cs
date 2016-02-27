@@ -257,8 +257,8 @@ namespace KBEngine
 
 
 
-                        Message msg = new Message();
-                        IMessageLite pbmsg = msg.handlePB(moduleId, msgid, stream);
+                        //Message msg = new Message();
+                        IMessageLite pbmsg = KBEngine.Message.handlePB(moduleId, msgid, stream);
                         Packet p = new Packet(flag, msglen, flowId, moduleId, msgid, responseTime, responseFlag, pbmsg);
                         var fullName = pbmsg.GetType().FullName;
                         //Bundle.recvMsg.Add("recvMsg " + fullName + " : " + flowId);

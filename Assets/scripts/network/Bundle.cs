@@ -37,23 +37,6 @@ namespace KBEngine
 		{
 		}
 		
-		public void newMessage(Message mt)
-		{
-			fini(false);
-			
-			msgtype = mt;
-			numMessage += 1;
-
-			writeUint16(msgtype.id);
-			/*
-			 * spare uint16 for size
-			 */ 
-			if(msgtype.msglen == -1)
-			{
-				writeUint16(0);
-				messageLength = 0;
-			}
-		}
 
 		/*
 		 * buffer Add New Message
@@ -93,43 +76,11 @@ namespace KBEngine
 		}
 
 		
-		public void writeMsgLength()
-		{
-			if (msgtype == null)
-				return;
-
-			if(msgtype.msglen != -1)
-				return;
-			/*
-			 * two byte message Length enough to put
-			 */ 
-			if(stream.opsize() >= messageLength)
-			{
-				int idx = (int)stream.opsize() - messageLength - 2;
-				stream.data()[idx] = (Byte)(messageLength & 0xff);
-				stream.data()[idx + 1] = (Byte)(messageLength >> 8 & 0xff);
-			}
-			/*
-			 * CheckStream Set Message Length  > currentStreamSize
-			 * last Stream Data length-size-2  set Message Length 
-			 */ 
-			else
-			{
-				int size = messageLength - (int)stream.opsize();
-				byte[] data = streamList[numMessage - 1].data();
-				
-				int idx = data.Length - size - 2;
-				
-				data[idx] = (Byte)(messageLength & 0xff);
-				data[idx + 1] = (Byte)(messageLength >> 8 & 0xff);
-			}
-		}
 		
 		public void fini(bool issend)
 		{
 			if(numMessage > 0)
 			{
-				writeMsgLength();
 				if(stream != null)
 					streamList.Add(stream);
 			}
