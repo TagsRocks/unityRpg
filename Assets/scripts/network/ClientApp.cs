@@ -70,6 +70,7 @@ public class ClientApp : UnityEngine.MonoBehaviour
 
     //First Connect
     //Check State OK?
+    //游戏转入后台 会导致网络连接断开
     IEnumerator CheckConnectState()
     {
         while (true)

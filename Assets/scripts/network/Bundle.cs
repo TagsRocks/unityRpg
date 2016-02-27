@@ -36,27 +36,6 @@ namespace KBEngine
 		public Bundle()
 		{
 		}
-		
-
-		/*
-		 * buffer Add New Message
-		 */ 
-		public void newMessage(string moduleName, string msgName) {
-			fini (false);
-
-			var pa = Util.GetMsgID (moduleName, msgName);
-			moduleId = pa.moduleId;
-			msgId = pa.messageId;
-
-			msgtype = null;
-			numMessage += 1;
-
-			//Write Protobuffer set MsgId MsgLength
-			//MsgId byte short
-			//MsgLength = writeUint 
-
-			//messageLength = 0;
-		}
 
 		public void newMessage(System.Type type) {
 			fini (false);
