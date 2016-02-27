@@ -23,6 +23,7 @@ namespace ChuMeng
             SetCallback("GMButton", OnGM);
             SetCallback("JingShiButton", OnJingShi);
             SetCallback("WorldButton", OnWorld);
+            SetCallback("BombButton", OnBomb);
             this.regEvt = new System.Collections.Generic.List<MyEvent.EventType>(){
                 MyEvent.EventType.UpdateItemCoffer,
                 MyEvent.EventType.UpdateMainUI,
@@ -35,6 +36,9 @@ namespace ChuMeng
         /// </summary>
         void OnWorld() {
             WorldManager.worldManager.WorldChangeScene(3, false);
+        }
+        void OnBomb() {
+            WorldManager.worldManager.WorldChangeScene(4, false);
         }
 
         void OnJingShi() {
