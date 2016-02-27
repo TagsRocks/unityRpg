@@ -97,8 +97,6 @@ START_RUN:
 		
 		public string currserver = "loginapp";
 		public string currstate = "create";
-		private byte[] serverdatas_ = new byte[0];
-		private byte[] clientdatas_ = new byte[0];
 		
 		public string serverVersion = "";
 		public string clientVersion = "0.1.13";
@@ -117,10 +115,7 @@ START_RUN:
 		public Vector3 entityLastLocalPos = new Vector3(0f, 0f, 0f);
 		public Vector3 entityLastLocalDir = new Vector3(0f, 0f, 0f);
 		public Vector3 entityServerPos = new Vector3(0f, 0f, 0f);
-		Dictionary<string, string> spacedatas = new Dictionary<string, string>();
 		
-		public List<Int32> entityIDAliasIDList = new List<Int32>();
-		private Dictionary<Int32, MemoryStream> bufferedCreateEntityMessage = new Dictionary<Int32, MemoryStream>(); 
 
 		public struct ServerErr
 		{
@@ -189,30 +184,13 @@ START_RUN:
         	return networkInterface_;
         }
         
-        public byte[] serverdatas()
-        {
-        	return serverdatas_;
-        }
-        
-        public void resetMessages()
-        {
-	        loadingLocalMessages_ = false;
-	        
-			loginappMessageImported_ = false;
-			baseappMessageImported_ = false;
-			entitydefImported_ = false;
-			isImportServerErrorsDescr_ = false;
-			serverErrs.Clear ();
-			Message.reset ();
-        }
-        
+
+
 		public void reset()
 		{
 			
 			currserver = "loginapp";
 			currstate = "create";
-			serverdatas_ = new byte[0];
-			clientdatas_ = new byte[0];
 			serverVersion = "";
 			serverScriptVersion = "";
 			
@@ -220,8 +198,6 @@ START_RUN:
 			entity_id = 0;
 			entity_type = "";
 			
-			entityIDAliasIDList.Clear();
-			bufferedCreateEntityMessage.Clear();
 			
 			lastticktime_ = System.DateTime.Now;
 			lastUpdateToServerTime_ = System.DateTime.Now;
@@ -230,13 +206,7 @@ START_RUN:
 			isLoadedGeometry = false;
 			
 			networkInterface_.reset();
-			
-			spacedatas.Clear();
 		}
-		
-	 
-				
-		
 		
 		public void process()
 		{

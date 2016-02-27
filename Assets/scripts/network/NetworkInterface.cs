@@ -186,39 +186,6 @@ __RETRY:
 			}
 		}
 		
-		public void send(byte[] datas)
-		{
-			if(socket_ == null || socket_.Connected == false) 
-			{
-               throw new ArgumentException ("invalid socket!");
-            }
-			
-            if (datas == null || datas.Length == 0 ) 
-			{
-                throw new ArgumentException ("invalid datas!");
-            }
-			
-			try
-			{
-				socket_.Send(datas);
-			}
-			catch (SocketException err)
-			{
-                if (err.ErrorCode == 10054 || err.ErrorCode == 10053)
-                {
-					Dbg.DEBUG_MSG(string.Format("NetworkInterface::send(): disable connect!"));
-					
-					if(socket_ != null && socket_.Connected)
-						socket_.Close();
-					
-					socket_ = null;
-                }
-				else{
-					Dbg.ERROR_MSG(string.Format("NetworkInterface::send(): socket error(" + err.ErrorCode + ")!"));
-				}
-			}
-        }
-		
 		public void recv()
 		{
            if(socket_ == null || socket_.Connected == false) 
