@@ -29,7 +29,6 @@ namespace KBEngine
 		public List<MemoryStream> streamList = new List<MemoryStream>();
 		public int numMessage = 0;
 		public int messageLength = 0;
-		public Message msgtype = null;
 
 		public int moduleId;
 		public int msgId;
@@ -50,7 +49,6 @@ namespace KBEngine
 			moduleId = pa.moduleId;
 			msgId = pa.messageId;
 			
-			msgtype = null;
 			numMessage += 1;
 		}
 
@@ -72,7 +70,6 @@ namespace KBEngine
 			if(issend)
 			{
 				numMessage = 0;
-				msgtype = null;
 			}
 		}
 		public void send(NetworkInterface networkInterface) {
