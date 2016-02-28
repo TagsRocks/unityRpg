@@ -36,6 +36,23 @@ public class ShadowComponent : MonoBehaviour {
 			}
 		}
 	}
+    private bool inLock = false;
+    private float lockY = 0;
+    public void LockShadowPlane() {
+        inLock = true;
+        lockY = shadowPlane.transform.position.y;
+    }
+    public void UnLockShadowPlane() {
+        inLock = false;
+        shadowPlane.transform.localPosition = Vector3.zero;
+    }
+    void Update() {
+        if(inLock) {
+            var oldP = shadowPlane.transform.position;
+            oldP.y = lockY;
+            shadowPlane.transform.position = oldP; 
+        }
+    }
 
 	public void HideShadow() {
 		shadowPlane.transform.localPosition = Vector3.up*-100;

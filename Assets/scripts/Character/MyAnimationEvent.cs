@@ -39,6 +39,7 @@ namespace ChuMeng
             EXIT_STUNNED,
             BOMB,
             DEAD,
+            JUMP,
 		}
 		/*
 		 * Pass Message Format
@@ -217,6 +218,13 @@ namespace ChuMeng
 			KnockBack = true;
             KnockWhoPos = pos;
 		}
+
+        public void EnterJump() {
+            Log.AI("EnterJump");
+            var msg = new Message();
+            msg.type = MsgType.JUMP;
+            InsertMsg (msg);
+        }
 
 		public bool fleeEvent = false;
 		public float fleeTime = 0;

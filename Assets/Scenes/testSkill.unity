@@ -75,6 +75,118 @@ NavMeshSettings:
     heightInaccuracy: 10
     tileSizeHint: 0
   m_NavMesh: {fileID: 0}
+--- !u!1001 &42452391
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 434718, guid: 0fd891deaf57443229336adf2127ee71, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: -33.1372757
+      objectReference: {fileID: 0}
+    - target: {fileID: 434718, guid: 0fd891deaf57443229336adf2127ee71, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 10.1519299
+      objectReference: {fileID: 0}
+    - target: {fileID: 434718, guid: 0fd891deaf57443229336adf2127ee71, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 122.248108
+      objectReference: {fileID: 0}
+    - target: {fileID: 434718, guid: 0fd891deaf57443229336adf2127ee71, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 434718, guid: 0fd891deaf57443229336adf2127ee71, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 434718, guid: 0fd891deaf57443229336adf2127ee71, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 434718, guid: 0fd891deaf57443229336adf2127ee71, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 434718, guid: 0fd891deaf57443229336adf2127ee71, type: 2}
+      propertyPath: m_RootOrder
+      value: 7
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 0fd891deaf57443229336adf2127ee71, type: 2}
+  m_RootGameObject: {fileID: 71257298}
+  m_IsPrefabParent: 0
+  m_IsExploded: 1
+--- !u!1 &64015838
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 134716, guid: 0fd891deaf57443229336adf2127ee71, type: 2}
+  m_PrefabInternal: {fileID: 42452391}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 64015840}
+  - 114: {fileID: 64015839}
+  m_Layer: 0
+  m_Name: JumpSkill
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &64015839
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 11434716, guid: 0fd891deaf57443229336adf2127ee71,
+    type: 2}
+  m_PrefabInternal: {fileID: 42452391}
+  m_GameObject: {fileID: 64015838}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6511922d27f0d43728f23722a094fb81, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &64015840
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 434716, guid: 0fd891deaf57443229336adf2127ee71, type: 2}
+  m_PrefabInternal: {fileID: 42452391}
+  m_GameObject: {fileID: 64015838}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 71257299}
+  m_RootOrder: 0
+--- !u!1 &71257298
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 134718, guid: 0fd891deaf57443229336adf2127ee71, type: 2}
+  m_PrefabInternal: {fileID: 42452391}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 71257299}
+  m_Layer: 0
+  m_Name: JumpSkillLayout
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &71257299
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 434718, guid: 0fd891deaf57443229336adf2127ee71, type: 2}
+  m_PrefabInternal: {fileID: 42452391}
+  m_GameObject: {fileID: 71257298}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -33.1372757, y: 10.1519299, z: 122.248108}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 64015840}
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
 --- !u!1001 &78708905
 Prefab:
   m_ObjectHideFlags: 0
@@ -332,6 +444,50 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bombData: {fileID: 11404394, guid: 2528c1bf1825b40b6bef958087e41f88, type: 2}
   Position: {x: 0, y: 1, z: 0}
+--- !u!1001 &723340078
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 434178, guid: fc784b9442c284070bdd66e160d3b069, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: -33.1372757
+      objectReference: {fileID: 0}
+    - target: {fileID: 434178, guid: fc784b9442c284070bdd66e160d3b069, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 10.1519299
+      objectReference: {fileID: 0}
+    - target: {fileID: 434178, guid: fc784b9442c284070bdd66e160d3b069, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 122.248108
+      objectReference: {fileID: 0}
+    - target: {fileID: 434178, guid: fc784b9442c284070bdd66e160d3b069, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 434178, guid: fc784b9442c284070bdd66e160d3b069, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 434178, guid: fc784b9442c284070bdd66e160d3b069, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 434178, guid: fc784b9442c284070bdd66e160d3b069, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 434178, guid: fc784b9442c284070bdd66e160d3b069, type: 2}
+      propertyPath: m_RootOrder
+      value: 8
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: fc784b9442c284070bdd66e160d3b069, type: 2}
+  m_RootGameObject: {fileID: 950607005}
+  m_IsPrefabParent: 0
+  m_IsExploded: 1
 --- !u!1 &892375839
 GameObject:
   m_ObjectHideFlags: 0
@@ -416,6 +572,72 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
+--- !u!1 &950607005
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 134178, guid: fc784b9442c284070bdd66e160d3b069, type: 2}
+  m_PrefabInternal: {fileID: 723340078}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 950607007}
+  - 114: {fileID: 950607006}
+  m_Layer: 0
+  m_Name: JumpSkill
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &950607006
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 11434178, guid: fc784b9442c284070bdd66e160d3b069,
+    type: 2}
+  m_PrefabInternal: {fileID: 723340078}
+  m_GameObject: {fileID: 950607005}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d3fd4ec4f0f144a7931205bdb8bd619, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  eventList:
+  - evt: 10001
+    layout: {fileID: 134718, guid: 0fd891deaf57443229336adf2127ee71, type: 2}
+    affix:
+      effectType: 0
+      Duration: 0
+      UnitTheme: {fileID: 0}
+      ThemePos: {x: 0, y: 0, z: 0}
+      addDefense: 0
+      target: 0
+      affixParameters: []
+      IsOnlyOne: 0
+      fireParticle: {fileID: 0}
+      keepOld: 0
+      buffParticle: {fileID: 0}
+    attachOwner: 0
+    attaches: 0
+    childSkillId: 0
+    AttachToTarget: 0
+    SetBeamTarget: 0
+    BeamOffset: {x: 0, y: 0, z: 0}
+    TargetPos: 0
+    UseMarkPos: 0
+    EvtId: 0
+  animationLoop: 0
+  attackDuration: 1
+--- !u!4 &950607007
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 434178, guid: fc784b9442c284070bdd66e160d3b069, type: 2}
+  m_PrefabInternal: {fileID: 723340078}
+  m_GameObject: {fileID: 950607005}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -33.1372757, y: 10.1519299, z: 122.248108}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 8
 --- !u!1 &1022968485
 GameObject:
   m_ObjectHideFlags: 0
@@ -683,8 +905,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 636a92c292ccd45ef9138ace743dd3c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Velocity: 10
+  Velocity: 6
   UpSpeed: 5
+  Gravity: 8
+  Friction: 20
   ReleaseParticle: {fileID: 100006, guid: 5f57c33e1e1954745b985ee2c210aa5f, type: 2}
   ActiveParticle: {fileID: 100012, guid: 7d1e9400127c14acb8a1078c5b08f6f1, type: 2}
   HitParticle: {fileID: 100014, guid: a9d413d6969c343ea96b30a4a2bd2a1d, type: 2}

@@ -36,6 +36,9 @@ namespace ChuMeng
 			//GetComponent<CharacterController> ().SimpleMove ();
 		}
 
+        public void JumpMove(Vector3 movement) {
+            motionValue = movement * Time.deltaTime;
+        }
         /// <summary>
         /// 从当前方向旋转到特定方向 
         /// </summary>
@@ -53,6 +56,8 @@ namespace ChuMeng
 				moveValue.y -= Gravity;
 			}
 		}
+
+
 
 		void LateUpdate ()
 		{
@@ -98,13 +103,15 @@ namespace ChuMeng
 			moveValue = Vector3.zero;
 			motionValue = Vector3.zero;
 			lastSpeed = 0;
-			//skillMoveFade = true;
 		}
+
         NpcAttribute attribute;
         void Start(){
             attribute = GetComponent<NpcAttribute>();
-            StartCoroutine(CheckFalling());
+            //StartCoroutine(CheckFalling());
         }
+
+        /*
         IEnumerator CheckFalling(){
             var mtrans = transform;
             while(true){
@@ -115,5 +122,7 @@ namespace ChuMeng
                 yield return new WaitForSeconds(1);
             }
         }
+        */
+
 	}
 }

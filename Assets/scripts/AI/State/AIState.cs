@@ -14,8 +14,10 @@ namespace ChuMeng
         FLEE,
         KNOCK_BACK,
 
-        CastSkill,
+        CAST_SKILL,
         Stunned,
+
+        JUMP,
     }
 
     public class AIState
@@ -276,7 +278,7 @@ namespace ChuMeng
                         Log.AI("Enter CastSkill");
                         var skillPart = GetSkill();
                         skillPart.SetActiveSkill(msg.skillData);
-                        return aiCharacter.ChangeState(AIStateEnum.CastSkill);
+                        return aiCharacter.ChangeState(AIStateEnum.CAST_SKILL);
                     }
                 } else if (msg.type == MyAnimationEvent.MsgType.STUNNED)
                 {
@@ -286,6 +288,9 @@ namespace ChuMeng
                     return aiCharacter.ChangeState(AIStateEnum.IDLE);
                 } else if(msg.type == MyAnimationEvent.MsgType.DEAD) {
                     return aiCharacter.ChangeState(AIStateEnum.DEAD);
+                } else if(msg.type == MyAnimationEvent.MsgType.JUMP) {
+                    Log.AI("EnterJumpStateNow");
+                    return aiCharacter.ChangeState(AIStateEnum.JUMP);
                 }
                 else {
                     return CheckEventOverride(msg);
@@ -368,12 +373,12 @@ namespace ChuMeng
     {
         public SkillState()
         {
-            type = AIStateEnum.CastSkill;
+            type = AIStateEnum.CAST_SKILL;
         }
 
         public override bool CheckNextState(AIStateEnum next)
         {
-            if (next == AIStateEnum.CastSkill)
+            if (next == AIStateEnum.CAST_SKILL)
             {
                 return false;
             }
@@ -410,5 +415,11 @@ namespace ChuMeng
             }
             return false;
         }
+    }
+
+    public class JumpState : AIState {
+        public JumpState() {
+            type = AIStateEnum.JUMP;
+        }    
     }
 }

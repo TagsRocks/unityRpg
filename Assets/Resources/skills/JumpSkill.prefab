@@ -1,52 +1,70 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &104394
+--- !u!1 &134178
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 4
   m_Component:
-  - 4: {fileID: 404394}
-  - 114: {fileID: 11404394}
+  - 4: {fileID: 434178}
+  - 114: {fileID: 11434178}
   m_Layer: 0
-  m_Name: BombData1
+  m_Name: JumpSkill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &404394
+--- !u!4 &434178
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 104394}
+  m_GameObject: {fileID: 134178}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -33.1372757, y: 10.1519299, z: 122.248108}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
---- !u!114 &11404394
+--- !u!114 &11434178
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 104394}
+  m_GameObject: {fileID: 134178}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 636a92c292ccd45ef9138ace743dd3c0, type: 3}
+  m_Script: {fileID: 11500000, guid: 1d3fd4ec4f0f144a7931205bdb8bd619, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Velocity: 6
-  UpSpeed: 5
-  Gravity: 8
-  Friction: 20
-  ReleaseParticle: {fileID: 100006, guid: 5f57c33e1e1954745b985ee2c210aa5f, type: 2}
-  ActiveParticle: {fileID: 100012, guid: 7d1e9400127c14acb8a1078c5b08f6f1, type: 2}
-  HitParticle: {fileID: 100014, guid: a9d413d6969c343ea96b30a4a2bd2a1d, type: 2}
-  AOERadius: 2
+  eventList:
+  - evt: 10001
+    layout: {fileID: 134718, guid: 0fd891deaf57443229336adf2127ee71, type: 2}
+    affix:
+      effectType: 0
+      Duration: 0
+      UnitTheme: {fileID: 0}
+      ThemePos: {x: 0, y: 0, z: 0}
+      addDefense: 0
+      target: 0
+      affixParameters: []
+      IsOnlyOne: 0
+      fireParticle: {fileID: 0}
+      keepOld: 0
+      buffParticle: {fileID: 0}
+    attachOwner: 0
+    attaches: 0
+    childSkillId: 0
+    AttachToTarget: 0
+    SetBeamTarget: 0
+    BeamOffset: {x: 0, y: 0, z: 0}
+    TargetPos: 0
+    UseMarkPos: 0
+    EvtId: 0
+  animationLoop: 0
+  attackDuration: 1
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
@@ -56,6 +74,6 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 104394}
+  m_RootGameObject: {fileID: 134178}
   m_IsPrefabParent: 1
   m_IsExploded: 1

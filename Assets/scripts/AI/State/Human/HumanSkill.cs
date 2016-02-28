@@ -48,11 +48,14 @@ namespace ChuMeng
             var camForward = playerMove.camForward;
             var vcontroller = playerMove.vcontroller;
             var physics = playerMove.GetComponent<PhysicComponent>();
+
+            var isEvt = false;
+
             while (!quit)
             {
-
                 if (CheckEvent())
                 {
+                    isEvt = true;
                     break;
                 }
 
@@ -87,7 +90,10 @@ namespace ChuMeng
             MyEventSystem.myEventSystem.PushLocalEvent(GetAttr().GetLocalId(), MyEvent.EventType.AnimationOver);
             Log.AI("Stop SkillState ");
             skillStateMachine.Stop();
-            aiCharacter.ChangeState(AIStateEnum.IDLE);
+            if (!isEvt)
+            {
+                aiCharacter.ChangeState(AIStateEnum.IDLE);
+            }
         }
     }
 }

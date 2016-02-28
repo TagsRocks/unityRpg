@@ -5,6 +5,7 @@ namespace ChuMeng
 {
     /// <summary>
     /// 标记地图某些点为安全点，以便在快速下坡的时候调整位置
+    /// 如何防止对象掉落
     /// </summary>
     [RequireComponent(typeof(SphereCollider))]
     public class SafePoint : MonoBehaviour

@@ -35,6 +35,7 @@ namespace ChuMeng
             ai.AddState(new HumanDead());
             ai.AddState(new MonsterKnockBack());
             ai.AddState(new HumanStunned());
+            ai.AddState(new HumanJump());
 
             this.regEvt = new List<MyEvent.EventType>()
             {
@@ -46,49 +47,42 @@ namespace ChuMeng
         }
 
 
+
         List<Vector3> samplePos;
+
         IEnumerator CheckFall()
         {
             Vector3 originPos = attribute.OriginPos;
             samplePos = new List<Vector3>(){ originPos };
             while (true)
             {
-                var lastOne = transform.position;
-                if(samplePos.Count > 0) {
-                    lastOne = samplePos [0];
-                }
-                Log.Sys("lastPos nowPos " + lastOne + " now " + transform.position);
-                if (transform.position.y < (lastOne.y - 3))
+                if (!ignoreFallCheck)
                 {
-                    if (!inSafe)
+                    var lastOne = transform.position;
+                    if (samplePos.Count > 0)
                     {
-                        /*
-                        //检查所有相邻的高度 < 3 则表示没有坠落 若存在相邻s > 3 则跳回
-                        for (int i = 1; i < samplePos.Count; i++)
-                        {
-                            var dy = samplePos [i].y - samplePos [i - 1].y;
-                            if (Mathf.Abs(dy) > 1f)
-                            {
-                                break;
-                            }
-                        }
-                        */
-
-                        transform.position = lastOne;    
+                        lastOne = samplePos [0];
                     }
-                } else
-                {
-                    if (inSafe)
+                    Log.Sys("lastPos nowPos " + lastOne + " now " + transform.position);
+                    if (transform.position.y < (lastOne.y - 3))
                     {
-                        samplePos.Clear();
-                        //samplePos.Add(transform.position);
+                        if (!inSafe)
+                        {
+                            transform.position = lastOne;    
+                        }
                     } else
                     {
-                        var pos = transform.position;
-                        samplePos.Add(pos);
-                        if (samplePos.Count > 4)
+                        if (inSafe)
                         {
-                            samplePos.RemoveAt(0);
+                            samplePos.Clear();
+                        } else
+                        {
+                            var pos = transform.position;
+                            samplePos.Add(pos);
+                            if (samplePos.Count > 4)
+                            {
+                                samplePos.RemoveAt(0);
+                            }
                         }
                     }
                 }
@@ -109,7 +103,7 @@ namespace ChuMeng
                 inSafe = false;
                 samplePos.Add(transform.position);
             }
-            Log.Sys("InSafeNow "+inSafe+" evt "+evt);
+            Log.Sys("InSafeNow " + inSafe + " evt " + evt);
         }
 
         void Start()

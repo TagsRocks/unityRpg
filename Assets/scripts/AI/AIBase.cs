@@ -25,7 +25,7 @@ namespace ChuMeng
 	[RequireComponent(typeof(NpcEquipment))]
 	public class AIBase : MonoBehaviour
 	{
-        
+        public bool ignoreFallCheck = false;
 		protected NpcAttribute attribute;
 		protected AICharacter ai;
         public AICharacter GetAI(){

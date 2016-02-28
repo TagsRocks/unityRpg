@@ -61,7 +61,7 @@ namespace ChuMeng
                 pressAttack = true;
                 return false;
             }
-            if (next == AIStateEnum.CastSkill)
+            if (next == AIStateEnum.CAST_SKILL)
             {
                 return true;
             }

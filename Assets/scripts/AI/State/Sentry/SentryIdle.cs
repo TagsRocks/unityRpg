@@ -78,7 +78,7 @@ namespace ChuMeng
 					GetAttr().transform.localRotation = qua;
 					GetSkill().SetDefaultActive();
 					//发动技能攻击
-					aiCharacter.ChangeState (AIStateEnum.CastSkill);
+					aiCharacter.ChangeState (AIStateEnum.CAST_SKILL);
 					yield break;
 				}
 
