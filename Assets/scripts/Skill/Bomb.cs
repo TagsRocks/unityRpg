@@ -60,16 +60,18 @@ namespace ChuMeng
             var controller = gameObject.GetComponent<CharacterController>();
             var gravity = bombData.Gravity;
             var passTime = 0.0f;
-            while(passTime < 2f) {
-                var movement = moveDirection*forwardSpeed+upSpeed*Vector3.up;
+            while (passTime < 2f)
+            {
+                var movement = moveDirection * forwardSpeed + upSpeed * Vector3.up;
                 movement *= Time.deltaTime;
                 controller.Move(movement);
 
-                upSpeed = upSpeed -gravity*Time.deltaTime;
+                upSpeed = upSpeed - gravity * Time.deltaTime;
                 passTime += Time.deltaTime;
 
-                if((controller.collisionFlags & CollisionFlags.Below) != 0)  {
-                    forwardSpeed -= bombData.Friction*Time.deltaTime;
+                if ((controller.collisionFlags & CollisionFlags.Below) != 0)
+                {
+                    forwardSpeed -= bombData.Friction * Time.deltaTime;
                     forwardSpeed = Mathf.Max(0, forwardSpeed);
                 }
                 yield return null;
@@ -79,32 +81,39 @@ namespace ChuMeng
             AOEDamage();
         }
 
-        void CreateHitParticle() {
-            if (bombData.HitParticle != null) {
-                GameObject g = Instantiate (bombData.HitParticle) as GameObject;
-                NGUITools.AddMissingComponent<RemoveSelf> (g);
+        void CreateHitParticle()
+        {
+            if (bombData.HitParticle != null)
+            {
+                GameObject g = Instantiate(bombData.HitParticle) as GameObject;
+                NGUITools.AddMissingComponent<RemoveSelf>(g);
                 g.transform.position = transform.position;
                 g.transform.parent = ObjectManager.objectManager.transform;
 
             }
         }
 
-        void AOEDamage() {
-            Collider[] col = Physics.OverlapSphere (transform.position, bombData.AOERadius, SkillDamageCaculate.GetDamageLayer());
-            foreach (Collider c in col) {
-                DoDamage (c);
+        void AOEDamage()
+        {
+            Collider[] col = Physics.OverlapSphere(transform.position, bombData.AOERadius, SkillDamageCaculate.GetDamageLayer());
+            foreach (Collider c in col)
+            {
+                DoDamage(c);
             }
         }
-
-        void DoDamage(Collider other){
-            if (SkillLogic.IsEnemy(attacker, other.gameObject)) {
-                if(!string.IsNullOrEmpty(skillData.HitSound)) {
-                    BackgroundSound.Instance.PlayEffect(skillData.HitSound);
-                }
-                if(runner != null) {
-                    runner.DoDamage(other.gameObject);
-                }
+        //炸弹所有人都攻击
+        void DoDamage(Collider other)
+        {
+            //if (SkillLogic.IsEnemy(attacker, other.gameObject)) {
+            if (!string.IsNullOrEmpty(skillData.HitSound))
+            {
+                BackgroundSound.Instance.PlayEffect(skillData.HitSound);
             }
+            if (runner != null)
+            {
+                runner.DoDamage(other.gameObject);
+            }
+            //}
         }
 
     }

@@ -35,7 +35,11 @@ namespace ChuMeng
             cmd.commandID = ObjectCommand.ENUM_OBJECT_COMMAND.OC_MOVE;
             GetComponent<LogicCommand>().PushCommand(cmd);
             if(info.HasHP) {
-                GetComponent<NpcAttribute>().SetHPNet(info.HP);    
+                GetComponent<NpcAttribute>().SetHPNet(info.HP);
+            }
+
+            if(info.HasTeamColor) {
+                GetComponent<NpcAttribute>().SetTeamColorNet(info.TeamColor);
             }
         }
 

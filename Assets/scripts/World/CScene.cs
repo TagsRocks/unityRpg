@@ -35,6 +35,12 @@ namespace ChuMeng
 			}
 		}
 
+        public virtual bool ShowTeamColor {
+            get {
+                return false;
+            }
+        }
+
 		public DungeonConfigData def;
 
 		protected virtual void Awake ()

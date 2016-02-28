@@ -106,6 +106,13 @@ namespace ChuMeng
             }
         }
 
+        public int TeamColor = 0;
+
+        public void SetTeamColorNet(int teamColor) {
+            TeamColor = teamColor;
+            MyEventSystem.PushLocalEventStatic(GetLocalId(), MyEvent.EventType.TeamColor);
+        }
+
         public void SetHPNet(int hp)
         {
             GetComponent<CharacterInfo>().SetProp(CharAttribute.CharAttributeEnum.HP, hp);
@@ -340,6 +347,10 @@ namespace ChuMeng
             }
         }
 
+        public KBEngine.KBNetworkView GetNetView() {
+            return GetComponent<KBEngine.KBNetworkView>();
+        }
+
         //玩家升级后设置等级 调整对应UnitData
         //TODO: 单人副本中调整属性  多人副本中网络同步属性 城市中网络同步属性  属性调整都是通过 CharacterInfo 来做的
         void SetLevel()
@@ -440,17 +451,6 @@ namespace ChuMeng
             OriginPos = transform.position;
         }
         
-        // Update is called once per frame
-        //TODO: 更新技能状态
-        void Update()
-        {
-            /*
-            foreach (SkillFullInfo sk in skills) {
-                sk.Update();
-            }
-            */
-        }
-
         /// <summary>
         /// 是否是本地玩家控制对象 
         /// </summary>

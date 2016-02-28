@@ -417,9 +417,21 @@ namespace ChuMeng
         }
     }
 
+    /// <summary>
+    /// 避免跳跃过程中死亡状态突然出现怎么处理？
+    /// 不要切换状态下次再检测CheckEvent 即可
+    /// Message 会丢弃 但是 常驻的state不会 
+    /// </summary>
     public class JumpState : AIState {
         public JumpState() {
             type = AIStateEnum.JUMP;
         }    
+        public override bool CheckNextState(AIStateEnum next)
+        {
+            if(next == AIStateEnum.IDLE) {
+                return true;
+            }
+            return false;
+        }
     }
 }

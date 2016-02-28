@@ -159,6 +159,7 @@ namespace ChuMeng
             ExitSafePoint,
 
             HitTarget, //击中目标一次
+            TeamColor,
 		}
 
 
@@ -282,6 +283,10 @@ namespace ChuMeng
 			evt.localID = localId;
 			PushLocalEvent (localId, evt);
 		}
+
+        public static void PushLocalEventStatic(int localId, MyEvent.EventType type) {
+            myEventSystem.PushLocalEvent(localId, type);
+        }
 
 		public void PushLocalEvent(long localId, MyEvent evt) {
          

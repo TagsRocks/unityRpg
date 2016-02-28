@@ -23,24 +23,46 @@ namespace ChuMeng
 		float curValue = 0;
         GameObject bar;
         UISlider fill;
+        UILabel label;
 		void Awake() {
-			
+
             bar = GameObject.Instantiate(Resources.Load<GameObject>("UI/BloodBar")) as GameObject;
             bar.transform.parent = WindowMng.windowMng.GetUIRoot().transform;
             Util.InitGameObject(bar);
+            var barUI = bar.gameObject.AddComponent<BloodBarUI>();
+            label = barUI.GetLabel("Label");
             fill = bar.GetComponent<UISlider>();
 		}
+
+        void SetTeamColor() {
+            var attr = GetComponent<NpcAttribute>();
+            if(WorldManager.worldManager.GetActive().ShowTeamColor && attr.GetNetView().IsPlayer) {
+                label.gameObject.SetActive(true);
+                if(attr.TeamColor == GameConst.TEAM_RED) {
+                    label.gradientTop = GameConst.teamRed;
+                    label.text = "红方";
+                }else {
+                    label.gradientTop = GameConst.teamBlue;
+                    label.text = "蓝方";
+                }
+            }else {
+                label.gameObject.SetActive(false);
+            }
+        }
 		// Use this for initialization
 		void Start ()
 		{
             Log.GUI("BloodBar Start Event");
             regLocalEvt = new System.Collections.Generic.List<MyEvent.EventType> (){
                 MyEvent.EventType.UnitHP,
+                MyEvent.EventType.TeamColor,
             };
             RegEvent (true); 
 
 
             GetComponent<NpcAttribute>().ChangeHP(0);
+            SetTeamColor();
+
         }
 
 
@@ -51,7 +73,9 @@ namespace ChuMeng
 			if (evt.type == MyEvent.EventType.UnitHP) {
 				
 				SetBarDisplay (GetComponent<CharacterInfo>().GetProp(CharAttribute.CharAttributeEnum.HP)*1.0f/GetComponent<CharacterInfo>().GetProp(CharAttribute.CharAttributeEnum.HP_MAX));
-			}
+            }else if(evt.type == MyEvent.EventType.TeamColor) {
+                SetTeamColor();
+            }
 		}
 
 		void OnGUI ()

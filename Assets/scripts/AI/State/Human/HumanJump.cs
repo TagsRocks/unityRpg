@@ -19,7 +19,9 @@ namespace ChuMeng
             ab.ignoreFallCheck = true;
             var ret = GetAttr().GetComponent<PhysicComponent>().EnterSkillMoveState();
             GetAttr().GetComponent<ShadowComponent>().LockShadowPlane();
+            BackgroundSound.Instance.PlayEffect("fall4");
         }
+
         public override void ExitState()
         {
             var ab = GetAttr().GetComponent<AIBase>();
@@ -39,15 +41,20 @@ namespace ChuMeng
 
             var controller = GetAttr().GetComponent<CharacterController>();
             var passTime = 0.0f;
-
+            var soundYet = false;
             while (!quit)
             {
+                if(CheckEvent()) {
+                    break;
+                }
                 var movement = playerForward * forwardSpeed + Vector3.up * upSpeed;
                 physics.JumpMove(movement);
 
-                if(upSpeed <= 0) {
+                if (upSpeed <= 0)
+                {
                     upSpeed -= dropGravity * Time.deltaTime;
-                }else {
+                } else
+                {
                     upSpeed -= gravity * Time.deltaTime;
                 }
                 passTime += Time.deltaTime;
@@ -56,6 +63,11 @@ namespace ChuMeng
                 {
                     if ((controller.collisionFlags & CollisionFlags.Below) != 0)
                     {
+                        if (!soundYet)
+                        {
+                            soundYet = true;
+                            BackgroundSound.Instance.PlayEffect("fall1");
+                        }
                         forwardSpeed -= friction * Time.deltaTime;
                         if (forwardSpeed <= 0)
                         {
