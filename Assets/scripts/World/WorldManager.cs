@@ -61,6 +61,7 @@ namespace ChuMeng
 		public bool IsPeaceLevel() {
 			return sceneType == SceneType.City;
 		}
+        /*
         /// <summary>
         /// 编辑器测试用的进入场景的初始化流程
         /// </summary>
@@ -85,6 +86,7 @@ namespace ChuMeng
             var g = new GameObject("StreamLoadLevel");
             var loader = g.AddComponent<StreamLoadLevel>();
             var water = g.AddComponent<WaterEnvLoader>();
+            var netLoader = g.AddComponent<NetworkLoadZone>();
 
             yield return loader.StartCoroutine(loader.LoadFirstRoom());
 
@@ -105,6 +107,8 @@ namespace ChuMeng
 
             loader.StartCoroutine(loader.LoadRoomNeibor());
         }
+        */
+
 		//执行进入场景的代码逻辑
 		IEnumerator EnterScene(GCEnterScene sceneData) {
             Log.Sys("EnterNextScene is "+nextSceneId);
@@ -162,6 +166,7 @@ namespace ChuMeng
             var g1 = new GameObject("StreamLoadLevel");
             var loader = g1.AddComponent<StreamLoadLevel>();
             var water = g1.AddComponent<WaterEnvLoader>();
+            var netLoader = g1.AddComponent<NetworkLoadZone>();
             yield return StartCoroutine(loader.LoadFirstRoom());
 
             var start = GameObject.Find("PlayerStart");

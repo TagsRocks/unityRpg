@@ -106,6 +106,7 @@ namespace ChuMeng
             }
         }
 
+        public bool IsMaster = false;
         public int TeamColor = 0;
 
         public void SetTeamColorNet(int teamColor) {
@@ -113,6 +114,11 @@ namespace ChuMeng
             MyEventSystem.PushLocalEventStatic(GetLocalId(), MyEvent.EventType.TeamColor);
         }
 
+        public void SetIsMasterNet(bool isMaster) {
+            Log.Sys("IsMasterNet: "+isMaster);
+            IsMaster = isMaster;
+            MyEventSystem.PushLocalEventStatic(GetLocalId(), MyEvent.EventType.IsMaster);
+        }
         public void SetHPNet(int hp)
         {
             GetComponent<CharacterInfo>().SetProp(CharAttribute.CharAttributeEnum.HP, hp);

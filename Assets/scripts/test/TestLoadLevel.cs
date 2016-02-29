@@ -20,7 +20,7 @@ public class TestLoadLevel : MonoBehaviour {
         SaveGame.saveGame.TestSetRole();
         yield return null;
 
-        StartCoroutine(WorldManager.worldManager.TestInitScene());
+        //StartCoroutine(WorldManager.worldManager.TestInitScene());
 
         yield return null;
     }

@@ -14,13 +14,16 @@ namespace ChuMeng
             runner = transform.parent.GetComponent<SkillLayoutRunner>();
             MakeBomb();	
         }
-        void MakeBomb() {
-            var b = new GameObject("bomb_"+bombData.name);
+
+        void MakeBomb()
+        {
+            var b = new GameObject("bomb_" + bombData.name);
             var bomb = b.AddComponent<Bomb>();
             bomb.OffsetPos = Position;
 
             GameObject attacker = null;
-            if(runner != null) {
+            if (runner != null)
+            {
                 bomb.skillData = runner.stateMachine.skillFullData.skillData;
                 attacker = runner.stateMachine.attacker;
                 bomb.runner = runner;

@@ -6,8 +6,12 @@ namespace ChuMeng
     public class MySelfAttributeSync : MonoBehaviour
     {
         public void NetworkAttribute(AvatarInfo info) {
+            var attr = GetComponent<NpcAttribute>();
             if(info.HasTeamColor) {
-                GetComponent<NpcAttribute>().SetTeamColorNet(info.TeamColor);
+                attr.SetTeamColorNet(info.TeamColor);
+            }
+            if(info.HasIsMaster) {
+                attr.SetIsMasterNet(info.IsMaster);
             }
         }
     }

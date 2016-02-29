@@ -19,8 +19,7 @@ namespace ChuMeng
                 t.gameObject.SetActive(false);
             }
         }
-        void Start()
-        {
+        void OnEnable() {
             StartCoroutine(CheckToSpawn());
         }
 
@@ -49,6 +48,20 @@ namespace ChuMeng
 
         IEnumerator CheckToSpawn()
         {
+            var player = ObjectManager.objectManager.GetMyPlayer();
+            while(player == null) {
+                player = ObjectManager.objectManager.GetMyPlayer();
+                yield return null;
+            }
+
+            var world = WorldManager.worldManager.GetActive();
+            if(world.IsNet){
+                var attr = ObjectManager.objectManager.GetMyAttr();
+                if(!attr.IsMaster) {
+                    yield break;
+                }
+            }
+
             while (true)
             {
                 if(CheckOk()) {

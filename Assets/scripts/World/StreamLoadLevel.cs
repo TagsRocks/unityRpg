@@ -33,6 +33,10 @@ namespace ChuMeng
         Dictionary<int, GameObject> loadedZone = new Dictionary<int, GameObject>();
         public static StreamLoadLevel Instance = null;
        
+        public  bool InitYet {
+            private set;
+            get;
+        }
         /// <summary>
         /// 加载第一个房间
         /// </summary>
@@ -63,11 +67,17 @@ namespace ChuMeng
 
             var g = new GameObject("PlayerStart");
             g.transform.position = zoneConfigStart.transform.position; 
+
+            InitYet = true;
         }
 
         /// <summary>
         /// 关卡房间相关怪物配置
         /// level_1_4_0
+        /// 网络游戏 怪物实例是由Master 负责生成和管理的
+        /// 不加载properties下面的对象
+        /// 动态对象
+        /// 其它的是静态对象
         /// </summary>
         /// <returns>The zones.</returns>
         IEnumerator LoadZone()
@@ -88,6 +98,12 @@ namespace ChuMeng
                 yield break;
             }
             var zone = GameObject.Instantiate(zoneConfig) as GameObject;
+            var pro = Util.FindChildRecursive(zone.transform, "properties");
+            var world = WorldManager.worldManager.GetActive();
+            if(world.IsNet) {
+                pro.gameObject.SetActive(false);
+            }
+
             if(zone == null){
                 Debug.LogError("LoadZone Null "+zone+" config "+zoneConfig);
             }
@@ -99,6 +115,17 @@ namespace ChuMeng
 
             yield return null;
         }
+
+        /// <summary>
+        /// 网络关卡的话加载关卡的动态Entity资源  
+        /// </summary>
+        /// <returns>The zone network.</returns>
+        public void  LoadZoneNetwork() {
+            var zone = loadedZone[0];
+            var pro = Util.FindChildRecursive(zone.transform, "properties");
+            pro.gameObject.SetActive(true);
+        }
+
 
         IEnumerator LoadRoom(GameObject roomConfig, bool slowly=false)
         {
@@ -320,7 +347,11 @@ namespace ChuMeng
        
         }
 
-        List<LevelConfig> configLists;
+        public List<LevelConfig> configLists{
+            private set;
+            get;
+        }
+
 
         void Awake()
         {

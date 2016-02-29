@@ -160,6 +160,7 @@ namespace ChuMeng
 
             HitTarget, //击中目标一次
             TeamColor,
+            IsMaster,
 		}
 
 

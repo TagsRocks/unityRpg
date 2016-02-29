@@ -91,10 +91,11 @@ namespace ChuMeng
                     if (sync != null)
                     {
                         sync.NetworkMove(proto.AvatarInfo);
+                    }else {
+                        var myselfAttr = player.GetComponent<MySelfAttributeSync>();
+                        myselfAttr.NetworkAttribute(proto.AvatarInfo);
                     }
-                } else
-                {
-                }
+                } 
 
             } else if (cmds [0] == "Damage")
             {
