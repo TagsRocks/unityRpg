@@ -93,10 +93,13 @@ namespace ChuMeng
                 var allNetView = ObjectManager.objectManager.GetNetView();
                 foreach (var v in allNetView)
                 {
-                    var ms = v.GetComponent<MonsterSyncToServer>();
-                    if (ms != null)
+                    if (v != null)
                     {
-                        ms.SyncToServer();
+                        var ms = v.GetComponent<MonsterSyncToServer>();
+                        if (ms != null)
+                        {
+                            ms.SyncToServer();
+                        }
                     }
                 }
             }
