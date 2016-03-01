@@ -44,7 +44,7 @@ MonoBehaviour:
     layout: {fileID: 100000, guid: 7ecc0423a67204e0ca4435bf6f92546f, type: 2}
     affix:
       effectType: 3
-      Duration: 1
+      Duration: .300000012
       UnitTheme: {fileID: 0}
       ThemePos: {x: 0, y: 0, z: 0}
       addDefense: 0
@@ -52,7 +52,8 @@ MonoBehaviour:
       affixParameters: []
       IsOnlyOne: 0
       fireParticle: {fileID: 0}
-      keepOld: 0
+      keepOld: 1
+      buffParticle: {fileID: 0}
     attachOwner: 0
     attaches: 0
     childSkillId: -1
@@ -61,6 +62,7 @@ MonoBehaviour:
     BeamOffset: {x: 0, y: 1, z: 0}
     TargetPos: 0
     UseMarkPos: 0
+    EvtId: 0
   animationLoop: 0
   attackDuration: 1
 --- !u!1001 &100100000
