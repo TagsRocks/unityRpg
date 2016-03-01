@@ -156,7 +156,7 @@ namespace ChuMeng
 
                 var ety = proto.EntityInfo;
                 var mon = ObjectManager.objectManager.GetPlayer(ety.Id);
-                if(!NetworkUtil.IsMaster()) {
+                if(!NetworkUtil.IsMaster() && mon != null) {
                     var sync = mon.GetComponent<MonsterSync>();
                     if(sync != null) {
                         sync.SyncAttribute(proto);
