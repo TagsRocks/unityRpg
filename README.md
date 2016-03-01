@@ -86,3 +86,8 @@ Unity 4.7 或者Unity 4.6.7  Pro版本
 可以查看上面第一课时免费视频中的介绍
 
 http://www.taikr.com/course/297
+
+##SVN 支持
+使用git的同学 可以使用 sourceTree 客户端下载代码
+
+使用svn的同学 可以使用 乌龟svn 通过svn://git.oschina.net/liyonghelpme/unityRpg 下载
