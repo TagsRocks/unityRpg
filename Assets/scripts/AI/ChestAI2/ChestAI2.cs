@@ -38,7 +38,7 @@ namespace ChuMeng
                 cg.Cmd = "RemoveEntity";
                 var ety = EntityInfo.CreateBuilder();
                 ety.Id = GetAttr().GetNetView().GetServerID();
-                cg.EntityInfo = ety;
+                cg.EntityInfo = ety.Build();
                 var world = WorldManager.worldManager.GetActive();
                 world.BroadcastMsg(cg);
                 ObjectManager.objectManager.DestroyByLocalId (GetAttr().GetComponent<KBEngine.KBNetworkView>().GetLocalId());
