@@ -83,7 +83,7 @@ namespace ChuMeng
             RegEvent(true); 
 
 
-            GetComponent<NpcAttribute>().ChangeHP(0);
+            GetComponent<NpcAttribute>().NotifyHP();
             SetTeamColor();
             SetMaster();
         }

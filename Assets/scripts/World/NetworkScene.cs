@@ -120,7 +120,7 @@ namespace ChuMeng
                         sync.DoNetworkDamage(proto);
                     }
                 }
-                if(!NetworkUtil.IsMaster()) {
+                if(!NetworkUtil.IsMaster() && enemy != null) {
                     var sync = enemy.GetComponent<MonsterSync>();
                     if(sync != null) {
                         sync.DoNetworkDamage(proto);
@@ -161,6 +161,12 @@ namespace ChuMeng
                     if(sync != null) {
                         sync.SyncAttribute(proto);
                     }
+                }
+            }else if(cmds[0] == "RemoveEntity") {
+                var ety = proto.EntityInfo;
+                var mon = ObjectManager.objectManager.GetPlayer(ety.Id);
+                if(!NetworkUtil.IsMaster() && mon != null) {
+                    ObjectManager.objectManager.DestroyByLocalId(mon.GetComponent<NpcAttribute>().GetNetView().GetLocalId());
                 }
             }
         }

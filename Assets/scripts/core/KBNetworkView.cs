@@ -276,8 +276,6 @@ namespace KBEngine
             get
             {
                 return localId == ChuMeng.ObjectManager.objectManager.GetMyLocalId(); 
-                //return ID.owner.ID 
-                //return true;
             }
         }
 

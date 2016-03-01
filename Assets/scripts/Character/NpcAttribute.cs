@@ -90,6 +90,7 @@ namespace ChuMeng
             }
         }
 
+
         /// <summary>
         /// 远程网络直接设置控制HP 
         /// </summary>
@@ -109,22 +110,29 @@ namespace ChuMeng
         public bool IsMaster = false;
         public int TeamColor = 0;
 
-        public void SetTeamColorNet(int teamColor) {
+        public void SetTeamColorNet(int teamColor)
+        {
             TeamColor = teamColor;
             MyEventSystem.PushLocalEventStatic(GetLocalId(), MyEvent.EventType.TeamColor);
         }
 
-        public void SetIsMasterNet(bool isMaster) {
-            Log.Sys("IsMasterNet: "+isMaster);
+        public void SetIsMasterNet(bool isMaster)
+        {
+            Log.Sys("IsMasterNet: " + isMaster);
             IsMaster = isMaster;
             MyEventSystem.PushLocalEventStatic(GetLocalId(), MyEvent.EventType.IsMaster);
         }
+
         public void SetHPNet(int hp)
         {
+            Log.Sys("SetHPNet: " + hp + " g " + gameObject);
             GetComponent<CharacterInfo>().SetProp(CharAttribute.CharAttributeEnum.HP, hp);
+            /*
             var evt1 = new MyEvent(MyEvent.EventType.UnitHP);
             evt1.localID = GetLocalId();
             MyEventSystem.myEventSystem.PushLocalEvent(evt1.localID, evt1);
+            */
+            NotifyHP();
         }
 
         public int HP_Max
@@ -353,7 +361,8 @@ namespace ChuMeng
             }
         }
 
-        public KBEngine.KBNetworkView GetNetView() {
+        public KBEngine.KBNetworkView GetNetView()
+        {
             return GetComponent<KBEngine.KBNetworkView>();
         }
 
@@ -456,7 +465,7 @@ namespace ChuMeng
             yield return new WaitForSeconds(0.5f);
             OriginPos = transform.position;
         }
-        
+
         /// <summary>
         /// 是否是本地玩家控制对象 
         /// </summary>
@@ -492,19 +501,23 @@ namespace ChuMeng
             { 
                 HP += c;
                 HP = Mathf.Min(Mathf.Max(0, HP), HP_Max);
-                Log.Important("Init GameObject HP " + gameObject.name);
+                Log.GUI("Init GameObject HP " + gameObject.name + " HP " + HP);
 
-                var evt1 = new MyEvent(MyEvent.EventType.UnitHP);
-                evt1.localID = GetLocalId();
-                evt1.intArg = HP;
-                evt1.intArg1 = HP_Max;
-                MyEventSystem.myEventSystem.PushLocalEvent(evt1.localID, evt1);
-
+                NotifyHP();
                 if (GetLocalId() == ObjectManager.objectManager.GetMyLocalId())
                 {
                     MyEventSystem.myEventSystem.PushEvent(MyEvent.EventType.UpdateMainUI);
                 }
             }
+        }
+
+        public void NotifyHP()
+        {
+            var evt1 = new MyEvent(MyEvent.EventType.UnitHP);
+            evt1.localID = GetLocalId();
+            //evt1.intArg = HP;
+            //evt1.intArg1 = HP_Max;
+            MyEventSystem.myEventSystem.PushLocalEvent(evt1.localID, evt1);
         }
 
         public void ChangeMP(int c)

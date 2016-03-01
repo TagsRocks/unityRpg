@@ -104,7 +104,6 @@ namespace ChuMeng
         //炸弹所有人都攻击
         void DoDamage(Collider other)
         {
-            //if (SkillLogic.IsEnemy(attacker, other.gameObject)) {
             if (!string.IsNullOrEmpty(skillData.HitSound))
             {
                 BackgroundSound.Instance.PlayEffect(skillData.HitSound);
@@ -113,7 +112,6 @@ namespace ChuMeng
             {
                 runner.DoDamage(other.gameObject);
             }
-            //}
         }
 
     }
