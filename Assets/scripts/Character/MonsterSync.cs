@@ -9,7 +9,7 @@ namespace ChuMeng
     public class MonsterSync : MonoBehaviour
     {
         AIBase aibase;
-        void Awake() {
+        void Start() {
             aibase = GetComponent<AIBase>();
         }
 
