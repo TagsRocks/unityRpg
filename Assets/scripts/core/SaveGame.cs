@@ -355,18 +355,6 @@ namespace ChuMeng
                 tempObj.AddComponent<BuffManager>();
                 tempObj.transform.parent = transform;
             }
-            if (MailController.mailController == null)
-            {
-                var mailObj = new GameObject("MailController");
-                mailObj.AddComponent<MailController>();
-                mailObj.transform.parent = transform;
-            }
-            if (GuildController.guildController == null)
-            {
-                var guildObj = new GameObject("GuildController");
-                guildObj.AddComponent<GuildController>();
-                guildObj.transform.parent = transform;
-            }
             var eff = new GameObject("EffectMainNode");
             eff.transform.parent = transform;
             EffectMainNode = eff;

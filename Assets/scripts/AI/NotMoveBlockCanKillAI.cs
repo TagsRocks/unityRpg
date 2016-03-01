@@ -8,6 +8,8 @@ namespace ChuMeng
         public override void EnterState()
         {
             base.EnterState();
+            Util.SetLayer(GetAttr().gameObject, GameLayer.IgnoreCollision);
+
             //GetAttr().animation.CrossFade("opening");
             GetAttr().IsDead = true;
             //GetAttr().OnlyShowDeadEffect();
@@ -62,6 +64,7 @@ namespace ChuMeng
         void Awake()
         {
             attribute = GetComponent<NpcAttribute>();
+            attribute.ShowBloodBar = false;
             ai = new ChestCharacter();
             ai.attribute = attribute;
             ai.AddState(new ChestIdle());

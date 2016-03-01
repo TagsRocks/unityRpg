@@ -107,6 +107,10 @@ namespace ChuMeng
 						mesh = t;
 						break;
 					}
+                    if(t.GetComponent<MeshRenderer>() != null) {
+                        mesh = t;
+                        break;
+                    }
 				}
 				if (mesh == null) {
 					Debug.Log ("Util::SetBurn Not Find Obj or Skinned Mesh");
@@ -146,6 +150,10 @@ namespace ChuMeng
 						mesh = t;
 						break;
 					}
+                    if(t.GetComponent<MeshRenderer>() != null) {
+                        mesh = t;
+                        break;
+                    }
 				}
 				if (mesh == null) {
 					Debug.Log ("Util::ClearMaterial Not Find Obj or Skinned Mesh");

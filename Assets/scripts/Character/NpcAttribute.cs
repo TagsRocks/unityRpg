@@ -75,7 +75,22 @@ namespace ChuMeng
                 return ObjUnitData.MoveSpeed;
             }
         }
-        public bool Pushable = false;
+        private bool _sb = true;
+        public bool ShowBloodBar{
+            get {
+                return _sb;
+            }
+            set {
+                _sb = value;
+                if(!_sb) {
+                    var bb = GetComponent<BloodBar>();
+                    //GameObject.Destroy(bb);
+                    if(bb != null) {
+                        bb.HideBar();
+                    }
+                }
+            }
+        }
 
         //[NpcAttributeAtt()]
         public float ApproachDistance

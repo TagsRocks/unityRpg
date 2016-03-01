@@ -126,9 +126,16 @@ namespace ChuMeng
             {
                 BackgroundSound.Instance.PlayEffect(skillData.HitSound);
             }
-            if (runner != null)
+
+
+            var attr = other.GetComponent<NpcAttribute>();
+            if(attr == null) {
+                attr = other.GetComponentInParent<NpcAttribute>();
+            }
+
+            if (runner != null && attr != null)
             {
-                runner.DoDamage(other.gameObject);
+                runner.DoDamage(attr.gameObject);
             }
         }
 

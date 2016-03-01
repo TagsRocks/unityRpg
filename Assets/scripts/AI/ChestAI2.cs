@@ -8,6 +8,8 @@ namespace ChuMeng
         public override void EnterState()
         {
             base.EnterState();
+            Util.SetLayer(GetAttr().gameObject, GameLayer.IgnoreCollision);
+
             GetAttr().animation.CrossFade("opening");
             GetAttr().IsDead = true;
             GetAttr().OnlyShowDeadEffect();
@@ -61,6 +63,7 @@ namespace ChuMeng
         void Awake()
         {
             attribute = GetComponent<NpcAttribute>();
+            attribute.ShowBloodBar = false;
             //测试可以被推动的怪物
             //attribute.Pushable = true;
 
