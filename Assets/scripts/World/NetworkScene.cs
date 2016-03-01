@@ -85,6 +85,15 @@ namespace ChuMeng
             {
                 ObjectManager.objectManager.CreateOtherPlayer(proto.AvatarInfo);
                 PlayerDataInterface.DressEquip(proto.AvatarInfo);
+                var player = ObjectManager.objectManager.GetPlayer(proto.AvatarInfo.Id);
+                if (player != null)
+                {
+                    var sync = player.GetComponent<PlayerSync>();
+                    if (sync != null)
+                    {
+                        sync.NetworkMove(proto.AvatarInfo);
+                    }
+                }
 
             } else if (cmds [0] == "Remove")
             {
