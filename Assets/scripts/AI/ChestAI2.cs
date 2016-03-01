@@ -98,8 +98,10 @@ namespace ChuMeng
                     var skill = Util.GetSkillData(140, 1);
                     var skillInfo = SkillLogic.GetSkillInfo(skill);
                     var evt = skillInfo.eventList[0];
-                    gameObject.GetComponent<BuffComponent>().AddBuff(evt.affix, pos);
-                    NetDateInterface.FastAddBuff(evt.affix, otherGo, gameObject, skill.Id, evt.EvtId);
+                    var ret = gameObject.GetComponent<BuffComponent>().AddBuff(evt.affix, pos);
+                    if(ret) {
+                        NetDateInterface.FastAddBuff(evt.affix, otherGo, gameObject, skill.Id, evt.EvtId);
+                    }
                 }
             }
         }

@@ -33,7 +33,7 @@ namespace ChuMeng {
             } 
             return false;
         }
-        public void AddBuff (Affix affix, Vector3 attackerPos = default(Vector3))
+        public bool AddBuff (Affix affix, Vector3 attackerPos = default(Vector3))
 		{
 			if (affix != null) {
 				Log.Sys ("AddBuff is "+gameObject.name+" " + affix.effectType);
@@ -41,7 +41,7 @@ namespace ChuMeng {
                 if(affix.keepOld) {
                     for(int i = 0; i < effectList.Count; i++) {
                         if(effectList[i].affix.effectType == affix.effectType) {
-                            return;
+                            return false;
                         }
                     }
                 }
@@ -60,7 +60,9 @@ namespace ChuMeng {
                 }
 				effectList.Add (buff);
 				buff.OnActive ();
+                return true;
 			}
+            return false;
 		}
 
 		public int GetArmor ()
