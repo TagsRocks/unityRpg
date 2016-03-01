@@ -5,7 +5,7 @@ namespace ChuMeng
 {
     public class SpawnChest : MonoBehaviour
     {
-        private static int MaxSpawnId = 0;
+        public  static int MaxSpawnId = 0;
         public int SpawnId;
         public int rateToSpawn = 100;
         //宝箱模型ID
@@ -16,8 +16,11 @@ namespace ChuMeng
         //宝箱所召唤的Boss的ID
         public int MonsterID = 2011;
 
-        void Awake() {
+        public void InitSpawnId() {
             SpawnId = MaxSpawnId++;
+        }
+
+        void Awake() {
             foreach(Transform t in transform){
                 t.gameObject.SetActive(false);
             }

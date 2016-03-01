@@ -153,9 +153,7 @@ namespace ChuMeng
                 var ety = proto.EntityInfo;
                 if (ety.EType == EntityType.CHEST)
                 {
-                    var unitData = Util.GetUnitData(false, ety.UnitId, 0);
-                    var spawnChest = BattleManager.battleManager.GetZone().GetComponent<ZoneEntityManager>().GetSpawnChest(ety.SpawnId);
-                    ObjectManager.objectManager.CreateChestFromNetwork(unitData, spawnChest, ety);
+                    StartCoroutine(WaitZoneInit(ety));
                 } else if (ety.EType == EntityType.DROP)
                 {
                     var itemData = Util.GetItemData((int)ItemData.GoodsType.Props, (int)ety.ItemId);
@@ -183,9 +181,24 @@ namespace ChuMeng
                 var mon = ObjectManager.objectManager.GetPlayer(ety.Id);
                 if (!NetworkUtil.IsMaster() && mon != null)
                 {
-                    ObjectManager.objectManager.DestroyByLocalId(mon.GetComponent<NpcAttribute>().GetNetView().GetLocalId());
+                    var netView = mon.GetComponent<KBEngine.KBNetworkView>();
+                    if (netView != null)
+                    {
+                        ObjectManager.objectManager.DestroyByLocalId(netView.GetLocalId());
+                    }
                 }
             }
+        }
+
+        IEnumerator WaitZoneInit(EntityInfo ety) {
+            var zone = BattleManager.battleManager.GetZone().GetComponent<ZoneEntityManager>();
+            var unitData = Util.GetUnitData(false, ety.UnitId, 0);
+            var spawnChest = zone.GetSpawnChest(ety.SpawnId);
+            while(spawnChest == null) {
+                yield return null;
+                spawnChest = zone.GetSpawnChest(ety.SpawnId);
+            }
+            ObjectManager.objectManager.CreateChestFromNetwork(unitData, spawnChest, ety);
         }
 
         IEnumerator InitConnect()

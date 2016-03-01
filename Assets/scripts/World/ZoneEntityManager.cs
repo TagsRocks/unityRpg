@@ -14,7 +14,11 @@ namespace ChuMeng
         void Awake()
         {
             properties = Util.FindChildRecursive(transform, "properties").gameObject;
-            allChest = gameObject.GetComponentsInChildren<SpawnChest>();
+            allChest = gameObject.GetComponentsInChildren<SpawnChest>(true);
+            SpawnChest.MaxSpawnId = 0;
+            foreach(var s in allChest) {
+                s.InitSpawnId();
+            }
         }
 
         public void EnableProperties()
