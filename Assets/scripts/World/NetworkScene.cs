@@ -189,13 +189,18 @@ namespace ChuMeng
                 }
             } else if (cmds [0] == "Pick")
             {
-                var action = proto.PickAction;
-                var ety = ObjectManager.objectManager.GetPlayer(action.Id);
-                var who = ObjectManager.objectManager.GetPlayer(action.Who);
-                if(ety != null) {
-                    var item = ety.GetComponent<DropItemStatic>();
-                    if(item != null) {
-                        item.PickItemFromNetwork(who);
+                if (!NetworkUtil.IsMaster())
+                {
+                    var action = proto.PickAction;
+                    var ety = ObjectManager.objectManager.GetPlayer(action.Id);
+                    var who = ObjectManager.objectManager.GetPlayer(action.Who);
+                    if (ety != null)
+                    {
+                        var item = ety.GetComponent<DropItemStatic>();
+                        if (item != null)
+                        {
+                            item.PickItemFromNetwork(who);
+                        }
                     }
                 }
             }
