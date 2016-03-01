@@ -51,7 +51,7 @@ namespace ChuMeng
         {
             foreach (KBEngine.KBNetworkView view in photonViewList)
             {
-                if (view.GetServerID() == playerId)
+                if (view != null && view.GetServerID() == playerId)
                 {
                     return view;
                 }

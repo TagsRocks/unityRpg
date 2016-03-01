@@ -9,10 +9,13 @@ namespace ChuMeng
         private GameObject Particle;
         private int num;
         private bool pickYet = false;
+        KBEngine.KBNetworkView netView;
 
-        void Awake() {
-            gameObject.AddMissingComponent<KBEngine.KBNetworkView>();
+        void Awake()
+        {
+            netView = gameObject.AddMissingComponent<KBEngine.KBNetworkView>();
         }
+
         void Start()
         {
             var player = ObjectManager.objectManager.GetMyPlayer();
@@ -24,21 +27,44 @@ namespace ChuMeng
 
         void OnTriggerEnter(Collider other)
         {
-            if (!pickYet && other.tag == GameTag.Player)
+            //只有Master才可以控制谁拾取到了物品
+            if (NetworkUtil.IsNetMaster())
             {
-                StartCoroutine(PickItem());
+                if (!pickYet && other.tag == GameTag.Player)
+                {
+                    StartCoroutine(PickItem(other.gameObject));
+                }
             }
         }
 
-        IEnumerator PickItem()
+        IEnumerator PickItem(GameObject who)
         {
-            pickYet = true;
+            PickItemFromNetwork(who);
 
-            BackgroundSound.Instance.PlayEffect("pickup");
-            GameObject.Destroy(gameObject);
-            GameInterface_Backpack.PickItem(itemData, num);
+            var cg = CGPlayerCmd.CreateBuilder();
+            cg.Cmd = "Pick";
+            var pickAction = PickItemAction.CreateBuilder();
+            pickAction.Id = GetComponent<KBEngine.KBNetworkView>().GetServerID();
+            pickAction.ItemId = itemData.ObjectId;
+            pickAction.ItemNum = num;
+            pickAction.Who = who.GetComponent<KBEngine.KBNetworkView>().GetServerID();
+            cg.PickAction = pickAction.Build();
+            NetworkUtil.Broadcast(cg);
+            NetworkUtil.RemoveEntityToNetwork(netView);
             yield break;
         }
+
+
+        public void PickItemFromNetwork(GameObject who) {
+            pickYet = true;
+            BackgroundSound.Instance.PlayEffect("pickup");
+            GameObject.Destroy(gameObject);
+            var me = ObjectManager.objectManager.GetMyPlayer();
+            if(who == me) {
+                GameInterface_Backpack.PickItem(itemData, num);
+            }
+        }
+
 
         public static GameObject MakeDropItemFromNet(ItemData itemData, Vector3 pos, int num, EntityInfo info)
         {
@@ -85,6 +111,13 @@ namespace ChuMeng
         {
             yield return new WaitForSeconds(0.2f);
             BackgroundSound.Instance.PlayEffect(s);
+        }
+
+        void OnDestroy()
+        {
+            var view = GetComponent<KBEngine.KBNetworkView>();
+
+            ObjectManager.objectManager.DestroyByLocalId(view.GetLocalId());
         }
     }
 

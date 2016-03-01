@@ -8,6 +8,7 @@ namespace ChuMeng
     {
         /// <summary>
         /// 拾取某个物品
+        /// 本地拾取物品
         /// </summary>
         public static void PickItem(ItemData itemData, int num)
         {

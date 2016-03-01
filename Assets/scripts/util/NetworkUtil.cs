@@ -41,5 +41,14 @@ namespace ChuMeng
             var scene = WorldManager.worldManager.GetActive();
             scene.BroadcastMsg(cmd);
         }
+
+        public static void RemoveEntityToNetwork(KBEngine.KBNetworkView view) {
+            var cg = CGPlayerCmd.CreateBuilder();
+            var ety = EntityInfo.CreateBuilder();
+            ety.Id = view.GetServerID();
+            cg.EntityInfo = ety.Build();
+            cg.Cmd = "RemoveEntity";
+            NetworkUtil.Broadcast(cg);
+        }
     }
 }

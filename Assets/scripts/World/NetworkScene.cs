@@ -164,10 +164,9 @@ namespace ChuMeng
 
             } else if (cmds [0] == "UpdateEntity")
             {
-
                 var ety = proto.EntityInfo;
                 var mon = ObjectManager.objectManager.GetPlayer(ety.Id);
-                Log.Net("UpdateEntityHP: "+ety.Id+" hp "+ety.HasHP+" h "+ety.HP);
+                Log.Net("UpdateEntityHP: " + ety.Id + " hp " + ety.HasHP + " h " + ety.HP);
                 if (!NetworkUtil.IsMaster() && mon != null)
                 {
                     var sync = mon.GetComponent<MonsterSync>();
@@ -188,14 +187,27 @@ namespace ChuMeng
                         ObjectManager.objectManager.DestroyByLocalId(netView.GetLocalId());
                     }
                 }
+            } else if (cmds [0] == "Pick")
+            {
+                var action = proto.PickAction;
+                var ety = ObjectManager.objectManager.GetPlayer(action.Id);
+                var who = ObjectManager.objectManager.GetPlayer(action.Who);
+                if(ety != null) {
+                    var item = ety.GetComponent<DropItemStatic>();
+                    if(item != null) {
+                        item.PickItemFromNetwork(who);
+                    }
+                }
             }
         }
 
-        IEnumerator WaitZoneInit(EntityInfo ety) {
+        IEnumerator WaitZoneInit(EntityInfo ety)
+        {
             var zone = BattleManager.battleManager.GetZone().GetComponent<ZoneEntityManager>();
             var unitData = Util.GetUnitData(false, ety.UnitId, 0);
             var spawnChest = zone.GetSpawnChest(ety.SpawnId);
-            while(spawnChest == null) {
+            while (spawnChest == null)
+            {
                 yield return null;
                 spawnChest = zone.GetSpawnChest(ety.SpawnId);
             }
