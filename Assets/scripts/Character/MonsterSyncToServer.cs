@@ -24,6 +24,7 @@ namespace ChuMeng
 
             cg.EntityInfo = ainfo.Build();
             var s = WorldManager.worldManager.GetActive();
+            Log.Net("UpdateEntityData: "+ainfo.HP+" id "+ainfo.Id);
             s.BroadcastMsg(cg);
         }
     }
