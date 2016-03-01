@@ -44,13 +44,14 @@ namespace ChuMeng
             var cg = CGPlayerCmd.CreateBuilder();
             cg.Cmd = "Pick";
             var pickAction = PickItemAction.CreateBuilder();
-            pickAction.Id = GetComponent<KBEngine.KBNetworkView>().GetServerID();
+            pickAction.Id = netView.GetServerID();
             pickAction.ItemId = itemData.ObjectId;
             pickAction.ItemNum = num;
             pickAction.Who = who.GetComponent<KBEngine.KBNetworkView>().GetServerID();
             cg.PickAction = pickAction.Build();
             NetworkUtil.Broadcast(cg);
             NetworkUtil.RemoveEntityToNetwork(netView);
+
             yield break;
         }
 
