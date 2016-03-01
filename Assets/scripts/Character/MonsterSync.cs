@@ -8,6 +8,11 @@ namespace ChuMeng
     /// </summary>
     public class MonsterSync : MonoBehaviour
     {
+        AIBase aibase;
+        void Awake() {
+            aibase = GetComponent<AIBase>();
+        }
+
         public void DoNetworkDamage(GCPlayerCmd cmd)
         {
             var eid = cmd.DamageInfo.Enemy;
@@ -36,10 +41,24 @@ namespace ChuMeng
             //}
         }
 
+        private void NetworkMove(EntityInfo info) {
+            var aiState = aibase.GetAI().state;
+            if(aiState.type == AIStateEnum.IDLE) {
+                var curPos = transform.position;
+                var tarPos = NetworkUtil.FloatPos(info.X, info.Y, info.Z);
+                var vdir = tarPos-curPos;
+                if (vdir.sqrMagnitude >= 2)
+                {
+                    transform.position = tarPos;
+                }
+            }
+        }
+
         public void SyncAttribute(GCPlayerCmd cmd)
         {
             var info = cmd.EntityInfo;
             var attr = gameObject.GetComponent<NpcAttribute>();
+            NetworkMove(info);
             if (info.HasHP)
             {
                 attr.SetHPNet(info.HP);
