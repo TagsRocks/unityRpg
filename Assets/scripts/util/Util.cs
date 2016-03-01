@@ -28,6 +28,7 @@ namespace ChuMeng
         SceneProps = 14, //场景物件所在层 用于物理检测何时显示场景物件
         IgnoreCollision = 15, //NPC所在层,避免和玩家碰撞 避免碰撞技能所在层
         IgnoreCollision2 = 16, //buff 状态下不发生碰撞但是收到技能伤害
+        Block = 17, //阻挡爆炸发生的层
 	}
 
 	public static class GameTag

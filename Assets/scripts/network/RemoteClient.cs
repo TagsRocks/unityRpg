@@ -90,7 +90,10 @@ namespace ChuMeng
         void OnReceive(IAsyncResult result) {
             int bytes = 0;
             try {
-                bytes = mSocket.EndReceive(result);
+                if(mSocket == null || !mSocket.Connected) {
+                }else {
+                    bytes = mSocket.EndReceive(result);
+                }
             }catch(Exception exception){
                 Debug.LogError(exception.ToString());
                 Close();

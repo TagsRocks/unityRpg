@@ -87,7 +87,11 @@ namespace ChuMeng
         /// <returns>The damage layer.</returns>
         public static int GetDamageLayer()
         {
-            return 1 << (int)GameLayer.Npc | 1 << (int)GameLayer.IgnoreCollision2;
+            return 1 << (int)GameLayer.Npc | 1 << (int)GameLayer.IgnoreCollision2 | 1 << (int)GameLayer.Block;
+        }
+
+        public static int GetBlockerLayer() {
+            return 1 << (int)GameLayer.Block;
         }
     }
 

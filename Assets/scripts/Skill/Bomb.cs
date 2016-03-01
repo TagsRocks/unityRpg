@@ -104,6 +104,24 @@ namespace ChuMeng
         //炸弹所有人都攻击
         void DoDamage(Collider other)
         {
+            var tarPos = other.transform.position+new Vector3(0, 1, 0);
+            var mePos = transform.position+new Vector3(0, 0.1f, 0);
+            var dir = tarPos - mePos;
+            dir.Normalize();
+            RaycastHit hitInfo;
+            var hit  = Physics.Raycast(mePos, dir, out hitInfo, bombData.AOERadius, SkillDamageCaculate.GetBlockerLayer());
+            Log.Sys("TestBlock: "+mePos+" dir "+dir+" tarpos "+tarPos+" radius "+bombData.AOERadius+" hit "+hit+" hitInfo "+hitInfo);
+
+            //障碍物阻挡无法攻击目标
+            if(hit) {
+                var hitObj = hitInfo.collider.gameObject;
+                Log.Sys("Block HitObjIs: "+hitObj+" other "+other.gameObject);
+                if(hitObj != other.gameObject) {
+                    Log.Sys("Bomb Block Hit: "+hitObj+" other "+other.gameObject);
+                    return;
+                }
+            }
+
             if (!string.IsNullOrEmpty(skillData.HitSound))
             {
                 BackgroundSound.Instance.PlayEffect(skillData.HitSound);

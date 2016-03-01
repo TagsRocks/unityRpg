@@ -3,20 +3,20 @@ using System.Collections;
 
 namespace ChuMeng
 {
-    public class ChestDead2 : DeadState
+    public class BlockDead : DeadState
     {
         public override void EnterState()
         {
             base.EnterState();
-            GetAttr().animation.CrossFade("opening");
+            //GetAttr().animation.CrossFade("opening");
             GetAttr().IsDead = true;
-            GetAttr().OnlyShowDeadEffect();
+            //GetAttr().OnlyShowDeadEffect();
 
             if (NetworkUtil.IsNetMaster())
             {
                 DropGoods.DropStaticGoods(GetAttr());
             }
-            CreateParticle();
+            //CreateParticle();
         }
 
         void CreateParticle()
@@ -54,34 +54,28 @@ namespace ChuMeng
         }
     }
 
+
     [RequireComponent(typeof(MonsterSync))]
     [RequireComponent(typeof(MonsterSyncToServer))]
-    public class ChestAI2 : AIBase
+    public class NotMoveBlockCanKillAI : AIBase
     {
         void Awake()
         {
             attribute = GetComponent<NpcAttribute>();
-            //测试可以被推动的怪物
-            //attribute.Pushable = true;
-
             ai = new ChestCharacter();
             ai.attribute = attribute;
             ai.AddState(new ChestIdle());
-            ai.AddState(new ChestDead2());
+            ai.AddState(new BlockDead());
             ai.AddState(new MonsterKnockBack());
-
         }
 
+
+        // Use this for initialization
         void Start()
         {
             ai.ChangeState(AIStateEnum.IDLE);
-            var par = Instantiate(Resources.Load<GameObject>("particles/drops/generic_item")) as GameObject;
-            par.transform.parent = transform;
-            par.transform.localPosition = Vector3.zero;
+	
         }
-
-
-
 
         protected override void OnDestroy()
         {

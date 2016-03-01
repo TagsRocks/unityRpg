@@ -28,7 +28,7 @@ namespace ChuMeng
 	/// AI或者状态机检测事件接着处理
 	/// AI也向状态机中注入事件
 	/// </summary>
-	public class MyAnimationEvent : KBEngine.KBNetworkView
+    public class MyAnimationEvent : KBEngine.KBNetworkView
 	{
 		//TODO:在发射MyAnimationEvent给Player或者怪物之前 同服务器通信 GameInterface里实现网络
 		public enum MsgType {
