@@ -5,13 +5,21 @@ namespace ChuMeng
 {
     public static class NetworkUtil
     {
+        public static bool IsNet()
+        {
+            var world = WorldManager.worldManager.GetActive();
+            return world.IsNet;
+        }
+
         public static bool IsNetMaster()
         {
             var world = WorldManager.worldManager.GetActive();
             var player = ObjectManager.objectManager.GetMyAttr();
             return world.IsNet && player.IsMaster;
         }
-        public static bool IsMaster() {
+
+        public static bool IsMaster()
+        {
             var player = ObjectManager.objectManager.GetMyAttr();
             return player.IsMaster;
         }
@@ -23,6 +31,15 @@ namespace ChuMeng
             ret [1] = (int)(pos.y * 100);
             ret [2] = (int)(pos.z * 100);
             return ret;
+        }
+        public static Vector3 FloatPos(int x, int y, int z) {
+            return new Vector3(x/100.0f, y/100.0f, z/100.0f);
+        }
+
+        public static void Broadcast(CGPlayerCmd.Builder cmd)
+        {
+            var scene = WorldManager.worldManager.GetActive();
+            scene.BroadcastMsg(cmd);
         }
     }
 }

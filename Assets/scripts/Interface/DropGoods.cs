@@ -21,6 +21,10 @@ namespace ChuMeng
             }
         }
 
+        /// <summary>
+        /// 掉落网络物品 
+        /// </summary>
+        /// <param name="mon">Mon.</param>
         public static void DropStaticGoods(NpcAttribute mon) {
 
             var treasure = mon.GetDropTreasure();

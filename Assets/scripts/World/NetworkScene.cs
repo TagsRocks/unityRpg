@@ -120,9 +120,11 @@ namespace ChuMeng
                         sync.DoNetworkDamage(proto);
                     }
                 }
-                if(!NetworkUtil.IsMaster() && enemy != null) {
+                if (!NetworkUtil.IsMaster() && enemy != null)
+                {
                     var sync = enemy.GetComponent<MonsterSync>();
-                    if(sync != null) {
+                    if (sync != null)
+                    {
                         sync.DoNetworkDamage(proto);
                     }
                 }
@@ -149,23 +151,38 @@ namespace ChuMeng
             } else if (cmds [0] == "AddEntity")
             {
                 var ety = proto.EntityInfo;
-                var unitData = Util.GetUnitData(false, ety.UnitId, 0);
-                var spawnChest = BattleManager.battleManager.GetZone().GetComponent<ZoneEntityManager>().GetSpawnChest(ety.SpawnId);
-                ObjectManager.objectManager.CreateChestFromNetwork(unitData, spawnChest, ety);
-            }else if(cmds[0] == "UpdateEntity") {
+                if (ety.EType == EntityType.CHEST)
+                {
+                    var unitData = Util.GetUnitData(false, ety.UnitId, 0);
+                    var spawnChest = BattleManager.battleManager.GetZone().GetComponent<ZoneEntityManager>().GetSpawnChest(ety.SpawnId);
+                    ObjectManager.objectManager.CreateChestFromNetwork(unitData, spawnChest, ety);
+                } else if (ety.EType == EntityType.DROP)
+                {
+                    var itemData = Util.GetItemData((int)ItemData.GoodsType.Props, (int)ety.ItemId);
+                    var itemNum = ety.ItemNum;
+                    var pos = NetworkUtil.FloatPos(ety.X, ety.Y, ety.Z); 
+                    DropItemStatic.MakeDropItemFromNet(itemData, pos, itemNum, ety);
+                }
+
+            } else if (cmds [0] == "UpdateEntity")
+            {
 
                 var ety = proto.EntityInfo;
                 var mon = ObjectManager.objectManager.GetPlayer(ety.Id);
-                if(!NetworkUtil.IsMaster() && mon != null) {
+                if (!NetworkUtil.IsMaster() && mon != null)
+                {
                     var sync = mon.GetComponent<MonsterSync>();
-                    if(sync != null) {
+                    if (sync != null)
+                    {
                         sync.SyncAttribute(proto);
                     }
                 }
-            }else if(cmds[0] == "RemoveEntity") {
+            } else if (cmds [0] == "RemoveEntity")
+            {
                 var ety = proto.EntityInfo;
                 var mon = ObjectManager.objectManager.GetPlayer(ety.Id);
-                if(!NetworkUtil.IsMaster() && mon != null) {
+                if (!NetworkUtil.IsMaster() && mon != null)
+                {
                     ObjectManager.objectManager.DestroyByLocalId(mon.GetComponent<NpcAttribute>().GetNetView().GetLocalId());
                 }
             }

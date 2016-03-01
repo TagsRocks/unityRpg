@@ -12,7 +12,9 @@ namespace ChuMeng
             GetAttr().IsDead = true;
             GetAttr().OnlyShowDeadEffect();
 
-            DropGoods.DropStaticGoods(GetAttr());
+            if(NetworkUtil.IsNetMaster()) {
+                DropGoods.DropStaticGoods(GetAttr());
+            }
             CreateParticle();
         }
 

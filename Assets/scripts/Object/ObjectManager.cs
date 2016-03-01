@@ -234,7 +234,7 @@ namespace ChuMeng
 		}
 
 		//增加一个玩家实体对象
-		private void AddObject (long unitId, KBEngine.KBNetworkView view)
+        public void AddObject (long unitId, KBEngine.KBNetworkView view)
 		{
 			photonViewList.Add (view);
 		}
