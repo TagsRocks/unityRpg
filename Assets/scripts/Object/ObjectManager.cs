@@ -22,11 +22,19 @@ namespace ChuMeng
 		Dictionary<int, GameObject> fakeObjects = new Dictionary<int,GameObject> ();
 		public static ObjectManager objectManager;
 		public KBEngine.KBPlayer myPlayer;
+
 		/*
-		 * Player And Player Related GameObject
+		 * 玩家服务器Id--->玩家实体
+         * 
+         * View 普通的怪物等实体
+         * LocalId  playerId
+         * ViewId
 		 */ 
 		public Dictionary<int, KBEngine.KBPlayer> Actors = new Dictionary<int, KBEngine.KBPlayer> ();
 		List<KBEngine.KBNetworkView> photonViewList = new List<KBEngine.KBNetworkView> ();
+        public List<KBEngine.KBNetworkView> GetNetView() {
+            return photonViewList;
+        }
 		/*
 		 * Monster Killed By Player
 		 */ 
@@ -35,12 +43,12 @@ namespace ChuMeng
 
 		/// <summary>
 		/// 获得玩家实体对象
+        /// 获得服务器怪物实体
 		/// </summary>
-		public KBEngine.KBNetworkView GetPhotonView (int viewID)
+		public KBEngine.KBNetworkView GetPlayerOrMonsterNetView (int playerId)
 		{
-			//KBEngine.KBNetworkView result = null;
 			foreach (KBEngine.KBNetworkView view in photonViewList) {
-				if (view.GetServerID () == viewID && view.IsPlayer) {
+				if (view.GetServerID () == playerId) {
 					return view;
 				}
 			}
@@ -68,7 +76,7 @@ namespace ChuMeng
 		}
 		public int GetMyProp(CharAttribute.CharAttributeEnum prop) {
 			if (myPlayer != null) {
-				var vi = GetPhotonView (myPlayer.ID);
+				var vi = GetPlayerOrMonsterNetView (myPlayer.ID);
 				if(vi != null) {
 					return vi.GetComponent<CharacterInfo>().GetProp(prop);
 				}
@@ -77,7 +85,7 @@ namespace ChuMeng
 		}
 		public CharacterInfo GetMyData() {
 			if (myPlayer != null) {
-				var vi = GetPhotonView (myPlayer.ID);
+				var vi = GetPlayerOrMonsterNetView (myPlayer.ID);
 				if(vi != null) {
 					return vi.GetComponent<CharacterInfo>();
 				}
@@ -94,7 +102,7 @@ namespace ChuMeng
 		public GameObject GetMyPlayer ()
 		{
 			if (myPlayer != null) {
-				var vi = GetPhotonView (myPlayer.ID);
+				var vi = GetPlayerOrMonsterNetView (myPlayer.ID);
 				if (vi != null) {
 					return vi.gameObject;
 				}
@@ -105,7 +113,7 @@ namespace ChuMeng
 		//获得玩家自身或者其它玩家的属性数据
 		public GameObject GetPlayer (int playerId)
 		{
-			var view = GetPhotonView (playerId);
+			var view = GetPlayerOrMonsterNetView (playerId);
 			if (view != null) {
 				return view.gameObject;
 			}
@@ -148,7 +156,7 @@ namespace ChuMeng
 			if (myPlayer != null) {
 				//Debug.Log("MyLocal Id Get Error "+);
 				//Log.Sys ("Local PlayerID " + myPlayer.ID);
-				var view = GetPhotonView (myPlayer.ID);
+				var view = GetPlayerOrMonsterNetView (myPlayer.ID);
 				if(view != null) {
 					var lid = view.GetLocalId ();
 					return lid;
@@ -265,31 +273,34 @@ namespace ChuMeng
 		public void DestroyPlayer (int playerID)
 		{
 			///<summary>
-			/// 删除自己玩家的时候需要保存玩家的位置和角度
+			/// 删除自己玩家的时候需要保存玩家的位置和角度Ch
 			/// </summary>
+            KBEngine.KBPlayer player = null;
 			if (myPlayer != null && myPlayer.ID == playerID) {
+                player = myPlayer;
 				myPlayer = null;
 			}
 
+            if(Actors.ContainsKey(playerID)) {
+                player = Actors[playerID];
+            }
+
 			//摧毁某个玩家所有的PhotonView对象  Destroy Fake object Fist Or Send Event ?
+            //删除玩家控制的怪物实体
 			var keys = photonViewList.Where (f => true).ToArray ();
 			foreach (KBEngine.KBNetworkView v in keys) {
-				if (v.GetServerID () == playerID) {
+                if (v.GetID().owner == player) {
 					photonViewList.Remove (v);
 					DestroyFakeObj (v.GetLocalId ());
 					GameObject.Destroy (v.gameObject);
-					//break;
-
 				}
 			}
 
 			if (Actors.ContainsKey (playerID)) {
 				Actors.Remove (playerID);
-			} else {
-				//Debug.LogError ("ObjectManager::clearPlayer No Such Player " + playerID);
 			}
-
 		}
+
 		/// <summary>
 		/// 摧毁自己玩家对象和单人副本怪物对象
 		/// </summary>
@@ -363,7 +374,7 @@ namespace ChuMeng
 
 		GameObject CreateMyPlayerInternal() {
 			var kbplayer = new KBEngine.KBPlayer ();
-            kbplayer.ID = (int)SaveGame.saveGame.selectChar.PlayerId;
+            kbplayer.ID = (int)-2;
 			if (myPlayer != null) {
 				throw new System.Exception ("myPlayer not null");
 			}
@@ -385,7 +396,7 @@ namespace ChuMeng
 			//设置自己玩家的View属性
 			var view = player.GetComponent<KBEngine.KBNetworkView> ();
 			NetDebug.netDebug.AddConsole ("SelectCharID " + SaveGame.saveGame.selectChar.PlayerId);
-            view.SetID (new KBEngine.KBViewID ((int)SaveGame.saveGame.selectChar.PlayerId, kbplayer));
+            view.SetID (new KBEngine.KBViewID (-1, kbplayer));
 			
 			NetDebug.netDebug.AddConsole ("Set UnitData of Certain Job " + udata);
 			player.GetComponent<NpcAttribute> ().SetObjUnitData (udata);
@@ -525,7 +536,7 @@ namespace ChuMeng
                 player.transform.parent = gameObject.transform;
 
                 var netview = player.GetComponent<KBEngine.KBNetworkView> ();
-                netview.SetID (new KBEngine.KBViewID (kbplayer.ID, kbplayer));
+                netview.SetID (new KBEngine.KBViewID (-1, kbplayer));
                 
 
                 AddPlayer (kbplayer.ID, kbplayer);
@@ -571,7 +582,7 @@ namespace ChuMeng
 
                 //Register Unique Id To Npc 
                 var netView = g.GetComponent<KBEngine.KBNetworkView> ();
-                netView.SetID (new KBEngine.KBViewID (myPlayer.ID, myPlayer));
+                netView.SetID (new KBEngine.KBViewID (-1, myPlayer));
                 netView.IsPlayer = false;
 
                 npc.SetObjUnitData (unitData);
@@ -587,7 +598,7 @@ namespace ChuMeng
             }
         }
 
-        public void CreateChest(UnitData unitData, SpawnChest spawn) {
+        public void CreateChestFromNetwork(UnitData unitData, SpawnChest spawn, EntityInfo info=null) {
             Log.Sys ("Create Chest Unit " + unitData.name);
             var Resource = Resources.Load<GameObject> (unitData.ModelName);
             GameObject g = Instantiate (Resource) as GameObject;
@@ -606,7 +617,16 @@ namespace ChuMeng
             g.layer = (int)GameLayer.Npc;
 
             var netView = g.GetComponent<KBEngine.KBNetworkView> ();
-            netView.SetID (new KBEngine.KBViewID (myPlayer.ID, myPlayer));
+
+            //服务器返回的ViewId
+            //Owner 客户端怪物 服务器怪物
+            //Id ViewId
+            if(info != null) {
+                netView.SetID (new KBEngine.KBViewID (info.Id, myPlayer));
+            }else {
+                netView.SetID (new KBEngine.KBViewID (-1, myPlayer));
+            }
+
             netView.IsPlayer = false;
 
             npc.SetObjUnitData (unitData);
@@ -617,6 +637,40 @@ namespace ChuMeng
 
             BattleManager.battleManager.AddEnemy (npc.gameObject);
             npc.SetDeadDelegate = BattleManager.battleManager.EnemyDead;
+        }
+
+        public GameObject GetNetworkMonster(int viewId) {
+            foreach(var p in photonViewList) {
+                if(p.GetViewId() == viewId) {
+                    return p.gameObject;
+                }
+            }
+            return null;
+        }
+        /// <summary>
+        /// Master 退出场景所有的Entities都销毁掉简单处理
+        /// </summary>
+        /// <param name="unitData">Unit data.</param>
+        /// <param name="spawn">Spawn.</param>
+        public void CreateChest(UnitData unitData, SpawnChest spawn) {
+
+            if(NetworkUtil.IsNetMaster()) {
+                var cg = CGPlayerCmd.CreateBuilder();
+                cg.Cmd = "AddEntity";
+                var entityInfo = EntityInfo.CreateBuilder();
+                entityInfo.UnitId = unitData.ID;
+                var ip = NetworkUtil.ConvertPos(spawn.transform.position);
+                entityInfo.X =  ip[0];
+                entityInfo.Y =  ip[1];
+                entityInfo.Z =  ip[2];
+                entityInfo.SpawnId = spawn.SpawnId;
+                entityInfo.HP = unitData.HP;
+                cg.EntityInfo = entityInfo.Build();
+                var scene = WorldManager.worldManager.GetActive();
+                scene.BroadcastMsg(cg);
+            }else {
+                CreateChestFromNetwork(unitData, spawn);
+            }
         }
 
 
@@ -657,7 +711,7 @@ namespace ChuMeng
                 spawn.FirstMonster = g;
 
 				var netView = g.GetComponent<KBEngine.KBNetworkView> ();
-				netView.SetID (new KBEngine.KBViewID (myPlayer.ID, myPlayer));
+				netView.SetID (new KBEngine.KBViewID (-1, myPlayer));
 				netView.IsPlayer = false;
 
 				npc.SetObjUnitData (unitData);
@@ -720,7 +774,7 @@ namespace ChuMeng
 			g.GetComponent<BuffComponent> ().AddBuff (affix);
 
 			var netView = NGUITools.AddMissingComponent<KBEngine.KBNetworkView> (g);
-			netView.SetID (new KBEngine.KBViewID (myPlayer.ID, myPlayer));
+			netView.SetID (new KBEngine.KBViewID (-1, myPlayer));
 			netView.IsPlayer = false;
             //owner.GetComponent<NpcAttribute>().AddSummon(netView.gameObject);
 			

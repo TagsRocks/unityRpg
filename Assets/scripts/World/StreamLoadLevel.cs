@@ -98,10 +98,14 @@ namespace ChuMeng
                 yield break;
             }
             var zone = GameObject.Instantiate(zoneConfig) as GameObject;
-            var pro = Util.FindChildRecursive(zone.transform, "properties");
+            var ze = zone.AddComponent<ZoneEntityManager>();
+
             var world = WorldManager.worldManager.GetActive();
+            Log.Sys("WorldIs Net: "+world.IsNet+" act "+world+" pro ");
             if(world.IsNet) {
-                pro.gameObject.SetActive(false);
+                //pro.gameObject.AddComponent<TestDisable>();
+                //pro.gameObject.SetActive(false);
+                ze.DisableProperties();
             }
 
             if(zone == null){
@@ -122,8 +126,10 @@ namespace ChuMeng
         /// <returns>The zone network.</returns>
         public void  LoadZoneNetwork() {
             var zone = loadedZone[0];
-            var pro = Util.FindChildRecursive(zone.transform, "properties");
-            pro.gameObject.SetActive(true);
+            //var pro = Util.FindChildRecursive(zone.transform, "properties");
+            var ze = zone.GetComponent<ZoneEntityManager>();
+            ze.EnableProperties();
+            //pro.gameObject.SetActive(true);
         }
 
 

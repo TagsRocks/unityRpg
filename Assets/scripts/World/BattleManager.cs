@@ -91,7 +91,9 @@ namespace ChuMeng
             for (int i = 1; i < Zones.Count; i++)
             {
                 var zone = Zones [i];
-                zone.transform.Find("properties").gameObject.SetActive(false);
+                //zone.transform.Find("properties").gameObject.SetActive(false);
+                var ze = zone.GetComponent<ZoneEntityManager>();
+                ze.DisableProperties();
             }
             if (Zones.Count > 0)
             {
@@ -118,7 +120,8 @@ namespace ChuMeng
 
         void InitZoneState(GameObject z)
         {
-            z.transform.Find("properties").gameObject.SetActive(false);
+            //z.transform.Find("properties").gameObject.SetActive(false);
+            z.GetComponent<ZoneEntityManager>().DisableProperties();
         }
 
         IEnumerator Start()
@@ -166,12 +169,18 @@ namespace ChuMeng
             
         }
 
+        public GameObject GetZone() {
+            return Zones[currentZone];
+        }
+
         void InitZone()
         {
             Log.Sys("InitZone Properties ");
             allWaves.Clear();
 
-            var prop = Zones [currentZone].transform.Find("properties");
+            var ze = Zones [currentZone].GetComponent<ZoneEntityManager>();
+            var prop = ze.properties.transform;
+
             var ex = Util.FindChildRecursive(Zones [currentZone].transform, "exitZone");
             if (ex != null)
             {
@@ -193,8 +202,31 @@ namespace ChuMeng
                 }
             }
 
-            prop.gameObject.SetActive(true);
+            //prop.gameObject.SetActive(true);
+            var world = WorldManager.worldManager.GetActive();
+            if(world.IsNet) {
+                //StartCoroutine(CheckNetSpawn());
+            }else {
+                ze.EnableProperties();
+            }
         }
+
+        /*
+        IEnumerator CheckNetSpawn() {
+            var ze = Zones[currentZone].GetComponent<ZoneEntityManager>();
+            var player = ObjectManager.objectManager.GetMyPlayer();
+            while(player == null) {
+                player = ObjectManager.objectManager.GetMyPlayer();
+                yield return null;
+            }
+
+            var world = WorldManager.worldManager.GetActive();
+            if(world.IsNet && ObjectManager.objectManager.GetMyAttr().IsMaster) {
+                ze.EnableProperties();
+            }
+        }
+        */
+
         /*
          * Disappear Wall Between
          */

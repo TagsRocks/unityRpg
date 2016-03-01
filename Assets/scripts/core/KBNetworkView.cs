@@ -39,6 +39,7 @@ namespace KBEngine
     public class KBViewID
     {
         KBPlayer internalPlayer;
+        public int ViewId;
 
         public KBPlayer owner
         {
@@ -50,6 +51,7 @@ namespace KBEngine
 
         public KBViewID(int id, KBPlayer player)
         {
+            ViewId = id;
             internalPlayer = player;
         }
     }
@@ -233,19 +235,31 @@ namespace KBEngine
 		 */
         KBViewID ID = new KBViewID(0, null);
 
+        /// <summary>
+        /// 玩家则返回玩家Id
+        /// 怪物则返回ViewId 
+        /// </summary>
+        /// <returns>The server I.</returns>
         public int GetServerID()
         {
             if (ID.owner == null)
             {
                 Debug.Log("KBNetworkView:: not net connection ");
+                //return ID.ViewId;
                 return -1;
+            }
+            //没联网则 怪物ViewId为-1
+            if(!IsPlayer) {
+                return ID.ViewId;
             }
             return ID.owner.ID;
         }
-        public void SetServerID(int id) {
-            ID.owner.ID = id;
+        public KBViewID GetID() {
+            return ID;
         }
-
+        public int GetViewId() {
+            return ID.ViewId;
+        }
 
         public void SetID(KBViewID id)
         {
@@ -267,7 +281,9 @@ namespace KBEngine
             }
         }
 
-        //是否是本地玩家
+        //是否是我可以控制的对象
+        //网络状态下 和 普通状态下
+        //网络状态下 == myPlayer 如果是怪物 则还需要我是Master 才行
         public bool IsMine
         {
             get
@@ -277,8 +293,15 @@ namespace KBEngine
                     Debug.Log("KBNetworkView:: No NetworkConnect Init Player Is Mine");
                     return true;
                 }
-                //return ID.owner == ChuMeng.ObjectManager.objectManager.myPlayer && IsPlayer;
-                return ID.owner == ChuMeng.ObjectManager.objectManager.myPlayer;
+
+                var isMe = ID.owner == ChuMeng.ObjectManager.objectManager.myPlayer;
+                if(!IsPlayer) {
+                    if(isMe && ChuMeng.NetworkUtil.IsMaster()) {
+                        return true;
+                    }
+                    return false;
+                }
+                return isMe;
             }
         }
 

@@ -5,6 +5,8 @@ namespace ChuMeng
 {
     public class SpawnChest : MonoBehaviour
     {
+        private static int MaxSpawnId = 0;
+        public int SpawnId;
         public int rateToSpawn = 100;
         //宝箱模型ID
         public int ChestId = 36;
@@ -15,6 +17,7 @@ namespace ChuMeng
         public int MonsterID = 2011;
 
         void Awake() {
+            SpawnId = MaxSpawnId++;
             foreach(Transform t in transform){
                 t.gameObject.SetActive(false);
             }
@@ -48,6 +51,9 @@ namespace ChuMeng
 
         IEnumerator CheckToSpawn()
         {
+            if(isSpawnYet) {
+                yield break;
+            }
             var player = ObjectManager.objectManager.GetMyPlayer();
             while(player == null) {
                 player = ObjectManager.objectManager.GetMyPlayer();

@@ -35,6 +35,8 @@ namespace ChuMeng
         }
     }
 
+    [RequireComponent(typeof(MonsterSync))]
+    [RequireComponent(typeof(MonsterSyncToServer))]
     public class ChestAI2 : AIBase
     {
         void Awake()

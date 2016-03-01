@@ -32,13 +32,6 @@ namespace ChuMeng
                         isCritical
                     );
                     enemy.GetComponent<MyAnimationEvent>().OnHit(attacker, damage, isCritical);
-
-                    /*
-                    var hitTarget = new MyEvent(MyEvent.EventType.HitTarget);
-                    hitTarget.target = enemy;
-                    hitTarget.skill = null;
-                    MyEventSystem.myEventSystem.PushLocalEvent(attribute.GetLocalId(), hitTarget);
-                    */
                 }
             }
         }
@@ -56,7 +49,7 @@ namespace ChuMeng
             if (enemy.GetComponent<MyAnimationEvent>() != null)
             {
                 var attribute = attacker.GetComponent<NpcAttribute>();
-                //技能施展方是我方则可以计算技能伤害否则只做技能表现
+                //技能伤害方是我方则可以计算技能伤害否则只做技能表现
                 if (enemy.GetComponent<NpcAttribute>().IsMine())
                 {
                     var rd = Random.Range(0, 100);

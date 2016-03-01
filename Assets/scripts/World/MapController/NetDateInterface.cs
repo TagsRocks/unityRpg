@@ -86,6 +86,15 @@ namespace ChuMeng
             }
         }
 
+        public static void SyncMonster() {
+            if(NetworkUtil.IsNetMaster()) {
+                var allNetView = ObjectManager.objectManager.GetNetView();
+                foreach(var v in allNetView) {
+                    var ms = v.GetComponent<MonsterSyncToServer>();
+                    ms.SyncToServer();
+                }
+            }
+        }
         public static void SyncPosDirHP()
         {
             var me = ObjectManager.objectManager.GetMyPlayer();

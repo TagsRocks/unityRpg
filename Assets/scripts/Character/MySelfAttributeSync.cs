@@ -3,6 +3,9 @@ using System.Collections;
 
 namespace ChuMeng
 {
+    /// <summary>
+    /// 玩家自己的属性 从服务器上同步 
+    /// </summary>
     public class MySelfAttributeSync : MonoBehaviour
     {
         public void NetworkAttribute(AvatarInfo info) {
