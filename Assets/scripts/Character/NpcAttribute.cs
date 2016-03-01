@@ -75,6 +75,7 @@ namespace ChuMeng
                 return ObjUnitData.MoveSpeed;
             }
         }
+        public bool Pushable = false;
 
         //[NpcAttributeAtt()]
         public float ApproachDistance

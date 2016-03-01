@@ -21,60 +21,69 @@ namespace ChuMeng
     /// 网络对象的本地代理
     /// Proxy 接受网络同步 
     /// </summary>
-	public class PlayerSync : KBEngine.MonoBehaviour
-	{
-		/*
+    public class PlayerSync : KBEngine.MonoBehaviour
+    {
+        /*
 		 * Write Message Send To Server
 		 * PlayerManagerment  PhotonView Manager 
-		 */ 
-        public void NetworkMove(AvatarInfo info) {
-            var mvTarget = new Vector3(info.X/100.0f, info.Y/100.0f+0.2f, info.Z/100.0f);
+		 */
+        public void NetworkMove(AvatarInfo info)
+        {
+            var mvTarget = new Vector3(info.X / 100.0f, info.Y / 100.0f + 0.2f, info.Z / 100.0f);
             var cmd = new ObjectCommand();
             cmd.targetPos = mvTarget;
             cmd.dir = info.Dir;
             cmd.commandID = ObjectCommand.ENUM_OBJECT_COMMAND.OC_MOVE;
             GetComponent<LogicCommand>().PushCommand(cmd);
-            if(info.HasHP) {
+            if (info.HasHP)
+            {
                 GetComponent<NpcAttribute>().SetHPNet(info.HP);
             }
 
-            if(info.HasTeamColor) {
+            if (info.HasTeamColor)
+            {
                 GetComponent<NpcAttribute>().SetTeamColorNet(info.TeamColor);
             }
         }
 
-        public void NetworkAttack(SkillAction sk) {
-            var cmd = new ObjectCommand (ObjectCommand.ENUM_OBJECT_COMMAND.OC_USE_SKILL);
+        public void NetworkAttack(SkillAction sk)
+        {
+            var cmd = new ObjectCommand(ObjectCommand.ENUM_OBJECT_COMMAND.OC_USE_SKILL);
             cmd.skillId = sk.SkillId;
-            Log.GUI ("Other Player Attack LogicCommand");
-            gameObject.GetComponent<LogicCommand> ().PushCommand (cmd);
+            Log.GUI("Other Player Attack LogicCommand");
+            gameObject.GetComponent<LogicCommand>().PushCommand(cmd);
         }
 
-        public void SetLevel(AvatarInfo info) {
+        public void SetLevel(AvatarInfo info)
+        {
             GetComponent<NpcAttribute>().ChangeLevel(info.Level);
         }
 
-        public void SetPositionAndDir(AvatarInfo info) {
-            Vector3 vxz = new Vector3(info.X/100.0f, info.Y/100.0f+0.2f, info.Z/100.0f);
-            Log.Sys("SetPosition: "+info+" vxz "+vxz+" n "+gameObject.name);
+        public void SetPositionAndDir(AvatarInfo info)
+        {
+            Vector3 vxz = new Vector3(info.X / 100.0f, info.Y / 100.0f + 0.2f, info.Z / 100.0f);
+            Log.Sys("SetPosition: " + info + " vxz " + vxz + " n " + gameObject.name);
             transform.position = new Vector3(vxz.x, vxz.y, vxz.y);
-            transform.rotation = Quaternion.Euler (new Vector3(0, info.Dir, 0));
+            transform.rotation = Quaternion.Euler(new Vector3(0, info.Dir, 0));
             StartCoroutine(SetPos(vxz));
         }
+
         /// <summary>
         /// 稳定一下初始化位置 
         /// </summary>
         /// <returns>The position.</returns>
         /// <param name="p">P.</param>
-        IEnumerator SetPos(Vector3 p) {
+        IEnumerator SetPos(Vector3 p)
+        {
             var c = 0;
-            while(c <= 3) {
+            while (c <= 3)
+            {
                 transform.position = p;
                 c++;
                 yield return null;
             }
         }
-	
+
 
         /// <summary>
         /// 本地控制对象接受网络命令
@@ -85,26 +94,29 @@ namespace ChuMeng
         {
             var eid = cmd.DamageInfo.Enemy;
             var attacker = ObjectManager.objectManager.GetPlayer(cmd.DamageInfo.Attacker);
-            if(attacker != null) {
+            if (attacker != null)
+            {
                 gameObject.GetComponent<MyAnimationEvent>().OnHit(attacker, cmd.DamageInfo.Damage, cmd.DamageInfo.IsCritical);
             }
         }
 
-        public void NetworkBuff(GCPlayerCmd cmd) {
-            var attacker = ObjectManager.objectManager.GetPlayer(cmd.BuffInfo.Attacker);
-            if(attacker != null) {
-                var sk = Util.GetSkillData(cmd.BuffInfo.SkillId, 1);
-                var skConfig = SkillLogic.GetSkillInfo(sk);
-                var evt = skConfig.GetEvent(cmd.BuffInfo.EventId);
-                if(evt != null) {
-                    var pos = cmd.BuffInfo.AttackerPosList;
-                    var px = pos[0]/100.0f;
-                    var py = pos[1]/100.0f;
-                    var pz = pos[2]/100.0f;
-                    gameObject.GetComponent<BuffComponent>().AddBuff(evt.affix, new Vector3(px, py, pz));
-                }
+        public void NetworkBuff(GCPlayerCmd cmd)
+        {
+            //var attacker = ObjectManager.objectManager.GetPlayer(cmd.BuffInfo.Attacker);
+            //if(attacker != null) {
+            var sk = Util.GetSkillData(cmd.BuffInfo.SkillId, 1);
+            var skConfig = SkillLogic.GetSkillInfo(sk);
+            var evt = skConfig.GetEvent(cmd.BuffInfo.EventId);
+            if (evt != null)
+            {
+                var pos = cmd.BuffInfo.AttackerPosList;
+                var px = pos [0] / 100.0f;
+                var py = pos [1] / 100.0f;
+                var pz = pos [2] / 100.0f;
+                gameObject.GetComponent<BuffComponent>().AddBuff(evt.affix, new Vector3(px, py, pz));
             }
+            //}
         }
-	}
+    }
 
 }

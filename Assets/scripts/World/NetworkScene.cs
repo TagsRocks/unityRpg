@@ -143,10 +143,20 @@ namespace ChuMeng
                 }
             } else if (cmds [0] == "Buff")
             {
-                var sync = NetDateInterface.GetPlayer(proto.BuffInfo.Target);
+                var target = proto.BuffInfo.Target;
+                var sync = NetDateInterface.GetPlayer(target);
+                var player = ObjectManager.objectManager.GetPlayer(target);
                 if (sync != null)
                 {
                     sync.NetworkBuff(proto);
+                }
+                if (player != null && !NetworkUtil.IsNetMaster())
+                {
+                    var monSync = player.GetComponent<MonsterSync>();
+                    if (monSync != null)
+                    {
+                        monSync.NetworkBuff(proto);
+                    }
                 }
             } else if (cmds [0] == "AddEntity")
             {

@@ -24,7 +24,6 @@ namespace ChuMeng
             binfo.AddAttackerPos((int)(pos.x * 100));
             binfo.AddAttackerPos((int)(pos.y * 100));
             binfo.AddAttackerPos((int)(pos.z * 100));
-            //Log.Net(binfo.AttackerPosCount);
 
             cg.BuffInfo = binfo.Build();
             cg.Cmd = "Buff";
