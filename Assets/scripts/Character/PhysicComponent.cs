@@ -46,13 +46,13 @@ namespace ChuMeng
         public void TurnTo(Vector3 moveDirection){
             var y1 = transform.eulerAngles.y;
             var y2 = Quaternion.LookRotation (moveDirection).eulerAngles.y;
-            var y3 = Mathf.LerpAngle(y1, y2, attribute.GetSpeedCoff());
+            var y3 = Mathf.LerpAngle(y1, y2, attribute.GetMoveSpeedCoff());
             transform.rotation = Quaternion.Euler(new Vector3(0, y3, 0));
         }
 		//键盘操控玩家移动
 		public void MoveSpeed(Vector3 moveSpeed) {
 			if (!skillMove) {
-                moveValue = moveSpeed * attribute.GetSpeedCoff();
+                moveValue = moveSpeed * attribute.GetMoveSpeedCoff();
 				moveValue.y -= Gravity;
 			}
 		}

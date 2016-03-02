@@ -165,11 +165,6 @@ namespace ChuMeng
         {
             Log.Sys("SetHPNet: " + hp + " g " + gameObject);
             GetComponent<CharacterInfo>().SetProp(CharAttribute.CharAttributeEnum.HP, hp);
-            /*
-            var evt1 = new MyEvent(MyEvent.EventType.UnitHP);
-            evt1.localID = GetLocalId();
-            MyEventSystem.myEventSystem.PushLocalEvent(evt1.localID, evt1);
-            */
             NotifyHP();
         }
 
@@ -377,6 +372,11 @@ namespace ChuMeng
 
 
 
+        public void AddMpMax(int num) {
+            MP_Max += num;
+            ChangeMP(0);
+        }
+
         //根据配置文件初始化属性
         //TODO: 初始化其它玩家的属性 PlayerOther  PlayerSelf Monster Boss
         void InitData()
@@ -386,8 +386,6 @@ namespace ChuMeng
             if (ObjUnitData != null && characterInfo != null)
             {
                 var view = GetComponent<KBEngine.KBNetworkView>(); 
-
-
                 Log.Important("Player View State " + gameObject.name + " " + view.IsPlayer + " " + view.IsMine);
                 HP_Max = _ObjUnitData.HP;
                 HP = HP_Max;
@@ -459,9 +457,18 @@ namespace ChuMeng
             return d;
         }
 
+        public float NetSpeed = 1;
+        public void AddNetSpeed(float v) {
+            NetSpeed += v;
+        }
+
+        public float GetMoveSpeedCoff() {
+            return GetComponent<BuffComponent>().GetSpeedCoff() * NetSpeed;
+        }
+
         public float GetSpeedCoff()
         {
-            return GetComponent<BuffComponent>().GetSpeedCoff();
+            return GetComponent<BuffComponent>().GetSpeedCoff() ;
         }
 
         public int GetCriticalRate()

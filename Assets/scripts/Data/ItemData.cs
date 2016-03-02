@@ -115,6 +115,8 @@ namespace ChuMeng
             FORGE_GRAPH = 16,
 
             POWER_DRUG = 17,
+            QIPAO_DRUG = 18,
+            XieZi_DRUG = 19,
 		}
 
         public enum ItemID {

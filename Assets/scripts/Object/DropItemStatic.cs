@@ -64,7 +64,14 @@ namespace ChuMeng
             if(who == me) {
                 if(itemData.UnitType == ItemData.UnitTypeEnum.POWER_DRUG) {
                     GameInterface_Backpack.LearnSkill((int)SkillData.SkillConstId.Bomb);
-                }else {
+                }else if(itemData.UnitType == ItemData.UnitTypeEnum.QIPAO_DRUG) {
+                    ObjectManager.objectManager.GetMyAttr().AddMpMax(20);
+                    WindowMng.windowMng.ShowNotifyLog("MP上限增加");
+                }else if(itemData.UnitType == ItemData.UnitTypeEnum.XieZi_DRUG) {
+                    ObjectManager.objectManager.GetMyAttr().AddNetSpeed(0.5f); 
+                    WindowMng.windowMng.ShowNotifyLog("速度提升");
+                }
+                else {
                     GameInterface_Backpack.PickItem(itemData, num);
                 }
             }

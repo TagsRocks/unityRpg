@@ -7,7 +7,7 @@ Material:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: leatherboots
-  m_Shader: {fileID: 4800000, guid: 4acbcff20f5df4d86a4a401694a5cc8a, type: 3}
+  m_Shader: {fileID: 4800000, guid: 65a267bb8c6f1468a853369b6641d369, type: 3}
   m_ShaderKeywords: []
   m_CustomRenderQueue: -1
   m_SavedProperties:
@@ -32,9 +32,9 @@ Material:
         second: {r: 1, g: 1, b: 1, a: 1}
       data:
         first:
-          name: _Ambient
-        second: {r: 1, g: 1, b: 1, a: 1}
-      data:
-        first:
           name: _ShadowColor
         second: {r: 0, g: 0, b: 0, a: 1}
+      data:
+        first:
+          name: _Ambient
+        second: {r: 1, g: 1, b: 1, a: 1}
