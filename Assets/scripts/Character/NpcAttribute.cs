@@ -139,7 +139,11 @@ namespace ChuMeng
             if(myPlayer.TeamColor != TeamColor) {
                 var renders = gameObject.GetComponentsInChildren<SkinnedMeshRenderer>();
                 var shaderRes = Resources.Load<ShaderResource> ("levelPublic/ShaderResource");
+                var render2 = gameObject.GetComponentsInChildren<MeshRenderer>();
                 foreach(var r in renders) {
+                    r.material.shader = Shader.Find ("Custom/playerHideShader");
+                }
+                foreach(var r in render2) {
                     r.material.shader = Shader.Find ("Custom/playerHideShader");
                 }
             }
