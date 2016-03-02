@@ -23,20 +23,54 @@ namespace ChuMeng
     /// </summary>
     public class PlayerSync : KBEngine.MonoBehaviour
     {
+        AvatarInfo lastInfo;
+        AvatarInfo curInfo;
+
+        void Awake()
+        {
+            curInfo = AvatarInfo.CreateBuilder().Build();
+            StartCoroutine(SyncPos());
+        }
+
+        IEnumerator SyncPos()
+        {
+            yield return new WaitForSeconds(2);
+            while (true)
+            {
+                SendMoveCmd();
+                yield return new WaitForSeconds(1);
+            }
+        }
+
+
+        void SendMoveCmd()
+        {
+            var curPos = NetworkUtil.ConvertPos(transform.position);
+            var dir = (int)transform.localRotation.eulerAngles.y;
+            if (curInfo.X != curPos [0] || curInfo.Y != curPos [1] || curInfo.Z != curPos [2] || curInfo.Dir != dir)
+            {
+                var mvTarget = new Vector3(curInfo.X / 100.0f, curInfo.Y / 100.0f + 0.2f, curInfo.Z / 100.0f);
+                var cmd = new ObjectCommand();
+                cmd.targetPos = mvTarget;
+                cmd.dir = curInfo.Dir;
+                cmd.commandID = ObjectCommand.ENUM_OBJECT_COMMAND.OC_MOVE;
+                GetComponent<LogicCommand>().PushCommand(cmd);
+            }
+        }
         /*
 		 * Write Message Send To Server
 		 * PlayerManagerment  PhotonView Manager 
 		 */
         public void NetworkMove(AvatarInfo info)
         {
+            Log.Sys("NetworkMove: " + info);
             if (info.HasX)
             {
-                var mvTarget = new Vector3(info.X / 100.0f, info.Y / 100.0f + 0.2f, info.Z / 100.0f);
-                var cmd = new ObjectCommand();
-                cmd.targetPos = mvTarget;
-                cmd.dir = info.Dir;
-                cmd.commandID = ObjectCommand.ENUM_OBJECT_COMMAND.OC_MOVE;
-                GetComponent<LogicCommand>().PushCommand(cmd);
+                curInfo.X = info.X;
+                curInfo.Y = info.Y;
+                curInfo.Z = info.Z;
+                curInfo.Dir = info.Dir;
+                SendMoveCmd();
             }
 
             if (info.HasHP)
@@ -48,8 +82,9 @@ namespace ChuMeng
             {
                 GetComponent<NpcAttribute>().SetTeamColorNet(info.TeamColor);
             }
-            if(info.HasNetSpeed) {
-                GetComponent<NpcAttribute>().NetSpeed = info.NetSpeed/100.0f;
+            if (info.HasNetSpeed)
+            {
+                GetComponent<NpcAttribute>().NetSpeed = info.NetSpeed / 100.0f;
             }
         }
 

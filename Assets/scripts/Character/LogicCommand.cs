@@ -74,7 +74,7 @@ namespace ChuMeng
 		 */
         public void PushCommand(ObjectCommand cmd)
         {
-            Log.Important("Push Command What " + cmd.commandID);
+            Log.Important("Push Command What " + cmd.commandID+" target "+cmd.targetPos+" dir "+cmd.dir);
             commandList.Add(cmd);
         }
 

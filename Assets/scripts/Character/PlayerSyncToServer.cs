@@ -26,8 +26,8 @@ namespace ChuMeng
             //Pos 和 Dir 同时同步
             if(intPos[0] != lastInfo.X || intPos[1] != lastInfo.Y || intPos[2] != lastInfo.Z || dir != lastInfo.Dir) {
                 ainfo.X = intPos[0];
-                ainfo.Z = intPos[1];
-                ainfo.Y = intPos[2];
+                ainfo.Y = intPos[1];
+                ainfo.Z = intPos[2];
 
                 curInfo.X = ainfo.X;
                 curInfo.Y = ainfo.Y;
