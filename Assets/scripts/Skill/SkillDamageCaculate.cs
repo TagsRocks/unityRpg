@@ -62,7 +62,7 @@ namespace ChuMeng
                     }
                     //在基础攻击力上面提升的比例
                     var damage = (int)(attribute.Damage * (skillData.skillData.WeaponDamagePCT / 100.0f) * rate );
-                    Log.Sys("calculate Damage Rate " + skillData.skillData.WeaponDamagePCT);
+                    Log.Sys("calculate Damage Rate " +skillData.skillData.Id+" lev "+skillData.skillData.Level+" ra "+ skillData.skillData.WeaponDamagePCT);
 
                     NetDateInterface.FastDamage(
                         attribute.GetComponent<KBEngine.KBNetworkView>().GetServerID(),

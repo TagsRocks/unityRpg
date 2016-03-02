@@ -87,39 +87,12 @@ namespace ChuMeng
             }
         }
 
-        void LevelDown(int skId)
-        {
-            foreach (SkillFullInfo sk in activeSkill)
-            {
-                if (sk.skillId == skId)
-                {
-                    sk.skillData = Util.GetSkillData(sk.skillId, sk.level - 1);
-                    return;
-                }
-            }
-
-            foreach (SkillFullInfo sk in passiveSkill)
-            {
-                if (sk.skillId == skId)
-                {
-                    sk.skillData = Util.GetSkillData(sk.skillId, sk.level - 1);
-                    return;
-                }
-            }
-        }
-
 	
-        public IEnumerator DownLevelSkill(int skillId)
-        {
-            var packet = new KBEngine.PacketHolder();
-            var levelDown = CGSkillLevelDown.CreateBuilder();
-            levelDown.SkillId = skillId;
-            yield return StartCoroutine(KBEngine.Bundle.sendSimple(this, levelDown, packet));
-            //skillList.LevelUpWithProps (packet.packet.protoBody as GCInjectPropsLevelUp);
-            LevelDown(skillId);
-            MyEventSystem.myEventSystem.PushEvent(MyEvent.EventType.UpdateSkill);
-        }
-
+        /// <summary>
+        /// 返回实际技能的等级  快捷技能里面只有技能ID 
+        /// </summary>
+        /// <returns>The short skill data.</returns>
+        /// <param name="index">Index.</param>
         public SkillData GetShortSkillData(int index)
         {
             Log.Sys("GetShortSkillData "+index);
@@ -127,7 +100,15 @@ namespace ChuMeng
             {
                 if (s.shortSlotId == index)
                 {
+                    Log.Sys("SkillLevel: "+s.skillData.Level);
+                    foreach(var sk in activeSkill) {
+                        if(sk.skillId == s.skillId) {
+                            return sk.skillData;
+                        }
+                    }
+
                     return s.skillData;
+                    //return null
                 }
             }
             return null;

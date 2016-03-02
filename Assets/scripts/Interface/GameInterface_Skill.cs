@@ -25,11 +25,6 @@ namespace ChuMeng
             //);
         }
 
-        public void ResetSkill(int skId)
-        {
-            SkillDataController.skillDataController.StartCoroutine(SkillDataController.skillDataController.DownLevelSkill(skId));
-        }
-
         public void SetSkillShortCut(int skId, int index)
         {
             SkillDataController.skillDataController.StartCoroutine(SkillDataController.skillDataController.SetSkillShortCut(skId, index));
@@ -86,22 +81,6 @@ namespace ChuMeng
             return SkillDataController.skillDataController.DistriSp;
         }
 
-        /// <summary>
-        ///我的角色使用技能 
-        /// </summary>
-        /// <param name="skillId">Skill identifier.</param>
-        public static void MeUseSkill(int skillId)
-        {
-            Log.Sys("MeUseSkill " + skillId);
-            if (skillId == 0)
-            {
-                return;
-            }
-            Log.GUI("ItemUseSkill " + skillId);
-            var skillData = Util.GetSkillData(skillId, 1);
-            UseSkill(skillData);
-
-        }
 
         /// <summary>
         /// 本地使用技能同时通知代理
@@ -110,6 +89,7 @@ namespace ChuMeng
         /// <param name="skillData">Skill data.</param>
         static void UseSkill(SkillData skillData)
         {
+            Log.Sys("UseSkill: "+skillData.SkillName+" lev "+skillData.Level);
             ObjectManager.objectManager.GetMyPlayer().GetComponent<MyAnimationEvent>().OnSkill(skillData);
 
             NetDateInterface.FastMoveAndPos();

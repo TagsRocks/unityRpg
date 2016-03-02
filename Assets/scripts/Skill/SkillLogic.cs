@@ -21,7 +21,7 @@ namespace ChuMeng
 
         public static SkillStateMachine CreateSkillStateMachine(GameObject attacker, SkillData activeSkill, Vector3 position, GameObject enemy = null)
         {
-            Log.AI("create Skill State Machine " + activeSkill.SkillName);
+            Log.AI("create Skill State Machine " + activeSkill.SkillName+" skillLevel "+activeSkill.Level);
             var g = new GameObject("SkillStateMachine_" + activeSkill.template);
             var skillStateMachine = g.AddComponent<SkillStateMachine>();
             skillStateMachine.InitPos = position;

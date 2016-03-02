@@ -49,7 +49,8 @@ namespace ChuMeng
             me.GetComponent<NpcAttribute>().StartCoroutine(UseItemCor(itemId));
         }
 
-        public static void ClearDrug() {
+        public static void ClearDrug()
+        {
             var itemId = (int)ItemData.ItemID.DRUG;
             var backPackId = BackPack.backpack.GetItemId(itemId);
             var count = BackPack.backpack.GetItemCount((int)ItemData.GoodsType.Props, itemId);
@@ -98,9 +99,11 @@ namespace ChuMeng
             SimpleIAP.GetInstance().ChargeItem(nm.itemId);
         }
 
-        public static void SetSkillPos(int skillId, int pos) {
+        public static void SetSkillPos(int skillId, int pos)
+        {
             PlayerData.SetSkillPos(skillId, pos);
         }
+
         /// <summary>
         /// 学习技能书 学习书籍的新技能
         /// 或者增加一个技能点 
@@ -140,6 +143,32 @@ namespace ChuMeng
                     }
                 }
 
+            }
+        }
+
+        public static void LearnSkill(int skillId)
+        {
+            var pinfo = ServerData.Instance.playerInfo;
+            var allSkill = pinfo.Skill;
+            var find = false;
+
+            Log.Sys("LearnSkill: "+skillId+" info "+ServerData.Instance.p2);
+            foreach (var s in allSkill.SkillInfosList)
+            {
+                if (s.SkillInfoId == skillId)
+                {
+                    find = true;
+                    break;
+                }
+            }
+
+            if (find)
+            {
+                PlayerData.AddSkillPoint(1);
+                PlayerData.LevelUpSkill(skillId);
+            } else
+            {
+                PlayerData.LearnSkill(skillId);
             }
         }
 

@@ -256,7 +256,6 @@ namespace ChuMeng
                 {
                     fs.Close();
                 }
-                //var ret = PlayerInfo.ParseFrom(buffer);
 
                 saveData = JSON.Parse(System.Text.Encoding.UTF8.GetString(buffer));
             }

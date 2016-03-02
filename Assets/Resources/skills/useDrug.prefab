@@ -46,17 +46,25 @@ MonoBehaviour:
       effectType: 4
       Duration: 4
       UnitTheme: {fileID: 0}
+      ThemePos: {x: 0, y: 0, z: 0}
       addDefense: 0
       target: 0
       affixParameters:
       - key: 0
-        value: 80
+        value: 100
+      IsOnlyOne: 0
+      fireParticle: {fileID: 0}
+      keepOld: 0
+      buffParticle: {fileID: 0}
     attachOwner: 0
     attaches: 0
     childSkillId: 0
     AttachToTarget: 0
     SetBeamTarget: 0
     BeamOffset: {x: 0, y: 0, z: 0}
+    TargetPos: 0
+    UseMarkPos: 0
+    EvtId: 0
   animationLoop: 0
   attackDuration: 1
 --- !u!1001 &100100000

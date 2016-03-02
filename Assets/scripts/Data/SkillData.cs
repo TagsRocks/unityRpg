@@ -20,6 +20,8 @@ namespace ChuMeng
     public class SkillData
     {
         public enum SkillConstId {
+            Bomb = 3,
+            Jump = 4,
             KnockBack = 140,
             AddMP = 150,
         }

@@ -15,6 +15,7 @@ namespace ChuMeng
         public static ServerData Instance = null;
         public PlayerInfo.Builder playerInfo;
 
+        public PlayerInfo p2;
 
         public ServerData(){
             Instance = this;
@@ -48,7 +49,9 @@ namespace ChuMeng
                         fs.Close ();
                     }
                     try {
+                        p2 = PlayerInfo.CreateBuilder().MergeFrom(buffer).Build();
                         playerInfo = PlayerInfo.CreateBuilder().MergeFrom(buffer);
+                        Log.Net("InitPlayerInfo: "+p2);
                         break;
                     }catch(Exception ex){
                         WindowMng.windowMng.ShowNotifyLog("加载保存游戏数据出错 "+ex.Message);

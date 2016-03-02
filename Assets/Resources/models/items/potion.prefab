@@ -25,7 +25,6 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 400002}
-  - 114: {fileID: 11400000}
   m_Layer: 0
   m_Name: potion
   m_TagString: Untagged
@@ -85,20 +84,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
   m_Mesh: {fileID: 4300000, guid: b20e4e6a40cfb4016b14558b02187aae, type: 3}
---- !u!114 &11400000
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100002}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8b7aeba0ccfc748edad62bfbf90bd553, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ItemData: {fileID: 11400000, guid: 1d622a92deae84ab6bed215d7ab4626c, type: 2}
-  Particle: {fileID: 0}
-  IsOnGround: 0
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

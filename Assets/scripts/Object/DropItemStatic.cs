@@ -62,7 +62,11 @@ namespace ChuMeng
             GameObject.Destroy(gameObject);
             var me = ObjectManager.objectManager.GetMyPlayer();
             if(who == me) {
-                GameInterface_Backpack.PickItem(itemData, num);
+                if(itemData.UnitType == ItemData.UnitTypeEnum.POWER_DRUG) {
+                    GameInterface_Backpack.LearnSkill((int)SkillData.SkillConstId.Bomb);
+                }else {
+                    GameInterface_Backpack.PickItem(itemData, num);
+                }
             }
         }
 

@@ -68,11 +68,9 @@ namespace ChuMeng
         public void SetLevel(int lev){
             skillData = Util.GetSkillData(skillId, lev);
         }
-		//TODO:从服务器初始化 技能数据
+
 		public SkillFullInfo(SkillInfo sk) {
-			//skillInfo = sk;
 			skillData = Util.GetSkillData (sk.SkillInfoId, sk.Level);
-            //Pos = sk.Pos;
 		}
 
 		//TODO:快捷键技能的信息 需要通过ShortCutInfo和普通的SkillInfo 来初始化 获得技能的等级信息
