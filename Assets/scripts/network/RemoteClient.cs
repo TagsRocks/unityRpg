@@ -22,7 +22,8 @@ namespace ChuMeng
         }
     }
 
-    public enum RemoteClientEvent {
+    public enum RemoteClientEvent
+    {
         None,
         Connected,
         Close,
@@ -40,7 +41,8 @@ namespace ChuMeng
         public KBEngine.MessageHandler msgHandler;
         public System.Action<RemoteClientEvent> evtHandler;
 
-        public RemoteClient(IMainLoop loop) {
+        public RemoteClient(IMainLoop loop)
+        {
             msgReader.msgHandle = HandleMsg;
             msgReader.mainLoop = loop; 
         }
@@ -49,13 +51,16 @@ namespace ChuMeng
         /// 当消息处理器已经退出场景则关闭网络连接 
         /// </summary>
         /// <param name="packet">Packet.</param>
-        void HandleMsg(KBEngine.Packet packet) {
+        void HandleMsg(KBEngine.Packet packet)
+        {
             //Debug.LogError("HandlerMsg "+packet.protoBody);
-            Log.Net("HandlerMsg "+packet.protoBody);
+            Log.Net("HandlerMsg " + packet.protoBody);
 
-            if(msgHandler != null) {
+            if (msgHandler != null)
+            {
                 msgHandler(packet);
-            }else {
+            } else
+            {
                 Close();
             }
         }
@@ -77,37 +82,50 @@ namespace ChuMeng
                 Close();
             }
         }
-        public void StartReceive() {
+
+        public void StartReceive()
+        {
             Debug.LogError("StartReceive");
-            try {
+            try
+            {
                 mSocket.BeginReceive(mTemp, 0, mTemp.Length, SocketFlags.None, OnReceive, null);
-            }catch(Exception exception) {
+            } catch (Exception exception)
+            {
                 Debug.LogError(exception.ToString());
                 Close();
             }
         }
 
-        void OnReceive(IAsyncResult result) {
+        void OnReceive(IAsyncResult result)
+        {
             int bytes = 0;
-            try {
-                if(mSocket == null || !mSocket.Connected) {
-                }else {
+            try
+            {
+                if (mSocket == null || !mSocket.Connected)
+                {
+                } else
+                {
                     bytes = mSocket.EndReceive(result);
                 }
-            }catch(Exception exception){
+            } catch (Exception exception)
+            {
                 Debug.LogError(exception.ToString());
                 Close();
             }
             //Debug.LogError("OnReceive "+bytes);
             //Log.Net("OnReceive: "+bytes);
-            if(bytes <= 0){
+            if (bytes <= 0)
+            {
                 Close();
-            }else {
+            } else
+            {
                 uint num = (uint)bytes;
                 msgReader.process(mTemp, num, null);
-                try {
+                try
+                {
                     mSocket.BeginReceive(mTemp, 0, mTemp.Length, SocketFlags.None, OnReceive, null);
-                }catch(Exception exception){
+                } catch (Exception exception)
+                {
                     Debug.LogError(exception.ToString());
                     Close();
                 }
@@ -145,21 +163,27 @@ namespace ChuMeng
         }
 
         //事件的Evt处理机制已经删除掉了
-        void SendEvt(RemoteClientEvent evt) {
-            Debug.LogError("SendEvt: "+evt);
-            if(evtHandler != null) {
+        void SendEvt(RemoteClientEvent evt)
+        {
+            Debug.LogError("SendEvt: " + evt);
+            if (evtHandler != null)
+            {
                 var eh = evtHandler;
-                msgReader.mainLoop.queueInLoop(()=>{
+                msgReader.mainLoop.queueInLoop(() =>
+                {
                     eh(evt);
                 });
-            }else {
+            } else
+            {
                 Close();
             }
         }
 
-        public void Disconnect() {
+        public void Disconnect()
+        {
             Close();
         }
+
         void Close()
         {
             if (IsClose)
@@ -167,24 +191,14 @@ namespace ChuMeng
                 return;
             }
             Debug.LogError("CloseRemoteClient");
-            /*
-            if (mSocket != null && mSocket.Connected)
-            {
-                try
-                {
-                    mSocket.Shutdown(SocketShutdown.Both);
-                    mSocket.Close();
-                } catch (Exception exception)
-                {
-                    Debug.LogError(exception.ToString());
-                }
-            }
-            */
             if (mSocket != null)
             {
                 try
                 {
-                    mSocket.Shutdown(SocketShutdown.Both);
+                    if (mSocket != null && mSocket.Connected)
+                    {
+                        mSocket.Shutdown(SocketShutdown.Both);
+                    }
                     mSocket.Close();
                 } catch (Exception exception)
                 {
@@ -194,7 +208,8 @@ namespace ChuMeng
             mSocket = null;
             IsClose = true;
 
-            if(evtHandler != null) {
+            if (evtHandler != null)
+            {
                 SendEvt(RemoteClientEvent.Close);
             }
             evtHandler = null;
@@ -208,26 +223,33 @@ namespace ChuMeng
             {
                 Debug.LogError("ConnectError");
                 Close();
-            }else {
+            } else
+            {
                 StartReceive();
             }
         }
-        private void SendTimeOut(object data) {
-            try {
+
+        private void SendTimeOut(object data)
+        {
+            try
+            {
                 IAsyncResult ret = data as IAsyncResult;
-                if(!ret.AsyncWaitHandle.WaitOne(3000)) {
+                if (!ret.AsyncWaitHandle.WaitOne(3000))
+                {
                     Debug.LogError("SendTimeOut");
                     Close();
                 }
-            }catch(Exception e) {
+            } catch (Exception e)
+            {
                 Debug.LogError(e.ToString());
             }
         }
+
         public void Send(byte[] data)
         {
             lock (msgBuffer)
             {
-                var mb = new MsgBuffer(){position=0, buffer=data};
+                var mb = new MsgBuffer(){ position = 0, buffer = data };
                 msgBuffer.Add(mb);
                 if (msgBuffer.Count == 1)
                 {

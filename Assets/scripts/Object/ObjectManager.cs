@@ -670,6 +670,10 @@ namespace ChuMeng
             NpcAttribute npc = NGUITools.AddMissingComponent<NpcAttribute>(g);
             npc.spawnTrigger = spawn.gameObject;
 
+            g.transform.parent = transform;
+            g.tag = GameTag.Enemy;
+            g.layer = (int)GameLayer.Npc;
+
             var type = Type.GetType("ChuMeng." + unitData.AITemplate);
             var t = typeof(NGUITools);
             var m = t.GetMethod("AddMissingComponent");
@@ -677,9 +681,6 @@ namespace ChuMeng
             var geMethod = m.MakeGenericMethod(type);
             geMethod.Invoke(null, new object[]{ g });// as AIBase;
 
-            g.transform.parent = transform;
-            g.tag = GameTag.Enemy;
-            g.layer = (int)GameLayer.Npc;
 
             var netView = g.GetComponent<KBEngine.KBNetworkView>();
 

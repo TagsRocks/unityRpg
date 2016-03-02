@@ -5,9 +5,13 @@ namespace ChuMeng
 {
     public class BlockDead : DeadState
     {
+        public System.Action deadCallback;
         public override void EnterState()
         {
             base.EnterState();
+            if(deadCallback != null) {
+                deadCallback();
+            }
             Util.SetLayer(GetAttr().gameObject, GameLayer.IgnoreCollision);
 
             //GetAttr().animation.CrossFade("opening");

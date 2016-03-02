@@ -55,6 +55,11 @@ namespace ChuMeng
             this.enabled = false;
         }
 
+        public void ShowBar() {
+            bar.SetActive(true);
+            this.enabled = true;
+        }
+
         void SetTeamColor()
         {
             var attr = GetComponent<NpcAttribute>();

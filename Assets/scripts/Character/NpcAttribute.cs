@@ -84,10 +84,15 @@ namespace ChuMeng
                 _sb = value;
                 if(!_sb) {
                     var bb = GetComponent<BloodBar>();
-                    //GameObject.Destroy(bb);
                     if(bb != null) {
                         bb.HideBar();
                     }
+                }else {
+                    var bb = GetComponent<BloodBar>();
+                    if(bb != null) {
+                        bb.ShowBar();
+                    }
+
                 }
             }
         }
