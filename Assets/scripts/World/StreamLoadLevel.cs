@@ -13,7 +13,7 @@ namespace ChuMeng
         public bool useOtherZone = false;
         public int zoneId;
         public bool flip = false;
-    
+
         public LevelConfig(string r, int x1, int y1)
         {
             room = r;
@@ -22,9 +22,9 @@ namespace ChuMeng
         }
     }
 
-/// <summary>
-/// 流式关卡加载器，分Room加载
-/// </summary>
+    /// <summary>
+    /// 流式关卡加载器，分Room加载
+    /// </summary>
     public class StreamLoadLevel : MonoBehaviour
     {
         int currentRoomIndex = -1;
@@ -32,11 +32,13 @@ namespace ChuMeng
         List<int> loadedRoom = new List<int>();
         Dictionary<int, GameObject> loadedZone = new Dictionary<int, GameObject>();
         public static StreamLoadLevel Instance = null;
-       
-        public  bool InitYet {
+
+        public  bool InitYet
+        {
             private set;
             get;
         }
+
         /// <summary>
         /// 加载第一个房间
         /// </summary>
@@ -54,7 +56,7 @@ namespace ChuMeng
             var firstOffset = new Vector3(first.x * 96, 9, first.y * 96 + 48);
             root.transform.localPosition = firstOffset;
 
-            Log.Sys("First Room NamePices "+first.room);
+            Log.Sys("First Room NamePices " + first.room);
             var roomConfig = RoomList.GetStaticObj(first.type, first.room);
             yield return StartCoroutine(LoadRoom(roomConfig));
             yield return null;
@@ -63,11 +65,14 @@ namespace ChuMeng
             yield return StartCoroutine(LoadZone());
 
             var zone = loadedZone [currentRoomIndex];
+
+            //单一出生点位置
             var zoneConfigStart = zone.transform.FindChild("PlayerStart");
-
-            var g = new GameObject("PlayerStart");
-            g.transform.position = zoneConfigStart.transform.position; 
-
+            if (zoneConfigStart != null)
+            {
+                var g = new GameObject("PlayerStart");
+                g.transform.position = zoneConfigStart.transform.position; 
+            }
             InitYet = true;
         }
 
@@ -101,15 +106,17 @@ namespace ChuMeng
             var ze = zone.AddComponent<ZoneEntityManager>();
 
             var world = WorldManager.worldManager.GetActive();
-            Log.Sys("WorldIs Net: "+world.IsNet+" act "+world+" pro ");
-            if(world.IsNet) {
+            Log.Sys("WorldIs Net: " + world.IsNet + " act " + world + " pro ");
+            if (world.IsNet)
+            {
                 //pro.gameObject.AddComponent<TestDisable>();
                 //pro.gameObject.SetActive(false);
                 ze.DisableProperties();
             }
 
-            if(zone == null){
-                Debug.LogError("LoadZone Null "+zone+" config "+zoneConfig);
+            if (zone == null)
+            {
+                Debug.LogError("LoadZone Null " + zone + " config " + zoneConfig);
             }
 
             zone.transform.parent = root.transform;
@@ -124,8 +131,9 @@ namespace ChuMeng
         /// 网络关卡的话加载关卡的动态Entity资源  
         /// </summary>
         /// <returns>The zone network.</returns>
-        public void  LoadZoneNetwork() {
-            var zone = loadedZone[0];
+        public void  LoadZoneNetwork()
+        {
+            var zone = loadedZone [0];
             //var pro = Util.FindChildRecursive(zone.transform, "properties");
             var ze = zone.GetComponent<ZoneEntityManager>();
             ze.EnableProperties();
@@ -133,7 +141,7 @@ namespace ChuMeng
         }
 
 
-        IEnumerator LoadRoom(GameObject roomConfig, bool slowly=false)
+        IEnumerator LoadRoom(GameObject roomConfig, bool slowly = false)
         {
 
             var pieces = roomConfig.transform.Find("RoomPieces_data");
@@ -166,8 +174,10 @@ namespace ChuMeng
 
 
         }
+
         const int batchNum = 10;
-        IEnumerator LoadLight(GameObject roomConfig, bool slowly=false)
+
+        IEnumerator LoadLight(GameObject roomConfig, bool slowly = false)
         {
             var light = roomConfig.transform.Find("light_data");
             var rd = light.GetComponent<RoomData>();
@@ -177,7 +187,7 @@ namespace ChuMeng
             Util.InitGameObject(rootOfLight);
             
             //Batch Rooom
-            int c= 0;
+            int c = 0;
             foreach (var p in  rd.Prefabs)
             {
                 var r = GameObject.Instantiate(p.prefab) as GameObject;
@@ -189,7 +199,7 @@ namespace ChuMeng
                 c++;
                 if (slowly && c > batchNum)
                 {
-                    c=0;
+                    c = 0;
                     yield return null;
                 }
             }
@@ -197,7 +207,7 @@ namespace ChuMeng
             yield return null;
         }
 
-        IEnumerator LoadProps(GameObject roomConfig, bool slowly=false)
+        IEnumerator LoadProps(GameObject roomConfig, bool slowly = false)
         {
             var light = roomConfig.transform.Find("Props_data");
             var rd = light.GetComponent<RoomData>();
@@ -221,7 +231,7 @@ namespace ChuMeng
                 c++;
                 if (slowly && c > batchNum)
                 {
-                    c=0;
+                    c = 0;
                     yield return null;
                 }
             }
@@ -262,9 +272,10 @@ namespace ChuMeng
 
             var first = configLists [currentRoomIndex];
             var firstOffset = new Vector3(first.x * 96, 9, first.y * 96 + 48);
-            Log.Sys("FirstRoom "+first.room);
+            Log.Sys("FirstRoom " + first.room);
             root.transform.localPosition = firstOffset;
-            if(first.flip) {
+            if (first.flip)
+            {
                 root.transform.localScale = new Vector3(-1, 1, 1);
             }
             
@@ -293,6 +304,7 @@ namespace ChuMeng
             StartCoroutine(ReleaseOldRoom());
             yield return StartCoroutine(LoadRoomNeibor());
         }
+
         /// <summary>
         /// 切换房间之后，进入新的房间并且激活了这个房间的怪物则释放旧的房间，同时预先加载下一个房间
         /// </summary>
@@ -307,27 +319,33 @@ namespace ChuMeng
                 var g = GameObject.Find("Root_" + toRemove);
                 //GameObject.Destroy(g);
                 List<GameObject> childs = new List<GameObject>();
-                foreach(Transform t in g.transform){
+                foreach (Transform t in g.transform)
+                {
                     childs.Add(t.gameObject);
                     //yield return null;
                 }
                 int c = 0;
-                for(int i =0; i < childs.Count; i++){
+                for (int i = 0; i < childs.Count; i++)
+                {
                     List<GameObject> subChild = new List<GameObject>();
-                    var cc = childs[i].transform.childCount;
-                    var ci = childs[i].transform;
-                    for(int j = 0; j < cc; j++){
+                    var cc = childs [i].transform.childCount;
+                    var ci = childs [i].transform;
+                    for (int j = 0; j < cc; j++)
+                    {
                         subChild.Add(ci.GetChild(j).gameObject);
                         //yield return null;
                         c++;
-                        if(c > batchNum){
+                        if (c > batchNum)
+                        {
                             c = 0;
                             yield return null;
                         }
                     }
-                    for(int j = 0; j < subChild.Count; j++){
-                        GameObject.Destroy(subChild[j]);
-                        if(c > batchNum) {
+                    for (int j = 0; j < subChild.Count; j++)
+                    {
+                        GameObject.Destroy(subChild [j]);
+                        if (c > batchNum)
+                        {
                             c = 0;
                             yield return null;
                         }
@@ -353,7 +371,8 @@ namespace ChuMeng
        
         }
 
-        public List<LevelConfig> configLists{
+        public List<LevelConfig> configLists
+        {
             private set;
             get;
         }

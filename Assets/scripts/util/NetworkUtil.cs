@@ -50,5 +50,10 @@ namespace ChuMeng
             cg.Cmd = "RemoveEntity";
             NetworkUtil.Broadcast(cg);
         }
+        public static Vector3 GetStartPos() {
+            var zone = BattleManager.battleManager.GetZone().GetComponent<ZoneEntityManager>();
+            var me = ObjectManager.objectManager.GetMyAttr().GetNetView().GetServerID();
+            return zone.GetRandomStartPos(me);
+        }
     }
 }

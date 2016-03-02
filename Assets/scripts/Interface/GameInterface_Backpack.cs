@@ -42,12 +42,16 @@ namespace ChuMeng
             var me = ObjectManager.objectManager.GetMyPlayer().GetComponent<AIBase>();
             if (me.GetAI().state.type != AIStateEnum.IDLE)
             {
-                //WindowMng.windowMng.ShowNotifyLog("只有在安全的地方才能使用物品");
                 me.GetComponent<MyAnimationEvent>().InsertMsg(new MyAnimationEvent.Message(MyAnimationEvent.MsgType.IDLE));
-                //return;
             }
-
             me.GetComponent<NpcAttribute>().StartCoroutine(UseItemCor(itemId));
+        }
+
+        public static void ClearDrug() {
+            var itemId = (int)ItemData.ItemID.DRUG;
+            var backPackId = BackPack.backpack.GetItemId(itemId);
+            var count = BackPack.backpack.GetItemCount((int)ItemData.GoodsType.Props, itemId);
+            PlayerData.ReduceItem(backPackId, count);
         }
 
         static System.Collections.IEnumerator UseItemCor(int itemId)

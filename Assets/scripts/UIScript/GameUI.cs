@@ -59,7 +59,7 @@ namespace ChuMeng
             }); 
         }
         void OnBottle(GameObject g){
-            GameInterface_Backpack.UseItem(101);
+            GameInterface_Backpack.UseItem((int)ItemData.ItemID.DRUG);
         }
 
         void UpdateFrame(){

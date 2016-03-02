@@ -6,6 +6,7 @@ namespace ChuMeng
 {
     public class ZoneEntityManager : MonoBehaviour
     {
+        private Transform  allPlayerStart;
         public GameObject properties{
             private set;
             get;
@@ -19,6 +20,16 @@ namespace ChuMeng
             foreach(var s in allChest) {
                 s.InitSpawnId();
             }
+
+            allPlayerStart = transform.Find("AllPlayerStart");
+        }
+
+        public Vector3 GetRandomStartPos(int id) {
+            var count = allPlayerStart.childCount;
+            var n = id%count;
+            var cd = allPlayerStart.GetChild(n);
+            Log.Sys("GetRandomStartPos: "+id+" cd "+cd.transform.position);
+            return cd.transform.position;
         }
 
         public void EnableProperties()

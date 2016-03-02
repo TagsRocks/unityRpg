@@ -462,9 +462,14 @@ namespace ChuMeng
 
         void SetStartPointPosition(GameObject player)
         {
-            var startPoint = GameObject.Find("PlayerStart");
-            player.transform.position = startPoint.transform.position;
-            player.transform.forward = startPoint.transform.forward;
+            if(NetworkUtil.IsNet()) {
+                var pos = NetworkUtil.GetStartPos();
+                player.transform.position = pos;
+            }else {
+                var startPoint = GameObject.Find("PlayerStart");
+                player.transform.position = startPoint.transform.position;
+                player.transform.forward = startPoint.transform.forward;
+            }
         }
 
         void SetCityStartPos(GameObject player)
@@ -612,7 +617,10 @@ namespace ChuMeng
         {
             if (myPlayer != null)
             {
+                Log.Sys("RefreshMyServerId: "+id);
                 myPlayer.ID = id;
+                var startPos = NetworkUtil.GetStartPos();
+                GetMyPlayer().transform.position = startPos;
             }
         }
 

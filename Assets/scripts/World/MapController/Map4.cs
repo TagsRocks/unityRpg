@@ -4,7 +4,6 @@ using System;
 
 namespace ChuMeng
 {
-    
 
     public class Map4 :CScene
     {

@@ -36,6 +36,8 @@ namespace ChuMeng
 
         void Awake()
         {
+            GameInterface_Backpack.ClearDrug();
+
             ml = gameObject.AddComponent<MainThreadLoop>();
 
             TextAsset bindata = Resources.Load("Config") as TextAsset;

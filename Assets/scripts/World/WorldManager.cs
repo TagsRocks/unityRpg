@@ -61,53 +61,6 @@ namespace ChuMeng
 		public bool IsPeaceLevel() {
 			return sceneType == SceneType.City;
 		}
-        /*
-        /// <summary>
-        /// 编辑器测试用的进入场景的初始化流程
-        /// </summary>
-        public IEnumerator TestInitScene(){
-            var sdata = CopyController.copyController.GetLevelInfo (3);
-            sdata.isCity = false;
-            //activeScene = new CScene(sdata);
-            activeScene = CScene.CreateScene(sdata);
-           
-            if (CameraController.cameraController == null ) {
-                Log.Sys("CreateMainCamera");
-                var mc = Resources.Load<GameObject> ("levelPublic/MainCamera");
-                //var m = 
-                Instantiate (mc);// as GameObject;
-                //var lightMapCamera = 
-                Instantiate (Resources.Load<GameObject> ("LightCamera"));// as GameObject;
-            }
-            Log.Sys("MainCamera");
-
-            MyEventSystem.myEventSystem.PushEvent (MyEvent.EventType.EnterScene);
-            yield return null;
-            var g = new GameObject("StreamLoadLevel");
-            var loader = g.AddComponent<StreamLoadLevel>();
-            var water = g.AddComponent<WaterEnvLoader>();
-            var netLoader = g.AddComponent<NetworkLoadZone>();
-
-            yield return loader.StartCoroutine(loader.LoadFirstRoom());
-
-            var start = GameObject.Find("PlayerStart");
-            CameraController.cameraController.TracePositon(start.transform.position);
-
-            CreateMyPlayer();
-            //Start Generate Monster
-            station = WorldStation.Enter;
-            NetDebug.netDebug.AddConsole ("Init Player Over Next");
-
-
-            CreateUI ();
-            //场景其它初始化交给LevelInit
-            NetDebug.netDebug.AddConsole ("WorldManager:: InitLevel");
-            CreateLevelInit ();
-            NetDebug.netDebug.AddConsole ("Init World Finish");
-
-            loader.StartCoroutine(loader.LoadRoomNeibor());
-        }
-        */
 
 		//执行进入场景的代码逻辑
 		IEnumerator EnterScene(GCEnterScene sceneData) {
