@@ -20,6 +20,7 @@ namespace ChuMeng
     [RequireComponent(typeof(AnimationController))]
     [RequireComponent(typeof(SkillCombineBuff))]
     [RequireComponent(typeof(MySelfAttributeSync))]
+    [RequireComponent(typeof(PlayerSyncToServer))]
     public class PlayerAIController : AIBase
     {
         void Awake()

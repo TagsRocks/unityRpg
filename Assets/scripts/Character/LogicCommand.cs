@@ -168,22 +168,11 @@ namespace ChuMeng
                 yield return null;
             }
 
-            //两个阶段问题
-            //移动到目标和确保朝向一致性
-            //方向平滑过渡
-            /*
-            while(currentLogicCommand != null) {
-                var myDir = transform.localRotation.eulerAngles.y;
-                var tarDir = currentLogicCommand.dir;
-                var dd = tarDir - myDir;
-            }
-            */
             //简单实现
             if(currentLogicCommand != null) {
                 transform.localRotation = Quaternion.Euler(new Vector3(0, currentLogicCommand.dir, 0));
             }
             //再次检测Move位置状态，如果不正常则重新开始
-
             currentLogicCommand = null;
         }
 

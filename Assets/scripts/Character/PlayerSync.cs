@@ -29,12 +29,16 @@ namespace ChuMeng
 		 */
         public void NetworkMove(AvatarInfo info)
         {
-            var mvTarget = new Vector3(info.X / 100.0f, info.Y / 100.0f + 0.2f, info.Z / 100.0f);
-            var cmd = new ObjectCommand();
-            cmd.targetPos = mvTarget;
-            cmd.dir = info.Dir;
-            cmd.commandID = ObjectCommand.ENUM_OBJECT_COMMAND.OC_MOVE;
-            GetComponent<LogicCommand>().PushCommand(cmd);
+            if (info.HasX)
+            {
+                var mvTarget = new Vector3(info.X / 100.0f, info.Y / 100.0f + 0.2f, info.Z / 100.0f);
+                var cmd = new ObjectCommand();
+                cmd.targetPos = mvTarget;
+                cmd.dir = info.Dir;
+                cmd.commandID = ObjectCommand.ENUM_OBJECT_COMMAND.OC_MOVE;
+                GetComponent<LogicCommand>().PushCommand(cmd);
+            }
+
             if (info.HasHP)
             {
                 GetComponent<NpcAttribute>().SetHPNet(info.HP);
@@ -43,6 +47,9 @@ namespace ChuMeng
             if (info.HasTeamColor)
             {
                 GetComponent<NpcAttribute>().SetTeamColorNet(info.TeamColor);
+            }
+            if(info.HasNetSpeed) {
+                GetComponent<NpcAttribute>().NetSpeed = info.NetSpeed/100.0f;
             }
         }
 

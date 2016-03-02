@@ -291,7 +291,12 @@ namespace ChuMeng
 
         void SyncMyPos()
         {
-            NetDateInterface.SyncPosDirHP();
+            var me = ObjectManager.objectManager.GetMyPlayer();
+            if(me != null) {
+                var sync = me.GetComponent<PlayerSyncToServer>();
+                sync.SyncAttribute();
+            }
+            //NetDateInterface.SyncPosDirHP();
             NetDateInterface.SyncMonster();
         }
 
@@ -324,6 +329,7 @@ namespace ChuMeng
 
             var me = ObjectManager.objectManager.GetMyPlayer();
             var pos = me.transform.position;
+            var dir = (int)me.transform.localRotation.eulerAngles.y;
 
             var cg = CGPlayerCmd.CreateBuilder();
             cg.Cmd = "InitData";
@@ -331,6 +337,8 @@ namespace ChuMeng
             ainfo.X = (int)(pos.x * 100);
             ainfo.Z = (int)(pos.z * 100);
             ainfo.Y = (int)(pos.y * 100);
+            ainfo.Dir = dir;
+
             var pinfo = ServerData.Instance.playerInfo;
             foreach (var d in pinfo.DressInfoList)
             {
@@ -340,6 +348,9 @@ namespace ChuMeng
             ainfo.HP = ObjectManager.objectManager.GetMyProp(CharAttribute.CharAttributeEnum.HP);
 
             cg.AvatarInfo = ainfo.Build();
+            var sync = me.GetComponent<PlayerSyncToServer>();
+            sync.InitData(cg.AvatarInfo);
+
             var data = KBEngine.Bundle.GetPacket(cg);
             rc.Send(data);
         }
