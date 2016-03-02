@@ -130,6 +130,19 @@ namespace ChuMeng
         {
             TeamColor = teamColor;
             MyEventSystem.PushLocalEventStatic(GetLocalId(), MyEvent.EventType.TeamColor);
+            SetTeamShader();
+        }
+
+        void SetTeamShader() {
+            var myPlayer = ObjectManager.objectManager.GetMyAttr();
+            Log.Sys("SetTeamShader: "+myPlayer.TeamColor+" tc "+TeamColor);
+            if(myPlayer.TeamColor != TeamColor) {
+                var renders = gameObject.GetComponentsInChildren<SkinnedMeshRenderer>();
+                var shaderRes = Resources.Load<ShaderResource> ("levelPublic/ShaderResource");
+                foreach(var r in renders) {
+                    r.material.shader = Shader.Find ("Custom/playerHideShader");
+                }
+            }
         }
 
         public void SetIsMasterNet(bool isMaster)
