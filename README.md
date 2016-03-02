@@ -91,3 +91,6 @@ http://www.taikr.com/course/297
 使用git的同学 可以使用 sourceTree 客户端下载代码
 
 使用svn的同学 可以使用 乌龟svn 通过svn://git.oschina.net/liyonghelpme/unityRpg 下载
+
+##git 使用教程
+http://www.cnblogs.com/AijunHe/p/5192379.html
