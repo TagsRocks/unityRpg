@@ -416,6 +416,20 @@ namespace ChuMeng
             ServerBundle.SendImmediatePush(no);
         }
 
+        public static void ResetSkillLevel() {
+            var pinfo = ServerData.Instance.playerInfo;
+            if(pinfo.HasSkill) {
+                foreach (var s in pinfo.Skill.SkillInfosList)
+                {
+                    s.Level = 0;
+                    var activeSkill = GCPushActivateSkill.CreateBuilder();
+                    activeSkill.SkillId = s.SkillInfoId;
+                    activeSkill.Level = 0;
+                    ServerBundle.SendImmediatePush(activeSkill);
+                }
+            }
+        }
+
         public static void LevelUpSkill(int skId)
         {
             var pinfo = ServerData.Instance.playerInfo;

@@ -64,6 +64,8 @@ namespace ChuMeng
             sync.Key = (int)CharAttribute.CharAttributeEnum.LEVEL;
             sync.Value = 1;
             KBEngine.Bundle.sendImmediate(sync);
+
+
         }
 
 

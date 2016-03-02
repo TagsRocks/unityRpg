@@ -466,9 +466,13 @@ namespace ChuMeng
             return GetComponent<BuffComponent>().GetSpeedCoff()+NetSpeed;
         }
 
+        public float ThrowSpeed = 0;
+        public void AddThrowSpeed(float v) {
+            ThrowSpeed += v;
+        }
         public float GetSpeedCoff()
         {
-            return GetComponent<BuffComponent>().GetSpeedCoff() ;
+            return GetComponent<BuffComponent>().GetSpeedCoff()+ThrowSpeed;
         }
 
         public int GetCriticalRate()
