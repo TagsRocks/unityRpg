@@ -457,13 +457,13 @@ namespace ChuMeng
             return d;
         }
 
-        public float NetSpeed = 1;
+        public float NetSpeed = 0;
         public void AddNetSpeed(float v) {
             NetSpeed += v;
         }
 
         public float GetMoveSpeedCoff() {
-            return GetComponent<BuffComponent>().GetSpeedCoff() * NetSpeed;
+            return GetComponent<BuffComponent>().GetSpeedCoff()+NetSpeed;
         }
 
         public float GetSpeedCoff()

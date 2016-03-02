@@ -68,7 +68,7 @@ namespace ChuMeng
                     ObjectManager.objectManager.GetMyAttr().AddMpMax(20);
                     WindowMng.windowMng.ShowNotifyLog("MP上限增加");
                 }else if(itemData.UnitType == ItemData.UnitTypeEnum.XieZi_DRUG) {
-                    ObjectManager.objectManager.GetMyAttr().AddNetSpeed(0.5f); 
+                    ObjectManager.objectManager.GetMyAttr().AddNetSpeed(0.1f); 
                     WindowMng.windowMng.ShowNotifyLog("速度提升");
                 }
                 else {
