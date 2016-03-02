@@ -158,7 +158,8 @@ namespace ChuMeng
 					return (UnitTypeEnum)propsConfig.propsType;
 				}
 				Log.Important ("Not a Props " + ItemName);
-				throw new System.NotSupportedException ("Not a Props");
+				//throw new System.NotSupportedException ("Not a Props");
+                return UnitTypeEnum.None;
 			}
 		}
 

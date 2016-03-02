@@ -19,6 +19,11 @@ namespace ChuMeng
     /// </summary>
     public class SkillData
     {
+        public enum SkillConstId {
+            KnockBack = 140,
+            AddMP = 150,
+        }
+
         SkillConfigData skillConfig;
         SkillEffectConfigData effectConfig;
         public string Sound {

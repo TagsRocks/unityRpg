@@ -20,6 +20,15 @@ namespace ChuMeng
             ServerBundle.SendImmediatePush(push);
         }
 
+        public static void SetLevel(int v) {
+            var pinfo = ServerData.Instance.playerInfo;
+            pinfo.Roles.Level = v;
+        
+            var push = GCPushLevel.CreateBuilder();
+            push.Level = pinfo.Roles.Level;
+            ServerBundle.SendImmediatePush(push);
+        }
+
         public static void AddLevel(int add)
         {
             Log.Net("AddLevel " + add);
@@ -289,7 +298,7 @@ namespace ChuMeng
                 Log.Sys("AddItemInStack");
                 foreach (var p in pinfo.PackInfoList)
                 {
-                    if (p.PackEntry.BaseId == itemId)
+                    if (p.PackEntry.BaseId == itemId && p.PackEntry.GoodsType == (int)ItemData.GoodsType.Props)
                     {
                         pinfo.PackInfoList.Remove(p);
                         var newPkinfo = PackInfo.CreateBuilder(p);
@@ -638,6 +647,8 @@ namespace ChuMeng
             if (inpb.Key == (int)CharAttribute.CharAttributeEnum.EXP)
             {
                 pinfo.Exp = inpb.Value;
+            }else if(inpb.Key == (int)CharAttribute.CharAttributeEnum.LEVEL) {
+                SetLevel(inpb.Value);
             }
         }
 

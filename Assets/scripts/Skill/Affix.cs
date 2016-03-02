@@ -45,7 +45,9 @@ namespace ChuMeng
             Blind, //玩家致盲
             Silent, //随机沉默
             WeaponBuff,//武器Buff
+            AddMP, //自动回复魔法的Buff
         }
+
 
         public EffectType effectType = EffectType.None;
         public float Duration = 10;//Buff Time 

@@ -44,7 +44,8 @@ namespace KBEngine
 				sendMsg.RemoveRange(0, sendMsg.Count-30);
 			}
 
-			Debug.Log ("Bundle:: 开始发送消息 Message is " + type.Name);
+            Log.Net ("Bundle:: 开始发送消息 Message is " + type.Name);
+
 			var pa = Util.GetMsgID (type.Name);
 			moduleId = pa.moduleId;
 			msgId = pa.messageId;

@@ -36,7 +36,7 @@ namespace ChuMeng
 
         void Awake()
         {
-            GameInterface_Backpack.ClearDrug();
+            StartCoroutine(InitGameData());
 
             ml = gameObject.AddComponent<MainThreadLoop>();
 
@@ -50,6 +50,20 @@ namespace ChuMeng
 
             state = WorldState.Connecting;
             StartCoroutine(InitConnect());
+        }
+
+        IEnumerator  InitGameData()
+        {
+            GameInterface_Backpack.ClearDrug();
+            yield return StartCoroutine(NetworkUtil.WaitForPlayer());
+            var me = ObjectManager.objectManager.GetMyPlayer();
+            GameInterface_Skill.AddSkillBuff(ObjectManager.objectManager.GetMyPlayer(), (int)SkillData.SkillConstId.AddMP, Vector3.zero);
+            var attr = me.GetComponent<NpcAttribute>();
+
+            var sync = CGSetProp.CreateBuilder();
+            sync.Key = (int)CharAttribute.CharAttributeEnum.LEVEL;
+            sync.Value = 1;
+            KBEngine.Bundle.sendImmediate(sync);
         }
 
 

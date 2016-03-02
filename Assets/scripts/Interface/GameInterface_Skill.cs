@@ -102,12 +102,14 @@ namespace ChuMeng
             UseSkill(skillData);
 
         }
+
         /// <summary>
         /// 本地使用技能同时通知代理
         /// 绕过LogicCommand 本地执行不需要LogicCommand队列 
         /// </summary>
         /// <param name="skillData">Skill data.</param>
-        static void UseSkill(SkillData skillData) {
+        static void UseSkill(SkillData skillData)
+        {
             ObjectManager.objectManager.GetMyPlayer().GetComponent<MyAnimationEvent>().OnSkill(skillData);
 
             NetDateInterface.FastMoveAndPos();
@@ -121,6 +123,15 @@ namespace ChuMeng
         public static void OnSkill(int skIndex)
         {
             var skillData = SkillDataController.skillDataController.GetShortSkillData(skIndex);
+            var curState = ObjectManager.objectManager.GetMyPlayer().GetComponent<AIBase>().GetAI().state;
+            //当前状态不能使用技能 或者已经在技能状态了不能连续点击
+            if(curState != null) {
+                var ret = curState.CheckNextState(AIStateEnum.CAST_SKILL);
+                if(!ret) {
+                    return;
+                }
+            }
+
             if (skillData != null)
             {
                 var mana = ObjectManager.objectManager.GetMyData().GetProp(CharAttribute.CharAttributeEnum.MP);
@@ -132,7 +143,6 @@ namespace ChuMeng
                 }
                 var npc = ObjectManager.objectManager.GetMyAttr();
                 npc.ChangeMP(-cost);
-                //ObjectManager.objectManager.GetMyPlayer().GetComponent<MyAnimationEvent>().OnSkill(skillData);
                 UseSkill(skillData);
             }
         }
@@ -152,6 +162,15 @@ namespace ChuMeng
         public static void UpdateShortcutsInfo(GCPushShortcutsInfo inpb)
         {
             SkillDataController.skillDataController.UpdateShortcutsInfo(inpb.ShortCutInfoList);
+        }
+
+        public static bool AddSkillBuff(GameObject who, int skillId, Vector3 pos)
+        {
+            var skill = Util.GetSkillData(skillId, 1);
+            var skillInfo = SkillLogic.GetSkillInfo(skill);
+            var evt = skillInfo.eventList [0];
+            var ret = who.GetComponent<BuffComponent>().AddBuff(evt.affix, pos);
+            return ret;
         }
     }
 }

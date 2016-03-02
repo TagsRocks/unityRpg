@@ -55,5 +55,15 @@ namespace ChuMeng
             var me = ObjectManager.objectManager.GetMyAttr().GetNetView().GetServerID();
             return zone.GetRandomStartPos(me);
         }
+
+        public static IEnumerator WaitForPlayer() {
+            while(true) {
+                var player = ObjectManager.objectManager.GetMyPlayer();
+                if(player != null){
+                    break;
+                }
+                yield return null;
+            }
+        }
     }
 }

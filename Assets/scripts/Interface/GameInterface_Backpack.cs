@@ -23,7 +23,9 @@ namespace ChuMeng
             var buyItem = CGBuyShopProps.CreateBuilder();
             buyItem.ShopId = itemId;
             buyItem.Count = 1;
-            KBEngine.Bundle.sendImmediate(buyItem);
+            //KBEngine.Bundle.sendImmediate(buyItem);
+            var data = buyItem.Build();
+            ServerPacketHandler.CGBuyShopProps.HandlePacket(data);
             return true;
         }
 
@@ -69,7 +71,8 @@ namespace ChuMeng
             Log.Sys("UseResult " + packet.packet.flag);
             if (packet.packet.responseFlag == 0)
             {
-                GameInterface_Skill.MeUseSkill(itemData.triggerBuffId);
+                //GameInterface_Skill.MeUseSkill(itemData.triggerBuffId);
+                GameInterface_Skill.AddSkillBuff(ObjectManager.objectManager.GetMyPlayer(), itemData.triggerBuffId, Vector3.zero);
             }
         }
 

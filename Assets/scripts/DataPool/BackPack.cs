@@ -272,7 +272,8 @@ namespace ChuMeng
         {
             for (int i = 0; i < SlotData.Count; i++)
             {
-                if (SlotData [i] != null && SlotData [i].itemData != null && SlotData [i].itemData.UnitType == ItemData.UnitTypeEnum.POTION)
+                var item = SlotData[i];
+                if (SlotData [i] != null && SlotData [i].itemData != null &&  item.goodsType == (int)ItemData.GoodsType.Props && SlotData [i].itemData.UnitType == ItemData.UnitTypeEnum.POTION)
                 {
                     return SlotData [i];
                 }

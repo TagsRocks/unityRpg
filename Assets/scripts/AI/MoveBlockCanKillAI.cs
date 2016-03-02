@@ -27,7 +27,7 @@ namespace ChuMeng
                         pos.z = myPos.z;
                     }
 
-                    var skill = Util.GetSkillData(140, 1);
+                    var skill = Util.GetSkillData((int)SkillData.SkillConstId.KnockBack, 1);
                     var skillInfo = SkillLogic.GetSkillInfo(skill);
                     var evt = skillInfo.eventList[0];
                     var ret = par.GetComponent<BuffComponent>().AddBuff(evt.affix, pos);
