@@ -48,6 +48,18 @@ namespace ChuMeng
         }
 
 
+        IEnumerator CheckFallDead()
+        {
+            while(true) {
+                var pos = transform.position;
+                if(pos.y <= -5) {
+                    break;
+                }
+                yield return new WaitForSeconds(1);
+            }
+
+            attribute.SetHPNet(0);
+        }
 
         List<Vector3> samplePos;
 
@@ -111,6 +123,7 @@ namespace ChuMeng
         {
             ai.ChangeState(AIStateEnum.IDLE);
             //StartCoroutine(CheckFall());
+            StartCoroutine(CheckFallDead());
         }
 
     }
