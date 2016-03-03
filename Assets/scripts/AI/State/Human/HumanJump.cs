@@ -27,35 +27,6 @@ namespace ChuMeng
             return false;
         }
 
-        string GetAttackAniName()
-        {
-            return "rslash_1";
-        }
-
-
-        IEnumerator WaitForAttackAnimation(Animation animation)
-        {
-            var rd = Random.Range(1, 3);
-            BackgroundSound.Instance.PlayEffect("onehandswinglarge" + rd);
-            var skillStateMachine = SkillLogic.CreateSkillStateMachine(GetAttr().gameObject, activeSkill.skillData, GetAttr().transform.position);
-            Log.AI("Wait For Combat Animation");
-            float passTime = 0;
-            do
-            {
-                if (passTime >= animation [GetAttackAniName()].length * 0.8f / animation [GetAttackAniName()].speed)
-                {
-                    break;
-                }
-                passTime += Time.deltaTime;
-
-                yield return null;
-            } while(!quit);
-            
-            Log.Ani("Animation is Playing stop ");
-            skillStateMachine.Stop();
-        }
-
-        SkillFullInfo activeSkill = null;
         private bool inSkill = false;
         IEnumerator SkillState() {
             if(inSkill) {
@@ -63,17 +34,9 @@ namespace ChuMeng
             }
 
             inSkill = true;
-
-            activeSkill = GetAttr().GetComponent<SkillInfoComponent>().GetActiveSkill();
-            var attackAniName = GetAttackAniName(); 
-            var realAttackTime = activeSkill.skillData.AttackAniTime / GetAttr().GetSpeedCoff();
-            var rate = GetAttr().animation [attackAniName].length / realAttackTime;
-            PlayAni(attackAniName, rate, WrapMode.Once);
-            yield return GetAttr().StartCoroutine(WaitForAttackAnimation(GetAttr().animation));
-
-            aiCharacter.SetRun();
-            //等动画彻底播放完成
-            yield return new WaitForSeconds(0.1f);
+            var js = new JumpSkillState();
+            aiCharacter.AddTempState(js);
+            yield return GetAttr().StartCoroutine(js.RunLogic());
             inSkill = false;
         }
 
@@ -81,7 +44,6 @@ namespace ChuMeng
         public override void EnterState()
         {
             base.EnterState();
-            activeSkill = null;
             aiCharacter.SetRun();
             var ab = GetAttr().GetComponent<AIBase>();
             ab.ignoreFallCheck = true;

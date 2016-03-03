@@ -36,24 +36,44 @@ namespace ChuMeng
             base.ExitState();
         }
 
+
+        public override bool CheckNextState(AIStateEnum next)
+        {
+            if(next == AIStateEnum.IDLE) {
+                return true;
+            }
+            if(next == AIStateEnum.COMBAT) {
+                GetAttr().StartCoroutine(SkillState());
+                return false;
+            }
+            return false;
+        }
+
+        private bool inSkill = false;
+        IEnumerator SkillState() {
+            if(inSkill) {
+                yield break;
+            }
+
+            inSkill = true;
+            var js = new JumpSkillState();
+            aiCharacter.AddTempState(js);
+            yield return GetAttr().StartCoroutine(js.RunLogic());
+            inSkill = false;
+        }
+      
+
+
         public override IEnumerator RunLogic()
         {
             var attr = GetAttr();
             var playerForward = GetAttr().transform.forward;
             var physics = GetAttr().GetComponent<PhysicComponent>();
-            //var forwardSpeed = RushSpeed;
             var upSpeed = UpSpeed;
 
             var controller = GetAttr().GetComponent<CharacterController>();
             var passTime = 0.0f;
             var soundYet = false;
-
-            /*
-            var playerMove = GetAttr ().GetComponent<MoveController> ();
-            var vcontroller = playerMove.vcontroller;
-            var camRight = playerMove.camRight;
-            var camForward = playerMove.camForward;
-            */
 
             while (!quit)
             {
@@ -61,35 +81,8 @@ namespace ChuMeng
                 {
                     break;
                 }
-                /*
-                float v = 0;
-                float h = 0;
-                if (vcontroller != null) {
-                    h = vcontroller.inputVector.x;//CameraRight 
-                    v = vcontroller.inputVector.y;//CameraForward
-                }
-
-                var targetDirection = h * camRight + v * camForward;
-                var curDir = playerForward;
-                //targetDirection.Normalize();
-                var addOrMinus = Vector3.Dot(curDir, targetDirection);
-                var val = Mathf.Abs(addOrMinus);
-                val = Mathf.Min(1, val);
-                var sign = Mathf.Sign(addOrMinus);
-                */
 
                 var forwardSpeed = attr.JumpForwardSpeed;
-                /*
-                if(sign > 0) {
-                    forwardSpeed += val*AddSpeed*Time.deltaTime;
-                    forwardSpeed = Mathf.Min(MaxSpeed, forwardSpeed);
-                }else {
-                    forwardSpeed -= val*AddSpeed*Time.deltaTime;
-                    forwardSpeed = Mathf.Max(0, forwardSpeed);
-                }
-                attr.JumpForwardSpeed = forwardSpeed;
-                */
-
                 var movement = playerForward * forwardSpeed + Vector3.up * upSpeed;
                 physics.JumpMove(movement);
 
@@ -121,7 +114,6 @@ namespace ChuMeng
                     }
                 }
             }
-
 
             aiCharacter.ChangeState(AIStateEnum.IDLE);
         }

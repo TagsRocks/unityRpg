@@ -57,6 +57,11 @@ namespace ChuMeng {
 			state.SetChar (this);
 		}
 
+        //增加临时状态
+        public void AddTempState(AIState state) {
+            state.SetChar(this);
+        }
+
 		public virtual IEnumerator ShowDead() {
 			yield return null;
 		}
