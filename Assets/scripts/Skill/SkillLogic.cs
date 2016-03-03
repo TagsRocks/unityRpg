@@ -107,8 +107,6 @@ namespace ChuMeng
         /// 首先判断场景模式：
         ///     普通场景
         ///     网络场景 
-        ///    
-        /// 
         /// </summary>
         /// <returns><c>true</c> if is enemy the specified a b; otherwise, <c>false</c>.</returns>
         /// <param name="a">The alpha component.</param>
@@ -121,14 +119,44 @@ namespace ChuMeng
                 if (a != b)
                 {
                     return true;
+                }else {
+                    return false;
                 }
             }
+
             var enemyTag = SkillLogic.GetEnemyTag(a.tag);
             if (b.tag == enemyTag)
             {
                 return true;
             }
             return false;
+        }
+
+        /// <summary>
+        /// 子弹在网络模式下面
+        /// 只伤害 敌方玩家
+        /// 不伤害 建筑物 和 我方玩家 
+        /// </summary>
+        /// <returns><c>true</c> if is enemy for bullet the specified a b; otherwise, <c>false</c>.</returns>
+        /// <param name="a">The alpha component.</param>
+        /// <param name="b">The blue component.</param>
+        public static bool IsEnemyForBullet(GameObject a, GameObject b) {
+            var scene = WorldManager.worldManager.GetActive();
+            if (scene.IsNet)
+            {
+                var aview = a.GetComponent<KBEngine.KBNetworkView>();
+                var bview = b.GetComponent<KBEngine.KBNetworkView>();
+                if(bview != null && bview.IsPlayer) {
+                    var battr = bview.GetComponent<NpcAttribute>();
+                    var aattr = aview.GetComponent<NpcAttribute>();
+                    if(aattr.TeamColor != battr.TeamColor) {
+                        return true;
+                    }
+                }
+                return false;
+            }else {
+                return IsEnemy(a, b);
+            }
         }
 
     }

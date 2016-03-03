@@ -110,7 +110,7 @@ namespace ChuMeng
         void Start()
         {
             ai.ChangeState(AIStateEnum.IDLE);
-            StartCoroutine(CheckFall());
+            //StartCoroutine(CheckFall());
         }
 
     }

@@ -85,7 +85,7 @@ namespace ChuMeng
 				//和多个不同的敌人目标碰撞
 				if (c != lastColobj) {
 					lastColobj = c;
-					OnTriggerEnter (c);
+                    HitSomething (c);
 					break;
 				}
 			}
@@ -96,15 +96,21 @@ namespace ChuMeng
         /// </summary>
         /// <param name="other">Other.</param>
 		void DoDamage(Collider other){
-            if (SkillLogic.IsEnemy(attacker, other.gameObject) && !missileData.DontHurtObject) {
+            var oattr = other.GetComponent<NpcAttribute>();
+            if(oattr == null) {
+                oattr = other.transform.parent.GetComponent<NpcAttribute>();
+            }
+
+            if (SkillLogic.IsEnemyForBullet(attacker, oattr.gameObject) && !missileData.DontHurtObject) {
                 if(!string.IsNullOrEmpty(skillData.HitSound)) {
                     BackgroundSound.Instance.PlayEffect(skillData.HitSound);
                 }
                 if(runner != null) {
-                    runner.DoDamage(other.gameObject);
+                    runner.DoDamage(oattr.gameObject);
                 }
 			}
 		}
+
 
 		void AOEDamage() {
 			Collider[] col = Physics.OverlapSphere (transform.position, missileData.AOERadius, SkillDamageCaculate.GetDamageLayer());
@@ -189,10 +195,10 @@ namespace ChuMeng
 		/*
          *客户端表现粒子和服务器计算伤害的数值分离开来
          */ 
-		void OnTriggerEnter (Collider other)
+		void HitSomething (Collider other)
 		{
 			Log.AI ("Bullet collider enemy " + other.name + " " + other.tag);
-            if (SkillLogic.IsEnemy(attacker, other.gameObject)) {
+            if (SkillLogic.IsEnemyForBullet(attacker, other.gameObject)) {
 				//攻击多个目标只释放一次 DieParticle
 				CreateHitParticle();
 
