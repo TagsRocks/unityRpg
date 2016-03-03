@@ -421,10 +421,10 @@ namespace ChuMeng
             if(pinfo.HasSkill) {
                 foreach (var s in pinfo.Skill.SkillInfosList)
                 {
-                    s.Level = 0;
+                    s.Level = 1;
                     var activeSkill = GCPushActivateSkill.CreateBuilder();
                     activeSkill.SkillId = s.SkillInfoId;
-                    activeSkill.Level = 0;
+                    activeSkill.Level = 1;
                     ServerBundle.SendImmediatePush(activeSkill);
                 }
             }

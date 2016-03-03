@@ -73,6 +73,7 @@ namespace ChuMeng
                 SendMoveCmd();
             }
 
+            var attr = GetComponent<NpcAttribute>();
             if (info.HasHP)
             {
                 GetComponent<NpcAttribute>().SetHPNet(info.HP);
@@ -85,6 +86,9 @@ namespace ChuMeng
             if (info.HasNetSpeed)
             {
                 GetComponent<NpcAttribute>().NetSpeed = info.NetSpeed / 100.0f;
+            }
+            if(info.HasThrowSpeed) {
+                attr.ThrowSpeed = info.ThrowSpeed/100.0f;
             }
         }
 

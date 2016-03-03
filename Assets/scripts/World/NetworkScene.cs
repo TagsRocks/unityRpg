@@ -65,7 +65,7 @@ namespace ChuMeng
             sync.Value = 1;
             KBEngine.Bundle.sendImmediate(sync);
 
-
+            PlayerData.ResetSkillLevel();
         }
 
 

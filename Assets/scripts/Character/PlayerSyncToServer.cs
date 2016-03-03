@@ -46,6 +46,12 @@ namespace ChuMeng
                 ainfo.NetSpeed = intNetSpeed;
                 curInfo.NetSpeed = intNetSpeed;
             }
+            var intThrowSpeed = (int)(meAttr.ThrowSpeed*100);
+            if(intThrowSpeed != lastInfo.ThrowSpeed) {
+                ainfo.ThrowSpeed = intThrowSpeed;
+                curInfo.ThrowSpeed = intThrowSpeed;
+            }
+
             lastInfo = AvatarInfo.CreateBuilder(curInfo).Build();
 
             var cg = CGPlayerCmd.CreateBuilder();
