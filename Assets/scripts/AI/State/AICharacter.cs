@@ -77,11 +77,11 @@ namespace ChuMeng {
 			
 			ani [name].speed = speed;
 			ani [name].wrapMode = wm;
+            ani[name].time = 0;
 			ani.Play (name);
 		}
 		public virtual void SetAni(string name, float speed, WrapMode wm) {
 			var ani = GetAttr ().animation;
-			//Log.AI ("Set Ani "+GetAttr().gameObject.name+" "+name);
 
 			ani[name].speed = speed;
 			ani[name].wrapMode = wm;

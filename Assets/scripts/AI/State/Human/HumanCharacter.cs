@@ -31,11 +31,11 @@ namespace ChuMeng
 			ani[name].wrapMode = wm;
 			GetAttr ().GetComponent<AnimationController> ().PlayAnimation (ani[name]);
 		}
+
 		public override void SetAni (string name, float speed, WrapMode wm)
 		{
 			Log.Ani ("SetAni "+name);
 			var ani = GetAttr ().animation;
-			//Log.AI ("Set Ani "+GetAttr().gameObject.name+" "+name);
 			
 			ani[name].speed = speed;
 			ani[name].wrapMode = wm;

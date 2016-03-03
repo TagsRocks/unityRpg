@@ -59,119 +59,39 @@ public class AnimationController : MonoBehaviour
 	//
 	protected virtual void LateUpdate ()
 	{
-		/*
-		if (gatherDeltaTimeAutomatically){
-			t = Mathf.Clamp (Time.deltaTime, 0, 0.066f);
-		}
-		// 
-		RunAnimations ();
-		*/
-		// 		
 		SampleTrail ();
 	}
-
-	//
 
 	public void AddTrail (WeaponTrail trail)
 	{
 		trails.Add (trail);
 	}
-	//
+    private string curAniName = null;
 	public void PlayAnimation (AnimationState state)
 	{
-		animation.CrossFade (state.name);
-
-	
-		// ** This function is exactly like the Unity Animation.Play() method
-		//
-		/*
-		for (int i = 0; i < fadingStates.Count; i++) {
-			fadingStates[i].weight = 0;
-			fadingStates[i].enabled = false;
-		}
-		fadingStates.Clear ();
-		//
-		if (currentState != null) {
-			currentState.enabled = false;
-			currentState.weight = 0;
-		}
-		currentState = state;
-		currentState.weight = 1;
-		currentState.time = currentStateTime = 0;
-		currentState.enabled = true;		
-*/
+        var aniName = state.name;
+        if(state.weight != 0) {
+            animation.PlayQueued(aniName);
+        }else {
+            curAniName = aniName;
+    		animation.CrossFade (state.name);
+        }
 	}
-	//	
+
 	public void CrossfadeAnimation (AnimationState state, float fadeTime)
 	{
-		// ** This function is exactly like the Unity Animation.Crossfade() method
 		Log.Ani ("currentState "+" "+state.name);
-		animation.CrossFade (state.name, fadeTime);
+        var aniName = state.name;
+        if(state.weight != 0){
+            animation.PlayQueued(aniName);
+        }else {
+            curAniName = aniName;
+            //animation.CrossFade (state.name);
+            animation.CrossFade (state.name, fadeTime);
+        }
 		return;
-
-		//Move Idle Attack Not as so
-        /*
-		if (currentState == state) {
-			return;
-		}
-        */
-
-        /*
-		animationFadeTime = fadeTime;
-		while (fadingStates.Count >= 2) {
-			var ani = fadingStates[0];
-			ani.weight = 0;
-			ani.enabled = false;
-			fadingStates.RemoveAt(0);
-		}
-        */
-
-		/*
-		for (int i = 0; i < fadingStates.Count; i++) {
-			if (state.name == fadingStates[i].name) {
-				fadingStates.RemoveAt (i);
-				if (currentState != null)
-					fadingStates.Add (currentState);
-				currentState = state;
-				return;
-			}
-		}
-		*/
-
-		//
-        /*
-		if (currentState != null)
-			fadingStates.Add (currentState);
-		Log.Ani ("CrossFade Ani ");
-		currentState = state;
-		currentState.weight = 0;
-		currentState.time = currentStateTime = 0;
-		currentState.enabled = true;
-        */
-		//
 	}
-	bool FadeOutAnimation (AnimationState state, float aI)
-	{
-		// ** This is called every sample to ease out a fading animation 
-		//
-		state.weight -= aI / animationFadeTime;
-		state.time += aI * state.speed;
-		// 		
-		if (state.weight <= 0) {
-			state.enabled = false;
-			return true;
-		}
-		return false;
-	}
-	//
-	void FadeInCurrentState (float aI)
-	{
-		// ** This is called every sample to ease in the current animation 
-		//
-		currentState.weight = Mathf.Clamp (currentState.weight + aI / animationFadeTime, 0, 1);
-		currentStateTime += aI * currentState.speed;
-		currentState.time = currentStateTime;
-	}
+
 
 	void SampleTrail() {
 
@@ -196,79 +116,5 @@ public class AnimationController : MonoBehaviour
 
 	}
 
-	//
-	void RunAnimations ()
-	{
-		//
-		if (t > 0) {
-			
-			// ** The Animation Controller also turns the character
-			// ** This is very important for smooth trails... Otherwise each frame the trail will jump to wherever the new rotation causes it to be
-			// ** This could be taken further and make the animation controller move the character as well... You might want to do this if you have a character that moves very quickly
-			//    
-			eulerAngles = transform.eulerAngles;
-			position = transform.position;
-			//
-			//
-			while (tempT < t) {
-				
-				//
-				// ** This loop runs slowly through the animation at very small increments
-				// ** a bit expensive, but necessary to achieve smoother than framerate weapon trails
-				//
-				tempT += animationIncrement;
-				// ** steps forward by a small increment
-				//
-				// ** Manually adjusts weights of all the animations that are applied 
-				//
-				for (int i = 0; i < fadingStates.Count; i++) {
-					if (FadeOutAnimation (fadingStates[i], animationIncrement)) {
-						fadingStates.RemoveAt (i);
-						i--;
-					}
-				}
-				if (currentState != null)
-					FadeInCurrentState (animationIncrement);
-				//
-				m = tempT / t;
-				transform.eulerAngles = new Vector3(Mathf.LerpAngle(lastEulerAngles.x, eulerAngles.x, m),Mathf.LerpAngle(lastEulerAngles.y, eulerAngles.y, m),Mathf.LerpAngle(lastEulerAngles.z, eulerAngles.z, m));
-				transform.position = Vector3.Lerp(lastPosition, position, m);
-				//
-				// ** Samples the animation at that moment
-				//
-				animation.Sample ();
-				//Log.Ani("Sample Player Animation");
-				//
-				// ** Adds the information to the WeaponTrail
-				//
-				//Log.Ani("trails "+trails.Count);
-				for (int j = 0; j < trails.Count; j++) {
-					if (trails[j].time > 0) {
-						trails[j].Itterate (Time.time - t + tempT);
-					} else {
-						trails[j].ClearTrail ();
-					}
-				}
-			}
-			//
-			// ** End of loop
-			//
-			tempT -= t;
-			//
-			// ** Sets the position and rotation to what they were originally
-			transform.position = position;
-			transform.eulerAngles = eulerAngles;
-			lastPosition = position;
-			lastEulerAngles = eulerAngles;
-			//
-			// ** Finally creates the meshes for the WeaponTrails (one per frame)
-			//
-			for (int j = 0; j < trails.Count; j++) {
-				if (trails[j].time > 0) {
-					trails[j].UpdateTrail (Time.time, t);
-				}
-			}
-		}
-	}
 	
 }

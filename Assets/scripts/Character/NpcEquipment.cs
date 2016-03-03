@@ -208,14 +208,15 @@ namespace ChuMeng
             }
         }
 
+        //不要刀光了
         protected override void OnLocalEvent(MyEvent evt)
         {
             if (evt.type == MyEvent.EventType.ShowWeaponTrail)
             {
-                NpcShowWeaponTrail(evt);
+                //NpcShowWeaponTrail(evt);
             } else if (evt.type == MyEvent.EventType.HideWeaponTrail)
             {
-                NpcHideWeaponTrail();
+                //NpcHideWeaponTrail();
             }
         }
 
