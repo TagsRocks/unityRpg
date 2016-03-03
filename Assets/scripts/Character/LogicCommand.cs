@@ -139,6 +139,10 @@ namespace ChuMeng
                 Vector3 tarPos = currentLogicCommand.targetPos;
                 float dx = tarPos.x - mypos.x;
                 float dz = tarPos.z - mypos.z;
+                var dy = tarPos.y-mypos.y;
+                if(Mathf.Abs(dy) > 0.5f) {
+                    transform.position = tarPos;
+                }
 
                 Vector2 vdir = new Vector2(dx, dz);
                 if (vdir.sqrMagnitude < 0.1f)
