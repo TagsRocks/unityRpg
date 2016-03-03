@@ -6,26 +6,48 @@ namespace ChuMeng
     public class MonsterSyncToServer : MonoBehaviour
     {
         EntityInfo lastInfo;
-        EntityInfo.Builder info;
-        public void SyncToServer() {
+        //EntityInfo.Builder info;
+        private void Awake()
+        {
+            lastInfo = EntityInfo.CreateBuilder().Build();
+            //info = EntityInfo.CreateBuilder().Build();
+        }
+
+        public void SyncToServer()
+        {
             var me = gameObject;
             var pos = me.transform.position;
             var dir = (int)me.transform.localRotation.eulerAngles.y;
             var meAttr = me.GetComponent<NpcAttribute>();
-
-            var cg = CGPlayerCmd.CreateBuilder();
-            cg.Cmd = "UpdateEntityData";
+            var intPos = NetworkUtil.ConvertPos(pos);
             var ainfo = EntityInfo.CreateBuilder();
             ainfo.Id = meAttr.GetNetView().GetServerID();
-            ainfo.X = (int)(pos.x * 100);
-            ainfo.Z = (int)(pos.z * 100);
-            ainfo.Y = (int)(pos.y * 100);
-            ainfo.HP = meAttr.HP;
+            var change = false;
+            if (intPos [0] != lastInfo.X || intPos [1] != lastInfo.Y || intPos [2] != lastInfo.Z)
+            {
+                change = true;
+                ainfo.X = intPos [0];
+                ainfo.Y = intPos [1];
+                ainfo.Z = intPos [2];
 
-            cg.EntityInfo = ainfo.Build();
-            var s = WorldManager.worldManager.GetActive();
-            Log.Net("UpdateEntityData: "+ainfo.HP+" id "+ainfo.Id);
-            s.BroadcastMsg(cg);
+                lastInfo.X = intPos [0];
+                lastInfo.Y = intPos [1];
+                lastInfo.Z = intPos [2];
+            }
+            if (meAttr.HP != lastInfo.HP)
+            {
+                change = true;
+                ainfo.HP = meAttr.HP;
+                lastInfo.HP = meAttr.HP;
+            }
+            if(change) {
+                var etyInfo = ainfo.Build();
+                var cg = CGPlayerCmd.CreateBuilder();
+                cg.Cmd = "UpdateEntityData";
+                cg.EntityInfo = etyInfo;
+                NetworkUtil.Broadcast(cg);
+            }
+
         }
     }
 }

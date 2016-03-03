@@ -25,6 +25,7 @@ namespace ChuMeng
         }
 
         public Vector3 GetRandomStartPos(int id) {
+            id = Mathf.Max(0, id);
             var count = allPlayerStart.childCount;
             var n = id%count;
             var cd = allPlayerStart.GetChild(n);
