@@ -24,7 +24,7 @@ namespace ChuMeng
             ai.AddState(new HumanDead());
             ai.AddState(new MonsterKnockBack());
             ai.AddState(new HumanStunned());
-            ai.AddState(new HumanJump());
+            ai.AddState(new OtherPlayerJump());
 
             this.regEvt = new List<MyEvent.EventType>()
             {

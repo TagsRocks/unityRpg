@@ -457,6 +457,8 @@ namespace ChuMeng
             return d;
         }
 
+        public float JumpForwardSpeed = 0;
+
         public float NetSpeed = 0;
         public void AddNetSpeed(float v) {
             NetSpeed += v;

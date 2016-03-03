@@ -51,6 +51,11 @@ namespace ChuMeng
                 ainfo.ThrowSpeed = intThrowSpeed;
                 curInfo.ThrowSpeed = intThrowSpeed;
             }
+            var intJumpSpeed = (int)(meAttr.JumpForwardSpeed * 100);
+            if(intJumpSpeed != lastInfo.JumpForwardSpeed) {
+                ainfo.JumpForwardSpeed = intJumpSpeed;
+                curInfo.JumpForwardSpeed = intJumpSpeed;
+            }
 
             lastInfo = AvatarInfo.CreateBuilder(curInfo).Build();
 

@@ -23,7 +23,7 @@ namespace ChuMeng
     /// </summary>
     public class PlayerSync : KBEngine.MonoBehaviour
     {
-        AvatarInfo lastInfo;
+        //AvatarInfo lastInfo;
         AvatarInfo curInfo;
 
         void Awake()
@@ -47,6 +47,7 @@ namespace ChuMeng
         {
             var curPos = NetworkUtil.ConvertPos(transform.position);
             var dir = (int)transform.localRotation.eulerAngles.y;
+            var meAttr = gameObject.GetComponent<NpcAttribute>();
             if (curInfo.X != curPos [0] || curInfo.Y != curPos [1] || curInfo.Z != curPos [2] || curInfo.Dir != dir)
             {
                 var mvTarget = new Vector3(curInfo.X / 100.0f, curInfo.Y / 100.0f + 0.2f, curInfo.Z / 100.0f);
@@ -56,6 +57,14 @@ namespace ChuMeng
                 cmd.commandID = ObjectCommand.ENUM_OBJECT_COMMAND.OC_MOVE;
                 GetComponent<LogicCommand>().PushCommand(cmd);
             }
+
+            if(curInfo.HasJumpForwardSpeed) {
+                var intJumpSpeed = (int)(meAttr.JumpForwardSpeed * 100);
+                if(intJumpSpeed != curInfo.JumpForwardSpeed) {
+                    meAttr.JumpForwardSpeed = curInfo.JumpForwardSpeed/100.0f;
+                }
+            }
+
         }
         /*
 		 * Write Message Send To Server
@@ -89,6 +98,10 @@ namespace ChuMeng
             }
             if(info.HasThrowSpeed) {
                 attr.ThrowSpeed = info.ThrowSpeed/100.0f;
+            }
+            if(info.HasJumpForwardSpeed) {
+                attr.JumpForwardSpeed = info.JumpForwardSpeed/100.0f;
+                curInfo.JumpForwardSpeed = info.JumpForwardSpeed;
             }
         }
 
