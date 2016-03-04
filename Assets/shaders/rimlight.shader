@@ -21,7 +21,8 @@
 				fixed3 diff;
 			};
 			
-			v2f vert(appdata_base v) {
+			v2f vert(appdata_base v) 
+			{
 				v2f o;
 				o.pos = mul(UNITY_MATRIX_MVP, v.vertex);
 				float3 viewDir = ObjSpaceViewDir(v.vertex);

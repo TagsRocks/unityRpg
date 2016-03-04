@@ -35,8 +35,9 @@ namespace ChuMeng
             var myTc = ObjectManager.objectManager.GetMyAttr().TeamColor;
             if(myTc != tc) {
                 attr.ShowBloodBar = false;
-                hideObject.Add(go);
             }
+            attr.SetTeamHideShader();
+            hideObject.Add(go);
         }
 
         void Show(GameObject go) {
@@ -44,10 +45,9 @@ namespace ChuMeng
             var attr= go.GetComponent<NpcAttribute>();
             var tc = attr.TeamColor;
             var myTc = ObjectManager.objectManager.GetMyAttr().TeamColor;
-            if(myTc != tc) {
-                attr.ShowBloodBar = true;
-                hideObject.Remove(go);
-            }
+            attr.ShowBloodBar = true;
+            attr.SetTeamNormalShader();
+            hideObject.Remove(go);
         }
 
         void OnTriggerEnter(Collider other)
@@ -85,8 +85,12 @@ namespace ChuMeng
             ai.AddState(new ChestIdle());
             ai.AddState(bd);
             ai.AddState(new MonsterKnockBack());
-
+            var particle = transform.Find("crystalGlow");
+            particle.gameObject.SetActive(false);
+            particle.transform.parent = null;
             Util.SetLayer(gameObject, GameLayer.IgnoreCollision2);
+            particle.transform.parent = transform;
+            particle.gameObject.SetActive(true);
 
             var g = new GameObject("HideBloodBar");
             g.transform.parent = transform;

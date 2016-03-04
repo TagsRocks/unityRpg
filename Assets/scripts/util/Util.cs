@@ -113,7 +113,19 @@ namespace ChuMeng
 
         public static IEnumerator SetBurn(GameObject go)
         {
-            Transform mesh = go.transform.Find("obj");
+            var mesh = Util.FindChildRecursive(go.transform, "obj");
+            /*
+            var mr = go.GetComponentInChildren<SkinnedMeshRenderer>();
+            if(mr != null) {
+                mesh = mr.transform;
+            }else {
+                var m = go.GetComponentInChildren<MeshRenderer>();
+                if(m != null) {
+                    mesh = m.transform;
+                }
+            }
+            */
+
             if (mesh == null)
             {
                 foreach (Transform t in go.transform)

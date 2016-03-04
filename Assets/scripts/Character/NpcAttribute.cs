@@ -75,21 +75,30 @@ namespace ChuMeng
                 return ObjUnitData.MoveSpeed;
             }
         }
+
         private bool _sb = true;
-        public bool ShowBloodBar{
-            get {
+
+        public bool ShowBloodBar
+        {
+            get
+            {
                 return _sb;
             }
-            set {
+            set
+            {
                 _sb = value;
-                if(!_sb) {
+                if (!_sb)
+                {
                     var bb = GetComponent<BloodBar>();
-                    if(bb != null) {
+                    if (bb != null)
+                    {
                         bb.HideBar();
                     }
-                }else {
+                } else
+                {
                     var bb = GetComponent<BloodBar>();
-                    if(bb != null) {
+                    if (bb != null)
+                    {
                         bb.ShowBar();
                     }
 
@@ -138,18 +147,82 @@ namespace ChuMeng
             SetTeamShader();
         }
 
-        void SetTeamShader() {
+        void SetTeamShader()
+        {
             var myPlayer = ObjectManager.objectManager.GetMyAttr();
-            Log.Sys("SetTeamShader: "+myPlayer.TeamColor+" tc "+TeamColor);
-            if(myPlayer.TeamColor != TeamColor) {
+            Log.Sys("SetTeamShader: " + myPlayer.TeamColor + " tc " + TeamColor);
+            if (myPlayer.TeamColor != TeamColor)
+            {
                 var renders = gameObject.GetComponentsInChildren<SkinnedMeshRenderer>();
-                var shaderRes = Resources.Load<ShaderResource> ("levelPublic/ShaderResource");
+                var shaderRes = Resources.Load<ShaderResource>("levelPublic/ShaderResource");
                 var render2 = gameObject.GetComponentsInChildren<MeshRenderer>();
-                foreach(var r in renders) {
-                    r.material.shader = Shader.Find ("Custom/playerHideShader");
+                foreach (var r in renders)
+                {
+                    r.material.shader = Shader.Find("Custom/playerHideShader");
                 }
-                foreach(var r in render2) {
-                    r.material.shader = Shader.Find ("Custom/playerHideShader");
+                foreach (var r in render2)
+                {
+                    r.material.shader = Shader.Find("Custom/playerHideShader");
+                }
+            }
+        }
+
+        public void SetTeamHideShader()
+        {
+            var shaderRes = Resources.Load<ShaderResource>("levelPublic/ShaderResource");
+            var myPlayer = ObjectManager.objectManager.GetMyAttr();
+            var renders = gameObject.GetComponentsInChildren<SkinnedMeshRenderer>();
+            var render2 = gameObject.GetComponentsInChildren<MeshRenderer>();
+            if (myPlayer.TeamColor != TeamColor)
+            {
+                foreach (var r in renders)
+                {
+                    r.material.shader = Shader.Find("Custom/OtherTeamHideShader");
+                }
+                foreach (var r in render2)
+                {
+                    r.material.shader = Shader.Find("Custom/OtherTeamHideShader");
+                }
+
+            } else
+            {
+                foreach (var r in renders)
+                {
+                    r.material.shader = Shader.Find("Custom/MyTeamHideShader");
+                }
+                foreach (var r in render2)
+                {
+                    r.material.shader = Shader.Find("Custom/MyTeamHideShader");
+                }
+            }
+        }
+
+        public void SetTeamNormalShader()
+        {
+            var shaderRes = Resources.Load<ShaderResource>("levelPublic/ShaderResource");
+            var myPlayer = ObjectManager.objectManager.GetMyAttr();
+            var renders = gameObject.GetComponentsInChildren<SkinnedMeshRenderer>();
+            var render2 = gameObject.GetComponentsInChildren<MeshRenderer>();
+            if (myPlayer.TeamColor != TeamColor)
+            {
+                foreach (var r in renders)
+                {
+                    r.material.shader = Shader.Find("Custom/playerHideShader");
+                }
+                foreach (var r in render2)
+                {
+                    r.material.shader = Shader.Find("Custom/playerHideShader");
+                }
+
+            } else
+            {
+                foreach (var r in renders)
+                {
+                    r.material.shader = Shader.Find("Custom/playerShader");
+                }
+                foreach (var r in render2)
+                {
+                    r.material.shader = Shader.Find("Custom/playerShader");
                 }
             }
         }
@@ -372,7 +445,8 @@ namespace ChuMeng
 
 
 
-        public void AddMpMax(int num) {
+        public void AddMpMax(int num)
+        {
             MP_Max += num;
             ChangeMP(0);
         }
@@ -460,21 +534,27 @@ namespace ChuMeng
         public float JumpForwardSpeed = 0;
 
         public float NetSpeed = 0;
-        public void AddNetSpeed(float v) {
+
+        public void AddNetSpeed(float v)
+        {
             NetSpeed += v;
         }
 
-        public float GetMoveSpeedCoff() {
-            return GetComponent<BuffComponent>().GetSpeedCoff()+NetSpeed;
+        public float GetMoveSpeedCoff()
+        {
+            return GetComponent<BuffComponent>().GetSpeedCoff() + NetSpeed;
         }
 
         public float ThrowSpeed = 0;
-        public void AddThrowSpeed(float v) {
+
+        public void AddThrowSpeed(float v)
+        {
             ThrowSpeed += v;
         }
+
         public float GetSpeedCoff()
         {
-            return GetComponent<BuffComponent>().GetSpeedCoff()+ThrowSpeed;
+            return GetComponent<BuffComponent>().GetSpeedCoff() + ThrowSpeed;
         }
 
         public int GetCriticalRate()

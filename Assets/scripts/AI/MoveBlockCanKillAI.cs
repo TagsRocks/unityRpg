@@ -103,7 +103,7 @@ namespace ChuMeng
             var bd = new MoveBlockDead ();
             bd.deadCallback = () =>
             {
-                Util.SpawnParticle("barrelbreak", transform.position+new Vector3(0, 0.2f, 0),false );
+                Util.SpawnParticle("barrelbreak", transform.position+new Vector3(0, 0.3f, 0),false );
             };
 
             ai.AddState(bd);
