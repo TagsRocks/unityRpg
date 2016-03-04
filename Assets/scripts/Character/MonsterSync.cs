@@ -1,4 +1,4 @@
-﻿﻿using UnityEngine;
+﻿using UnityEngine;
 using System.Collections;
 
 namespace ChuMeng
@@ -60,15 +60,18 @@ namespace ChuMeng
             }
         }
 
-        public void SyncAttribute(GCPlayerCmd cmd)
-        {
-            var info = cmd.EntityInfo;
+        public void SyncAttribute(EntityInfo info) {
             var attr = gameObject.GetComponent<NpcAttribute>();
             NetworkMove(info);
             if (info.HasHP)
             {
                 attr.SetHPNet(info.HP);
             }
+        }
+        public void SyncAttribute(GCPlayerCmd cmd)
+        {
+            var info = cmd.EntityInfo;
+            SyncAttribute(info);
         }
     }
 

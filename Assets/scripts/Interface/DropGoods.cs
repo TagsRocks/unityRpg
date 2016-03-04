@@ -30,7 +30,7 @@ namespace ChuMeng
             var treasure = mon.GetDropTreasure();
             foreach(var d in treasure) {
                 Log.Sys("DropTreasure " + d.Count);
-                var itemData = Util.GetItemData(0, (int)d[0]);
+                var itemData = Util.GetItemData((int)ItemData.GoodsType.Props, (int)d[0]);
                 int num = 1;
                 if (d.Count >= 3)
                 {

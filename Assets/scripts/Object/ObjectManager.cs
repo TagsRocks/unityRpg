@@ -462,10 +462,12 @@ namespace ChuMeng
 
         void SetStartPointPosition(GameObject player)
         {
-            if(NetworkUtil.IsNet()) {
+            if (NetworkUtil.IsNet())
+            {
                 var pos = NetworkUtil.GetStartPos();
                 player.transform.position = pos;
-            }else {
+            } else
+            {
                 var startPoint = GameObject.Find("PlayerStart");
                 player.transform.position = startPoint.transform.position;
                 player.transform.forward = startPoint.transform.forward;
@@ -617,7 +619,7 @@ namespace ChuMeng
         {
             if (myPlayer != null)
             {
-                Log.Sys("RefreshMyServerId: "+id);
+                Log.Sys("RefreshMyServerId: " + id);
                 myPlayer.ID = id;
                 var startPos = NetworkUtil.GetStartPos();
                 GetMyPlayer().transform.position = startPos;
@@ -709,10 +711,24 @@ namespace ChuMeng
             AddObject(netView.GetServerID(), netView);
 
             //不算怪物允许不去打
-            npc.transform.position = spawn.transform.position;
+            if (info != null)
+            {
+                npc.transform.position = NetworkUtil.FloatPos(info.X, info.Y, info.Z);
+            } else
+            {
+                npc.transform.position = spawn.transform.position;
+            }
+
 
             BattleManager.battleManager.AddEnemy(npc.gameObject);
             npc.SetDeadDelegate = BattleManager.battleManager.EnemyDead;
+
+
+            var sync = npc.GetComponent<MonsterSync>();
+            if (sync != null)
+            {
+                sync.SyncAttribute(info);
+            }
         }
 
         public GameObject GetNetworkMonster(int viewId)
