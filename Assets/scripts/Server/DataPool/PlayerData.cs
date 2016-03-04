@@ -678,7 +678,7 @@ namespace ChuMeng
             role.Job = inpb.Job;
 
             var msg = role.Build();
-            ServerData.Instance.playerInfo.Roles = msg;
+            ServerData.Instance.playerInfo.Roles = RolesInfo.CreateBuilder(msg).Build();
 
             var dress = new int[]
             {
@@ -699,9 +699,13 @@ namespace ChuMeng
             }
 
             au.AddRolesInfos(msg);
-
-
             ServerBundle.SendImmediate(au, packet.flowId);    
+
+            //投掷 跳跃
+            pinfo.Roles.Level = 10;
+            AddSkillPoint(10);
+            LevelUpSkill(3);
+            LevelUpSkill(4);
         }
 
         /// <summary>

@@ -203,6 +203,9 @@ namespace ChuMeng
             GameObject bag;
             if (uiMap.TryGetValue(viewName, out bag))
             {
+                if(bag == null) {
+                    return null;
+                }
                 bag.SetActive(true);
             } else
             {
