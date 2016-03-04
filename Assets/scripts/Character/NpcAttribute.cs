@@ -162,7 +162,10 @@ namespace ChuMeng
                 }
                 foreach (var r in render2)
                 {
-                    r.material.shader = Shader.Find("Custom/playerHideShader");
+                    if (r.gameObject.name != "playerLight(Clone)")
+                    {
+                        r.material.shader = Shader.Find("Custom/playerHideShader");
+                    }
                 }
             }
         }
@@ -172,7 +175,7 @@ namespace ChuMeng
             var shaderRes = Resources.Load<ShaderResource>("levelPublic/ShaderResource");
             var myPlayer = ObjectManager.objectManager.GetMyAttr();
             var renders = gameObject.GetComponentsInChildren<SkinnedMeshRenderer>();
-            var render2 = gameObject.GetComponentsInChildren<MeshRenderer>();
+            var render2 = gameObject.GetComponentsInChildren<MeshRenderer>(true);
             if (myPlayer.TeamColor != TeamColor)
             {
                 foreach (var r in renders)
@@ -181,7 +184,12 @@ namespace ChuMeng
                 }
                 foreach (var r in render2)
                 {
-                    r.material.shader = Shader.Find("Custom/OtherTeamHideShader");
+                    if (r.gameObject.name != "playerLight(Clone)")
+                    {
+                        r.material.shader = Shader.Find("Custom/OtherTeamHideShader");
+                    }else {
+                        r.enabled = false;
+                    }
                 }
 
             } else
@@ -192,7 +200,10 @@ namespace ChuMeng
                 }
                 foreach (var r in render2)
                 {
-                    r.material.shader = Shader.Find("Custom/MyTeamHideShader");
+                    if (r.gameObject.name != "playerLight(Clone)")
+                    {
+                        r.material.shader = Shader.Find("Custom/MyTeamHideShader");
+                    }
                 }
             }
         }
@@ -211,7 +222,13 @@ namespace ChuMeng
                 }
                 foreach (var r in render2)
                 {
-                    r.material.shader = Shader.Find("Custom/playerHideShader");
+                    if (r.gameObject.name != "playerLight(Clone)")
+                    {
+                        r.material.shader = Shader.Find("Custom/playerHideShader");
+                    }else 
+                    {
+                        r.enabled = true;
+                    }
                 }
 
             } else
@@ -222,7 +239,10 @@ namespace ChuMeng
                 }
                 foreach (var r in render2)
                 {
-                    r.material.shader = Shader.Find("Custom/playerShader");
+                    if (r.gameObject.name != "playerLight(Clone)")
+                    {
+                        r.material.shader = Shader.Find("Custom/playerShader");
+                    }
                 }
             }
         }

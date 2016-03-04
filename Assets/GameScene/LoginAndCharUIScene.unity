@@ -378,6 +378,7 @@ MonoBehaviour:
   updateIntervalOnSerialize: 1000
   testPort: 20000
   heartBeat: 8
+  remoteServerIP: 127.0.0.1
   IsPause: 0
 --- !u!4 &775957294
 Transform:

@@ -126,12 +126,8 @@ namespace ChuMeng
             ai.AddState(new ChestIdle());
             ai.AddState(bd);
             ai.AddState(new MonsterKnockBack());
-            var particle = transform.Find("crystalGlow");
-            particle.gameObject.SetActive(false);
-            particle.transform.parent = null;
+
             Util.SetLayer(gameObject, GameLayer.IgnoreCollision2);
-            particle.transform.parent = transform;
-            particle.gameObject.SetActive(true);
 
             var g = new GameObject("HideBloodBar");
             g.transform.parent = transform;
@@ -140,10 +136,18 @@ namespace ChuMeng
             bd.deadCallback = hb.RestoreAll;
         }
 
+
+
+        void CreateParticle() {
+            var p = Util.SpawnParticle("crystalGlow", transform.position, false);
+            p.transform.parent = transform;
+        }
+
         // Use this for initialization
         void Start()
         {
             ai.ChangeState(AIStateEnum.IDLE);
+            CreateParticle();
         }
 
         protected override void OnDestroy()
