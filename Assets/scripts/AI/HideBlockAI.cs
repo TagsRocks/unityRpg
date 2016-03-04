@@ -70,6 +70,47 @@ namespace ChuMeng
             }
         }
     }
+    public class  HideDead : DeadState
+    {
+        public System.Action deadCallback;
+        public override void EnterState()
+        {
+            base.EnterState();
+            if(deadCallback != null) {
+                deadCallback();
+            }
+            Util.SetLayer(GetAttr().gameObject, GameLayer.IgnoreCollision);
+            GetAttr().IsDead = true;
+
+            if (NetworkUtil.IsNetMaster())
+            {
+                DropGoods.DropStaticGoods(GetAttr());
+            }
+        }
+
+        public override IEnumerator RunLogic()
+        {
+
+            //等网络属性同步上去了再删除对象 Hp = 0 接着等一会删除对象
+            if (NetworkUtil.IsNetMaster())
+            {
+                //yield return new WaitForSeconds(5);
+                var cg = CGPlayerCmd.CreateBuilder();
+                cg.Cmd = "RemoveEntity";
+                var ety = EntityInfo.CreateBuilder();
+                ety.Id = GetAttr().GetNetView().GetServerID();
+                cg.EntityInfo = ety.Build();
+                var world = WorldManager.worldManager.GetActive();
+                world.BroadcastMsg(cg);
+                ObjectManager.objectManager.DestroyByLocalId(GetAttr().GetComponent<KBEngine.KBNetworkView>().GetLocalId());
+            } else
+            {
+                ObjectManager.objectManager.DestroyByLocalId(GetAttr().GetComponent<KBEngine.KBNetworkView>().GetLocalId());
+            }
+            yield return null;
+        }
+    }
+
 
     [RequireComponent(typeof(MonsterSync))]
     [RequireComponent(typeof(MonsterSyncToServer))]
@@ -81,7 +122,7 @@ namespace ChuMeng
             attribute.ShowBloodBar = false;
             ai = new ChestCharacter();
             ai.attribute = attribute;
-            var bd = new BlockDead();
+            var bd = new HideDead();
             ai.AddState(new ChestIdle());
             ai.AddState(bd);
             ai.AddState(new MonsterKnockBack());

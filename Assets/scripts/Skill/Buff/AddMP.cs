@@ -13,8 +13,8 @@ namespace ChuMeng
         }
 
         IEnumerator Add(){
-            var period = 2.0f;
-            var num = 20;
+            var period = 0.2f;
+            var num = 2;
             var goneTime = 0.0f;
             var npcAttr = obj.GetComponent<NpcAttribute>();
             while(!IsDie) {
