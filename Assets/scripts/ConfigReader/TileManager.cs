@@ -107,7 +107,7 @@ namespace ChuMeng
             saveData.transform.parent = g.transform;
             Util.InitGameObject(saveData);
 
-            var resPath = Path.Combine(Application.dataPath, "levelPrefab");
+            var resPath = Path.Combine(Application.dataPath, "LevelPrefab");
             var dir = new DirectoryInfo(resPath);
             var prefabs = dir.GetFiles("*.prefab", SearchOption.TopDirectoryOnly);
 
@@ -146,7 +146,7 @@ namespace ChuMeng
             }
 
             PrefabUtility.CreatePrefab(resName, g);
-            //GameObject.DestroyImmediate(g);
+            GameObject.DestroyImmediate(g);
 
             Debug.LogError("请刷新RoomList 将该房间加入到RoomList中： " + resName);
         }
