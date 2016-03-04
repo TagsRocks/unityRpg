@@ -33,6 +33,7 @@ public class ClientApp : UnityEngine.MonoBehaviour
     //public bool debug = false;
     public int heartBeat = 8;
     public string remoteServerIP = "127.0.0.1";
+    public float syncFreq = 0.1f;
 
     void Awake()
     {

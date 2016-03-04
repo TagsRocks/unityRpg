@@ -156,12 +156,15 @@ namespace ChuMeng
             //Batch Rooom
             foreach (var p in  rd.Prefabs)
             {
-                var r = GameObject.Instantiate(p.prefab) as GameObject;
-                r.isStatic = true;
-                r.transform.parent = rootOfPieces.transform;
-                r.transform.localPosition = p.pos;
-                r.transform.localRotation = p.rot;
-                r.transform.localScale = p.scale;
+                if (p != null && p.prefab != null)
+                {
+                    var r = GameObject.Instantiate(p.prefab) as GameObject;
+                    r.isStatic = true;
+                    r.transform.parent = rootOfPieces.transform;
+                    r.transform.localPosition = p.pos;
+                    r.transform.localRotation = p.rot;
+                    r.transform.localScale = p.scale;
+                }
                 c++;
                 if (slowly && c >= batchNum)
                 {

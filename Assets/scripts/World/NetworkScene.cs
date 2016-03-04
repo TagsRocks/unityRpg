@@ -314,7 +314,7 @@ namespace ChuMeng
             while (state == WorldState.Connected)
             {
                 SyncMyPos();
-                yield return new WaitForSeconds(0.5f);
+                yield return new WaitForSeconds(ClientApp.Instance.syncFreq);
             }
         }
 
