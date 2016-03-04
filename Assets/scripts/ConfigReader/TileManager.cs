@@ -30,9 +30,9 @@ namespace ChuMeng
 
         public void SortMethod()
         {
-            var g = gameObject;
+            var g = transform.Find("RoomPieces_data");
             var count = 0;
-            foreach (Transform t in g.transform)
+            foreach (Transform t in g)
             {
                 count++;
                 t.localPosition = Vector3.zero;
@@ -160,6 +160,7 @@ namespace ChuMeng
                 pb.prefab = del(child.name);
                 pb.pos = child.localPosition;
                 pb.rot = child.localRotation;
+                pb.scale = child.localScale;
 
                 sd.Prefabs.Add(pb);
             }
@@ -178,6 +179,7 @@ namespace ChuMeng
                     pb.prefab = del(child.name);
                     pb.pos = child.localPosition;
                     pb.rot = child.localRotation;
+                    pb.scale = child.localScale;
 
                     sd.Prefabs.Add(pb);
                 }
@@ -188,19 +190,21 @@ namespace ChuMeng
 
         GameObject GetPrefab(string name, List<FileInfo[]> dirs)
         {
-            if (nameCache.ContainsKey(name))
+            var nameLower = name.ToLower();
+            if (nameCache.ContainsKey(nameLower))
             {
-                return nameCache [name];
+                return nameCache [nameLower];
             }
 
             int lastNameLen = 0;
             FileInfo bestMatch = null;
+
             foreach (var fi in dirs)
             {
                 foreach (var f in fi)
                 {
                     var pn = f.Name.Replace(".prefab", "").ToLower();
-                    if (pn.Length > lastNameLen && name.Contains(pn))
+                    if (pn.Length > lastNameLen && nameLower.Contains(pn))
                     {
                         lastNameLen = pn.Length;
                         bestMatch = f;

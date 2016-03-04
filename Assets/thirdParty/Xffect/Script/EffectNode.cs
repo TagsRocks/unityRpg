@@ -505,20 +505,35 @@ namespace Xft
                     collided = true;
                     collideObject = hit.collider.gameObject;
                 }
-                
-                //if (Physics.CheckSphere(GetOriginalPos(), Owner.ParticleRadius, layer))
-                //{
-                    //collided = true;
-                //}
             }
             else if (Owner.CollisionType == COLLITION_TYPE.Plane)
             {
-				//Debug.Log("particle pos "+CurWorldPos+" "+Owner.PlaneDir.normalized+" "+Owner.ParticleRadius);
-				//Debug.Log("plane "+Owner.CollisionPlane.distance+" "+Owner.CollisionPlane.normal);
-                if (!Owner.CollisionPlane.GetSide(CurWorldPos -Owner.PlaneDir.normalized * Owner.ParticleRadius))
-                {
+				//Debug.Log("particle pos "+CurWorldPos+" nor "+Owner.PlaneDir.normalized+" "+Owner.ParticleRadius);
+                //Debug.Log("plane "+Owner.CollisionPlane.distance+" "+Owner.CollisionPlane.normal+" pos ");
+                //var realPos = CurWorldPos + Owner.transform.position;
+                //var realPos = CurWorldPos;
+                var realPos = this.Position;
+                var np = realPos-Owner.PlaneDir.normalized * Owner.ParticleRadius;
+                /*
+                if(realPos.y <= 0) {
+                    Debug.Log("Collide: "+Owner.CollisionPlane.distance+" w "+CurWorldPos+" pos "+Owner.transform.position
+                        +" np "+np+" emitPoint "+Owner.EmitPoint);
                     collided = true;
                     collideObject = Owner.gameObject;
+                }
+                */
+
+                if (!Owner.CollisionPlane.GetSide(np))
+                {
+                    Debug.Log("Collide: "+Owner.CollisionPlane.distance+" w "+CurWorldPos+" pos "+Owner.transform.position
+                        +" np "+np+" emitPoint "+Owner.EmitPoint);
+                    //var testP = new Plane(Vector3.up, Owner.transform.position);
+                    //var side = testP.GetSide(np);
+                    //Debug.Log("TestP: "+testP.distance+" n "+testP.normal+" np "+np+" si "+side);
+
+                    collided = true;
+                    collideObject = Owner.gameObject;
+
                 }
             }
             else
@@ -572,6 +587,7 @@ namespace Xft
 			float initRotate;
 			Vector3 curPos;
 
+            Vector3 ownerPos;
             public BounceAffector(EffectNode node)
             : base(node, AFFECTORTYPE.GravityAffector)
             {
@@ -579,9 +595,11 @@ namespace Xft
                 curTime = 1/2.75f;
                 //dir = Node.Velocity;
 				initVelocity = new Vector3(Node.Velocity.x, 0, Node.Velocity.z);
-                initPos = Node.Position;
+                ownerPos = Node.Owner.transform.position;
+                initPos = Node.Position;//+ownerPos;
+                Debug.Log("OwnerPos MePos: "+ownerPos+" mePos "+Node.Position);
 				curPos = initPos;
-                jumpHeight = Node.Owner.JumpHeight+Node.Position.y;
+                jumpHeight = Node.Owner.JumpHeight+initPos.y;
 				initRotate = Node.RotateAngle;
                 Node.Velocity = initVelocity;
             }
@@ -622,8 +640,11 @@ namespace Xft
                 }else {
                     initVelocity = Vector3.zero;
                 }
-				Node.Position = curPos+initVelocity*deltaTime;
+
+                Node.Position = curPos+initVelocity*deltaTime;//+ownerPos;
+                //Node.Position = initPos;
 				Node.RotateAngle = initRotate;
+                //Debug.Log("NodeNewPos: "+Node.Position);
             }   
         }
 

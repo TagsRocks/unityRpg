@@ -58,7 +58,6 @@ GameObject:
   - 4: {fileID: 400006}
   - 114: {fileID: 11400006}
   - 114: {fileID: 11400008}
-  - 114: {fileID: 11400018}
   m_Layer: 0
   m_Name: barrelbreak
   m_TagString: Untagged
@@ -173,7 +172,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100006}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.78700018, y: 5.22399998, z: -.416000009}
+  m_LocalPosition: {x: -.25999999, y: 0, z: .00999999978}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400010}
@@ -260,6 +259,7 @@ MonoBehaviour:
   SpriteUVStretch: 0
   RandomOriScale: 0
   RandomOriRot: 0
+  IsTowardZ: 0
   OriRotationMin: 0
   OriRotationMax: 0
   RotAffectorEnable: 0
@@ -304,10 +304,27 @@ MonoBehaviour:
   OriScaleXMax: 1
   OriScaleYMin: 1
   OriScaleYMax: 1
+  OriScaleZ: 1
   ScaleAffectorEnable: 1
   ScaleType: 3
   DeltaScaleX: 0
   DeltaScaleY: 0
+  IsScaleZ: 0
+  ScaleZCurveNew:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
   ScaleXCurve:
     serializedVersion: 2
     m_Curve:
@@ -429,6 +446,7 @@ MonoBehaviour:
   FaceToObject: 0
   FaceObject: {fileID: 0}
   IsWeapon: 0
+  IsScale: 0
   UseRandomRibbon: 0
   RibbonWidthMin: 1
   RibbonWidthMax: 1
@@ -513,9 +531,12 @@ MonoBehaviour:
     m_Curve: []
     m_PreInfinity: 2
     m_PostInfinity: 2
+  JetMin: 0
+  JetMax: 0
   VortexAffectorEnable: 0
   VortexMagType: 0
   VortexMag: 1
+  VortexMagMax: 1
   VortexCurve:
     serializedVersion: 2
     m_Curve: []
@@ -525,6 +546,7 @@ MonoBehaviour:
   VortexInheritRotation: 1
   VortexObj: {fileID: 400000}
   IsFixedCircle: 0
+  VortexTime: -1
   IsRandomVortexDir: 0
   IsVortexAccelerate: 0
   VortexAttenuation: 0
@@ -548,6 +570,13 @@ MonoBehaviour:
   GravityDirection: {x: 0, y: 1, z: 0}
   GravityObject: {fileID: 400000}
   IsGravityAccelerate: 1
+  IsSine: 0
+  SineFreq: 1
+  SineAffectorEnable: 0
+  SineForce: {x: 0, y: 1, z: 0}
+  ModifyPos: 1
+  SineMaxFreq: 5
+  SineMinFreq: 1
   AirAffectorEnable: 0
   AirObject: {fileID: 400000}
   AirMagType: 0
@@ -630,7 +659,7 @@ MonoBehaviour:
   CollisionSubEmitter: 
   DeathSubEmitter: 
   AvailableNodeCount: 2
-  LastClientPos: {x: 0, y: 8.56585026, z: 0}
+  LastClientPos: {x: -.25999999, y: 0, z: .00999999978}
   MyCamera: {fileID: 0}
   Owner: {fileID: 11400006}
   mStopped: 0
@@ -661,6 +690,7 @@ MonoBehaviour:
   SpriteUVStretch: 0
   RandomOriScale: 0
   RandomOriRot: 1
+  IsTowardZ: 0
   OriRotationMin: 0
   OriRotationMax: 360
   RotAffectorEnable: 1
@@ -705,10 +735,27 @@ MonoBehaviour:
   OriScaleXMax: 1
   OriScaleYMin: 1
   OriScaleYMax: 1
+  OriScaleZ: 1
   ScaleAffectorEnable: 1
   ScaleType: 3
   DeltaScaleX: 0
   DeltaScaleY: 0
+  IsScaleZ: 0
+  ScaleZCurveNew:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
   ScaleXCurve:
     serializedVersion: 2
     m_Curve:
@@ -812,6 +859,7 @@ MonoBehaviour:
   FaceToObject: 0
   FaceObject: {fileID: 0}
   IsWeapon: 0
+  IsScale: 0
   UseRandomRibbon: 0
   RibbonWidthMin: 1
   RibbonWidthMax: 1
@@ -896,9 +944,12 @@ MonoBehaviour:
     m_Curve: []
     m_PreInfinity: 2
     m_PostInfinity: 2
+  JetMin: 0
+  JetMax: 0
   VortexAffectorEnable: 0
   VortexMagType: 0
   VortexMag: 1
+  VortexMagMax: 1
   VortexCurve:
     serializedVersion: 2
     m_Curve: []
@@ -908,6 +959,7 @@ MonoBehaviour:
   VortexInheritRotation: 1
   VortexObj: {fileID: 400002}
   IsFixedCircle: 0
+  VortexTime: -1
   IsRandomVortexDir: 0
   IsVortexAccelerate: 0
   VortexAttenuation: 0
@@ -931,6 +983,13 @@ MonoBehaviour:
   GravityDirection: {x: 0, y: 1, z: 0}
   GravityObject: {fileID: 400002}
   IsGravityAccelerate: 1
+  IsSine: 0
+  SineFreq: 1
+  SineAffectorEnable: 0
+  SineForce: {x: 0, y: 1, z: 0}
+  ModifyPos: 1
+  SineMaxFreq: 5
+  SineMinFreq: 1
   AirAffectorEnable: 0
   AirObject: {fileID: 400002}
   AirMagType: 0
@@ -1013,7 +1072,7 @@ MonoBehaviour:
   CollisionSubEmitter: 
   DeathSubEmitter: 
   AvailableNodeCount: 30
-  LastClientPos: {x: 0, y: 8.56585026, z: 0}
+  LastClientPos: {x: -.25999999, y: 0, z: .00999999978}
   MyCamera: {fileID: 0}
   Owner: {fileID: 11400006}
   mStopped: 0
@@ -1044,6 +1103,7 @@ MonoBehaviour:
   SpriteUVStretch: 0
   RandomOriScale: 0
   RandomOriRot: 1
+  IsTowardZ: 0
   OriRotationMin: -60
   OriRotationMax: 60
   RotAffectorEnable: 0
@@ -1088,10 +1148,27 @@ MonoBehaviour:
   OriScaleXMax: 1
   OriScaleYMin: 1
   OriScaleYMax: 1
+  OriScaleZ: 1
   ScaleAffectorEnable: 1
   ScaleType: 3
   DeltaScaleX: 0
   DeltaScaleY: 0
+  IsScaleZ: 0
+  ScaleZCurveNew:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
   ScaleXCurve:
     serializedVersion: 2
     m_Curve:
@@ -1210,6 +1287,7 @@ MonoBehaviour:
   FaceToObject: 0
   FaceObject: {fileID: 0}
   IsWeapon: 0
+  IsScale: 0
   UseRandomRibbon: 0
   RibbonWidthMin: 1
   RibbonWidthMax: 1
@@ -1294,9 +1372,12 @@ MonoBehaviour:
     m_Curve: []
     m_PreInfinity: 2
     m_PostInfinity: 2
+  JetMin: 0
+  JetMax: 0
   VortexAffectorEnable: 0
   VortexMagType: 0
   VortexMag: 1
+  VortexMagMax: 1
   VortexCurve:
     serializedVersion: 2
     m_Curve: []
@@ -1306,6 +1387,7 @@ MonoBehaviour:
   VortexInheritRotation: 1
   VortexObj: {fileID: 400004}
   IsFixedCircle: 0
+  VortexTime: -1
   IsRandomVortexDir: 0
   IsVortexAccelerate: 0
   VortexAttenuation: 0
@@ -1329,6 +1411,13 @@ MonoBehaviour:
   GravityDirection: {x: 0, y: 1, z: 0}
   GravityObject: {fileID: 400004}
   IsGravityAccelerate: 1
+  IsSine: 0
+  SineFreq: 1
+  SineAffectorEnable: 0
+  SineForce: {x: 0, y: 1, z: 0}
+  ModifyPos: 1
+  SineMaxFreq: 5
+  SineMinFreq: 1
   AirAffectorEnable: 0
   AirObject: {fileID: 400004}
   AirMagType: 0
@@ -1411,7 +1500,7 @@ MonoBehaviour:
   CollisionSubEmitter: 
   DeathSubEmitter: 
   AvailableNodeCount: 7
-  LastClientPos: {x: 0, y: 8.56585026, z: 0}
+  LastClientPos: {x: -.25999999, y: 0, z: .00999999978}
   MyCamera: {fileID: 0}
   Owner: {fileID: 11400006}
   mStopped: 0
@@ -1429,7 +1518,7 @@ MonoBehaviour:
   LifeTime: 10
   IgnoreTimeScale: 0
   EditView: 0
-  Scale: 1
+  Scale: 2
 --- !u!114 &11400008
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1468,6 +1557,7 @@ MonoBehaviour:
   SpriteUVStretch: 0
   RandomOriScale: 0
   RandomOriRot: 1
+  IsTowardZ: 0
   OriRotationMin: 0
   OriRotationMax: 360
   RotAffectorEnable: 1
@@ -1512,10 +1602,27 @@ MonoBehaviour:
   OriScaleXMax: 1
   OriScaleYMin: 1
   OriScaleYMax: 1
+  OriScaleZ: 1
   ScaleAffectorEnable: 1
   ScaleType: 3
   DeltaScaleX: 0
   DeltaScaleY: 0
+  IsScaleZ: 0
+  ScaleZCurveNew:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
   ScaleXCurve:
     serializedVersion: 2
     m_Curve:
@@ -1635,6 +1742,7 @@ MonoBehaviour:
   FaceToObject: 0
   FaceObject: {fileID: 0}
   IsWeapon: 0
+  IsScale: 0
   UseRandomRibbon: 0
   RibbonWidthMin: 1
   RibbonWidthMax: 1
@@ -1719,9 +1827,12 @@ MonoBehaviour:
     m_Curve: []
     m_PreInfinity: 2
     m_PostInfinity: 2
+  JetMin: 0
+  JetMax: 0
   VortexAffectorEnable: 0
   VortexMagType: 0
   VortexMag: 1
+  VortexMagMax: 1
   VortexCurve:
     serializedVersion: 2
     m_Curve: []
@@ -1731,6 +1842,7 @@ MonoBehaviour:
   VortexInheritRotation: 1
   VortexObj: {fileID: 400008}
   IsFixedCircle: 0
+  VortexTime: -1
   IsRandomVortexDir: 0
   IsVortexAccelerate: 0
   VortexAttenuation: 0
@@ -1754,6 +1866,13 @@ MonoBehaviour:
   GravityDirection: {x: 0, y: 1, z: 0}
   GravityObject: {fileID: 400008}
   IsGravityAccelerate: 1
+  IsSine: 0
+  SineFreq: 1
+  SineAffectorEnable: 0
+  SineForce: {x: 0, y: 1, z: 0}
+  ModifyPos: 1
+  SineMaxFreq: 5
+  SineMinFreq: 1
   AirAffectorEnable: 0
   AirObject: {fileID: 400008}
   AirMagType: 0
@@ -1836,7 +1955,7 @@ MonoBehaviour:
   CollisionSubEmitter: 
   DeathSubEmitter: 
   AvailableNodeCount: 2
-  LastClientPos: {x: 0, y: 8.56585026, z: 0}
+  LastClientPos: {x: -.25999999, y: 0, z: .00999999978}
   MyCamera: {fileID: 0}
   Owner: {fileID: 11400006}
   mStopped: 0
@@ -1867,6 +1986,7 @@ MonoBehaviour:
   SpriteUVStretch: 0
   RandomOriScale: 0
   RandomOriRot: 0
+  IsTowardZ: 0
   OriRotationMin: 0
   OriRotationMax: 0
   RotAffectorEnable: 0
@@ -1911,10 +2031,27 @@ MonoBehaviour:
   OriScaleXMax: 1
   OriScaleYMin: 1
   OriScaleYMax: 1
+  OriScaleZ: 1
   ScaleAffectorEnable: 0
   ScaleType: 0
   DeltaScaleX: 0
   DeltaScaleY: 0
+  IsScaleZ: 0
+  ScaleZCurveNew:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
   ScaleXCurve:
     serializedVersion: 2
     m_Curve:
@@ -2024,6 +2161,7 @@ MonoBehaviour:
   FaceToObject: 0
   FaceObject: {fileID: 0}
   IsWeapon: 0
+  IsScale: 0
   UseRandomRibbon: 0
   RibbonWidthMin: 1
   RibbonWidthMax: 1
@@ -2108,9 +2246,12 @@ MonoBehaviour:
     m_Curve: []
     m_PreInfinity: 2
     m_PostInfinity: 2
+  JetMin: 0
+  JetMax: 0
   VortexAffectorEnable: 0
   VortexMagType: 0
   VortexMag: 1
+  VortexMagMax: 1
   VortexCurve:
     serializedVersion: 2
     m_Curve: []
@@ -2120,6 +2261,7 @@ MonoBehaviour:
   VortexInheritRotation: 1
   VortexObj: {fileID: 400010}
   IsFixedCircle: 0
+  VortexTime: -1
   IsRandomVortexDir: 0
   IsVortexAccelerate: 0
   VortexAttenuation: 0
@@ -2143,6 +2285,13 @@ MonoBehaviour:
   GravityDirection: {x: 0, y: 1, z: 0}
   GravityObject: {fileID: 400010}
   IsGravityAccelerate: 1
+  IsSine: 0
+  SineFreq: 1
+  SineAffectorEnable: 0
+  SineForce: {x: 0, y: 1, z: 0}
+  ModifyPos: 1
+  SineMaxFreq: 5
+  SineMinFreq: 1
   AirAffectorEnable: 0
   AirObject: {fileID: 400010}
   AirMagType: 0
@@ -2224,8 +2373,8 @@ MonoBehaviour:
   BirthSubEmitter: 
   CollisionSubEmitter: 
   DeathSubEmitter: 
-  AvailableNodeCount: 1
-  LastClientPos: {x: 0, y: 8.56585026, z: 0}
+  AvailableNodeCount: 0
+  LastClientPos: {x: -.25999999, y: 0, z: .00999999978}
   MyCamera: {fileID: 0}
   Owner: {fileID: 11400006}
   mStopped: 0
@@ -2256,6 +2405,7 @@ MonoBehaviour:
   SpriteUVStretch: 0
   RandomOriScale: 0
   RandomOriRot: 1
+  IsTowardZ: 0
   OriRotationMin: 0
   OriRotationMax: 360
   RotAffectorEnable: 1
@@ -2300,10 +2450,27 @@ MonoBehaviour:
   OriScaleXMax: 1
   OriScaleYMin: 1
   OriScaleYMax: 1
+  OriScaleZ: 1
   ScaleAffectorEnable: 1
   ScaleType: 3
   DeltaScaleX: 0
   DeltaScaleY: 0
+  IsScaleZ: 0
+  ScaleZCurveNew:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
   ScaleXCurve:
     serializedVersion: 2
     m_Curve:
@@ -2423,6 +2590,7 @@ MonoBehaviour:
   FaceToObject: 0
   FaceObject: {fileID: 0}
   IsWeapon: 0
+  IsScale: 0
   UseRandomRibbon: 0
   RibbonWidthMin: 1
   RibbonWidthMax: 1
@@ -2507,9 +2675,12 @@ MonoBehaviour:
     m_Curve: []
     m_PreInfinity: 2
     m_PostInfinity: 2
+  JetMin: 0
+  JetMax: 0
   VortexAffectorEnable: 0
   VortexMagType: 0
   VortexMag: 1
+  VortexMagMax: 1
   VortexCurve:
     serializedVersion: 2
     m_Curve: []
@@ -2519,6 +2690,7 @@ MonoBehaviour:
   VortexInheritRotation: 1
   VortexObj: {fileID: 400012}
   IsFixedCircle: 0
+  VortexTime: -1
   IsRandomVortexDir: 0
   IsVortexAccelerate: 0
   VortexAttenuation: 0
@@ -2542,6 +2714,13 @@ MonoBehaviour:
   GravityDirection: {x: 0, y: 1, z: 0}
   GravityObject: {fileID: 400012}
   IsGravityAccelerate: 1
+  IsSine: 0
+  SineFreq: 1
+  SineAffectorEnable: 0
+  SineForce: {x: 0, y: 1, z: 0}
+  ModifyPos: 1
+  SineMaxFreq: 5
+  SineMinFreq: 1
   AirAffectorEnable: 0
   AirObject: {fileID: 400012}
   AirMagType: 0
@@ -2624,7 +2803,7 @@ MonoBehaviour:
   CollisionSubEmitter: 
   DeathSubEmitter: 
   AvailableNodeCount: 5
-  LastClientPos: {x: 0, y: 8.56585026, z: 0}
+  LastClientPos: {x: -.25999999, y: 0, z: .00999999978}
   MyCamera: {fileID: 0}
   Owner: {fileID: 11400006}
   mStopped: 0
@@ -2655,6 +2834,7 @@ MonoBehaviour:
   SpriteUVStretch: 0
   RandomOriScale: 1
   RandomOriRot: 1
+  IsTowardZ: 0
   OriRotationMin: 0
   OriRotationMax: 360
   RotAffectorEnable: 1
@@ -2699,10 +2879,27 @@ MonoBehaviour:
   OriScaleXMax: .699999988
   OriScaleYMin: .5
   OriScaleYMax: .699999988
+  OriScaleZ: 1
   ScaleAffectorEnable: 0
   ScaleType: 0
   DeltaScaleX: 0
   DeltaScaleY: 0
+  IsScaleZ: 0
+  ScaleZCurveNew:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
   ScaleXCurve:
     serializedVersion: 2
     m_Curve:
@@ -2810,6 +3007,7 @@ MonoBehaviour:
   FaceToObject: 0
   FaceObject: {fileID: 0}
   IsWeapon: 0
+  IsScale: 0
   UseRandomRibbon: 0
   RibbonWidthMin: 1
   RibbonWidthMax: 1
@@ -2894,9 +3092,12 @@ MonoBehaviour:
     m_Curve: []
     m_PreInfinity: 2
     m_PostInfinity: 2
+  JetMin: 0
+  JetMax: 0
   VortexAffectorEnable: 0
   VortexMagType: 0
   VortexMag: 1
+  VortexMagMax: 1
   VortexCurve:
     serializedVersion: 2
     m_Curve: []
@@ -2906,6 +3107,7 @@ MonoBehaviour:
   VortexInheritRotation: 1
   VortexObj: {fileID: 400014}
   IsFixedCircle: 0
+  VortexTime: -1
   IsRandomVortexDir: 0
   IsVortexAccelerate: 0
   VortexAttenuation: 0
@@ -2929,6 +3131,13 @@ MonoBehaviour:
   GravityDirection: {x: 0, y: 1, z: 0}
   GravityObject: {fileID: 400014}
   IsGravityAccelerate: 1
+  IsSine: 0
+  SineFreq: 1
+  SineAffectorEnable: 0
+  SineForce: {x: 0, y: 1, z: 0}
+  ModifyPos: 1
+  SineMaxFreq: 5
+  SineMinFreq: 1
   AirAffectorEnable: 0
   AirObject: {fileID: 400014}
   AirMagType: 0
@@ -3010,22 +3219,11 @@ MonoBehaviour:
   BirthSubEmitter: 
   CollisionSubEmitter: 
   DeathSubEmitter: 
-  AvailableNodeCount: 12
-  LastClientPos: {x: 0, y: 8.56585026, z: 0}
+  AvailableNodeCount: 0
+  LastClientPos: {x: -.25999999, y: 0, z: .00999999978}
   MyCamera: {fileID: 0}
   Owner: {fileID: 11400006}
   mStopped: 0
---- !u!114 &11400018
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100006}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4cc091592102942caa7f5ca335a6dae4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
