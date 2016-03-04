@@ -172,7 +172,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100006}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -.25999999, y: 0, z: .00999999978}
+  m_LocalPosition: {x: -.25999999, y: 2, z: .00999999978}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400010}
@@ -659,7 +659,7 @@ MonoBehaviour:
   CollisionSubEmitter: 
   DeathSubEmitter: 
   AvailableNodeCount: 2
-  LastClientPos: {x: -.25999999, y: 0, z: .00999999978}
+  LastClientPos: {x: -.25999999, y: 2, z: .00999999978}
   MyCamera: {fileID: 0}
   Owner: {fileID: 11400006}
   mStopped: 0
@@ -685,8 +685,8 @@ MonoBehaviour:
   Depth: 0
   SpriteType: 4
   OriPoint: 0
-  SpriteWidth: 1
-  SpriteHeight: 1
+  SpriteWidth: 2
+  SpriteHeight: 2
   SpriteUVStretch: 0
   RandomOriScale: 0
   RandomOriRot: 1
@@ -1072,7 +1072,7 @@ MonoBehaviour:
   CollisionSubEmitter: 
   DeathSubEmitter: 
   AvailableNodeCount: 30
-  LastClientPos: {x: -.25999999, y: 0, z: .00999999978}
+  LastClientPos: {x: -.25999999, y: 2, z: .00999999978}
   MyCamera: {fileID: 0}
   Owner: {fileID: 11400006}
   mStopped: 0
@@ -1500,7 +1500,7 @@ MonoBehaviour:
   CollisionSubEmitter: 
   DeathSubEmitter: 
   AvailableNodeCount: 7
-  LastClientPos: {x: -.25999999, y: 0, z: .00999999978}
+  LastClientPos: {x: -.25999999, y: 2, z: .00999999978}
   MyCamera: {fileID: 0}
   Owner: {fileID: 11400006}
   mStopped: 0
@@ -1518,7 +1518,7 @@ MonoBehaviour:
   LifeTime: 10
   IgnoreTimeScale: 0
   EditView: 0
-  Scale: 2
+  Scale: 1
 --- !u!114 &11400008
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1552,8 +1552,8 @@ MonoBehaviour:
   Depth: 0
   SpriteType: 4
   OriPoint: 0
-  SpriteWidth: 1
-  SpriteHeight: 1
+  SpriteWidth: 2
+  SpriteHeight: 2
   SpriteUVStretch: 0
   RandomOriScale: 0
   RandomOriRot: 1
@@ -1955,7 +1955,7 @@ MonoBehaviour:
   CollisionSubEmitter: 
   DeathSubEmitter: 
   AvailableNodeCount: 2
-  LastClientPos: {x: -.25999999, y: 0, z: .00999999978}
+  LastClientPos: {x: -.25999999, y: 2, z: .00999999978}
   MyCamera: {fileID: 0}
   Owner: {fileID: 11400006}
   mStopped: 0
@@ -1981,8 +1981,8 @@ MonoBehaviour:
   Depth: 0
   SpriteType: 4
   OriPoint: 0
-  SpriteWidth: 1
-  SpriteHeight: 1
+  SpriteWidth: 2
+  SpriteHeight: 2
   SpriteUVStretch: 0
   RandomOriScale: 0
   RandomOriRot: 0
@@ -2374,7 +2374,7 @@ MonoBehaviour:
   CollisionSubEmitter: 
   DeathSubEmitter: 
   AvailableNodeCount: 0
-  LastClientPos: {x: -.25999999, y: 0, z: .00999999978}
+  LastClientPos: {x: -.25999999, y: 2, z: .00999999978}
   MyCamera: {fileID: 0}
   Owner: {fileID: 11400006}
   mStopped: 0
@@ -2803,7 +2803,7 @@ MonoBehaviour:
   CollisionSubEmitter: 
   DeathSubEmitter: 
   AvailableNodeCount: 5
-  LastClientPos: {x: -.25999999, y: 0, z: .00999999978}
+  LastClientPos: {x: -.25999999, y: 2, z: .00999999978}
   MyCamera: {fileID: 0}
   Owner: {fileID: 11400006}
   mStopped: 0
@@ -2829,8 +2829,8 @@ MonoBehaviour:
   Depth: 0
   SpriteType: 4
   OriPoint: 0
-  SpriteWidth: 1
-  SpriteHeight: 1
+  SpriteWidth: 2
+  SpriteHeight: 2
   SpriteUVStretch: 0
   RandomOriScale: 1
   RandomOriRot: 1
@@ -3035,7 +3035,7 @@ MonoBehaviour:
   CMesh: {fileID: 0}
   EmitType: 2
   BoxSize: {x: 0, y: 0, z: 0}
-  EmitPoint: {x: 0, y: .709999979, z: 0}
+  EmitPoint: {x: 0, y: 1.5, z: 0}
   Radius: .100000001
   UseRandomCircle: 0
   CircleRadiusMin: 1
@@ -3220,7 +3220,7 @@ MonoBehaviour:
   CollisionSubEmitter: 
   DeathSubEmitter: 
   AvailableNodeCount: 0
-  LastClientPos: {x: -.25999999, y: 0, z: .00999999978}
+  LastClientPos: {x: -.25999999, y: 2, z: .00999999978}
   MyCamera: {fileID: 0}
   Owner: {fileID: 11400006}
   mStopped: 0

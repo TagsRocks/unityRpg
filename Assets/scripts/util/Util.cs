@@ -797,8 +797,10 @@ namespace ChuMeng
 
             var parName = "particles/" + name;
             var breakable = Resources.Load<GameObject> (parName);
+            //breakable.SetActive(false);
             //breakable.transform.position = pos + new Vector3 (0, 0.1f, 0);
             var p = GameObject.Instantiate(breakable) as GameObject;
+            p.SetActive(false);
             var xft = p.GetComponent<XffectComponent>();
             xft.enabled = false;
             if(par != null) {
@@ -817,7 +819,14 @@ namespace ChuMeng
         }
         private static IEnumerator EnableXft(XffectComponent xft) {
             yield return null;
+            var eft = xft.GetComponentsInChildren<EffectLayer>();
+            foreach(var e in eft) {
+                e.InitCollision();
+            }
+            xft.gameObject.SetActive(true);
             xft.enabled = true;
+            //重置CollisionPlane
+            //xft.Reset();
         }
     }
 

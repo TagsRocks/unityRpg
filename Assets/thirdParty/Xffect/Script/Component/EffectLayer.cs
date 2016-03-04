@@ -507,29 +507,20 @@ public class EffectLayer : MonoBehaviour
     }
 
 
-    protected void InitCollision()
+    public void InitCollision()
     {
         if (!UseCollisionDetection)
             return;
   
         mCollisionPlane = new Plane(PlaneDir.normalized,transform.position + PlaneOffset);
-		//mCollisionPlane = new Plane(PlaneDir.normalized, PlaneOffset);
-        
+
         if (CollisionType == COLLITION_TYPE.CollisionLayer || CollisionType == COLLITION_TYPE.Plane )
             return;
 
         if (CollisionGoal == null /* || CollisionGoal.gameObject.active == false*/)
         {
             Debug.LogWarning("please set the collision goal!");
-            //UseCollisionDetection = false;
-            //return;
         }
-
-        //暂时没有用到，先留着吧
-        //if (CollisionType == COLLITION_TYPE.Collider)
-        //{
-        //    CollisionCollider = CollisionGoal.GetComponent<Collider>();
-        //}
     }
 
     protected List<Affector> InitAffectors(EffectNode node)
