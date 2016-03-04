@@ -2,6 +2,7 @@
 using System.Collections;
 using UnityEditor;
 
+/*
 [CustomEditor(typeof(TileManager))]
 public class TileEditor : Editor {
 
@@ -52,3 +53,5 @@ public class TileEditor : Editor {
 		}
 	}
 }
+
+*/

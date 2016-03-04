@@ -58,7 +58,7 @@ namespace ChuMeng
                 yield return new WaitForSeconds(1);
             }
 
-            attribute.SetHPNet(0);
+            attribute.ChangeHP(-attribute.HP_Max);
         }
 
         List<Vector3> samplePos;

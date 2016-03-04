@@ -307,11 +307,7 @@ public class MakeSceneEditor : Editor
                 g.transform.parent = root.transform;
                 g.transform.localPosition = new Vector3(-px, py, pz);
                 var localPos = g.transform.localPosition;
-                /*
-                n["localPosition"][0].AsFloat = localPos.x;
-                n["localPosition"][1].AsFloat = localPos.y;
-                n["localPosition"][2].AsFloat = localPos.z;
-                */
+
                 pb.pos = localPos;
 
                 g.transform.localScale = Vector3.one;
@@ -320,20 +316,9 @@ public class MakeSceneEditor : Editor
                 var rot2 = Quaternion.Euler(new Vector3(rot.eulerAngles.x, -rot.eulerAngles.y, rot.eulerAngles.z));
                 g.transform.localRotation = rot2 * Quaternion.Euler(new Vector3(-90, 0, 0));
                 var localRot = g.transform.localRotation;
-                /*
-                n["localRotation"][0].AsFloat = localRot.x;
-                n["localRotation"][1].AsFloat = localRot.y;
-                n["localRotation"][2].AsFloat = localRot.z;
-                n["localRotation"][3].AsFloat = localRot.w;
-                */
+              
                 pb.rot = localRot;
-                /*
-                if(oldRot != 0){
-
-                }else {
-                    g.transform.localRotation = rot2 ;//* Quaternion.Euler(new Vector3(-90, 0, 0));
-                }
-                */
+               
 
             } else
             {
@@ -419,14 +404,11 @@ public class MakeSceneEditor : Editor
         var saveData = new GameObject("RoomPieces_data");
         saveData.AddComponent<RoomData>();
 
-        var resPath = Path.Combine(Application.dataPath, "levelPrefab");
+        //var resPath = Path.Combine(Application.dataPath, "levelPrefab");
+        //var dir = new DirectoryInfo(resPath);
+
+        var resPath = Path.Combine(Application.dataPath, "prefabs");
         var dir = new DirectoryInfo(resPath);
-
-        //var levelPrefab = dir.GetFiles("*.prefab", SearchOption.TopDirectoryOnly);
-
-
-        resPath = Path.Combine(Application.dataPath, "prefabs");
-        dir = new DirectoryInfo(resPath);
         var prefabs = dir.GetFiles("*.prefab", SearchOption.TopDirectoryOnly);
 
         resPath = Path.Combine(Application.dataPath, "prefabs/props");
