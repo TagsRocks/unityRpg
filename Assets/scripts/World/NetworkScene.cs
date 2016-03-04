@@ -42,10 +42,13 @@ namespace ChuMeng
 
             TextAsset bindata = Resources.Load("Config") as TextAsset;
             Debug.Log("nameMap " + bindata);
+            /*
             if (bindata != null)
             {
                 ServerIP = SimpleJSON.JSON.Parse(bindata.text).AsObject ["Server"];
             }
+            */
+            ServerIP = ClientApp.Instance.remoteServerIP;
             Debug.LogError("ServerIP: " + ServerIP);
 
             state = WorldState.Connecting;

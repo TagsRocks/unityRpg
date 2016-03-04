@@ -32,6 +32,7 @@ public class ClientApp : UnityEngine.MonoBehaviour
     public int testPort = 20000;
     //public bool debug = false;
     public int heartBeat = 8;
+    public string remoteServerIP = "127.0.0.1";
 
     void Awake()
     {
@@ -40,32 +41,22 @@ public class ClientApp : UnityEngine.MonoBehaviour
         DontDestroyOnLoad(this.gameObject);
     }
 
+    public void StartServer() {
+        Debug.Log("StartServer");
+        KBEngineApp.url = "http://10.1.2.210";
+        KBEngineApp.app.clientType = 1;
+        KBEngineApp.app.ip = "127.0.0.1";
+        KBEngineApp.app.port = Convert.ToUInt16(testPort);
+
+        new ChuMeng.DemoServer();
+
+        StartCoroutine(CheckConnectState());
+    }
     // Use this for initialization
     void Start()
     {
         UnityEngine.MonoBehaviour.print("client app start");
         gameapp = new KBEngineApp(this);
-        KBEngineApp.url = "http://10.1.2.210";
-
-        KBEngineApp.app.clientType = 1; //Mobile 
-
-        KBEngineApp.app.ip = "127.0.0.1";
-        KBEngineApp.app.port = Convert.ToUInt16(testPort);
-
-        //var s = 
-        new ChuMeng.DemoServer();
-        /*
-        if (debug)
-        {
-
-        } else
-        {
-            KBEngineApp.app.ip = url;
-            KBEngineApp.app.port = Convert.ToUInt16(port);
-        }
-        */
-
-        StartCoroutine(CheckConnectState());
     }
 
     //First Connect
@@ -141,7 +132,7 @@ public class ClientApp : UnityEngine.MonoBehaviour
     public bool IsPause = false;
     void OnApplicationPause(bool pauseStatus) {
         IsPause = pauseStatus;
-        if(pauseStatus){
+        if(pauseStatus && ChuMeng.ServerData.Instance != null){
             //ChuMeng.DemoServer.demoServer.GetThread().CloseServerSocket();
             ChuMeng.ServerData.Instance.SaveUserData();
         }
