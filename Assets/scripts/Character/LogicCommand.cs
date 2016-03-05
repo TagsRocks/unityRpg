@@ -30,6 +30,7 @@ namespace ChuMeng
         }
 
         public int skillId;
+        public int skillLevel;
 
         public ENUM_OBJECT_COMMAND commandID;
         public int logicCount;
@@ -104,7 +105,7 @@ namespace ChuMeng
         {
             //判断是否可以使用技能
             var msg = new MyAnimationEvent.Message(MyAnimationEvent.MsgType.DoSkill);
-            msg.skillData = Util.GetSkillData(cmd.skillId, 1);
+            msg.skillData = Util.GetSkillData(cmd.skillId, cmd.skillLevel);
             GetComponent<MyAnimationEvent>().InsertMsg(msg);
             currentLogicCommand = null;
         }

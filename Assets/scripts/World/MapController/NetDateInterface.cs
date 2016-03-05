@@ -49,7 +49,7 @@ namespace ChuMeng
             sc.BroadcastMsg(cg);
         }
 
-        public static void FastUseSkill(int skillId)
+        public static void FastUseSkill(int skillId, int skillLevel)
         {
             var sc = WorldManager.worldManager.GetActive();
             if (sc.IsNet)
@@ -58,6 +58,7 @@ namespace ChuMeng
                 var skInfo = SkillAction.CreateBuilder();
                 skInfo.Who = ObjectManager.objectManager.GetMyServerID(); 
                 skInfo.SkillId = skillId;
+                skInfo.SkillLevel = skillLevel;
                 cg.SkillAction = skInfo.Build();
                 cg.Cmd = "Skill";
                 sc.BroadcastMsg(cg);

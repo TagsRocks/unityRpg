@@ -22,7 +22,7 @@ namespace ChuMeng
             ObjectManager.objectManager.GetMyPlayer().GetComponent<MyAnimationEvent>().OnSkill(skillData);
 
             NetDateInterface.FastMoveAndPos();
-            NetDateInterface.FastUseSkill(skillId);
+            NetDateInterface.FastUseSkill(skillId, skillData.Level);
 		}
 
 

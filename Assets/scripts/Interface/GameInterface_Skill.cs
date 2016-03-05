@@ -93,7 +93,7 @@ namespace ChuMeng
             ObjectManager.objectManager.GetMyPlayer().GetComponent<MyAnimationEvent>().OnSkill(skillData);
 
             NetDateInterface.FastMoveAndPos();
-            NetDateInterface.FastUseSkill(skillData.Id);
+            NetDateInterface.FastUseSkill(skillData.Id, skillData.Level);
         }
 
         /// <summary>
