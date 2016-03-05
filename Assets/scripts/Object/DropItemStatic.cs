@@ -63,6 +63,7 @@ namespace ChuMeng
             var me = ObjectManager.objectManager.GetMyPlayer();
             if(who == me) {
                 if(itemData.UnitType == ItemData.UnitTypeEnum.POWER_DRUG) {
+                    WindowMng.windowMng.ShowNotifyLog("炸弹威力上升");
                     GameInterface_Backpack.LearnSkill((int)SkillData.SkillConstId.Bomb);
                 }else if(itemData.UnitType == ItemData.UnitTypeEnum.QIPAO_DRUG) {
                     var attr = ObjectManager.objectManager.GetMyAttr();

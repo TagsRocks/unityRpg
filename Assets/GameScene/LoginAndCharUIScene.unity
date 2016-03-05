@@ -379,6 +379,7 @@ MonoBehaviour:
   testPort: 20000
   heartBeat: 8
   remoteServerIP: 127.0.0.1
+  syncFreq: .100000001
   IsPause: 0
 --- !u!4 &775957294
 Transform:

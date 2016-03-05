@@ -14,7 +14,7 @@ namespace ChuMeng
 
         IEnumerator Add(){
             var period = 0.2f;
-            var num = 2;
+            var num = 1;
             var goneTime = 0.0f;
             var npcAttr = obj.GetComponent<NpcAttribute>();
             while(!IsDie) {

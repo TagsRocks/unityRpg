@@ -24,10 +24,10 @@ namespace ChuMeng {
 	/// </summary>
 	public class AttackUI : IUserInterface {
 		void InitShortCut() {
-			Log.GUI ("Init Short Cut Icon");
+			//Log.GUI ("Init Short Cut Icon");
 			for(int i=1; i <= 4; i++) {
 				var shortCut = GameInterface_Skill.skillInterface.GetShortSkillData (i-1);
-				Log.GUI("shortcut info "+i.ToString()+" "+shortCut);
+				//Log.GUI("shortcut info "+i.ToString()+" "+shortCut);
 				var but = GetName("SkillButton"+i.ToString());
 				var icon = Util.FindChildRecursive(but.transform, "Background");
 				int temp = i-1;

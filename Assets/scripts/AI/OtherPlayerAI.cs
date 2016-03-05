@@ -18,7 +18,7 @@ namespace ChuMeng
             ai = new HumanCharacter();
             ai.attribute = attribute;
             ai.AddState(new HumanIdle());
-            ai.AddState(new HumanMove());
+            ai.AddState(new OtherPlayerMove());
             ai.AddState(new HumanCombat());
             ai.AddState(new HumanSkill());
             ai.AddState(new HumanDead());

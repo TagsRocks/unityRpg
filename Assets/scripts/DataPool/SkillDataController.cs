@@ -95,12 +95,12 @@ namespace ChuMeng
         /// <param name="index">Index.</param>
         public SkillData GetShortSkillData(int index)
         {
-            Log.Sys("GetShortSkillData "+index);
+            //Log.Sys("GetShortSkillData "+index);
             foreach (SkillFullInfo s in skillSlots)
             {
                 if (s.shortSlotId == index)
                 {
-                    Log.Sys("SkillLevel: "+s.skillData.Level);
+                    //Log.Sys("SkillLevel: "+s.skillData.Level);
                     foreach(var sk in activeSkill) {
                         if(sk.skillId == s.skillId) {
                             return sk.skillData;

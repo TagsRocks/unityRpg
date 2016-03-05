@@ -38,7 +38,7 @@ namespace ChuMeng
         public SkillData GetShortSkillData(int shortId)
         {
             var shortData = SkillDataController.skillDataController.GetShortSkillData(shortId);
-            Log.Sys("GetShortSkillData " + shortId + " d " + shortData);
+            //Log.Sys("GetShortSkillData " + shortId + " d " + shortData);
             return shortData;
         }
 

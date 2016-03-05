@@ -834,15 +834,17 @@ namespace ChuMeng
         //TODO: 掉落物品机制重新设计 掉落物品和掉落黄金
         public List<List<float>> GetDropTreasure()
         {
-            var myLev = _ObjUnitData.Level;
-            var pLev = ObjectManager.objectManager.GetMyAttr().Level;
-            var num = (pLev - myLev) / 10;
+            //var myLev = _ObjUnitData.Level;
+            //var pLev = ObjectManager.objectManager.GetMyAttr().Level;
+            //var num = (pLev - myLev) / 10;
             var mod = 100;
+            /*
             if (num > 0)
             {
                 mod = mod >> num;
             }
-            Log.Sys("DropMod " + mod + " lev " + pLev + " mlev " + myLev);
+            */
+            //Log.Sys("DropMod " + mod + " lev " + pLev + " mlev " + myLev);
 
             return _ObjUnitData.GetRandomDrop(mod / 100.0f);
         }

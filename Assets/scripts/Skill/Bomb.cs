@@ -10,6 +10,7 @@ namespace ChuMeng
         public SkillLayoutRunner runner;
         public BombData bombData;
         public GameObject attacker;
+        const float BombTime = 4;
 
         float velocity;
         Vector3 initPos;
@@ -60,7 +61,7 @@ namespace ChuMeng
             var controller = gameObject.GetComponent<CharacterController>();
             var gravity = bombData.Gravity;
             var passTime = 0.0f;
-            while (passTime < 2f)
+            while (passTime < BombTime)
             {
                 var movement = moveDirection * forwardSpeed + upSpeed * Vector3.up;
                 movement *= Time.deltaTime;

@@ -55,10 +55,10 @@ namespace ChuMeng
             ServerBundle.SendImmediatePush(psp);
             if (sp > 0)
             {
-                SendNotify("升级技能点+" + sp);
+                //SendNotify("升级技能点+" + sp);
             } else
             {
-                SendNotify("技能点" + sp);
+                //SendNotify("技能点" + sp);
             }
         }
 
