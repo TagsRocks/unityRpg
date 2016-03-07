@@ -1,10 +1,14 @@
+##常见报错：
+    Log.cs 报错
+    打开 WIndow / Log View 这个窗口即可消除报错
+
+    NGUI shader编译错误， 屏幕变粉红色
+    在player setting 里面 设置 use d3d11 选项去掉 即可
+
 ##unityRpg
 Demo 游戏下载地址：
 https://itunes.apple.com/cn/app/id1016771030?mt=8
 
-常见报错：
-    Log.cs 报错
-    打开 WIndow / Log View 这个窗口即可消除报错
 
 http://www.taikr.com/course/297
 
