@@ -34,19 +34,7 @@ namespace ChuMeng
                 MyEvent.EventType.UpdateMainUI,
                 MyEvent.EventType.UpdatePlayerData,
             };
-            /*
-            var view = NGUITools.AddMissingComponent<KBEngine.KBNetworkView>();
-            view.SetLocalId(ObjectManager.objectManager.GetMyLocalId());
-
-            this.regLocalEvt = new System.Collections.Generic.List<MyEvent.EventType>(){
-                MyEvent.EventType.UnitHP,
-                MyEvent.EventType.UnitHPPercent,
-                MyEvent.EventType.UnitMP,
-                MyEvent.EventType.UnitMPPercent,
-                MyEvent.EventType.UpdatePlayerData,
-                MyEvent.EventType.UnitExp,
-            };
-            */
+   
             RegEvent();
             SetCallback("Close", OnQuit);
         }

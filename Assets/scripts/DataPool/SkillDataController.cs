@@ -27,13 +27,6 @@ namespace ChuMeng
         GameObject uiRoot;
         GameObject skillPanel;
 
-        /*
-		[System.Serializable]
-		public class SkillSlot {
-			public SkillData skillData;
-			public int Level;
-		}
-		*/
 
         //右下角快捷栏 里面的 技能  还包括 使用药品的技能
         //TODO: 初始化结束之后 玩家 SkillinfoComponent 从这里获取快捷栏里面的技能  不包括普通攻击技能  普通技能的ID 根据单位的BaseSkill 确定
@@ -61,12 +54,8 @@ namespace ChuMeng
             get
             {
                 return 0;
-                //return distributedSkillPoint;
             }
         }
-
-        //TODO:增加技能状态 变化接口
-        //public VoidDelegate UpdateSkill;
 
         List<SkillFullInfo> activeSkill = new List<SkillFullInfo>();
         List<SkillFullInfo> passiveSkill = new List<SkillFullInfo>();
@@ -77,6 +66,47 @@ namespace ChuMeng
             {
                 return activeSkill;
             }
+        }
+
+        void Update()
+        {
+            foreach (SkillFullInfo s in skillSlots)
+            {
+                s.Update();
+            }
+        }
+
+        public bool CheckCoolDown(int index)
+        {
+            foreach (SkillFullInfo s in skillSlots)
+            {
+                if (s.shortSlotId == index)
+                {
+                    return s.CheckCoolDown();
+                }
+            }
+            return false;
+        }
+        public void SetCoolDown(int index) {
+            foreach (SkillFullInfo s in skillSlots)
+            {
+                if (s.shortSlotId == index)
+                {
+                    s.SetCoolDown();
+                    break;
+                }
+            }
+        }
+
+        public float GetCoolTime(int index) {
+            foreach (SkillFullInfo s in skillSlots)
+            {
+                if (s.shortSlotId == index)
+                {
+                    return s.CoolDownTime;
+                }
+            }
+            return 0;
         }
 
         public List<SkillFullInfo> passive
@@ -101,8 +131,10 @@ namespace ChuMeng
                 if (s.shortSlotId == index)
                 {
                     //Log.Sys("SkillLevel: "+s.skillData.Level);
-                    foreach(var sk in activeSkill) {
-                        if(sk.skillId == s.skillId) {
+                    foreach (var sk in activeSkill)
+                    {
+                        if (sk.skillId == s.skillId)
+                        {
                             return sk.skillData;
                         }
                     }

@@ -26,7 +26,7 @@ namespace ChuMeng
             AddMP = 150,
         }
 
-        SkillConfigData skillConfig;
+        public SkillConfigData skillConfig;
         SkillEffectConfigData effectConfig;
         public string Sound {
             get {

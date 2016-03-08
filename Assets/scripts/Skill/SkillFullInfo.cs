@@ -1,4 +1,4 @@
-﻿﻿﻿using UnityEngine;
+﻿using UnityEngine;
 using System.Collections;
 
 namespace ChuMeng
@@ -44,9 +44,12 @@ namespace ChuMeng
 			CoolDownTime = Mathf.Max (0, CoolDownTime);
 		}
 
+        public void SetCoolDown() {
+            CoolDownTime = skillData.skillConfig.FullColdTime;
+        }
 		public bool CheckCoolDown ()
 		{
-			return CoolDownTime == 0;
+			return CoolDownTime <= 0;
 		}
 
 

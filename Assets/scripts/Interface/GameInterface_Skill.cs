@@ -121,6 +121,12 @@ namespace ChuMeng
                     WindowMng.windowMng.ShowNotifyLog("魔法不足");
                     return;
                 }
+                var cd = SkillDataController.skillDataController.CheckCoolDown(skIndex);
+                if(!cd) {
+                    WindowMng.windowMng.ShowNotifyLog("冷却时间未到");
+                    return;
+                }
+                SkillDataController.skillDataController.SetCoolDown(skIndex);
                 var npc = ObjectManager.objectManager.GetMyAttr();
                 npc.ChangeMP(-cost);
                 UseSkill(skillData);
