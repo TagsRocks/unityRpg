@@ -15,15 +15,27 @@ namespace ChuMeng
         float velocity;
         Vector3 initPos;
         GameObject activeParticle;
-        private bool isDie = false;
+        public bool isDie = false;
+        public bool FastDie = false;
 
         //抛物线子弹需要添加一个小的CharacterController碰撞器 用于运动
         void Awake()
         {
+            gameObject.layer = (int)GameLayer.Bomb;
             var c = gameObject.AddComponent<CharacterController>();
-            c.center = new Vector3(0, 0.2f, 0);
-            c.radius = 0.1f;
-            c.height = 0.5f;
+            c.center = new Vector3(0, 0.5f, 0);
+            c.radius = 0.2f;
+            c.height = 1f;
+
+
+            StartCoroutine(WaitSetBox());
+        }
+
+        IEnumerator WaitSetBox() {
+            yield return new WaitForSeconds(0.4f);
+            var box = gameObject.AddComponent<BoxCollider>();
+            box.center = new Vector3(0, 1.5f, 0) ;
+            box.size = 3*Vector3.one;
         }
 
         void Start()
@@ -61,7 +73,7 @@ namespace ChuMeng
             var controller = gameObject.GetComponent<CharacterController>();
             var gravity = bombData.Gravity;
             var passTime = 0.0f;
-            while (passTime < BombTime)
+            while (passTime < BombTime && !FastDie)
             {
                 var movement = moveDirection * forwardSpeed + upSpeed * Vector3.up;
                 movement *= Time.deltaTime;
@@ -79,7 +91,25 @@ namespace ChuMeng
             }
             CreateHitParticle();
             GameObject.Destroy(gameObject);
+            isDie = true;
             AOEDamage();
+            CheckNearbyBomb();
+        }
+
+        /// <summary>
+        /// 引爆附近的炸弹 如果炸弹属于自己就可以引爆
+        /// 或者由Master控制炸弹的引爆
+        /// </summary>
+        void CheckNearbyBomb(){
+            var col = Physics.OverlapSphere(transform.position, 5, 1 << (int)GameLayer.Bomb);
+            foreach (var c in col)
+            {
+                var bomb = c.GetComponent<Bomb>();
+                if(bomb != null && !bomb.isDie) 
+                {
+                    bomb.FastDie = true;
+                }
+            }
         }
 
         void CreateHitParticle()

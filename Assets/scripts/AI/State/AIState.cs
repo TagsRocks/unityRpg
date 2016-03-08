@@ -278,7 +278,13 @@ namespace ChuMeng
                         Log.AI("Enter CastSkill");
                         var skillPart = GetSkill();
                         skillPart.SetActiveSkill(msg.skillData);
-                        return aiCharacter.ChangeState(AIStateEnum.CAST_SKILL);
+                        //技能动作为空
+                        if(string.IsNullOrEmpty(msg.skillData.AnimationName)) {
+                            SkillLogic.UseSkill(GetAttr());
+                            return false;
+                        }else {
+                            return aiCharacter.ChangeState(AIStateEnum.CAST_SKILL);
+                        }
                     }
                 } else if (msg.type == MyAnimationEvent.MsgType.STUNNED)
                 {

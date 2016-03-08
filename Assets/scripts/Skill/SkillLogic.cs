@@ -18,10 +18,17 @@ namespace ChuMeng
             var skillStateMachine = CreateSkillStateMachine(attacker, activeSkill, position);
             yield return null;
         }
+        //直接使用技能不切换状态
+        public static SkillStateMachine UseSkill(NpcAttribute attacker)
+        {
+            var activeSkill = attacker.GetComponent<SkillInfoComponent>().GetActiveSkill();
+            var skillStateMachine = SkillLogic.CreateSkillStateMachine(attacker.gameObject, activeSkill.skillData, attacker.transform.position);
+            return skillStateMachine;
+        }
 
         public static SkillStateMachine CreateSkillStateMachine(GameObject attacker, SkillData activeSkill, Vector3 position, GameObject enemy = null)
         {
-            Log.AI("create Skill State Machine " + activeSkill.SkillName+" skillLevel "+activeSkill.Level);
+            Log.AI("create Skill State Machine " + activeSkill.SkillName + " skillLevel " + activeSkill.Level);
             var g = new GameObject("SkillStateMachine_" + activeSkill.template);
             var skillStateMachine = g.AddComponent<SkillStateMachine>();
             skillStateMachine.InitPos = position;
@@ -45,21 +52,22 @@ namespace ChuMeng
             Log.AI("Get Skill Template is " + activeSkill.template);
             if (activeSkill.template != null)
             {
-                if (!skillConfigCache.ContainsKey(activeSkill.template) || skillConfigCache[activeSkill.template] == null)
+                if (!skillConfigCache.ContainsKey(activeSkill.template) || skillConfigCache [activeSkill.template] == null)
                 {
                     var tem = Resources.Load<GameObject>("skills/" + activeSkill.template);
                     if (tem == null)
                     {
                         Debug.LogError("NotFind Template " + activeSkill.template);
                         return null;
-                    }else {
+                    } else
+                    {
                         //切换场景不要摧毁对象
                         var go = GameObject.Instantiate(tem) as GameObject;
                         GameObject.DontDestroyOnLoad(go);
                         skillConfigCache.Add(activeSkill.template, go);
                     }
                 }
-                return skillConfigCache[activeSkill.template].GetComponent<SkillDataConfig>();
+                return skillConfigCache [activeSkill.template].GetComponent<SkillDataConfig>();
             }
             return null;
         }
@@ -119,7 +127,8 @@ namespace ChuMeng
                 if (a != b)
                 {
                     return true;
-                }else {
+                } else
+                {
                     return false;
                 }
             }
@@ -140,21 +149,25 @@ namespace ChuMeng
         /// <returns><c>true</c> if is enemy for bullet the specified a b; otherwise, <c>false</c>.</returns>
         /// <param name="a">The alpha component.</param>
         /// <param name="b">The blue component.</param>
-        public static bool IsEnemyForBullet(GameObject a, GameObject b) {
+        public static bool IsEnemyForBullet(GameObject a, GameObject b)
+        {
             var scene = WorldManager.worldManager.GetActive();
             if (scene.IsNet)
             {
                 var aview = a.GetComponent<KBEngine.KBNetworkView>();
                 var bview = b.GetComponent<KBEngine.KBNetworkView>();
-                if(bview != null && bview.IsPlayer) {
+                if (bview != null && bview.IsPlayer)
+                {
                     var battr = bview.GetComponent<NpcAttribute>();
                     var aattr = aview.GetComponent<NpcAttribute>();
-                    if(aattr.TeamColor != battr.TeamColor) {
+                    if (aattr.TeamColor != battr.TeamColor)
+                    {
                         return true;
                     }
                 }
                 return false;
-            }else {
+            } else
+            {
                 return IsEnemy(a, b);
             }
         }

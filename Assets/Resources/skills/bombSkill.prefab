@@ -40,7 +40,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   eventList:
-  - evt: 10000
+  - evt: 10001
     layout: {fileID: 131952, guid: 9d2223ca92d0a493ba57f09871f0cbfe, type: 2}
     affix:
       effectType: 0

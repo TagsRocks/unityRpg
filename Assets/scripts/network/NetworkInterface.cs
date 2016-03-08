@@ -33,8 +33,6 @@ namespace KBEngine
     	public const int TCP_PACKET_MAX = 1460;
     	
         private Socket socket_ = null;
-        private KBEngineApp app_ = null;
-		private List<MemoryStream> packets_ = null;
 		private MessageReader msgReader = new MessageReader();
 		private static ManualResetEvent TimeoutObject = new ManualResetEvent(false);
 		private static byte[] _datas = new byte[MemoryStream.BUFFER_MAX];
@@ -43,8 +41,6 @@ namespace KBEngine
 
         public NetworkInterface(KBEngineApp app)
         {
-        	this.app_ = app;
-        	packets_ = new List<MemoryStream>();
             msgReader.mainLoop = KBEngine.KBEngineApp.app;
         }
 		
@@ -56,7 +52,6 @@ namespace KBEngine
 			socket_ = null;
 			msgReader = new MessageReader();
             msgReader.mainLoop = KBEngineApp.app;
-			packets_.Clear();
 			TimeoutObject.Set();
 		}
 		
@@ -91,10 +86,8 @@ __RETRY:
 			reset();
 			TimeoutObject.Reset();
 			
-			// Security.PrefetchSocketPolicy(ip, 843);
 			socket_ = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp); 
 			socket_.SetSocketOption (System.Net.Sockets.SocketOptionLevel.Socket, SocketOptionName.ReceiveBuffer, MemoryStream.BUFFER_MAX);
-			
             try 
             { 
                 IPEndPoint endpoint = new IPEndPoint(IPAddress.Parse(ip), port); 

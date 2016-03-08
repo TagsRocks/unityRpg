@@ -39,6 +39,7 @@ namespace ChuMeng
         //buff 状态下不发生碰撞但是收到技能伤害
         Block = 17,
         //阻挡爆炸发生的层
+        Bomb = 18, //炸弹所在层 炸弹之间没有碰撞
     }
 
     public static class GameTag
