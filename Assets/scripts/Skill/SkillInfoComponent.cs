@@ -12,6 +12,7 @@ namespace ChuMeng
         SkillData activeSkill;
         NpcAttribute attribute;
 
+
         void Start()
         {
             attribute = GetComponent<NpcAttribute>();

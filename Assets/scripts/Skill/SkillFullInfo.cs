@@ -45,7 +45,7 @@ namespace ChuMeng
 		}
 
         public void SetCoolDown() {
-            CoolDownTime = skillData.skillConfig.FullColdTime;
+            CoolDownTime = skillData.skillConfig.FullColdTime/1000.0f;
         }
 		public bool CheckCoolDown ()
 		{
