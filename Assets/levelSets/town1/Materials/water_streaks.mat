@@ -24,7 +24,7 @@ Material:
       data:
         first:
           name: _UVAnimX
-        second: .100000001
+        second: -.200000003
       data:
         first:
           name: _UVAnimY
