@@ -11,7 +11,7 @@
 				
 		Pass {
 			LOD 200
-			Blend Zero One 
+			Blend One One 
 			//Blend SrcAlpha OneMinusSrcAlpha 
 			zwrite off
 			
@@ -56,7 +56,7 @@
 			fixed4 frag(v2f i) : Color {
                 fixed4 tex =  tex2D(_MainTex, i.uv);//*i.vertColor;
                 fixed4 col;
-                col.rgb = tex.rgb*(i.vertColor);
+                col.rgb = tex.rgb*2*(i.vertColor);
                 col.a = tex.a;
 				//col.a *= 0.5f;
 				return col;

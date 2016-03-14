@@ -19,6 +19,8 @@
 
 		_scaleX("scaleX", float) = 1
 		_scaleY("scaleY", float) = 1
+
+		_rotate2("rotate2", float) = 55
 	}
 	
 
@@ -47,6 +49,7 @@
 	        	fixed4 pos : SV_POSITION;
 	        	fixed2 uv : TEXCOORD0;
 	   			fixed4 vertColor : TEXCOORD1;
+	   			fixed3 offPos : TEXCOORD2;
 	        };
 	        
 	        uniform sampler2D _MainTex;  
@@ -57,7 +60,15 @@
 	        uniform fixed _Amplitude_Y; 
 
 	        uniform fixed _rotate;
-	         
+
+
+			uniform sampler2D _LightMap;
+		    uniform float4 _CamPos;
+		    uniform float _CameraSize;
+		    uniform float4 _AmbientCol;
+			uniform sampler2D _LightMask;
+			uniform float _LightCoff;
+
 	         
 	        v2f vert(VertIn v) 
 			{
@@ -67,15 +78,19 @@
 				float t1 = sin(_Time.y*_Freq_X*6.28)*_Amplitude_X;
 				float t2 = sin(_Time.y*_Freq_Y*6.28)*_Amplitude_Y;
 
-				float sinX = sin(_rotate);
-				float cosX = cos(_rotate);
-				float2x2 rotationMatrix = float2x2(cosX*0.5f+0.5f, -sinX*0.5f+0.5f, sinX*0.5f+0.5f, cosX*0.5f+0.5f);
-
 				o.uv = MultiplyUV(UNITY_MATRIX_TEXTURE0, v.texcoord);
+
+				float sinX = sin(_rotate/180*3.14);
+				float cosX = cos(_rotate/180*3.14);
+				float2x2 rotationMatrix = float2x2(cosX, -sinX, sinX, cosX);
+				o.uv = mul(o.uv, rotationMatrix);
+
 				o.uv = mul(o.uv, rotationMatrix);
 				o.uv += fixed2(t1, t2);
 				
 				o.vertColor = v.color; 
+
+				o.offPos = mul(_Object2World, v.vertex).xyz-(_WorldSpaceCameraPos+_CamPos);
 				return o;
 			}
 			
@@ -84,6 +99,11 @@
                 fixed4 col;
                 col.rgb = tex.rgb*(i.vertColor);
                 col.a = tex.a;
+
+				fixed2 mapUV = (i.offPos.xz+float2(_CameraSize, _CameraSize))/(2*_CameraSize);
+				fixed3 lightColor = (_AmbientCol.rgb+tex2D(_LightMap, mapUV).rgb * (1-tex2D(_LightMask, mapUV).a)*_LightCoff );
+
+				col.rgb *= lightColor;
 				return col;
 			}	
 	        
@@ -107,12 +127,15 @@
 	        	float4 vertex : POSITION;
 	        	float4 texcoord : TEXCOORD0;
 	        	float4 color : COLOR;
+
+	   			fixed3 offPos : TEXCOORD2;
 	        };
 	        
 	        struct v2f {
 	        	fixed4 pos : SV_POSITION;
 	        	fixed2 uv : TEXCOORD0;
 	   			fixed4 vertColor : TEXCOORD1;
+	   			fixed3 offPos : TEXCOORD2;
 	        };
 	        
 	        uniform sampler2D _AnimTex;  
@@ -124,8 +147,15 @@
 
 	        uniform fixed _scaleX;
 	        uniform fixed _scaleY;
-	         
-	         
+
+	        uniform fixed _rotate2;
+
+			uniform sampler2D _LightMap;
+		    uniform float4 _CamPos;
+		    uniform float _CameraSize;
+		    uniform float4 _AmbientCol;
+			uniform sampler2D _LightMask;
+			uniform float _LightCoff;
 	        v2f vert(VertIn v) 
 			{
 				v2f o;
@@ -135,10 +165,17 @@
 				float t2 = sin(_Time.y*_Freq_Y1*6.28)*_Amplitude_Y1;
 	
 				o.uv = MultiplyUV(UNITY_MATRIX_TEXTURE0, v.texcoord);
-				o.uv += fixed2(t1, t2);
+
+				float sinX = sin(_rotate2/180*3.14);
+				float cosX = cos(_rotate2/180*3.14);
+				float2x2 rotationMatrix = float2x2(cosX, -sinX, sinX, cosX);
+				o.uv = mul(o.uv, rotationMatrix);
+
 				o.uv *= fixed2(_scaleX, _scaleY);
-				
+				o.uv += fixed2(t1, t2);
+
 				o.vertColor = v.color; 
+				o.offPos = mul(_Object2World, v.vertex).xyz-(_WorldSpaceCameraPos+_CamPos);
 				return o;
 			}
 			
@@ -147,6 +184,11 @@
                 fixed4 col;
                 col.rgb = tex.rgb*(i.vertColor);
                 col.a = tex.a;
+
+				fixed2 mapUV = (i.offPos.xz+float2(_CameraSize, _CameraSize))/(2*_CameraSize);
+				fixed3 lightColor = (_AmbientCol.rgb+tex2D(_LightMap, mapUV).rgb * (1-tex2D(_LightMask, mapUV).a)*_LightCoff );
+
+				col.rgb *= lightColor;
 				return col;
 			}	
 	        
