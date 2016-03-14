@@ -45,6 +45,7 @@
 			uniform fixed _LightCoff;
 			
 			v2f vert(VertIn v) 
+
 			{
 				v2f o;
 				o.pos = mul(UNITY_MATRIX_MVP, v.vertex);

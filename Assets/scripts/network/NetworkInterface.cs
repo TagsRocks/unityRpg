@@ -30,8 +30,6 @@ namespace KBEngine
 
     public class NetworkInterface 
     {
-    	public const int TCP_PACKET_MAX = 1460;
-    	
         private Socket socket_ = null;
 		private MessageReader msgReader = new MessageReader();
 		private static ManualResetEvent TimeoutObject = new ManualResetEvent(false);

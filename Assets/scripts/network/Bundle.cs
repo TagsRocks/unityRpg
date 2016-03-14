@@ -144,6 +144,20 @@ namespace KBEngine
 			
 		}
 
+        public static Packet GetPacketFid(IBuilderLite build) {
+            var p = new Packet();
+
+            var bundle = new Bundle();
+            var data = build.WeakBuild();
+            Log.Net("GetPacket: "+data);
+            bundle.newMessage(data.GetType());
+            var fid = bundle.writePB(data);
+            var buff = bundle.stream.getbuffer();
+            p.flowId = fid;
+            p.data = buff;
+            return p;
+        }
+
         public static byte[] GetPacket(IBuilderLite build) {
             var bundle = new Bundle();
             var data = build.WeakBuild();

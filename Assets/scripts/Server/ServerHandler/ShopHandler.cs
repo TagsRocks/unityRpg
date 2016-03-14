@@ -8,7 +8,6 @@ namespace ServerPacketHandler
     {
         public static void HandlePacket(ChuMeng.CGBuyShopProps buy)
         {
-
             Log.Net("ShopHandler");
             //var buy = packet.protoBody as ChuMeng.CGBuyShopProps;
             var itemId = buy.ShopId;

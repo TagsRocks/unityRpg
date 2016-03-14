@@ -26,6 +26,87 @@ public class SimpleMakeScene : MonoBehaviour
         #endif
     }
 
+    public string lightPath;
+    [ButtonCallFunc()]
+    public bool LightMapEnv;
+    #if UNITY_EDITOR
+    public void LightMapEnvMethod()
+    {
+        var allModel = Path.Combine(Application.dataPath, lightPath);
+        var resDir = new DirectoryInfo(allModel);
+        FileInfo[] fileInfo = resDir.GetFiles("*.fbx", SearchOption.AllDirectories);
+        AssetDatabase.StartAssetEditing();
+        foreach (FileInfo file in fileInfo)
+        {
+            Debug.Log("file is " + file.Name + " " + file.Name);
+
+            var ass = file.FullName.Replace(Application.dataPath, "Assets");
+            var res = Resources.LoadAssetAtPath<GameObject>(ass);
+            res.renderer.sharedMaterial.shader = Shader.Find("Custom/lightMapEnv");
+            EditorUtility.SetDirty(res.renderer.sharedMaterial);
+
+            Debug.Log("import change state ");
+            AssetDatabase.WriteImportSettingsIfDirty(ass);
+        }
+        AssetDatabase.StopAssetEditing();
+        AssetDatabase.Refresh();
+    }
+    #endif
+
+    public string lightModelPath = "lights";
+    [ButtonCallFunc()]
+    public bool CustomLight;
+    #if UNITY_EDITOR
+    public void CustomLightMethod()
+    {
+        var allModel = Path.Combine(Application.dataPath, lightModelPath);
+        var resDir = new DirectoryInfo(allModel);
+        FileInfo[] fileInfo = resDir.GetFiles("*.fbx", SearchOption.AllDirectories);
+        AssetDatabase.StartAssetEditing();
+        foreach (FileInfo file in fileInfo)
+        {
+            Debug.Log("file is " + file.Name + " " + file.Name);
+
+            var ass = file.FullName.Replace(Application.dataPath, "Assets");
+            var res = Resources.LoadAssetAtPath<GameObject>(ass);
+            res.renderer.sharedMaterial.shader = Shader.Find("Custom/light");
+            EditorUtility.SetDirty(res.renderer.sharedMaterial);
+
+            Debug.Log("import change state ");
+            AssetDatabase.WriteImportSettingsIfDirty(ass);
+        }
+        AssetDatabase.StopAssetEditing();
+        AssetDatabase.Refresh();
+    }
+    #endif
+
+    public string lightModelPath2 = "lights";
+    [ButtonCallFunc()]public bool MoveToPrefab;
+
+    public void MoveToPrefabMethod()
+    {
+        var allModel = Path.Combine(Application.dataPath, lightModelPath2);
+        var resDir = new DirectoryInfo(allModel);
+        FileInfo[] fileInfo = resDir.GetFiles("*.fbx", SearchOption.AllDirectories);
+
+        AssetDatabase.StartAssetEditing();
+        foreach (FileInfo file in fileInfo)
+        {
+            Debug.Log("file is " + file.Name + " " + file.FullName);
+            var dirName = file.Name.Replace(".fbx", "");
+            var ass = file.FullName.Replace(Application.dataPath, "Assets");
+            var tar = Path.Combine("Assets/lightPrefab", dirName + ".prefab");
+
+            var oldPrefab = Resources.LoadAssetAtPath<GameObject>(tar);
+            if(oldPrefab == null)
+            {
+                var prefab = PrefabUtility.CreatePrefab(tar, Resources.LoadAssetAtPath<GameObject>(ass));
+            }
+        }
+
+        AssetDatabase.StopAssetEditing();
+        AssetDatabase.Refresh();
+    }
 
     public string path1;
     [ButtonCallFunc()]public bool CombineToPrefab;
@@ -55,20 +136,8 @@ public class SimpleMakeScene : MonoBehaviour
 
         var allFiles = resDir.GetFiles("*.fbx", SearchOption.TopDirectoryOnly);
         CreateAniModelPrefab(allFiles, resDir.Name);
-
-
-        /*
-        DirectoryInfo[] fileInfo = resDir.GetDirectories("*", SearchOption.TopDirectoryOnly);//("*.*", SearchOption.TopDirectoryOnly);
-        foreach (DirectoryInfo file in fileInfo)
-        {
-            Debug.Log("Directory name " + file.FullName);
-   
-            var allFiles = file.GetFiles("*.fbx", SearchOption.TopDirectoryOnly);
-            CreateAniModelPrefab(allFiles, file.Name);
-
-        }
-        */
     }
+
     GameObject CreateAniModelPrefab(FileInfo[] allFiles, string dirName)
     {
         var tar = Path.Combine("Assets/ModelPrefab", dirName + ".prefab");
@@ -190,6 +259,7 @@ public class SimpleMakeScene : MonoBehaviour
         AssetDatabase.Refresh();
         #endif
     }
+
 
 
 

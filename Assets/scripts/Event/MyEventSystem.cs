@@ -178,7 +178,6 @@ namespace ChuMeng
 
 		public LevelInfo levelInfo;
 
-		public GCPushTeamInvite teamInvite;
 
 		public RolesInfo rolesInfo;
 

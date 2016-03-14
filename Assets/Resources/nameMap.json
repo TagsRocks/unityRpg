@@ -14,9 +14,6 @@
     "MTeamProtoc": {
         "id": 9
     }, 
-    "MShopProtoc": {
-        "id": 10
-    }, 
     "MMallProtoc": {
         "id": 11
     }, 
@@ -70,6 +67,11 @@
     }, 
     "MCombatProtoc": {
         "id": 31
+    }, 
+    "MShopProtoc": {
+        "CGBuyShopProps": 1, 
+        "GCBuyShopProps": 2, 
+        "id": 10
     }, 
     "MCopyProtoc": {
         "CGCopyInfo": 1, 

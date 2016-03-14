@@ -165,13 +165,8 @@ namespace ChuMeng
 				retPb = au;
 			} else if (className == "CGHeartBeat") {
             
-			} else if (className == "CGLoadSaleItems") {
-				var au = GCLoadSaleItems.CreateBuilder ();
-				retPb = au;
-			} else if (className == "CGListAllTeams") {
-				var au = GCListAllTeams.CreateBuilder ();
-				retPb = au;
-			} else if (className == "CGCopyInfo") {
+			} 
+            else if (className == "CGCopyInfo") {
 				var pinfo = ServerData.Instance.playerInfo;
 				if (pinfo.HasCopyInfos) {
 					retPb = GCCopyInfo.CreateBuilder ().MergeFrom (pinfo.CopyInfos);
@@ -186,138 +181,10 @@ namespace ChuMeng
 					pinfo.CopyInfos = msg;
 					retPb = GCCopyInfo.CreateBuilder ().MergeFrom (msg);
 				}
+			} 
 
-                
-			} else if (className == "CGLoadVipLevelGiftReceiveInfo") {
-				var au = GCLoadVipLevelGiftReceiveInfo.CreateBuilder ();
-				var vip = ReceviedReward.CreateBuilder ();
-				vip.RewardId = 1;
-				au.AddReceviedLevelRewards (vip);
 
-				vip = ReceviedReward.CreateBuilder ();
-				vip.RewardId = 2;
-				au.AddReceviedLevelRewards (vip);
-
-				vip = ReceviedReward.CreateBuilder ();
-				vip.RewardId = 3;
-				au.AddReceviedLevelRewards (vip);
-
-				retPb = au;
-			} else if (className == "CGLoadVipInfo") {
-				var au = GCLoadVipInfo.CreateBuilder ();
-				au.VipType = VipType.NONE_VIP;
-				au.VipRemainTime = 0;
-				au.VipLevel = 4;
-				au.VipExp = 0;
-				retPb = au;
-			} else if (className == "CGLoadTaskList") {
-				var au = GCLoadTaskList.CreateBuilder ();
-				var task = PlayerTask.CreateBuilder ();
-				task.TaskId = 1;
-				task.PlayerTaskId = 1;
-				task.PlayerId = 2;
-				task.TaskState = 5;
-				task.Chain = 6;
-				au.AddPlayerTask (task);
-
-				task = PlayerTask.CreateBuilder ();
-				task.TaskId = 2;
-				task.PlayerTaskId = 1;
-				task.PlayerId = 2;
-				task.TaskState = 5;
-				task.Chain = 6;
-				au.AddPlayerTask (task);
-
-				task = PlayerTask.CreateBuilder ();
-				task.TaskId = 3;
-				task.PlayerTaskId = 1;
-				task.PlayerId = 2;
-				task.TaskState = 5;
-				task.Chain = 6;
-				au.AddPlayerTask (task);
-
-				retPb = au;
-			} else if (className == "CGLoadAchievements") {
-				var au = GCLoadAchievements.CreateBuilder ();
-				var ac = Achievement.CreateBuilder ();
-				ac.AchievementId = 1000;
-				au.AddAchievements (ac);
-
-				ac = Achievement.CreateBuilder ();
-				ac.AchievementId = 1001;
-				au.AddAchievements (ac);
-
-				ac = Achievement.CreateBuilder ();
-				ac.AchievementId = 1002;
-				au.AddAchievements (ac);
-
-				ac = Achievement.CreateBuilder ();
-				ac.AchievementId = 1003;
-				au.AddAchievements (ac);
-
-				ac = Achievement.CreateBuilder ();
-				ac.AchievementId = 1004;
-				au.AddAchievements (ac);
-				retPb = au;
-			} else if (className == "CGAuctionInfo") {
-				var au = GCAuctionInfo.CreateBuilder ();
-				au.MaxSize = 1;
-				au.PageSize = 6;
-				var item = AuctionItem.CreateBuilder ();
-				item.Id = 11;
-				item.BaseId = 14;
-				item.Type = 1;
-				item.SellCount = 2;
-				item.RemainTime = 60;
-				item.TotalCost = 88;
-				au.AddAuctionItems (item);
-                
-				item = AuctionItem.CreateBuilder ();
-				item.Id = 119;
-				item.BaseId = 15;
-				item.Type = 1;
-				item.SellCount = 2;
-				item.RemainTime = 609;
-				item.TotalCost = 889;
-				au.AddAuctionItems (item);
-                
-				item = AuctionItem.CreateBuilder ();
-				item.Id = 118;
-				item.BaseId = 16;
-				item.Type = 1;
-				item.SellCount = 2;
-				item.RemainTime = 608;
-				item.TotalCost = 888;
-				au.AddAuctionItems (item);
-
-				item = AuctionItem.CreateBuilder ();
-				item.Id = 117;
-				item.BaseId = 23;
-				item.Type = 1;
-				item.SellCount = 2;
-				item.RemainTime = 607;
-				item.TotalCost = 887;
-				au.AddAuctionItems (item);
-
-				item = AuctionItem.CreateBuilder ();
-				item.Id = 116;
-				item.BaseId = 24;
-				item.Type = 1;
-				item.SellCount = 2;
-				item.RemainTime = 605;
-				item.TotalCost = 886;
-				au.AddAuctionItems (item);
-
-				item = AuctionItem.CreateBuilder ();
-				item.Id = 115;
-				item.BaseId = 25;
-				item.Type = 1;
-				item.SellCount = 2;
-				item.RemainTime = 605;
-				item.TotalCost = 88;
-				au.AddAuctionItems (item);
-				retPb = au;
-			} else if (className == "CGUserDressEquip") {
+            else if (className == "CGUserDressEquip") {
 				PlayerData.UserDressEquip (packet);
 				findHandler = true;
 			} else if (className == "CGAutoRegisterAccount") {

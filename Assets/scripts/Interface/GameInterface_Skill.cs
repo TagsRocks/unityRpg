@@ -89,7 +89,7 @@ namespace ChuMeng
         /// <param name="skillData">Skill data.</param>
         static void UseSkill(SkillData skillData)
         {
-            Log.Sys("UseSkill: "+skillData.SkillName+" lev "+skillData.Level);
+            Log.Sys("UseSkill: " + skillData.SkillName + " lev " + skillData.Level);
             ObjectManager.objectManager.GetMyPlayer().GetComponent<MyAnimationEvent>().OnSkill(skillData);
 
             NetDateInterface.FastMoveAndPos();
@@ -104,11 +104,19 @@ namespace ChuMeng
         {
             var skillData = SkillDataController.skillDataController.GetShortSkillData(skIndex);
             var curState = ObjectManager.objectManager.GetMyPlayer().GetComponent<AIBase>().GetAI().state;
-            //当前状态不能使用技能 或者已经在技能状态了不能连续点击
-            if(curState != null) {
-                var ret = curState.CheckNextState(AIStateEnum.CAST_SKILL);
-                if(!ret) {
-                    return;
+            //无动作技能释放 不用检测
+            if (string.IsNullOrEmpty(skillData.AnimationName))
+            {
+            } else
+            {
+                //当前状态不能使用技能 或者已经在技能状态了不能连续点击
+                if (curState != null)
+                {
+                    var ret = curState.CheckNextState(AIStateEnum.CAST_SKILL);
+                    if (!ret)
+                    {
+                        return;
+                    }
                 }
             }
 
@@ -122,7 +130,8 @@ namespace ChuMeng
                     return;
                 }
                 var cd = SkillDataController.skillDataController.CheckCoolDown(skIndex);
-                if(!cd) {
+                if (!cd)
+                {
                     WindowMng.windowMng.ShowNotifyLog("冷却时间未到");
                     return;
                 }

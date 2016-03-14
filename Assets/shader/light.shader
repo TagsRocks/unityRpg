@@ -1,7 +1,6 @@
 ﻿Shader "Custom/light" {
 	Properties {
 		_MainTex ("Base (RGB)", 2D) = "white" {}
-		_Color ("Color", Color) = (1, 1, 1, 1)
 	}
 	
 	SubShader {
@@ -28,8 +27,7 @@
 	        	fixed2 uv : TEXCOORD0;
 	   		};
 	        uniform sampler2D _MainTex;
-	        uniform float4 _Color;
-	        
+
 	        v2f vert(VertIn v) 
 			{
 				v2f o;
@@ -39,7 +37,7 @@
 				return o;
 			}
 			fixed4 frag(v2f i) : Color {
-				fixed4 col = tex2D(_MainTex, i.uv)*_Color;
+				fixed4 col = tex2D(_MainTex, i.uv);//*_Color;
 				return col;
 			}
 	        

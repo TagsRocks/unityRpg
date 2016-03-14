@@ -26,6 +26,7 @@ namespace KBEngine
 		public short responseFlag;
 
 		public IMessageLite protoBody;
+        public byte[] data;
 
 
 		public Packet(byte f, uint len, uint fid, byte module, ushort msg, uint restime, short resflag, IMessageLite pb) {

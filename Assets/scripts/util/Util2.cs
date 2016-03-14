@@ -684,6 +684,16 @@ public partial class Util {
 		return retMsg;
 	}	
 
+	static IMessageLite GetGCBuyShopProps(ByteString buf) {
+		var retMsg = ChuMeng.GCBuyShopProps.ParseFrom(buf);
+		return retMsg;
+	}	
+
+	static IMessageLite GetCGBuyShopProps(ByteString buf) {
+		var retMsg = ChuMeng.CGBuyShopProps.ParseFrom(buf);
+		return retMsg;
+	}	
+
 
 	static Dictionary<string, MsgDelegate> msgMap = new Dictionary<string, MsgDelegate>(){
 
@@ -956,6 +966,10 @@ public partial class Util {
 	{"GCPushNotice", GetGCPushNotice},
 
 	{"CGViewChatGoods", GetCGViewChatGoods},
+
+	{"GCBuyShopProps", GetGCBuyShopProps},
+
+	{"CGBuyShopProps", GetCGBuyShopProps},
 
 	};
 

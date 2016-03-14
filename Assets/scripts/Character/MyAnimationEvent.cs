@@ -46,7 +46,6 @@ namespace ChuMeng
 		 */
 		public class Message {
 			public MsgType type;
-			public GCPushFightReport fightReport;
 
 			public SkillData skillData;
 			public Message(MsgType t) {

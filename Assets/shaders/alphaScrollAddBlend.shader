@@ -15,13 +15,7 @@
 			Cull Off Lighting Off
 			ztest off
 			zwrite off
-			//ztest always
-			
-			//ZWrite On ZTest Always
-				
-			//ztest Less
-			//zwrite off
-			
+
 			CGPROGRAM
 			#pragma vertex vert 
 	        #pragma fragment frag
