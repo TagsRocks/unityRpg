@@ -11,7 +11,7 @@
 				
 		Pass {
 			LOD 200
-			Blend One One
+			Blend Zero One 
 			//Blend SrcAlpha OneMinusSrcAlpha 
 			zwrite off
 			
