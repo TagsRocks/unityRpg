@@ -11,10 +11,66 @@ using ChuMeng;
 [CustomEditor(typeof(MakeScene))]
 public class MakeSceneEditor : Editor
 {
-    //string dir = "";
     string layoutStr = "";
-    //string modelStr = "";
-    //string lightStr = "";
+    GameObject CreateAParticle(GameObject root, JSONClass jobj) 
+    {
+        var px = jobj ["POSITIONX"].AsFloat;
+        var py = jobj ["POSITIONY"].AsFloat;
+        var pz = jobj ["POSITIONZ"].AsFloat;
+        var file = jobj ["LAYOUT FILE"].Value;
+
+        var rx = jobj ["RIGHTX"].AsFloat;
+        var ry = jobj ["RIGHTY"].AsFloat;
+        var rz = jobj ["RIGHTZ"].AsFloat;
+
+        var fx = jobj ["FORWARDX"].AsFloat;
+        var fy = jobj ["FORWARDY"].AsFloat;
+        var fz = jobj ["FORWARDZ"].AsFloat;
+
+
+        var levelPrefab = Path.Combine(Application.dataPath, "particles");
+        var prefabList = new DirectoryInfo(levelPrefab);
+        FileInfo[] fileInfo = prefabList.GetFiles("*.prefab", SearchOption.AllDirectories);
+
+        var fname = Path.GetFileName(file);
+        Debug.Log("create Prefab " + fname);
+        int lastNameLen = 0;
+        FileInfo bestMatch = null;
+        foreach (var p in fileInfo)
+        {
+            Debug.Log("Check Prefab " + p.Name);
+            var pn = p.Name.Replace(".prefab", "").ToLower();
+            var fn = fname.ToLower();
+            //空格用_替换
+            fn = fn.Replace(" ", "_");
+            pn = pn.Replace(" ", "_");
+            if (pn.Length > lastNameLen && fn.Contains(pn))
+            {
+                lastNameLen = pn.Length;
+                bestMatch = p;
+            }
+        }
+        if (bestMatch != null)
+        {
+            Debug.Log("Find File " + fname);
+            var assPath = bestMatch.FullName.Replace(Application.dataPath, "Assets");
+            var g = PrefabUtility.InstantiatePrefab(Resources.LoadAssetAtPath<GameObject>(assPath)) as GameObject;
+            g.transform.parent = root.transform;
+            g.transform.position = new Vector3(-px, py, pz);
+            g.transform.localScale = Vector3.one;
+
+            //LevelPrefab No Need To Multiply -90 because LevelPrefab combine RoomPieces With Particles
+            //OtherPrefab Need To Rotate Only Room Pieces
+            //Adjust Rotate
+            var rot = Quaternion.LookRotation(new Vector3(fx, fy, fz), Vector3.up);
+            var rot2 = Quaternion.Euler(new Vector3(rot.eulerAngles.x, -rot.eulerAngles.y, rot.eulerAngles.z));
+            g.transform.localRotation = rot2;//* Quaternion.Euler(new Vector3(-90, 0, 0));
+
+            return g;
+        }
+        Debug.Log("Not Find " + fname);
+        return null;
+    }
 
     GameObject CreateAProp(GameObject root, JSONClass jobj)
     {
@@ -91,6 +147,14 @@ public class MakeSceneEditor : Editor
         if (jobj ["DESCRIPTOR"].Value == "Layout Link")
         {
             var g = CreateAProp(root, jobj);
+            if (g != null)
+            {
+                var rd = saveData.GetComponent<RoomData>();
+                var pb = GetPrefabConfig(g);
+                rd.Prefabs.Add(pb);
+            }
+        }else if(jobj["DESCRIPTOR"].Value == "Layout Link Particle") {
+            var g = CreateAParticle(root, jobj);
             if (g != null)
             {
                 var rd = saveData.GetComponent<RoomData>();

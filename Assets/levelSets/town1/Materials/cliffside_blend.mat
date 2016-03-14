@@ -7,7 +7,7 @@ Material:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: cliffside_blend
-  m_Shader: {fileID: 4800000, guid: 65a267bb8c6f1468a853369b6641d369, type: 3}
+  m_Shader: {fileID: 4800000, guid: 5638acb5e39f94a4f9f0793a5258211b, type: 3}
   m_ShaderKeywords: []
   m_CustomRenderQueue: -1
   m_SavedProperties:

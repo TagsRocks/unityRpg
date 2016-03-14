@@ -10,7 +10,7 @@ GameObject:
   - 4: {fileID: 489346}
   - 33: {fileID: 3389346}
   - 23: {fileID: 2389346}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: stemple_quarter_03
   m_TagString: Untagged
   m_Icon: {fileID: 0}

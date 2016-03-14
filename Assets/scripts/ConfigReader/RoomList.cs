@@ -43,6 +43,7 @@ public class RoomList : MonoBehaviour
             "SW",
             "SE",
             "N",
+            "TOWN",
         };
 
         nameToObj = new Dictionary<string, Dictionary<string, GameObject>>();

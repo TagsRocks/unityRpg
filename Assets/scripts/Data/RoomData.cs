@@ -9,6 +9,18 @@ namespace ChuMeng
     /// </summary>
     public class RoomData : MonoBehaviour
     {
+        public string partName;
+        [ButtonCallFunc()]public bool RemovePart;
+        public void RemovePartMethod() {
+            foreach(var p in Prefabs) {
+                if(p.prefab.name == partName) {
+                    Prefabs.Remove(p);
+                    Debug.LogError("FindPrefab: "+p.prefab.name);
+                    break;
+                }
+            }
+        }
+
         [System.Serializable]
         public class RoomPosRot{
             public GameObject prefab;

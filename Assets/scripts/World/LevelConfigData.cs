@@ -36,9 +36,16 @@ namespace ChuMeng
             };
             LevelLayout.Add(101, l1);
 
+            /*
             //ZoneConfig MainCity
             l1 = new List<LevelConfig>(){
                 new LevelConfig("ENTRANCE_S_LM", 0, 0){useOtherZone=true, zoneId=10},
+            };
+            LevelLayout.Add(2, l1);
+            */
+
+            l1 = new List<LevelConfig>(){
+                new LevelConfig("TOWN", 0, 0){useOtherZone=true, zoneId=70, type="town"},
             };
             LevelLayout.Add(2, l1);
 

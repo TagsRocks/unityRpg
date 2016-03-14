@@ -80,6 +80,33 @@ public class SimpleMakeScene : MonoBehaviour
     }
     #endif
 
+    public string lightLayerPath = "lightPrefab";
+    [ButtonCallFunc()]
+    public bool LightLayer;
+
+    public void LightLayerMethod()
+    {
+        var allModel = Path.Combine(Application.dataPath, lightLayerPath);
+        var resDir = new DirectoryInfo(allModel);
+        FileInfo[] fileInfo = resDir.GetFiles("*.prefab", SearchOption.AllDirectories);
+        AssetDatabase.StartAssetEditing();
+        foreach (FileInfo file in fileInfo)
+        {
+            Debug.Log("file is " + file.Name + " " + file.Name);
+
+            var ass = file.FullName.Replace(Application.dataPath, "Assets");
+            var res = Resources.LoadAssetAtPath<GameObject>(ass);
+            //res.renderer.sharedMaterial.shader = Shader.Find("Custom/light");
+            Util.SetLayer(res, GameLayer.Light);
+            EditorUtility.SetDirty(res);
+
+            Debug.Log("import change state ");
+            AssetDatabase.WriteImportSettingsIfDirty(ass);
+        }
+        AssetDatabase.StopAssetEditing();
+        AssetDatabase.Refresh();
+    }
+
     public string lightModelPath2 = "lights";
     [ButtonCallFunc()]public bool MoveToPrefab;
 
@@ -98,7 +125,7 @@ public class SimpleMakeScene : MonoBehaviour
             var tar = Path.Combine("Assets/lightPrefab", dirName + ".prefab");
 
             var oldPrefab = Resources.LoadAssetAtPath<GameObject>(tar);
-            if(oldPrefab == null)
+            if (oldPrefab == null)
             {
                 var prefab = PrefabUtility.CreatePrefab(tar, Resources.LoadAssetAtPath<GameObject>(ass));
             }

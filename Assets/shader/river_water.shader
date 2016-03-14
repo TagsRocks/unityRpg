@@ -1,12 +1,13 @@
 ﻿Shader "Custom/river_water" {
 	Properties {
-		_Color ("Ambient", Color) = (0.588, 0.588, 0.588, 1)
 		_MainTex ("Base (RGB)", 2D) = "white" {}
 		_Freq_X("wave x freq", float) = 0.07
 		_Amplitude_X("wave x amplitude", float) = -0.2
 		
 		_Freq_Y("wave  freq", float) = 0.06
 		_Amplitude_Y("wave  amplitude", float) = -0.24
+
+		_rotate("rotate", float) = 55
 	
 	
 		_AnimTex("Animation Texture Pass", 2D) = "white" {}	
@@ -15,6 +16,9 @@
 		
 		_Freq_Y1("wave  freq", float) = 0.02
 		_Amplitude_Y1("wave  amplitude", float) = 0.05
+
+		_scaleX("scaleX", float) = 1
+		_scaleY("scaleY", float) = 1
 	}
 	
 
@@ -24,7 +28,7 @@
 				"IgnoreProjector"="True"
 				"RenderType"="Transparent" }
 		Pass {
-			
+			Name "Base"
 			LOD 200
 			Blend SrcAlpha OneMinusSrcAlpha 
 			
@@ -45,13 +49,14 @@
 	   			fixed4 vertColor : TEXCOORD1;
 	        };
 	        
-	        uniform fixed4 _Color;
 	        uniform sampler2D _MainTex;  
 	        uniform fixed _Freq_X;
 	        uniform fixed _Amplitude_X; 
 	         
 	        uniform fixed _Freq_Y;
 	        uniform fixed _Amplitude_Y; 
+
+	        uniform fixed _rotate;
 	         
 	         
 	        v2f vert(VertIn v) 
@@ -61,8 +66,13 @@
 				
 				float t1 = sin(_Time.y*_Freq_X*6.28)*_Amplitude_X;
 				float t2 = sin(_Time.y*_Freq_Y*6.28)*_Amplitude_Y;
-	
+
+				float sinX = sin(_rotate);
+				float cosX = cos(_rotate);
+				float2x2 rotationMatrix = float2x2(cosX*0.5f+0.5f, -sinX*0.5f+0.5f, sinX*0.5f+0.5f, cosX*0.5f+0.5f);
+
 				o.uv = MultiplyUV(UNITY_MATRIX_TEXTURE0, v.texcoord);
+				o.uv = mul(o.uv, rotationMatrix);
 				o.uv += fixed2(t1, t2);
 				
 				o.vertColor = v.color; 
@@ -72,7 +82,7 @@
 			fixed4 frag(v2f i) : Color {
                 fixed4 tex =  tex2D(_MainTex, i.uv);
                 fixed4 col;
-                col.rgb = tex.rgb*(i.vertColor+_Color);
+                col.rgb = tex.rgb*(i.vertColor);
                 col.a = tex.a;
 				return col;
 			}	
@@ -105,13 +115,15 @@
 	   			fixed4 vertColor : TEXCOORD1;
 	        };
 	        
-	        uniform fixed4 _Color;
 	        uniform sampler2D _AnimTex;  
 	        uniform fixed _Freq_X1;
 	        uniform fixed _Amplitude_X1; 
 	         
 	        uniform fixed _Freq_Y1;
 	        uniform fixed _Amplitude_Y1; 
+
+	        uniform fixed _scaleX;
+	        uniform fixed _scaleY;
 	         
 	         
 	        v2f vert(VertIn v) 
@@ -124,6 +136,7 @@
 	
 				o.uv = MultiplyUV(UNITY_MATRIX_TEXTURE0, v.texcoord);
 				o.uv += fixed2(t1, t2);
+				o.uv *= fixed2(_scaleX, _scaleY);
 				
 				o.vertColor = v.color; 
 				return o;
@@ -132,7 +145,7 @@
 			fixed4 frag(v2f i) : Color {
                 fixed4 tex =  tex2D(_AnimTex, i.uv);
                 fixed4 col;
-                col.rgb = tex.rgb*(i.vertColor+_Color);
+                col.rgb = tex.rgb*(i.vertColor);
                 col.a = tex.a;
 				return col;
 			}	

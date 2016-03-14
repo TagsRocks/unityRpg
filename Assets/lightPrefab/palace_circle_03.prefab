@@ -10,7 +10,7 @@ GameObject:
   - 4: {fileID: 414994}
   - 33: {fileID: 3314994}
   - 23: {fileID: 2314994}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: palace_circle_03
   m_TagString: Untagged
   m_Icon: {fileID: 0}

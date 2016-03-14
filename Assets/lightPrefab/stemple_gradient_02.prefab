@@ -10,7 +10,7 @@ GameObject:
   - 4: {fileID: 496900}
   - 33: {fileID: 3396900}
   - 23: {fileID: 2396900}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: stemple_gradient_02
   m_TagString: Untagged
   m_Icon: {fileID: 0}

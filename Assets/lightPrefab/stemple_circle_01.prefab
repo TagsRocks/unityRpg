@@ -10,7 +10,7 @@ GameObject:
   - 4: {fileID: 499856}
   - 33: {fileID: 3399856}
   - 23: {fileID: 2399856}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: stemple_circle_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
