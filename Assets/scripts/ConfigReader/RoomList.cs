@@ -103,7 +103,7 @@ public class RoomList : MonoBehaviour
         var dirInfo = prefabList.GetDirectories();
 
         FileInfo[] fileInfo = prefabList.GetFiles("*.prefab", SearchOption.TopDirectoryOnly);
-        var tp1 = Contains("");
+        var tp1 = Contains("mine");
         foreach (var p in fileInfo)
         {
             var n = p.FullName.Replace(Application.dataPath, "Assets");
@@ -111,6 +111,7 @@ public class RoomList : MonoBehaviour
             var go = Resources.LoadAssetAtPath<GameObject>(n);
             tp1.parts.Add(go);
         }
+
         foreach (var dir in dirInfo)
         {
             var finfo = dir.GetFiles("*.prefab", SearchOption.TopDirectoryOnly);

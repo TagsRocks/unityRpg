@@ -6,7 +6,7 @@ namespace ChuMeng
 {
     public class LevelConfig
     {
-        public string type = "";
+        public string type = "mine";
         public string room;
         public int x;
         public int y;

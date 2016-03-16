@@ -46,6 +46,17 @@ namespace ChuMeng
                     var s2 = GameObject.Instantiate(skybox) as GameObject;
                     s2.transform.localPosition = Vector3.zero;
                 }
+                if(d.useFog) {
+                    RenderSettings.fog = d.useFog;
+                    RenderSettings.fogColor = d.fogColor;
+                    RenderSettings.fogStartDistance = d.fogStart;
+                    RenderSettings.fogEndDistance = d.fogEnd;
+                    RenderSettings.fogMode = d.fogMode;
+                    RenderSettings.fogDensity = d.fogDensity;
+                    Camera.main.farClipPlane = d.cameraDist;
+                }else {
+                    RenderSettings.fog = d.useFog;
+                }
             }
         }
 
