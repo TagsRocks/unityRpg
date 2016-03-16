@@ -50,6 +50,18 @@ public class MakeParticle : MonoBehaviour
                 useShader = Shader.Find("Mobile/Particles/Alpha Blended");
             }
 
+            if (!string.IsNullOrEmpty(jobj ["U RATE"].Value))
+            {
+                var uRate = System.Convert.ToSingle(jobj ["U RATE"].Value);
+                var vRate = System.Convert.ToSingle(jobj ["V RATE"].Value);
+                effectLayer.UVRotXSpeed = uRate;
+                effectLayer.UVRotYSpeed = vRate;
+                effectLayer.UVRotAffectorEnable = true;
+                effectLayer.RandomUVRotateSpeed = false;
+                effectLayer.UVType = 2;
+                effectLayer.RandomStartFrame = true;
+            }
+
             var texPath = tex.Replace("media", "Assets").Replace(".dds", ".mat").Replace("\\", "/");
 
             var texName = texPath.Replace(".mat", ".png");
@@ -317,6 +329,11 @@ public class MakeParticle : MonoBehaviour
         {
             Debug.LogError("RibbomTrail");
             effectLayer.RenderType = 1;
+        } else if (renderType == "Sphere")
+        {
+            effectLayer.RenderType = 3;
+            //effectLayer.CMesh = ;
+            Debug.LogError("手动设置Sphere 粒子模型");
         }
 
         var isLight = modData ["IS LIGHT"].AsBool;
@@ -626,6 +643,7 @@ public class MakeParticle : MonoBehaviour
         } else if (modData ["NUM LOOPS"].AsInt == 1)
         {
             effectLayer.IsBurstEmit = true;
+            effectLayer.EmitLoop = 1;
         } else if (numLoops.AsInt == 0)
         {
             hasLoops = true;
@@ -699,8 +717,15 @@ public class MakeParticle : MonoBehaviour
         {
             effectLayer.EmitType = 3;
             effectLayer.UseRandomCircle = true;
-            effectLayer.CircleRadiusMax = ConvertToFloat(modData ["MAX RADIUS"].Value.Split(',')) [1];
-            
+            float[] maxRadius;
+            if (string.IsNullOrEmpty(modData ["MAX RADIUS"]))
+            {
+                maxRadius = new float[]{ 0, 3 };
+            } else
+            {
+                maxRadius = ConvertToFloat(modData ["MAX RADIUS"].Value.Split(','));
+            }
+            effectLayer.CircleRadiusMax = maxRadius [1];
             if (modData ["MIN RADIUS"].Value == "")
             {
                 effectLayer.CircleRadiusMin = effectLayer.CircleRadiusMax;
@@ -793,7 +818,14 @@ public class MakeParticle : MonoBehaviour
         }
 
 
-        var velocity = ConvertToFloat(modData ["VELOCITY"].Value);
+        float[] velocity;
+        if (string.IsNullOrEmpty(modData ["VELOCITY"]))
+        {
+            velocity = new float[]{ 0, 15 };
+        } else
+        {
+            velocity = ConvertToFloat(modData ["VELOCITY"].Value);
+        }
         var vtype = (int)velocity [0];
         if (vtype == 0)
         {

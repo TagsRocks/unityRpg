@@ -85,6 +85,10 @@ MonoBehaviour:
   - type: town
     parts:
     - {fileID: 192196, guid: b2d89e06d58954c408bb94d3bacccb8d, type: 2}
+  - type: lava
+    parts:
+    - {fileID: 0}
+    - {fileID: 152592, guid: 27c28cfafe6ab4255b1ebbf4da4eb15a, type: 2}
   LoadAllRooms: 0
 --- !u!1001 &100100000
 Prefab:

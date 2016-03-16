@@ -5,10 +5,13 @@ namespace ChuMeng
 {
     public class WaterEnvLoader : MonoBehaviour
     {
-        void Awake() {
+        void Awake()
+        {
             Log.Sys("WaterEnvLoader");
         }
-        void Start() {
+
+        void Start()
+        {
             LoadWater();
         }
 
@@ -19,20 +22,30 @@ namespace ChuMeng
             var configLists = LevelConfigData.LevelLayout [sceneId];
             var first = configLists [0];
 
-            Log.Sys("LoadWater "+first.type);
+            Log.Sys("LoadWater " + first.type);
             if (LevelConfigData.envConfig.ContainsKey(first.type))
             {
-                Log.Sys("LoadWater "+first.type);
-                var d = LevelConfigData.envConfig[first.type];
-                var bottom = Resources.Load<GameObject>(d.waterBottom);
-                var b = GameObject.Instantiate(bottom) as GameObject;
-                Log.Sys("WaterObj "+b);
-                //Util.InitGameObject(b);
+                Log.Sys("LoadWater " + first.type);
+                var d = LevelConfigData.envConfig [first.type];
+                if (!string.IsNullOrEmpty(d.waterBottom))
+                {
+                    var bottom = Resources.Load<GameObject>(d.waterBottom);
+                    var b = GameObject.Instantiate(bottom) as GameObject;
+                    Log.Sys("WaterObj " + b);
+                }
 
-                var bottom2 = Resources.Load<GameObject>(d.waterFace);
-                var b2 = GameObject.Instantiate(bottom2) as GameObject;
-                b2.transform.localPosition  = new Vector3(0, d.offY, 0);
-                //Util.InitGameObject(b2);
+                if (!string.IsNullOrEmpty(d.waterFace))
+                {
+                    var bottom2 = Resources.Load<GameObject>(d.waterFace);
+                    var b2 = GameObject.Instantiate(bottom2) as GameObject;
+                    b2.transform.localPosition = new Vector3(0, d.offY, 0);
+                }
+                if (!string.IsNullOrEmpty(d.skyBox))
+                {
+                    var skybox = Resources.Load<GameObject>(d.skyBox);
+                    var s2 = GameObject.Instantiate(skybox) as GameObject;
+                    s2.transform.localPosition = Vector3.zero;
+                }
             }
         }
 

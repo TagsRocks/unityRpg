@@ -64,7 +64,7 @@ namespace Xft
         public Vector2 LowerLeftUV;
         public Vector2 UVDimensions;
         public Vector3 Velocity;
-        public Vector2 Scale;
+        public Vector3 Scale;
         public float RotateAngle;
         public Color Color;
   
@@ -105,7 +105,7 @@ namespace Xft
             Owner = owner;
             LowerLeftUV = Vector2.zero;
             UVDimensions = Vector2.one;
-            Scale = Vector2.one;
+            Scale = Vector3.one;
             RotateAngle = 0;
             Color = Color.white;
         }
@@ -172,7 +172,7 @@ namespace Xft
                 
                 CusMesh.SetColor(oriColor);
                 CusMesh.SetRotation(oriRot);
-                CusMesh.SetScale(oriScaleX,oriScaleY);
+                CusMesh.SetScale(oriScaleX,oriScaleY, OriScaleZ);
                 CusMesh.ScaleZ = oriScaleZ;
                 CusMesh.SetUVCoord(LowerLeftUV,UVDimensions);
             }
@@ -350,7 +350,7 @@ namespace Xft
             //foreach (Affector aft in AffectorList)
             //{
             //    aft.Reset();
-            //}
+            //}V
 
             //do not use foreach in your script!
             for (int i = 0; i < AffectorList.Count; i++)
@@ -368,7 +368,7 @@ namespace Xft
                 Sprite.SetColor(Color.clear);
                 Sprite.Update(true,0f);
                 //TODO:should reset in ScaleAffector.
-                Scale = Vector2.one;
+                Scale = Vector3.one;
             }
             else if (Type == 2)
             {
@@ -387,7 +387,7 @@ namespace Xft
                 Cone.SetRotation(OriRotateAngle);
                 Cone.SetColor(Color.clear);
                 Cone.SetPosition(Position);
-                Scale = Vector2.one;
+                Scale = Vector3.one;
                 Cone.ResetAngle();
                 Cone.Update(true,0f);
             }
@@ -462,7 +462,7 @@ namespace Xft
         
         public void UpdateCustomMesh(float deltaTime)
         {
-            CusMesh.SetScale(Scale.x * OriScaleX, Scale.y * OriScaleY);
+            CusMesh.SetScale(Scale.x * OriScaleX, Scale.y * OriScaleY, Scale.z*OriScaleZ);
             if (Owner.ColorAffectorEnable)
                 CusMesh.SetColor(Color);
             

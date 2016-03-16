@@ -16,7 +16,7 @@ namespace Xft
 
         public Color MyColor;
         public Vector3 MyPosition = Vector3.zero;
-        public Vector2 MyScale = Vector2.one;
+        public Vector3 MyScale = Vector3.one;
         public float ScaleZ = 1;
         public Quaternion MyRotation = Quaternion.identity;
         public  Vector3 MyDirection;
@@ -77,10 +77,11 @@ namespace Xft
             MyPosition = pos;
         }
         
-        public void SetScale(float width, float height)
+        public void SetScale(float width, float height, float depth)
         {
             MyScale.x = width;
             MyScale.y = height;
+            MyScale.z = depth;
         }
         
         public void SetRotation(float angle)
@@ -153,7 +154,8 @@ namespace Xft
             Vector3 scale = Vector3.one;
             //scale.x = scale.z = MyScale.x;
             scale.x = MyScale.x;
-            scale.z = ScaleZ;
+            //scale.z = ScaleZ;
+            scale.z = MyScale.z;//需要缩放面片的ScaleZ 设置
             scale.y = MyScale.y;
 
             LocalMat.SetTRS(Vector3.zero, rot * MyRotation, scale);

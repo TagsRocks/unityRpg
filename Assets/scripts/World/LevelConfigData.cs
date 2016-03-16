@@ -9,6 +9,7 @@ namespace ChuMeng
         public string waterBottom;
         public string waterFace;
         public float offY = 8.5f;
+        public string skyBox;
     }
     public class LevelConfigData
     {
@@ -192,6 +193,10 @@ namespace ChuMeng
                 waterFace = "skyboxes/stemple_water",
             });
 
+            envConfig.Add("lava", new EnvConfig(){
+                waterFace = "skyboxes/lava",
+                skyBox = "skyboxes/crypt_sky",
+            });
 
         }
     }
