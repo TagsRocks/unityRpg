@@ -209,6 +209,13 @@ public class SimpleMakeScene : MonoBehaviour
 
         //Use First Animation FBX idle as base
         var first = aniFbx.First();
+        foreach(var a in aniFbx) {
+            if(a.Key != "collision") {
+                first = a;
+                break;
+            }
+        }
+
         //aniFbx ["idle"]
         var prefab = PrefabUtility.CreatePrefab(tar, Resources.LoadAssetAtPath<GameObject>(first.Value));
 

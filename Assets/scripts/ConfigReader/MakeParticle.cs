@@ -91,7 +91,12 @@ public class MakeParticle : MonoBehaviour
                 if (modType == "Color")
                 {
                     var overTime = modData ["COLOR OVER TIME"].Value;
-                    var param = ConvertToFloat(overTime.Split(','));
+                    float[] param;
+                    if(string.IsNullOrEmpty(overTime)) {
+                        param = new float[]{0, 1, 1, 1, 1};
+                    }else {
+                        param = ConvertToFloat(overTime.Split(','));
+                    }
                     SetColor(effectLayer, param);
                 } else if (modType == "Emitter")
                 {

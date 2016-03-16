@@ -50,6 +50,14 @@ namespace ChuMeng
             };
             LevelLayout.Add(2, l1);
 
+            l1 = new List<LevelConfig>(){
+                new LevelConfig("ENTRANCE_E_JD", 0, 0){useOtherZone=true, zoneId=71, type="lava"},
+                new LevelConfig("SW_LM", 1, 0){useOtherZone=true, zoneId=72, type="lava"},
+                new LevelConfig("EXIT_N_JD", 1, -1){useOtherZone=true, zoneId=73, type="lava"},
+            };
+            LevelLayout.Add(102, l1);
+
+            /*
             //Level 2
             l1 = new List<LevelConfig>(){
                 new LevelConfig("ENTRANCE_S_PB", 0, 0){useOtherZone=true, zoneId=11},
@@ -59,6 +67,7 @@ namespace ChuMeng
 
             };
             LevelLayout.Add(102, l1);
+            */
 
             //Level 3
             l1 = new List<LevelConfig>(){

@@ -7,7 +7,7 @@ Material:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: lava_shifter
-  m_Shader: {fileID: 4800000, guid: 65a267bb8c6f1468a853369b6641d369, type: 3}
+  m_Shader: {fileID: 4800000, guid: 8d15ceff735ee4ee4bc390ff3662463a, type: 3}
   m_ShaderKeywords: []
   m_CustomRenderQueue: -1
   m_SavedProperties:
@@ -17,10 +17,18 @@ Material:
         first:
           name: _MainTex
         second:
-          m_Texture: {fileID: 0}
+          m_Texture: {fileID: 2800000, guid: 2ca05ebbc404148a1893e6d0fba3c755, type: 3}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
-    m_Floats: {}
+    m_Floats:
+      data:
+        first:
+          name: _UVAnimX
+        second: 0
+      data:
+        first:
+          name: _UVAnimY
+        second: .224999994
     m_Colors:
       data:
         first:

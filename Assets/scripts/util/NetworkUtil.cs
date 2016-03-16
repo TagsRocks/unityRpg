@@ -20,6 +20,10 @@ namespace ChuMeng
 
         public static bool IsMaster()
         {
+            var world = WorldManager.worldManager.GetActive();
+            if(!world.IsNet) {
+                return true;
+            }
             var player = ObjectManager.objectManager.GetMyAttr();
             return player.IsMaster;
         }
