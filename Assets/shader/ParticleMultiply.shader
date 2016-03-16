@@ -3,7 +3,7 @@
 		_MainTex ("Base (RGB)", 2D) = "white" {}
 	}
 	SubShader {
-		Tags { "Queue"="Transparent" "IgnoreProjector"="True" "RenderType"="Transparent" }
+		Tags { "Queue"="Transparent+2" "IgnoreProjector"="True" "RenderType"="Transparent" }
 		LOD 200
 		
 		Pass {

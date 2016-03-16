@@ -248,7 +248,7 @@ namespace ChuMeng
                 fogStart = 64,
                 fogEnd = 100,
                 fogMode = FogMode.ExponentialSquared,
-                fogDensity = 0.02f,
+                fogDensity = 0.01f,
                 cameraDist = 200,
             });
 
