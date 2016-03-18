@@ -61,7 +61,7 @@ namespace ChuMeng
             attribute.ChangeHP(-attribute.HP_Max);
         }
 
-        List<Vector3> samplePos;
+        List<Vector3> samplePos = new List<Vector3>();
 
         IEnumerator CheckFall()
         {

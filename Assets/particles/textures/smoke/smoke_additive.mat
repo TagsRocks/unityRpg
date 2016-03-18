@@ -7,9 +7,9 @@ Material:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: smoke_additive
-  m_Shader: {fileID: 10720, guid: 0000000000000000f000000000000000, type: 0}
+  m_Shader: {fileID: 4800000, guid: 834ec4cd6e8a34ec4adbbd92f85c2b51, type: 3}
   m_ShaderKeywords: []
-  m_CustomRenderQueue: 3000
+  m_CustomRenderQueue: 3003
   m_SavedProperties:
     serializedVersion: 2
     m_TexEnvs:

@@ -40,7 +40,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   typeParts:
-  - type: 
+  - type: mine
     parts:
     - {fileID: 100000, guid: 9db961b124cde4fc68ffac54091a4738, type: 2}
     - {fileID: 100000, guid: 1af9594594ace4c388ec63028f8a9d2b, type: 2}

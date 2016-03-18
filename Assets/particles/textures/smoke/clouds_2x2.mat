@@ -9,7 +9,7 @@ Material:
   m_Name: clouds_2x2
   m_Shader: {fileID: 4800000, guid: aab5c9ff1e583431a993b2e5f346dff0, type: 3}
   m_ShaderKeywords: []
-  m_CustomRenderQueue: 3000
+  m_CustomRenderQueue: 3002
   m_SavedProperties:
     serializedVersion: 2
     m_TexEnvs:

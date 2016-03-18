@@ -54,6 +54,17 @@ namespace ChuMeng
                     RenderSettings.fogMode = d.fogMode;
                     RenderSettings.fogDensity = d.fogDensity;
                     Camera.main.farClipPlane = d.cameraDist;
+
+                    GraphInit.Instance.lightCoff = d.lightCoff;
+                    GraphInit.Instance.ambient = d.ambient;
+                    GraphInit.Instance.InitNowMethod();
+
+                    if(d.hasRain) {
+                        gameObject.AddComponent<RainSystem>();
+                        GraphInit.Instance.lightCoff = d.rainLightCoff;
+                        GraphInit.Instance.ambient = d.rainAmbient;
+                        GraphInit.Instance.InitNowMethod();
+                    }
                 }else {
                     RenderSettings.fog = d.useFog;
                 }

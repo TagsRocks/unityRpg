@@ -11,11 +11,13 @@ namespace ChuMeng
         }
 
         public Texture lightMap;
-        //public Vector3 camPos = Vector3.zero;
+        public Texture specMap;
 
         public Vector3 ambient = Vector3.one;
         public Texture lightMask;
         public float lightCoff;
+        public float specCoff;
+        public float specSize;
 		
         void InitAll() {
             var lc = Resources.Load<GameObject>("LightCamera").camera;
@@ -25,12 +27,16 @@ namespace ChuMeng
             
             var camSize = lc.orthographicSize;
             Shader.SetGlobalTexture("_LightMap", lightMap);
+            Shader.SetGlobalTexture("_SpecMap", specMap);
+
             Shader.SetGlobalVector("_CamPos", lightCamera.CamPos);
             Shader.SetGlobalFloat("_CameraSize", camSize);
             
             Shader.SetGlobalVector("_AmbientCol", ambient);
             Shader.SetGlobalTexture("_LightMask", lightMask);
             Shader.SetGlobalFloat("_LightCoff", lightCoff);
+            Shader.SetGlobalFloat("_SpecCoff", specCoff);
+            Shader.SetGlobalFloat("_SpecSize", specSize );
             
             
             

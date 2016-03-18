@@ -554,7 +554,7 @@ MonoBehaviour:
   BirthSubEmitter: 
   CollisionSubEmitter: 
   DeathSubEmitter: 
-  AvailableNodeCount: 0
+  AvailableNodeCount: 1
   LastClientPos: {x: 0, y: 0, z: 0}
   MyCamera: {fileID: 0}
   Owner: {fileID: 11461802}
@@ -825,8 +825,8 @@ MonoBehaviour:
   ChanceToEmit: 100
   EmitDuration: 1
   EmitRate: 50
-  EmitLoop: 1
-  EmitDelay: 0
+  EmitLoop: -1
+  EmitDelay: 1
   DirType: 0
   DirCenter: {fileID: 461804}
   OriVelocityAxis: {x: 0, y: 1, z: 0}

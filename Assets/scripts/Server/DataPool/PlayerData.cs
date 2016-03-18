@@ -20,7 +20,8 @@ namespace ChuMeng
             ServerBundle.SendImmediatePush(push);
         }
 
-        public static void SetLevel(int v) {
+        public static void SetLevel(int v)
+        {
             var pinfo = ServerData.Instance.playerInfo;
             pinfo.Roles.Level = v;
         
@@ -416,9 +417,11 @@ namespace ChuMeng
             ServerBundle.SendImmediatePush(no);
         }
 
-        public static void ResetSkillLevel() {
+        public static void ResetSkillLevel()
+        {
             var pinfo = ServerData.Instance.playerInfo;
-            if(pinfo.HasSkill) {
+            if (pinfo.HasSkill)
+            {
                 foreach (var s in pinfo.Skill.SkillInfosList)
                 {
                     s.Level = 1;
@@ -661,7 +664,8 @@ namespace ChuMeng
             if (inpb.Key == (int)CharAttribute.CharAttributeEnum.EXP)
             {
                 pinfo.Exp = inpb.Value;
-            }else if(inpb.Key == (int)CharAttribute.CharAttributeEnum.LEVEL) {
+            } else if (inpb.Key == (int)CharAttribute.CharAttributeEnum.LEVEL)
+            {
                 SetLevel(inpb.Value);
             }
         }
@@ -697,6 +701,14 @@ namespace ChuMeng
                 pkinfo.PackEntry = pkEntry.Build();
                 pinfo.AddDressInfo(pkinfo);
             }
+
+            var cinfo = GCCopyInfo.CreateBuilder();
+            var cin = CopyInfo.CreateBuilder();
+            cin.Id = 209;
+            cin.IsPass = true;
+            cinfo.AddCopyInfo(cin);
+            var msg2 = cinfo.Build();
+            pinfo.CopyInfos = msg2;
 
             au.AddRolesInfos(msg);
             ServerBundle.SendImmediate(au, packet.flowId);    
@@ -1044,7 +1056,7 @@ namespace ChuMeng
             skInfo.Pos = 0;
             allSkill.SkillInfosList.Add(skInfo.Build());
             var skData = Util.GetSkillData(skillId, 1);
-            SendNotify("恭喜学会技能 [ff1010]" + skData.SkillName+"[-]");
+            SendNotify("恭喜学会技能 [ff1010]" + skData.SkillName + "[-]");
         }
 
 
@@ -1074,7 +1086,8 @@ namespace ChuMeng
             return pinfo.Skill;
         }
 
-        public static void HelpMe() {
+        public static void HelpMe()
+        {
             var pinfo = ServerData.Instance.playerInfo;
             var key = "helpme";
             var find = false;
@@ -1086,7 +1099,8 @@ namespace ChuMeng
                     break;
                 }
             }
-            if (!find) {
+            if (!find)
+            {
                 var kv = KeyValue.CreateBuilder();
                 kv.Key = key;
                 kv.Value = "1";

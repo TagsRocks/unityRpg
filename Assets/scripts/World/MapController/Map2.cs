@@ -30,6 +30,7 @@ namespace ChuMeng
         //Wait For All Npc Init Over
         //Then Set Npc TalkHandler
         IEnumerator Start(){
+            yield break;
             yield return new WaitForSeconds(1f);
             var cunZhang = NpcManager.Instance.GetNpc("巨牙子");
             cunZhang.TalkToMe = TalkToCunZhang;

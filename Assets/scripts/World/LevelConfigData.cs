@@ -18,6 +18,13 @@ namespace ChuMeng
         public FogMode fogMode;
         public float fogDensity;
         public float cameraDist;
+
+        public float lightCoff = 5;
+        public Vector3  ambient = new Vector3(0.6f, 0.6f, 0.6f);
+
+        public bool hasRain = false;
+        public Vector3 rainAmbient = new Vector3(0.3f, 0.3f, 0.3f);
+        public float rainLightCoff = 3;
     }
     public class LevelConfigData
     {
@@ -226,6 +233,8 @@ namespace ChuMeng
                 fogMode = FogMode.ExponentialSquared,
                 fogDensity = 0.02f,
                 cameraDist = 200,
+                lightCoff = 2,
+                ambient = new Vector3(0.3f, 0.3f, 0.3f),
             });
 
             envConfig.Add("lava", new EnvConfig(){
@@ -250,6 +259,7 @@ namespace ChuMeng
                 fogMode = FogMode.ExponentialSquared,
                 fogDensity = 0.01f,
                 cameraDist = 200,
+                hasRain = true,
             });
 
         }
