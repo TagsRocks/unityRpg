@@ -29,6 +29,7 @@
 	        	fixed2 uv : TEXCOORD0;
 	        	fixed3 offPos : TEXCOORD2;
 	   			fixed3 worldPos : TEXCOORD3;
+	   			fixed3 noisePos : TEXCOORD4;
 	        	
 	        };
 			uniform sampler2D _MainTex;
@@ -44,6 +45,13 @@
 			uniform sampler2D _SpecMap;
 			uniform float _SpecCoff;
 			uniform float _SpecSize;
+
+			uniform float _SpecFreqX;
+			uniform float _SpecFreqY;
+			uniform float _SpecAmpX;
+			uniform float _SpecAmpY;
+
+			uniform sampler2D _CloudNoise;
 		    
 			v2f vert(VertIn v) 
 			{
@@ -52,7 +60,11 @@
 				o.uv = MultiplyUV(UNITY_MATRIX_TEXTURE0, v.texcoord);
 				
 				o.offPos = mul(_Object2World, v.vertex).xyz-(_WorldSpaceCameraPos+_CamPos);
-				o.worldPos = mul(_Object2World, v.vertex).xyz;
+				fixed3 worldPos = mul(_Object2World, v.vertex).xyz;
+				fixed t1 = sin(_Time.y*_SpecFreqX*6.28)*_SpecAmpX;
+				fixed t2 = sin(_Time.y*_SpecFreqY*6.28)*_SpecAmpY;
+				o.worldPos = worldPos+fixed3(t1, 0, t2);
+				o.noisePos = worldPos;
 				return o;
 			}
 			
@@ -63,7 +75,7 @@
 	        	retCol.rgb = col.rgb*(_AmbientCol.rgb+tex2D(_LightMap, mapUV).rgb * (1-tex2D(_LightMask, mapUV).a)*_LightCoff	);
 	        	retCol.a = col.a;
 
-				fixed2 specUV = i.worldPos.xz * fixed2(_SpecSize, _SpecSize);
+				fixed2 specUV = i.worldPos.xz * fixed2(_SpecSize, _SpecSize)+tex2D(_CloudNoise, i.noisePos).rg;
 				fixed4 specColor = tex2D(_SpecMap, specUV);
 				retCol.rgb += specColor.rgb*_SpecCoff;
 

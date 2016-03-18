@@ -12,6 +12,7 @@ namespace ChuMeng
 
         public Texture lightMap;
         public Texture specMap;
+        public Texture cloudNoise;
 
         public Vector3 ambient = Vector3.one;
         public Texture lightMask;
@@ -19,6 +20,11 @@ namespace ChuMeng
         public float specCoff;
         public float specSize;
 		
+        public float specFreqX;
+        public float specAmpX;
+        public float specFreqY;
+        public float specAmpY;
+
         void InitAll() {
             var lc = Resources.Load<GameObject>("LightCamera").camera;
             var lightCamera = lc.GetComponent<LightCamera>();
@@ -28,6 +34,7 @@ namespace ChuMeng
             var camSize = lc.orthographicSize;
             Shader.SetGlobalTexture("_LightMap", lightMap);
             Shader.SetGlobalTexture("_SpecMap", specMap);
+            Shader.SetGlobalTexture("_CloudNoise", cloudNoise);
 
             Shader.SetGlobalVector("_CamPos", lightCamera.CamPos);
             Shader.SetGlobalFloat("_CameraSize", camSize);
@@ -37,9 +44,12 @@ namespace ChuMeng
             Shader.SetGlobalFloat("_LightCoff", lightCoff);
             Shader.SetGlobalFloat("_SpecCoff", specCoff);
             Shader.SetGlobalFloat("_SpecSize", specSize );
-            
-            
-            
+
+            Shader.SetGlobalFloat("_SpecFreqX", specFreqX);
+            Shader.SetGlobalFloat("_SpecFreqY", specFreqY);
+            Shader.SetGlobalFloat("_SpecAmpX", specAmpX );
+            Shader.SetGlobalFloat("_SpecAmpY", specAmpY );
+
             Shader.SetGlobalColor ("_OverlayColor", new Color(68/255.0f, 227/255.0f, 237/255.0f, 0.5f));
             Shader.SetGlobalColor ("_ShadowColor", new Color (28/255.0f, 25/255.0f, 25/255.0f, 1));
             Shader.SetGlobalVector ("_LightDir", new Vector3 (-1, -1, -1));

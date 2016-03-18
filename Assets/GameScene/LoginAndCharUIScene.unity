@@ -419,9 +419,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lightMap: {fileID: 8400000, guid: 5a3cade6b6da442f3aee87a019eb109f, type: 2}
+  specMap: {fileID: 2800000, guid: 1045ae72aa3a14e209680b1741c2685c, type: 3}
+  cloudNoise: {fileID: 2800000, guid: 4fa137de60c074475958380a4705be64, type: 3}
   ambient: {x: .600000024, y: .600000024, z: .600000024}
   lightMask: {fileID: 2800000, guid: 0f68bc94fc73f4b2cae2633ae2c09dac, type: 3}
   lightCoff: 5
+  specCoff: .300000012
+  specSize: .0500000007
+  specFreqX: .0500000007
+  specAmpX: 1
+  specFreqY: .0500000007
+  specAmpY: 1
   testAmbient: {r: 1, g: 1, b: 1, a: 0}
   InitAmbient: 0
   InitNow: 0
