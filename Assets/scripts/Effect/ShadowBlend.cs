@@ -33,12 +33,14 @@ namespace ChuMeng
             shadowBlendMat = new Material(sh);
         }
 
+        /*
         void OnRenderImage(RenderTexture src, RenderTexture dest)
         {
             shadowBlendMat.SetTexture("_MainTex", src);
             shadowBlendMat.SetTexture("_ShadowMap", shadowMap);
             Graphics.Blit(src, dest, shadowBlendMat);
         }
+        */
 
     }
 }
