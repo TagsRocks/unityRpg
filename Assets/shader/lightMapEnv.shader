@@ -19,6 +19,7 @@
 	        struct VertIn {
 	        	float4 vertex : POSITION;
 	        	float4 texcoord : TEXCOORD0;
+	        	float3 normal : NORMAL;
 	        };
 
 			
@@ -28,6 +29,7 @@
 	   			fixed3 offPos : TEXCOORD2;
 	   			fixed3 worldPos : TEXCOORD3;
 	   			fixed3 noisePos : TEXCOORD4;
+	   			fixed3 rimPower : TEXCOORD5;
 	        };
 
 			uniform sampler2D _MainTex;
@@ -51,6 +53,8 @@
 
 			uniform sampler2D _CloudNoise;
 
+			uniform fixed4 _RimColor2;
+			uniform fixed _RimPower2;
 			v2f vert(VertIn v) 
 			{
 				v2f o;
@@ -63,6 +67,10 @@
 				fixed t2 = sin(_Time.y*_SpecFreqY*6.28)*_SpecAmpY;
 				o.worldPos = worldPos+fixed3(t1, 0, t2);
 				o.noisePos = worldPos;
+
+				fixed3 viewDir = ObjSpaceViewDir(v.vertex);
+				half rim = 1.0 - saturate(dot (normalize(viewDir), v.normal));
+	          	o.rimPower = _RimColor2.rgb * pow (rim, _RimPower2);
 				return o;
 			}
 			
@@ -78,7 +86,7 @@
 				fixed2 specUV = i.worldPos.xz * fixed2(_SpecSize, _SpecSize)+tex2D(_CloudNoise, i.noisePos).rg;
 				fixed4 specColor = tex2D(_SpecMap, specUV);
 
-				retCol.rgb += specColor.rgb*_SpecCoff;
+				retCol.rgb += specColor.rgb*_SpecCoff + i.rimPower*tex2D(_CloudNoise, i.noisePos);
 				return retCol;
 			}	
 

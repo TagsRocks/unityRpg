@@ -40,6 +40,9 @@ namespace ChuMeng
         Block = 17,
         //阻挡爆炸发生的层
         Bomb = 18, //炸弹所在层 炸弹之间没有碰撞
+
+        SkillLight = 19,//测试用技能光效
+        ShadowMap = 20,//绘制角色阴影
     }
 
     public static class GameTag

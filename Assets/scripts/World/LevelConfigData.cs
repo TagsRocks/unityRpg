@@ -25,6 +25,8 @@ namespace ChuMeng
         public bool hasRain = false;
         public Vector3 rainAmbient = new Vector3(0.3f, 0.3f, 0.3f);
         public float rainLightCoff = 3;
+
+        public bool hasLightning = false;
     }
     public class LevelConfigData
     {
@@ -260,6 +262,7 @@ namespace ChuMeng
                 fogDensity = 0.01f,
                 cameraDist = 200,
                 hasRain = true,
+                hasLightning = true,
             });
 
         }

@@ -71,8 +71,8 @@
 				o.uv = uv*fixed2(_scaleX, _scaleY);
 				o.uv += fixed2(t1, t2);
 
-				float t3 = _Time.y*_UVAnimX;
-				float t4 = _Time.y*_UVAnimY;
+				float t3 = _Time.y*_UVAnimX1;
+				float t4 = _Time.y*_UVAnimY1;
 				o.uv1 = uv*fixed2(_scaleX1, _scaleY1);
 				o.uv1 += fixed2(t3, t4);
 				return o;

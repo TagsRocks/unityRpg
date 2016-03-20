@@ -25,6 +25,18 @@ namespace ChuMeng
         public float specFreqY;
         public float specAmpY;
 
+        public Vector3 rimColor;
+        public float rimPower;
+
+        public AnimationCurve lightningCurve;
+        public float lightningTime = 1;
+        public float lightningMagnitude = 1;
+
+        public RenderTexture skillLight;
+        public float skillLightCoff = 1;
+
+        public RenderTexture shadowMap;
+
         void InitAll() {
             var lc = Resources.Load<GameObject>("LightCamera").camera;
             var lightCamera = lc.GetComponent<LightCamera>();
@@ -49,6 +61,10 @@ namespace ChuMeng
             Shader.SetGlobalFloat("_SpecFreqY", specFreqY);
             Shader.SetGlobalFloat("_SpecAmpX", specAmpX );
             Shader.SetGlobalFloat("_SpecAmpY", specAmpY );
+
+            Shader.SetGlobalVector("_RimColor2", rimColor);
+            Shader.SetGlobalFloat("_RimPower2", rimPower );
+            Shader.SetGlobalFloat("_SkillLightCoff",  skillLightCoff );
 
             Shader.SetGlobalColor ("_OverlayColor", new Color(68/255.0f, 227/255.0f, 237/255.0f, 0.5f));
             Shader.SetGlobalColor ("_ShadowColor", new Color (28/255.0f, 25/255.0f, 25/255.0f, 1));

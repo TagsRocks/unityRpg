@@ -50,6 +50,8 @@ MonoBehaviour:
   - {fileID: 4800000, guid: 443ff16f0f81242e0bf2eb79dc0c77d8, type: 3}
   - {fileID: 4800000, guid: b6787a7f6f6df429ab226aee3f4f9cc7, type: 3}
   - {fileID: 4800000, guid: 933704d24abe044a882c75655a5c3c85, type: 3}
+  - {fileID: 4800000, guid: d6f04da35caf644bb99df473b9425d34, type: 3}
+  - {fileID: 4800000, guid: fec84be272cbc495c82ba4a8b26622e8, type: 3}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

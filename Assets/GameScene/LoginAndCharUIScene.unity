@@ -430,7 +430,74 @@ MonoBehaviour:
   specAmpX: 1
   specFreqY: .0500000007
   specAmpY: 1
-  testAmbient: {r: 1, g: 1, b: 1, a: 0}
+  rimColor: {x: .100000001, y: .74000001, z: .930000007}
+  rimPower: 8
+  lightningCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 7.73179817
+      outSlope: 7.73179817
+      tangentMode: 10
+    - time: .115187652
+      value: .890607655
+      inSlope: .831529617
+      outSlope: .831529617
+      tangentMode: 10
+    - time: .227777377
+      value: .207329988
+      inSlope: -.969571352
+      outSlope: -.969571352
+      tangentMode: 10
+    - time: .361589611
+      value: .759920478
+      inSlope: -.899655104
+      outSlope: -.899655104
+      tangentMode: 10
+    - time: .462107599
+      value: .163958728
+      inSlope: .021822691
+      outSlope: .021822691
+      tangentMode: 10
+    - time: .554986477
+      value: .718682647
+      inSlope: .259421825
+      outSlope: .259421825
+      tangentMode: 10
+    - time: .648708105
+      value: .207552254
+      inSlope: -1.03692889
+      outSlope: -1.03692889
+      tangentMode: 10
+    - time: .750207245
+      value: .550604165
+      inSlope: .304602981
+      outSlope: .304602981
+      tangentMode: 10
+    - time: .845309258
+      value: .287110299
+      inSlope: .369306207
+      outSlope: .369306207
+      tangentMode: 10
+    - time: .915565431
+      value: .533657253
+      inSlope: -1.16479778
+      outSlope: -1.16479778
+      tangentMode: 10
+    - time: 1.00206351
+      value: .0286077261
+      inSlope: -5.83885241
+      outSlope: -5.83885241
+      tangentMode: 10
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  lightningTime: 1
+  lightningMagnitude: 1
+  skillLight: {fileID: 8400000, guid: 93106ece963fb48dbb2b67bd7ab6b942, type: 2}
+  skillLightCoff: 10
+  shadowMap: {fileID: 8400000, guid: 7d496c40ccd924714ae717af845039e3, type: 2}
+  testAmbient: {r: .0137327118, g: .743459702, b: .933823526, a: 0}
   InitAmbient: 0
   InitNow: 0
   IsBlind: 0
