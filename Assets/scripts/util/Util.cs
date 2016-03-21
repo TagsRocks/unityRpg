@@ -21,6 +21,7 @@ namespace ChuMeng
 
     public enum GameLayer
     {
+        Default = 0,
         PlayerCamera = 12,
         //UI中显示3D对象
         UICamera = 5,

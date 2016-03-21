@@ -93,12 +93,9 @@ namespace ChuMeng
             if (CameraController.cameraController == null) {
                 Log.Sys("CreateMainCamera");
                 var mc = Resources.Load<GameObject> ("levelPublic/MainCamera");
-                //var m = 
                 Instantiate (mc);//  as GameObject;
-                //var lightMapCamera = Instantiate (Resources.Load<GameObject> ("levelPublic/lightMapCamera")) as GameObject;
-                //var lightMapCamera = 
-                Instantiate (Resources.Load<GameObject> ("LightCamera"));// as GameObject;
-
+                Instantiate (Resources.Load<GameObject> ("LightCamera"));
+                Instantiate(Resources.Load<GameObject>("levelPublic/ShadowCamera"));
             }
             if(BattleManager.battleManager == null) {
                 var g = new GameObject("BattleManager");

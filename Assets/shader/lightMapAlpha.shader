@@ -30,7 +30,7 @@
 	        	fixed3 offPos : TEXCOORD2;
 	   			fixed3 worldPos : TEXCOORD3;
 	   			fixed3 noisePos : TEXCOORD4;
-	        	
+	   			fixed3 shadowPos : TEXCOORD6;
 	        };
 			uniform sampler2D _MainTex;
 			
@@ -52,15 +52,21 @@
 			uniform float _SpecAmpY;
 
 			uniform sampler2D _CloudNoise;
+
+			uniform sampler2D _ShadowMap;
+		    uniform float4 _ShadowCamPos;
+		    uniform float _ShadowCameraSize;
 		    
 			v2f vert(VertIn v) 
 			{
 				v2f o;
 				o.pos = mul(UNITY_MATRIX_MVP, v.vertex);
 				o.uv = MultiplyUV(UNITY_MATRIX_TEXTURE0, v.texcoord);
-				
-				o.offPos = mul(_Object2World, v.vertex).xyz-(_WorldSpaceCameraPos+_CamPos);
+
 				fixed3 worldPos = mul(_Object2World, v.vertex).xyz;
+				o.offPos = worldPos-(_WorldSpaceCameraPos+_CamPos);
+				o.shadowPos = worldPos-(_WorldSpaceCameraPos+_ShadowCamPos);
+
 				fixed t1 = sin(_Time.y*_SpecFreqX*6.28)*_SpecAmpX;
 				fixed t2 = sin(_Time.y*_SpecFreqY*6.28)*_SpecAmpY;
 				o.worldPos = worldPos+fixed3(t1, 0, t2);
@@ -79,6 +85,10 @@
 				fixed4 specColor = tex2D(_SpecMap, specUV);
 				retCol.rgb += specColor.rgb*_SpecCoff;
 
+				fixed2 mapShadow = (i.shadowPos.xz+float2(_ShadowCameraSize, _ShadowCameraSize))/(2*_ShadowCameraSize);
+				fixed4 shadowC = tex2D(_ShadowMap, mapShadow);
+				//retCol.rgb *= shadowC.rgb;
+				retCol.rgb = retCol.rgb*(1-shadowC.a)+shadowC.rgb;
 				return retCol;
 			}	
 			

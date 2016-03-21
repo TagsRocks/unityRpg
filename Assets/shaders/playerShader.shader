@@ -88,6 +88,7 @@
 	        ENDCG
 		}
 
+		/*
 		Pass {
 			Name "SHADOW"
 			Blend One Zero
@@ -148,7 +149,7 @@
 			
 			ENDCG
 		}
-		
+		*/
 		
 	} 
 	FallBack "Diffuse"

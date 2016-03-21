@@ -170,6 +170,40 @@ namespace ChuMeng
             }
         }
 
+        public void SetShadowLayer()
+        {
+            var renders = gameObject.GetComponentsInChildren<SkinnedMeshRenderer>();
+            var render2 = gameObject.GetComponentsInChildren<MeshRenderer>();
+            foreach (var r in renders)
+            {
+                r.gameObject.layer = (int)GameLayer.ShadowMap;
+            }
+            foreach (var r in render2)
+            {
+                if (r.gameObject.name != "playerLight(Clone)")
+                {
+                    r.gameObject.layer = (int)GameLayer.ShadowMap;
+                }
+            }
+        }
+
+        public void SetNormalLayer()
+        {
+            var renders = gameObject.GetComponentsInChildren<SkinnedMeshRenderer>();
+            var render2 = gameObject.GetComponentsInChildren<MeshRenderer>();
+            foreach (var r in renders)
+            {
+                r.gameObject.layer = (int)GameLayer.Default;
+            }
+            foreach (var r in render2)
+            {
+                if (r.gameObject.name != "playerLight(Clone)")
+                {
+                    r.gameObject.layer = (int)GameLayer.Default;
+                }
+            }
+        }
+
         public void SetTeamHideShader()
         {
             var shaderRes = Resources.Load<ShaderResource>("levelPublic/ShaderResource");
@@ -187,7 +221,8 @@ namespace ChuMeng
                     if (r.gameObject.name != "playerLight(Clone)")
                     {
                         r.material.shader = Shader.Find("Custom/OtherTeamHideShader");
-                    }else {
+                    } else
+                    {
                         r.enabled = false;
                     }
                 }
@@ -225,7 +260,7 @@ namespace ChuMeng
                     if (r.gameObject.name != "playerLight(Clone)")
                     {
                         r.material.shader = Shader.Find("Custom/playerHideShader");
-                    }else 
+                    } else
                     {
                         r.enabled = true;
                     }

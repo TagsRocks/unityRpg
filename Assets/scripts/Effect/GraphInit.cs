@@ -36,10 +36,18 @@ namespace ChuMeng
         public float skillLightCoff = 1;
 
         public RenderTexture shadowMap;
+        public Vector3 lightDir;
+
+        public Color shadowColor;
+        public float shinness;
+        public Color specColor;
+
+        public float noiseScale;
 
         void InitAll() {
             var lc = Resources.Load<GameObject>("LightCamera").camera;
             var lightCamera = lc.GetComponent<LightCamera>();
+            var sc = Resources.Load<GameObject>("levelPublic/ShadowCamera").GetComponent<ShadowCamera>();
             //New Shader lightMapxxx need these Set
             //var lc = GameObject.FindGameObjectWithTag("LightCamera").camera;
             
@@ -67,13 +75,21 @@ namespace ChuMeng
             Shader.SetGlobalFloat("_SkillLightCoff",  skillLightCoff );
 
             Shader.SetGlobalColor ("_OverlayColor", new Color(68/255.0f, 227/255.0f, 237/255.0f, 0.5f));
-            Shader.SetGlobalColor ("_ShadowColor", new Color (28/255.0f, 25/255.0f, 25/255.0f, 1));
-            Shader.SetGlobalVector ("_LightDir", new Vector3 (-1, -1, -1));
+            Shader.SetGlobalColor ("_ShadowColor", shadowColor);// new Color (28/255.0f, 25/255.0f, 25/255.0f, 0.5f));
+            Shader.SetGlobalVector ("_LightDir", lightDir);
             Shader.SetGlobalVector ("_HighLightDir", new Vector3 (-1, -1, -1));
             Shader.SetGlobalColor ("_LightDiffuseColor", new Color (223/255.0f, 248/255.0f, 255/255.0f, 1));
             
             Shader.SetGlobalColor ("_GhostColor", new Color(68/255.0f, 227/255.0f, 68/255.0f, 0.5f));
-            
+
+            Shader.SetGlobalTexture("_ShadowMap", shadowMap);
+            Shader.SetGlobalVector("_ShadowCamPos", sc.CamPos);
+            Shader.SetGlobalFloat("_ShadowCameraSize", sc.camera.orthographicSize);
+
+            Shader.SetGlobalFloat("_Shinness", shinness);
+            Shader.SetGlobalColor ("_SpecColor", specColor);
+            Shader.SetGlobalFloat("_NoiseScale", noiseScale);
+
             var res = Screen.currentResolution;
             Log.GUI ("Screen Attribute resolution "+res.width + " "+res.height+" "+res.refreshRate);
             Log.GUI ("Screen Attribute dpi "+Screen.dpi);
