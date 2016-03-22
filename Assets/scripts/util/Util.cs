@@ -44,6 +44,7 @@ namespace ChuMeng
 
         SkillLight = 19,//测试用技能光效
         ShadowMap = 20,//绘制角色阴影
+        MotionBlur = 21, //运动模糊层
     }
 
     public static class GameTag

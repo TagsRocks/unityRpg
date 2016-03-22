@@ -497,10 +497,19 @@ MonoBehaviour:
   skillLight: {fileID: 8400000, guid: 93106ece963fb48dbb2b67bd7ab6b942, type: 2}
   skillLightCoff: 10
   shadowMap: {fileID: 8400000, guid: 7d496c40ccd924714ae717af845039e3, type: 2}
+  lightDir: {x: -1, y: -1, z: -1}
+  shadowColor: {r: 0, g: 0, b: 0, a: .458823532}
+  shinness: 15
+  specColor: {r: 1, g: 1, b: 1, a: 1}
+  noiseScale: .100000001
+  blurAmount: .800000012
+  accumTexture: {fileID: 8400000, guid: 96e2421c2c3324aeeba050b71c056a57, type: 2}
   testAmbient: {r: .0137327118, g: .743459702, b: .933823526, a: 0}
   InitAmbient: 0
   InitNow: 0
   IsBlind: 0
+  useMotion: 0
+  UseMotionBlur: 0
 --- !u!114 &775957297
 MonoBehaviour:
   m_ObjectHideFlags: 0

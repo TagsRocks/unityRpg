@@ -186,6 +186,23 @@ namespace ChuMeng
                 }
             }
         }
+               
+        public void SetMotionLayer()
+        {
+            var renders = gameObject.GetComponentsInChildren<SkinnedMeshRenderer>();
+            var render2 = gameObject.GetComponentsInChildren<MeshRenderer>();
+            foreach (var r in renders)
+            {
+                r.gameObject.layer = (int)GameLayer.MotionBlur;
+            }
+            foreach (var r in render2)
+            {
+                if (r.gameObject.name != "playerLight(Clone)")
+                {
+                    r.gameObject.layer = (int)GameLayer.MotionBlur;
+                }
+            }
+        }
 
         public void SetNormalLayer()
         {

@@ -43,6 +43,10 @@ namespace ChuMeng
         public Color specColor;
 
         public float noiseScale;
+        public float blurAmount = 0.8f;
+        public RenderTexture accumTexture;
+
+        public RenderTexture motionCamera;
 
         void InitAll() {
             var lc = Resources.Load<GameObject>("LightCamera").camera;
@@ -162,5 +166,41 @@ namespace ChuMeng
             }
         }
 
+        public bool useMotion = false;
+        [ButtonCallFunc()]public bool UseMotionBlur;
+        public void UseMotionBlurMethod() {
+            /*
+            if(useMotion) {
+                Camera.main.GetComponent<MotionMainCamera>().enabled = true;
+                MotionCamera.Instance.gameObject.SetActive(true);
+            }else {
+                Camera.main.GetComponent<MotionMainCamera>().enabled = false;
+                MotionCamera.Instance.gameObject.SetActive(false);
+            }
+            */
+            if(useMotion) {
+                Camera.main.GetComponent<MotionBlur>().enabled = true;
+                Camera.main.GetComponent<CameraController>().enabled = false;
+            }else {
+                Camera.main.GetComponent<MotionBlur>().enabled = false;
+                Camera.main.GetComponent<CameraController>().enabled = true;
+            }
+        }
+
+        public Texture heatTex;
+        public float DistortFactor;
+        public float RiseFactor;
+        public float _Radius;
+        public float _ClipArg;
+
+        public bool useHeat = true ;
+        [ButtonCallFunc()] public bool heat;
+        public void heatMethod() {
+            if(useHeat) {
+                Camera.main.GetComponent<HeatHaze>().enabled = true;
+            }else {
+                Camera.main.GetComponent<HeatHaze>().enabled =  false;
+            }
+        }
 	}
 }
