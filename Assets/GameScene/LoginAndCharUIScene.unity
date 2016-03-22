@@ -502,14 +502,22 @@ MonoBehaviour:
   shinness: 15
   specColor: {r: 1, g: 1, b: 1, a: 1}
   noiseScale: .100000001
-  blurAmount: .800000012
+  blurAmount: .899999976
   accumTexture: {fileID: 8400000, guid: 96e2421c2c3324aeeba050b71c056a57, type: 2}
+  motionCamera: {fileID: 8400000, guid: da5b7a96a61144d76a24a9d59e40696c, type: 2}
   testAmbient: {r: .0137327118, g: .743459702, b: .933823526, a: 0}
   InitAmbient: 0
   InitNow: 0
   IsBlind: 0
-  useMotion: 0
+  useMotion: 1
   UseMotionBlur: 0
+  heatTex: {fileID: 2800000, guid: 4a00e843a34a2467187b483fa04f922a, type: 3}
+  DistortFactor: .0299999993
+  RiseFactor: 1
+  _Radius: .5
+  _ClipArg: .200000003
+  useHeat: 1
+  heat: 0
 --- !u!114 &775957297
 MonoBehaviour:
   m_ObjectHideFlags: 0
