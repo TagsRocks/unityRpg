@@ -1,5 +1,4 @@
 ﻿Shader "Custom/lightMapEnv2" {
-	//floor blank
 	Properties {
 		_MainTex ("Base (RGB)", 2D) = "white" {}
 	}
@@ -22,7 +21,7 @@
 	        struct VertIn {
 	        	float4 vertex : POSITION;
 	        	float4 texcoord : TEXCOORD0;
-	        	//float4 color : COLOR;
+	        	float4 color : COLOR;
 	        	
 	        };
 
@@ -30,19 +29,17 @@
 			struct v2f {
 	        	fixed4 pos : SV_POSITION;
 	        	fixed2 uv : TEXCOORD0;
-	   			//fixed4 vertColor : TEXCOORD1;
+	   			fixed4 vertColor : TEXCOORD1;
 	   			fixed3 offPos : TEXCOORD2;
 	        };
+
 			uniform sampler2D _MainTex;
-			//uniform fixed4 _Color;
-			
+
 			uniform sampler2D _LightMap;
 		    uniform float4 _CamPos;
 		    uniform float _CameraSize;
-		    //uniform float _CameraSizeX;
-		    
+
 		    uniform float4 _AmbientCol;
-			//uniform fixed _LightCoff;
 			
 			uniform sampler2D _LightMask;
 			uniform float _LightCoff;
@@ -54,7 +51,7 @@
 				o.pos.z -= 0.01;
 				o.uv = MultiplyUV(UNITY_MATRIX_TEXTURE0, v.texcoord);
 				
-				//o.vertColor = v.color; 
+				o.vertColor = v.color; 
 				o.offPos = mul(_Object2World, v.vertex).xyz-(_WorldSpaceCameraPos+_CamPos);
 				return o;
 			}

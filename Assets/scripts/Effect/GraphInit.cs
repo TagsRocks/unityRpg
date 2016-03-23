@@ -48,6 +48,8 @@ namespace ChuMeng
 
         public RenderTexture motionCamera;
 
+        public float gamma = 1;
+
         void InitAll() {
             var lc = Resources.Load<GameObject>("LightCamera").camera;
             var lightCamera = lc.GetComponent<LightCamera>();
@@ -93,6 +95,7 @@ namespace ChuMeng
             Shader.SetGlobalFloat("_Shinness", shinness);
             Shader.SetGlobalColor ("_SpecColor", specColor);
             Shader.SetGlobalFloat("_NoiseScale", noiseScale);
+            Shader.SetGlobalFloat("_Gamma", gamma);
 
             var res = Screen.currentResolution;
             Log.GUI ("Screen Attribute resolution "+res.width + " "+res.height+" "+res.refreshRate);
