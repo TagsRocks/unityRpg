@@ -5,7 +5,7 @@ Email: 233242872@qq.com
 using UnityEngine;
 using System.Collections;
 
-namespace ChuMeng
+namespace MyLib
 {
 	/// <summary>
 	/// 控制主镜头跟随玩家一起移动

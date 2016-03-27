@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-namespace ChuMeng
+namespace MyLib
 {
     /// <summary>
     ///主城中的UI 

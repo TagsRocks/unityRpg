@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
-using ChuMeng;
+using MyLib;
 public class TestTask : MonoBehaviour {
 
     public int v = 4;

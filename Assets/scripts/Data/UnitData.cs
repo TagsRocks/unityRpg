@@ -12,7 +12,7 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
-namespace ChuMeng
+namespace MyLib
 {
     /*
  * 配置的数据均为百分比数据  需要从相关的曲线数据中获取时机的数据
@@ -368,7 +368,7 @@ namespace ChuMeng
         }
 
         //TODO:增加怪物技能的配置信息
-        public List<ChuMeng.SkillData> Skills
+        public List<MyLib.SkillData> Skills
         {
             get
             {

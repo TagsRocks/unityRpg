@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-namespace ChuMeng
+namespace MyLib
 {
     /// <summary>
     /// 限制所有的事件只处理一次

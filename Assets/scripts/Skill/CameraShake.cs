@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
-namespace ChuMeng {
+namespace MyLib {
 	public class CameraShake : MonoBehaviour {
 		public CameraShakeData shakeData;
 		public float duration = 0.2f;

@@ -15,7 +15,7 @@ using System.IO;
 using System.Collections.Generic;
 using System;
 
-namespace ChuMeng
+namespace MyLib
 {
     public class SaveGame : MonoBehaviour
     {   

@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using UnityEditor;
 #endif
 
-namespace ChuMeng
+namespace MyLib
 {
     /// <summary>
     ///配置在zone中的NPc生成器 参考SpawnTrigger 

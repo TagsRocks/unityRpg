@@ -7,7 +7,7 @@ public class TestEquip : MonoBehaviour {
     public int equipId;
     [ButtonCallFunc()] public bool AddEquip;
     public void  AddEquipMethod() {
-        ChuMeng.PlayerData.AddEquipInPackage(equipId, 0, 0);
+        MyLib.PlayerData.AddEquipInPackage(equipId, 0, 0);
     }
 }
 

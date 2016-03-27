@@ -14,11 +14,11 @@ namespace PacketHandler
 	{
 		public override void HandlePacket(KBEngine.Packet packet) {
 			if (packet.responseFlag == 0) {
-				var player = ChuMeng.ObjectManager.objectManager.GetMyPlayer();
-				var objCmd = new ChuMeng.ObjectCommand();
-				objCmd.commandID = ChuMeng.ObjectCommand.ENUM_OBJECT_COMMAND.OC_UPDATE_IMPACT;
-				objCmd.buffInfo = packet.protoBody as ChuMeng.GCPushUnitAddBuffer;
-				player.GetComponent<ChuMeng.LogicCommand>().PushCommand(objCmd);
+				var player = MyLib.ObjectManager.objectManager.GetMyPlayer();
+				var objCmd = new MyLib.ObjectCommand();
+				objCmd.commandID = MyLib.ObjectCommand.ENUM_OBJECT_COMMAND.OC_UPDATE_IMPACT;
+				objCmd.buffInfo = packet.protoBody as MyLib.GCPushUnitAddBuffer;
+				player.GetComponent<MyLib.LogicCommand>().PushCommand(objCmd);
 			}
 		}
 	}

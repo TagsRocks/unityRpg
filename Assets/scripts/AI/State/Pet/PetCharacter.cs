@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-namespace ChuMeng
+namespace MyLib
 {
     //火焰陷阱不支持移动
     public class PetCharacter : AICharacter

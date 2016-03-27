@@ -7,7 +7,7 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
-namespace ChuMeng
+namespace MyLib
 {
 	//保存一些和UI显示相关的对象状态
 	public class FakeObject {

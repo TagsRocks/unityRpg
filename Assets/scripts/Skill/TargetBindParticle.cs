@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-namespace ChuMeng
+namespace MyLib
 {
     /// <summary>
     ///在攻击目标身上产生一个粒子效果 

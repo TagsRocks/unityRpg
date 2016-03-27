@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-namespace ChuMeng
+namespace MyLib
 {
 	[RequireComponent(typeof(ShadowComponent))]
 	[RequireComponent(typeof(NpcEquipment))]

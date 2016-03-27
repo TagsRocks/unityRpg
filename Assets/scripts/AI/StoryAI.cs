@@ -15,7 +15,7 @@ using System.Collections;
  * CutScene Control Player To Move And Kill Somebody 
  * AI Script
  */ 
-namespace ChuMeng {
+namespace MyLib {
 	[RequireComponent(typeof(CommonAI))]
 	public class StoryAI : MonoBehaviour {
 		MyAnimationEvent animationEvent;

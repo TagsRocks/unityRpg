@@ -3,7 +3,7 @@ using System.Collections;
 using System;
 using System.Collections.Generic;
 
-namespace ChuMeng
+namespace MyLib
 {
     /// <summary>
     /// 只进行玩家的初始化 

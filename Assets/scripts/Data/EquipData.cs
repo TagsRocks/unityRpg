@@ -5,7 +5,7 @@ Email: 233242872@qq.com
 */
 
 
-namespace ChuMeng
+namespace MyLib
 {
 	public class EquipData : ActionItem
 	{

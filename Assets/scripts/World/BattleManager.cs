@@ -12,7 +12,7 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
-namespace ChuMeng
+namespace MyLib
 {
     /// <summary>
     /// 关卡相关配置信息

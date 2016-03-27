@@ -11,7 +11,7 @@ using System.Collections.Generic;
  * Chat System  
  * Chat Event Dispatcher
  */ 
-namespace ChuMeng
+namespace MyLib
 {
 	public class ChatMsg
 	{

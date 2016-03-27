@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-namespace ChuMeng
+namespace MyLib
 {
     /// <summary>
     ///7s一次 每次持续5s 

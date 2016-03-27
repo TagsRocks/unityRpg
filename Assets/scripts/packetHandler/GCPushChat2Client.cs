@@ -14,8 +14,8 @@ namespace PacketHandler
 		{
 			Log.Net ("handle dy");
 			if (packet.responseFlag == 0) {
-				var data = packet.protoBody as ChuMeng.GCPushChat2Client;
-				ChuMeng.Talk.talk.HandleRecvTalkPacket(data);
+				var data = packet.protoBody as MyLib.GCPushChat2Client;
+				MyLib.Talk.talk.HandleRecvTalkPacket(data);
 			}
 
 		}

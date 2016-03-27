@@ -15,7 +15,7 @@ using Google.ProtocolBuffers;
 using System;
 using System.Collections.Generic;
 
-namespace ChuMeng
+namespace MyLib
 {
     using pb = global::Google.ProtocolBuffers;
 
@@ -418,28 +418,6 @@ namespace ChuMeng
             return new Pair(mId, pId);
         }
 
-        /*
-		 * Message Builder
-		 */
-        /*
-		public static IMessage GetMsg(int moduleId, int messageId, ByteString buf) {
-			var module = SaveGame.saveGame.getModuleName(moduleId);
-			var msg = SaveGame.saveGame.getMethodName(module, messageId);
-			Debug.LogWarning ("modulename "+module+" "+msg);
-
-			//var imsg = MessageUtil.GetDefaultMessage (msg);
-			//IMessage retMsg = imsg.WeakCreateBuilderForType ().WeakMergeFrom (buf).WeakBuild();
-			var tp = Type.GetType ("ChuMeng."+msg);
-			Debug.LogWarning ("Message is "+tp);
-			var pro = tp.GetProperty ("DefaultInstance", System.Reflection.BindingFlags.Static | System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.NonPublic);
-			IMessage im = (IMessage)pro.GetValue (null, null);
-
-			var retMsg = ChuMeng.GCPushChat2Client.CreateBuilder ().MergeFrom (buf).BuildPartial ();
-			var retMsg = im.WeakCreateBuilderForType ().WeakMergeFrom (buf).WeakBuild ();
-
-			return retMsg;
-		}
-		*/
 
         public static string GetMsgName(int moduleId, int messageId)
         {

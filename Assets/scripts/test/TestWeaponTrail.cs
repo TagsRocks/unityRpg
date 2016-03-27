@@ -8,7 +8,7 @@ public class TestWeaponTrail : MonoBehaviour {
 	void Start () {
 		if (!TestLocalEnableLater) {
 			//加载的RibbonTrail Xffect 的prefab 需要是NotActive这样 才能计算到正确的坐标
-			var par = ChuMeng.Util.FindChildRecursive (transform, "Point001");
+			var par = MyLib.Util.FindChildRecursive (transform, "Point001");
 			var weaponTrail = GameObject.Instantiate (Resources.Load<GameObject> ("particles/weaponTrail")) as GameObject;
 			weaponTrail.transform.parent = par;
 			weaponTrail.transform.localPosition = Vector3.zero;
@@ -24,7 +24,7 @@ public class TestWeaponTrail : MonoBehaviour {
 	}
 	IEnumerator EnableWeapon() {
 		yield return new WaitForSeconds (0.2f);
-		var weaponTrail = ChuMeng.Util.FindChildRecursive(transform, "weaponTrail").gameObject;
+		var weaponTrail = MyLib.Util.FindChildRecursive(transform, "weaponTrail").gameObject;
 		weaponTrail.SetActive (true);
 	}
 	// Update is called once per frame

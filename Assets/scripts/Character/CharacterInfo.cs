@@ -10,7 +10,7 @@ using SimpleJSON;
 using System.Collections.Generic;
 
  
-namespace ChuMeng
+namespace MyLib
 {
 	/// <summary>
 	/// 角色或者怪物的属性

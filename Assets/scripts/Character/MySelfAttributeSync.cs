@@ -1,7 +1,7 @@
-﻿﻿﻿using UnityEngine;
+﻿﻿using UnityEngine;
 using System.Collections;
 
-namespace ChuMeng
+namespace MyLib
 {
     /// <summary>
     /// 玩家自己的属性 从服务器上同步 

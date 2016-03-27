@@ -14,7 +14,7 @@ using System.Collections.Generic;
  * 2. 调用接口获取数据
  */ 
 
-namespace ChuMeng {
+namespace MyLib {
 	public class GameInterface_Package {
 		public static GameInterface_Package playerPackage = new GameInterface_Package();
 

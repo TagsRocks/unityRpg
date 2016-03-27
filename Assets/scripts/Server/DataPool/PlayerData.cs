@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-namespace ChuMeng
+namespace MyLib
 {
     /// <summary>
     /// Player data InServer
@@ -157,7 +157,7 @@ namespace ChuMeng
 
         private static bool RemoveEquipFromPackage(long id)
         {
-            var player = ChuMeng.ServerData.Instance.playerInfo;
+            var player = MyLib.ServerData.Instance.playerInfo;
             foreach (var pinfo in player.PackInfoList)
             {
                 if (pinfo.PackEntry.Id == id)
@@ -380,7 +380,7 @@ namespace ChuMeng
 
         public static bool ReduceItem(long userPropsId, int num)
         {
-            var player = ChuMeng.ServerData.Instance.playerInfo;
+            var player = MyLib.ServerData.Instance.playerInfo;
             foreach (var pinfo in player.PackInfoList)
             {
                 if (pinfo.PackEntry.Id == userPropsId)

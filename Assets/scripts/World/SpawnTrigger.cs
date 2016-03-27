@@ -21,7 +21,7 @@ using UnityEditor;
 /*
  * Configure Level Monster Spawn Position And Monster Type And Number 
  */
-namespace ChuMeng
+namespace MyLib
 {
     /// <summary>
     ///怪物生成器 

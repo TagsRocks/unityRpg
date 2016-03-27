@@ -4,693 +4,693 @@ using System.Collections.Generic;
 using Google.ProtocolBuffers;
 
 
-namespace ChuMeng {
+namespace MyLib {
 public partial class Util {
 	public delegate IMessageLite MsgDelegate(ByteString buf); 
 	
 
 	static IMessageLite GetGCGetKeyValue(ByteString buf) {
-		var retMsg = ChuMeng.GCGetKeyValue.ParseFrom(buf);
+		var retMsg = MyLib.GCGetKeyValue.ParseFrom(buf);
 		return retMsg;
 	}	
 
 	static IMessageLite GetGCListBranchinges(ByteString buf) {
-		var retMsg = ChuMeng.GCListBranchinges.ParseFrom(buf);
+		var retMsg = MyLib.GCListBranchinges.ParseFrom(buf);
 		return retMsg;
 	}	
 
 	static IMessageLite GetCGLoginAccount(ByteString buf) {
-		var retMsg = ChuMeng.CGLoginAccount.ParseFrom(buf);
+		var retMsg = MyLib.CGLoginAccount.ParseFrom(buf);
 		return retMsg;
 	}	
 
 	static IMessageLite GetCGGetKeyValue(ByteString buf) {
-		var retMsg = ChuMeng.CGGetKeyValue.ParseFrom(buf);
+		var retMsg = MyLib.CGGetKeyValue.ParseFrom(buf);
 		return retMsg;
 	}	
 
 	static IMessageLite GetGCPushFightModeChangeWithMap(ByteString buf) {
-		var retMsg = ChuMeng.GCPushFightModeChangeWithMap.ParseFrom(buf);
+		var retMsg = MyLib.GCPushFightModeChangeWithMap.ParseFrom(buf);
 		return retMsg;
 	}	
 
 	static IMessageLite GetGCPickUpLootReward(ByteString buf) {
-		var retMsg = ChuMeng.GCPickUpLootReward.ParseFrom(buf);
+		var retMsg = MyLib.GCPickUpLootReward.ParseFrom(buf);
 		return retMsg;
 	}	
 
 	static IMessageLite GetGCSaveGuideStep(ByteString buf) {
-		var retMsg = ChuMeng.GCSaveGuideStep.ParseFrom(buf);
+		var retMsg = MyLib.GCSaveGuideStep.ParseFrom(buf);
 		return retMsg;
 	}	
 
 	static IMessageLite GetCGForgotPassword(ByteString buf) {
-		var retMsg = ChuMeng.CGForgotPassword.ParseFrom(buf);
+		var retMsg = MyLib.CGForgotPassword.ParseFrom(buf);
 		return retMsg;
 	}	
 
 	static IMessageLite GetCGPropsRevive(ByteString buf) {
-		var retMsg = ChuMeng.CGPropsRevive.ParseFrom(buf);
+		var retMsg = MyLib.CGPropsRevive.ParseFrom(buf);
 		return retMsg;
 	}	
 
 	static IMessageLite GetCGChangeScreen4Point(ByteString buf) {
-		var retMsg = ChuMeng.CGChangeScreen4Point.ParseFrom(buf);
+		var retMsg = MyLib.CGChangeScreen4Point.ParseFrom(buf);
 		return retMsg;
 	}	
 
 	static IMessageLite GetCGChangeFightMode(ByteString buf) {
-		var retMsg = ChuMeng.CGChangeFightMode.ParseFrom(buf);
+		var retMsg = MyLib.CGChangeFightMode.ParseFrom(buf);
 		return retMsg;
 	}	
 
 	static IMessageLite GetGCBindingSession(ByteString buf) {
-		var retMsg = ChuMeng.GCBindingSession.ParseFrom(buf);
+		var retMsg = MyLib.GCBindingSession.ParseFrom(buf);
 		return retMsg;
 	}	
 
 	static IMessageLite GetCGGetCharacterInfo(ByteString buf) {
-		var retMsg = ChuMeng.CGGetCharacterInfo.ParseFrom(buf);
+		var retMsg = MyLib.CGGetCharacterInfo.ParseFrom(buf);
 		return retMsg;
 	}	
 
 	static IMessageLite GetGCPushAttribute2Members(ByteString buf) {
-		var retMsg = ChuMeng.GCPushAttribute2Members.ParseFrom(buf);
+		var retMsg = MyLib.GCPushAttribute2Members.ParseFrom(buf);
 		return retMsg;
 	}	
 
 	static IMessageLite GetCGRegisterAccount(ByteString buf) {
-		var retMsg = ChuMeng.CGRegisterAccount.ParseFrom(buf);
+		var retMsg = MyLib.CGRegisterAccount.ParseFrom(buf);
 		return retMsg;
 	}	
 
 	static IMessageLite GetCGSetKeyValue(ByteString buf) {
-		var retMsg = ChuMeng.CGSetKeyValue.ParseFrom(buf);
+		var retMsg = MyLib.CGSetKeyValue.ParseFrom(buf);
 		return retMsg;
 	}	
 
 	static IMessageLite GetGCPushPlayerModifyName(ByteString buf) {
-		var retMsg = ChuMeng.GCPushPlayerModifyName.ParseFrom(buf);
+		var retMsg = MyLib.GCPushPlayerModifyName.ParseFrom(buf);
 		return retMsg;
 	}	
 
 	static IMessageLite GetGCGetCharacterInfo(ByteString buf) {
-		var retMsg = ChuMeng.GCGetCharacterInfo.ParseFrom(buf);
+		var retMsg = MyLib.GCGetCharacterInfo.ParseFrom(buf);
 		return retMsg;
 	}	
 
 	static IMessageLite GetGCPushAttrChange(ByteString buf) {
-		var retMsg = ChuMeng.GCPushAttrChange.ParseFrom(buf);
+		var retMsg = MyLib.GCPushAttrChange.ParseFrom(buf);
 		return retMsg;
 	}	
 
 	static IMessageLite GetGCSelectCharacter(ByteString buf) {
-		var retMsg = ChuMeng.GCSelectCharacter.ParseFrom(buf);
+		var retMsg = MyLib.GCSelectCharacter.ParseFrom(buf);
 		return retMsg;
 	}	
 
 	static IMessageLite GetCGListBranchinges(ByteString buf) {
-		var retMsg = ChuMeng.CGListBranchinges.ParseFrom(buf);
+		var retMsg = MyLib.CGListBranchinges.ParseFrom(buf);
 		return retMsg;
 	}	
 
 	static IMessageLite GetCGAutoRegisterAccount(ByteString buf) {
-		var retMsg = ChuMeng.CGAutoRegisterAccount.ParseFrom(buf);
+		var retMsg = MyLib.CGAutoRegisterAccount.ParseFrom(buf);
 		return retMsg;
 	}	
 
 	static IMessageLite GetCGModifyPassword(ByteString buf) {
-		var retMsg = ChuMeng.CGModifyPassword.ParseFrom(buf);
+		var retMsg = MyLib.CGModifyPassword.ParseFrom(buf);
 		return retMsg;
 	}	
 
 	static IMessageLite GetGCPushNotice2Kick(ByteString buf) {
-		var retMsg = ChuMeng.GCPushNotice2Kick.ParseFrom(buf);
+		var retMsg = MyLib.GCPushNotice2Kick.ParseFrom(buf);
 		return retMsg;
 	}	
 
 	static IMessageLite GetGCPushLevelUpgrade(ByteString buf) {
-		var retMsg = ChuMeng.GCPushLevelUpgrade.ParseFrom(buf);
+		var retMsg = MyLib.GCPushLevelUpgrade.ParseFrom(buf);
 		return retMsg;
 	}	
 
 	static IMessageLite GetCGHeartBeat(ByteString buf) {
-		var retMsg = ChuMeng.CGHeartBeat.ParseFrom(buf);
+		var retMsg = MyLib.CGHeartBeat.ParseFrom(buf);
 		return retMsg;
 	}	
 
 	static IMessageLite GetCGPlayerCmd(ByteString buf) {
-		var retMsg = ChuMeng.CGPlayerCmd.ParseFrom(buf);
+		var retMsg = MyLib.CGPlayerCmd.ParseFrom(buf);
 		return retMsg;
 	}	
 
 	static IMessageLite GetGCPushLootReward(ByteString buf) {
-		var retMsg = ChuMeng.GCPushLootReward.ParseFrom(buf);
+		var retMsg = MyLib.GCPushLootReward.ParseFrom(buf);
 		return retMsg;
 	}	
 
 	static IMessageLite GetCGBindingSession(ByteString buf) {
-		var retMsg = ChuMeng.CGBindingSession.ParseFrom(buf);
+		var retMsg = MyLib.CGBindingSession.ParseFrom(buf);
 		return retMsg;
 	}	
 
 	static IMessageLite GetGCPropsRevive(ByteString buf) {
-		var retMsg = ChuMeng.GCPropsRevive.ParseFrom(buf);
+		var retMsg = MyLib.GCPropsRevive.ParseFrom(buf);
 		return retMsg;
 	}	
 
 	static IMessageLite GetGCChangeFightMode(ByteString buf) {
-		var retMsg = ChuMeng.GCChangeFightMode.ParseFrom(buf);
+		var retMsg = MyLib.GCChangeFightMode.ParseFrom(buf);
 		return retMsg;
 	}	
 
 	static IMessageLite GetCGModifyPlayerName(ByteString buf) {
-		var retMsg = ChuMeng.CGModifyPlayerName.ParseFrom(buf);
+		var retMsg = MyLib.CGModifyPlayerName.ParseFrom(buf);
 		return retMsg;
 	}	
 
 	static IMessageLite GetCGCreateCharacter(ByteString buf) {
-		var retMsg = ChuMeng.CGCreateCharacter.ParseFrom(buf);
+		var retMsg = MyLib.CGCreateCharacter.ParseFrom(buf);
 		return retMsg;
 	}	
 
 	static IMessageLite GetGCModifyPassword(ByteString buf) {
-		var retMsg = ChuMeng.GCModifyPassword.ParseFrom(buf);
+		var retMsg = MyLib.GCModifyPassword.ParseFrom(buf);
 		return retMsg;
 	}	
 
 	static IMessageLite GetGCPushLevel(ByteString buf) {
-		var retMsg = ChuMeng.GCPushLevel.ParseFrom(buf);
+		var retMsg = MyLib.GCPushLevel.ParseFrom(buf);
 		return retMsg;
 	}	
 
 	static IMessageLite GetGCEnterScene(ByteString buf) {
-		var retMsg = ChuMeng.GCEnterScene.ParseFrom(buf);
+		var retMsg = MyLib.GCEnterScene.ParseFrom(buf);
 		return retMsg;
 	}	
 
 	static IMessageLite GetGCPushNotify(ByteString buf) {
-		var retMsg = ChuMeng.GCPushNotify.ParseFrom(buf);
+		var retMsg = MyLib.GCPushNotify.ParseFrom(buf);
 		return retMsg;
 	}	
 
 	static IMessageLite GetGCPushLootRewardRemove(ByteString buf) {
-		var retMsg = ChuMeng.GCPushLootRewardRemove.ParseFrom(buf);
+		var retMsg = MyLib.GCPushLootRewardRemove.ParseFrom(buf);
 		return retMsg;
 	}	
 
 	static IMessageLite GetGCForgotPassword(ByteString buf) {
-		var retMsg = ChuMeng.GCForgotPassword.ParseFrom(buf);
+		var retMsg = MyLib.GCForgotPassword.ParseFrom(buf);
 		return retMsg;
 	}	
 
 	static IMessageLite GetCGPickItem(ByteString buf) {
-		var retMsg = ChuMeng.CGPickItem.ParseFrom(buf);
+		var retMsg = MyLib.CGPickItem.ParseFrom(buf);
 		return retMsg;
 	}	
 
 	static IMessageLite GetGCPushExpChange(ByteString buf) {
-		var retMsg = ChuMeng.GCPushExpChange.ParseFrom(buf);
+		var retMsg = MyLib.GCPushExpChange.ParseFrom(buf);
 		return retMsg;
 	}	
 
 	static IMessageLite GetCGPlayerMove(ByteString buf) {
-		var retMsg = ChuMeng.CGPlayerMove.ParseFrom(buf);
+		var retMsg = MyLib.CGPlayerMove.ParseFrom(buf);
 		return retMsg;
 	}	
 
 	static IMessageLite GetGCPushPlayerPower(ByteString buf) {
-		var retMsg = ChuMeng.GCPushPlayerPower.ParseFrom(buf);
+		var retMsg = MyLib.GCPushPlayerPower.ParseFrom(buf);
 		return retMsg;
 	}	
 
 	static IMessageLite GetCGDelCharacter(ByteString buf) {
-		var retMsg = ChuMeng.CGDelCharacter.ParseFrom(buf);
+		var retMsg = MyLib.CGDelCharacter.ParseFrom(buf);
 		return retMsg;
 	}	
 
 	static IMessageLite GetCGSaveGuideStep(ByteString buf) {
-		var retMsg = ChuMeng.CGSaveGuideStep.ParseFrom(buf);
+		var retMsg = MyLib.CGSaveGuideStep.ParseFrom(buf);
 		return retMsg;
 	}	
 
 	static IMessageLite GetGCSettingClothShow(ByteString buf) {
-		var retMsg = ChuMeng.GCSettingClothShow.ParseFrom(buf);
+		var retMsg = MyLib.GCSettingClothShow.ParseFrom(buf);
 		return retMsg;
 	}	
 
 	static IMessageLite GetCGAddProp(ByteString buf) {
-		var retMsg = ChuMeng.CGAddProp.ParseFrom(buf);
+		var retMsg = MyLib.CGAddProp.ParseFrom(buf);
 		return retMsg;
 	}	
 
 	static IMessageLite GetGCRegisterAccount(ByteString buf) {
-		var retMsg = ChuMeng.GCRegisterAccount.ParseFrom(buf);
+		var retMsg = MyLib.GCRegisterAccount.ParseFrom(buf);
 		return retMsg;
 	}	
 
 	static IMessageLite GetGCChangeScreen4Point(ByteString buf) {
-		var retMsg = ChuMeng.GCChangeScreen4Point.ParseFrom(buf);
+		var retMsg = MyLib.GCChangeScreen4Point.ParseFrom(buf);
 		return retMsg;
 	}	
 
 	static IMessageLite GetCGEnterScene(ByteString buf) {
-		var retMsg = ChuMeng.CGEnterScene.ParseFrom(buf);
+		var retMsg = MyLib.CGEnterScene.ParseFrom(buf);
 		return retMsg;
 	}	
 
 	static IMessageLite GetCGSettingClothShow(ByteString buf) {
-		var retMsg = ChuMeng.CGSettingClothShow.ParseFrom(buf);
+		var retMsg = MyLib.CGSettingClothShow.ParseFrom(buf);
 		return retMsg;
 	}	
 
 	static IMessageLite GetGCDelCharacter(ByteString buf) {
-		var retMsg = ChuMeng.GCDelCharacter.ParseFrom(buf);
+		var retMsg = MyLib.GCDelCharacter.ParseFrom(buf);
 		return retMsg;
 	}	
 
 	static IMessageLite GetGCAutoRegisterAccount(ByteString buf) {
-		var retMsg = ChuMeng.GCAutoRegisterAccount.ParseFrom(buf);
+		var retMsg = MyLib.GCAutoRegisterAccount.ParseFrom(buf);
 		return retMsg;
 	}	
 
 	static IMessageLite GetGCPushPlayerToilState(ByteString buf) {
-		var retMsg = ChuMeng.GCPushPlayerToilState.ParseFrom(buf);
+		var retMsg = MyLib.GCPushPlayerToilState.ParseFrom(buf);
 		return retMsg;
 	}	
 
 	static IMessageLite GetGCCreateCharacter(ByteString buf) {
-		var retMsg = ChuMeng.GCCreateCharacter.ParseFrom(buf);
+		var retMsg = MyLib.GCCreateCharacter.ParseFrom(buf);
 		return retMsg;
 	}	
 
 	static IMessageLite GetGCPushPlayerResurrect(ByteString buf) {
-		var retMsg = ChuMeng.GCPushPlayerResurrect.ParseFrom(buf);
+		var retMsg = MyLib.GCPushPlayerResurrect.ParseFrom(buf);
 		return retMsg;
 	}	
 
 	static IMessageLite GetGCPlayerMove(ByteString buf) {
-		var retMsg = ChuMeng.GCPlayerMove.ParseFrom(buf);
+		var retMsg = MyLib.GCPlayerMove.ParseFrom(buf);
 		return retMsg;
 	}	
 
 	static IMessageLite GetGCPlayerCmd(ByteString buf) {
-		var retMsg = ChuMeng.GCPlayerCmd.ParseFrom(buf);
+		var retMsg = MyLib.GCPlayerCmd.ParseFrom(buf);
 		return retMsg;
 	}	
 
 	static IMessageLite GetGCModifyPlayerName(ByteString buf) {
-		var retMsg = ChuMeng.GCModifyPlayerName.ParseFrom(buf);
+		var retMsg = MyLib.GCModifyPlayerName.ParseFrom(buf);
 		return retMsg;
 	}	
 
 	static IMessageLite GetCGSelectCharacter(ByteString buf) {
-		var retMsg = ChuMeng.CGSelectCharacter.ParseFrom(buf);
+		var retMsg = MyLib.CGSelectCharacter.ParseFrom(buf);
 		return retMsg;
 	}	
 
 	static IMessageLite GetCGPickUpLootReward(ByteString buf) {
-		var retMsg = ChuMeng.CGPickUpLootReward.ParseFrom(buf);
+		var retMsg = MyLib.CGPickUpLootReward.ParseFrom(buf);
 		return retMsg;
 	}	
 
 	static IMessageLite GetCGSetProp(ByteString buf) {
-		var retMsg = ChuMeng.CGSetProp.ParseFrom(buf);
+		var retMsg = MyLib.CGSetProp.ParseFrom(buf);
 		return retMsg;
 	}	
 
 	static IMessageLite GetGCPushPlayerDressAttributeChanges(ByteString buf) {
-		var retMsg = ChuMeng.GCPushPlayerDressAttributeChanges.ParseFrom(buf);
+		var retMsg = MyLib.GCPushPlayerDressAttributeChanges.ParseFrom(buf);
 		return retMsg;
 	}	
 
 	static IMessageLite GetGCLoginAccount(ByteString buf) {
-		var retMsg = ChuMeng.GCLoginAccount.ParseFrom(buf);
+		var retMsg = MyLib.GCLoginAccount.ParseFrom(buf);
 		return retMsg;
 	}	
 
 	static IMessageLite GetGCCopyInfo(ByteString buf) {
-		var retMsg = ChuMeng.GCCopyInfo.ParseFrom(buf);
+		var retMsg = MyLib.GCCopyInfo.ParseFrom(buf);
 		return retMsg;
 	}	
 
 	static IMessageLite GetCGCopyInfo(ByteString buf) {
-		var retMsg = ChuMeng.CGCopyInfo.ParseFrom(buf);
+		var retMsg = MyLib.CGCopyInfo.ParseFrom(buf);
 		return retMsg;
 	}	
 
 	static IMessageLite GetGCCopyReward(ByteString buf) {
-		var retMsg = ChuMeng.GCCopyReward.ParseFrom(buf);
+		var retMsg = MyLib.GCCopyReward.ParseFrom(buf);
 		return retMsg;
 	}	
 
 	static IMessageLite GetGCPushLevelOpen(ByteString buf) {
-		var retMsg = ChuMeng.GCPushLevelOpen.ParseFrom(buf);
-		return retMsg;
-	}	
-
-	static IMessageLite GetGCListUserEquip(ByteString buf) {
-		var retMsg = ChuMeng.GCListUserEquip.ParseFrom(buf);
-		return retMsg;
-	}	
-
-	static IMessageLite GetGCCheckout4Storage(ByteString buf) {
-		var retMsg = ChuMeng.GCCheckout4Storage.ParseFrom(buf);
-		return retMsg;
-	}	
-
-	static IMessageLite GetGCSellUserProps(ByteString buf) {
-		var retMsg = ChuMeng.GCSellUserProps.ParseFrom(buf);
-		return retMsg;
-	}	
-
-	static IMessageLite GetGCPushGoodsCountChange(ByteString buf) {
-		var retMsg = ChuMeng.GCPushGoodsCountChange.ParseFrom(buf);
-		return retMsg;
-	}	
-
-	static IMessageLite GetCGSellUserProps(ByteString buf) {
-		var retMsg = ChuMeng.CGSellUserProps.ParseFrom(buf);
-		return retMsg;
-	}	
-
-	static IMessageLite GetGCPushPackInfo(ByteString buf) {
-		var retMsg = ChuMeng.GCPushPackInfo.ParseFrom(buf);
-		return retMsg;
-	}	
-
-	static IMessageLite GetCGAutoAdjustPack(ByteString buf) {
-		var retMsg = ChuMeng.CGAutoAdjustPack.ParseFrom(buf);
-		return retMsg;
-	}	
-
-	static IMessageLite GetCGSplitUserProps(ByteString buf) {
-		var retMsg = ChuMeng.CGSplitUserProps.ParseFrom(buf);
-		return retMsg;
-	}	
-
-	static IMessageLite GetGCLoadShortcutsInfo(ByteString buf) {
-		var retMsg = ChuMeng.GCLoadShortcutsInfo.ParseFrom(buf);
-		return retMsg;
-	}	
-
-	static IMessageLite GetGCUserDressEquip(ByteString buf) {
-		var retMsg = ChuMeng.GCUserDressEquip.ParseFrom(buf);
-		return retMsg;
-	}	
-
-	static IMessageLite GetCGSwapShortcuts(ByteString buf) {
-		var retMsg = ChuMeng.CGSwapShortcuts.ParseFrom(buf);
-		return retMsg;
-	}	
-
-	static IMessageLite GetGCUnbindingGoods(ByteString buf) {
-		var retMsg = ChuMeng.GCUnbindingGoods.ParseFrom(buf);
-		return retMsg;
-	}	
-
-	static IMessageLite GetCGUseUserProps(ByteString buf) {
-		var retMsg = ChuMeng.CGUseUserProps.ParseFrom(buf);
-		return retMsg;
-	}	
-
-	static IMessageLite GetCGUnbindingGoods(ByteString buf) {
-		var retMsg = ChuMeng.CGUnbindingGoods.ParseFrom(buf);
-		return retMsg;
-	}	
-
-	static IMessageLite GetGCPushEquipDataUpdate(ByteString buf) {
-		var retMsg = ChuMeng.GCPushEquipDataUpdate.ParseFrom(buf);
-		return retMsg;
-	}	
-
-	static IMessageLite GetGCPushPlayerDressInfo(ByteString buf) {
-		var retMsg = ChuMeng.GCPushPlayerDressInfo.ParseFrom(buf);
-		return retMsg;
-	}	
-
-	static IMessageLite GetCGLoadShortcutsInfo(ByteString buf) {
-		var retMsg = ChuMeng.CGLoadShortcutsInfo.ParseFrom(buf);
-		return retMsg;
-	}	
-
-	static IMessageLite GetGCModifyShortcutsInfo(ByteString buf) {
-		var retMsg = ChuMeng.GCModifyShortcutsInfo.ParseFrom(buf);
-		return retMsg;
-	}	
-
-	static IMessageLite GetGCDressCloth(ByteString buf) {
-		var retMsg = ChuMeng.GCDressCloth.ParseFrom(buf);
-		return retMsg;
-	}	
-
-	static IMessageLite GetCGPut2Storage(ByteString buf) {
-		var retMsg = ChuMeng.CGPut2Storage.ParseFrom(buf);
-		return retMsg;
-	}	
-
-	static IMessageLite GetCGCheckout4Storage(ByteString buf) {
-		var retMsg = ChuMeng.CGCheckout4Storage.ParseFrom(buf);
-		return retMsg;
-	}	
-
-	static IMessageLite GetGCTakeOffCloth(ByteString buf) {
-		var retMsg = ChuMeng.GCTakeOffCloth.ParseFrom(buf);
-		return retMsg;
-	}	
-
-	static IMessageLite GetCGLevelUpEquip(ByteString buf) {
-		var retMsg = ChuMeng.CGLevelUpEquip.ParseFrom(buf);
-		return retMsg;
-	}	
-
-	static IMessageLite GetGCMergeUserProps(ByteString buf) {
-		var retMsg = ChuMeng.GCMergeUserProps.ParseFrom(buf);
-		return retMsg;
-	}	
-
-	static IMessageLite GetGCUseUserProps(ByteString buf) {
-		var retMsg = ChuMeng.GCUseUserProps.ParseFrom(buf);
-		return retMsg;
-	}	
-
-	static IMessageLite GetCGModifyShortcutsInfo(ByteString buf) {
-		var retMsg = ChuMeng.CGModifyShortcutsInfo.ParseFrom(buf);
-		return retMsg;
-	}	
-
-	static IMessageLite GetCGListUserEquip(ByteString buf) {
-		var retMsg = ChuMeng.CGListUserEquip.ParseFrom(buf);
-		return retMsg;
-	}	
-
-	static IMessageLite GetCGLoadPackInfo(ByteString buf) {
-		var retMsg = ChuMeng.CGLoadPackInfo.ParseFrom(buf);
-		return retMsg;
-	}	
-
-	static IMessageLite GetCGDressCloth(ByteString buf) {
-		var retMsg = ChuMeng.CGDressCloth.ParseFrom(buf);
-		return retMsg;
-	}	
-
-	static IMessageLite GetGCPut2Storage(ByteString buf) {
-		var retMsg = ChuMeng.GCPut2Storage.ParseFrom(buf);
-		return retMsg;
-	}	
-
-	static IMessageLite GetGCSplitUserProps(ByteString buf) {
-		var retMsg = ChuMeng.GCSplitUserProps.ParseFrom(buf);
-		return retMsg;
-	}	
-
-	static IMessageLite GetCGQueryUserEquipInfo(ByteString buf) {
-		var retMsg = ChuMeng.CGQueryUserEquipInfo.ParseFrom(buf);
-		return retMsg;
-	}	
-
-	static IMessageLite GetGCSwapShortcuts(ByteString buf) {
-		var retMsg = ChuMeng.GCSwapShortcuts.ParseFrom(buf);
-		return retMsg;
-	}	
-
-	static IMessageLite GetGCLoadPackInfo(ByteString buf) {
-		var retMsg = ChuMeng.GCLoadPackInfo.ParseFrom(buf);
-		return retMsg;
-	}	
-
-	static IMessageLite GetCGUserDressEquip(ByteString buf) {
-		var retMsg = ChuMeng.CGUserDressEquip.ParseFrom(buf);
-		return retMsg;
-	}	
-
-	static IMessageLite GetGCAutoAdjustPack(ByteString buf) {
-		var retMsg = ChuMeng.GCAutoAdjustPack.ParseFrom(buf);
-		return retMsg;
-	}	
-
-	static IMessageLite GetGCPushShortcutsInfo(ByteString buf) {
-		var retMsg = ChuMeng.GCPushShortcutsInfo.ParseFrom(buf);
-		return retMsg;
-	}	
-
-	static IMessageLite GetGCPushPlayerDressedEquipChange(ByteString buf) {
-		var retMsg = ChuMeng.GCPushPlayerDressedEquipChange.ParseFrom(buf);
-		return retMsg;
-	}	
-
-	static IMessageLite GetCGTakeOffCloth(ByteString buf) {
-		var retMsg = ChuMeng.CGTakeOffCloth.ParseFrom(buf);
-		return retMsg;
-	}	
-
-	static IMessageLite GetGCQueryUserEquipInfo(ByteString buf) {
-		var retMsg = ChuMeng.GCQueryUserEquipInfo.ParseFrom(buf);
-		return retMsg;
-	}	
-
-	static IMessageLite GetCGLevelUpGem(ByteString buf) {
-		var retMsg = ChuMeng.CGLevelUpGem.ParseFrom(buf);
-		return retMsg;
-	}	
-
-	static IMessageLite GetCGMergeUserProps(ByteString buf) {
-		var retMsg = ChuMeng.CGMergeUserProps.ParseFrom(buf);
+		var retMsg = MyLib.GCPushLevelOpen.ParseFrom(buf);
 		return retMsg;
 	}	
 
 	static IMessageLite GetCGResetSkillPoint(ByteString buf) {
-		var retMsg = ChuMeng.CGResetSkillPoint.ParseFrom(buf);
+		var retMsg = MyLib.CGResetSkillPoint.ParseFrom(buf);
 		return retMsg;
 	}	
 
 	static IMessageLite GetCGSkillLevelUp(ByteString buf) {
-		var retMsg = ChuMeng.CGSkillLevelUp.ParseFrom(buf);
+		var retMsg = MyLib.CGSkillLevelUp.ParseFrom(buf);
 		return retMsg;
 	}	
 
 	static IMessageLite GetCGInjectPropsLevelUp(ByteString buf) {
-		var retMsg = ChuMeng.CGInjectPropsLevelUp.ParseFrom(buf);
+		var retMsg = MyLib.CGInjectPropsLevelUp.ParseFrom(buf);
 		return retMsg;
 	}	
 
 	static IMessageLite GetCGLoadInjectPropsLevelUpInfo(ByteString buf) {
-		var retMsg = ChuMeng.CGLoadInjectPropsLevelUpInfo.ParseFrom(buf);
+		var retMsg = MyLib.CGLoadInjectPropsLevelUpInfo.ParseFrom(buf);
 		return retMsg;
 	}	
 
 	static IMessageLite GetGCPushMemberSkillCD(ByteString buf) {
-		var retMsg = ChuMeng.GCPushMemberSkillCD.ParseFrom(buf);
+		var retMsg = MyLib.GCPushMemberSkillCD.ParseFrom(buf);
 		return retMsg;
 	}	
 
 	static IMessageLite GetCGLoadSkillPanel(ByteString buf) {
-		var retMsg = ChuMeng.CGLoadSkillPanel.ParseFrom(buf);
+		var retMsg = MyLib.CGLoadSkillPanel.ParseFrom(buf);
 		return retMsg;
 	}	
 
 	static IMessageLite GetCGSkillLevelDown(ByteString buf) {
-		var retMsg = ChuMeng.CGSkillLevelDown.ParseFrom(buf);
+		var retMsg = MyLib.CGSkillLevelDown.ParseFrom(buf);
 		return retMsg;
 	}	
 
 	static IMessageLite GetGCInjectPropsLevelUp(ByteString buf) {
-		var retMsg = ChuMeng.GCInjectPropsLevelUp.ParseFrom(buf);
+		var retMsg = MyLib.GCInjectPropsLevelUp.ParseFrom(buf);
 		return retMsg;
 	}	
 
 	static IMessageLite GetGCLoadSkillPanel(ByteString buf) {
-		var retMsg = ChuMeng.GCLoadSkillPanel.ParseFrom(buf);
+		var retMsg = MyLib.GCLoadSkillPanel.ParseFrom(buf);
 		return retMsg;
 	}	
 
 	static IMessageLite GetGCPushActivateSkill(ByteString buf) {
-		var retMsg = ChuMeng.GCPushActivateSkill.ParseFrom(buf);
+		var retMsg = MyLib.GCPushActivateSkill.ParseFrom(buf);
 		return retMsg;
 	}	
 
 	static IMessageLite GetGCPushUnitAddBuffer(ByteString buf) {
-		var retMsg = ChuMeng.GCPushUnitAddBuffer.ParseFrom(buf);
+		var retMsg = MyLib.GCPushUnitAddBuffer.ParseFrom(buf);
 		return retMsg;
 	}	
 
 	static IMessageLite GetGCLoadInjectPropsLevelUpInfo(ByteString buf) {
-		var retMsg = ChuMeng.GCLoadInjectPropsLevelUpInfo.ParseFrom(buf);
+		var retMsg = MyLib.GCLoadInjectPropsLevelUpInfo.ParseFrom(buf);
 		return retMsg;
 	}	
 
 	static IMessageLite GetGCResetSkillPoint(ByteString buf) {
-		var retMsg = ChuMeng.GCResetSkillPoint.ParseFrom(buf);
+		var retMsg = MyLib.GCResetSkillPoint.ParseFrom(buf);
 		return retMsg;
 	}	
 
 	static IMessageLite GetGCPushSkillPoint(ByteString buf) {
-		var retMsg = ChuMeng.GCPushSkillPoint.ParseFrom(buf);
+		var retMsg = MyLib.GCPushSkillPoint.ParseFrom(buf);
 		return retMsg;
 	}	
 
 	static IMessageLite GetGCSkillLevelUp(ByteString buf) {
-		var retMsg = ChuMeng.GCSkillLevelUp.ParseFrom(buf);
+		var retMsg = MyLib.GCSkillLevelUp.ParseFrom(buf);
 		return retMsg;
 	}	
 
 	static IMessageLite GetGCSkillLevelDown(ByteString buf) {
-		var retMsg = ChuMeng.GCSkillLevelDown.ParseFrom(buf);
+		var retMsg = MyLib.GCSkillLevelDown.ParseFrom(buf);
 		return retMsg;
 	}	
 
 	static IMessageLite GetCGSendChat(ByteString buf) {
-		var retMsg = ChuMeng.CGSendChat.ParseFrom(buf);
+		var retMsg = MyLib.CGSendChat.ParseFrom(buf);
 		return retMsg;
 	}	
 
 	static IMessageLite GetCGLoadMChatShowInfo(ByteString buf) {
-		var retMsg = ChuMeng.CGLoadMChatShowInfo.ParseFrom(buf);
+		var retMsg = MyLib.CGLoadMChatShowInfo.ParseFrom(buf);
 		return retMsg;
 	}	
 
 	static IMessageLite GetGCViewChatGoods(ByteString buf) {
-		var retMsg = ChuMeng.GCViewChatGoods.ParseFrom(buf);
+		var retMsg = MyLib.GCViewChatGoods.ParseFrom(buf);
 		return retMsg;
 	}	
 
 	static IMessageLite GetGCLoadMChatShowInfo(ByteString buf) {
-		var retMsg = ChuMeng.GCLoadMChatShowInfo.ParseFrom(buf);
+		var retMsg = MyLib.GCLoadMChatShowInfo.ParseFrom(buf);
 		return retMsg;
 	}	
 
 	static IMessageLite GetGCPushChat2Client(ByteString buf) {
-		var retMsg = ChuMeng.GCPushChat2Client.ParseFrom(buf);
+		var retMsg = MyLib.GCPushChat2Client.ParseFrom(buf);
 		return retMsg;
 	}	
 
 	static IMessageLite GetGCSendChat(ByteString buf) {
-		var retMsg = ChuMeng.GCSendChat.ParseFrom(buf);
+		var retMsg = MyLib.GCSendChat.ParseFrom(buf);
 		return retMsg;
 	}	
 
 	static IMessageLite GetGCPushSendNotice(ByteString buf) {
-		var retMsg = ChuMeng.GCPushSendNotice.ParseFrom(buf);
+		var retMsg = MyLib.GCPushSendNotice.ParseFrom(buf);
 		return retMsg;
 	}	
 
 	static IMessageLite GetGCPushNotice(ByteString buf) {
-		var retMsg = ChuMeng.GCPushNotice.ParseFrom(buf);
+		var retMsg = MyLib.GCPushNotice.ParseFrom(buf);
 		return retMsg;
 	}	
 
 	static IMessageLite GetCGViewChatGoods(ByteString buf) {
-		var retMsg = ChuMeng.CGViewChatGoods.ParseFrom(buf);
-		return retMsg;
-	}	
-
-	static IMessageLite GetGCBuyShopProps(ByteString buf) {
-		var retMsg = ChuMeng.GCBuyShopProps.ParseFrom(buf);
+		var retMsg = MyLib.CGViewChatGoods.ParseFrom(buf);
 		return retMsg;
 	}	
 
 	static IMessageLite GetCGBuyShopProps(ByteString buf) {
-		var retMsg = ChuMeng.CGBuyShopProps.ParseFrom(buf);
+		var retMsg = MyLib.CGBuyShopProps.ParseFrom(buf);
+		return retMsg;
+	}	
+
+	static IMessageLite GetGCBuyShopProps(ByteString buf) {
+		var retMsg = MyLib.GCBuyShopProps.ParseFrom(buf);
+		return retMsg;
+	}	
+
+	static IMessageLite GetGCListUserEquip(ByteString buf) {
+		var retMsg = MyLib.GCListUserEquip.ParseFrom(buf);
+		return retMsg;
+	}	
+
+	static IMessageLite GetGCCheckout4Storage(ByteString buf) {
+		var retMsg = MyLib.GCCheckout4Storage.ParseFrom(buf);
+		return retMsg;
+	}	
+
+	static IMessageLite GetGCSellUserProps(ByteString buf) {
+		var retMsg = MyLib.GCSellUserProps.ParseFrom(buf);
+		return retMsg;
+	}	
+
+	static IMessageLite GetGCPushGoodsCountChange(ByteString buf) {
+		var retMsg = MyLib.GCPushGoodsCountChange.ParseFrom(buf);
+		return retMsg;
+	}	
+
+	static IMessageLite GetCGSellUserProps(ByteString buf) {
+		var retMsg = MyLib.CGSellUserProps.ParseFrom(buf);
+		return retMsg;
+	}	
+
+	static IMessageLite GetGCPushPackInfo(ByteString buf) {
+		var retMsg = MyLib.GCPushPackInfo.ParseFrom(buf);
+		return retMsg;
+	}	
+
+	static IMessageLite GetCGAutoAdjustPack(ByteString buf) {
+		var retMsg = MyLib.CGAutoAdjustPack.ParseFrom(buf);
+		return retMsg;
+	}	
+
+	static IMessageLite GetCGSplitUserProps(ByteString buf) {
+		var retMsg = MyLib.CGSplitUserProps.ParseFrom(buf);
+		return retMsg;
+	}	
+
+	static IMessageLite GetGCLoadShortcutsInfo(ByteString buf) {
+		var retMsg = MyLib.GCLoadShortcutsInfo.ParseFrom(buf);
+		return retMsg;
+	}	
+
+	static IMessageLite GetGCUserDressEquip(ByteString buf) {
+		var retMsg = MyLib.GCUserDressEquip.ParseFrom(buf);
+		return retMsg;
+	}	
+
+	static IMessageLite GetCGSwapShortcuts(ByteString buf) {
+		var retMsg = MyLib.CGSwapShortcuts.ParseFrom(buf);
+		return retMsg;
+	}	
+
+	static IMessageLite GetGCUnbindingGoods(ByteString buf) {
+		var retMsg = MyLib.GCUnbindingGoods.ParseFrom(buf);
+		return retMsg;
+	}	
+
+	static IMessageLite GetCGUseUserProps(ByteString buf) {
+		var retMsg = MyLib.CGUseUserProps.ParseFrom(buf);
+		return retMsg;
+	}	
+
+	static IMessageLite GetCGUnbindingGoods(ByteString buf) {
+		var retMsg = MyLib.CGUnbindingGoods.ParseFrom(buf);
+		return retMsg;
+	}	
+
+	static IMessageLite GetGCPushEquipDataUpdate(ByteString buf) {
+		var retMsg = MyLib.GCPushEquipDataUpdate.ParseFrom(buf);
+		return retMsg;
+	}	
+
+	static IMessageLite GetGCPushPlayerDressInfo(ByteString buf) {
+		var retMsg = MyLib.GCPushPlayerDressInfo.ParseFrom(buf);
+		return retMsg;
+	}	
+
+	static IMessageLite GetCGLoadShortcutsInfo(ByteString buf) {
+		var retMsg = MyLib.CGLoadShortcutsInfo.ParseFrom(buf);
+		return retMsg;
+	}	
+
+	static IMessageLite GetGCModifyShortcutsInfo(ByteString buf) {
+		var retMsg = MyLib.GCModifyShortcutsInfo.ParseFrom(buf);
+		return retMsg;
+	}	
+
+	static IMessageLite GetGCDressCloth(ByteString buf) {
+		var retMsg = MyLib.GCDressCloth.ParseFrom(buf);
+		return retMsg;
+	}	
+
+	static IMessageLite GetCGPut2Storage(ByteString buf) {
+		var retMsg = MyLib.CGPut2Storage.ParseFrom(buf);
+		return retMsg;
+	}	
+
+	static IMessageLite GetCGCheckout4Storage(ByteString buf) {
+		var retMsg = MyLib.CGCheckout4Storage.ParseFrom(buf);
+		return retMsg;
+	}	
+
+	static IMessageLite GetGCTakeOffCloth(ByteString buf) {
+		var retMsg = MyLib.GCTakeOffCloth.ParseFrom(buf);
+		return retMsg;
+	}	
+
+	static IMessageLite GetCGLevelUpEquip(ByteString buf) {
+		var retMsg = MyLib.CGLevelUpEquip.ParseFrom(buf);
+		return retMsg;
+	}	
+
+	static IMessageLite GetGCMergeUserProps(ByteString buf) {
+		var retMsg = MyLib.GCMergeUserProps.ParseFrom(buf);
+		return retMsg;
+	}	
+
+	static IMessageLite GetGCUseUserProps(ByteString buf) {
+		var retMsg = MyLib.GCUseUserProps.ParseFrom(buf);
+		return retMsg;
+	}	
+
+	static IMessageLite GetCGModifyShortcutsInfo(ByteString buf) {
+		var retMsg = MyLib.CGModifyShortcutsInfo.ParseFrom(buf);
+		return retMsg;
+	}	
+
+	static IMessageLite GetCGListUserEquip(ByteString buf) {
+		var retMsg = MyLib.CGListUserEquip.ParseFrom(buf);
+		return retMsg;
+	}	
+
+	static IMessageLite GetCGLoadPackInfo(ByteString buf) {
+		var retMsg = MyLib.CGLoadPackInfo.ParseFrom(buf);
+		return retMsg;
+	}	
+
+	static IMessageLite GetCGDressCloth(ByteString buf) {
+		var retMsg = MyLib.CGDressCloth.ParseFrom(buf);
+		return retMsg;
+	}	
+
+	static IMessageLite GetGCPut2Storage(ByteString buf) {
+		var retMsg = MyLib.GCPut2Storage.ParseFrom(buf);
+		return retMsg;
+	}	
+
+	static IMessageLite GetGCSplitUserProps(ByteString buf) {
+		var retMsg = MyLib.GCSplitUserProps.ParseFrom(buf);
+		return retMsg;
+	}	
+
+	static IMessageLite GetCGQueryUserEquipInfo(ByteString buf) {
+		var retMsg = MyLib.CGQueryUserEquipInfo.ParseFrom(buf);
+		return retMsg;
+	}	
+
+	static IMessageLite GetGCSwapShortcuts(ByteString buf) {
+		var retMsg = MyLib.GCSwapShortcuts.ParseFrom(buf);
+		return retMsg;
+	}	
+
+	static IMessageLite GetGCLoadPackInfo(ByteString buf) {
+		var retMsg = MyLib.GCLoadPackInfo.ParseFrom(buf);
+		return retMsg;
+	}	
+
+	static IMessageLite GetCGUserDressEquip(ByteString buf) {
+		var retMsg = MyLib.CGUserDressEquip.ParseFrom(buf);
+		return retMsg;
+	}	
+
+	static IMessageLite GetGCAutoAdjustPack(ByteString buf) {
+		var retMsg = MyLib.GCAutoAdjustPack.ParseFrom(buf);
+		return retMsg;
+	}	
+
+	static IMessageLite GetGCPushShortcutsInfo(ByteString buf) {
+		var retMsg = MyLib.GCPushShortcutsInfo.ParseFrom(buf);
+		return retMsg;
+	}	
+
+	static IMessageLite GetGCPushPlayerDressedEquipChange(ByteString buf) {
+		var retMsg = MyLib.GCPushPlayerDressedEquipChange.ParseFrom(buf);
+		return retMsg;
+	}	
+
+	static IMessageLite GetCGTakeOffCloth(ByteString buf) {
+		var retMsg = MyLib.CGTakeOffCloth.ParseFrom(buf);
+		return retMsg;
+	}	
+
+	static IMessageLite GetGCQueryUserEquipInfo(ByteString buf) {
+		var retMsg = MyLib.GCQueryUserEquipInfo.ParseFrom(buf);
+		return retMsg;
+	}	
+
+	static IMessageLite GetCGLevelUpGem(ByteString buf) {
+		var retMsg = MyLib.CGLevelUpGem.ParseFrom(buf);
+		return retMsg;
+	}	
+
+	static IMessageLite GetCGMergeUserProps(ByteString buf) {
+		var retMsg = MyLib.CGMergeUserProps.ParseFrom(buf);
 		return retMsg;
 	}	
 
@@ -833,6 +833,60 @@ public partial class Util {
 
 	{"GCPushLevelOpen", GetGCPushLevelOpen},
 
+	{"CGResetSkillPoint", GetCGResetSkillPoint},
+
+	{"CGSkillLevelUp", GetCGSkillLevelUp},
+
+	{"CGInjectPropsLevelUp", GetCGInjectPropsLevelUp},
+
+	{"CGLoadInjectPropsLevelUpInfo", GetCGLoadInjectPropsLevelUpInfo},
+
+	{"GCPushMemberSkillCD", GetGCPushMemberSkillCD},
+
+	{"CGLoadSkillPanel", GetCGLoadSkillPanel},
+
+	{"CGSkillLevelDown", GetCGSkillLevelDown},
+
+	{"GCInjectPropsLevelUp", GetGCInjectPropsLevelUp},
+
+	{"GCLoadSkillPanel", GetGCLoadSkillPanel},
+
+	{"GCPushActivateSkill", GetGCPushActivateSkill},
+
+	{"GCPushUnitAddBuffer", GetGCPushUnitAddBuffer},
+
+	{"GCLoadInjectPropsLevelUpInfo", GetGCLoadInjectPropsLevelUpInfo},
+
+	{"GCResetSkillPoint", GetGCResetSkillPoint},
+
+	{"GCPushSkillPoint", GetGCPushSkillPoint},
+
+	{"GCSkillLevelUp", GetGCSkillLevelUp},
+
+	{"GCSkillLevelDown", GetGCSkillLevelDown},
+
+	{"CGSendChat", GetCGSendChat},
+
+	{"CGLoadMChatShowInfo", GetCGLoadMChatShowInfo},
+
+	{"GCViewChatGoods", GetGCViewChatGoods},
+
+	{"GCLoadMChatShowInfo", GetGCLoadMChatShowInfo},
+
+	{"GCPushChat2Client", GetGCPushChat2Client},
+
+	{"GCSendChat", GetGCSendChat},
+
+	{"GCPushSendNotice", GetGCPushSendNotice},
+
+	{"GCPushNotice", GetGCPushNotice},
+
+	{"CGViewChatGoods", GetCGViewChatGoods},
+
+	{"CGBuyShopProps", GetCGBuyShopProps},
+
+	{"GCBuyShopProps", GetGCBuyShopProps},
+
 	{"GCListUserEquip", GetGCListUserEquip},
 
 	{"GCCheckout4Storage", GetGCCheckout4Storage},
@@ -916,60 +970,6 @@ public partial class Util {
 	{"CGLevelUpGem", GetCGLevelUpGem},
 
 	{"CGMergeUserProps", GetCGMergeUserProps},
-
-	{"CGResetSkillPoint", GetCGResetSkillPoint},
-
-	{"CGSkillLevelUp", GetCGSkillLevelUp},
-
-	{"CGInjectPropsLevelUp", GetCGInjectPropsLevelUp},
-
-	{"CGLoadInjectPropsLevelUpInfo", GetCGLoadInjectPropsLevelUpInfo},
-
-	{"GCPushMemberSkillCD", GetGCPushMemberSkillCD},
-
-	{"CGLoadSkillPanel", GetCGLoadSkillPanel},
-
-	{"CGSkillLevelDown", GetCGSkillLevelDown},
-
-	{"GCInjectPropsLevelUp", GetGCInjectPropsLevelUp},
-
-	{"GCLoadSkillPanel", GetGCLoadSkillPanel},
-
-	{"GCPushActivateSkill", GetGCPushActivateSkill},
-
-	{"GCPushUnitAddBuffer", GetGCPushUnitAddBuffer},
-
-	{"GCLoadInjectPropsLevelUpInfo", GetGCLoadInjectPropsLevelUpInfo},
-
-	{"GCResetSkillPoint", GetGCResetSkillPoint},
-
-	{"GCPushSkillPoint", GetGCPushSkillPoint},
-
-	{"GCSkillLevelUp", GetGCSkillLevelUp},
-
-	{"GCSkillLevelDown", GetGCSkillLevelDown},
-
-	{"CGSendChat", GetCGSendChat},
-
-	{"CGLoadMChatShowInfo", GetCGLoadMChatShowInfo},
-
-	{"GCViewChatGoods", GetGCViewChatGoods},
-
-	{"GCLoadMChatShowInfo", GetGCLoadMChatShowInfo},
-
-	{"GCPushChat2Client", GetGCPushChat2Client},
-
-	{"GCSendChat", GetGCSendChat},
-
-	{"GCPushSendNotice", GetGCPushSendNotice},
-
-	{"GCPushNotice", GetGCPushNotice},
-
-	{"CGViewChatGoods", GetCGViewChatGoods},
-
-	{"GCBuyShopProps", GetGCBuyShopProps},
-
-	{"CGBuyShopProps", GetCGBuyShopProps},
 
 	};
 

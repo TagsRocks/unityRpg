@@ -15,7 +15,7 @@ namespace PacketHandler
 	{
 		public override void HandlePacket(KBEngine.Packet packet) {
 			if (packet.responseFlag == 0) {
-				ChuMeng.SkillDataController.skillDataController.ActivateSkill(packet.protoBody as ChuMeng.GCPushActivateSkill);
+				MyLib.SkillDataController.skillDataController.ActivateSkill(packet.protoBody as MyLib.GCPushActivateSkill);
 			}
 		}
 	}

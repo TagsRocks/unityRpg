@@ -5,7 +5,7 @@ using System.Net;
 using System;
 using System.Collections.Generic;
 
-namespace ChuMeng
+namespace MyLib
 {
     public enum UDPEvent
     {

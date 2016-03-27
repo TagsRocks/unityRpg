@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System;
 
-namespace ChuMeng
+namespace MyLib
 {
     /// <summary>
     /// 服务端存储的用户数据 一个Json文件

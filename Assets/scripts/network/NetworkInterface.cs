@@ -71,7 +71,7 @@ namespace KBEngine
 			if(KBEngineApp.app.networkInterface().valid()) {
 				KBEngineApp.app.networkInterface().sock().EndConnect(asyncresult);
             }else {
-                ChuMeng.MyEventSystem.myEventSystem.PushEvent(ChuMeng.MyEvent.EventType.ReConnect);
+                MyLib.MyEventSystem.myEventSystem.PushEvent(MyLib.MyEvent.EventType.ReConnect);
             }
 			
 			TimeoutObject.Set();
@@ -96,7 +96,7 @@ __RETRY:
 		        {
                     if(valid()) {
                     }else {
-                        ChuMeng.MyEventSystem.myEventSystem.PushEvent(ChuMeng.MyEvent.EventType.ReConnect);
+                        MyLib.MyEventSystem.myEventSystem.PushEvent(MyLib.MyEvent.EventType.ReConnect);
                     }
 		        }
 		        else

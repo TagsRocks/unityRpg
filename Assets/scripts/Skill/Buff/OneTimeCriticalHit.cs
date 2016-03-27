@@ -1,7 +1,7 @@
-﻿﻿﻿using UnityEngine;
+﻿﻿using UnityEngine;
 using System.Collections;
 
-namespace ChuMeng
+namespace MyLib
 {
     /// <summary>
     /// 获得一次性暴击BUff  Buff监听Hit事件

@@ -13,7 +13,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System;
 
-namespace ChuMeng
+namespace MyLib
 {
     //自己玩家不接受服务器控制
     //远端玩家接受服务器控制

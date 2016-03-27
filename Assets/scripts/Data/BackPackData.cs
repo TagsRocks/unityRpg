@@ -13,7 +13,7 @@ using System;
 	背包物品结构：
 		BackPackData ----> ItemData + EquipExtraInfo
  */ 
-namespace ChuMeng
+namespace MyLib
 {
 
 	public class BackpackData : ActionItem

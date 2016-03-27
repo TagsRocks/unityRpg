@@ -1,7 +1,7 @@
-﻿﻿using UnityEngine;
+﻿using UnityEngine;
 using System.Collections;
 
-namespace ChuMeng
+namespace MyLib
 {
     /// <summary>
     /// 同步服务器上的怪物属性和操作 

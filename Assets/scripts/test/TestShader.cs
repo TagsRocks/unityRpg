@@ -2,7 +2,7 @@
 using UnityEngine;
 using System.Collections;
 
-namespace ChuMeng
+namespace MyLib 
 {
     public class TestShader : MonoBehaviour
     {

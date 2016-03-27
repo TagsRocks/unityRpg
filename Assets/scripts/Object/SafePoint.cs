@@ -1,7 +1,7 @@
-﻿﻿﻿using UnityEngine;
+﻿﻿using UnityEngine;
 using System.Collections;
 
-namespace ChuMeng
+namespace MyLib
 {
     /// <summary>
     /// 标记地图某些点为安全点，以便在快速下坡的时候调整位置

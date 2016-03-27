@@ -13,7 +13,7 @@ using System.Collections;
 using KBEngine;
 using Google.ProtocolBuffers;
 
-namespace ChuMeng
+namespace MyLib
 {
 
 	public class LoginInit : UnityEngine.MonoBehaviour

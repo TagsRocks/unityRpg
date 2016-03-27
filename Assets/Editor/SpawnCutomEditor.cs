@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEditor;
-using ChuMeng;
+using MyLib;
 
 [CustomEditor(typeof(SpawnTrigger))]
 public class SpawnCutomEditor : Editor {

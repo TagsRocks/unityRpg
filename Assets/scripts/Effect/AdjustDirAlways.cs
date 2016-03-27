@@ -1,7 +1,7 @@
-﻿﻿﻿using UnityEngine;
+﻿﻿using UnityEngine;
 using System.Collections;
 
-namespace ChuMeng
+namespace MyLib
 {
 	/// <summary>
 	/// 调整粒子的发射方向 根据 当前的旋转方向

@@ -14,7 +14,7 @@ using System.Reflection;
 using System;
 using System.Collections.Generic;
 
-namespace ChuMeng
+namespace MyLib
 {
     [RequireComponent(typeof(MyAnimationEvent))]
     public class NpcEquipment : KBEngine.MonoBehaviour

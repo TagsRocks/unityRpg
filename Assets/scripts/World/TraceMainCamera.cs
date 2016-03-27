@@ -16,7 +16,7 @@ using System.Collections.Generic;
  * LightMap Camera Trace main Camera 
  * And Set All Material Camera Offset Value 
  */ 
-namespace ChuMeng
+namespace MyLib
 {
 	public class TraceMainCamera : MonoBehaviour
 	{

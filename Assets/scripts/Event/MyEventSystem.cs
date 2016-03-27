@@ -7,7 +7,7 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
-namespace ChuMeng
+namespace MyLib
 {
 	public class MyEvent {
         /// <summary>

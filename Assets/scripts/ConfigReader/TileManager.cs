@@ -21,7 +21,7 @@ using UnityEditor;
  * Configure Level Map Block  
  * Floor and Wall Position
  */
-namespace ChuMeng
+namespace MyLib 
 {
     public class TileManager : MonoBehaviour
     {

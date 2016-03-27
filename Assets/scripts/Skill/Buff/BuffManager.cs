@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System;
-namespace ChuMeng
+namespace MyLib
 {
 	public class BuffManager : MonoBehaviour
 	{
@@ -13,7 +13,7 @@ namespace ChuMeng
 		}
 
 		public Type GetBuffInstance(Affix.EffectType type) {
-			return Type.GetType ("ChuMeng."+type.ToString());
+            return Type.GetType ("MyLib."+type.ToString());
 		}
 
 		public IEffect CreateBuffInstance(Affix affix) {

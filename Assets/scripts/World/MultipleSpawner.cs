@@ -2,7 +2,7 @@
 using System.Collections;
 using System;
 
-namespace ChuMeng
+namespace MyLib
 {
     [System.Serializable]
     public class MultipleSpawner

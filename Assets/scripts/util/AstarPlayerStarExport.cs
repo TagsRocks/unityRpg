@@ -10,7 +10,7 @@ using System;
 
 using SimpleJSON;
 
-namespace ChuMeng
+namespace MyLib
 {
 	public class AstarPlayerStarExport : MonoBehaviour
 	{

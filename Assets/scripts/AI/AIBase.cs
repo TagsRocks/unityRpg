@@ -7,7 +7,7 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
-namespace ChuMeng
+namespace MyLib
 {
     [RequireComponent(typeof(KBEngine.KBNetworkView))]
 	[RequireComponent(typeof(CharacterController))]
@@ -32,25 +32,25 @@ namespace ChuMeng
             return ai;
         }
 
-		public List<ChuMeng.MyEvent.EventType> regEvt = null;
+		public List<MyLib.MyEvent.EventType> regEvt = null;
 		
 		public void RegEvent ()
 		{
 			if (regEvt != null) {
-				foreach (ChuMeng.MyEvent.EventType t in regEvt) {
-					ChuMeng.MyEventSystem.myEventSystem.RegisterEvent (t, OnEvent);
+				foreach (MyLib.MyEvent.EventType t in regEvt) {
+					MyLib.MyEventSystem.myEventSystem.RegisterEvent (t, OnEvent);
 				}
 			}
 			
 		}
 		void DropEvent()  {
 			if (regEvt != null) {
-				foreach(ChuMeng.MyEvent.EventType t in regEvt) {
-					ChuMeng.MyEventSystem.myEventSystem.dropListener(t, OnEvent);
+				foreach(MyLib.MyEvent.EventType t in regEvt) {
+					MyLib.MyEventSystem.myEventSystem.dropListener(t, OnEvent);
 				}
 			}
 		}
-		protected virtual void OnEvent(ChuMeng.MyEvent evt) {
+		protected virtual void OnEvent(MyLib.MyEvent evt) {
 		}
 		
 		protected virtual void OnDestroy() {
@@ -62,9 +62,9 @@ namespace ChuMeng
 			}
 		}
 		
-		protected void AddEvent(ChuMeng.MyEvent.EventType t) {
+		protected void AddEvent(MyLib.MyEvent.EventType t) {
 			regEvt.Add (t);
-			ChuMeng.MyEventSystem.myEventSystem.RegisterEvent (t, OnEvent);
+			MyLib.MyEventSystem.myEventSystem.RegisterEvent (t, OnEvent);
 		}
 	}
 

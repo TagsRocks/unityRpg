@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using SimpleJSON;
 using System;
-namespace ChuMeng
+namespace MyLib
 {
 	public class GameInterface_Login
 	{

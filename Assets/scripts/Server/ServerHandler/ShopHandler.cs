@@ -1,31 +1,31 @@
 ﻿using UnityEngine;
 using System.Collections;
-using playerData = ChuMeng.PlayerData;
+using playerData = MyLib.PlayerData;
 
 namespace ServerPacketHandler
 {
     public class CGBuyShopProps : IPacketHandler
     {
-        public static void HandlePacket(ChuMeng.CGBuyShopProps buy)
+        public static void HandlePacket(MyLib.CGBuyShopProps buy)
         {
             Log.Net("ShopHandler");
             //var buy = packet.protoBody as ChuMeng.CGBuyShopProps;
             var itemId = buy.ShopId;
-            var data = ChuMeng.GMDataBaseSystem.SearchIdStatic<ChuMeng.PropsConfigData>(ChuMeng.GameData.PropsConfig, itemId);
-            var player = ChuMeng.ServerData.Instance.playerInfo;
+            var data = MyLib.GMDataBaseSystem.SearchIdStatic<MyLib.PropsConfigData>(MyLib.GameData.PropsConfig, itemId);
+            var player = MyLib.ServerData.Instance.playerInfo;
             var has = player.Gold;
             var hasJingShi = player.JingShi;
             //var playerData = ChuMeng.PlayerData;
             if (has < data.goldCoin)
             {
-                var notify = ChuMeng.GCPushNotify.CreateBuilder();
+                var notify = MyLib.GCPushNotify.CreateBuilder();
                 notify.SetNotify("金币不足");
-                ChuMeng.ServerBundle.SendImmediatePush(notify);
+                MyLib.ServerBundle.SendImmediatePush(notify);
             } else if (hasJingShi < data.JingShi)
             {
-                var notify = ChuMeng.GCPushNotify.CreateBuilder();
+                var notify = MyLib.GCPushNotify.CreateBuilder();
                 notify.SetNotify("[ff0a0a]晶石不足，请去晶石商店购买[-]");
-                ChuMeng.ServerBundle.SendImmediatePush(notify);
+                MyLib.ServerBundle.SendImmediatePush(notify);
             } else
             {
                 if (playerData.IsPackageFull(itemId, 1))
@@ -42,23 +42,23 @@ namespace ServerPacketHandler
         public override void HandlePacket(KBEngine.Packet packet)
         {
             Log.Net("ShopHandler");
-            var buy = packet.protoBody as ChuMeng.CGBuyShopProps;
+            var buy = packet.protoBody as MyLib.CGBuyShopProps;
             var itemId = buy.ShopId;
-            var data = ChuMeng.GMDataBaseSystem.SearchIdStatic<ChuMeng.PropsConfigData>(ChuMeng.GameData.PropsConfig, itemId);
-            var player = ChuMeng.ServerData.Instance.playerInfo;
+            var data = MyLib.GMDataBaseSystem.SearchIdStatic<MyLib.PropsConfigData>(MyLib.GameData.PropsConfig, itemId);
+            var player = MyLib.ServerData.Instance.playerInfo;
             var has = player.Gold;
             var hasJingShi = player.JingShi;
             //var playerData = ChuMeng.PlayerData;
             if (has < data.goldCoin)
             {
-                var notify = ChuMeng.GCPushNotify.CreateBuilder();
+                var notify = MyLib.GCPushNotify.CreateBuilder();
                 notify.SetNotify("金币不足");
-                ChuMeng.ServerBundle.SendImmediatePush(notify);
+                MyLib.ServerBundle.SendImmediatePush(notify);
             } else if (hasJingShi < data.JingShi)
             {
-                var notify = ChuMeng.GCPushNotify.CreateBuilder();
+                var notify = MyLib.GCPushNotify.CreateBuilder();
                 notify.SetNotify("[ff0a0a]晶石不足，请去晶石商店购买[-]");
-                ChuMeng.ServerBundle.SendImmediatePush(notify);
+                MyLib.ServerBundle.SendImmediatePush(notify);
             } else
             {
                 if (playerData.IsPackageFull(itemId, 1))
@@ -78,15 +78,15 @@ namespace ServerPacketHandler
     {
         public override void HandlePacket(KBEngine.Packet packet)
         {
-            var inpb = packet.protoBody as ChuMeng.CGUseUserProps;
+            var inpb = packet.protoBody as MyLib.CGUseUserProps;
             var ret = playerData.ReduceItem(inpb.UserPropsId, 1);
-            var pb = ChuMeng.GCUseUserProps.CreateBuilder();
+            var pb = MyLib.GCUseUserProps.CreateBuilder();
             if (ret)
             {
-                ChuMeng.ServerBundle.SendImmediate(pb, packet.flowId);
+                MyLib.ServerBundle.SendImmediate(pb, packet.flowId);
             } else
             {
-                ChuMeng.ServerBundle.SendImmediateError(pb, packet.flowId, 1);
+                MyLib.ServerBundle.SendImmediateError(pb, packet.flowId, 1);
             }
         }
     }
@@ -95,7 +95,7 @@ namespace ServerPacketHandler
     {
         public override void HandlePacket(KBEngine.Packet packet)
         {
-            var inpb = packet.protoBody as ChuMeng.CGPickItem;
+            var inpb = packet.protoBody as MyLib.CGPickItem;
             playerData.AddItemInPackage(inpb.ItemId, inpb.Num);
         }
     }

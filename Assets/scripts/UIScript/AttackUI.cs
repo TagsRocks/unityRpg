@@ -18,7 +18,7 @@ using System.Collections.Generic;
  * TODO:需要添加血瓶切换功能
  */
 
-namespace ChuMeng
+namespace MyLib
 {
     /// <summary>
     /// 右下角 攻击按钮和快捷按钮的UI

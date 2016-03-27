@@ -14,7 +14,7 @@ using System.Collections;
 /*
  * Player Touch Sphere Enter Into Battle Scene 
  */ 
-namespace ChuMeng {
+namespace MyLib {
 	public class EntranceTrigger : KBEngine.MonoBehaviour {
 		public int NextSceneId = -1;
 		void Awake() {

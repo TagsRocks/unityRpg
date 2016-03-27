@@ -14,7 +14,7 @@ using System.Collections;
 using System;
 using KBEngine;
 
-namespace ChuMeng
+namespace MyLib
 {
 
     /// <summary>

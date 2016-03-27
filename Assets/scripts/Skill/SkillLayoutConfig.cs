@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
-namespace ChuMeng {
+namespace MyLib {
     /// <summary>
     /// 用于技能层粒子效果相关配置 
     /// </summary>

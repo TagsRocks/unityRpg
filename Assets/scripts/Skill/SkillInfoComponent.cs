@@ -2,7 +2,7 @@
 using System.Collections;
 using System;
 
-namespace ChuMeng
+namespace MyLib
 {
     /// <summary>
     /// 玩家或者Boss的技能相关的的组件
@@ -98,7 +98,7 @@ namespace ChuMeng
                 {
                     if (rd < j ["chance"].AsInt)
                     {
-                        var tp = Type.GetType("ChuMeng.Skill" + j ["id"].AsInt);
+                        var tp = Type.GetType("MyLib.Skill" + j ["id"].AsInt);
                         if (tp == null)
                         {
                         } else
@@ -137,7 +137,7 @@ namespace ChuMeng
             {
                 if (string.IsNullOrEmpty(j ["ignore"].Value) && rd >= j ["min"].AsInt && rd < j ["max"].AsInt)
                 {
-                    var tp = Type.GetType("ChuMeng.Skill" + j ["id"].AsInt);
+                    var tp = Type.GetType("MyLib.Skill" + j ["id"].AsInt);
                     if (tp == null)
                     {
                         activeSkill = Util.GetSkillData(j ["id"].AsInt, j ["level"].AsInt);

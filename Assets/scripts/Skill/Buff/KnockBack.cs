@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-namespace ChuMeng
+namespace MyLib
 {
 	//0.8s 击退怪物 buff
 	public class KnockBack : IEffect

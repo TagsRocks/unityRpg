@@ -16,7 +16,7 @@ using System;
 using System.Collections.Generic;
 
 
-namespace ChuMeng {
+namespace MyLib {
 	//Attribute use for what
 	[AttributeUsage(AttributeTargets.Field)]
 	public class SaveAttribute : System.Attribute {

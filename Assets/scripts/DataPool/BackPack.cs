@@ -18,7 +18,7 @@ using SimpleJSON;
 using UnityEditor;
 #endif
 
-namespace ChuMeng
+namespace MyLib
 {
     /// <summary>
     /// Backpack Data Controller
@@ -102,7 +102,7 @@ namespace ChuMeng
 
 		
         //枚举背包物品
-        public BackpackData EnumItem(ChuMeng.GameInterface_Package.PackagePageEnum type, int index)
+        public BackpackData EnumItem(MyLib.GameInterface_Package.PackagePageEnum type, int index)
         {
             var allSlots = SlotData;
             if (index < allSlots.Count)

@@ -7,7 +7,7 @@ using System.IO;
 using SimpleJSON;
 using System.Collections.Generic;
 using System.Linq;
-using ChuMeng;
+using MyLib;
 #endif
 
 public class SimpleMakeScene : MonoBehaviour

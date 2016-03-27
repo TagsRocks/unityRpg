@@ -6,7 +6,7 @@ namespace PacketHandler
     public class GCPushLevelOpen : IPacketHandler {
         public override void HandlePacket(KBEngine.Packet packet)
         {
-            ChuMeng.CopyController.copyController.OpenLev(packet.protoBody as ChuMeng.GCPushLevelOpen);
+            MyLib.CopyController.copyController.OpenLev(packet.protoBody as MyLib.GCPushLevelOpen);
         }
     }
 }

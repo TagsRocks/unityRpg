@@ -6,14 +6,14 @@ namespace PacketHandler
     public class GCPushSkillPoint  : IPacketHandler 
     {
         public override void HandlePacket(KBEngine.Packet packet) {
-            ChuMeng.GameInterface_Skill.UpdateSkillPoint(packet.protoBody as ChuMeng.GCPushSkillPoint);
+            MyLib.GameInterface_Skill.UpdateSkillPoint(packet.protoBody as MyLib.GCPushSkillPoint);
         }
 
     }
 
     public class GCPushLevel : IPacketHandler {
         public override void HandlePacket(KBEngine.Packet packet) {
-            ChuMeng.GameInterface_Skill.UpdateLevel(packet.protoBody as ChuMeng.GCPushLevel);
+            MyLib.GameInterface_Skill.UpdateLevel(packet.protoBody as MyLib.GCPushLevel);
         }
     }
 
@@ -21,19 +21,19 @@ namespace PacketHandler
     {
         public override void HandlePacket(KBEngine.Packet packet)
         {
-            ChuMeng.GameInterface_Player.UpdateExp(packet.protoBody as ChuMeng.GCPushExpChange);
+            MyLib.GameInterface_Player.UpdateExp(packet.protoBody as MyLib.GCPushExpChange);
         }
     }
     public class GCPushShortcutsInfo : IPacketHandler {
         public override void HandlePacket(KBEngine.Packet packet)
         {
-            ChuMeng.GameInterface_Skill.UpdateShortcutsInfo(packet.protoBody as ChuMeng.GCPushShortcutsInfo);
+            MyLib.GameInterface_Skill.UpdateShortcutsInfo(packet.protoBody as MyLib.GCPushShortcutsInfo);
         }
     }
     public class GCPushEquipDataUpdate : IPacketHandler {
         public override void HandlePacket(KBEngine.Packet packet)
         {
-            ChuMeng.BackPack.backpack.EquipDataUpdate(packet.protoBody as ChuMeng.GCPushEquipDataUpdate);
+            MyLib.BackPack.backpack.EquipDataUpdate(packet.protoBody as MyLib.GCPushEquipDataUpdate);
         }
     }
 }

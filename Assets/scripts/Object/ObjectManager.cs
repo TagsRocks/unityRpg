@@ -15,7 +15,7 @@ using System.Reflection;
 using System;
 using System.Linq;
 
-namespace ChuMeng
+namespace MyLib
 {
     public class ObjectManager : MonoBehaviour
     {
@@ -426,7 +426,7 @@ namespace ChuMeng
 			
             myPlayer = kbplayer;
 			
-            var job = (ChuMeng.Job)GetMyJob();
+            var job = (MyLib.Job)GetMyJob();
             var udata = Util.GetUnitData(true, (int)job, GetMyLevel());
             var player = Instantiate(Resources.Load<GameObject>(udata.ModelName)) as GameObject;
 			
@@ -606,7 +606,7 @@ namespace ChuMeng
                 AddPlayer(kbplayer.ID, kbplayer);
                 AddObject(netview.GetServerID(), netview);
                 attr.Init();
-                var sync = player.GetComponent<ChuMeng.PlayerSync>();
+                var sync = player.GetComponent<MyLib.PlayerSync>();
                 sync.SetPositionAndDir(ainfo);
                 sync.SetLevel(ainfo);
             } else
@@ -642,7 +642,7 @@ namespace ChuMeng
 
                 NpcAttribute npc = NGUITools.AddMissingComponent<NpcAttribute>(g);
 
-                var type = Type.GetType("ChuMeng." + unitData.AITemplate);
+                var type = Type.GetType("MyLib." + unitData.AITemplate);
                 var t = typeof(NGUITools);
                 var m = t.GetMethod("AddMissingComponent");
                 Log.AI("Monster Create Certain AI  " + unitData.AITemplate + " " + type);
@@ -684,7 +684,7 @@ namespace ChuMeng
             g.tag = GameTag.Enemy;
             g.layer = (int)GameLayer.Npc;
 
-            var type = Type.GetType("ChuMeng." + unitData.AITemplate);
+            var type = Type.GetType("MyLib." + unitData.AITemplate);
             var t = typeof(NGUITools);
             var m = t.GetMethod("AddMissingComponent");
             Log.AI("Monster Create Certain AI  " + unitData.AITemplate + " " + type);
@@ -797,7 +797,7 @@ namespace ChuMeng
                 NpcAttribute npc = NGUITools.AddMissingComponent<NpcAttribute>(g);
                 npc.spawnTrigger = spawn.gameObject;
 
-                var type = Type.GetType("ChuMeng." + unitData.AITemplate);
+                var type = Type.GetType("MyLib." + unitData.AITemplate);
                 var t = typeof(NGUITools);
                 var m = t.GetMethod("AddMissingComponent");
                 Log.AI("Monster Create Certain AI  " + unitData.AITemplate + " " + type);
@@ -853,7 +853,7 @@ namespace ChuMeng
 
             GameObject g = Instantiate(Resource) as GameObject;
             NpcAttribute npc = NGUITools.AddMissingComponent<NpcAttribute>(g);
-            var type = Type.GetType("ChuMeng." + unitData.AITemplate);
+            var type = Type.GetType("MyLib." + unitData.AITemplate);
             var t = typeof(NGUITools);
             var m = t.GetMethod("AddMissingComponent");
             Log.AI("Create Certain AI  " + unitData.AITemplate + " " + type);

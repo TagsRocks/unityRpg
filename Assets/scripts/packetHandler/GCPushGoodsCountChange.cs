@@ -1,4 +1,4 @@
-﻿﻿using UnityEngine;
+﻿using UnityEngine;
 using System.Collections;
 
 namespace PacketHandler
@@ -10,11 +10,11 @@ namespace PacketHandler
 	{
 		public override void HandlePacket (KBEngine.Packet packet)
 		{
-			var pushGoods = packet.protoBody as ChuMeng.GCPushGoodsCountChange;
-			foreach (ChuMeng.GoodsCountChange gc in pushGoods.GoodsCountChangeList) {
-                ChuMeng.BackPack.backpack.UpdateGoodsCount(gc);
+			var pushGoods = packet.protoBody as MyLib.GCPushGoodsCountChange;
+			foreach (MyLib.GoodsCountChange gc in pushGoods.GoodsCountChangeList) {
+                MyLib.BackPack.backpack.UpdateGoodsCount(gc);
 			}
-			ChuMeng.MyEventSystem.myEventSystem.PushEvent (ChuMeng.MyEvent.EventType.UpdateItemCoffer);
+			MyLib.MyEventSystem.myEventSystem.PushEvent (MyLib.MyEvent.EventType.UpdateItemCoffer);
 		}
 	}
 

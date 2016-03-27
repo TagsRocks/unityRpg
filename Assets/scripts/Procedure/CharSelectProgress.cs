@@ -3,7 +3,7 @@ using System.Collections;
 
 
 
-namespace ChuMeng {
+namespace MyLib {
 	public class CharSelectProgress : MonoBehaviour {
 		public static CharSelectProgress charSelectLogic;
 

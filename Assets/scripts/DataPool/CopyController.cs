@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-namespace ChuMeng {
+namespace MyLib {
 
 	//副本信息关卡信息
 	public class LevelInfo

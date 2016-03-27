@@ -2,7 +2,7 @@
 using System.Collections;
 using UnityEditor;
 
-[CustomEditor(typeof(ChuMeng.CameraShakeData))]
+[CustomEditor(typeof(MyLib.CameraShakeData))]
 public class CameraShakeEditor : Editor {
 	SerializedProperty shakeCurve;
 	static float LabelWidth = 130f;

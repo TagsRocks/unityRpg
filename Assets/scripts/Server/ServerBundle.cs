@@ -4,7 +4,7 @@ using Google.ProtocolBuffers;
 using System.Collections.Generic;
 using System;
 
-namespace ChuMeng
+namespace MyLib
 {
 	public class ServerBundle 
 	{

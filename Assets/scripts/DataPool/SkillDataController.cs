@@ -17,7 +17,7 @@ using SimpleJSON;
 /// <summary>
 /// 初始化技能列表 CActionItem_Skill 管理这些技能
 /// </summary>
-namespace ChuMeng
+namespace MyLib
 {
     public class SkillDataController : MonoBehaviour
     {
@@ -244,7 +244,7 @@ namespace ChuMeng
                 skIdToInfo [sk.SkillInfoId] = sk;
             }
 
-            var myJob = ChuMeng.ObjectManager.objectManager.GetMyJob();
+            var myJob = MyLib.ObjectManager.objectManager.GetMyJob();
             Log.Sys("SkillMyJob AndList " + myJob);
             //从服务器加载对应的技能数据 两部分： 配置的职业技能 服务器加载的技能
             foreach (var s in GameData.SkillConfig)

@@ -1,7 +1,7 @@
-﻿﻿﻿using UnityEngine;
+﻿﻿using UnityEngine;
 using System.Collections;
 
-namespace ChuMeng {
+namespace MyLib {
 	/// <summary>
 	/// 根据当前的transform.rotation 调整Effectlayer的发射位置和旋转初始角度 
 	/// </summary>

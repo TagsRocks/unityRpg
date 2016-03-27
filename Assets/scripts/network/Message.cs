@@ -18,7 +18,7 @@ namespace KBEngine
 	using System.Collections.Generic;
 	
 	using MessageID = System.UInt16;
-	using ChuMeng;
+	using MyLib;
 	
     public class Message 
     {

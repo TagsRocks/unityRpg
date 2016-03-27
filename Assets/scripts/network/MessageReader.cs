@@ -8,7 +8,7 @@ Email: 233242872@qq.com
 Author: liyonghelpme
 Email: 233242872@qq.com
 */
-using ChuMeng;
+using MyLib;
 using Google.ProtocolBuffers;
 
 namespace KBEngine
@@ -271,7 +271,7 @@ namespace KBEngine
                             {
                                 mainLoop.queueInLoop(delegate
                                 {
-                                    var handlerName = fullName.Replace("ChuMeng", "PacketHandler");
+                                    var handlerName = fullName.Replace("MyLib", "PacketHandler");
                                     var tp = Type.GetType(handlerName);
                                     if (tp == null)
                                     {

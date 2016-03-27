@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-namespace ChuMeng {
+namespace MyLib {
 	public class DefenseAdd : IEffect {
 		public override void Init (Affix af, GameObject o)
 		{

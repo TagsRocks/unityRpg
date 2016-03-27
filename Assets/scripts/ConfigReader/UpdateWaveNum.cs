@@ -13,7 +13,7 @@ using System.Collections;
  * 		SpawnTrigger name is wave0
  * 		wavenum = 0
  */ 
-namespace ChuMeng
+namespace MyLib
 {
 	public class UpdateWaveNum : MonoBehaviour
 	{

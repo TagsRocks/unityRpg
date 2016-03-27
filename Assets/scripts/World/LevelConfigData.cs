@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 
 //SceneId ---> ConfigData List
-namespace ChuMeng
+namespace MyLib
 {
     public class EnvConfig {
         public string waterBottom;

@@ -8,7 +8,7 @@ using Google.ProtocolBuffers;
 using SimpleJSON;
 using System;
 
-namespace ChuMeng
+namespace MyLib
 {
 	public class MyCon
 	{
@@ -49,7 +49,7 @@ namespace ChuMeng
      
 		int selectPlayerJob = 4;
 		Socket socket;
-		ChuMeng.ServerMsgReader msgReader = new ServerMsgReader ();
+		MyLib.ServerMsgReader msgReader = new ServerMsgReader ();
 		System.Random random = new System.Random (1000);
 
 		public void CloseServerSocket ()
@@ -202,7 +202,7 @@ namespace ChuMeng
 				retPb = au;
 			} else {
 				var fullName = packet.protoBody.GetType ().FullName;
-				var handlerName = fullName.Replace ("ChuMeng", "ServerPacketHandler");
+                var handlerName = fullName.Replace ("MyLib", "ServerPacketHandler");
 
 				var tp = Type.GetType (handlerName);
 				if (tp == null) {

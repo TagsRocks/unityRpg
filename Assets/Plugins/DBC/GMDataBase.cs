@@ -9,7 +9,7 @@ using System.Linq;
 
 
 using SimpleJSON;
-namespace ChuMeng
+namespace MyLib
 {
 	public class CDataBase {
 		SimpleJSON.JSONArray database = null;

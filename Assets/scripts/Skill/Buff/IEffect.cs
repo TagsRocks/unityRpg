@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-namespace ChuMeng {
+namespace MyLib {
 	public class IEffect {
 		protected GameObject obj;
 		public Affix affix;

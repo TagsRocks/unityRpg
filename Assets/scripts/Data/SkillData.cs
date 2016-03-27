@@ -12,7 +12,7 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
-namespace ChuMeng
+namespace MyLib
 {
     /// <summary>
     /// 技能数据为完全静态数据，不存在其他因素可以影响技能的数据

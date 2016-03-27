@@ -1,7 +1,7 @@
-﻿﻿﻿using UnityEngine;
+﻿﻿using UnityEngine;
 using System.Collections;
 
-namespace ChuMeng
+namespace MyLib
 {
     /// <summary>
     /// 在目标位置产生一个AOE技能伤害目标位置附近单位，类似于子弹飞射，最后目标位置碰撞爆炸 

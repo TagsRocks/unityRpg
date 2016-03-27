@@ -8,8 +8,8 @@ namespace PacketHandler
 
         public override void HandlePacket (KBEngine.Packet packet)
         {
-            var pushGoods = packet.protoBody as ChuMeng.GCPushNotify;
-            ChuMeng.WindowMng.windowMng.ShowNotifyLog(pushGoods.Notify);
+            var pushGoods = packet.protoBody as MyLib.GCPushNotify;
+            MyLib.WindowMng.windowMng.ShowNotifyLog(pushGoods.Notify);
         }
     }
 }

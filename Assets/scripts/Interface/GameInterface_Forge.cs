@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using SimpleJSON;
 
-namespace ChuMeng
+namespace MyLib
 {
     public static class GameInterface_Forge
     {

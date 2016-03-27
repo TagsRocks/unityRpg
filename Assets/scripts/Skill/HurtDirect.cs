@@ -1,7 +1,7 @@
-﻿﻿using UnityEngine;
+﻿using UnityEngine;
 using System.Collections;
 
-namespace ChuMeng
+namespace MyLib
 {
 	/// <summary>
 	/// 直接确定攻击目标为伤害对象  怪物的近战攻击

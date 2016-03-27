@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-namespace ChuMeng
+namespace MyLib
 {
     //配置障碍物的 半径大小和碰撞提类型
     //或者自动加载障碍物 怪物类型

@@ -16,7 +16,7 @@ using System.Collections.Generic;
  * Connect DialogCutScene And uiRoot 
  * dirty Code is here
  */
-namespace ChuMeng {
+namespace MyLib {
 	public class DialogRender : MonoBehaviour {
 
 		GameObject DialogCutScene;

@@ -2,7 +2,7 @@
 using System.Collections;
 using System;
 
-namespace ChuMeng
+namespace MyLib
 {
     public enum WorldState
     {

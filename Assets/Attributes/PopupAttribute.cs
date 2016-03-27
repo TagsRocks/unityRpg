@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 
 
-namespace ChuMeng {
+namespace MyLib {
 //getPopList from target Object  GetOutPutTri
 public class PopupAttribute : PropertyAttribute {
 	public List<string> popList;

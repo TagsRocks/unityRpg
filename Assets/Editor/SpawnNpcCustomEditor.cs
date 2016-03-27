@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
-using ChuMeng;
+using MyLib;
 using UnityEditor;
 
 [CustomEditor(typeof(SpawnNpc))]

@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using SimpleJSON;
-using ChuMeng;
+using MyLib;
 
 public class StoreEvents2 : MonoBehaviour {
     void Awake() {

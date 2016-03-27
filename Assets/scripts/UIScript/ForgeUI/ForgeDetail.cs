@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using SimpleJSON;
 using System;
 
-namespace ChuMeng
+namespace MyLib
 {
     public class ForgeDetail : IUserInterface
     {

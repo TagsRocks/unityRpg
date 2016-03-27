@@ -7,7 +7,7 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
-namespace ChuMeng
+namespace MyLib
 {
 	//TODO:增加回调函数的通用函数
 	public class IUserInterface : KBEngine.MonoBehaviour

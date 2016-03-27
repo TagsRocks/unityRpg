@@ -1,7 +1,7 @@
-﻿﻿using UnityEngine;
+﻿using UnityEngine;
 using System.Collections;
 
-namespace ChuMeng
+namespace MyLib
 {
     /// <summary>
     ///计数 以及触发Buff 

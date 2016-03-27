@@ -5,7 +5,7 @@ using System;
 using System.Linq;
 
 //一个场景中的数据，包括LevelInit AStar 以及 BattleManager 以及Forever怪物出生点等信息
-namespace ChuMeng
+namespace MyLib
 {
 	public class CScene : KBEngine.MonoBehaviour
 	{
@@ -14,12 +14,12 @@ namespace ChuMeng
 		public static void InitStatic ()
 		{
 			staticTypeMap = new Dictionary<string, Type> () {
-				{ "ChuMeng.Map2", typeof(Map2) }, 
-				{ "ChuMeng.Map3", typeof(Map3) }, 
-				{ "ChuMeng.Map101", typeof(Map101) }, 
-				{ "ChuMeng.Map102", typeof(Map102) }, 
-				{ "ChuMeng.Map103", typeof(Map103) }, 
-				{ "ChuMeng.Map105", typeof(Map105) }, 
+                { "MyLib.Map2", typeof(Map2) }, 
+                { "MyLib.Map3", typeof(Map3) }, 
+                { "MyLib.Map101", typeof(Map101) }, 
+                { "MyLib.Map102", typeof(Map102) }, 
+                { "MyLib.Map103", typeof(Map103) }, 
+                { "MyLib.Map105", typeof(Map105) }, 
 			};
 		}
 
@@ -50,7 +50,7 @@ namespace ChuMeng
 
 		public static CScene CreateScene (DungeonConfigData sceneDef)
 		{
-			var tpName = "ChuMeng.Map" + sceneDef.id;
+            var tpName = "MyLib.Map" + sceneDef.id;
 			var tp = typeof(CScene).Assembly.GetType (tpName);
 			//var tp = Type.GetType ();
 			var g = new GameObject ("CScene");

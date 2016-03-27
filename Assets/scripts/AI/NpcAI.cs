@@ -10,7 +10,7 @@ Email: 233242872@qq.com
 */
 using UnityEngine;
 using System.Collections;
-namespace ChuMeng {
+namespace MyLib {
     /// <summary>
     ///怪物AI 
     /// </summary>

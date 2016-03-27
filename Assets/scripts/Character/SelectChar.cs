@@ -10,10 +10,10 @@ Email: 233242872@qq.com
 */
 using UnityEngine;
 using System.Collections;
-using ChuMeng;
+using MyLib;
 using System.Collections.Generic;
 
-namespace ChuMeng
+namespace MyLib
 {
 	[RequireComponent(typeof(ShadowComponent))]
 	[RequireComponent(typeof(NpcEquipment))]

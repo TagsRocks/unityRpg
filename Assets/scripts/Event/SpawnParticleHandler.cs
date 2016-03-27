@@ -5,7 +5,7 @@ namespace EventHandler {
 	public class SpawnParticleHandler : IEventHandler {
 		#region implemented abstract members of IEventHandler
 
-		public override void OnEvent (ChuMeng.MyEvent evt)
+		public override void OnEvent (MyLib.MyEvent evt)
 		{
             GameObject p;
             if(string.IsNullOrEmpty(evt.particle)) {
@@ -17,13 +17,13 @@ namespace EventHandler {
             }
 			NGUITools.AddMissingComponent<RemoveSelf> (p);
 			if (!string.IsNullOrEmpty( evt.boneName)) {
-				p.transform.parent = ChuMeng.Util.FindChildRecursive(evt.player.transform, evt.boneName);
+				p.transform.parent = MyLib.Util.FindChildRecursive(evt.player.transform, evt.boneName);
 
 				p.transform.localPosition = evt.particleOffset;
 				p.transform.localRotation = Quaternion.identity;
 				p.transform.localScale = Vector3.one;
 			} else {
-                var sync = p.AddComponent<ChuMeng.SyncPosWithTarget>();
+                var sync = p.AddComponent<MyLib.SyncPosWithTarget>();
                 sync.target = evt.player;
                 var xft = p.GetComponent<XffectComponent>();//.enabled = false;
                 xft.enabled = false;
@@ -41,8 +41,8 @@ namespace EventHandler {
         }
 		public override void Init ()
 		{
-			regEvent = new System.Collections.Generic.List<ChuMeng.MyEvent.EventType> () {
-				ChuMeng.MyEvent.EventType.SpawnParticle,
+			regEvent = new System.Collections.Generic.List<MyLib.MyEvent.EventType> () {
+				MyLib.MyEvent.EventType.SpawnParticle,
 			};
 		}
 		#endregion

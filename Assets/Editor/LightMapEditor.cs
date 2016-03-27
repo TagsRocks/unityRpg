@@ -6,7 +6,7 @@ using System.Collections.Generic;
 /*
  * 为所有子物体中 shader 为 lightmapFloor的 配置对应的材质 属性
  */
-namespace ChuMeng {
+namespace MyLib {
 	[CustomEditor(typeof(SetLightMap))]
 	public class LightMapEditor : Editor {
 		Texture rt;

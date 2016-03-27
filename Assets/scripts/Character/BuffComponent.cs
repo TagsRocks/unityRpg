@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 
-namespace ChuMeng {
+namespace MyLib {
 	public class BuffComponent : MonoBehaviour {
 		List<IEffect> effectList = new List<IEffect>();
 		

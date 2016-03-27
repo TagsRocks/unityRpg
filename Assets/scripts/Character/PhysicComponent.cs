@@ -1,7 +1,7 @@
-﻿﻿﻿using UnityEngine;
+﻿﻿using UnityEngine;
 using System.Collections;
 
-namespace ChuMeng
+namespace MyLib
 {
     /// <summary>
     /// 角色所有操作 SimpleMove CharacterController 的代码都要在Physics里面进行 确保同一帧只调用一次

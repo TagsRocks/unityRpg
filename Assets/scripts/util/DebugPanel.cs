@@ -7,7 +7,7 @@ using System.Collections;
  * My Player Or Other Player 
  * 
  */ 
-namespace ChuMeng
+namespace MyLib
 {
 	public class DebugPanel : MonoBehaviour
 	{

@@ -1,89 +1,20 @@
 {
-    "MTaskProtoc": {
-        "id": 5
-    }, 
-    "MDungeonProtoc": {
-        "id": 6
-    }, 
-    "MMailProtoc": {
-        "id": 7
-    }, 
-    "MFriendsProtoc": {
-        "id": 8
-    }, 
-    "MTeamProtoc": {
-        "id": 9
-    }, 
-    "MMallProtoc": {
-        "id": 11
-    }, 
-    "MTopProtoc": {
-        "id": 12
-    }, 
-    "MAuctionProtoc": {
-        "id": 13
-    }, 
-    "MHoroscopeProtoc": {
-        "id": 14
-    }, 
-    "MAchievementProtoc": {
-        "id": 15
-    }, 
-    "MVIPProtoc": {
-        "id": 16
-    }, 
-    "MLotteryProtoc": {
-        "id": 17
-    }, 
-    "MPetProtoc": {
-        "id": 18
-    }, 
-    "MContestProtoc": {
-        "id": 19
-    }, 
-    "MIndustryProtoc": {
-        "id": 20
-    }, 
-    "MGuildProtoc": {
-        "id": 21
-    }, 
-    "MMentalityProtoc": {
-        "id": 22
-    }, 
-    "MActiveProtoc": {
-        "id": 23
-    }, 
-    "MArenaProtoc": {
-        "id": 24
-    }, 
-    "MFightProtoc": {
-        "id": 25
-    }, 
-    "MWelfareProtoc": {
-        "id": 26
-    }, 
-    "MAdminProtoc": {
-        "id": 29
-    }, 
-    "MCombatProtoc": {
-        "id": 31
-    }, 
     "MShopProtoc": {
         "CGBuyShopProps": 1, 
         "GCBuyShopProps": 2, 
-        "id": 10
+        "id": 5
     }, 
     "MCopyProtoc": {
         "CGCopyInfo": 1, 
         "GCCopyInfo": 2, 
+        "id": 2, 
         "GCCopyReward": 3, 
-        "id": 28, 
         "GCPushLevelOpen": 1000
     }, 
     "MChatProtoc": {
         "CGSendChat": 1, 
+        "id": 1, 
         "GCSendChat": 2, 
-        "id": 2, 
         "CGViewChatGoods": 3, 
         "GCViewChatGoods": 4, 
         "CGLoadMChatShowInfo": 5, 
@@ -97,8 +28,8 @@
         "GCLoadSkillPanel": 2, 
         "CGSkillLevelUp": 3, 
         "GCSkillLevelUp": 4, 
-        "id": 4, 
         "CGSkillLevelDown": 5, 
+        "id": 6, 
         "GCSkillLevelDown": 6, 
         "CGLoadInjectPropsLevelUpInfo": 7, 
         "GCLoadInjectPropsLevelUpInfo": 8, 
@@ -114,8 +45,8 @@
     "MPropsProtoc": {
         "CGLoadPackInfo": 1, 
         "GCLoadPackInfo": 2, 
-        "id": 3, 
         "CGUseUserProps": 3, 
+        "id": 4, 
         "GCUseUserProps": 4, 
         "CGSellUserProps": 5, 
         "GCSellUserProps": 6, 
@@ -149,17 +80,17 @@
         "GCUnbindingGoods": 34, 
         "CGLevelUpEquip": 35, 
         "CGLevelUpGem": 36, 
-        "GCPushGoodsCountChange": 1000, 
-        "GCPushPlayerDressedEquipChange": 1001, 
-        "GCPushPlayerDressInfo": 1002, 
-        "GCPushPackInfo": 1003, 
-        "GCPushShortcutsInfo": 1004, 
+        "GCPushShortcutsInfo": 1000, 
+        "GCPushGoodsCountChange": 1001, 
+        "GCPushPlayerDressedEquipChange": 1002, 
+        "GCPushPlayerDressInfo": 1003, 
+        "GCPushPackInfo": 1004, 
         "GCPushEquipDataUpdate": 1005
     }, 
     "MPlayerProtoc": {
-        "id": 1, 
         "CGHeartBeat": 1, 
         "CGAutoRegisterAccount": 2, 
+        "id": 3, 
         "GCAutoRegisterAccount": 3, 
         "CGRegisterAccount": 4, 
         "GCRegisterAccount": 5, 
@@ -197,14 +128,14 @@
         "GCChangeScreen4Point": 37, 
         "CGPickUpLootReward": 38, 
         "GCPickUpLootReward": 39, 
-        "CGForgotPassword": 40, 
-        "GCForgotPassword": 41, 
-        "CGPickItem": 42, 
-        "CGAddProp": 43, 
-        "CGSetProp": 44, 
-        "CGGetKeyValue": 45, 
-        "GCGetKeyValue": 46, 
-        "CGSetKeyValue": 47, 
+        "CGPickItem": 40, 
+        "CGForgotPassword": 41, 
+        "GCForgotPassword": 42, 
+        "CGGetKeyValue": 43, 
+        "GCGetKeyValue": 44, 
+        "CGSetKeyValue": 45, 
+        "CGAddProp": 46, 
+        "CGSetProp": 47, 
         "CGPlayerCmd": 48, 
         "GCPlayerCmd": 49, 
         "GCPushNotice2Kick": 1000, 
@@ -212,15 +143,15 @@
         "GCPushLevelUpgrade": 1002, 
         "GCPushAttrChange": 1003, 
         "GCPushExpChange": 1004, 
-        "GCPushPlayerModifyName": 1007, 
-        "GCPushPlayerDressAttributeChanges": 1008, 
-        "GCPushPlayerPower": 1009, 
-        "GCPushLootReward": 1010, 
-        "GCPushLootRewardRemove": 1011, 
-        "GCPushFightModeChangeWithMap": 1012, 
-        "GCPushPlayerResurrect": 1013, 
-        "GCPushPlayerToilState": 1014, 
-        "GCPushNotify": 1015, 
-        "GCPushLevel": 1016
+        "GCPushPlayerModifyName": 1005, 
+        "GCPushPlayerDressAttributeChanges": 1006, 
+        "GCPushPlayerPower": 1007, 
+        "GCPushLootReward": 1008, 
+        "GCPushLootRewardRemove": 1009, 
+        "GCPushFightModeChangeWithMap": 1010, 
+        "GCPushPlayerResurrect": 1011, 
+        "GCPushPlayerToilState": 1012, 
+        "GCPushNotify": 1013, 
+        "GCPushLevel": 1014
     }
 }

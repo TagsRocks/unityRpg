@@ -1,7 +1,7 @@
-﻿﻿using UnityEngine;
+﻿using UnityEngine;
 using System.Collections;
 
-namespace ChuMeng
+namespace MyLib
 {
     /// <summary>
     /// 在0.5s中释放12次对象 位置是从2 到 12  释放的半径 和 释放的 角度范围限定 曲线产生一条直线

@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
-using playerData = ChuMeng.PlayerData;
+using playerData = MyLib.PlayerData;
 
 namespace ServerPacketHandler {
     public class CGLoadSkillPanel : IPacketHandler {
@@ -8,12 +8,12 @@ namespace ServerPacketHandler {
         {
             Log.Sys("LoadSkillPanelData");
             //var inpb = packet.protoBody as ChuMeng.CGLoadSkillPanel;
-            var pd = ChuMeng.ServerData.Instance.playerInfo;
+            var pd = MyLib.ServerData.Instance.playerInfo;
             if(pd.HasSkill){
-                ChuMeng.ServerBundle.SendImmediate(pd.Skill.ToBuilder(), packet.flowId);
+                MyLib.ServerBundle.SendImmediate(pd.Skill.ToBuilder(), packet.flowId);
             }else {
-                var ret = ChuMeng.GCLoadSkillPanel.CreateBuilder();
-                ChuMeng.ServerBundle.SendImmediate(ret, packet.flowId);
+                var ret = MyLib.GCLoadSkillPanel.CreateBuilder();
+                MyLib.ServerBundle.SendImmediate(ret, packet.flowId);
             }
         }
     }
@@ -21,7 +21,7 @@ namespace ServerPacketHandler {
     public class CGSkillLevelUp : IPacketHandler {
         public override void HandlePacket(KBEngine.Packet packet)
         {
-            var inpb = packet.protoBody as ChuMeng.CGSkillLevelUp;
+            var inpb = packet.protoBody as MyLib.CGSkillLevelUp;
             playerData.LevelUpSkill(inpb.SkillId);
         }
     }

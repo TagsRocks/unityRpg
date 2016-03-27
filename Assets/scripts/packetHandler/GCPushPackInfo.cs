@@ -7,11 +7,11 @@ namespace PacketHandler
 	{
 		public override void HandlePacket(KBEngine.Packet packet) {
 			if (packet.responseFlag == 0) {
-				var data = packet.protoBody as ChuMeng.GCPushPackInfo;
+				var data = packet.protoBody as MyLib.GCPushPackInfo;
 				//更新背包数据 以及 UI中的图标数据 
-				ChuMeng.BackPack.backpack.SetItemInfo(data);
+				MyLib.BackPack.backpack.SetItemInfo(data);
 
-				ChuMeng.MyEventSystem.myEventSystem.PushEvent (ChuMeng.MyEvent.EventType.UpdateItemCoffer);
+				MyLib.MyEventSystem.myEventSystem.PushEvent (MyLib.MyEvent.EventType.UpdateItemCoffer);
 				//ChuMeng.MyEventSystem.myEventSystem.PushEvent(ChuMeng.MyEvent.EventType.UpdateSuperTip);
 			}
 		}

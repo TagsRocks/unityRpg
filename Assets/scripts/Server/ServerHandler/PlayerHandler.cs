@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
-using playerData = ChuMeng.PlayerData;
+using playerData = MyLib.PlayerData;
 using System;
 using System.Collections.Generic;
 

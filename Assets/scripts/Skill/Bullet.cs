@@ -11,7 +11,7 @@ Email: 233242872@qq.com
 using UnityEngine;
 using System.Collections;
 
-namespace ChuMeng
+namespace MyLib
 {
 	//多种类型子弹子类 bulletType
 	public class Bullet : MonoBehaviour

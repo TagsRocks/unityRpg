@@ -3,7 +3,7 @@ using System.Collections;
 using System;
 using Google.ProtocolBuffers;
 
-namespace ChuMeng {
+namespace MyLib {
 	using MessageID = System.UInt16;
 	using MessageLength = System.UInt32;
 
@@ -162,7 +162,7 @@ namespace ChuMeng {
 						 * PacketHandler namespace
 						 * IPacketHandler---->GCPushSpriteInfo
 						 */ 
-						ChuMeng.ServerMsgReader.MessageHandler handler = msgHandle;
+						MyLib.ServerMsgReader.MessageHandler handler = msgHandle;
 
 						//KBEngine.Message msg = new KBEngine.Message();
                         IMessageLite pbmsg = KBEngine.Message.handlePB(moduleId, msgid, stream);

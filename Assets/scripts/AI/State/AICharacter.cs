@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-namespace ChuMeng {
+namespace MyLib {
 
 	public class AICharacter {
         public bool canRelive = false;

@@ -6,15 +6,15 @@ namespace EventHandler
 {
 	public abstract class IEventHandler
 	{
-		protected List<ChuMeng.MyEvent.EventType> regEvent;
+		protected List<MyLib.MyEvent.EventType> regEvent;
 		public void RegEvent() {
 			if (regEvent != null) {
-				foreach(ChuMeng.MyEvent.EventType e in regEvent) {
-					ChuMeng.MyEventSystem.myEventSystem.RegisterEvent(e, OnEvent);
+				foreach(MyLib.MyEvent.EventType e in regEvent) {
+					MyLib.MyEventSystem.myEventSystem.RegisterEvent(e, OnEvent);
 				}
 			}
 		}
 		public abstract void Init();
-		public abstract void OnEvent(ChuMeng.MyEvent evt);
+		public abstract void OnEvent(MyLib.MyEvent evt);
 	}
 }

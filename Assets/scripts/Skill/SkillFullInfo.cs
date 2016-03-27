@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-namespace ChuMeng
+namespace MyLib
 {
 	/// <summary>
 	/// 技能操作对象 主界面上的玩家技能对象

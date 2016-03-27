@@ -16,7 +16,7 @@ namespace KBEngine
 	using System; 
 	using System.Collections;
 	using System.Collections.Generic;
-	using ChuMeng;
+	using MyLib;
 
     public class Bundle 
     {

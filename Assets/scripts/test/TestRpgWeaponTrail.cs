@@ -10,7 +10,7 @@ public class TestRpgWeaponTrail : MonoBehaviour {
 		ani = GetComponent<AnimationController> ();
 
 		trail = Instantiate(Resources.Load<GameObject>("particles/newWeaponTrail")) as GameObject;
-		var rightHand = ChuMeng.Util.FindChildRecursive(transform, "Point001");
+		var rightHand = MyLib.Util.FindChildRecursive(transform, "Point001");
 		if(rightHand != null) {
 			trail.transform.parent = rightHand;
 			trail.transform.localPosition = Vector3.zero;

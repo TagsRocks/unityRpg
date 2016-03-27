@@ -7,7 +7,7 @@ using UnityEngine;
 using System.Collections;
 using StringInject;
 
-namespace ChuMeng
+namespace MyLib
 {
 	public class NotifyUI : IUserInterface
 	{

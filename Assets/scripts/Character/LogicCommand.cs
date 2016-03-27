@@ -12,7 +12,7 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
-namespace ChuMeng
+namespace MyLib
 {
     /*
  * Object Command List
@@ -44,6 +44,7 @@ namespace ChuMeng
         public ObjectCommand()
         {
         }
+
 
         public ObjectCommand(ENUM_OBJECT_COMMAND cmd)
         {

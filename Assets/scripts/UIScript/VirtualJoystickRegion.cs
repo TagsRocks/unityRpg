@@ -13,7 +13,7 @@ Email: 233242872@qq.com
 /// If you use this, stop by and say thanks: http://forum.unity3d.com/threads/116076-VJR-(Virtual-Joystick-Region)-Sample?p=773620#post773620
 /// </summary>
 using UnityEngine;
-namespace ChuMeng
+namespace MyLib
 {
 	public class VirtualJoystickRegion : IUserInterface
 	{

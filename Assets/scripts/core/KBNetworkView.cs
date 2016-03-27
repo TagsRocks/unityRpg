@@ -58,8 +58,8 @@ namespace KBEngine
 
     public class MonoBehaviour : UnityEngine.MonoBehaviour
     {
-        protected List<ChuMeng.MyEvent.EventType> regEvt = null;
-        protected List<ChuMeng.MyEvent.EventType> regLocalEvt = null;
+        protected List<MyLib.MyEvent.EventType> regEvt = null;
+        protected List<MyLib.MyEvent.EventType> regLocalEvt = null;
         protected List<EvtCbPair> regLocalEvtCallback = null;
 
         protected bool regYet = false;
@@ -80,24 +80,24 @@ namespace KBEngine
             regYet = true;
             if (regEvt != null)
             {
-                foreach (ChuMeng.MyEvent.EventType t in regEvt)
+                foreach (MyLib.MyEvent.EventType t in regEvt)
                 {
-                    ChuMeng.MyEventSystem.myEventSystem.RegisterEvent(t, OnEvent);
+                    MyLib.MyEventSystem.myEventSystem.RegisterEvent(t, OnEvent);
                 }
             }
 
             if (regLocalEvt != null)
             {
-                foreach (ChuMeng.MyEvent.EventType t in regLocalEvt)
+                foreach (MyLib.MyEvent.EventType t in regLocalEvt)
                 {
-                    Log.Sys("Reglocalevent " + t + " view " + photonView + " myevent " + ChuMeng.MyEventSystem.myEventSystem);
-                    ChuMeng.MyEventSystem.myEventSystem.RegisterLocalEvent(photonView.GetLocalId(), t, OnLocalEvent);
+                    Log.Sys("Reglocalevent " + t + " view " + photonView + " myevent " + MyLib.MyEventSystem.myEventSystem);
+                    MyLib.MyEventSystem.myEventSystem.RegisterLocalEvent(photonView.GetLocalId(), t, OnLocalEvent);
                 }
             }
 
         }
 
-        protected virtual void OnLocalEvent(ChuMeng.MyEvent evt)
+        protected virtual void OnLocalEvent(MyLib.MyEvent evt)
         {
 		
         }
@@ -111,29 +111,29 @@ namespace KBEngine
             regYet = false;
             if (regEvt != null)
             {
-                foreach (ChuMeng.MyEvent.EventType t in regEvt)
+                foreach (MyLib.MyEvent.EventType t in regEvt)
                 {
-                    ChuMeng.MyEventSystem.myEventSystem.dropListener(t, OnEvent);
+                    MyLib.MyEventSystem.myEventSystem.dropListener(t, OnEvent);
                 }
             }
 
             if (regLocalEvt != null)
             {
-                foreach (ChuMeng.MyEvent.EventType t in regLocalEvt)
+                foreach (MyLib.MyEvent.EventType t in regLocalEvt)
                 {
-                    ChuMeng.MyEventSystem.myEventSystem.DropLocalListener(photonView.GetLocalId(), t, OnLocalEvent);
+                    MyLib.MyEventSystem.myEventSystem.DropLocalListener(photonView.GetLocalId(), t, OnLocalEvent);
                 }
             }
             if (regLocalEvtCallback != null)
             {
                 foreach (var t in regLocalEvtCallback)
                 {
-                    ChuMeng.MyEventSystem.myEventSystem.DropLocalListener(photonView.GetLocalId(), t.t, t.cb);
+                    MyLib.MyEventSystem.myEventSystem.DropLocalListener(photonView.GetLocalId(), t.t, t.cb);
                 }
             }
         }
 
-        protected virtual void OnEvent(ChuMeng.MyEvent evt)
+        protected virtual void OnEvent(MyLib.MyEvent evt)
         {
         }
 
@@ -155,19 +155,19 @@ namespace KBEngine
         /// 在RegEvent之后添加事件
         /// </summary>
         /// <param name="t">T.</param>
-        protected void AddEvent(ChuMeng.MyEvent.EventType t)
+        protected void AddEvent(MyLib.MyEvent.EventType t)
         {
             regEvt.Add(t);
-            ChuMeng.MyEventSystem.myEventSystem.RegisterEvent(t, OnEvent);
+            MyLib.MyEventSystem.myEventSystem.RegisterEvent(t, OnEvent);
         }
 
         public class EvtCbPair
         {
-            public ChuMeng.MyEvent.EventType t;
-            public ChuMeng.EventDel cb;
+            public MyLib.MyEvent.EventType t;
+            public MyLib.EventDel cb;
         }
 
-        public void AddCallBackLocalEvent(ChuMeng.MyEvent.EventType t, ChuMeng.EventDel cb)
+        public void AddCallBackLocalEvent(MyLib.MyEvent.EventType t, MyLib.EventDel cb)
         {
             regYet = true;
             if (regLocalEvtCallback == null)
@@ -180,12 +180,12 @@ namespace KBEngine
                 t = t,
                 cb = cb,
             });
-            ChuMeng.MyEventSystem.myEventSystem.RegisterLocalEvent(photonView.GetLocalId(), t, cb);
+            MyLib.MyEventSystem.myEventSystem.RegisterLocalEvent(photonView.GetLocalId(), t, cb);
         }
 
-        public void DropCallBackLocalEvent(ChuMeng.MyEvent.EventType t, ChuMeng.EventDel cb)
+        public void DropCallBackLocalEvent(MyLib.MyEvent.EventType t, MyLib.EventDel cb)
         {
-            ChuMeng.MyEventSystem.myEventSystem.DropLocalListener(photonView.GetLocalId(), t, cb);
+            MyLib.MyEventSystem.myEventSystem.DropLocalListener(photonView.GetLocalId(), t, cb);
             foreach(var e in regLocalEvtCallback) {
                 if(e.t == t && e.cb == cb) {
                     regLocalEvtCallback.Remove(e);
@@ -275,7 +275,7 @@ namespace KBEngine
         {
             get
             {
-                return localId == ChuMeng.ObjectManager.objectManager.GetMyLocalId(); 
+                return localId == MyLib.ObjectManager.objectManager.GetMyLocalId(); 
             }
         }
 
@@ -292,9 +292,9 @@ namespace KBEngine
                     return true;
                 }
 
-                var isMe = ID.owner == ChuMeng.ObjectManager.objectManager.myPlayer;
+                var isMe = ID.owner == MyLib.ObjectManager.objectManager.myPlayer;
                 if(!IsPlayer) {
-                    if(isMe && ChuMeng.NetworkUtil.IsMaster()) {
+                    if(isMe && MyLib.NetworkUtil.IsMaster()) {
                         return true;
                     }
                     return false;
