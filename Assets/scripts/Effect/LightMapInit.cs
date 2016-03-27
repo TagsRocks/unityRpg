@@ -5,7 +5,7 @@ namespace ChuMeng
 {
     public class LightMapInit : MonoBehaviour
     {
-        public Texture unityLightMap;
+        public Texture2D unityLightMap;
         public float lightMapScale;
 
         public static LightMapInit Instance;
@@ -22,8 +22,13 @@ namespace ChuMeng
 
         public void InitLightMapMethod()
         {
-            Shader.SetGlobalTexture("_UnityLightMap", unityLightMap);
+            //Shader.SetGlobalTexture("_UnityLightMap", unityLightMap);
            // Shader.SetGlobalFloat("_LightMapScale", lightMapScale);
+            var lm = new LightmapData();
+            lm.lightmapFar = unityLightMap;
+            LightmapSettings.lightmaps = new LightmapData[]{
+                lm
+            };
         }
 	
     }

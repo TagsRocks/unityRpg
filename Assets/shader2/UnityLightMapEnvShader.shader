@@ -31,8 +31,8 @@
 
 	      //unity光照贴图
 	      // These are prepopulated by Unity
-	      //sampler2D unity_Lightmap;
-	      sampler2D _UnityLightMap;
+	      sampler2D unity_Lightmap;
+	      //sampler2D _UnityLightMap;
 	      //float _LightMapScale;
 	      fixed4 _LightMapScaleAndOffset;
 	      //光照贴图的位置的缩放和偏移
@@ -52,6 +52,8 @@
 
 	        // Use `unity_LightmapST` NOT `unity_Lightmap_ST`
 	        o.uv1 = i.texcoord1.xy * _LightMapScaleAndOffset.xy + _LightMapScaleAndOffset.zw;
+	        //o.uv1 = i.texcoord1;
+	        //o.uv1 = i.texcoord.xy * _LightMapScaleAndOffset.xy + _LightMapScaleAndOffset.zw;
 	        //o.uv1 = i.texcoord1.xy*_LightMapScale;
 	        return o;
 	      }
@@ -70,7 +72,7 @@
 	        // #endif
 	        // }
 
-	        main_color.rgb *= DecodeLightmap(tex2D(_UnityLightMap, i.uv1));
+	        main_color.rgb *= DecodeLightmap(tex2D(unity_Lightmap, i.uv1));
 	        //main_color.rgb = fixed3(i.uv1, 0);
 	        return main_color;
 	      }
