@@ -524,18 +524,8 @@ namespace MyLib
 
         public void InitCache()
         {
-            InitCachePlayer();
             InitCacheMonster();
             InitCacheNpc();
-        }
-
-        void InitCachePlayer()
-        {
-            /*
-			foreach (ViewPlayer vp in cacheInitPlayer) {
-				CreatePlayer (vp);
-			}
-            */
         }
 
         void InitCacheMonster()
