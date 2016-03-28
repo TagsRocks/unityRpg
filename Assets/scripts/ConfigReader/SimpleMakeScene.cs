@@ -136,6 +136,7 @@ public class SimpleMakeScene : MonoBehaviour
     }
 
     public string path1;
+    public string combinePath = "snow";
     [ButtonCallFunc()]public bool CombineToPrefab;
 
     /// <summary>
@@ -209,8 +210,10 @@ public class SimpleMakeScene : MonoBehaviour
 
         //Use First Animation FBX idle as base
         var first = aniFbx.First();
-        foreach(var a in aniFbx) {
-            if(a.Key != "collision") {
+        foreach (var a in aniFbx)
+        {
+            if (a.Key != "collision")
+            {
                 first = a;
                 break;
             }
@@ -327,6 +330,7 @@ public class SimpleMakeScene : MonoBehaviour
         AssetDatabase.StopAssetEditing();
         AssetDatabase.Refresh();
     }
+
     //With Animation
     GameObject CombineTwo(string f, string col)
     {
@@ -357,8 +361,16 @@ public class SimpleMakeScene : MonoBehaviour
                 var oldPrefab = Resources.LoadAssetAtPath<GameObject>(prefab);
                 if (oldPrefab == null)
                 {
+                    var tar = Path.Combine("Assets/prefabs", combinePath);
 
-                    var tar = Path.Combine("Assets/prefabs", prefab);
+                    var tarDir = Path.Combine(Application.dataPath, "prefabs/"+combinePath);
+                    if (!File.Exists(tarDir))
+                    {
+                        Directory.CreateDirectory(tarDir);
+                    }
+
+
+                    tar = Path.Combine(tar, prefab);
                     var tg = PrefabUtility.CreatePrefab(tar, g);
                     if (cg != null)
                     {
@@ -372,8 +384,9 @@ public class SimpleMakeScene : MonoBehaviour
                     Debug.Log("old prefab exists " + prefab);
                 }
             }
-
-
+        } else
+        {
+            Debug.Log("Not Find: " + f + " col " + col);
         }
         return null;
     }
