@@ -363,7 +363,7 @@ public class SimpleMakeScene : MonoBehaviour
                 {
                     var tar = Path.Combine("Assets/prefabs", combinePath);
 
-                    var tarDir = Path.Combine(Application.dataPath, "prefabs/"+combinePath);
+                    var tarDir = Path.Combine(Application.dataPath, "prefabs/" + combinePath);
                     if (!File.Exists(tarDir))
                     {
                         Directory.CreateDirectory(tarDir);
@@ -465,4 +465,29 @@ public class SimpleMakeScene : MonoBehaviour
         Debug.Log("ReadRoomPiece " + count);
     }
     */
+    [ButtonCallFunc()]public bool RemoveMapJson;
+
+    public void RemoveMapJsonMethod()
+    {
+        var mapJson = Resources.LoadAssetAtPath<TextAsset>("Assets/Config/map.json");
+        var mapObj = JSON.Parse(mapJson.text).AsObject;
+        Debug.Log("path is ");
+        foreach (KeyValuePair<string, JSONNode> n in mapObj)
+        {
+            var f = n.Value ["FILE"].Value;
+            var col = n.Value ["COLLISIONFILE"].Value;
+
+            var fpath = ConvertPath(f);
+            fpath = fpath.Replace("levelsets", "levelSets");
+
+            Debug.Log("filePath is " + fpath);
+
+            var tarDir = Path.Combine(Application.dataPath, "prefabs/");
+            var fn = Path.GetFileName(fpath);
+            var prefab = fn.Replace(".fbx", ".prefab");
+            var tar = Path.Combine(tarDir, prefab);
+            Debug.Log("Delete: "+tar);
+            File.Delete(tar);
+        }
+    }
 }

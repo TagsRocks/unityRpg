@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 5b3d661904ed04193a01f10cb8285bb0
+guid: 7917ffacd94334c47b2a009427158fd3
 ModelImporter:
   serializedVersion: 16
   fileIDToRecycleName:
@@ -7,7 +7,7 @@ ModelImporter:
     400000: //RootNode
     2300000: //RootNode
     3300000: //RootNode
-    4300000: obj3
+    4300000: obj3.003
     9500000: //RootNode
   materials:
     importMaterials: 1
@@ -46,7 +46,7 @@ ModelImporter:
     splitTangentsAcrossUV: 1
     normalImportMode: 0
     tangentImportMode: 1
-  importAnimation: 1
+  importAnimation: 0
   copyAvatar: 0
   humanDescription:
     human: []

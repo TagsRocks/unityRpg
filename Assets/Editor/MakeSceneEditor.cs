@@ -12,7 +12,8 @@ using MyLib;
 public class MakeSceneEditor : Editor
 {
     string layoutStr = "";
-    GameObject CreateAParticle(GameObject root, JSONClass jobj) 
+
+    GameObject CreateAParticle(GameObject root, JSONClass jobj)
     {
         var px = jobj ["POSITIONX"].AsFloat;
         var py = jobj ["POSITIONY"].AsFloat;
@@ -153,7 +154,8 @@ public class MakeSceneEditor : Editor
                 var pb = GetPrefabConfig(g);
                 rd.Prefabs.Add(pb);
             }
-        }else if(jobj["DESCRIPTOR"].Value == "Layout Link Particle") {
+        } else if (jobj ["DESCRIPTOR"].Value == "Layout Link Particle")
+        {
             var g = CreateAParticle(root, jobj);
             if (g != null)
             {
@@ -232,22 +234,25 @@ public class MakeSceneEditor : Editor
             var pb = "Assets/lightPrefab/" + ln.Replace(".MESH", ".prefab").ToLower();
             Debug.Log("LoadLight " + pb);
             var lobj = Resources.LoadAssetAtPath(pb, typeof(GameObject)) as GameObject;
-            var copyobj = PrefabUtility.InstantiatePrefab(lobj) as GameObject;
-            copyobj.transform.parent = root.transform;
+            if (lobj != null)
+            {
+                var copyobj = PrefabUtility.InstantiatePrefab(lobj) as GameObject;
+                copyobj.transform.parent = root.transform;
 
-            copyobj.transform.localPosition = new Vector3(-n ["POSITIONX"].AsFloat, n ["POSITIONY"].AsFloat, n ["POSITIONZ"].AsFloat);
-            copyobj.transform.localScale = new Vector3(n ["SCALE X"].AsFloat, n ["SCALE Z"].AsFloat, 1);
-            var rot = Quaternion.Euler(new Vector3(0, n ["ANGLE"].AsFloat, 0));
-            copyobj.transform.localRotation = rot * Quaternion.Euler(new Vector3(-90, 0, 0));
+                copyobj.transform.localPosition = new Vector3(-n ["POSITIONX"].AsFloat, n ["POSITIONY"].AsFloat, n ["POSITIONZ"].AsFloat);
+                copyobj.transform.localScale = new Vector3(n ["SCALE X"].AsFloat, n ["SCALE Z"].AsFloat, 1);
+                var rot = Quaternion.Euler(new Vector3(0, n ["ANGLE"].AsFloat, 0));
+                copyobj.transform.localRotation = rot * Quaternion.Euler(new Vector3(-90, 0, 0));
 
 
-            var rd = saveData.GetComponent<RoomData>();
-            var pb1 = new RoomData.RoomPosRot();
-            pb1.prefab = lobj;
-            pb1.pos = copyobj.transform.localPosition;
-            pb1.rot = copyobj.transform.localRotation;
-            pb1.scale = copyobj.transform.localScale;
-            rd.Prefabs.Add(pb1);
+                var rd = saveData.GetComponent<RoomData>();
+                var pb1 = new RoomData.RoomPosRot();
+                pb1.prefab = lobj;
+                pb1.pos = copyobj.transform.localPosition;
+                pb1.rot = copyobj.transform.localRotation;
+                pb1.scale = copyobj.transform.localScale;
+                rd.Prefabs.Add(pb1);
+            }
         }
 
     }
@@ -468,9 +473,7 @@ public class MakeSceneEditor : Editor
         var saveData = new GameObject("RoomPieces_data");
         saveData.AddComponent<RoomData>();
 
-        //var resPath = Path.Combine(Application.dataPath, "levelPrefab");
-        //var dir = new DirectoryInfo(resPath);
-
+        /*
         var resPath = Path.Combine(Application.dataPath, "prefabs");
         var dir = new DirectoryInfo(resPath);
         var prefabs = dir.GetFiles("*.prefab", SearchOption.TopDirectoryOnly);
@@ -478,13 +481,18 @@ public class MakeSceneEditor : Editor
         resPath = Path.Combine(Application.dataPath, "prefabs/props");
         dir = new DirectoryInfo(resPath);
         var propsPrefab = dir.GetFiles("*.prefab", SearchOption.TopDirectoryOnly);
+        */
+
+        var resPath = Path.Combine(Application.dataPath, "prefabs");
+        var dir = new DirectoryInfo(resPath);
+        var propsPrefab = dir.GetFiles("*.prefab", SearchOption.AllDirectories);
 
 
         GameObjectDelegate gg = delegate (string name)
         {
             return GetPrefab(name, new List<FileInfo[]>()
             {
-                prefabs,
+                //prefabs,
                 propsPrefab
             });
         };
@@ -692,10 +700,12 @@ public class MakeSceneEditor : Editor
             pieces.transform.parent = root.transform;
             props.transform.parent = root.transform;
             light.transform.parent = root.transform;
-            if(type != "") {
+            if (type != "")
+            {
                 Directory.CreateDirectory("Assets/room/" + type); 
-                PrefabUtility.CreatePrefab("Assets/room/" +type+"/"+ root.name + ".prefab", root);
-            }else {
+                PrefabUtility.CreatePrefab("Assets/room/" + type + "/" + root.name + ".prefab", root);
+            } else
+            {
                 PrefabUtility.CreatePrefab("Assets/room/" + root.name + ".prefab", root);
             }
         }
@@ -1049,7 +1059,8 @@ public class MakeSceneEditor : Editor
 
         }
 
-        if(GUILayout.Button("设置某个目录下面所有材质为lightMapEnv")) {
+        if (GUILayout.Button("设置某个目录下面所有材质为lightMapEnv"))
+        {
             var allModel = Path.Combine(Application.dataPath, modelStr.stringValue);
             var resDir = new DirectoryInfo(allModel);
             FileInfo[] fileInfo = resDir.GetFiles("*.mat", SearchOption.AllDirectories);
@@ -1150,7 +1161,7 @@ public class MakeSceneEditor : Editor
     /// <param name="rootPath">Root path.</param>
     void AdjustNoAniModel(string rootPath)
     {
-        Debug.Log("AdjustNoAniModel "+rootPath);
+        Debug.Log("AdjustNoAniModel " + rootPath);
         
         var allModel = Path.Combine(Application.dataPath, rootPath);
         var resDir = new DirectoryInfo(allModel);

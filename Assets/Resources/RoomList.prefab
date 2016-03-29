@@ -90,6 +90,10 @@ MonoBehaviour:
   - type: town
     parts:
     - {fileID: 192196, guid: b2d89e06d58954c408bb94d3bacccb8d, type: 2}
+  - type: snow
+    parts:
+    - {fileID: 0}
+    - {fileID: 163026, guid: 36617918ecad2482091b82896e254896, type: 2}
   LoadAllRooms: 0
 --- !u!1001 &100100000
 Prefab:

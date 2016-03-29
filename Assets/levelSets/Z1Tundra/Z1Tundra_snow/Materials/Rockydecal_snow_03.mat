@@ -7,7 +7,7 @@ Material:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: Rockydecal_snow_03
-  m_Shader: {fileID: 4800000, guid: 65a267bb8c6f1468a853369b6641d369, type: 3}
+  m_Shader: {fileID: 4800000, guid: 36554abc495284b999aa93f943af1f7a, type: 3}
   m_ShaderKeywords: []
   m_CustomRenderQueue: -1
   m_SavedProperties:
@@ -17,7 +17,7 @@ Material:
         first:
           name: _MainTex
         second:
-          m_Texture: {fileID: 2800000, guid: 47f4db5674cf2484188558addfe333b9, type: 3}
+          m_Texture: {fileID: 2800000, guid: bd6e97ccf5e2f4f00a18fbc71b89dbcb, type: 3}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
     m_Floats: {}
