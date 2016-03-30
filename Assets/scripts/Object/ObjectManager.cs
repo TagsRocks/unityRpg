@@ -432,7 +432,7 @@ namespace MyLib
 			
             NetDebug.netDebug.AddConsole("Init Player tag layer transform");
             NGUITools.AddMissingComponent<NpcAttribute>(player);
-            NGUITools.AddMissingComponent<PlayerAIController>(player);
+            NGUITools.AddMissingComponent<TankAIController>(player);
             player.tag = "Player";
             player.layer = (int)GameLayer.Npc;
             player.transform.parent = transform;

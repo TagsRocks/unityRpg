@@ -206,6 +206,11 @@ namespace MyLib
             LevelLayout.Add(4, l1);
 
             l1 = new List<LevelConfig>(){
+                new LevelConfig("ENTRANCE_N_PB", 0, 0){useOtherZone=true, zoneId=74, type="tank"},
+            };
+            LevelLayout.Add(5, l1);
+
+            l1 = new List<LevelConfig>(){
                 new LevelConfig("ENTRANCE_W_LM", 0, 0){useOtherZone=true, zoneId=66, type="suntemple"},
                 new LevelConfig("EW_LM", -1, 0){useOtherZone=true, zoneId=67, type="suntemple"},
                 new LevelConfig("EXIT_E_LM", -2, 0){useOtherZone=true, zoneId=68, type="suntemple"},
@@ -261,8 +266,8 @@ namespace MyLib
                 fogMode = FogMode.ExponentialSquared,
                 fogDensity = 0.01f,
                 cameraDist = 200,
-                hasRain = true,
-                hasLightning = true,
+                hasRain = false,
+                hasLightning = false ,
             });
 
         }

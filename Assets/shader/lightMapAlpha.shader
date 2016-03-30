@@ -20,7 +20,6 @@
 	        struct VertIn {
 	        	float4 vertex : POSITION;
 	        	float4 texcoord : TEXCOORD0;
-	   
 	        };
 
 			
@@ -28,8 +27,6 @@
 	        	fixed4 pos : SV_POSITION;
 	        	fixed2 uv : TEXCOORD0;
 	        	fixed3 offPos : TEXCOORD2;
-	   			fixed3 worldPos : TEXCOORD3;
-	   			fixed3 noisePos : TEXCOORD4;
 	   			fixed3 shadowPos : TEXCOORD6;
 	        };
 			uniform sampler2D _MainTex;
@@ -41,17 +38,6 @@
 		     
 		    uniform sampler2D _LightMask;
 		    uniform float _LightCoff;
-
-			uniform sampler2D _SpecMap;
-			uniform float _SpecCoff;
-			uniform float _SpecSize;
-
-			uniform float _SpecFreqX;
-			uniform float _SpecFreqY;
-			uniform float _SpecAmpX;
-			uniform float _SpecAmpY;
-
-			uniform sampler2D _CloudNoise;
 
 			uniform sampler2D _ShadowMap;
 		    uniform float4 _ShadowCamPos;
@@ -66,11 +52,6 @@
 				fixed3 worldPos = mul(_Object2World, v.vertex).xyz;
 				o.offPos = worldPos-(_WorldSpaceCameraPos+_CamPos);
 				o.shadowPos = worldPos-(_WorldSpaceCameraPos+_ShadowCamPos);
-
-				fixed t1 = sin(_Time.y*_SpecFreqX*6.28)*_SpecAmpX;
-				fixed t2 = sin(_Time.y*_SpecFreqY*6.28)*_SpecAmpY;
-				o.worldPos = worldPos+fixed3(t1, 0, t2);
-				o.noisePos = worldPos;
 				return o;
 			}
 			
@@ -80,15 +61,12 @@
 	        	fixed2 mapUV = (i.offPos.xz+float2(_CameraSize, _CameraSize))/(2*_CameraSize);
 	        	retCol.rgb = col.rgb*(_AmbientCol.rgb+tex2D(_LightMap, mapUV).rgb * (1-tex2D(_LightMask, mapUV).a)*_LightCoff	);
 	        	retCol.a = col.a;
-
-				fixed2 specUV = i.worldPos.xz * fixed2(_SpecSize, _SpecSize)+tex2D(_CloudNoise, i.noisePos).rg;
-				fixed4 specColor = tex2D(_SpecMap, specUV);
-				retCol.rgb += specColor.rgb*_SpecCoff;
-
+				
+				/*
 				fixed2 mapShadow = (i.shadowPos.xz+float2(_ShadowCameraSize, _ShadowCameraSize))/(2*_ShadowCameraSize);
 				fixed4 shadowC = tex2D(_ShadowMap, mapShadow);
-				//retCol.rgb *= shadowC.rgb;
 				retCol.rgb = retCol.rgb*(1-shadowC.a)+shadowC.rgb;
+				*/
 				return retCol;
 			}	
 			

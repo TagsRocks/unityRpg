@@ -380,6 +380,7 @@ MonoBehaviour:
   heartBeat: 8
   remoteServerIP: 127.0.0.1
   syncFreq: .100000001
+  testAI: 1
   IsPause: 0
 --- !u!4 &775957294
 Transform:
@@ -575,6 +576,10 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11476094, guid: 189faaf6d4b0a4095af9b023112d150c, type: 2}
       propertyPath: gamma
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400002, guid: 189faaf6d4b0a4095af9b023112d150c, type: 2}
+      propertyPath: testAI
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []

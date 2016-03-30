@@ -1,4 +1,4 @@
-﻿﻿using UnityEngine;
+﻿using UnityEngine;
 using System.Collections;
 
 namespace MyLib
@@ -48,6 +48,10 @@ namespace MyLib
             var y2 = Quaternion.LookRotation (moveDirection).eulerAngles.y;
             var y3 = Mathf.LerpAngle(y1, y2, attribute.GetMoveSpeedCoff());
             transform.rotation = Quaternion.Euler(new Vector3(0, y3, 0));
+        }
+        public void TurnToImmediately(Vector3 moveDirection) {
+            var y2 = Quaternion.LookRotation (moveDirection).eulerAngles.y;
+            transform.rotation = Quaternion.Euler(new Vector3(0, y2, 0));
         }
 		//键盘操控玩家移动
 		public void MoveSpeed(Vector3 moveSpeed) {

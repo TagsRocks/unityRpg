@@ -35,6 +35,7 @@ public class ClientApp : UnityEngine.MonoBehaviour
     public string remoteServerIP = "127.0.0.1";
     public float syncFreq = 0.1f;
 
+    public bool testAI = false;
     void Awake()
     {
         client = gameObject;

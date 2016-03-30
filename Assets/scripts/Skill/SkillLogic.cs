@@ -96,7 +96,7 @@ namespace MyLib
 			
             foreach (var ene in enemies)
             {
-                if (IsEnemy(attacker, ene.gameObject))
+                if (!ene.gameObject.GetComponent<NpcAttribute>().IsDead && IsEnemy(attacker, ene.gameObject))
                 {
                     var d = (ene.transform.position - transform.position).sqrMagnitude;
                     if (d < minDist)

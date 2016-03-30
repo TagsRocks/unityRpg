@@ -10,7 +10,9 @@ namespace MyLib
     {
         UILabel hpLabel;
         UILabel level;
-        void Awake(){
+
+        void Awake()
+        {
             hpLabel = GetLabel("HPNum");
             level = GetLabel("Level");
 
@@ -24,67 +26,93 @@ namespace MyLib
             SetCallback("JingShiButton", OnJingShi);
             SetCallback("WorldButton", OnWorld);
             SetCallback("BombButton", OnBomb);
-            this.regEvt = new System.Collections.Generic.List<MyEvent.EventType>(){
+            SetCallback("TankButton", OnTank);
+            this.regEvt = new System.Collections.Generic.List<MyEvent.EventType>()
+            {
                 MyEvent.EventType.UpdateItemCoffer,
                 MyEvent.EventType.UpdateMainUI,
                 MyEvent.EventType.UpdatePlayerData,
             };
             RegEvent();
         }
+
         /// <summary>
         /// 进入世界场景 
         /// </summary>
-        void OnWorld() {
+        void OnWorld()
+        {
             WorldManager.worldManager.WorldChangeScene(3, false);
         }
-        void OnBomb() {
+        void OnBomb()
+        {
             WorldManager.worldManager.WorldChangeScene(4, false);
         }
 
-        void OnJingShi() {
+        void OnTank()
+        {
+            WorldManager.worldManager.WorldChangeScene(5, false);
+        }
+
+        void OnJingShi()
+        {
             WindowMng.windowMng.PushView("UI/ChargeUI");
             MyEventSystem.myEventSystem.PushEvent(MyEvent.EventType.UpdateItemCoffer);
         }
-        void OnGM() {
+
+        void OnGM()
+        {
             WindowMng.windowMng.PushView("UI/GMCmd");
 
         }
-        void OnPack(GameObject g){
-            WindowMng.windowMng.PushView ("UI/Package", true);
-            MyEventSystem.myEventSystem.PushEvent (MyEvent.EventType.UpdateItemCoffer);
+
+        void OnPack(GameObject g)
+        {
+            WindowMng.windowMng.PushView("UI/Package", true);
+            MyEventSystem.myEventSystem.PushEvent(MyEvent.EventType.UpdateItemCoffer);
         }
-        void UpdateFrame(){
+
+        void UpdateFrame()
+        {
             hpLabel.text = GameInterface_Backpack.GetHpNum().ToString(); 
             var lev = GameInterface_Player.GetLevel();
-            Log.GUI("lev "+lev );
-            level.text = "[ff9500]等级:"+lev+"[-]";
+            Log.GUI("lev " + lev);
+            level.text = "[ff9500]等级:" + lev + "[-]";
         }
+
         protected override void OnEvent(MyEvent evt)
         {
-            Log.GUI("OnEvent "+evt.type);
+            Log.GUI("OnEvent " + evt.type);
             UpdateFrame();
         }
 
-        void OnTalk(GameObject g){
+        void OnTalk(GameObject g)
+        {
             GameInterface_Player.TalkToNpc();
         }
 
-        void OnCopy(GameObject g){
-            WindowMng.windowMng.PushView ("UI/CopyList", true);
-            MyEventSystem.myEventSystem.PushEvent (MyEvent.EventType.OpenCopyUI);
+        void OnCopy(GameObject g)
+        {
+            WindowMng.windowMng.PushView("UI/CopyList", true);
+            MyEventSystem.myEventSystem.PushEvent(MyEvent.EventType.OpenCopyUI);
         }
 
-        void OnBag(GameObject g){
+        void OnBag(GameObject g)
+        {
         }
-        void OnSkill(GameObject g){
+
+        void OnSkill(GameObject g)
+        {
             WindowMng.windowMng.PushView("UI/SkillUI", true);
             MyEventSystem.myEventSystem.PushEvent(MyEvent.EventType.UpdateSkill);
         }
 
-        void OnStore(GameObject g){
-            WindowMng.windowMng.PushView ("UI/StoreUI", true);
-            MyEventSystem.myEventSystem.PushEvent (MyEvent.EventType.UpdateItemCoffer);
+        void OnStore(GameObject g)
+        {
+            WindowMng.windowMng.PushView("UI/StoreUI", true);
+            MyEventSystem.myEventSystem.PushEvent(MyEvent.EventType.UpdateItemCoffer);
         }
+
+
 
     }
 }

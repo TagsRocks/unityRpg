@@ -25,16 +25,17 @@ namespace MyLib {
 
 		//TODO:状态机检测是否可以进入 其它状态
 		public bool ChangeState(AIStateEnum s, int layer = 0) {
-			//Log.AI ("Change State "+GetAttr().gameObject+" state "+s);
+			Log.AI ("Change State "+GetAttr().gameObject+" state "+s);
+
+			if (state != null && !state.CheckNextState (s)) {
+				return false;
+			}
+
             if(!stateMap.ContainsKey(s)) {
                 //Debug.LogError("Who Not Has Such State "+GetAttr().gameObject+" state "+s);
                 Log.Sys("gameObject No State "+GetAttr().gameObject+" state "+s);
                 return false;
             }
-
-			if (state != null && !state.CheckNextState (s)) {
-				return false;
-			}
 
 			if (state != null && state.type == s) {
 				return false;

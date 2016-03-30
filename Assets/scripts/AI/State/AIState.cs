@@ -18,6 +18,8 @@ namespace MyLib
         Stunned,
 
         JUMP,
+
+        MOVE_SHOOT,
     }
 
     public class AIState
@@ -438,6 +440,12 @@ namespace MyLib
                 return true;
             }
             return false;
+        }
+    }
+
+    public class MoveShootState : AIState {
+        public MoveShootState(){
+            type = AIStateEnum.MOVE_SHOOT;
         }
     }
 }

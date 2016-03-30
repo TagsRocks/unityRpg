@@ -27,12 +27,14 @@ namespace MyLib
         {
             attribute = GetComponent<NpcAttribute>();
 
-            ai = new HumanCharacter();
+            ai = new TankCharacter();
             ai.attribute = attribute;
             ai.AddState(new HumanIdle());
-            ai.AddState(new HumanMove());
-            ai.AddState(new HumanCombat());
-            ai.AddState(new HumanSkill());
+            ai.AddState(new TankMoveAndShoot());
+            //ai.AddState(new HumanMove());
+            //ai.AddState(new HumanCombat());
+            //ai.AddState(new HumanSkill());
+
             ai.AddState(new HumanDead());
             ai.AddState(new MonsterKnockBack());
             ai.AddState(new HumanStunned());
