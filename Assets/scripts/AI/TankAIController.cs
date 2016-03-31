@@ -7,6 +7,7 @@ namespace MyLib
     [RequireComponent(typeof(SkillCombineBuff))]
     [RequireComponent(typeof(MySelfAttributeSync))]
     [RequireComponent(typeof(PlayerSyncToServer))]
+    [RequireComponent(typeof(TankPhysicComponent))]
     public class TankAIController : AIBase
     {
         void Awake()

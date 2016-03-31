@@ -90,6 +90,9 @@ MonoBehaviour:
     - {fileID: 158768, guid: 936eb0543d04e4bd5879d41122a4b159, type: 2}
     - {fileID: 188550, guid: ba3eea2d937384b8e8a1084a1682fe07, type: 2}
     - {fileID: 182320, guid: da12026ebc3344cafae72a93dd462df0, type: 2}
+  - type: tank
+    parts:
+    - {fileID: 150718, guid: 3a3fb354a57604447b06d5096196f7d2, type: 2}
   - type: town
     parts:
     - {fileID: 192196, guid: b2d89e06d58954c408bb94d3bacccb8d, type: 2}

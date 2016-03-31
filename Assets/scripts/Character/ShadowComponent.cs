@@ -19,13 +19,13 @@ public class ShadowComponent : MonoBehaviour {
 	void CreateShadowPlane() {
 		if (shadowPlane == null) {
 			GameObject p = GameObject.CreatePrimitive (PrimitiveType.Plane);
+            DestroyImmediate (p.collider);
 			shadowPlane = p;
 			p.name = "shadowPlane";
 			p.transform.parent = transform;
 			p.transform.localScale = Vector3.one;
 			p.transform.localRotation = Quaternion.identity;
 			p.renderer.enabled = false;
-			DestroyImmediate (p.collider);
 			p.transform.localPosition = Vector3.zero;
 		
 			foreach (Transform c in transform) {

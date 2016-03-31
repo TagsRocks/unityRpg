@@ -94,9 +94,12 @@ namespace MyLib
             GameObject enemy = null;
             var transform = attacker.transform;
 			
+            Log.Sys("EnemyCount: "+enemies.Length);
             foreach (var ene in enemies)
             {
-                if (!ene.gameObject.GetComponent<NpcAttribute>().IsDead && IsEnemy(attacker, ene.gameObject))
+                var npcAttr = ene.gameObject.GetComponent<NpcAttribute>();
+                Log.Sys("EnemyIs: "+npcAttr);
+                if (npcAttr != null && !npcAttr.IsDead && IsEnemy(attacker, ene.gameObject))
                 {
                     var d = (ene.transform.position - transform.position).sqrMagnitude;
                     if (d < minDist)

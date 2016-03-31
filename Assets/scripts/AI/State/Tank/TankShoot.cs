@@ -25,17 +25,22 @@ namespace MyLib
         {
             var trans = GetAttr().transform;
             var enemy = SkillLogic.FindNearestEnemy(trans.gameObject);
-            var physic = GetAttr().GetComponent<PhysicComponent>();
+            var physic = GetAttr().GetComponent<TankPhysicComponent>();
+            Log.Sys("FindEnemyIs: "+enemy);
             if(enemy != null) {
                 var dir = enemy.transform.position- trans.position;
                 dir.y = 0;
-                physic.TurnToImmediately(dir);
+                Log.Sys("EnemyIs: "+dir);
+                //physic.TurnToImmediately(dir);
+                physic.TurnTower(dir);
             }
 
             attackAniName = GetAttackAniName(); 
+            /*
             var realAttackTime = activeSkill.skillData.AttackAniTime / GetAttr().GetSpeedCoff();
             var rate = GetAttr().animation [attackAniName].length / realAttackTime;
             PlayAni(attackAniName, rate, WrapMode.Once);
+            */
             yield return GetAttr().StartCoroutine(WaitForAttackAnimation(GetAttr().animation));
             yield return new WaitForSeconds(0.1f);
         }
@@ -47,9 +52,10 @@ namespace MyLib
             var skillStateMachine = SkillLogic.CreateSkillStateMachine(GetAttr().gameObject, activeSkill.skillData, GetAttr().transform.position);
             Log.AI("Wait For Combat Animation");
             float passTime = 0;
+            var realAttackTime = activeSkill.skillData.AttackAniTime / GetAttr().GetSpeedCoff();
             do
             {
-                if (passTime >= animation [GetAttackAniName()].length * 0.8f / animation [GetAttackAniName()].speed)
+                if (passTime >= realAttackTime * 0.8f)
                 {
                     break;
                 }

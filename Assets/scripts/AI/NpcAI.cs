@@ -14,11 +14,13 @@ namespace MyLib {
     /// <summary>
     ///怪物AI 
     /// </summary>
+    [RequireComponent(typeof(PhysicComponent))]
 	public class NpcAI : AIBase {
 		MyAnimationEvent myAnimationEvent;
 		float heading;
 		Vector3 targetRotation;
 		void Awake() {
+
 			attribute = GetComponent<NpcAttribute>();
 			myAnimationEvent = GetComponent<MyAnimationEvent>();
 			heading = Random.Range(0, 360);

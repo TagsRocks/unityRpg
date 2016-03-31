@@ -18,7 +18,7 @@ namespace MyLib
     [RequireComponent(typeof(ShadowComponent))]
     [RequireComponent(typeof(CharacterInfo))]
     [RequireComponent(typeof(SkillInfoComponent))]
-    [RequireComponent(typeof(PhysicComponent))]
+    //[RequireComponent(typeof(PhysicComponent))]
     [RequireComponent(typeof(BuffComponent))]
     [RequireComponent(typeof(LogicCommand))]
     [RequireComponent(typeof(MoveController))]

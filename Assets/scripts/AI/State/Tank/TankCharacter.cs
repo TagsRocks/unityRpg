@@ -7,6 +7,7 @@ namespace MyLib
     {
         public override void SetRun()
         {
+            /*
             var runName = "run";
             if (WorldManager.worldManager.IsPeaceLevel())
             {
@@ -25,27 +26,32 @@ namespace MyLib
             }
             Log.AI("RunAnimation name " + runName);
             PlayAni(runName, GetAttr().ObjUnitData.WalkAniSpeed, WrapMode.Loop);
+            */
         }
 
         public override void PlayAni(string name, float speed, WrapMode wm)
         {
+            /*
             var ani = GetAttr().animation;
             ani [name].speed = speed;
             ani [name].wrapMode = wm;
             GetAttr().GetComponent<AnimationController>().PlayAnimation(ani [name]);
+            */
         }
 
         public override void SetAni(string name, float speed, WrapMode wm)
         {
+            /*
             var ani = GetAttr().animation;
             ani [name].speed = speed;
             ani [name].wrapMode = wm;
             GetAttr().GetComponent<AnimationController>().CrossfadeAnimation(ani [name], 0.2f);
-
+            */
         }
 
         public override void SetIdle()
         {
+            /*
             var peace = WorldManager.worldManager.IsPeaceLevel();
             var idleName = "idle";
             if (peace)
@@ -56,6 +62,7 @@ namespace MyLib
                 }
             } 
             PlayAni(idleName, 1, WrapMode.Loop);
+            */
         }
 
     }

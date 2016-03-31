@@ -27,17 +27,26 @@ namespace MyLib
 		public uint job;
 		public RolesInfo roleInfo;
 
+        void Awake() {
+            var body = GetComponent<Rigidbody>();
+            body.useGravity = false;
+            body.freezeRotation = true;
+            body.isKinematic = true;
+        }
 
 		void Start() {
+            /*
 			animation ["stand"].wrapMode = WrapMode.Loop;
 			animation.CrossFade ("stand");
+            */
 
 		}
 		void OnEnable() {
+            /*
 			animation ["stand"].wrapMode = WrapMode.Loop;
 			animation.CrossFade ("stand");
+            */
 			GetComponent<ShadowComponent> ().HideShadow ();
-
 		}
 		// Update is called once per frame
 		void Update ()
@@ -58,13 +67,6 @@ namespace MyLib
 
 			selChar.GetComponent<NpcAttribute> ().SetObjUnitData (udata);
 			selChar.GetComponent<NpcEquipment> ().InitDefaultEquip ();
-
-			/*
-			selChar.name = roleInfo.Name;
-			selChar.playerId = roleInfo.PlayerId;
-			selChar.level = roleInfo.Level;
-			selChar.roleInfo = roleInfo;
-			*/
 			return player;
 		}
 		/*
@@ -77,10 +79,6 @@ namespace MyLib
 			if (fakeObj.TryGetValue (roleInfo.PlayerId, out player)) {
 				return player;
 			}
-
-			//var res = Util.GetUnitData (true, (int)roleInfo.Job, 0);
-			//var modName = res.ModelName.Replace ("player/", "models/player/");
-			//var modName = "DialogPlayer/" + roleInfo.Job.ToString ();
 
 			var udata = Util.GetUnitData (true, (int)roleInfo.Job, 0);
 			Log.Sys ("udata "+udata+" "+udata.name+" "+udata.ModelName);

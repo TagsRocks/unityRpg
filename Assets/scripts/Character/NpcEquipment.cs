@@ -150,8 +150,10 @@ namespace MyLib
                 {
 
                     var defaultWardrobe = attribute.ObjUnitData.GetDefaultWardrobe();
+                    if(string.IsNullOrEmpty(defaultWardrobe)) {
+                        return;
+                    }
                     var wardrobe = Resources.Load<GameObject>(defaultWardrobe);
-
                     if (transform.Find("chest") != null)
                     {
                         defaultChest = transform.Find("chest").gameObject;
@@ -312,6 +314,10 @@ namespace MyLib
             if (!IsFakeObject)
             {
                 FakeWieldEquip(ed);
+            }
+            var defeq = attribute.ObjUnitData.GetDefaultWardrobe();
+            if(string.IsNullOrEmpty(defeq)){
+                return;
             }
 
             partToData [ed.itemData.equipPosition] = ed;

@@ -29,7 +29,7 @@ namespace MyLib
             var vcontroller = playerMove.vcontroller;
             var camRight = playerMove.camRight;
             var camForward = playerMove.camForward;
-            var physics = playerMove.GetComponent<PhysicComponent>();
+            var physics = playerMove.GetComponent<TankPhysicComponent>();
             var first = true;
             while (!quit)
             {
@@ -65,6 +65,8 @@ namespace MyLib
                 Vector3 targetDirection = h * camRight + v * camForward;
                 if (targetDirection != Vector3.zero)
                 {
+                    moveDirection = targetDirection;
+                    /*
                     if (moveSpeed < walkSpeed * 0.3f)
                     {
                         moveDirection = Vector3.RotateTowards(moveDirection, targetDirection, rotateSpeed * 2 * Mathf.Deg2Rad * Time.deltaTime, 1000);
@@ -75,6 +77,7 @@ namespace MyLib
                         moveDirection = Vector3.RotateTowards(moveDirection, targetDirection, rotateSpeed * Mathf.Deg2Rad * Time.deltaTime, 1000);         
                         moveDirection = moveDirection.normalized;
                     }
+                    */
                 }
 
                 var curSmooth = speedSmoothing * Time.deltaTime;
@@ -84,9 +87,11 @@ namespace MyLib
                 var movement = moveDirection * moveSpeed;
                 physics.MoveSpeed(movement);
                 //没有使用技能则自动设置方向 有技能则最近设置方向
+                /*
                 if(!inSkill) {
-                    physics.TurnTo(moveDirection);
                 }
+                */
+                physics.TurnTo(moveDirection);
                 yield return null;
             }
         }
