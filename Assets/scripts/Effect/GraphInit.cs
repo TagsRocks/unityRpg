@@ -49,6 +49,7 @@ namespace MyLib
         public RenderTexture motionCamera;
 
         public float gamma = 1;
+        public Color lightDiffuseColor = new Color(223/255.0f, 248/255.0f, 255/255.0f, 1);
 
         void InitAll() {
             var lc = Resources.Load<GameObject>("LightCamera").camera;
@@ -84,7 +85,7 @@ namespace MyLib
             Shader.SetGlobalColor ("_ShadowColor", shadowColor);// new Color (28/255.0f, 25/255.0f, 25/255.0f, 0.5f));
             Shader.SetGlobalVector ("_LightDir", lightDir);
             Shader.SetGlobalVector ("_HighLightDir", new Vector3 (-1, -1, -1));
-            Shader.SetGlobalColor ("_LightDiffuseColor", new Color (223/255.0f, 248/255.0f, 255/255.0f, 1));
+            Shader.SetGlobalColor ("_LightDiffuseColor", lightDiffuseColor);
             
             Shader.SetGlobalColor ("_GhostColor", new Color(68/255.0f, 227/255.0f, 68/255.0f, 0.5f));
 

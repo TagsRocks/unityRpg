@@ -113,6 +113,9 @@ namespace MyLib
                 attr.JumpForwardSpeed = info.JumpForwardSpeed / 100.0f;
                 curInfo.JumpForwardSpeed = info.JumpForwardSpeed;
             }
+            if(info.HasName) {
+                attr.userName = info.Name;
+            }
         }
 
         public void Revive()

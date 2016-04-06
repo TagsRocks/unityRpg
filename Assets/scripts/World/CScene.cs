@@ -7,9 +7,16 @@ using System.Linq;
 //一个场景中的数据，包括LevelInit AStar 以及 BattleManager 以及Forever怪物出生点等信息
 namespace MyLib
 {
+    public enum SceneState
+    {
+        InGame,
+        GameOver,
+    }
+
     public class CScene : KBEngine.MonoBehaviour
     {
         private static Dictionary<string, Type> staticTypeMap;
+        public SceneState state = SceneState.InGame;
 
         public static void InitStatic()
         {

@@ -49,6 +49,10 @@ namespace MyLib
         List<GameObject>  alphaStack;
         Dictionary<string, GameObject> uiMap = new Dictionary<string, GameObject>();
 
+        public GameObject  GetMainUI() {
+            return stack[0];
+        }
+
         public WindowMng()
         {
             stack = new List<GameObject>();

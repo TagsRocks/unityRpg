@@ -50,7 +50,8 @@ namespace MyLib
 
         void OnTank()
         {
-            WorldManager.worldManager.WorldChangeScene(5, false);
+            //WorldManager.worldManager.WorldChangeScene(5, false);
+            WindowMng.windowMng.PushView("UI/SelectTankUI");
         }
 
         void OnJingShi()

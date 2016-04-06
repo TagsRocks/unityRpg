@@ -20,6 +20,7 @@ namespace MyLib
         JUMP,
 
         MOVE_SHOOT,
+        STOP,
     }
 
     public class AIState
@@ -95,6 +96,10 @@ namespace MyLib
         public virtual bool CheckNextState(AIStateEnum next)
         {
             return true;
+        }
+
+        public virtual bool CanChangeState(AIStateEnum next) {
+            return CheckNextState(next);
         }
 
         protected void PlayAni(string name, float speed, WrapMode wm)

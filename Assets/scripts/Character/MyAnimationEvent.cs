@@ -186,12 +186,15 @@ namespace MyLib
 			attachParticleBone = boneName;
 		}
 
+        public int lastAttacker;
 		/*
 		 * When Birth is inattackable
          * Birth Add Buff UnAttackable 
 		 */ 
 		public void OnHit(GameObject go, int damage, bool isCritical, SkillData.DamageType damageType = SkillData.DamageType.Physic,  bool showHit = true) {
 			if(attribute._characterState != CharacterState.Birth) {
+                lastAttacker = go.GetComponent<NpcAttribute>().GetNetView().GetServerID();
+
 				CacheDamage.Add(new DamageData(go, damage, isCritical, damageType, showHit));
 				onHit = true;
 				attacker = go;

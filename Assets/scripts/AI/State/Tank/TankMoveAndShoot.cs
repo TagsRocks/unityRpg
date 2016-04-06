@@ -85,20 +85,24 @@ namespace MyLib
                 var movement = moveDirection * moveSpeed;
                 physics.MoveSpeed(movement);
                 //没有使用技能则自动设置方向 有技能则最近设置方向
-                /*
-                if(!inSkill) {
-                }
-                */
                 physics.TurnTo(moveDirection);
                 yield return null;
             }
         }
 
 
+        public override bool CanChangeState(AIStateEnum next)
+        {
+            if (next == AIStateEnum.COMBAT || next == AIStateEnum.CAST_SKILL)
+            {
+                return true;
+            }
+            return base.CanChangeState(next);
+        }
         //检测输入shoot命令
         public override bool CheckNextState(AIStateEnum next)
         {
-            if (next == AIStateEnum.COMBAT)
+            if (next == AIStateEnum.COMBAT || next == AIStateEnum.CAST_SKILL)
             {
                 GetAttr().StartCoroutine(SkillState());
                 return false;

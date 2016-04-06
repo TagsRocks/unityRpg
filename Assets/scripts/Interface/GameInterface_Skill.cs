@@ -112,7 +112,7 @@ namespace MyLib
                 //当前状态不能使用技能 或者已经在技能状态了不能连续点击
                 if (curState != null)
                 {
-                    var ret = curState.CheckNextState(AIStateEnum.CAST_SKILL);
+                    var ret = curState.CanChangeState(AIStateEnum.CAST_SKILL);
                     if (!ret)
                     {
                         return;

@@ -14,13 +14,21 @@ namespace MyLib
         //先进入MOVE_SHOOT 层状态机，再将状态注入
         public override bool CheckNextState(AIStateEnum next)
         {
-            if (next == AIStateEnum.COMBAT)
+            if (next == AIStateEnum.COMBAT || next == AIStateEnum.CAST_SKILL)
             {
                 //进入MoveShoot状态机 再压入Combat命令
                 GetAttr().StartCoroutine(MoveShoot());
                 return false;
             }
             return base.CheckNextState(next);
+        }
+        public override bool CanChangeState(AIStateEnum next)
+        {
+            if (next == AIStateEnum.COMBAT || next == AIStateEnum.CAST_SKILL)
+            {
+                return true;
+            }
+            return base.CanChangeState(next);
         }
 
         IEnumerator MoveShoot()

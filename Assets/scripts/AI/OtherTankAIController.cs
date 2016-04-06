@@ -20,6 +20,7 @@ namespace MyLib
             ai.AddState(new TankDead());
             ai.AddState(new MonsterKnockBack());
             ai.AddState(new HumanStunned());
+            ai.AddState(new TankStop());
         }
 
         void Start()

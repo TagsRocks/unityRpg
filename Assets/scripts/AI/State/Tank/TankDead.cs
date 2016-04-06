@@ -6,21 +6,29 @@ namespace MyLib
     public class TankDead : DeadState
     {
         string dieAni;
-        public override void EnterState ()
+
+        public override void EnterState()
         {
-            base.EnterState ();
+            base.EnterState();
             dieAni = "death";
-            SetAni (dieAni, 1, WrapMode.Once);
+            SetAni(dieAni, 1, WrapMode.Once);
             GetAttr().IsDead = true;
+            if (GetAttr().IsMine())
+            {
+                var last = GetEvent().lastAttacker;
+                NetDateInterface.Dead(last);
+            }
         }
-        public override IEnumerator RunLogic ()
+
+        public override IEnumerator RunLogic()
         {
-            yield return GetAttr ().StartCoroutine (Util.WaitForAnimation(GetAttr().animation));
-            var evt = new MyEvent (MyEvent.EventType.PlayerDead);
-            evt.localID = aiCharacter.GetLocalId ();
-            MyEventSystem.myEventSystem.PushEvent (evt);
-            while(!quit) {
-                ClearEvent ();
+            yield return GetAttr().StartCoroutine(Util.WaitForAnimation(GetAttr().animation));
+            var evt = new MyEvent(MyEvent.EventType.PlayerDead);
+            evt.localID = aiCharacter.GetLocalId();
+            MyEventSystem.myEventSystem.PushEvent(evt);
+            while (!quit)
+            {
+                ClearEvent();
                 yield return null;
             }
         }

@@ -39,6 +39,7 @@ namespace MyLib
         public CharacterState _characterState = CharacterState.Idle;
         public int OwnerId = -1;
 
+        public string userName;
         /// <summary>
         /// Monster SpawnObject 
         /// </summary>
@@ -523,8 +524,6 @@ namespace MyLib
             ChangeMP(0);
         }
 
-        //根据配置文件初始化属性
-        //TODO: 初始化其它玩家的属性 PlayerOther  PlayerSelf Monster Boss
         void InitData()
         {
             Log.Important("Initial Object HP " + gameObject.name);
@@ -562,11 +561,10 @@ namespace MyLib
         }
 
         CharacterInfo charInfo;
-
-        void Awake()
+        public void InitName()
         {
+            userName = ServerData.Instance.playerInfo.Roles.Name;
         }
-
 
         public void SetObjUnitData(UnitData ud)
         {
@@ -987,13 +985,6 @@ namespace MyLib
             {
                 Physics.IgnoreCollision(GetComponent<CharacterController>(), ObjectManager.objectManager.GetMyPlayer().GetComponent<CharacterController>());
             }
-        }
-
-        /// <summary>
-        /// 复活时操作
-        /// </summary>
-        public void Relive()
-        {
         }
 
         public bool CheckAni(string name)

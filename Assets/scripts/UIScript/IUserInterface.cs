@@ -119,7 +119,7 @@ namespace MyLib
 			grid.repositionNow = true;
 		}
 
-		public void SetText(GameObject g, string name, string text) {
+        public static void SetText(GameObject g, string name, string text) {
 			var lab = Util.FindChildRecursive(g.transform, name);
 			lab.GetComponent<UILabel> ().text = text;
 		}

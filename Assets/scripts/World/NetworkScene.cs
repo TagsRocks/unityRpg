@@ -42,12 +42,7 @@ namespace MyLib
 
             TextAsset bindata = Resources.Load("Config") as TextAsset;
             Debug.Log("nameMap " + bindata);
-            /*
-            if (bindata != null)
-            {
-                ServerIP = SimpleJSON.JSON.Parse(bindata.text).AsObject ["Server"];
-            }
-            */
+          
             ServerIP = ClientApp.Instance.remoteServerIP;
             Debug.LogError("ServerIP: " + ServerIP);
 
@@ -253,6 +248,22 @@ namespace MyLib
                     {
                         sync.Revive();
                     }
+                }
+            } else if (cmds [0] == "Dead")
+            {
+                var dinfo = proto.DamageInfo;
+                ScoreManager.Instance.NetAddScore(dinfo.Attacker, dinfo.Enemy);
+            } else if (cmds [0] == "SyncTime")
+            {
+                if (!NetworkUtil.IsNetMaster())
+                {
+                    ScoreManager.Instance.NetSyncTime(proto.LeftTime);
+                }
+            } else if (cmds [0] == "GameOver")
+            {
+                if (!NetworkUtil.IsNetMaster())
+                {
+                    ScoreManager.Instance.NetworkGameOver();
                 }
             }
         }

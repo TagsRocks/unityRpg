@@ -5,7 +5,8 @@ namespace MyLib
 {
     public static class NetDateInterface
     {
-        public static void FastAddBuff(Affix affix, GameObject attacker, GameObject target, int skillId, int evtId, Vector3 pos) {
+        public static void FastAddBuff(Affix affix, GameObject attacker, GameObject target, int skillId, int evtId, Vector3 pos)
+        {
             var cg = CGPlayerCmd.CreateBuilder();
             var binfo = BuffInfo.CreateBuilder();
             binfo.BuffType = (int)affix.effectType;
@@ -23,6 +24,7 @@ namespace MyLib
             var sc = WorldManager.worldManager.GetActive();
             sc.BroadcastMsg(cg);
         }
+
         /// <summary>
         ///相同的技能 Skill Configure来触发Buff 但是不要触发 Buff修改非表现属性
         /// </summary>
@@ -78,12 +80,38 @@ namespace MyLib
             WorldManager.worldManager.GetActive().BroadcastMsg(cg);
         }
 
-        public static void Revive() {
+        public static void Revive()
+        {
             var cg = CGPlayerCmd.CreateBuilder();
             cg.Cmd = "Revive";
             WorldManager.worldManager.GetActive().BroadcastMsg(cg);
         }
 
+        public static void SyncTime(int leftTime)
+        {
+            var cg = CGPlayerCmd.CreateBuilder();
+            cg.Cmd = "SyncTime";
+            cg.LeftTime = leftTime;
+            WorldManager.worldManager.GetActive().BroadcastMsg(cg);
+        }
+
+        public static void GameOver()
+        {
+            var cg = CGPlayerCmd.CreateBuilder();
+            cg.Cmd = "GameOver";
+            WorldManager.worldManager.GetActive().BroadcastMsg(cg);
+        }
+
+        public static void Dead(int last)
+        {
+            var cg = CGPlayerCmd.CreateBuilder();
+            cg.Cmd = "Dead";
+            var dinfo = DamageInfo.CreateBuilder();
+            dinfo.Attacker = last;
+            dinfo.Enemy = ObjectManager.objectManager.GetMyAttr().GetNetView().GetServerID();
+            cg.DamageInfo = dinfo.Build();
+            WorldManager.worldManager.GetActive().BroadcastMsg(cg);
+        }
 
         public static void FastMoveAndPos()
         {
@@ -110,6 +138,7 @@ namespace MyLib
                 s.BroadcastMsg(cg);
             }
         }
+
 
         public static void SyncMonster()
         {

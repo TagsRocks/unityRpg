@@ -249,7 +249,9 @@ namespace MyLib
 
         public int GetMyJob()
         {
-            return (int)SaveGame.saveGame.selectChar.Job;
+            //return (int)SaveGame.saveGame.selectChar.Job;
+            Log.Sys("GetMyJob: "+ServerData.Instance.playerInfo.Roles.Job);
+            return (int)ServerData.Instance.playerInfo.Roles.Job;
         }
 
         void Awake()
@@ -443,10 +445,12 @@ namespace MyLib
             NetDebug.netDebug.AddConsole("SelectCharID " + SaveGame.saveGame.selectChar.PlayerId);
             view.SetID(new KBEngine.KBViewID(-1, kbplayer));
 			
+            var npcAttr = player.GetComponent<NpcAttribute>();
             NetDebug.netDebug.AddConsole("Set UnitData of Certain Job " + udata);
             player.GetComponent<NpcAttribute>().SetObjUnitData(udata);
             player.GetComponent<NpcEquipment>().InitDefaultEquip();
             player.GetComponent<NpcEquipment>().InitPlayerEquipmentFromBackPack();
+            npcAttr.InitName();
 			
             player.name = "player_me";
 			

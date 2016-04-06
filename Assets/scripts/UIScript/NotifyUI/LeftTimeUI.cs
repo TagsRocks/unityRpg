@@ -3,19 +3,15 @@ using System.Collections;
 
 namespace MyLib
 {
-    public class LeftTimeUI : MyLib 
+    public class LeftTimeUI : IUserInterface
     {
-    
-        // Use this for initialization
-        void Start()
+        UILabel notifyLabel;
+        void Awake()
         {
-	
+            notifyLabel = GetLabel("notifyLabel");
         }
-	
-        // Update is called once per frame
-        void Update()
-        {
-	
+        public void SetLabel(string txt) {
+            notifyLabel.text = txt;
         }
     }
 

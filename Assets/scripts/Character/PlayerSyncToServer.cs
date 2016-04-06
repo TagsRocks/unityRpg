@@ -67,6 +67,13 @@ namespace MyLib
                 curInfo.JumpForwardSpeed = intJumpSpeed;
                 change = true;
             }
+
+            if(meAttr.userName != lastInfo.Name) {
+                ainfo.Name = meAttr.userName;
+                curInfo.Name = meAttr.userName;
+                change = true;
+            }
+
             if (change)
             {
                 lastInfo = AvatarInfo.CreateBuilder(curInfo).Build();

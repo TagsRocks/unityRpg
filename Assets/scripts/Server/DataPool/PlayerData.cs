@@ -420,6 +420,28 @@ namespace MyLib
         public static void ResetSkillLevel()
         {
             var pinfo = ServerData.Instance.playerInfo;
+            var skPanel = GCLoadSkillPanel.CreateBuilder();
+            pinfo.Skill = skPanel.Build(); 
+            pinfo.Roles.Level = 10;
+            AddSkillPoint(10);
+            var skData = GameData.SkillConfig;
+            var count = 0;
+            foreach (var s in skData)
+            {
+                if (s.job == pinfo.Roles.Job)
+                {
+                    LevelUpSkill(s.id);
+                    count++;
+                    if (count >= 2)
+                    {
+                        break;
+                    }
+                }
+            }
+            //LevelUpSkill(3);
+            //LevelUpSkill(4);
+
+            /*
             if (pinfo.HasSkill)
             {
                 foreach (var s in pinfo.Skill.SkillInfosList)
@@ -431,6 +453,7 @@ namespace MyLib
                     ServerBundle.SendImmediatePush(activeSkill);
                 }
             }
+            */
         }
 
         public static void LevelUpSkill(int skId)

@@ -27,6 +27,7 @@ namespace MyLib
                 return true;
             }
         }
+
         public override bool IsRevive
         {
             get
@@ -42,12 +43,19 @@ namespace MyLib
         {
             base.Awake();
             netScene = gameObject.AddComponent<NetworkScene>();
+        }
+
+        void Start()
+        {
             gameObject.AddComponent<ScoreManager>();
         }
 
         public override void BroadcastMsg(CGPlayerCmd.Builder cmd)
         {
-            netScene.BroadcastMsg(cmd);
+            if (state == SceneState.InGame)
+            {
+                netScene.BroadcastMsg(cmd);
+            }
         }
 
     }
