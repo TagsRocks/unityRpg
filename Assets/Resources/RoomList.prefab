@@ -68,13 +68,9 @@ MonoBehaviour:
     - {fileID: 100000, guid: 1b4db632985534074b1b8f9d21ee3a23, type: 2}
     - {fileID: 172988, guid: 97ec20e742f9c4b4f94ef88bcd72d763, type: 2}
   - type: lava
-    parts:
-    - {fileID: 167292, guid: 27c28cfafe6ab4255b1ebbf4da4eb15a, type: 2}
-    - {fileID: 174522, guid: 770613f78f4fa40478aacf76863573b8, type: 2}
-    - {fileID: 139152, guid: b87db9279e6b14a89a81de8df15a9e8b, type: 2}
+    parts: []
   - type: snow
-    parts:
-    - {fileID: 163026, guid: 36617918ecad2482091b82896e254896, type: 2}
+    parts: []
   - type: suntemple
     parts:
     - {fileID: 172638, guid: 43926b90e4a20495291e68f34549cd1e, type: 2}
@@ -92,10 +88,9 @@ MonoBehaviour:
     - {fileID: 182320, guid: da12026ebc3344cafae72a93dd462df0, type: 2}
   - type: tank
     parts:
-    - {fileID: 150718, guid: 3a3fb354a57604447b06d5096196f7d2, type: 2}
+    - {fileID: 133176, guid: 3a3fb354a57604447b06d5096196f7d2, type: 2}
   - type: town
-    parts:
-    - {fileID: 192196, guid: b2d89e06d58954c408bb94d3bacccb8d, type: 2}
+    parts: []
   LoadAllRooms: 0
 --- !u!1001 &100100000
 Prefab:

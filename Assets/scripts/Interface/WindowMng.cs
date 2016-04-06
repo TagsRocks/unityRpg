@@ -273,10 +273,10 @@ namespace MyLib
             BackgroundSound.Instance.PlayEffect("sheet_close");
         }
 
-        public void ShowNotifyLog(string text, float time = 3, System.Action<GameObject> cb = null)
+        public void ShowNotifyLog(string text, float time = 3, System.Action<GameObject> cb = null, bool forceTime=false)
         {
             Log.GUI("ShowNotifyLog "+text);
-            NotifyUIManager.Instance.AddNotify(text, time, cb);
+            NotifyUIManager.Instance.AddNotify(text, time, cb, forceTime);
         }
 
         public void ShowDialog(BoolDelegate action)

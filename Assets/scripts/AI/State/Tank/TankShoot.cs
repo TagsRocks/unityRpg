@@ -20,19 +20,26 @@ namespace MyLib
         }
 
         private string attackAniName;
+        private Vector3 forward;
 
         IEnumerator Shoot()
         {
             var trans = GetAttr().transform;
             var enemy = SkillLogic.FindNearestEnemy(trans.gameObject);
             var physic = GetAttr().GetComponent<TankPhysicComponent>();
-            Log.Sys("FindEnemyIs: "+enemy);
-            if(enemy != null) {
-                var dir = enemy.transform.position- trans.position;
+            Log.Sys("FindEnemyIs: " + enemy);
+            if (enemy != null)
+            {
+                var dir = enemy.transform.position - trans.position;
                 dir.y = 0;
-                Log.Sys("EnemyIs: "+dir);
+                Log.Sys("EnemyIs: " + dir);
+                forward = dir;
                 //physic.TurnToImmediately(dir);
                 physic.TurnTower(dir);
+            } else
+            {
+                forward = trans.forward;
+                physic.TurnTower(forward);
             }
 
             attackAniName = GetAttackAniName(); 
@@ -47,12 +54,17 @@ namespace MyLib
 
         private IEnumerator WaitForAttackAnimation(Animation animation)
         {
-            //var rd = Random.Range(1, 3);
-            //BackgroundSound.Instance.PlayEffect("onehandswinglarge" + rd);
-            var skillStateMachine = SkillLogic.CreateSkillStateMachine(GetAttr().gameObject, activeSkill.skillData, GetAttr().transform.position);
+            var tower = Util.FindChildRecursive(GetAttr().transform, "tower").transform;
+            var skillStateMachine = SkillLogic.CreateSkillStateMachine(GetAttr().gameObject, activeSkill.skillData, tower.transform.position);
+            skillStateMachine.SetForwardDirection(forward);
+            skillStateMachine.SetRelativePos(tower.localPosition);
+
             Log.AI("Wait For Combat Animation");
             float passTime = 0;
+            yield return new WaitForSeconds(0.3f);
+            MyEventSystem.PushLocalEventStatic(GetAttr().GetLocalId(), MyEvent.EventType.EventTrigger);
             var realAttackTime = activeSkill.skillData.AttackAniTime / GetAttr().GetSpeedCoff();
+            realAttackTime -= 0.3f;
             do
             {
                 if (passTime >= realAttackTime * 0.8f)

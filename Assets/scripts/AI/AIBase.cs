@@ -10,7 +10,7 @@ using System.Collections.Generic;
 namespace MyLib
 {
     [RequireComponent(typeof(KBEngine.KBNetworkView))]
-    [RequireComponent(typeof(CharacterController))]
+    //[RequireComponent(typeof(CharacterController))]
     [RequireComponent(typeof(MyAnimationEvent))]
     [RequireComponent(typeof(BloodBar))]
     [RequireComponent(typeof(NpcAttribute))]

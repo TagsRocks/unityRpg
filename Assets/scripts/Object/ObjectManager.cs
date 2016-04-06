@@ -577,7 +577,7 @@ namespace MyLib
 
                 var attr = NGUITools.AddMissingComponent<NpcAttribute>(player);
                 //状态机类似 之后可能需要修改为其它玩家状态机
-                NGUITools.AddMissingComponent<OtherPlayerAI>(player);
+                NGUITools.AddMissingComponent<OtherTankAIController>(player);
 
                 player.tag = "Player";
                 player.layer = (int)GameLayer.Npc;

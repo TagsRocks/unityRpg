@@ -167,5 +167,12 @@ namespace MyLib
             var ret = who.GetComponent<BuffComponent>().AddBuff(evt.affix, pos);
             return ret;
         }
+        public static void RemoveSkillBuff(GameObject who, int skillId)
+        {
+            var skill = Util.GetSkillData(skillId, 1);
+            var skillInfo = SkillLogic.GetSkillInfo(skill);
+            var evt = skillInfo.eventList [0];
+            who.GetComponent<BuffComponent>().RemoveBuff(evt.affix.effectType);
+        }
     }
 }

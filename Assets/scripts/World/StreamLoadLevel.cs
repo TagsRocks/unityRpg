@@ -104,7 +104,6 @@ namespace MyLib
             }
             var zone = GameObject.Instantiate(zoneConfig) as GameObject;
             var ze = zone.AddComponent<ZoneEntityManager>();
-            zone.AddComponent<ZonePlayerManager>();
 
             var world = WorldManager.worldManager.GetActive();
             Log.Sys("WorldIs Net: " + world.IsNet + " act " + world + " pro ");

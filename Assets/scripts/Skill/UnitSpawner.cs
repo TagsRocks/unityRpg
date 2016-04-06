@@ -52,6 +52,7 @@ namespace MyLib
         }
 
         public ReleaseOrder releaseOrder = ReleaseOrder.ByRandom;
+
         /// <summary>
         /// 初始化Runner
         /// </summary>
@@ -96,10 +97,19 @@ namespace MyLib
             bullet.missileData = Missile;
             bullet.transform.parent = ObjectManager.objectManager.transform;
 
-            var playerForward = Quaternion.Euler(new Vector3(0, 0 + attacker.transform.rotation.eulerAngles.y, 0));
-            var bulletForward = Quaternion.Euler(new Vector3(0, deg + attacker.transform.eulerAngles.y, 0));
-            bullet.transform.localPosition = attacker.transform.localPosition + playerForward * Position;
-            bullet.transform.localRotation = bulletForward;
+            if (runner.stateMachine.forwardSet)
+            {
+                var playerForward = Quaternion.Euler(new Vector3(0, 0 + runner.transform.rotation.eulerAngles.y, 0));
+                var bulletForward = Quaternion.Euler(new Vector3(0, deg + runner.transform.eulerAngles.y, 0));
+                bullet.transform.localPosition = runner.transform.localPosition + playerForward * Position;
+                bullet.transform.localRotation = bulletForward;
+            } else
+            {
+                var playerForward = Quaternion.Euler(new Vector3(0, 0 + attacker.transform.rotation.eulerAngles.y, 0));
+                var bulletForward = Quaternion.Euler(new Vector3(0, deg + attacker.transform.eulerAngles.y, 0));
+                bullet.transform.localPosition = attacker.transform.localPosition + playerForward * Position;
+                bullet.transform.localRotation = bulletForward;
+            }
         }
 
         void MakeMonster()

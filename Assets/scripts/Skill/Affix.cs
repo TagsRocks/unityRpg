@@ -46,6 +46,7 @@ namespace MyLib
             Silent, //随机沉默
             WeaponBuff,//武器Buff
             AddMP, //自动回复魔法的Buff
+            AddHP, //自动回复HP
         }
 
 

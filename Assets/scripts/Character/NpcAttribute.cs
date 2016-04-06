@@ -186,7 +186,7 @@ namespace MyLib
                 }
             }
         }
-               
+
         public void SetMotionLayer()
         {
             var renders = gameObject.GetComponentsInChildren<SkinnedMeshRenderer>();
@@ -405,7 +405,7 @@ namespace MyLib
                     return;
                 }
                 _isDead = value;
-                if (SetDeadDelegate != null)
+                if (SetDeadDelegate != null && _isDead)
                 {
                     SetDeadDelegate(gameObject);
                 }
@@ -1001,6 +1001,30 @@ namespace MyLib
             return animation.GetClip(name) != null; 
         }
 
+        public void NetworkRevive()
+        {
+            Log.Sys("Revive");
+            //ChangeHP(HP_Max);
+            //ChangeMP(MP_Max);
+            SetHPNet(HP_Max);
+            var ai = GetComponent<AIBase>().GetAI();
+            ai.ChangeStateForce(AIStateEnum.IDLE);
+            _isDead = false;
+        }
+
+        public void Revive()
+        {
+            ChangeHP(HP_Max);
+            ChangeMP(MP_Max);
+            NetworkRevive();
+
+            var pos = NetworkUtil.GetStartPos();
+            transform.position = pos;
+            if (this.IsMine())
+            {
+                NetDateInterface.Revive();
+            }
+        }
     }
 
 }

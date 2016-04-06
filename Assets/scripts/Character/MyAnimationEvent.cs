@@ -91,6 +91,9 @@ namespace MyLib
             }
             return null;
         }
+        public void ClearMsg() {
+            messages.Clear();
+        }
 
 		public Message CheckMsg(MsgType type) {
 			Message ret = null;

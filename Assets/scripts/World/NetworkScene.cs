@@ -243,6 +243,17 @@ namespace MyLib
                         }
                     }
                 }
+            } else if (cmds [0] == "Revive")
+            {
+                var player = ObjectManager.objectManager.GetPlayer(proto.AvatarInfo.Id);
+                if (player != null)
+                {
+                    var sync = player.GetComponent<PlayerSync>();
+                    if (sync != null)
+                    {
+                        sync.Revive();
+                    }
+                }
             }
         }
 
@@ -295,7 +306,8 @@ namespace MyLib
         void SyncMyPos()
         {
             var me = ObjectManager.objectManager.GetMyPlayer();
-            if(me != null) {
+            if (me != null)
+            {
                 var sync = me.GetComponent<PlayerSyncToServer>();
                 sync.SyncAttribute();
             }

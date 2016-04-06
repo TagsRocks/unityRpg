@@ -23,7 +23,7 @@ namespace MyLib
         {
             rigid = GetComponent<Rigidbody>();
             rigid.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
-            rigid.useGravity = false;
+            rigid.useGravity = true;
             attribute = GetComponent<NpcAttribute>();
             tower = Util.FindChildRecursive(transform, "tower").gameObject;
         }
@@ -60,6 +60,7 @@ namespace MyLib
 
         void FixedUpdate()
         {
+            /*
             if (grounded)
             {
                 var targetVelocity = moveValue;
@@ -71,8 +72,13 @@ namespace MyLib
                 rigidbody.AddForce(velocityDiff, ForceMode.VelocityChange);
                 moveValue = new Vector3(0, 0, 0);
             }
+            */
+            //moveValue.y = -gravity;
+            var mv = moveValue*Time.fixedDeltaTime;
+            rigidbody.MovePosition(rigidbody.position+mv);
+            moveValue = Vector3.zero;
 
-            rigidbody.AddForce(new Vector3(0, -gravity * rigidbody.mass, 0));
+            //rigidbody.AddForce(new Vector3(0, -gravity * rigidbody.mass, 0));
             grounded = false;
 
 
@@ -104,11 +110,13 @@ namespace MyLib
                 */
 
                 var dy = Mathf.Clamp(diffY, -maxRotateChange, maxRotateChange);
-                var curSpeed = rigid.angularVelocity;
-                var diffVelocity = dy-curSpeed.y;
+                //var curSpeed = rigid.angularVelocity;
+                //var diffVelocity = dy-curSpeed.y;
                 Log.Sys("DirY: " + dy + " diffY: " + diffY);
-
-                rigid.AddTorque(Vector3.up * diffVelocity, ForceMode.VelocityChange);
+                //*Time.fixedDeltaTime
+                var delta = Quaternion.Euler(new Vector3(0, dy, 0));
+                rigidbody.MoveRotation(rigidbody.rotation*delta);
+                //rigid.AddTorque(Vector3.up * diffVelocity, ForceMode.VelocityChange);
                 rot = false;
             }
         }

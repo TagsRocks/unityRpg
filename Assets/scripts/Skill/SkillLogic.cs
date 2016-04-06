@@ -94,12 +94,16 @@ namespace MyLib
             GameObject enemy = null;
             var transform = attacker.transform;
 			
-            Log.Sys("EnemyCount: "+enemies.Length);
+            Log.Sys("EnemyCount: " + enemies.Length);
             foreach (var ene in enemies)
             {
                 var npcAttr = ene.gameObject.GetComponent<NpcAttribute>();
-                Log.Sys("EnemyIs: "+npcAttr);
-                if (npcAttr != null && !npcAttr.IsDead && IsEnemy(attacker, ene.gameObject))
+                if (npcAttr == null)
+                {
+                    npcAttr = ene.gameObject.GetComponentInParent<NpcAttribute>();
+                }
+                Log.Sys("EnemyIs: " + npcAttr);
+                if (npcAttr != null && !npcAttr.IsDead && IsEnemy(attacker, npcAttr.gameObject))
                 {
                     var d = (ene.transform.position - transform.position).sqrMagnitude;
                     if (d < minDist)
@@ -127,6 +131,9 @@ namespace MyLib
             var scene = WorldManager.worldManager.GetActive();
             if (scene.IsNet)
             {
+                //var battr = NetworkUtil.GetAttr(b);
+                return scene.IsEnemy(a, b);
+                /*
                 if (a != b)
                 {
                     return true;
@@ -134,6 +141,7 @@ namespace MyLib
                 {
                     return false;
                 }
+                */
             }
 
             var enemyTag = SkillLogic.GetEnemyTag(a.tag);
@@ -158,14 +166,18 @@ namespace MyLib
             if (scene.IsNet)
             {
                 var aview = a.GetComponent<KBEngine.KBNetworkView>();
-                var bview = b.GetComponent<KBEngine.KBNetworkView>();
-                if (bview != null && bview.IsPlayer)
+                var batt = NetworkUtil.GetAttr(b);
+                if (batt != null)
                 {
-                    var battr = bview.GetComponent<NpcAttribute>();
-                    var aattr = aview.GetComponent<NpcAttribute>();
-                    if (aattr.TeamColor != battr.TeamColor)
+                    var bview = batt.GetComponent<KBEngine.KBNetworkView>();
+                    if (bview != null && bview.IsPlayer)
                     {
-                        return true;
+                        var battr = bview.GetComponent<NpcAttribute>();
+                        var aattr = aview.GetComponent<NpcAttribute>();
+                        if (aattr.TeamColor != battr.TeamColor)
+                        {
+                            return true;
+                        }
                     }
                 }
                 return false;

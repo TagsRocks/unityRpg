@@ -2,12 +2,26 @@
 using System.Collections;
 using MyLib;
 
+#if UNITY_EDITOR
 public class RemoveMonsterInZone : MonoBehaviour
 {
-    [ButtonCallFunc()]
-    public bool
-        Remove;
+    [ButtonCallFunc()]public bool Show;
 
+    public void ShowMethod()
+    {
+        var pro = transform.Find("properties");
+        foreach (Transform t in pro)
+        {
+            var spawnChest = t.GetComponent<SpawnChest>();
+            if(spawnChest != null) {
+                spawnChest.ResetMethod();
+                spawnChest.UpdateEditor();
+            }
+        }
+    }
+
+    [ButtonCallFunc()]
+    public bool Remove;
     public void RemoveMethod()
     {
         var pro = transform.Find("properties");
@@ -15,7 +29,8 @@ public class RemoveMonsterInZone : MonoBehaviour
         {
             var trigger = t.GetComponent<SpawnTrigger>();
             var spawnNpc = t.GetComponent<SpawnNpc>();
-            if (trigger != null || spawnNpc != null)
+            var spawnChest = t.GetComponent<SpawnChest>();
+            if (trigger != null || spawnNpc != null || spawnChest != null)
             {
 
                 if (trigger != null)
@@ -87,3 +102,5 @@ public class RemoveMonsterInZone : MonoBehaviour
     
     }
 }
+
+#endif

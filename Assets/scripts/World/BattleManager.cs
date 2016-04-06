@@ -1,10 +1,4 @@
-﻿
-/*
-Author: liyonghelpme
-Email: 233242872@qq.com
-*/
-
-/*
+﻿/*
 Author: liyonghelpme
 Email: 233242872@qq.com
 */
@@ -14,14 +8,17 @@ using System.Collections.Generic;
 
 namespace MyLib
 {
+    public enum BattleState {
+        Prepare,
+        Battling,
+        Finish,
+    }
     /// <summary>
     /// 关卡相关配置信息
     /// </summary>
     public class BattleManager : KBEngine.MonoBehaviour
     {
-        /*
-         * Current Wave
-         */
+        public BattleState state = BattleState.Battling;
         public int waveNum = 0;
         public static BattleManager battleManager;
         //[HideInInspector]
@@ -77,6 +74,8 @@ namespace MyLib
 
         void Awake()
         {
+            gameObject.AddComponent<ReviveBattleManager>();
+
             Zones = new List<GameObject>();
 
             levelOver = false;
@@ -91,7 +90,6 @@ namespace MyLib
             for (int i = 1; i < Zones.Count; i++)
             {
                 var zone = Zones [i];
-                //zone.transform.Find("properties").gameObject.SetActive(false);
                 var ze = zone.GetComponent<ZoneEntityManager>();
                 ze.DisableProperties();
             }
@@ -165,8 +163,13 @@ namespace MyLib
         void OnPlayerDead(GameObject g)
         {
             levelOver = true;
-            StartCoroutine(ShowFail());
-            
+            var scene = WorldManager.worldManager.GetActive();
+            if(scene.IsRevive) {
+                var rb = GetComponent<ReviveBattleManager>();
+                rb.ReviveMe();
+            }else {
+                StartCoroutine(ShowFail());
+            }
         }
 
         public GameObject GetZone() {
@@ -334,7 +337,6 @@ namespace MyLib
                 yield return new WaitForSeconds(1);
             }
             var notify = not.GetComponent<NotifyUI>();
-            //.GetComponent<NotifyUI>();
             if (notify != null)
             {
                 while (leftTime > 0)

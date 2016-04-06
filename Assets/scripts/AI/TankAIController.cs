@@ -12,13 +12,16 @@ namespace MyLib
     {
         void Awake()
         {
+            var tower = Util.FindChildRecursive(transform, "tower");
+            tower.gameObject.AddComponent<TowerAutoCheck>();
+
             attribute = GetComponent<NpcAttribute>();
 
             ai = new TankCharacter();
             ai.attribute = attribute;
             ai.AddState(new TankIdle());
             ai.AddState(new TankMoveAndShoot());
-            ai.AddState(new HumanDead());
+            ai.AddState(new TankDead());
             ai.AddState(new MonsterKnockBack());
             ai.AddState(new HumanStunned());
         }

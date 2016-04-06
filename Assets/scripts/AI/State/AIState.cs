@@ -247,6 +247,11 @@ namespace MyLib
 
         protected MyAnimationEvent.Message lastMsg;
 
+        protected void ClearEvent()
+        {
+            GetEvent().ClearMsg();
+        }
+
         //TODO:检测一些事件 然后进行状态切换
         //获得对应注册哪些事件， 就检测哪些事件？
         //只有状态切换成功才回 CheckEvent 返回true
@@ -260,7 +265,7 @@ namespace MyLib
             lastMsg = msg;
             if (msg != null)
             {
-                Log.AI("CheckEventIs "+msg.type);
+                Log.AI("CheckEventIs " + msg.type);
                 if (msg.type == MyAnimationEvent.MsgType.IDLE)
                 {
                     return aiCharacter.ChangeState(AIStateEnum.IDLE);
@@ -281,10 +286,12 @@ namespace MyLib
                         var skillPart = GetSkill();
                         skillPart.SetActiveSkill(msg.skillData);
                         //技能动作为空
-                        if(string.IsNullOrEmpty(msg.skillData.AnimationName)) {
+                        if (string.IsNullOrEmpty(msg.skillData.AnimationName))
+                        {
                             SkillLogic.UseSkill(GetAttr());
                             return false;
-                        }else {
+                        } else
+                        {
                             return aiCharacter.ChangeState(AIStateEnum.CAST_SKILL);
                         }
                     }
@@ -294,13 +301,15 @@ namespace MyLib
                 } else if (msg.type == MyAnimationEvent.MsgType.EXIT_STUNNED)
                 {
                     return aiCharacter.ChangeState(AIStateEnum.IDLE);
-                } else if(msg.type == MyAnimationEvent.MsgType.DEAD) {
+                } else if (msg.type == MyAnimationEvent.MsgType.DEAD)
+                {
                     return aiCharacter.ChangeState(AIStateEnum.DEAD);
-                } else if(msg.type == MyAnimationEvent.MsgType.JUMP) {
+                } else if (msg.type == MyAnimationEvent.MsgType.JUMP)
+                {
                     Log.AI("EnterJumpStateNow");
                     return aiCharacter.ChangeState(AIStateEnum.JUMP);
-                }
-                else {
+                } else
+                {
                     return CheckEventOverride(msg);
                 }
 
@@ -309,8 +318,9 @@ namespace MyLib
             //return CheckAttackEvent ();
         }
 
-        protected virtual bool CheckEventOverride(MyAnimationEvent.Message msg){
-            Log.AI("DefaultEvent "+msg.type);
+        protected virtual bool CheckEventOverride(MyAnimationEvent.Message msg)
+        {
+            Log.AI("DefaultEvent " + msg.type);
             return false;
         }
 
@@ -430,21 +440,27 @@ namespace MyLib
     /// 不要切换状态下次再检测CheckEvent 即可
     /// Message 会丢弃 但是 常驻的state不会 
     /// </summary>
-    public class JumpState : AIState {
-        public JumpState() {
+    public class JumpState : AIState
+    {
+        public JumpState()
+        {
             type = AIStateEnum.JUMP;
-        }    
+        }
+
         public override bool CheckNextState(AIStateEnum next)
         {
-            if(next == AIStateEnum.IDLE) {
+            if (next == AIStateEnum.IDLE)
+            {
                 return true;
             }
             return false;
         }
     }
 
-    public class MoveShootState : AIState {
-        public MoveShootState(){
+    public class MoveShootState : AIState
+    {
+        public MoveShootState()
+        {
             type = AIStateEnum.MOVE_SHOOT;
         }
     }

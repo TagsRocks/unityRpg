@@ -15,11 +15,22 @@ namespace MyLib
             }
         }
 
+        public override bool IsEnemy(GameObject a, GameObject b)
+        {
+            return a != b && b.tag == GameTag.Player;
+        }
 
         public override bool IsNet
         {
             get
             { 
+                return true;
+            }
+        }
+        public override bool IsRevive
+        {
+            get
+            {
                 return true;
             }
         }
@@ -31,6 +42,7 @@ namespace MyLib
         {
             base.Awake();
             netScene = gameObject.AddComponent<NetworkScene>();
+            gameObject.AddComponent<ScoreManager>();
         }
 
         public override void BroadcastMsg(CGPlayerCmd.Builder cmd)

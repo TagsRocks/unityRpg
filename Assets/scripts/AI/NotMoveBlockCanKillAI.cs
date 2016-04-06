@@ -106,6 +106,7 @@ namespace MyLib
 
     [RequireComponent(typeof(MonsterSync))]
     [RequireComponent(typeof(MonsterSyncToServer))]
+    [RequireComponent(typeof(BlockPhysic))]
     public class NotMoveBlockCanKillAI : AIBase
     {
         void Awake()

@@ -1,6 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 namespace MyLib
 {
     public class SpawnChest : MonoBehaviour
@@ -16,16 +19,21 @@ namespace MyLib
         //宝箱所召唤的Boss的ID
         public int MonsterID = 2011;
 
-        public void InitSpawnId() {
+        public void InitSpawnId()
+        {
             SpawnId = MaxSpawnId++;
         }
 
-        void Awake() {
-            foreach(Transform t in transform){
+        void Awake()
+        {
+            foreach (Transform t in transform)
+            {
                 t.gameObject.SetActive(false);
             }
         }
-        void OnEnable() {
+
+        void OnEnable()
+        {
             StartCoroutine(CheckToSpawn());
         }
 
@@ -40,50 +48,101 @@ namespace MyLib
                 return false;
             }
 
-            if(BattleManager.battleManager.waveNum == waveNum) {
+            if (BattleManager.battleManager.waveNum == waveNum)
+            {
                 return true;
             }
             return false;
         }
 
-        void DoSpawn() {
-            var unitData = Util.GetUnitData(false, ChestId , 0);
+        void DoSpawn()
+        {
+            var unitData = Util.GetUnitData(false, ChestId, 0);
             ObjectManager.objectManager.CreateChest(unitData, this);
         }
 
 
         IEnumerator CheckToSpawn()
         {
-            if(isSpawnYet) {
+            if (isSpawnYet)
+            {
                 yield break;
             }
             var player = ObjectManager.objectManager.GetMyPlayer();
-            while(player == null) {
+            while (player == null)
+            {
                 player = ObjectManager.objectManager.GetMyPlayer();
                 yield return null;
             }
 
             var world = WorldManager.worldManager.GetActive();
-            if(world.IsNet){
+            if (world.IsNet)
+            {
                 var attr = ObjectManager.objectManager.GetMyAttr();
-                if(!attr.IsMaster) {
+                if (!attr.IsMaster)
+                {
                     yield break;
                 }
             }
 
             while (true)
             {
-                if(CheckOk()) {
+                if (CheckOk())
+                {
                     break;
                 }
                 yield return new WaitForSeconds(1);
             }
             isSpawnYet = true;
             var rate = Random.Range(0, 100);
-            if(rate < rateToSpawn) {
+            if (rate < rateToSpawn)
+            {
                 DoSpawn();
             }
         }
 
+        public GameObject oldResource;
+        public GameObject Resource;
+        public GameObject showRes;
+
+        #if UNITY_EDITOR
+        public void UpdateEditor()
+        {
+            if (!EditorApplication.isPlaying)
+            {
+                if (ChestId != -1)
+                {
+                    var mData = GMDataBaseSystem.database.SearchId<MonsterFightConfigData>(GameData.MonsterFightConfig, ChestId);
+                    if (mData != null)
+                    {
+                        Resource = Resources.Load<GameObject>(mData.model);
+                    }
+                }
+                if (oldResource != Resource)
+                {
+                    if (showRes != null)
+                    {
+                        GameObject.DestroyImmediate(showRes);
+                        showRes = null;
+                    }
+                    if (Resource != null)
+                    {
+                        showRes = GameObject.Instantiate(Resource) as GameObject;
+                        showRes.transform.parent = transform;
+                        showRes.transform.localPosition = Vector3.zero;
+                    }
+                    oldResource = Resource;
+                }
+            }
+        }
+
+        [ButtonCallFunc()]public bool Reset;
+        public void ResetMethod() {
+            oldResource = null;
+            Resource = null;
+            GameObject.DestroyImmediate(showRes);
+        }
+
+        #endif
     }
 }

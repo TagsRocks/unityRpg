@@ -9,6 +9,7 @@ namespace MyLib
         public string text;
         public float time;
         public System.Action<GameObject> cb;
+        public bool forceTime;
     }
 
     public class NotifyUIManager : MonoBehaviour
@@ -21,18 +22,15 @@ namespace MyLib
             Instance = this;
         }
 
-        public void AddNotify(string text, float time, System.Action<GameObject> cb)
+        public void AddNotify(string text, float time, System.Action<GameObject> cb, bool forceTime)
         {
-            nd.Add(new NotifyData(){text=text, time=time, cb = cb});
-            /*
-            if(nd.Count >= 3) {
-                var n0 = nd[0];
-                nd.RemoveAt(0);
-                if(n0.cb != null) {
-                    n0.cb();
-                }
-            }
-            */
+            nd.Add(new NotifyData()
+            {
+                text = text,
+                time = time,
+                cb = cb,
+                forceTime = forceTime
+            });
         }
         // Use this for initialization
         void Start()
@@ -50,7 +48,8 @@ namespace MyLib
                 {
                     if (NotifyUI.Instance == null || NotifyUI.Instance.activeSelf == false)
                     {
-                        if(lastNotify !=null && lastNotify.activeSelf) {
+                        if (lastNotify != null && lastNotify.activeSelf)
+                        {
                             yield return new WaitForSeconds(lastFt);
                         }
                         var not = nd [0];
@@ -60,14 +59,20 @@ namespace MyLib
                         {
                             g.GetComponent<NotifyUI>().SetText(not.text);
                             var ft = not.time;
-                            if(nd.Count >= 2) {
-                                ft /= 2;
-                            }
-                            if(nd.Count >= 4){
-                                ft /= 4;
-                            }
-                            if(nd.Count >= 6){
-                                ft /= 4;    
+                            if (!not.forceTime)
+                            {
+                                if (nd.Count >= 2)
+                                {
+                                    ft /= 2;
+                                }
+                                if (nd.Count >= 4)
+                                {
+                                    ft /= 4;
+                                }
+                                if (nd.Count >= 6)
+                                {
+                                    ft /= 4;    
+                                }
                             }
                             lastFt = ft;
                             g.GetComponent<NotifyUI>().SetDurationTime(ft);
@@ -77,7 +82,8 @@ namespace MyLib
                         {
                             not.cb(g);
                         }
-                    }else {
+                    } else
+                    {
                         NotifyUI.Instance.GetComponent<NotifyUI>().ShortTime();
                     }
                 }

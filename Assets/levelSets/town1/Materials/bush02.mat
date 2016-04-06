@@ -7,7 +7,7 @@ Material:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: bush02
-  m_Shader: {fileID: 4800000, guid: 5638acb5e39f94a4f9f0793a5258211b, type: 3}
+  m_Shader: {fileID: 4800000, guid: 53294c13c178549f180320ce9951df94, type: 3}
   m_ShaderKeywords: []
   m_CustomRenderQueue: -1
   m_SavedProperties:

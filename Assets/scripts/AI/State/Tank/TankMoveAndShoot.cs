@@ -66,7 +66,6 @@ namespace MyLib
                 if (targetDirection != Vector3.zero)
                 {
                     moveDirection = targetDirection;
-                    /*
                     if (moveSpeed < walkSpeed * 0.3f)
                     {
                         moveDirection = Vector3.RotateTowards(moveDirection, targetDirection, rotateSpeed * 2 * Mathf.Deg2Rad * Time.deltaTime, 1000);
@@ -77,7 +76,6 @@ namespace MyLib
                         moveDirection = Vector3.RotateTowards(moveDirection, targetDirection, rotateSpeed * Mathf.Deg2Rad * Time.deltaTime, 1000);         
                         moveDirection = moveDirection.normalized;
                     }
-                    */
                 }
 
                 var curSmooth = speedSmoothing * Time.deltaTime;

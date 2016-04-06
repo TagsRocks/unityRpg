@@ -25,11 +25,17 @@ namespace MyLib
     {
         //AvatarInfo lastInfo;
         AvatarInfo curInfo;
+        NpcAttribute attribute;
 
         void Awake()
         {
             curInfo = AvatarInfo.CreateBuilder().Build();
             StartCoroutine(SyncPos());
+        }
+
+        void Start()
+        {
+            attribute = GetComponent<NpcAttribute>(); 
         }
 
         IEnumerator SyncPos()
@@ -58,10 +64,12 @@ namespace MyLib
                 GetComponent<LogicCommand>().PushCommand(cmd);
             }
 
-            if(curInfo.HasJumpForwardSpeed) {
+            if (curInfo.HasJumpForwardSpeed)
+            {
                 var intJumpSpeed = (int)(meAttr.JumpForwardSpeed * 100);
-                if(intJumpSpeed != curInfo.JumpForwardSpeed) {
-                    meAttr.JumpForwardSpeed = curInfo.JumpForwardSpeed/100.0f;
+                if (intJumpSpeed != curInfo.JumpForwardSpeed)
+                {
+                    meAttr.JumpForwardSpeed = curInfo.JumpForwardSpeed / 100.0f;
                 }
             }
 
@@ -96,13 +104,20 @@ namespace MyLib
             {
                 GetComponent<NpcAttribute>().NetSpeed = info.NetSpeed / 100.0f;
             }
-            if(info.HasThrowSpeed) {
-                attr.ThrowSpeed = info.ThrowSpeed/100.0f;
+            if (info.HasThrowSpeed)
+            {
+                attr.ThrowSpeed = info.ThrowSpeed / 100.0f;
             }
-            if(info.HasJumpForwardSpeed) {
-                attr.JumpForwardSpeed = info.JumpForwardSpeed/100.0f;
+            if (info.HasJumpForwardSpeed)
+            {
+                attr.JumpForwardSpeed = info.JumpForwardSpeed / 100.0f;
                 curInfo.JumpForwardSpeed = info.JumpForwardSpeed;
             }
+        }
+
+        public void Revive()
+        {
+            attribute.NetworkRevive(); 
         }
 
         public void NetworkAttack(SkillAction sk)
@@ -162,8 +177,6 @@ namespace MyLib
 
         public void NetworkBuff(GCPlayerCmd cmd)
         {
-            //var attacker = ObjectManager.objectManager.GetPlayer(cmd.BuffInfo.Attacker);
-            //if(attacker != null) {
             var sk = Util.GetSkillData(cmd.BuffInfo.SkillId, 1);
             var skConfig = SkillLogic.GetSkillInfo(sk);
             var evt = skConfig.GetEvent(cmd.BuffInfo.EventId);
@@ -175,7 +188,6 @@ namespace MyLib
                 var pz = pos [2] / 100.0f;
                 gameObject.GetComponent<BuffComponent>().AddBuff(evt.affix, new Vector3(px, py, pz));
             }
-            //}
         }
     }
 

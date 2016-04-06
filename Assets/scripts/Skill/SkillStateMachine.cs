@@ -53,6 +53,16 @@ namespace MyLib
             get;
             set;
         }
+        public bool forwardSet = false;
+        private Vector3 forwardDir;
+        public void SetForwardDirection(Vector3 f) {
+            forwardSet = true;
+            forwardDir = f;
+        }
+        private Vector3 relativePos;
+        public void SetRelativePos(Vector3 pos) {
+            relativePos = pos;
+        }
 
         public int ownerLocalId = -1;
         //注册监听技能相关事件  攻击命中事件 子弹命中或者死亡 攻击动画结束
@@ -106,7 +116,12 @@ namespace MyLib
                 //陷阱粒子效果 位置是 当前missile爆炸的位置
                 //瞬间调整SkillLayout的方向为 攻击者的正方向
                 g.transform.localPosition = InitPos;
-                var y = attacker.transform.localRotation.eulerAngles.y;
+                float y;
+                if(forwardSet) {
+                    y = Quaternion.LookRotation(forwardDir).eulerAngles.y;
+                }else {
+                    y = attacker.transform.localRotation.eulerAngles.y;
+                }
                 g.transform.localRotation = Quaternion.Euler(new Vector3(0, y, 0));
                 g.transform.localScale = Vector3.one;
             

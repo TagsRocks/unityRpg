@@ -8,7 +8,6 @@ using SimpleJSON;
 using System.Collections.Generic;
 using System.Linq;
 using MyLib;
-#endif
 
 public class SimpleMakeScene : MonoBehaviour
 {
@@ -21,15 +20,12 @@ public class SimpleMakeScene : MonoBehaviour
     /// </summary>
     public void AdjustNoAniMethod()
     {
-        #if UNITY_EDITOR
         AdjustNoAniModel(path);
-        #endif
     }
 
     public string lightPath;
     [ButtonCallFunc()]
     public bool LightMapEnv;
-    #if UNITY_EDITOR
     public void LightMapEnvMethod()
     {
         var allModel = Path.Combine(Application.dataPath, lightPath);
@@ -51,12 +47,10 @@ public class SimpleMakeScene : MonoBehaviour
         AssetDatabase.StopAssetEditing();
         AssetDatabase.Refresh();
     }
-    #endif
 
     public string lightModelPath = "lights";
     [ButtonCallFunc()]
     public bool CustomLight;
-    #if UNITY_EDITOR
     public void CustomLightMethod()
     {
         var allModel = Path.Combine(Application.dataPath, lightModelPath);
@@ -78,7 +72,6 @@ public class SimpleMakeScene : MonoBehaviour
         AssetDatabase.StopAssetEditing();
         AssetDatabase.Refresh();
     }
-    #endif
 
     public string lightLayerPath = "lightPrefab";
     [ButtonCallFunc()]
@@ -134,7 +127,6 @@ public class SimpleMakeScene : MonoBehaviour
         AssetDatabase.StopAssetEditing();
         AssetDatabase.Refresh();
     }
-
     public string path1;
     public string combinePath = "snow";
     [ButtonCallFunc()]public bool CombineToPrefab;
@@ -144,12 +136,9 @@ public class SimpleMakeScene : MonoBehaviour
     /// </summary>
     public void CombineToPrefabMethod()
     {
-        #if UNITY_EDITOR
         CombineFileAndCollisionToPrefab(path1);
-        #endif
     }
 
-    #if UNITY_EDITOR
     public string path3;
     [ButtonCallFunc()]public bool ImportAniModel;
 
@@ -266,11 +255,9 @@ public class SimpleMakeScene : MonoBehaviour
         return prefab;
     }
 
-    #endif
     void AdjustNoAniModel(string rootPath)
     {
         Debug.Log("AdjustNoAniModel " + rootPath);
-        #if UNITY_EDITOR     
 
         var allModel = Path.Combine(Application.dataPath, rootPath);
         var resDir = new DirectoryInfo(allModel);
@@ -294,13 +281,11 @@ public class SimpleMakeScene : MonoBehaviour
         }
         AssetDatabase.StopAssetEditing();
         AssetDatabase.Refresh();
-        #endif
     }
 
 
 
 
-    #if UNITY_EDITOR
     /// <summary>
     /// 融合了MineProp.dat Prop.dat Mine.dat 三个文件的map.json 组合所有的RoomPieces 模型
     /// </summary>
@@ -403,7 +388,6 @@ public class SimpleMakeScene : MonoBehaviour
         return fpath;
     }
 
-    #endif
 
 
     /*
@@ -491,3 +475,5 @@ public class SimpleMakeScene : MonoBehaviour
         }
     }
 }
+
+#endif

@@ -78,6 +78,13 @@ namespace MyLib
             WorldManager.worldManager.GetActive().BroadcastMsg(cg);
         }
 
+        public static void Revive() {
+            var cg = CGPlayerCmd.CreateBuilder();
+            cg.Cmd = "Revive";
+            WorldManager.worldManager.GetActive().BroadcastMsg(cg);
+        }
+
+
         public static void FastMoveAndPos()
         {
             var s = WorldManager.worldManager.GetActive();
@@ -159,5 +166,6 @@ namespace MyLib
             }
             return null;
         }
+
     }
 }

@@ -21,7 +21,8 @@ namespace MyLib
         public static bool IsMaster()
         {
             var world = WorldManager.worldManager.GetActive();
-            if(!world.IsNet) {
+            if (!world.IsNet)
+            {
                 return true;
             }
             var player = ObjectManager.objectManager.GetMyAttr();
@@ -36,8 +37,10 @@ namespace MyLib
             ret [2] = (int)(pos.z * 100);
             return ret;
         }
-        public static Vector3 FloatPos(int x, int y, int z) {
-            return new Vector3(x/100.0f, y/100.0f, z/100.0f);
+
+        public static Vector3 FloatPos(int x, int y, int z)
+        {
+            return new Vector3(x / 100.0f, y / 100.0f, z / 100.0f);
         }
 
         public static void Broadcast(CGPlayerCmd.Builder cmd)
@@ -46,7 +49,8 @@ namespace MyLib
             scene.BroadcastMsg(cmd);
         }
 
-        public static void RemoveEntityToNetwork(KBEngine.KBNetworkView view) {
+        public static void RemoveEntityToNetwork(KBEngine.KBNetworkView view)
+        {
             var cg = CGPlayerCmd.CreateBuilder();
             var ety = EntityInfo.CreateBuilder();
             ety.Id = view.GetServerID();
@@ -54,20 +58,35 @@ namespace MyLib
             cg.Cmd = "RemoveEntity";
             NetworkUtil.Broadcast(cg);
         }
-        public static Vector3 GetStartPos() {
+
+        public static Vector3 GetStartPos()
+        {
             var zone = BattleManager.battleManager.GetZone().GetComponent<ZoneEntityManager>();
             var me = ObjectManager.objectManager.GetMyAttr().GetNetView().GetServerID();
             return zone.GetRandomStartPos(me);
         }
 
-        public static IEnumerator WaitForPlayer() {
-            while(true) {
+        public static IEnumerator WaitForPlayer()
+        {
+            while (true)
+            {
                 var player = ObjectManager.objectManager.GetMyPlayer();
-                if(player != null){
+                if (player != null)
+                {
                     break;
                 }
                 yield return null;
             }
+        }
+
+        public static NpcAttribute GetAttr(GameObject g)
+        {
+            var npcAttr = g.GetComponent<NpcAttribute>();
+            if (npcAttr == null)
+            {
+                npcAttr = g.GetComponentInParent<NpcAttribute>();
+            }
+            return npcAttr;
         }
     }
 }
