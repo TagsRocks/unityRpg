@@ -1,3 +1,10 @@
+##对Git不熟悉的同学，或者下载有问题，使用百度网盘 备用下载
+
+无法通过git 下载或者zip打包下载工程的同学， 可以通过百度网盘下载工程
+
+链接: http://pan.baidu.com/s/1bnQqGer 密码: qwk6
+
+
 ##常见报错：
     Log.cs 报错
     打开 WIndow / Log View 这个窗口即可消除报错
@@ -79,11 +86,7 @@ Unity 4.7 或者Unity 4.6.7  Pro版本
 
 可以查看工程的Wiki 了解工程的下一步开发计划
 
-##备用下载
 
-无法通过git 下载或者zip打包下载工程的同学， 可以通过百度网盘下载工程
-
-链接: http://pan.baidu.com/s/1bnQqGer 密码: qwk6
 
 ##网络版运行
 
