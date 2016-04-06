@@ -12,6 +12,13 @@
     NGUI shader编译错误， 屏幕变粉红色
     在player setting 里面 设置 use d3d11 选项去掉 即可
 
+    GetthreadContext 报错，请关闭杀毒软件，360，qq，或者卡巴斯基等杀毒软件，再开始游戏
+
+    win10 材质丢失，画面粉红色，请关掉PlayerSetting 里面的Use Direct3d11 选项，Direct3d 11 有问题。
+
+    Unity5 问题，工程不支持Unity5, 请使用 Unity4.7 4.6 打开工程游戏
+
+
 ##unityRpg
 Demo 游戏下载地址：
 https://itunes.apple.com/cn/app/id1016771030?mt=8
