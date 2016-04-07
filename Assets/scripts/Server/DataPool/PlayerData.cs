@@ -428,7 +428,7 @@ namespace MyLib
             var count = 0;
             foreach (var s in skData)
             {
-                if (s.job == pinfo.Roles.Job)
+                if (s.job == (int)pinfo.Roles.Job)
                 {
                     LevelUpSkill(s.id);
                     count++;
