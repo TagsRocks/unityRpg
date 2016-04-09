@@ -62,7 +62,9 @@ public class MakeParticle : MonoBehaviour
                 effectLayer.RandomStartFrame = true;
             }
 
-            var texPath = tex.Replace("media", "Assets").Replace(".dds", ".mat").Replace("\\", "/");
+            var texPath = tex.Replace("media", "Assets")
+                .Replace("MEDIA", "Assets")
+                .Replace(".dds", ".mat").Replace(".DDS", ".mat").Replace("\\", "/");
 
             var texName = texPath.Replace(".mat", ".png");
             Debug.Log("load Material " + texPath + "  " + texName);
@@ -92,9 +94,11 @@ public class MakeParticle : MonoBehaviour
                 {
                     var overTime = modData ["COLOR OVER TIME"].Value;
                     float[] param;
-                    if(string.IsNullOrEmpty(overTime)) {
-                        param = new float[]{0, 1, 1, 1, 1};
-                    }else {
+                    if (string.IsNullOrEmpty(overTime))
+                    {
+                        param = new float[]{ 0, 1, 1, 1, 1 };
+                    } else
+                    {
                         param = ConvertToFloat(overTime.Split(','));
                     }
                     SetColor(effectLayer, param);
@@ -328,8 +332,6 @@ public class MakeParticle : MonoBehaviour
         {
             Debug.LogError(" Model Particle " + effectLayer.name);
             effectLayer.RenderType = 3;
-            //var mesh = modData["MESH"].Value;
-            //var meshPath = mesh.Replace("media", Application.dataPath).Replace(".mesh", ".");
         } else if (renderType == "RibbonTrail")
         {
             Debug.LogError("RibbomTrail");
@@ -425,14 +427,199 @@ public class MakeParticle : MonoBehaviour
         effectLayer.ScaleWrapMode = WRAP_TYPE.LOOP;
     }
 
+    void SetScaleXCurve(EffectLayer effectLayer, float[] scale)
+    {
+        int scaType = (int)scale [0];
+        if (scaType == 4)
+        {
+            SetRandomScaleCurve(effectLayer, scale);
+        } else
+        {
+            int count = (scale.Length - 1) / 2;
+            float x = 0;
+            float value = 0;
+            float max = 1;
+            for (int i = 1; i < scale.Length; i++)
+            {
+                if ((i - 1) % 2 == 0)
+                {
+                    x = scale [i];
+                } else
+                {
+                    value = scale [i];
+                    if (Mathf.Abs(value) > max)
+                    {
+                        max = Mathf.Abs(value);
+                    }
+                }
+            }
+            effectLayer.MaxScaleCalue = max;
+            var ks = new Keyframe[count];
+            int c = 0;
+            for (int i = 1; i < scale.Length; i++)
+            {
+                if ((i - 1) % 2 == 0)
+                {
+                    x = scale [i];
+                } else
+                {
+                    value = scale [i];
+                    Debug.Log("Add Scale Node " + value / max);
+                    ks [c] = new Keyframe(x, value / max);
+                    c++;
+
+                }
+            }
+            effectLayer.ScaleXCurveNew = new AnimationCurve(ks);
+            effectLayer.ScaleWrapMode = WRAP_TYPE.LOOP;
+        }
+    
+    }
+
+    void AdjustScaleX(EffectLayer effectLayer, float[] scale)
+    {
+        int scaType = (int)scale [0];
+        if (scaType == 4)
+        {
+            SetRandomScaleCurve(effectLayer, scale);
+        } else
+        {
+            int count = (scale.Length - 1) / 2;
+            float x = 0;
+            float value = 0;
+            float max = 1;
+            /*
+            for (int i = 1; i < scale.Length; i++)
+            {
+                if ((i - 1) % 2 == 0)
+                {
+                    x = scale [i];
+                } else
+                {
+                    value = scale [i];
+                    if (Mathf.Abs(value) > max)
+                    {
+                        max = Mathf.Abs(value);
+                    }
+                }
+            }
+            */
+            max = effectLayer.MaxScaleCalue;
+            //effectLayer.MaxScaleCalue = max;
+            var ks = new Keyframe[count];
+            int c = 0;
+            for (int i = 1; i < scale.Length; i++)
+            {
+                if ((i - 1) % 2 == 0)
+                {
+                    x = scale [i];
+                } else
+                {
+                    value = scale [i];
+                    Debug.Log("Add Scale Node " + value / max);
+                    ks [c] = new Keyframe(x, value / max);
+                    c++;
+
+                }
+            }
+            effectLayer.ScaleXCurveNew = new AnimationCurve(ks);
+            effectLayer.ScaleWrapMode = WRAP_TYPE.LOOP;
+        }
+    }
+
+    void SetScaleYCurve(EffectLayer effectLayer, float[] scale, float[] scaleX)
+    {
+        int scaType = (int)scale [0];
+        if (scaType == 4)
+        {
+            SetRandomScaleCurve(effectLayer, scale);
+        } else
+        {
+            int count = (scale.Length - 1) / 2;
+            float x = 0;
+            float value = 0;
+            float max = 1;
+            for (int i = 1; i < scale.Length; i++)
+            {
+                if ((i - 1) % 2 == 0)
+                {
+                    x = scale [i];
+                } else
+                {
+                    value = scale [i];
+                    if (Mathf.Abs(value) > max)
+                    {
+                        max = Mathf.Abs(value);
+                    }
+                }
+            }
+            //保持X的MaxValue不要调整
+            if (max > effectLayer.MaxScaleCalue)
+            {
+                effectLayer.MaxScaleCalue = max;
+                AdjustScaleX(effectLayer, scaleX);
+            } else
+            {
+                max = effectLayer.MaxScaleCalue;
+            }
+            var ks = new Keyframe[count];
+            int c = 0;
+            for (int i = 1; i < scale.Length; i++)
+            {
+                if ((i - 1) % 2 == 0)
+                {
+                    x = scale [i];
+                } else
+                {
+                    value = scale [i];
+                    Debug.Log("Add Scale Node " + value / max);
+                    ks [c] = new Keyframe(x, value / max);
+                    c++;
+
+                }
+            }
+            effectLayer.ScaleYCurveNew = new AnimationCurve(ks);
+            effectLayer.ScaleWrapMode = WRAP_TYPE.LOOP;
+        }
+    }
+
     void SetScale(EffectLayer effectLayer, JSONClass modData)
     {
-        bool fix = true;
-        if (modData ["FIXED"].Value == "")
+        bool fix = false;
+        if (!string.IsNullOrEmpty(modData ["FIXED"].Value))
         {
             fix = modData ["FIXED"].AsBool;
         }
-
+        Debug.Log("SetScale: " + modData.ToString());
+        effectLayer.ScaleType = RSTYPE.CURVE01;
+        if (string.IsNullOrEmpty(modData ["X"].Value))
+        {
+            var f = new float[]{ 2, 0, 1, 1, 1 };
+            SetScaleXCurve(effectLayer, f);
+        } else
+        {
+            var scaleX = ConvertToFloat(modData ["X"].Value);
+            SetScaleXCurve(effectLayer, scaleX);
+        }
+        //fix 确保XY 比例不变
+        if (!fix)
+        {
+            if (string.IsNullOrEmpty(modData ["Y"].Value))
+            {
+                //var f = new float[]{ 2, 0, 1, 1, 1 };
+                //SetScaleYCurve(effectLayer, f);
+                effectLayer.UseSameScaleCurve = true;
+            } else
+            {
+                var scaleX = ConvertToFloat(modData ["X"].Value);
+                var scaleY = ConvertToFloat(modData ["Y"].Value);
+                SetScaleYCurve(effectLayer, scaleY, scaleX);
+            }
+        } else
+        {
+            effectLayer.UseSameScaleCurve = true;
+        }
+        /*
         if (fix)
         {
             effectLayer.ScaleType = RSTYPE.CURVE01;
@@ -485,6 +672,7 @@ public class MakeParticle : MonoBehaviour
                 effectLayer.ScaleWrapMode = WRAP_TYPE.LOOP;
             }
         }
+        */
     }
 
     void SetGeometryRotate(EffectLayer effectLayer, JSONClass modData)
@@ -616,6 +804,14 @@ public class MakeParticle : MonoBehaviour
             effectLayer.EmitRate = rateMin;
             effectLayer.MaxENodes = rateMin;
             rateNum = rateMin; 
+            /*
+            if (rateMin == 1)
+            {
+                effectLayer.IsBurstEmit = true;
+            } else
+            {
+            }
+            */
 
         } else
         {
@@ -715,6 +911,10 @@ public class MakeParticle : MonoBehaviour
             } else
             {
             }
+        }
+
+        if(rateMin == 1 && forever) {
+            effectLayer.IsBurstEmit = true;
         }
 
         var emitType = modData ["TYPE OF EMITTER"].Value;

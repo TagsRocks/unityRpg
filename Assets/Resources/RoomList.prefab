@@ -67,6 +67,10 @@ MonoBehaviour:
     - {fileID: 145618, guid: 54c7e88364f1d4e1388bbdf42323fe97, type: 2}
     - {fileID: 100000, guid: 1b4db632985534074b1b8f9d21ee3a23, type: 2}
     - {fileID: 172988, guid: 97ec20e742f9c4b4f94ef88bcd72d763, type: 2}
+  - type: MainMenus
+    parts:
+    - {fileID: 152996, guid: 71e6b177e40084bd78834d207c6cf939, type: 2}
+    - {fileID: 115340, guid: 11c85501e022e4612bdb1653e6b0e39d, type: 2}
   - type: lava
     parts: []
   - type: snow

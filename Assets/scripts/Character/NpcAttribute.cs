@@ -150,6 +150,7 @@ namespace MyLib
 
         void SetTeamShader()
         {
+            return;
             var myPlayer = ObjectManager.objectManager.GetMyAttr();
             Log.Sys("SetTeamShader: " + myPlayer.TeamColor + " tc " + TeamColor);
             if (myPlayer.TeamColor != TeamColor)
@@ -224,6 +225,7 @@ namespace MyLib
 
         public void SetTeamHideShader()
         {
+            return;
             var shaderRes = Resources.Load<ShaderResource>("levelPublic/ShaderResource");
             var myPlayer = ObjectManager.objectManager.GetMyAttr();
             var renders = gameObject.GetComponentsInChildren<SkinnedMeshRenderer>();
@@ -263,6 +265,7 @@ namespace MyLib
 
         public void SetTeamNormalShader()
         {
+            return;
             var shaderRes = Resources.Load<ShaderResource>("levelPublic/ShaderResource");
             var myPlayer = ObjectManager.objectManager.GetMyAttr();
             var renders = gameObject.GetComponentsInChildren<SkinnedMeshRenderer>();

@@ -412,6 +412,7 @@ namespace MyLib
 
         public static void  SendNotify(string str)
         {
+            Log.Sys("SendNotify: "+str);
             var no = GCPushNotify.CreateBuilder();
             no.Notify = str;
             ServerBundle.SendImmediatePush(no);
@@ -430,8 +431,10 @@ namespace MyLib
             {
                 if (s.job == (int)pinfo.Roles.Job)
                 {
-                    LevelUpSkill(s.id);
+                    //LevelUpSkill(s.id);
+                    LearnSkill(s.id);
                     count++;
+                    SetSkillPos(s.id, count);
                     if (count >= 2)
                     {
                         break;
@@ -458,6 +461,7 @@ namespace MyLib
 
         public static void LevelUpSkill(int skId)
         {
+            Debug.Log("LevelUpSkill: "+skId);
             var pinfo = ServerData.Instance.playerInfo;
             int totalSP = 0;
             int skillLevel = 0;
@@ -481,7 +485,7 @@ namespace MyLib
 
             if (totalSP > 0 && skillLevel < maxLev && playerLev >= needLev)
             {
-                //pinfo.Skill.TotalPoint--;
+                Log.Sys("LearnSkill");
                 AddSkillPoint(-1);
 
                 bool find = false;
@@ -508,8 +512,6 @@ namespace MyLib
                 activeSkill.SkillId = skId;
                 activeSkill.Level = skillLevel + 1;
                 ServerBundle.SendImmediatePush(activeSkill);
-
-
 
             } else if (totalSP <= 0)
             {
@@ -1071,6 +1073,7 @@ namespace MyLib
 
         public static void LearnSkill(int skillId)
         {
+            Log.Net("LearnSkill: "+skillId);
             var pinfo = ServerData.Instance.playerInfo;
             var allSkill = pinfo.Skill;
             var skInfo = SkillInfo.CreateBuilder();

@@ -7,7 +7,7 @@ Material:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: miniberms_snow_01
-  m_Shader: {fileID: 4800000, guid: 4b8649b4d02a3455abfbc8b3d271ff4f, type: 3}
+  m_Shader: {fileID: 4800000, guid: 65a267bb8c6f1468a853369b6641d369, type: 3}
   m_ShaderKeywords: []
   m_CustomRenderQueue: -1
   m_SavedProperties:

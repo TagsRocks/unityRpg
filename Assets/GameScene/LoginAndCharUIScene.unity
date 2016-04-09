@@ -508,6 +508,7 @@ MonoBehaviour:
   accumTexture: {fileID: 8400000, guid: 96e2421c2c3324aeeba050b71c056a57, type: 2}
   motionCamera: {fileID: 8400000, guid: da5b7a96a61144d76a24a9d59e40696c, type: 2}
   gamma: 1
+  lightDiffuseColor: {r: .874509811, g: .972549021, b: 1, a: 1}
   testAmbient: {r: .0137327118, g: .743459702, b: .933823526, a: 0}
   InitAmbient: 0
   InitNow: 0

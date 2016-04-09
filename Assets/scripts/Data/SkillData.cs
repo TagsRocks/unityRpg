@@ -19,7 +19,8 @@ namespace MyLib
     /// </summary>
     public class SkillData
     {
-        public enum SkillConstId {
+        public enum SkillConstId
+        {
             Bomb = 3,
             Jump = 4,
             KnockBack = 140,
@@ -28,13 +29,19 @@ namespace MyLib
 
         public SkillConfigData skillConfig;
         SkillEffectConfigData effectConfig;
-        public string Sound {
-            get {
+
+        public string Sound
+        {
+            get
+            {
                 return skillConfig.effectSound;
             }
         }
-        public string HitSound {
-            get {
+
+        public string HitSound
+        {
+            get
+            {
                 return skillConfig.hitSound;
             }
         }
@@ -53,7 +60,8 @@ namespace MyLib
         {
             get
             {
-                if(effectConfig != null) {
+                if (effectConfig != null)
+                {
                     return effectConfig.skillLevel;
                 }
                 return 0;
@@ -75,6 +83,7 @@ namespace MyLib
                 return skillConfig.icon;
             }
         }
+
         public enum CastType
         {
             Always = 0,
@@ -88,6 +97,7 @@ namespace MyLib
                 return skillConfig.template;
             }
         }
+
         public enum SkillType
         {
             None = 0,
@@ -98,7 +108,7 @@ namespace MyLib
             PassiveSkill,
             AttachBuff,
         }
-       
+
         public enum DamageType
         {
             Physic = 0,
@@ -150,8 +160,7 @@ namespace MyLib
                 if (idToMaxLev.ContainsKey(skId))
                 {
                     return idToMaxLev [skId];
-                } 
-                else
+                } else
                 {
                     int maxLev = 0;
                     foreach (var sk in GameData.SkillEffectConfig)
@@ -161,7 +170,7 @@ namespace MyLib
                             maxLev = Mathf.Max(maxLev, sk.skillLevel);
                         }
                     }
-                    idToMaxLev[skId] = maxLev;
+                    idToMaxLev [skId] = maxLev;
                     return maxLev;
                 }
             }
@@ -173,8 +182,9 @@ namespace MyLib
         {
             get
             {
-                if(learnConfig != null) {
-                    return learnConfig.restrictLevel+(Level-1)*learnConfig.addLevel;
+                if (learnConfig != null)
+                {
+                    return learnConfig.restrictLevel + (Level - 1) * learnConfig.addLevel;
                 }
                 return 99999;
             }
@@ -184,13 +194,15 @@ namespace MyLib
         {
             get
             {
-                //return 0;
+                if (effectConfig == null)
+                {
+                    return 0;
+                }
                 return effectConfig.mp;
-                //return skillConfig.mpExp;
             }
         }
 
-        //GoTo Next Level 
+        //GoTo Next Level
         public int SpCost
         {
             get
@@ -212,9 +224,11 @@ namespace MyLib
         {
             get
             {
-                if(effectConfig == null) {
+                if (effectConfig == null)
+                {
                     return 100;
-                }else {
+                } else
+                {
                     return effectConfig.damageRatio;
                 }
             }
@@ -235,7 +249,7 @@ namespace MyLib
 
         /*
          * UI display  6row * 3 col
-         */ 
+         */
         //TODO: 技能显示 在 技能面板上面的位置
         public int row = 1;
         public int column = 1;

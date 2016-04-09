@@ -70,8 +70,7 @@ namespace MyLib
                     {
                         moveDirection = Vector3.RotateTowards(moveDirection, targetDirection, rotateSpeed * 2 * Mathf.Deg2Rad * Time.deltaTime, 1000);
                         moveDirection = moveDirection.normalized;
-                    }
-                    else
+                    } else
                     {
                         moveDirection = Vector3.RotateTowards(moveDirection, targetDirection, rotateSpeed * Mathf.Deg2Rad * Time.deltaTime, 1000);         
                         moveDirection = moveDirection.normalized;
@@ -82,10 +81,20 @@ namespace MyLib
                 var targetSpeed = Mathf.Min(targetDirection.magnitude, 1.0f);
                 targetSpeed *= walkSpeed;
                 moveSpeed = Mathf.Lerp(moveSpeed, targetSpeed, curSmooth);
-                var movement = moveDirection * moveSpeed;
+                physics.TurnTo(moveDirection);
+                var curDir = physics.transform.forward;
+                //var movement = moveDirection * moveSpeed;
+                var movement = curDir * moveSpeed;
+                var cosDir = Vector3.Dot(moveDirection.normalized, curDir.normalized);
+                movement = cosDir * movement;
+                /*
+                if(cosDir > 0) {
+                }else if(cosDir < 0) {
+                    movement = cosDir * movement;
+                }
+                */
                 physics.MoveSpeed(movement);
                 //没有使用技能则自动设置方向 有技能则最近设置方向
-                physics.TurnTo(moveDirection);
                 yield return null;
             }
         }

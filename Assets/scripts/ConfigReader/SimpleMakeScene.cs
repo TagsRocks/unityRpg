@@ -26,6 +26,7 @@ public class SimpleMakeScene : MonoBehaviour
     public string lightPath;
     [ButtonCallFunc()]
     public bool LightMapEnv;
+
     public void LightMapEnvMethod()
     {
         var allModel = Path.Combine(Application.dataPath, lightPath);
@@ -38,9 +39,12 @@ public class SimpleMakeScene : MonoBehaviour
 
             var ass = file.FullName.Replace(Application.dataPath, "Assets");
             var res = Resources.LoadAssetAtPath<GameObject>(ass);
-            res.renderer.sharedMaterial.shader = Shader.Find("Custom/lightMapEnv");
-            EditorUtility.SetDirty(res.renderer.sharedMaterial);
-
+            var shm = res.renderer.sharedMaterials;
+            foreach (var s in shm)
+            {
+                s.shader = Shader.Find("Custom/lightMapEnv");
+                EditorUtility.SetDirty(s);
+            }
             Debug.Log("import change state ");
             AssetDatabase.WriteImportSettingsIfDirty(ass);
         }
@@ -51,6 +55,7 @@ public class SimpleMakeScene : MonoBehaviour
     public string lightModelPath = "lights";
     [ButtonCallFunc()]
     public bool CustomLight;
+
     public void CustomLightMethod()
     {
         var allModel = Path.Combine(Application.dataPath, lightModelPath);
@@ -100,6 +105,7 @@ public class SimpleMakeScene : MonoBehaviour
         AssetDatabase.Refresh();
     }
 
+    public string lightTargetPos = "OUTDOOR";
     public string lightModelPath2 = "lights";
     [ButtonCallFunc()]public bool MoveToPrefab;
 
@@ -115,7 +121,13 @@ public class SimpleMakeScene : MonoBehaviour
             Debug.Log("file is " + file.Name + " " + file.FullName);
             var dirName = file.Name.Replace(".fbx", "");
             var ass = file.FullName.Replace(Application.dataPath, "Assets");
-            var tar = Path.Combine("Assets/lightPrefab", dirName + ".prefab");
+            var tar = Path.Combine("Assets/lightPrefab",lightTargetPos);
+            if (!File.Exists(tar))
+            {
+                Directory.CreateDirectory(tar);
+            }
+
+            tar = Path.Combine(tar,  dirName + ".prefab");
 
             var oldPrefab = Resources.LoadAssetAtPath<GameObject>(tar);
             if (oldPrefab == null)
@@ -127,6 +139,7 @@ public class SimpleMakeScene : MonoBehaviour
         AssetDatabase.StopAssetEditing();
         AssetDatabase.Refresh();
     }
+
     public string path1;
     public string combinePath = "snow";
     [ButtonCallFunc()]public bool CombineToPrefab;
@@ -295,6 +308,7 @@ public class SimpleMakeScene : MonoBehaviour
         var mapObj = JSON.Parse(mapJson.text).AsObject;
         AssetDatabase.StartAssetEditing();
         Debug.Log("path is " + p);
+        var plow = p.ToLower();
         foreach (KeyValuePair<string, JSONNode> n in mapObj)
         {
             var f = n.Value ["FILE"].Value;
@@ -302,10 +316,10 @@ public class SimpleMakeScene : MonoBehaviour
 
             var fpath = ConvertPath(f);
             fpath = fpath.Replace("levelsets", "levelSets");
+            var flow = fpath.ToLower();
 
-            Debug.Log("filePath is " + fpath);
-
-            if (fpath.Contains(p))
+            Debug.Log("filePath is " + flow);
+            if (flow.Contains(plow))
             {
                 CombineTwo(f, col);
                 //break;
@@ -390,65 +404,6 @@ public class SimpleMakeScene : MonoBehaviour
 
 
 
-    /*
-    public string path2;
-    [ButtonCallFunc()]
-    public bool MakeRoomPieces;
-    public void MakeRoomPiecesMethod() {
-        var md = Resources.LoadAssetAtPath("Assets/Config/" + path2, typeof(TextAsset)) as TextAsset;
-        var jobj = JSON.Parse(md.text).AsObject;
-        MakePieces(jobj);
-    }
-    void MakePieces(JSONClass jobj){
-    
-    }
-
-    void MakePieces(JSONClass jobj)
-    {
-        var mapJson = Resources.LoadAssetAtPath<TextAsset>("Assets/Config/map.json");
-        var mapObj = JSON.Parse(mapJson.text).AsObject;
-        var root = new GameObject("RoomPieces");
-        Util.InitGameObject(root);
-        int count = 0;
-
-        var saveData = new GameObject("RoomPieces_data");
-        saveData.AddComponent<RoomData>();
-
-        var resPath = Path.Combine(Application.dataPath, "levelPrefab");
-        var dir = new DirectoryInfo(resPath);
-
-        //var levelPrefab = dir.GetFiles("*.prefab", SearchOption.TopDirectoryOnly);
-
-
-        resPath = Path.Combine(Application.dataPath, "prefabs");
-        dir = new DirectoryInfo(resPath);
-        var prefabs = dir.GetFiles("*.prefab", SearchOption.TopDirectoryOnly);
-
-        resPath = Path.Combine(Application.dataPath, "prefabs/props");
-        dir = new DirectoryInfo(resPath);
-        var propsPrefab = dir.GetFiles("*.prefab", SearchOption.TopDirectoryOnly);
-
-
-        GameObjectDelegate gg = delegate (string name)
-        {
-            return GetPrefab(name, new List<FileInfo[]>()
-            {
-                prefabs,
-                propsPrefab
-            });
-        };
-        VoidDelegate hd = delegate(JSONClass obj)
-        {
-            handleRoomPiece(root, mapObj, obj, gg, saveData);
-            count++;
-        };
-
-        TranverseTree(jobj, hd);
-        //saveData.GetComponent<RoomData>().SaveJson();
-
-        Debug.Log("ReadRoomPiece " + count);
-    }
-    */
     [ButtonCallFunc()]public bool RemoveMapJson;
 
     public void RemoveMapJsonMethod()
@@ -470,7 +425,7 @@ public class SimpleMakeScene : MonoBehaviour
             var fn = Path.GetFileName(fpath);
             var prefab = fn.Replace(".fbx", ".prefab");
             var tar = Path.Combine(tarDir, prefab);
-            Debug.Log("Delete: "+tar);
+            Debug.Log("Delete: " + tar);
             File.Delete(tar);
         }
     }

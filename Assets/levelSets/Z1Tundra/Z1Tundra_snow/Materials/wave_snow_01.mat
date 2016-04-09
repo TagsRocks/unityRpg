@@ -7,7 +7,7 @@ Material:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: wave_snow_01
-  m_Shader: {fileID: 4800000, guid: 70f6ff21d550e42fb9abe4d13de59366, type: 3}
+  m_Shader: {fileID: 4800000, guid: 65a267bb8c6f1468a853369b6641d369, type: 3}
   m_ShaderKeywords: []
   m_CustomRenderQueue: -1
   m_SavedProperties:

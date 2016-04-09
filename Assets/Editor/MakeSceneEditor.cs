@@ -28,6 +28,13 @@ public class MakeSceneEditor : Editor
         var fy = jobj ["FORWARDY"].AsFloat;
         var fz = jobj ["FORWARDZ"].AsFloat;
 
+        Vector3 parPos = Vector3.zero;
+        foreach (var s in stack)
+        {
+            parPos += s;
+        }
+        parPos.x = -parPos.x;
+
 
         var levelPrefab = Path.Combine(Application.dataPath, "particles");
         var prefabList = new DirectoryInfo(levelPrefab);
@@ -57,7 +64,7 @@ public class MakeSceneEditor : Editor
             var assPath = bestMatch.FullName.Replace(Application.dataPath, "Assets");
             var g = PrefabUtility.InstantiatePrefab(Resources.LoadAssetAtPath<GameObject>(assPath)) as GameObject;
             g.transform.parent = root.transform;
-            g.transform.position = new Vector3(-px, py, pz);
+            g.transform.position = new Vector3(-px, py, pz) + parPos;
             g.transform.localScale = Vector3.one;
 
             //LevelPrefab No Need To Multiply -90 because LevelPrefab combine RoomPieces With Particles
@@ -90,6 +97,13 @@ public class MakeSceneEditor : Editor
         var fy = jobj ["FORWARDY"].AsFloat;
         var fz = jobj ["FORWARDZ"].AsFloat;
 
+        Vector3 parPos = Vector3.zero;
+        foreach (var s in stack)
+        {
+            parPos += s;
+        }
+        parPos.x = -parPos.x;
+
 
         var levelPrefab = Path.Combine(Application.dataPath, "levelPrefab");
         var prefabList = new DirectoryInfo(levelPrefab);
@@ -118,7 +132,7 @@ public class MakeSceneEditor : Editor
             var assPath = bestMatch.FullName.Replace(Application.dataPath, "Assets");
             var g = PrefabUtility.InstantiatePrefab(Resources.LoadAssetAtPath<GameObject>(assPath)) as GameObject;
             g.transform.parent = root.transform;
-            g.transform.position = new Vector3(-px, py, pz);
+            g.transform.position = new Vector3(-px, py, pz)+parPos;
             g.transform.localScale = Vector3.one;
 
             //LevelPrefab No Need To Multiply -90 because LevelPrefab combine RoomPieces With Particles
@@ -193,15 +207,51 @@ public class MakeSceneEditor : Editor
 
     public delegate GameObject GameObjectDelegate(string name);
 
+    //private Vector3 currentPos = Vector3.zero;
+    private Vector3 lastPos = Vector3.zero;
+    List<Vector3> stack = new List<Vector3>();
+
     void TranverseTree(JSONClass jobj, VoidDelegate handler)
     {
-        if (jobj ["DESCRIPTOR"].Value == "Room Piece")
+        var desc = jobj ["DESCRIPTOR"].Value;
+        if (desc == "Group")
+        {
+            if (!string.IsNullOrEmpty(jobj ["POSITIONX"].Value))
+            {
+                var px = jobj ["POSITIONX"].AsFloat;
+                var py = jobj ["POSITIONY"].AsFloat;
+                var pz = jobj ["POSITIONZ"].AsFloat;
+                var ps = new Vector3(px, py, pz); 
+                lastPos = ps;
+                //stack.Add(ps);
+            } else
+            {
+                lastPos = Vector3.zero;
+                //stack.Add(Vector3.zero);
+            }
+        } else if (jobj ["DESCRIPTOR"].Value == "Room Piece")
         {
             handler(jobj);
+            //stack.Add(Vector3.zero);
+            lastPos = Vector3.zero;
+        } else if (jobj ["stackName"].Value == "CHILDREN")
+        {
+            stack.Add(lastPos);
+            lastPos = Vector3.zero;
+        } else
+        {
+            //stack.Add(Vector3.zero);
+            lastPos = Vector3.zero;
         }
+
         foreach (JSONNode n in jobj["children"].AsArray)
         {
             TranverseTree(n.AsObject, handler);
+        }
+
+        if (jobj ["stackName"].Value == "CHILDREN")
+        {
+            stack.RemoveAt(stack.Count - 1);
         }
     }
 
@@ -212,10 +262,38 @@ public class MakeSceneEditor : Editor
     /// <param name="handler">Handler.</param>
     void TranverseLightNode(JSONClass jobj, VoidDelegate handler)
     {
+        var desc = jobj ["DESCRIPTOR"].Value;
+        if (desc == "Group")
+        {
+            if (!string.IsNullOrEmpty(jobj ["POSITIONX"].Value))
+            {
+                var px = jobj ["POSITIONX"].AsFloat;
+                var py = jobj ["POSITIONY"].AsFloat;
+                var pz = jobj ["POSITIONZ"].AsFloat;
+                var ps = new Vector3(px, py, pz); 
+                lastPos = ps;
+            } else
+            {
+                lastPos = Vector3.zero;
+            }
+        } else if (jobj ["stackName"].Value == "CHILDREN")
+        {
+            stack.Add(lastPos);
+            lastPos = Vector3.zero;
+        } else
+        {
+            lastPos = Vector3.zero;
+        }
+
         handler(jobj);
         foreach (JSONNode n in jobj["children"].AsArray)
         {
             TranverseLightNode(n.AsObject, handler);
+        }
+
+        if (jobj ["stackName"].Value == "CHILDREN")
+        {
+            stack.RemoveAt(stack.Count - 1);
         }
     }
 
@@ -369,17 +447,42 @@ public class MakeSceneEditor : Editor
                 var px = jobj ["POSITIONX"].AsFloat;
                 var py = jobj ["POSITIONY"].AsFloat;
                 var pz = jobj ["POSITIONZ"].AsFloat;
+                Vector3 parPos = Vector3.zero;
+                foreach (var s in stack)
+                {
+                    parPos += s;
+                }
+                parPos.x = -parPos.x;
+
                 var fx = jobj ["FORWARDX"].AsFloat;
                 var fy = jobj ["FORWARDY"].AsFloat;
                 var fz = jobj ["FORWARDZ"].AsFloat;
+
+                //fbx模型旋转了X 90 角度 因此  z y 缩放交换
+                Vector3 scale = Vector3.one;
+                if (!string.IsNullOrEmpty(jobj ["X"].Value))
+                {
+                    scale.x = jobj ["X"].AsFloat;
+                }
+                if (!string.IsNullOrEmpty(jobj ["Y"].Value))
+                {
+                    scale.z = jobj ["Y"].AsFloat;
+                }
+                if (!string.IsNullOrEmpty(jobj ["Z"].Value))
+                {
+                    scale.y = jobj ["Z"].AsFloat;
+                }
+
+
                 var oldRot = g.transform.localRotation.eulerAngles.y;
                 g.transform.parent = root.transform;
-                g.transform.localPosition = new Vector3(-px, py, pz);
+                g.transform.localPosition = parPos + new Vector3(-px, py, pz);
                 var localPos = g.transform.localPosition;
 
                 pb.pos = localPos;
 
-                g.transform.localScale = Vector3.one;
+                //g.transform.localScale = Vector3.one;
+                g.transform.localScale = scale;
 
                 var rot = Quaternion.LookRotation(new Vector3(fx, fy, fz), Vector3.up);
                 var rot2 = Quaternion.Euler(new Vector3(rot.eulerAngles.x, -rot.eulerAngles.y, rot.eulerAngles.z));
@@ -473,16 +576,6 @@ public class MakeSceneEditor : Editor
         var saveData = new GameObject("RoomPieces_data");
         saveData.AddComponent<RoomData>();
 
-        /*
-        var resPath = Path.Combine(Application.dataPath, "prefabs");
-        var dir = new DirectoryInfo(resPath);
-        var prefabs = dir.GetFiles("*.prefab", SearchOption.TopDirectoryOnly);
-
-        resPath = Path.Combine(Application.dataPath, "prefabs/props");
-        dir = new DirectoryInfo(resPath);
-        var propsPrefab = dir.GetFiles("*.prefab", SearchOption.TopDirectoryOnly);
-        */
-
         var resPath = Path.Combine(Application.dataPath, "prefabs");
         var dir = new DirectoryInfo(resPath);
         var propsPrefab = dir.GetFiles("*.prefab", SearchOption.AllDirectories);
@@ -503,7 +596,6 @@ public class MakeSceneEditor : Editor
         };
 
         TranverseTree(jobj, hd);
-        //saveData.GetComponent<RoomData>().SaveJson();
 
         Debug.Log("ReadRoomPiece " + count);
     }

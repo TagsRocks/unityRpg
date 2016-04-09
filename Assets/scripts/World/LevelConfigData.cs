@@ -227,6 +227,7 @@ namespace MyLib
                 fogMode = FogMode.ExponentialSquared,
                 fogDensity = 0.02f,
                 cameraDist = 200,
+                //hasRain = true,
             });
 
             envConfig.Add("suntemple", new EnvConfig(){
