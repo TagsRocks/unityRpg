@@ -118,6 +118,17 @@ namespace MyLib
             return null;
         }
 
+        public IEnumerator<GameObject> GetAllPlayer()
+        {
+            foreach (var p in photonViewList)
+            {
+                if (p.IsPlayer)
+                {
+                    yield return p.gameObject;
+                }
+            }
+        }
+
         public GameObject GetMyPlayer()
         {
             if (myPlayer != null)
@@ -250,7 +261,7 @@ namespace MyLib
         public int GetMyJob()
         {
             //return (int)SaveGame.saveGame.selectChar.Job;
-            Log.Sys("GetMyJob: "+ServerData.Instance.playerInfo.Roles.Job);
+            Log.Sys("GetMyJob: " + ServerData.Instance.playerInfo.Roles.Job);
             return (int)ServerData.Instance.playerInfo.Roles.Job;
         }
 

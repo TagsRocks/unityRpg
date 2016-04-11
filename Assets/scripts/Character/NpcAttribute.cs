@@ -174,6 +174,14 @@ namespace MyLib
 
         public void SetShadowLayer()
         {
+            foreach (Transform t in transform)
+            {
+                if (t.renderer != null && t.name != "playerLight(Clone)")
+                {
+                    t.gameObject.layer = (int)GameLayer.ShadowMap;
+                }
+            }
+            /*
             var renders = gameObject.GetComponentsInChildren<SkinnedMeshRenderer>();
             var render2 = gameObject.GetComponentsInChildren<MeshRenderer>();
             foreach (var r in renders)
@@ -187,6 +195,7 @@ namespace MyLib
                     r.gameObject.layer = (int)GameLayer.ShadowMap;
                 }
             }
+            */
         }
 
         public void SetMotionLayer()
@@ -208,6 +217,15 @@ namespace MyLib
 
         public void SetNormalLayer()
         {
+            foreach (Transform t in transform)
+            {
+                if (t.renderer != null && t.name != "playerLight(Clone)")
+                {
+                    t.gameObject.layer = (int)GameLayer.Default;
+                }
+            }
+
+            /*
             var renders = gameObject.GetComponentsInChildren<SkinnedMeshRenderer>();
             var render2 = gameObject.GetComponentsInChildren<MeshRenderer>();
             foreach (var r in renders)
@@ -221,6 +239,7 @@ namespace MyLib
                     r.gameObject.layer = (int)GameLayer.Default;
                 }
             }
+            */
         }
 
         public void SetTeamHideShader()
@@ -565,6 +584,7 @@ namespace MyLib
 
         public Job job = Job.NOVICE;
         CharacterInfo charInfo;
+
         public void InitName()
         {
             userName = ServerData.Instance.playerInfo.Roles.Name;

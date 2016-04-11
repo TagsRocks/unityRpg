@@ -181,6 +181,7 @@ MonoBehaviour:
   particle: {fileID: 100008, guid: 26d778b47d92f4725ae42e9fa6628031, type: 2}
   Missile: {fileID: 0}
   MonsterId: -1
+  delay: 0
   releaseOrder: 0
 --- !u!114 &11400002
 MonoBehaviour:

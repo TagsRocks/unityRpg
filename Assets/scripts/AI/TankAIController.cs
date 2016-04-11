@@ -12,6 +12,10 @@ namespace MyLib
     {
         void Awake()
         {
+            //var bx = Util.FindChildRecursive(transform, "boxColldier");
+            //var bx1 = Util.FindChildRecursive(transform, "boxColldier2");
+            //Physics.IgnoreCollision(bx.collider, bx1.collider);
+
             var tower = Util.FindChildRecursive(transform, "tower");
             tower.gameObject.AddComponent<TowerAutoCheck>();
 

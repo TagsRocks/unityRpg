@@ -22,7 +22,10 @@ namespace MyLib
         public static float Multi = 2;
         void Start()
         {
-            rigid = GetComponent<Rigidbody>();
+            //var box = Util.FindChildRecursive(transform, "boxColldier").gameObject;
+            //rigid =  box.GetComponent<Rigidbody>();
+            rigid = this.rigidbody;
+
             rigid.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
             rigid.useGravity = true;
             attribute = GetComponent<NpcAttribute>();
@@ -31,14 +34,16 @@ namespace MyLib
         }
 
         void OnCollisionEnter(Collision col) {
+            /*
             Debug.Log("OnCollisionEnter: "+col.gameObject.layer);
             if(col.gameObject.layer == (int)GameLayer.Npc) {
                 //var attr = NetworkUtil.GetAttr(col.gameObject);
                 var rev = col.relativeVelocity;
                 //col.rigidbody.AddForce(-Multi*rev, ForceMode.VelocityChange);
                 //this.rigidbody.AddForce(-Multi*rev, ForceMode.VelocityChange);
-                this.rigidbody.MovePosition(this.rigidbody.position);
+                this.rigid.MovePosition(this.rigid.position);
             }
+            */
         }
 
         public void MoveSpeed(Vector3 moveSpeed)
@@ -89,7 +94,7 @@ namespace MyLib
             */
             //moveValue.y = -gravity;
             var mv = moveValue*Time.fixedDeltaTime;
-            rigidbody.MovePosition(rigidbody.position+mv);
+            this.rigid.MovePosition(this.rigid.position+mv);
             moveValue = Vector3.zero;
 
             //rigidbody.AddForce(new Vector3(0, -gravity * rigidbody.mass, 0));
@@ -129,7 +134,7 @@ namespace MyLib
                 Log.Sys("DirY: " + dy + " diffY: " + diffY);
                 //*Time.fixedDeltaTime
                 var delta = Quaternion.Euler(new Vector3(0, dy, 0));
-                rigidbody.MoveRotation(rigidbody.rotation*delta);
+                this.rigid.MoveRotation(this.rigid.rotation*delta);
                 //rigid.AddTorque(Vector3.up * diffVelocity, ForceMode.VelocityChange);
                 rot = false;
             }

@@ -64,13 +64,14 @@
 				
 				fixed2 mapUV = (i.offPos.xz+float2(_CameraSize, _CameraSize))/(2*_CameraSize);
 
-				retCol.rgb = col.rgb*(_AmbientCol.rgb+tex2D(_LightMap, mapUV).rgb * (1-tex2D(_LightMask, mapUV).a)*_LightCoff );
+				fixed mask = 1-tex2D(_LightMask, mapUV).a;
+				retCol.rgb = col.rgb*(_AmbientCol.rgb+  tex2D(_LightMap, mapUV).rgb * mask*_LightCoff );
 				retCol.a = col.a;
 
 				fixed2 mapShadow = (i.shadowPos.xz+float2(_ShadowCameraSize, _ShadowCameraSize))/(2*_ShadowCameraSize);
 				fixed4 shadowC = tex2D(_ShadowMap, mapShadow);
 				//retCol.rgb = retCol.rgb*(1-shadowC.a)+shadowC.rgb;
-				retCol.rgb = retCol.rgb * shadowC.rgb;
+				retCol.rgb =(1-mask)*retCol.rgb + mask*retCol.rgb * shadowC.rgb;
 				return retCol;
 			}	
 

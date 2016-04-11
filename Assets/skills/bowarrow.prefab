@@ -8,7 +8,6 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 400000}
-  - 111: {fileID: 11100000}
   m_Layer: 0
   m_Name: bowarrow
   m_TagString: Untagged
@@ -57,21 +56,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 400000}
   m_RootOrder: 0
---- !u!111 &11100000
-Animation:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100000}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Animation: {fileID: 7400000, guid: 970089ebda2df4a689289305d679f1e1, type: 2}
-  m_Animations:
-  - {fileID: 7400000, guid: 970089ebda2df4a689289305d679f1e1, type: 2}
-  m_WrapMode: 0
-  m_PlayAutomatically: 1
-  m_AnimatePhysics: 0
-  m_CullingType: 0
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -83,7 +67,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c70af40f3f97445ca041cc7199a632e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Position: {x: .460000008, y: .899999976, z: .699999988}
+  Position: {x: 0, y: .200000003, z: 3.45000005}
   count: 1
   duration: 0
   direction: 0
@@ -121,7 +105,9 @@ MonoBehaviour:
     m_PostInfinity: 2
   UseMaxOnly: 0
   particle: {fileID: 0}
-  Missile: {fileID: 11400000, guid: 2441d825f7f524a6898d25b815eb734e, type: 2}
+  Missile: {fileID: 11400000, guid: 8769d657c246b4d6e8c74f0d125ed08f, type: 2}
+  MonsterId: -1
+  delay: 0
   releaseOrder: 1
 --- !u!1001 &100100000
 Prefab:

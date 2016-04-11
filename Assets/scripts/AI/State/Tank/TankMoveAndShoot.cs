@@ -111,7 +111,11 @@ namespace MyLib
         {
             if (next == AIStateEnum.COMBAT || next == AIStateEnum.CAST_SKILL)
             {
-                return true;
+                if(!inSkill) {
+                    return true;
+                }else {
+                    return false;
+                }
             }
             return base.CanChangeState(next);
         }

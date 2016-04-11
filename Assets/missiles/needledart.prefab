@@ -45,13 +45,17 @@ MonoBehaviour:
   ReleaseParticle: {fileID: 0}
   Velocity: 20
   Radius: .800000012
-  MaxDistance: 10
+  MaxDistance: 20
   NumRicochets: 0
   RandomAngle: 45
   GotoPosition: 0
   piercing: 0
   maxTurnRate: 0
   DieWaitTime: 0
+  IsAOE: 0
+  AOERadius: 0
+  DontHurtObject: 0
+  shakeData: {fileID: 0}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

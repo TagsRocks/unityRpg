@@ -45,7 +45,7 @@ MonoBehaviour:
   ReleaseParticle: {fileID: 100006, guid: 5f57c33e1e1954745b985ee2c210aa5f, type: 2}
   Velocity: 20
   Radius: .800000012
-  MaxDistance: 10
+  MaxDistance: 30
   NumRicochets: 0
   RandomAngle: 45
   GotoPosition: 0

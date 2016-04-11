@@ -59,10 +59,6 @@ namespace MyLib
             forwardSet = true;
             forwardDir = f;
         }
-        private Vector3 relativePos;
-        public void SetRelativePos(Vector3 pos) {
-            relativePos = pos;
-        }
 
         public int ownerLocalId = -1;
         //注册监听技能相关事件  攻击命中事件 子弹命中或者死亡 攻击动画结束

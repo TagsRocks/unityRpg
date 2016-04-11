@@ -40,7 +40,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   eventList:
-  - evt: 10000
+  - evt: 10001
     layout: {fileID: 100000, guid: 2b1958e15af9745b1ad7068ea70ddc11, type: 2}
     affix:
       effectType: 14
@@ -53,6 +53,7 @@ MonoBehaviour:
       IsOnlyOne: 0
       fireParticle: {fileID: 0}
       keepOld: 1
+      buffParticle: {fileID: 0}
     attachOwner: 0
     attaches: 0
     childSkillId: -1
@@ -60,6 +61,8 @@ MonoBehaviour:
     SetBeamTarget: 0
     BeamOffset: {x: 0, y: 1, z: 0}
     TargetPos: 0
+    UseMarkPos: 0
+    EvtId: 0
   animationLoop: 0
   attackDuration: 1
 --- !u!1001 &100100000

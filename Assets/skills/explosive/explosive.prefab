@@ -67,7 +67,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c70af40f3f97445ca041cc7199a632e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Position: {x: 0, y: 1, z: .600000024}
+  Position: {x: 0, y: .319999993, z: 3.16000009}
   count: 1
   duration: 0
   direction: 1
@@ -106,6 +106,8 @@ MonoBehaviour:
   UseMaxOnly: 1
   particle: {fileID: 0}
   Missile: {fileID: 11400000, guid: fcd90bf5cffc14a4eab4333a4d85e8bd, type: 2}
+  MonsterId: -1
+  delay: 0
   releaseOrder: 1
 --- !u!1001 &100100000
 Prefab:

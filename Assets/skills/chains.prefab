@@ -42,6 +42,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 400018}
   - 114: {fileID: 11400020}
+  - 135: {fileID: 13539822}
   m_Layer: 0
   m_Name: DamageShape
   m_TagString: Untagged
@@ -68,7 +69,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100014}
   m_LocalRotation: {x: 0, y: .707106829, z: 0, w: .707106709}
-  m_LocalPosition: {x: 0, y: -0, z: 0}
+  m_LocalPosition: {x: 0, y: 3.86999989, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400018}
@@ -115,6 +116,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Position: {x: 0, y: 1, z: 0}
   particle: {fileID: 100014, guid: 8fe7cf9ae618548ddacc0e90c2ca05ea, type: 2}
+  delayTime: 0
   boneName: 
 --- !u!114 &11400002
 MonoBehaviour:
@@ -153,6 +155,18 @@ MonoBehaviour:
   speed: 6
   Distance: 6
   delayTime: 0
+--- !u!135 &13539822
+SphereCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100018}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 0
+  serializedVersion: 2
+  m_Radius: 4
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

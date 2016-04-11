@@ -10,6 +10,7 @@ namespace MyLib
         public override IEnumerator RunLogic()
         {
             activeSkill = GetAttr().GetComponent<SkillInfoComponent>().GetActiveSkill();
+            tower = Util.FindChildRecursive(GetAttr().transform, "tower").transform;
             yield return GetAttr().StartCoroutine(Shoot());
         }
 
@@ -33,7 +34,9 @@ namespace MyLib
                 var dir = enemy.transform.position - trans.position;
                 dir.y = 0;
                 Log.Sys("EnemyIs: " + dir);
-                forward = dir;
+                //forward = dir;
+                forward = tower.forward;
+
                 //physic.TurnToImmediately(dir);
                 physic.TurnTower(dir);
             } else
@@ -51,20 +54,20 @@ namespace MyLib
             yield return GetAttr().StartCoroutine(WaitForAttackAnimation(GetAttr().animation));
             yield return new WaitForSeconds(0.1f);
         }
-
+        private Transform tower;
         private IEnumerator WaitForAttackAnimation(Animation animation)
         {
-            var tower = Util.FindChildRecursive(GetAttr().transform, "tower").transform;
             var skillStateMachine = SkillLogic.CreateSkillStateMachine(GetAttr().gameObject, activeSkill.skillData, tower.transform.position);
             skillStateMachine.SetForwardDirection(forward);
-            skillStateMachine.SetRelativePos(tower.localPosition);
+            //skillStateMachine.SetRelativePos(tower.localPosition);
 
             Log.AI("Wait For Combat Animation");
             float passTime = 0;
-            yield return new WaitForSeconds(0.3f);
+            //yield return new WaitForSeconds(0.1f);
+            yield return null;
             MyEventSystem.PushLocalEventStatic(GetAttr().GetLocalId(), MyEvent.EventType.EventTrigger);
             var realAttackTime = activeSkill.skillData.AttackAniTime / GetAttr().GetSpeedCoff();
-            realAttackTime -= 0.3f;
+            //realAttackTime -= 0.3f;
             do
             {
                 if (passTime >= realAttackTime * 0.8f)

@@ -343,6 +343,7 @@ GameObject:
   - 114: {fileID: 775957292}
   - 114: {fileID: 775957296}
   - 114: {fileID: 775957297}
+  - 114: {fileID: 775957298}
   m_Layer: 0
   m_Name: kbengine
   m_TagString: Untagged
@@ -536,6 +537,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   v: 10
   SetBool: 0
+--- !u!114 &775957298
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 775957291}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b0a36ecd56364685bff8be687ef77f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mul: 2
+  ChangeP: 0
+  changeS2: 4
+  ChangeS: 0
 --- !u!1001 &1091273874
 Prefab:
   m_ObjectHideFlags: 0

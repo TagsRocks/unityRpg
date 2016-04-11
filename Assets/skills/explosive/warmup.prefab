@@ -39,7 +39,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e033caffa2d174a929e84e191ce5945c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Position: {x: 0, y: .268999994, z: 2.42000008}
+  Position: {x: 0, y: .319999993, z: 3.16000009}
   particle: {fileID: 100004, guid: 73a5c145f84c6424d86ffc641036a730, type: 2}
   delayTime: 0
   boneName: 
