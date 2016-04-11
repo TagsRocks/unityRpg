@@ -17,7 +17,9 @@ namespace MyLib
 
         public override bool IsEnemy(GameObject a, GameObject b)
         {
-            return a != b && b.tag == GameTag.Player;
+            var aattr = a.GetComponent<NpcAttribute>();
+            var battr = b.GetComponent<NpcAttribute>();
+            return a != b && b.tag == GameTag.Player && aattr.TeamColor != battr.TeamColor ;
         }
 
         public override bool IsNet

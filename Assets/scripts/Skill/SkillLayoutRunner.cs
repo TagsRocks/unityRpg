@@ -21,19 +21,20 @@ namespace MyLib
         public void DoDamage(GameObject g)
         {
             Log.AI("SkillLayout DoDamage " + Event.affix.effectType);
+            var attr = NetworkUtil.GetAttr(g);
             if (Event.affix.effectType != Affix.EffectType.None && Event.affix.target == Affix.TargetType.Enemy)
             {
                 //Buff目标是本地控制
                 //通过ID来控制复制信息 实体都要有ID才便于复制
                 //if(stateMachine.attacker.GetComponent<NpcAttribute>().IsMine()) {
-                if(g.GetComponent<NpcAttribute>().IsMine())
+                if(attr.IsMine())
                 {
-                    g.GetComponent<BuffComponent>().AddBuff(Event.affix, stateMachine.attacker.transform.position);
+                    attr.GetComponent<BuffComponent>().AddBuff(Event.affix, stateMachine.attacker.transform.position);
                     NetDateInterface.FastMoveAndPos();
-                    NetDateInterface.FastAddBuff(Event.affix, stateMachine.attacker, g, stateMachine.skillFullData.skillId, Event.EvtId);
+                    NetDateInterface.FastAddBuff(Event.affix, stateMachine.attacker, attr.gameObject, stateMachine.skillFullData.skillId, Event.EvtId);
                 }
             }
-            stateMachine.DoDamage(g);
+            stateMachine.DoDamage(attr.gameObject);
         }
 
         //玩家先在处于一个Skill状态 玩家先在处于一个Skill状态 技能时间1s钟 玩家才能结束状态
