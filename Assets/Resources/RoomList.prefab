@@ -41,39 +41,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   typeParts:
   - type: mine
-    parts:
-    - {fileID: 100000, guid: 9db961b124cde4fc68ffac54091a4738, type: 2}
-    - {fileID: 100000, guid: 1af9594594ace4c388ec63028f8a9d2b, type: 2}
-    - {fileID: 100000, guid: dcb20e55bda9e457eba5d562432a568a, type: 2}
-    - {fileID: 154480, guid: fc135f778b56a41b4b938718cacfe8cc, type: 2}
-    - {fileID: 140522, guid: f5a5d66ff16a649929bbda8fe5385539, type: 2}
-    - {fileID: 100000, guid: c7440f87c544d4f458e54b7c0e6024a2, type: 2}
-    - {fileID: 100000, guid: 44ef5491b2b524969a292e94b3cbbd0f, type: 2}
-    - {fileID: 100000, guid: e974816f69931441d843bbf3086212a1, type: 2}
-    - {fileID: 100000, guid: 53f151d572e984b8dba2f3f8564fef90, type: 2}
-    - {fileID: 111434, guid: 0c6c337941be64658b34102384166318, type: 2}
-    - {fileID: 170052, guid: 4195d9c815df54bf69850392a6f30bfa, type: 2}
-    - {fileID: 100000, guid: 81d42f05cf653454c9dd351ccff0c362, type: 2}
-    - {fileID: 100000, guid: c000e2ae7464b421c9b5ee572bfc73bf, type: 2}
-    - {fileID: 100000, guid: d314e15343e164ba18d2bfb4339e4995, type: 2}
-    - {fileID: 156034, guid: 2be5fd3575134466296a663870cc4ede, type: 2}
-    - {fileID: 100000, guid: 2d5858341215e4906bb1d8690ea7465e, type: 2}
-    - {fileID: 100000, guid: 9e095da1ebeb24f34b887dfcceae95de, type: 2}
-    - {fileID: 100000, guid: 790d3a5ed81fb404caf3cc7d139f2ebd, type: 2}
-    - {fileID: 100000, guid: 9b6da3ec07b5c4aafb3fce8b9263c199, type: 2}
-    - {fileID: 100000, guid: 273c8561f21ff4be8ae0d9f2689c99ed, type: 2}
-    - {fileID: 100000, guid: 8133031ffd95c4610b52da6484509ce7, type: 2}
-    - {fileID: 100000, guid: cda36eb5df89c4908ad44cfbf08afd30, type: 2}
-    - {fileID: 145618, guid: 54c7e88364f1d4e1388bbdf42323fe97, type: 2}
-    - {fileID: 100000, guid: 1b4db632985534074b1b8f9d21ee3a23, type: 2}
-    - {fileID: 172988, guid: 97ec20e742f9c4b4f94ef88bcd72d763, type: 2}
-  - type: MainMenus
-    parts:
-    - {fileID: 152996, guid: 71e6b177e40084bd78834d207c6cf939, type: 2}
-    - {fileID: 115340, guid: 11c85501e022e4612bdb1653e6b0e39d, type: 2}
-  - type: lava
-    parts: []
-  - type: snow
     parts: []
   - type: suntemple
     parts:
@@ -93,8 +60,6 @@ MonoBehaviour:
   - type: tank
     parts:
     - {fileID: 133176, guid: 3a3fb354a57604447b06d5096196f7d2, type: 2}
-  - type: town
-    parts: []
   LoadAllRooms: 0
 --- !u!1001 &100100000
 Prefab:
