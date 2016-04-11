@@ -107,7 +107,6 @@ namespace MyLib
 
     public partial class Util
     {
-        static AstarPath astarPath = null;
 
         public static IEnumerator WaitForAnimation(Animation a)
         {
@@ -462,68 +461,8 @@ namespace MyLib
             tp.to = t;
         }
 
-        /*
-		 * 0 width-1  center.x
-		 * 0 height-1 center.z
-		 * NodeSize 1 1
-		 */
-        static void InitAstarPath()
-        {
-            astarPath = AstarPath.active;
-        }
+    
 
-        public static Vector2 GridToCoord(int x, int z)
-        {
-            InitAstarPath();
-            var gridGraph = astarPath.graphs [0] as Pathfinding.GridGraph;
-            var center = gridGraph.center;
-            var width = gridGraph.width;
-            var height = gridGraph.depth;
-
-            var v = new Vector2();
-            v.x = x + center.x - width / 2.0f;
-            v.y = z + center.z - height / 2.0f;
-            return v;
-        }
-
-        public static Vector2 CoordToGrid(float x, float z)
-        {
-            InitAstarPath();
-            var gridGraph = astarPath.graphs [0] as Pathfinding.GridGraph;
-            var center = gridGraph.center;
-            var width = gridGraph.width;
-            var height = gridGraph.depth;
-
-            var v = new Vector2();
-            v.x = (float)Math.Round(x - center.x + width / 2.0f);
-            v.y = (float)Mathf.Round(z - center.z + height / 2.0f);
-
-            return v;
-        }
-
-        public static bool CheckMovable(int x, int z)
-        {
-            InitAstarPath();
-            var gridGraph = astarPath.graphs [0] as Pathfinding.GridGraph;
-            var width = gridGraph.width;
-            var height = gridGraph.depth;
-            if (x < 0 || z < 0 || x >= width || z >= height)
-            {
-                return false;
-            }
-            var index = z * gridGraph.width + x;
-            if (index >= 0 && index < gridGraph.nodes.Length)
-            {
-                var n = gridGraph.nodes [index];
-                var walk = n.Flags & 0x1;
-                if (walk == 0)
-                {
-                    return false;
-                }
-                return true;
-            }
-            return false;
-        }
 
         public static int IntYOffset(float v)
         {
@@ -664,12 +603,7 @@ namespace MyLib
             return " error " + type.ToString();
         }
 
-        public static Vector3 CoordToGrid(Vector3 pos)
-        {
-            var p = CoordToGrid(pos.x, pos.z);
-            var h = IntYOffset(pos.y);
-            return new Vector3(p.x, h, p.y);
-        }
+     
 
         static void CollectUIPanel(GameObject g, List<UIPanel> all)
         {
