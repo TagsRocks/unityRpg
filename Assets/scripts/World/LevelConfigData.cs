@@ -55,8 +55,15 @@ namespace MyLib
             LevelLayout.Add(101, l1);
 
             //ZoneConfig MainCity
+            /*
             l1 = new List<LevelConfig>(){
                 new LevelConfig("ENTRANCE_S_LM", 0, 0){useOtherZone=true, zoneId=10},
+            };
+            LevelLayout.Add(2, l1);
+            */
+
+            l1 = new List<LevelConfig>(){
+                new LevelConfig("ENTRANCE_E_LM", 0, 0){useOtherZone=true, zoneId=50, type="suntemple"},
             };
             LevelLayout.Add(2, l1);
 
