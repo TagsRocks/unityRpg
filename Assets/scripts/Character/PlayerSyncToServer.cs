@@ -74,6 +74,12 @@ namespace MyLib
                 change = true;
             }
 
+            if(lastInfo.Job != ServerData.Instance.playerInfo.Roles.Job) {
+                ainfo.Job = ServerData.Instance.playerInfo.Roles.Job;
+                curInfo.Job = ainfo.Job;
+                change = true;
+            }
+
             if (change)
             {
                 lastInfo = AvatarInfo.CreateBuilder(curInfo).Build();

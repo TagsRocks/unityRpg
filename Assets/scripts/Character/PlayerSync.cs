@@ -116,6 +116,9 @@ namespace MyLib
             if(info.HasName) {
                 attr.userName = info.Name;
             }
+            if(info.HasJob) {
+                attr.job = info.Job;
+            }
         }
 
         public void Revive()

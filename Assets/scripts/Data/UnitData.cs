@@ -22,7 +22,7 @@ namespace MyLib
     {
         MonsterFightConfigData config = null;
         RoleUpgradeConfigData playerConfig = null;
-        RoleJobDescriptionsData jobConfig = null;
+        public RoleJobDescriptionsData jobConfig = null;
         NpcConfigData npcConfig = null;
 
         public NpcConfigData NpcConfig

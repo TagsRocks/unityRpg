@@ -17,7 +17,7 @@ namespace MyLib
     /// </summary>
     public class ScoreManager : MonoBehaviour
     {
-        public int leftTime = 30;
+        public int leftTime = 300;
         public Dictionary<int, ScoreData> score = new Dictionary<int, ScoreData>();
         LeftTimeUI ltui;
         ScoreUI scoreUI;

@@ -421,7 +421,7 @@ BoxCollider:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 150134}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: b5f87704179014481b4938a23dbd9861, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -459,6 +459,7 @@ MonoBehaviour:
   attacker: {fileID: 0}
   KnockBack: 0
   KnockWhoPos: {x: 0, y: 0, z: 0}
+  lastAttacker: 0
   fleeEvent: 0
   fleeTime: 0
 --- !u!1001 &100100000

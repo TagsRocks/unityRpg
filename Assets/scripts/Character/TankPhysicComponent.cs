@@ -19,6 +19,7 @@ namespace MyLib
         private GameObject tower;
         private bool grounded = false;
 
+        public static float Multi = 2;
         void Start()
         {
             rigid = GetComponent<Rigidbody>();
@@ -26,6 +27,18 @@ namespace MyLib
             rigid.useGravity = true;
             attribute = GetComponent<NpcAttribute>();
             tower = Util.FindChildRecursive(transform, "tower").gameObject;
+            maxRotateChange = attribute.ObjUnitData.jobConfig.rotateSpeed;
+        }
+
+        void OnCollisionEnter(Collision col) {
+            Debug.Log("OnCollisionEnter: "+col.gameObject.layer);
+            if(col.gameObject.layer == (int)GameLayer.Npc) {
+                //var attr = NetworkUtil.GetAttr(col.gameObject);
+                var rev = col.relativeVelocity;
+                //col.rigidbody.AddForce(-Multi*rev, ForceMode.VelocityChange);
+                //this.rigidbody.AddForce(-Multi*rev, ForceMode.VelocityChange);
+                this.rigidbody.MovePosition(this.rigidbody.position);
+            }
         }
 
         public void MoveSpeed(Vector3 moveSpeed)
@@ -48,6 +61,7 @@ namespace MyLib
         //旋转炮台 射击时候 或者安静的时候自动归位
         public void TurnTower(Vector3 moveDirection)
         {
+            return;
             var y = Quaternion.LookRotation(moveDirection).eulerAngles.y;
             Log.Sys("TowerRotate: " + y);
             tower.transform.rotation = Quaternion.Euler(new Vector3(0, y, 0));

@@ -372,6 +372,7 @@ namespace MyLib
             }
             ainfo.Level = ObjectManager.objectManager.GetMyProp(CharAttribute.CharAttributeEnum.LEVEL);
             ainfo.HP = ObjectManager.objectManager.GetMyProp(CharAttribute.CharAttributeEnum.HP);
+            ainfo.Job = ServerData.Instance.playerInfo.Roles.Job;
 
             cg.AvatarInfo = ainfo.Build();
             var sync = me.GetComponent<PlayerSyncToServer>();

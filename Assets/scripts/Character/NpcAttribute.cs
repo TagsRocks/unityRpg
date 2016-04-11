@@ -563,6 +563,7 @@ namespace MyLib
             ChangeHP(0);
         }
 
+        public Job job = Job.NOVICE;
         CharacterInfo charInfo;
         public void InitName()
         {

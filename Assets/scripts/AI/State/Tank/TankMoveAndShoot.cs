@@ -83,10 +83,17 @@ namespace MyLib
                 moveSpeed = Mathf.Lerp(moveSpeed, targetSpeed, curSmooth);
                 physics.TurnTo(moveDirection);
                 var curDir = physics.transform.forward;
-                //var movement = moveDirection * moveSpeed;
-                var movement = curDir * moveSpeed;
+                var movement = moveDirection * moveSpeed;
+                //var movement = curDir * moveSpeed;
+
                 var cosDir = Vector3.Dot(moveDirection.normalized, curDir.normalized);
+                cosDir = Mathf.Max(0, cosDir);
                 movement = cosDir * movement;
+                //movement = cosDir * movement;
+                //当前不动 旋转 
+                //在目标方向移动
+                 //在当前方向移动
+                 //在当前方向旋转
                 /*
                 if(cosDir > 0) {
                 }else if(cosDir < 0) {

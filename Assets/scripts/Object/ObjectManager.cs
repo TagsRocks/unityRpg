@@ -576,7 +576,7 @@ namespace MyLib
                 var kbplayer = new KBEngine.KBPlayer();
                 kbplayer.ID = ainfo.Id;
 
-                var udata = Util.GetUnitData(true, (int)1, 1);
+                var udata = Util.GetUnitData(true, (int)ainfo.Job, 1);
                 var player = GameObject.Instantiate(Resources.Load<GameObject>(udata.ModelName)) as GameObject;
 
                 var attr = NGUITools.AddMissingComponent<NpcAttribute>(player);

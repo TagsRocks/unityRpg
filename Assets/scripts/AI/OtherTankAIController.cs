@@ -12,6 +12,8 @@ namespace MyLib
         void Awake()
         {
             attribute = GetComponent<NpcAttribute>();
+            var tower = Util.FindChildRecursive(transform, "tower");
+            tower.gameObject.AddComponent<TowerAutoCheck>();
 
             ai = new TankCharacter();
             ai.attribute = attribute;
