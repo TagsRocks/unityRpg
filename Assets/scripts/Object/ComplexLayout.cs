@@ -52,7 +52,7 @@ namespace MyLib
                 var child = transform.GetChild(i);
                 parts [i].pos = child.localPosition;
                 parts [i].scale = child.localScale;
-                parts[i].rotY = child.localRotation.eulerAngles.y;
+                parts [i].rotY = child.localRotation.eulerAngles.y;
             } 
         }
 
@@ -76,21 +76,26 @@ namespace MyLib
         {
             foreach (var g in parts)
             {
-                var nb = GameObject.Instantiate(g.g) as GameObject;
-                var oldRot = nb.transform.localRotation;
-                nb.transform.parent = transform;
-                Util.InitGameObject(nb);
-                nb.transform.localRotation = oldRot;
-                if(g.rotY != 0) {
-                    nb.transform.localRotation = Quaternion.Euler(new Vector3(oldRot.eulerAngles.x, g.rotY, oldRot.eulerAngles.z));
-                }
-
-                nb.transform.localPosition = g.pos;
-                if (g.scale.x != 0)
+                if (g.g != null)
                 {
-                    nb.transform.localScale = g.scale;
-                }else {
-                    nb.transform.localScale = Vector3.one;
+                    var nb = GameObject.Instantiate(g.g) as GameObject;
+                    var oldRot = nb.transform.localRotation;
+                    nb.transform.parent = transform;
+                    Util.InitGameObject(nb);
+                    nb.transform.localRotation = oldRot;
+                    if (g.rotY != 0)
+                    {
+                        nb.transform.localRotation = Quaternion.Euler(new Vector3(oldRot.eulerAngles.x, g.rotY, oldRot.eulerAngles.z));
+                    }
+
+                    nb.transform.localPosition = g.pos;
+                    if (g.scale.x != 0)
+                    {
+                        nb.transform.localScale = g.scale;
+                    } else
+                    {
+                        nb.transform.localScale = Vector3.one;
+                    }
                 }
             }
         }

@@ -108,6 +108,10 @@ namespace MyLib
                     if (sync != null)
                     {
                         sync.NetworkMove(proto.AvatarInfo);
+                    } else
+                    {
+                        var sync2 = player.GetComponent<MySelfAttributeSync>();
+                        sync2.NetworkAttribute(proto.AvatarInfo);
                     }
                 }
 
@@ -482,7 +486,10 @@ namespace MyLib
 
         void  OnDestroy()
         {
-            UnityEngine.Object.Destroy(NetMatchScene.Instance.gameObject);
+            if (NetMatchScene.Instance != null)
+            {
+                UnityEngine.Object.Destroy(NetMatchScene.Instance.gameObject);
+            }
             QuitWorld();
         }
 
