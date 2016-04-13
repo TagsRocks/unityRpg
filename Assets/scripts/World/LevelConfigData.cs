@@ -217,6 +217,13 @@ namespace MyLib
             };
             LevelLayout.Add(5, l1);
 
+
+            l1 = new List<LevelConfig>(){
+                new LevelConfig("ENTRANCE_E_LM", 0, 0){useOtherZone=true, zoneId=75, type="suntemple"},
+            };
+            LevelLayout.Add(6, l1);
+
+
             l1 = new List<LevelConfig>(){
                 new LevelConfig("ENTRANCE_W_LM", 0, 0){useOtherZone=true, zoneId=66, type="suntemple"},
                 new LevelConfig("EW_LM", -1, 0){useOtherZone=true, zoneId=67, type="suntemple"},

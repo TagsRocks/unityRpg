@@ -253,16 +253,12 @@ namespace KBEngine
                         {
                             handler = flowHandler [flowId];
                             flowHandler.Remove(flowId);
+                        }else {
+                            handler = msgHandle;
                         }
-
-
-
-                        //Message msg = new Message();
                         IMessageLite pbmsg = KBEngine.Message.handlePB(moduleId, msgid, stream);
                         Packet p = new Packet(flag, msglen, flowId, moduleId, msgid, responseTime, responseFlag, pbmsg);
                         var fullName = pbmsg.GetType().FullName;
-                        //Bundle.recvMsg.Add("recvMsg " + fullName + " : " + flowId);
-                        //Log.Net("RecvMsg: "+fullName+" f "+flowId);
 
                         if (fullName.Contains("Push"))
                         {

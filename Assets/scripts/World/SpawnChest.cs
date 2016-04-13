@@ -79,11 +79,13 @@ namespace MyLib
             if (world.IsNet)
             {
                 var attr = ObjectManager.objectManager.GetMyAttr();
-                if (!attr.IsMaster)
+                var nm = NetMatchScene.Instance;
+                if (!attr.IsMaster || nm.roomState != NetMatchScene.RoomState.AllReady)
                 {
                     yield break;
                 }
             }
+
 
             while (true)
             {

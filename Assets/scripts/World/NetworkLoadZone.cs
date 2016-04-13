@@ -20,6 +20,7 @@ namespace MyLib
         }
 
         void OnLocalEvent(MyEvent evt) {
+            Log.Sys("NetworkLoadZone: "+evt);
             if(evt.type == MyEvent.EventType.IsMaster) {
                 var world = WorldManager.worldManager.GetActive();
                 var player = ObjectManager.objectManager.GetMyAttr();

@@ -21,6 +21,15 @@ namespace MyLib
             grid = GetGrid("Grid");
             cell = GetName("Cell");
             cell.SetActive(false);
+            SetCallback("StartGame", OnStartGame);
+        }
+
+        void OnStartGame()
+        {
+            if (jobSel != 0)
+            {
+                WorldManager.worldManager.WorldChangeScene(6, false);
+            }
         }
 
         void Start()
@@ -37,19 +46,23 @@ namespace MyLib
                 Util.InitGameObject(c);
                 IUserInterface.SetText(c, "Name", n);
                 var temp = i;
-                c.GetComponent<IUserInterface>().SetCallback("Info", ()=>{
+                c.GetComponent<IUserInterface>().SetCallback("Info", () =>
+                {
                     OnSelect(temp);
                 });
             }
             grid.repositionNow = true;
         }
 
+        private int jobSel = 0;
+
         void OnSelect(int i)
         {
-            var job = i+1;
+            var job = i + 1;
+            jobSel = job;
             ServerData.Instance.playerInfo.Roles.Job = (Job)job;
 
-            WorldManager.worldManager.WorldChangeScene(5, false);
+            //WorldManager.worldManager.WorldChangeScene(5, false);
         }
     }
 }

@@ -54,6 +54,7 @@ namespace MyLib
         void Start()
         {
             gameObject.AddComponent<ScoreManager>();
+            netScene.InitMap();
         }
 
         public override void BroadcastMsg(CGPlayerCmd.Builder cmd)
