@@ -80,6 +80,7 @@ namespace MyLib
             {
                 var attr = ObjectManager.objectManager.GetMyAttr();
                 var nm = NetMatchScene.Instance;
+                Log.Sys("CheckSpawn: "+world.IsNet+" attr "+attr.IsMaster+" room "+nm.roomState);
                 if (!attr.IsMaster || nm.roomState != NetMatchScene.RoomState.AllReady)
                 {
                     yield break;

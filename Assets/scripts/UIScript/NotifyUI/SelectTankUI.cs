@@ -29,6 +29,8 @@ namespace MyLib
             if (jobSel != 0)
             {
                 WorldManager.worldManager.WorldChangeScene(6, false);
+            }else {
+                Util.ShowMsg("未选择坦克职业");
             }
         }
 
@@ -61,8 +63,7 @@ namespace MyLib
             var job = i + 1;
             jobSel = job;
             ServerData.Instance.playerInfo.Roles.Job = (Job)job;
-
-            //WorldManager.worldManager.WorldChangeScene(5, false);
+            Util.ShowMsg("选择了职业:"+(Job)job);
         }
     }
 }

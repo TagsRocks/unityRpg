@@ -52,9 +52,14 @@ namespace MyLib
             return false;
         }
 
+        private int needPlayer = 2;
         public bool GetPlayerFull()
         {
-            return nm.roomInfo.PlayersCount >= 1;
+            return nm.roomInfo.PlayersCount >= needPlayer;
+        }
+
+        public int GetPlayerNum() {
+            return nm.roomInfo.PlayersCount;
         }
     }
 

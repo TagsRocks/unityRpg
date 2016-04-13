@@ -267,8 +267,18 @@ namespace MyLib
                 }
             } else if (cmds [0] == "AllReady")
             {
+                Util.ShowMsg("所有客户端准备完成");
                 //当所有客户端准备好之后 服务器推送Entity给所有客户端
                 NetMatchScene.Instance.SetAllReady();
+
+                //更新IsMaster 这样才能生成Entity
+                var player = ObjectManager.objectManager.GetMyPlayer();
+                var myselfAttr = player.GetComponent<MySelfAttributeSync>();
+                var matchRoom = NetMatchScene.Instance.GetComponent<MatchRoom>();
+                if (myselfAttr != null)
+                {
+                    myselfAttr.NetworkAttribute(matchRoom.GetMyInfo());
+                }
             }
         }
 
@@ -300,19 +310,13 @@ namespace MyLib
                 yield return null;
             }
             //等待NetworkLoadZone 初始化完成
-            yield return null;
+            yield return new WaitForSeconds(0.2f);
             rc.evtHandler = EvtHandler;
             rc.msgHandler = MsgHandler;
             state = WorldState.Connected;
             myId = NetMatchScene.Instance.myId;
             ObjectManager.objectManager.RefreshMyServerId(myId);
-            var player = ObjectManager.objectManager.GetMyPlayer();
-            var myselfAttr = player.GetComponent<MySelfAttributeSync>();
-            var matchRoom = NetMatchScene.Instance.GetComponent<MatchRoom>();
-            if (myselfAttr != null)
-            {
-                myselfAttr.NetworkAttribute(matchRoom.GetMyInfo());
-            }
+
 
 
             var cg = CGPlayerCmd.CreateBuilder();

@@ -163,6 +163,7 @@ namespace MyLib
             if (c0 == "Add")
             {
                 roomInfo.PlayersList.Add(proto.AvatarInfo);
+                Util.ShowMsg("玩家:"+proto.AvatarInfo.Name+" 加入游戏，当前人数:"+matchRoom.GetPlayerNum());
             } else if (c0 == "Update")
             {
                 foreach (var p in roomInfo.PlayersList)
@@ -184,6 +185,7 @@ namespace MyLib
                         break;
                     }
                 }
+                Util.ShowMsg("玩家:"+proto.AvatarInfo.Name+" 离开游戏，当前人数:"+matchRoom.GetPlayerNum());
             } else if (c0 == "StartGame")
             {
                 //进入Map5场景开始游戏
@@ -191,6 +193,7 @@ namespace MyLib
                 //等待所有玩家进入场景成功
                 //EnterSuc 
                 //然后将所有玩家状态重新刷新一遍
+                Util.ShowMsg("玩家足够开始游戏："+matchRoom.GetPlayerNum());
                 Log.Net("StartGame");
                 roomState = RoomState.InGame;
                 WorldManager.worldManager.WorldChangeScene(5, false);
