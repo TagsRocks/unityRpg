@@ -133,6 +133,7 @@ namespace MyLib
         /// <returns>The zone network.</returns>
         public void  LoadZoneNetwork()
         {
+            Log.Sys("LoadZoneNetwork");
             var zone = loadedZone [0];
             //var pro = Util.FindChildRecursive(zone.transform, "properties");
             var ze = zone.GetComponent<ZoneEntityManager>();

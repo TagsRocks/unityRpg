@@ -106,7 +106,7 @@ namespace MyLib
         IEnumerator AutoEnemy()
         {
             var attr = NetworkUtil.GetAttr(gameObject);
-            var phy = attr.GetComponent<TankPhysicComponent>();
+            var phy = attr.GetComponent<GeneraPhysic>();
             var trans = attr.transform;
             while (true)
             {

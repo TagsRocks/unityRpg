@@ -6,7 +6,7 @@ namespace MyLib
 
     [RequireComponent(typeof(AnimationController))]
     [RequireComponent(typeof(PlayerSync))]
-    [RequireComponent(typeof(TankPhysicComponent))]
+    [RequireComponent(typeof(OtherTankPhysicComponent))]
     public class OtherTankAIController : AIBase 
     {
         void Awake()

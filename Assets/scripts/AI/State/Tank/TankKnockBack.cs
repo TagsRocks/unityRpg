@@ -26,7 +26,7 @@ namespace MyLib
 
         public override IEnumerator RunLogic()
         {
-            var physic = GetAttr().GetComponent<TankPhysicComponent>();
+            var physic = GetAttr().GetComponent<GeneraPhysic>();
             Vector3 moveDirection = GetAttr().transform.position - GetEvent().KnockWhoPos;
             moveDirection.y = 0;
 

@@ -27,7 +27,7 @@ namespace MyLib
         {
             var trans = GetAttr().transform;
             var enemy = SkillLogic.FindNearestEnemy(trans.gameObject);
-            var physic = GetAttr().GetComponent<TankPhysicComponent>();
+            var physic = GetAttr().GetComponent<GeneraPhysic>();
             Log.Sys("FindEnemyIs: " + enemy);
             if (enemy != null)
             {

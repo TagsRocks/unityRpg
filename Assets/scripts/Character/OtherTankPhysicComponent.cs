@@ -4,7 +4,7 @@ using System.Collections;
 namespace MyLib
 {
     //移动和旋转接口
-    public class TankPhysicComponent : GeneraPhysic 
+    public class OtherTankPhysicComponent : GeneraPhysic 
     {
         Rigidbody rigid;
         Vector3 moveValue = Vector3.zero;
@@ -25,10 +25,9 @@ namespace MyLib
             //var box = Util.FindChildRecursive(transform, "boxColldier").gameObject;
             //rigid =  box.GetComponent<Rigidbody>();
             rigid = this.rigidbody;
-            Physics.IgnoreLayerCollision((int)GameLayer.Npc, (int)GameLayer.Npc);
 
             rigid.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
-            rigid.mass = 100;
+            rigid.isKinematic = true;
             //rigid.constraints = RigidbodyConstraints.FreezeAll & ~RigidbodyConstraints.FreezePositionY;
 
             rigid.useGravity = true;
