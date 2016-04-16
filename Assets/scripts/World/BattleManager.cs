@@ -158,6 +158,7 @@ namespace MyLib
 
             //从副本回到主城
             yield return WorldManager.worldManager.StartCoroutine(WorldManager.worldManager.ChangeScene(2, false));
+
         }
 
         void OnPlayerDead(GameObject g)

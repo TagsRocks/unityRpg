@@ -27,6 +27,7 @@ namespace MyLib
             SetCallback("WorldButton", OnWorld);
             SetCallback("BombButton", OnBomb);
             SetCallback("TankButton", OnTank);
+            SetCallback("ClashButton", OnClash);
             this.regEvt = new System.Collections.Generic.List<MyEvent.EventType>()
             {
                 MyEvent.EventType.UpdateItemCoffer,
@@ -36,6 +37,11 @@ namespace MyLib
             RegEvent();
         }
 
+        void OnClash()
+        {
+            WorldManager.worldManager.WorldChangeScene(7, false); 
+        }
+
         /// <summary>
         /// 进入世界场景 
         /// </summary>
@@ -43,6 +49,7 @@ namespace MyLib
         {
             WorldManager.worldManager.WorldChangeScene(3, false);
         }
+
         void OnBomb()
         {
             WorldManager.worldManager.WorldChangeScene(4, false);

@@ -28,11 +28,16 @@ namespace MyLib
 
         public bool hasLightning = false;
     }
+    public class LevelExtraConfig {
+        public bool hasJoystick = true;
+    }
+
     public class LevelConfigData
     {
         static bool initYet = false;
         public static Dictionary<int, List<LevelConfig>> LevelLayout = new Dictionary<int, List<LevelConfig>>();
         public static Dictionary<string, EnvConfig> envConfig = new Dictionary<string, EnvConfig>();
+        public static Dictionary<int, LevelExtraConfig> extraConfig = new Dictionary<int, LevelExtraConfig>();
 
         public static void Init()
         {
@@ -223,6 +228,14 @@ namespace MyLib
             };
             LevelLayout.Add(6, l1);
 
+
+            l1 = new List<LevelConfig>(){
+                new LevelConfig("ENTRANCE_N_PB", 0, 0){useOtherZone=true, zoneId=74, type="tank"},
+            };
+            LevelLayout.Add(7, l1);
+            extraConfig.Add(7, new LevelExtraConfig() {
+                hasJoystick = false,
+            });
 
             l1 = new List<LevelConfig>(){
                 new LevelConfig("ENTRANCE_W_LM", 0, 0){useOtherZone=true, zoneId=66, type="suntemple"},

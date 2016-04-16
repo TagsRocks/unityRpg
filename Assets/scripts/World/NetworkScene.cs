@@ -50,7 +50,7 @@ namespace MyLib
             //StartCoroutine(InitConnect());
         }
 
-        IEnumerator  InitGameData()
+        IEnumerator InitGameData()
         {
             GameInterface_Backpack.ClearDrug();
             yield return StartCoroutine(NetworkUtil.WaitForPlayer());

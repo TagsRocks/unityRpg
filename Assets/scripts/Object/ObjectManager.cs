@@ -439,6 +439,7 @@ namespace MyLib
 
         void SetStartPointPosition(GameObject player)
         {
+            Log.Sys("SetStartPointPosition: "+player);
             if (NetworkUtil.IsNet())
             {
                 var pos = NetworkUtil.GetStartPos();

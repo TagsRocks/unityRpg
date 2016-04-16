@@ -33,7 +33,8 @@ namespace MyLib {
 		
 		void OnOk(GameObject g) {	
 			Log.GUI ("OnOk Next Scene "+NextSceneId);
-			WorldManager.worldManager.StartCoroutine(WorldManager.worldManager.ChangeScene (NextSceneId, false));
+			//WorldManager.worldManager.StartCoroutine(WorldManager.worldManager.ChangeScene (NextSceneId, false));
+            WorldManager.worldManager.WorldChangeScene(NextSceneId, false);
 		}
 
 

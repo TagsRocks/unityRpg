@@ -16,6 +16,7 @@ namespace MyLib
         public enum WindowName
         {
         }
+
         static WindowMng wm = null;
 
         public static WindowMng windowMng
@@ -46,11 +47,12 @@ namespace MyLib
 
         GameObject back = null;
         List<GameObject> stack;
-        List<GameObject>  alphaStack;
+        List<GameObject> alphaStack;
         Dictionary<string, GameObject> uiMap = new Dictionary<string, GameObject>();
 
-        public GameObject  GetMainUI() {
-            return stack[0];
+        public GameObject  GetMainUI()
+        {
+            return stack [0];
         }
 
         public WindowMng()
@@ -125,7 +127,7 @@ namespace MyLib
             {
                 uiRoot = GameObject.FindGameObjectWithTag("UIRoot");
             }
-            Log.GUI("UIRoot "+uiRoot);
+            Log.GUI("UIRoot " + uiRoot);
             if (needAlpha)
             {
                 if (back == null)
@@ -163,6 +165,7 @@ namespace MyLib
                 alphaStack.Add(alpha);
             } else
             {
+                Log.GUI("AddJustBlock: " + viewName + " alpha " + needAlpha);
                 var just = NGUITools.AddChild(uiRoot, justBlock);
                 just.GetComponent<UIPanel>().depth = (int)UIDepth.Window + stack.Count * 10;
                 alphaStack.Add(just);
@@ -181,13 +184,26 @@ namespace MyLib
 #if UNITY_EDITOR
             foreach (GameObject g in stack)
             {
-                if(g != null) {
+                if (g != null)
+                {
                     Log.GUI("Stack UI is " + g.name);
                 }
             }
 #endif
             BackgroundSound.Instance.PlayEffect("sheet_opencenter");
             return bag;
+        }
+
+        public void AddChild(GameObject parentUI, GameObject childUi)
+        {
+            var ch = NGUITools.AddChild(parentUI, childUi);
+            var up = parentUI.GetComponent<UIPanel>().depth;
+            var allPanel = Util.GetAllPanel(ch);
+            int oldDepth = allPanel [0].depth;
+            foreach (UIPanel p in allPanel)
+            {
+                p.depth = up+(p.depth - oldDepth);
+            }
         }
 
         /// <summary>
@@ -201,13 +217,15 @@ namespace MyLib
             {
                 uiRoot = GameObject.FindGameObjectWithTag("UIRoot");
             }
-            if(uiRoot == null) {
+            if (uiRoot == null)
+            {
                 return null;
             }
             GameObject bag;
             if (uiMap.TryGetValue(viewName, out bag))
             {
-                if(bag == null) {
+                if (bag == null)
+                {
                     return null;
                 }
                 bag.SetActive(true);
@@ -233,7 +251,8 @@ namespace MyLib
 #if UNITY_EDITOR
             foreach (GameObject g in stack)
             {
-                if(g != null) {
+                if (g != null)
+                {
                     Log.GUI("Stack UI is " + g.name);
                 }
             }
@@ -246,7 +265,7 @@ namespace MyLib
         // 简单UI可以复用 
         /// </summary>
         /// <param name="destroy">If set to <c>true</c> destroy.</param>
-        public void PopView(bool destroy =true)
+        public void PopView(bool destroy = true)
         {
             Log.Important("UI Layer " + stack.Count + " alphaCount " + alphaStack.Count + " backactive " + back);
             var top = stack [stack.Count - 1];
@@ -258,9 +277,11 @@ namespace MyLib
                 GameObject.Destroy(alpha);
             }
 
-            if(destroy){
+            if (destroy)
+            {
                 GameObject.Destroy(top);
-            }else {
+            } else
+            {
                 top.SetActive(false);
             }
             //top.GetComponent<IUserInterface>().DropEvent();//Close Remove Event
@@ -269,7 +290,8 @@ namespace MyLib
             //除了主UI其它UI才有Back遮挡
             if (stack.Count == 1)
             {
-                if(back != null) {
+                if (back != null)
+                {
                     back.SetActive(false);
                 }
             }
@@ -277,9 +299,9 @@ namespace MyLib
             BackgroundSound.Instance.PlayEffect("sheet_close");
         }
 
-        public void ShowNotifyLog(string text, float time = 3, System.Action<GameObject> cb = null, bool forceTime=false)
+        public void ShowNotifyLog(string text, float time = 3, System.Action<GameObject> cb = null, bool forceTime = false)
         {
-            Log.GUI("ShowNotifyLog "+text);
+            Log.GUI("ShowNotifyLog " + text);
             NotifyUIManager.Instance.AddNotify(text, time, cb, forceTime);
         }
 
