@@ -41,6 +41,8 @@ namespace MyLib
         public KBEngine.MessageHandler msgHandler;
         public System.Action<RemoteClientEvent> evtHandler;
 
+        private Dictionary<uint, KBEngine.MessageHandler> flowHandler = new Dictionary<uint, KBEngine.MessageHandler>();
+
         public RemoteClient(IMainLoop loop)
         {
             msgReader.msgHandle = HandleMsg;
@@ -120,7 +122,7 @@ namespace MyLib
             } else
             {
                 uint num = (uint)bytes;
-                msgReader.process(mTemp, num, null);
+                msgReader.process(mTemp, num, flowHandler);
                 try
                 {
                     mSocket.BeginReceive(mTemp, 0, mTemp.Length, SocketFlags.None, OnReceive, null);
@@ -242,6 +244,18 @@ namespace MyLib
             } catch (Exception e)
             {
                 Debug.LogError(e.ToString());
+            }
+        }
+
+        public IEnumerator SendWaitResponse(byte[] data, uint fid, KBEngine.MessageHandler handler) {
+            var ret = false;
+            flowHandler.Add(fid, (packet)=>{
+                handler(packet);
+                ret = true;
+            });
+            Send(data);
+            while(!ret) {
+                yield return null;
             }
         }
 

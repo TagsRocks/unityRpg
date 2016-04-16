@@ -47,7 +47,7 @@ namespace MyLib
             Debug.LogError("ServerIP: " + ServerIP);
 
             state = WorldState.Connecting;
-            StartCoroutine(InitConnect());
+            //StartCoroutine(InitConnect());
         }
 
         IEnumerator  InitGameData()
@@ -108,6 +108,10 @@ namespace MyLib
                     if (sync != null)
                     {
                         sync.NetworkMove(proto.AvatarInfo);
+                    } else
+                    {
+                        var sync2 = player.GetComponent<MySelfAttributeSync>();
+                        sync2.NetworkAttribute(proto.AvatarInfo);
                     }
                 }
 
@@ -265,6 +269,20 @@ namespace MyLib
                 {
                     ScoreManager.Instance.NetworkGameOver();
                 }
+            } else if (cmds [0] == "AllReady")
+            {
+                Util.ShowMsg("所有客户端准备完成");
+                //当所有客户端准备好之后 服务器推送Entity给所有客户端
+                NetMatchScene.Instance.SetAllReady();
+
+                //更新IsMaster 这样才能生成Entity
+                var player = ObjectManager.objectManager.GetMyPlayer();
+                var myselfAttr = player.GetComponent<MySelfAttributeSync>();
+                var matchRoom = NetMatchScene.Instance.GetComponent<MatchRoom>();
+                if (myselfAttr != null)
+                {
+                    myselfAttr.NetworkAttribute(matchRoom.GetMyInfo());
+                }
             }
         }
 
@@ -279,6 +297,38 @@ namespace MyLib
                 spawnChest = zone.GetSpawnChest(ety.SpawnId);
             }
             ObjectManager.objectManager.CreateChestFromNetwork(unitData, spawnChest, ety);
+        }
+
+        //设置发送Ready
+        //当所有的Ready之后Master 会发送一个Go状态
+        public void InitMap()
+        {
+            rc = NetMatchScene.Instance.rc;
+            StartCoroutine(SendReady());
+        }
+
+        IEnumerator SendReady()
+        {
+            while (ObjectManager.objectManager.GetMyPlayer() == null)
+            {
+                yield return null;
+            }
+            //等待NetworkLoadZone 初始化完成
+            yield return new WaitForSeconds(0.2f);
+            rc.evtHandler = EvtHandler;
+            rc.msgHandler = MsgHandler;
+            state = WorldState.Connected;
+            myId = NetMatchScene.Instance.myId;
+            ObjectManager.objectManager.RefreshMyServerId(myId);
+
+
+
+            var cg = CGPlayerCmd.CreateBuilder();
+            cg.Cmd = "Ready";
+            var data = KBEngine.Bundle.GetPacket(cg);
+            rc.Send(data);
+            SendUserData();
+            yield return StartCoroutine(SendCommandToServer());
         }
 
         IEnumerator InitConnect()
@@ -436,6 +486,10 @@ namespace MyLib
 
         void  OnDestroy()
         {
+            if (NetMatchScene.Instance != null)
+            {
+                UnityEngine.Object.Destroy(NetMatchScene.Instance.gameObject);
+            }
             QuitWorld();
         }
 

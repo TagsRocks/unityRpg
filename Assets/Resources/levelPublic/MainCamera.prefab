@@ -102,6 +102,7 @@ MonoBehaviour:
   XRot: 45
   YRot: 0
   RotSmooth: 5
+  scrollDegree: 0
   ScrollCoff: 4
 --- !u!114 &11405958
 MonoBehaviour:

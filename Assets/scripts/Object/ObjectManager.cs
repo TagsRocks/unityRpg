@@ -203,46 +203,6 @@ namespace MyLib
             return -1;
         }
 
-        /// <summary>
-        /// 返回玩家上一次离开主城的初始位置 存储在数据池中
-        /// </summary>
-        /// <returns>The my init position.</returns>
-        private Vector3 GetMyInitPos()
-        {
-            var x = SaveGame.saveGame.bindSession.X;
-            //var y = SaveGame.saveGame.bindSession.Y;
-            var z = SaveGame.saveGame.bindSession.Z;
-
-            var coord = Util.GridToCoord(x, z);
-            //Get Floor Y Offset By RayCast
-            //Current Scene Height
-
-            //var AStar = GameObject.Find ("AStar").GetComponent<AstarPath> ();
-            var AStar = AstarPath.active;
-            //Scene Height Data 
-            var gridGraph = AStar.graphs [0] as Pathfinding.GridGraph;
-            var gridIndex = (int)(z) * gridGraph.width + (int)(x);
-            Debug.Log("ObjectManager::GetMyInitPos GridIndex" + gridIndex);
-            var n = gridGraph.nodes [gridIndex];
-
-            var hei = (Vector3)(n.position);
-            var ret = new Vector3(coord.x, hei.y + 0.3f, coord.y);
-            Debug.Log("Pos " + ret);
-            return ret;
-        }
-
-        public float GetSceneHeight(int x, int z)
-        {
-            var AStar = GameObject.Find("AStar").GetComponent<AstarPath>();
-            //Scene Height Data 
-            var gridGraph = AStar.graphs [0] as Pathfinding.GridGraph;
-            var gridIndex = (int)(z) * gridGraph.width + (int)(x);
-            Debug.Log("ObjectManager::GetMyInitPos GridIndex" + gridIndex);
-            var n = gridGraph.nodes [gridIndex];
-			
-            var hei = (Vector3)(n.position);
-            return hei.y + 0.1f;
-        }
 
         private Vector3 GetMyInitRot()
         {
@@ -445,7 +405,7 @@ namespace MyLib
 			
             NetDebug.netDebug.AddConsole("Init Player tag layer transform");
             NGUITools.AddMissingComponent<NpcAttribute>(player);
-            NGUITools.AddMissingComponent<TankAIController>(player);
+			NGUITools.AddMissingComponent<PlayerAIController>(player);
             player.tag = "Player";
             player.layer = (int)GameLayer.Npc;
             player.transform.parent = transform;
@@ -592,7 +552,7 @@ namespace MyLib
 
                 var attr = NGUITools.AddMissingComponent<NpcAttribute>(player);
                 //状态机类似 之后可能需要修改为其它玩家状态机
-                NGUITools.AddMissingComponent<OtherTankAIController>(player);
+				NGUITools.AddMissingComponent<OtherPlayerAI>(player);
 
                 player.tag = "Player";
                 player.layer = (int)GameLayer.Npc;

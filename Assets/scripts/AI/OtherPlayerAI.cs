@@ -9,6 +9,7 @@ namespace MyLib
     /// </summary>
     [RequireComponent(typeof(AnimationController))]
     [RequireComponent(typeof(PlayerSync))]
+	[RequireComponent(typeof(PhysicComponent))]
     public class OtherPlayerAI : AIBase
     {
         void Awake()

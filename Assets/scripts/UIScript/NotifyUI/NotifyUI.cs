@@ -44,8 +44,9 @@ namespace MyLib
 		IEnumerator WaitTime(float t) {
             shortT = false;
             while(t > 0) {
-			    yield return new WaitForSeconds (1);
-                t--;
+			    yield return new WaitForSeconds (0.1f);
+                //yield return null;
+                t -= 0.1f;
                 if(shortT) {
                     break;
                 }

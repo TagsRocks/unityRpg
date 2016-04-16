@@ -1,14 +1,14 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &100000
+--- !u!1 &144778
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 4
   m_Component:
-  - 4: {fileID: 400000}
-  - 114: {fileID: 11400000}
+  - 4: {fileID: 444778}
+  - 114: {fileID: 11444778}
   m_Layer: 0
   m_Name: RoomList
   m_TagString: Untagged
@@ -16,24 +16,24 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &400000
+--- !u!4 &444778
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100000}
+  m_GameObject: {fileID: 144778}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
---- !u!114 &11400000
+--- !u!114 &11444778
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100000}
+  m_GameObject: {fileID: 144778}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5b40ce71a8a514e8fb618c9df8d1b202, type: 3}
@@ -72,7 +72,10 @@ MonoBehaviour:
     - {fileID: 152996, guid: 71e6b177e40084bd78834d207c6cf939, type: 2}
     - {fileID: 115340, guid: 11c85501e022e4612bdb1653e6b0e39d, type: 2}
   - type: lava
-    parts: []
+    parts:
+    - {fileID: 154274, guid: 8e678fd39cd4c4341a41c1cd51cd3788, type: 2}
+    - {fileID: 198480, guid: 471d5b1fbd5cd47379c784b6f93c5b92, type: 2}
+    - {fileID: 171456, guid: b5eee892235bb4d24915bf1dd944685d, type: 2}
   - type: snow
     parts: []
   - type: suntemple
@@ -105,6 +108,6 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 100000}
+  m_RootGameObject: {fileID: 144778}
   m_IsPrefabParent: 1
   m_IsExploded: 1

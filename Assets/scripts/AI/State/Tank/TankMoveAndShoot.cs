@@ -29,7 +29,7 @@ namespace MyLib
             var vcontroller = playerMove.vcontroller;
             var camRight = playerMove.camRight;
             var camForward = playerMove.camForward;
-            var physics = playerMove.GetComponent<TankPhysicComponent>();
+            var physics = playerMove.GetComponent<GeneraPhysic>();
             var first = true;
             while (!quit)
             {

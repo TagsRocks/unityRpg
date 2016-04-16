@@ -1,4 +1,4 @@
-﻿﻿using UnityEngine;
+﻿using UnityEngine;
 using System.Collections;
 
 namespace MyLib
@@ -10,6 +10,7 @@ namespace MyLib
     {
         public void NetworkAttribute(AvatarInfo info) {
             var attr = GetComponent<NpcAttribute>();
+            Log.Net("MySelfSync: "+info);
             if(info.HasTeamColor) {
                 attr.SetTeamColorNet(info.TeamColor);
             }

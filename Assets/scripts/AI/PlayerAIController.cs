@@ -21,19 +21,20 @@ namespace MyLib
     [RequireComponent(typeof(SkillCombineBuff))]
     [RequireComponent(typeof(MySelfAttributeSync))]
     [RequireComponent(typeof(PlayerSyncToServer))]
+	[RequireComponent(typeof(PhysicComponent))]
     public class PlayerAIController : AIBase
     {
         void Awake()
         {
             attribute = GetComponent<NpcAttribute>();
 
-            ai = new TankCharacter();
+			ai = new HumanCharacter();
             ai.attribute = attribute;
             ai.AddState(new HumanIdle());
-            ai.AddState(new TankMoveAndShoot());
-            //ai.AddState(new HumanMove());
-            //ai.AddState(new HumanCombat());
-            //ai.AddState(new HumanSkill());
+            //ai.AddState(new TankMoveAndShoot());
+            ai.AddState(new HumanMove());
+            ai.AddState(new HumanCombat());
+            ai.AddState(new HumanSkill());
 
             ai.AddState(new HumanDead());
             ai.AddState(new MonsterKnockBack());

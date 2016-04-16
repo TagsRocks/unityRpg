@@ -17,7 +17,13 @@ namespace MyLib
 
         public override bool IsEnemy(GameObject a, GameObject b)
         {
-            return a != b && b.tag == GameTag.Player;
+            var aattr = NetworkUtil.GetAttr(a);
+            var battr = NetworkUtil.GetAttr(b);
+            if (aattr != null && battr != null)
+            {
+                return a != b && b.tag == GameTag.Player && aattr.TeamColor != battr.TeamColor;
+            }
+            return false;
         }
 
         public override bool IsNet
@@ -48,6 +54,7 @@ namespace MyLib
         void Start()
         {
             gameObject.AddComponent<ScoreManager>();
+            netScene.InitMap();
         }
 
         public override void BroadcastMsg(CGPlayerCmd.Builder cmd)

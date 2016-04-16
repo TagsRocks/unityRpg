@@ -26,7 +26,7 @@ namespace MyLib
             ai.AddState(new TankIdle());
             ai.AddState(new TankMoveAndShoot());
             ai.AddState(new TankDead());
-            ai.AddState(new MonsterKnockBack());
+            ai.AddState(new TankKnockBack());
             ai.AddState(new HumanStunned());
             ai.AddState(new TankStop());
         }

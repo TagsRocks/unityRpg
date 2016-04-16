@@ -11,6 +11,7 @@ using System.Collections;
  */
 public class EnterZone : MonoBehaviour
 {
+    public delegate void OnVoidDelegate();
     public OnVoidDelegate OnEnter;
     public bool Enter = false;
 

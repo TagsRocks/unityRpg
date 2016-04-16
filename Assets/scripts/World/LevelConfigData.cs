@@ -55,8 +55,15 @@ namespace MyLib
             LevelLayout.Add(101, l1);
 
             //ZoneConfig MainCity
+            /*
             l1 = new List<LevelConfig>(){
                 new LevelConfig("ENTRANCE_S_LM", 0, 0){useOtherZone=true, zoneId=10},
+            };
+            LevelLayout.Add(2, l1);
+            */
+
+            l1 = new List<LevelConfig>(){
+                new LevelConfig("ENTRANCE_E_LM", 0, 0){useOtherZone=true, zoneId=50, type="suntemple"},
             };
             LevelLayout.Add(2, l1);
 
@@ -209,6 +216,13 @@ namespace MyLib
                 new LevelConfig("ENTRANCE_N_PB", 0, 0){useOtherZone=true, zoneId=74, type="tank"},
             };
             LevelLayout.Add(5, l1);
+
+
+            l1 = new List<LevelConfig>(){
+                new LevelConfig("ENTRANCE_E_LM", 0, 0){useOtherZone=true, zoneId=75, type="suntemple"},
+            };
+            LevelLayout.Add(6, l1);
+
 
             l1 = new List<LevelConfig>(){
                 new LevelConfig("ENTRANCE_W_LM", 0, 0){useOtherZone=true, zoneId=66, type="suntemple"},

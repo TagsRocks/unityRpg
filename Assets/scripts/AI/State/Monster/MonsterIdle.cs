@@ -74,23 +74,7 @@ namespace MyLib
             }
         }
 
-        IEnumerator CheckFarAway()
-        {
-            var oriPos = GetAttr().OriginPos;
-            while (!quit)
-            {
-                yield return new WaitForSeconds(1);
-                if (!quit)
-                {
-                    var curPos = GetAttr().transform.position;
-                    var dis = Pathfinding.AstarMath.SqrMagnitudeXZ(curPos, oriPos);
-                    if (dis > 25)
-                    {
-                        GetAttr().transform.position = oriPos;
-                    }
-                }
-            }
-        }
+
 
         public override IEnumerator RunLogic()
         {
@@ -98,7 +82,6 @@ namespace MyLib
             {
                 yield return GetAttr().StartCoroutine(Birth());
             }
-            GetAttr().StartCoroutine(CheckFarAway());
             GetAttr().StartCoroutine(IdleSound());
             yield return GetAttr().StartCoroutine(NewHeading());
             

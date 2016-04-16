@@ -25,8 +25,6 @@ namespace MyLib
             SetCallback("GMButton", OnGM);
             SetCallback("JingShiButton", OnJingShi);
             SetCallback("WorldButton", OnWorld);
-            SetCallback("BombButton", OnBomb);
-            SetCallback("TankButton", OnTank);
             this.regEvt = new System.Collections.Generic.List<MyEvent.EventType>()
             {
                 MyEvent.EventType.UpdateItemCoffer,

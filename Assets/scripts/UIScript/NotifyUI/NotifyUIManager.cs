@@ -87,7 +87,7 @@ namespace MyLib
                         NotifyUI.Instance.GetComponent<NotifyUI>().ShortTime();
                     }
                 }
-                yield return new WaitForSeconds(1);
+                yield return new WaitForSeconds(0.1f);
             }
         }
 

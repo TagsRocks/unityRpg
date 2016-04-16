@@ -158,13 +158,27 @@ namespace KBEngine
             return p;
         }
 
+        private static uint lastFid;
         public static byte[] GetPacket(IBuilderLite build) {
             var bundle = new Bundle();
             var data = build.WeakBuild();
             Log.Net("GetPacket: "+data);
             bundle.newMessage(data.GetType());
             var fid = bundle.writePB(data);
+            lastFid = fid;
             return bundle.stream.getbuffer();
+        }
+        public struct SendPacketInfo {
+            public uint fid;
+            public byte[] data;
+        }
+        public static SendPacketInfo GetPacketFull(IBuilderLite build) {
+            var data = GetPacket(build);
+            var t = new SendPacketInfo() {
+                fid = lastFid,
+                data = data,
+            };
+            return t;
         }
 
 		public static IMessageLite sendImmediate(IBuilderLite build) {

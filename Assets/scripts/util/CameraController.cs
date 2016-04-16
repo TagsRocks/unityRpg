@@ -26,7 +26,7 @@ namespace MyLib
 		private float movementZ;
 		float movementY = 0;
 		Quaternion targetRotation;
-		float scrollDegree = 0;
+        public float scrollDegree = 45;
 		public float ScrollCoff = 1;
 		// Use this for initialization
 		public static CameraController cameraController;
