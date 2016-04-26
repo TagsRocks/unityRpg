@@ -10,7 +10,7 @@ namespace MyLib
             base.EnterState();
             Util.SetLayer(GetAttr().gameObject, GameLayer.IgnoreCollision);
 
-            GetAttr().animation.CrossFade("opening");
+            GetAttr().GetComponent<Animation>().CrossFade("opening");
             GetAttr().IsDead = true;
             GetAttr().OnlyShowDeadEffect();
 

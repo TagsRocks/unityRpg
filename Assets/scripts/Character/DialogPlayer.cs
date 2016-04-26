@@ -19,8 +19,8 @@ namespace MyLib
 			//var peace = WorldManager.worldManager.IsPeaceLevel();
 			var idleName = "stand";
 
-			animation.CrossFade (idleName);
-			animation [idleName].wrapMode = WrapMode.Loop;
+			GetComponent<Animation>().CrossFade (idleName);
+			GetComponent<Animation>() [idleName].wrapMode = WrapMode.Loop;
 		}
 		void OnEnable() {
 			SetIdle ();

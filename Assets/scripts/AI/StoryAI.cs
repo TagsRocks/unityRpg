@@ -48,7 +48,7 @@ namespace MyLib {
 			yield return StartCoroutine (commonAI.KillNpc (target));
 
 			attribute._characterState = CharacterState.Idle;
-			animation.CrossFade("idle");
+			GetComponent<Animation>().CrossFade("idle");
 
 			GetComponent<PlayerAIController> ().enabled = false;
 		}

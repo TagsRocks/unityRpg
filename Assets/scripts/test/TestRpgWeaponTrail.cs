@@ -31,10 +31,10 @@ public class TestRpgWeaponTrail : MonoBehaviour {
 
 	IEnumerator PlayNow() {
 		yield return null;
-		ani.PlayAnimation (animation["idle"]);
+		ani.PlayAnimation (GetComponent<Animation>()["idle"]);
 		//.CrossfadeAnimation (animation["rslash_1"], 0.2f);
 		yield return new WaitForSeconds(2);
-		ani.CrossfadeAnimation (animation["rslash_1"], 0.2f);
+		ani.CrossfadeAnimation (GetComponent<Animation>()["rslash_1"], 0.2f);
 		wt.SetTime (1, 0, 1);
 
 		yield return new WaitForSeconds (2);

@@ -10,7 +10,7 @@ namespace MyLib
     {
         void Awake()
         {
-            camera.depthTextureMode = DepthTextureMode.Depth;
+            GetComponent<Camera>().depthTextureMode = DepthTextureMode.Depth;
 
         }
         [ButtonCallFunc()]public bool SetMatrix;
@@ -18,7 +18,7 @@ namespace MyLib
             Update();
         }
         void Update() {
-            var mat = camera.projectionMatrix * camera.worldToCameraMatrix ;
+            var mat = GetComponent<Camera>().projectionMatrix * GetComponent<Camera>().worldToCameraMatrix ;
             Shader.SetGlobalMatrix("_MainCameraWorldToProj", mat);
         }
 

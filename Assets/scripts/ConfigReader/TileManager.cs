@@ -214,7 +214,7 @@ namespace MyLib
             if (bestMatch != null)
             {
                 var assPath = bestMatch.FullName.Replace(Application.dataPath, "Assets");
-                var g = Resources.LoadAssetAtPath<GameObject>(assPath) as GameObject;
+                var g = AssetDatabase.LoadAssetAtPath<GameObject>(assPath) as GameObject;
                 //var g = PrefabUtility.InstantiatePrefab() as GameObject;
                 return g;
             }

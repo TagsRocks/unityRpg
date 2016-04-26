@@ -108,7 +108,7 @@ public class RoomList : MonoBehaviour
         {
             var n = p.FullName.Replace(Application.dataPath, "Assets");
 			Log.Sys("AddRoom "+n);
-            var go = Resources.LoadAssetAtPath<GameObject>(n);
+            var go = AssetDatabase.LoadAssetAtPath<GameObject>(n);
             tp1.parts.Add(go);
         }
 
@@ -121,7 +121,7 @@ public class RoomList : MonoBehaviour
             {
                 var n = p.FullName.Replace(Application.dataPath, "Assets");
 				Log.Sys("AddRoom "+n);
-                var go = Resources.LoadAssetAtPath<GameObject>(n);
+                var go = AssetDatabase.LoadAssetAtPath<GameObject>(n);
                 tp.parts.Add(go);
                 
             }

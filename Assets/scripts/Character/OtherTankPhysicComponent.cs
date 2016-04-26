@@ -24,7 +24,7 @@ namespace MyLib
         {
             //var box = Util.FindChildRecursive(transform, "boxColldier").gameObject;
             //rigid =  box.GetComponent<Rigidbody>();
-            rigid = this.rigidbody;
+            rigid = this.GetComponent<Rigidbody>();
 
             rigid.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
             rigid.isKinematic = true;

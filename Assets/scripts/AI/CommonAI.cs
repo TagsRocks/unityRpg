@@ -84,12 +84,12 @@ namespace MyLib {
 			//targetObj = target;
 
 			while (!targetAttribute.IsDead) {
-				animation.CrossFade (attAniName);
-				animation [attAniName].speed = 2;
-				animation [attAniName].wrapMode = WrapMode.Once;
+				GetComponent<Animation>().CrossFade (attAniName);
+				GetComponent<Animation>() [attAniName].speed = 2;
+				GetComponent<Animation>() [attAniName].wrapMode = WrapMode.Once;
 
 
-				while(animation.isPlaying) {
+				while(GetComponent<Animation>().isPlaying) {
 					if(myAnimationEvent.hit) {
 						myAnimationEvent.hit = false;
 						DoHit();
@@ -164,12 +164,12 @@ namespace MyLib {
 		/// </summary>
 		public IEnumerator CastSkill(SkillData sd) {
 			var attackAniName = sd.AnimationName;
-			animation.CrossFade(attackAniName);
-			animation[attackAniName].speed = 2;
+			GetComponent<Animation>().CrossFade(attackAniName);
+			GetComponent<Animation>()[attackAniName].speed = 2;
 
 			Debug.Log ("CommonAI::CastSkill "+gameObject.name);
 
-			while(animation.isPlaying) {
+			while(GetComponent<Animation>().isPlaying) {
 				if(attribute.CheckDead())
 					break;
 				

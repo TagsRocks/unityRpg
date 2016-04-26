@@ -1,4 +1,6 @@
-﻿Shader "Custom/gelShader" {
+﻿#warning Upgrade NOTE: unity_Scale shader variable was removed; replaced 'unity_Scale.w' with '1.0'
+
+Shader "Custom/gelShader" {
 	Properties {
 		_Color ("Main Color", Color) = (1,1,1,1)
 		_MainTex ("Base (RGB)", 2D) = "white" {}
@@ -91,7 +93,7 @@
 	         {
 	            float4x4 modelMatrix = _Object2World;
 	            float4x4 modelMatrixInverse = 
-	               _World2Object * unity_Scale.w;
+	               _World2Object * 1.0;
 	            modelMatrixInverse[3][3] = 1.0; 
 	            float4x4 viewMatrix = 
 	               mul(UNITY_MATRIX_MV, modelMatrixInverse);

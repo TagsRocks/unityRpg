@@ -176,7 +176,7 @@ namespace MyLib
         {
             foreach (Transform t in transform)
             {
-                if (t.renderer != null && t.name != "playerLight(Clone)")
+                if (t.GetComponent<Renderer>() != null && t.name != "playerLight(Clone)")
                 {
                     t.gameObject.layer = (int)GameLayer.ShadowMap;
                 }
@@ -219,7 +219,7 @@ namespace MyLib
         {
             foreach (Transform t in transform)
             {
-                if (t.renderer != null && t.name != "playerLight(Clone)")
+                if (t.GetComponent<Renderer>() != null && t.name != "playerLight(Clone)")
                 {
                     t.gameObject.layer = (int)GameLayer.Default;
                 }
@@ -818,7 +818,7 @@ namespace MyLib
         void SetTexture(string tex)
         {
             var skins = gameObject.GetComponentInChildren<SkinnedMeshRenderer>();
-            skins.renderer.material.mainTexture = Resources.Load<Texture>(tex);
+            skins.GetComponent<Renderer>().material.mainTexture = Resources.Load<Texture>(tex);
 
         }
 
@@ -1013,7 +1013,7 @@ namespace MyLib
 
         public bool CheckAni(string name)
         {
-            return animation.GetClip(name) != null; 
+            return GetComponent<Animation>().GetClip(name) != null; 
         }
 
         public void NetworkRevive()

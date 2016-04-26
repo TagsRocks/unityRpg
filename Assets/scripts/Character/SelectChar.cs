@@ -39,18 +39,18 @@ namespace MyLib
 
 		void Start ()
 		{
-			if (animation.GetClip ("stand") != null) {
-				animation ["stand"].wrapMode = WrapMode.Loop;
-				animation.CrossFade ("stand");
+			if (GetComponent<Animation>().GetClip ("stand") != null) {
+				GetComponent<Animation>() ["stand"].wrapMode = WrapMode.Loop;
+				GetComponent<Animation>().CrossFade ("stand");
 			}
 
 		}
 
 		void OnEnable ()
 		{
-			if (animation.GetClip ("stand") != null) {
-				animation ["stand"].wrapMode = WrapMode.Loop;
-				animation.CrossFade ("stand");
+			if (GetComponent<Animation>().GetClip ("stand") != null) {
+				GetComponent<Animation>() ["stand"].wrapMode = WrapMode.Loop;
+				GetComponent<Animation>().CrossFade ("stand");
 			}
 			GetComponent<ShadowComponent> ().HideShadow ();
 		}

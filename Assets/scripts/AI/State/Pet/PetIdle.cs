@@ -29,7 +29,7 @@ namespace MyLib
                     g.transform.localRotation = Quaternion.identity;
                     g.transform.localScale = Vector3.one;
                 }
-                yield return GetAttr().StartCoroutine(Util.WaitForAnimation(GetAttr().animation));
+                yield return GetAttr().StartCoroutine(Util.WaitForAnimation(GetAttr().GetComponent<Animation>()));
                 
                 SetAttrState(CharacterState.Idle);
                 aiCharacter.SetIdle ();

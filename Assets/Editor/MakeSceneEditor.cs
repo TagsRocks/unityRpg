@@ -62,7 +62,7 @@ public class MakeSceneEditor : Editor
         {
             Debug.Log("Find File " + fname);
             var assPath = bestMatch.FullName.Replace(Application.dataPath, "Assets");
-            var g = PrefabUtility.InstantiatePrefab(Resources.LoadAssetAtPath<GameObject>(assPath)) as GameObject;
+            var g = PrefabUtility.InstantiatePrefab(AssetDatabase.LoadAssetAtPath<GameObject>(assPath)) as GameObject;
             g.transform.parent = root.transform;
             g.transform.position = new Vector3(-px, py, pz) + parPos;
             g.transform.localScale = Vector3.one;
@@ -130,7 +130,7 @@ public class MakeSceneEditor : Editor
         {
             Debug.Log("Find File " + fname);
             var assPath = bestMatch.FullName.Replace(Application.dataPath, "Assets");
-            var g = PrefabUtility.InstantiatePrefab(Resources.LoadAssetAtPath<GameObject>(assPath)) as GameObject;
+            var g = PrefabUtility.InstantiatePrefab(AssetDatabase.LoadAssetAtPath<GameObject>(assPath)) as GameObject;
             g.transform.parent = root.transform;
             g.transform.position = new Vector3(-px, py, pz)+parPos;
             g.transform.localScale = Vector3.one;
@@ -311,7 +311,7 @@ public class MakeSceneEditor : Editor
             Debug.Log("light file name " + ln);
             var pb = "Assets/lightPrefab/" + ln.Replace(".MESH", ".prefab").ToLower();
             Debug.Log("LoadLight " + pb);
-            var lobj = Resources.LoadAssetAtPath(pb, typeof(GameObject)) as GameObject;
+            var lobj = AssetDatabase.LoadAssetAtPath(pb, typeof(GameObject)) as GameObject;
             if (lobj != null)
             {
                 var copyobj = PrefabUtility.InstantiatePrefab(lobj) as GameObject;
@@ -377,7 +377,7 @@ public class MakeSceneEditor : Editor
             Debug.Log("DataPath " + Application.dataPath);
             var pa = f.FullName.Replace(Application.dataPath, "Assets");
             
-            var pre = Resources.LoadAssetAtPath<GameObject>(pa);
+            var pre = AssetDatabase.LoadAssetAtPath<GameObject>(pa);
             
             nameToGameObject.Add(pre);
         }
@@ -525,7 +525,7 @@ public class MakeSceneEditor : Editor
         if (bestMatch != null)
         {
             var assPath = bestMatch.FullName.Replace(Application.dataPath, "Assets");
-            var g = PrefabUtility.InstantiatePrefab(Resources.LoadAssetAtPath<GameObject>(assPath)) as GameObject;
+            var g = PrefabUtility.InstantiatePrefab(AssetDatabase.LoadAssetAtPath<GameObject>(assPath)) as GameObject;
             return g;
         }
         return null;
@@ -533,7 +533,7 @@ public class MakeSceneEditor : Editor
 
     void MakeLightOuter(string lightStr)
     {
-        var light = Resources.LoadAssetAtPath("Assets/Config/" + lightStr + ".json", typeof(TextAsset)) as TextAsset;
+        var light = AssetDatabase.LoadAssetAtPath("Assets/Config/" + lightStr + ".json", typeof(TextAsset)) as TextAsset;
         var larr = JSON.Parse(light.text) as JSONClass;
         Debug.Log("ReadFile " + lightStr);
         MakeLight(larr);
@@ -567,7 +567,7 @@ public class MakeSceneEditor : Editor
     /// <param name="jobj">Jobj.</param>
     void MakeRoomPieces(JSONClass jobj)
     {
-        var mapJson = Resources.LoadAssetAtPath<TextAsset>("Assets/Config/map.json");
+        var mapJson = AssetDatabase.LoadAssetAtPath<TextAsset>("Assets/Config/map.json");
         var mapObj = JSON.Parse(mapJson.text).AsObject;
         var root = new GameObject("RoomPieces");
         Util.InitGameObject(root);
@@ -644,7 +644,7 @@ public class MakeSceneEditor : Editor
             {
                 Debug.Log("CopyLight " + tarFile);
                 var sub = fpath.Substring(start);
-                var g = Resources.LoadAssetAtPath<GameObject>(sub);
+                var g = AssetDatabase.LoadAssetAtPath<GameObject>(sub);
                 var tg = PrefabUtility.CreatePrefab(tar, g);
             } else
             {
@@ -658,7 +658,7 @@ public class MakeSceneEditor : Editor
     GameObject CombineTwo(string f, string col)
     {
         var fpath = ConvertPath(f);
-        var g = Resources.LoadAssetAtPath<GameObject>(fpath);
+        var g = AssetDatabase.LoadAssetAtPath<GameObject>(fpath);
         if (g != null)
         {
             if (!g.name.Contains("@"))
@@ -670,7 +670,7 @@ public class MakeSceneEditor : Editor
                 if (col != "")
                 {
                     var cp = ConvertPath(col);
-                    cg = Resources.LoadAssetAtPath<GameObject>(cp);
+                    cg = AssetDatabase.LoadAssetAtPath<GameObject>(cp);
                     if (cg != null)
                     {
                         //AdjustModelImport(cp);
@@ -679,7 +679,7 @@ public class MakeSceneEditor : Editor
 
                 var fn = Path.GetFileName(fpath);
                 var prefab = fn.Replace(".fbx", ".prefab");
-                var oldPrefab = Resources.LoadAssetAtPath<GameObject>(prefab);
+                var oldPrefab = AssetDatabase.LoadAssetAtPath<GameObject>(prefab);
                 if (oldPrefab == null)
                 {
                 
@@ -709,7 +709,7 @@ public class MakeSceneEditor : Editor
     /// </summary>
     void CombineFileAndCollisionToPrefab()
     {
-        var mapJson = Resources.LoadAssetAtPath<TextAsset>("Assets/Config/map.json");
+        var mapJson = AssetDatabase.LoadAssetAtPath<TextAsset>("Assets/Config/map.json");
         var mapObj = JSON.Parse(mapJson.text).AsObject;
         AssetDatabase.StartAssetEditing();
         foreach (KeyValuePair<string, JSONNode> n in mapObj)
@@ -737,7 +737,7 @@ public class MakeSceneEditor : Editor
         //场景类型和组件编号
         if (GUILayout.Button("一键生成房间数据"))
         {
-            var md = Resources.LoadAssetAtPath("Assets/Config/" + dataConfigStr.stringValue + ".json", typeof(TextAsset)) as TextAsset;
+            var md = AssetDatabase.LoadAssetAtPath("Assets/Config/" + dataConfigStr.stringValue + ".json", typeof(TextAsset)) as TextAsset;
             var jobj = JSON.Parse(md.text).AsObject;
             MakeRoomPieces(jobj);
             MakeLight(jobj);
@@ -772,7 +772,7 @@ public class MakeSceneEditor : Editor
 
             PrefabUtility.CreatePrefab(resName, g);
             GameObject.DestroyImmediate(g);
-            var res = Resources.LoadAssetAtPath<GameObject>(resName);
+            var res = AssetDatabase.LoadAssetAtPath<GameObject>(resName);
             var roomList = Resources.Load<GameObject>("RoomList");
             var rl = roomList.GetComponent<RoomList>();
             rl.AddRoom(type, res);
@@ -803,14 +803,14 @@ public class MakeSceneEditor : Editor
         }
         if (GUILayout.Button("根据Layout.json结合map.json获取所有Room Pieces"))
         {
-            var md = Resources.LoadAssetAtPath("Assets/Config/" + dataConfigStr.stringValue + ".json", typeof(TextAsset)) as TextAsset;
+            var md = AssetDatabase.LoadAssetAtPath("Assets/Config/" + dataConfigStr.stringValue + ".json", typeof(TextAsset)) as TextAsset;
             var jobj = JSON.Parse(md.text).AsObject;
             MakeRoomPieces(jobj);
         }
         if (GUILayout.Button("将LayoutLink 的props从levelPrefab中组合"))
         {
             Debug.Log("ReadData is " + dataConfigStr.stringValue);
-            var md = Resources.LoadAssetAtPath("Assets/Config/" + dataConfigStr.stringValue + ".json", typeof(TextAsset)) as TextAsset;
+            var md = AssetDatabase.LoadAssetAtPath("Assets/Config/" + dataConfigStr.stringValue + ".json", typeof(TextAsset)) as TextAsset;
             var jobj = JSON.Parse(md.text).AsObject;
             MakeProps(jobj);
 
@@ -822,7 +822,7 @@ public class MakeSceneEditor : Editor
 
         if (GUILayout.Button("组合模型Props"))
         {
-            var md = Resources.LoadAssetAtPath("Assets/Config/" + dataConfigStr.stringValue + ".json", typeof(TextAsset)) as TextAsset;
+            var md = AssetDatabase.LoadAssetAtPath("Assets/Config/" + dataConfigStr.stringValue + ".json", typeof(TextAsset)) as TextAsset;
             var jobj = JSON.Parse(md.text).AsObject;
             int count = 0;
             foreach (KeyValuePair<string, JSONNode> N in jobj)
@@ -842,7 +842,7 @@ public class MakeSceneEditor : Editor
                     var prefab = fn.Replace(".mesh", ".prefab");
                     var oldFile = Path.Combine("Assets/levelsets/props", fbx);
                     Debug.Log("oldFile:" + oldFile);
-                    var g = Resources.LoadAssetAtPath<GameObject>(oldFile);
+                    var g = AssetDatabase.LoadAssetAtPath<GameObject>(oldFile);
                     if (g == null)
                     {
                         Debug.Log("load fbx error:" + fbx);
@@ -855,7 +855,7 @@ public class MakeSceneEditor : Editor
                     
                         var colN = Path.GetFileName(colName);
                         colN = Path.Combine("Assets/levelsets/props", colN.Replace(".mesh", ".fbx"));
-                        var gcol = Resources.LoadAssetAtPath<GameObject>(colN);
+                        var gcol = AssetDatabase.LoadAssetAtPath<GameObject>(colN);
                         meshCollider.sharedMesh = gcol.GetComponent<MeshFilter>().sharedMesh;
                     }
                     //break;
@@ -867,7 +867,7 @@ public class MakeSceneEditor : Editor
                     Debug.Log("Create Collision null:" + fn);
                     var oldFile = Path.Combine("Assets/levelsets/props", fbx);
                     var tar = Path.Combine("Assets/prefabs/props", prefab);
-                    var g = Resources.LoadAssetAtPath<GameObject>(oldFile);
+                    var g = AssetDatabase.LoadAssetAtPath<GameObject>(oldFile);
                     if (g == null)
                     {
                         Debug.Log("load fbx error:" + fbx);   
@@ -883,7 +883,7 @@ public class MakeSceneEditor : Editor
         //According to Mine.data.json  To COmbine levelsets/Mine  Model 
         if (GUILayout.Button("组合模型Mine"))
         {
-            var md = Resources.LoadAssetAtPath("Assets/Config/Mine.dat.json", typeof(TextAsset)) as TextAsset;
+            var md = AssetDatabase.LoadAssetAtPath("Assets/Config/Mine.dat.json", typeof(TextAsset)) as TextAsset;
             var jobj = JSON.Parse(md.text).AsObject;
             int count = 0;
             foreach (KeyValuePair<string, JSONNode> N in jobj)
@@ -903,7 +903,7 @@ public class MakeSceneEditor : Editor
                     var prefab = fn.Replace(".mesh", ".prefab");
                     var oldFile = Path.Combine("Assets/levelsets/mine", fbx);
                     Debug.Log("oldFile:" + oldFile);
-                    var g = Resources.LoadAssetAtPath<GameObject>(oldFile);
+                    var g = AssetDatabase.LoadAssetAtPath<GameObject>(oldFile);
                     var tar = Path.Combine("Assets/prefabs", prefab);
                     Debug.Log("Prefab is " + tar + " " + fbx + " GameObje: " + g);
                     var tg = PrefabUtility.CreatePrefab(tar, g);
@@ -911,7 +911,7 @@ public class MakeSceneEditor : Editor
 
                     var colN = Path.GetFileName(colName);
                     colN = Path.Combine("Assets/levelsets/mine", colN.Replace(".mesh", ".fbx"));
-                    var gcol = Resources.LoadAssetAtPath<GameObject>(colN);
+                    var gcol = AssetDatabase.LoadAssetAtPath<GameObject>(colN);
                     meshCollider.sharedMesh = gcol.GetComponent<MeshFilter>().sharedMesh;
                     //break;
                 } else
@@ -922,7 +922,7 @@ public class MakeSceneEditor : Editor
                     Debug.Log("Create Collision null:" + fn);
                     var oldFile = Path.Combine("Assets/levelsets/mine", fbx);
                     var tar = Path.Combine("Assets/prefabs", prefab);
-                    var g = Resources.LoadAssetAtPath<GameObject>(oldFile);
+                    var g = AssetDatabase.LoadAssetAtPath<GameObject>(oldFile);
                     //var tg = 
                     PrefabUtility.CreatePrefab(tar, g);
                     //tg.AddComponent<BoxCollider>();
@@ -936,10 +936,10 @@ public class MakeSceneEditor : Editor
 
         if (GUILayout.Button("组合场景"))
         {
-            var md = Resources.LoadAssetAtPath("Assets/Config/Mine.dat.json", typeof(TextAsset)) as TextAsset;
+            var md = AssetDatabase.LoadAssetAtPath("Assets/Config/Mine.dat.json", typeof(TextAsset)) as TextAsset;
             var jobj = JSON.Parse(md.text).AsObject;
 
-            var layout = Resources.LoadAssetAtPath<TextAsset>("Assets/Config/" + layoutStr + ".json");
+            var layout = AssetDatabase.LoadAssetAtPath<TextAsset>("Assets/Config/" + layoutStr + ".json");
             var jlist = JSON.Parse(layout.text).AsArray;
             Debug.Log("ArrayLength " + jlist.Count);
             int notFindCount = 0;
@@ -1000,7 +1000,7 @@ public class MakeSceneEditor : Editor
                         var prefab = fn.Replace(".mesh", ".prefab");
                         var oldFile = Path.Combine("Assets/prefabs", prefab);
                         Debug.Log("instantiate :" + oldFile);
-                        var g = GameObject.Instantiate(Resources.LoadAssetAtPath<GameObject>(oldFile)) as GameObject;
+                        var g = GameObject.Instantiate(AssetDatabase.LoadAssetAtPath<GameObject>(oldFile)) as GameObject;
                         int co = 0;
                         pieceId.TryGetValue(gid, out co);
 
@@ -1025,9 +1025,9 @@ public class MakeSceneEditor : Editor
         ///According to Layout.json to Test whether all Room Pieces is in Mine.ata.json
         if (GUILayout.Button("Test"))
         {
-            var md = Resources.LoadAssetAtPath("Assets/Config/Mine.dat.json", typeof(TextAsset)) as TextAsset;
+            var md = AssetDatabase.LoadAssetAtPath("Assets/Config/Mine.dat.json", typeof(TextAsset)) as TextAsset;
             var jobj = JSON.Parse(md.text).AsObject;
-            var layout = Resources.LoadAssetAtPath<TextAsset>("Assets/Config/1X1ENTRANCE_E.json");
+            var layout = AssetDatabase.LoadAssetAtPath<TextAsset>("Assets/Config/1X1ENTRANCE_E.json");
             var jlist = JSON.Parse(layout.text).AsArray;
             Debug.Log("ArrayLength " + jlist.Count);
 
@@ -1087,7 +1087,7 @@ public class MakeSceneEditor : Editor
         if (GUILayout.Button("组合模型和粒子效果为一个场景组件"))
         {
             var config = Path.Combine("Assets/Config", modelStr.stringValue + ".json");
-            var txt = Resources.LoadAssetAtPath<TextAsset>(config);
+            var txt = AssetDatabase.LoadAssetAtPath<TextAsset>(config);
             var js = JSON.Parse(txt.text);
             Debug.Log(js);
             var arr = js ["children"] [0] ["children"].AsArray;
@@ -1139,9 +1139,9 @@ public class MakeSceneEditor : Editor
                 Debug.Log("file is " + file.Name + " " + file.Name);
                 
                 var ass = file.FullName.Replace(Application.dataPath, "Assets");
-                var res = Resources.LoadAssetAtPath<GameObject>(ass);
-                res.renderer.sharedMaterial.shader = Shader.Find("Custom/lightMapEnv");
-                EditorUtility.SetDirty(res.renderer.sharedMaterial);
+                var res = AssetDatabase.LoadAssetAtPath<GameObject>(ass);
+                res.GetComponent<Renderer>().sharedMaterial.shader = Shader.Find("Custom/lightMapEnv");
+                EditorUtility.SetDirty(res.GetComponent<Renderer>().sharedMaterial);
 
                 Debug.Log("import change state ");
                 AssetDatabase.WriteImportSettingsIfDirty(ass);
@@ -1163,7 +1163,7 @@ public class MakeSceneEditor : Editor
                 Debug.Log("file is " + file.Name + " " + file.Name);
                 
                 var ass = file.FullName.Replace(Application.dataPath, "Assets");
-                var res = Resources.LoadAssetAtPath<Material>(ass);
+                var res = AssetDatabase.LoadAssetAtPath<Material>(ass);
 
                 res.shader = Shader.Find("Custom/lightMapEnv");
                 EditorUtility.SetDirty(res);
@@ -1190,7 +1190,7 @@ public class MakeSceneEditor : Editor
             foreach (FileInfo file in fileInfo)
             {
                 var ass = Path.Combine("Assets/" + modelStr.stringValue, file.Name);
-                var res = Resources.LoadAssetAtPath<GameObject>(ass);
+                var res = AssetDatabase.LoadAssetAtPath<GameObject>(ass);
                 var tar = Path.Combine("Assets/lightPrefab", file.Name.Replace(".fbx", ".prefab"));
                 var tg = PrefabUtility.CreatePrefab(tar, res);
                 tg.layer = 8;
@@ -1350,7 +1350,7 @@ public class MakeSceneEditor : Editor
 
         //Use First Animation FBX idle as base
 
-        var prefab = PrefabUtility.CreatePrefab(tar, Resources.LoadAssetAtPath<GameObject>(aniFbx ["idle"]));
+        var prefab = PrefabUtility.CreatePrefab(tar, AssetDatabase.LoadAssetAtPath<GameObject>(aniFbx ["idle"]));
         if (!npc)
         {
             prefab.transform.Find("Armature").localRotation = Quaternion.identity;
@@ -1359,7 +1359,7 @@ public class MakeSceneEditor : Editor
         if (aniFbx.ContainsKey("collision"))
         {
             var meshCollider = prefab.AddComponent<MeshCollider>();
-            var colObj = Resources.LoadAssetAtPath<GameObject>(aniFbx ["collision"]);
+            var colObj = AssetDatabase.LoadAssetAtPath<GameObject>(aniFbx ["collision"]);
             meshCollider.sharedMesh = colObj.GetComponent<MeshFilter>().sharedMesh;
         }
 
@@ -1368,8 +1368,8 @@ public class MakeSceneEditor : Editor
         {
             if (ani.Key != "idle" && ani.Key != "collision")
             {
-                var aniObj = Resources.LoadAssetAtPath<GameObject>(ani.Value);
-                var clip = aniObj.animation.clip;
+                var aniObj = AssetDatabase.LoadAssetAtPath<GameObject>(ani.Value);
+                var clip = aniObj.GetComponent<Animation>().clip;
                 aniPart.AddClip(clip, clip.name);
             }
         }
@@ -1377,18 +1377,18 @@ public class MakeSceneEditor : Editor
         //AssetDatabase.StartAssetEditing();
         foreach (Transform t in prefab.transform)
         {
-            if (t.renderer != null)
+            if (t.GetComponent<Renderer>() != null)
             {
                 Debug.Log("render is " + t.name);
                 if (npc)
                 {
-                    t.renderer.sharedMaterial.shader = Shader.Find("Custom/npcShader");
-                    t.renderer.sharedMaterial.color = Color.white;
+                    t.GetComponent<Renderer>().sharedMaterial.shader = Shader.Find("Custom/npcShader");
+                    t.GetComponent<Renderer>().sharedMaterial.color = Color.white;
                 } else
                 {
-                    t.renderer.sharedMaterial.shader = Shader.Find("Custom/lightMapEnv");
+                    t.GetComponent<Renderer>().sharedMaterial.shader = Shader.Find("Custom/lightMapEnv");
                 }
-                EditorUtility.SetDirty(t.renderer.sharedMaterial);
+                EditorUtility.SetDirty(t.GetComponent<Renderer>().sharedMaterial);
             }
         }
 
@@ -1423,7 +1423,7 @@ public class MakeSceneEditor : Editor
                 var assetFile = prop ["LAYOUT FILE"].Value.Replace("MEDIA", "Assets").Replace(".LAYOUT", ".prefab");
                 Debug.Log("assetFile " + assetFile);
 
-                var par = Resources.LoadAssetAtPath<GameObject>(assetFile);
+                var par = AssetDatabase.LoadAssetAtPath<GameObject>(assetFile);
                 var particle = GameObject.Instantiate(par) as GameObject;
 
                 particle.transform.parent = g.transform;
@@ -1449,7 +1449,7 @@ public class MakeSceneEditor : Editor
                 {
                     if (f.Name.Contains(model))
                     {
-                        prefab = Resources.LoadAssetAtPath<GameObject>(f.FullName.Replace(Application.dataPath, "Assets"));
+                        prefab = AssetDatabase.LoadAssetAtPath<GameObject>(f.FullName.Replace(Application.dataPath, "Assets"));
                         break;
                     }
                 }

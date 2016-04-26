@@ -51,7 +51,7 @@ namespace MyLib
             var rate = GetAttr().animation [attackAniName].length / realAttackTime;
             PlayAni(attackAniName, rate, WrapMode.Once);
             */
-            yield return GetAttr().StartCoroutine(WaitForAttackAnimation(GetAttr().animation));
+            yield return GetAttr().StartCoroutine(WaitForAttackAnimation(GetAttr().GetComponent<Animation>()));
             yield return new WaitForSeconds(0.1f);
         }
         private Transform tower;

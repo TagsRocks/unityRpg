@@ -155,7 +155,7 @@ namespace MyLib
                 attackAniName = GetAttackAniName(); 
 
                 var realAttackTime = activeSkill.skillData.AttackAniTime / GetAttr().GetSpeedCoff();
-                var rate = GetAttr().animation [attackAniName].length / realAttackTime;
+                var rate = GetAttr().GetComponent<Animation>() [attackAniName].length / realAttackTime;
                 if (first)
                 {
                     PlayAni(attackAniName, rate, WrapMode.Once);
@@ -172,7 +172,7 @@ namespace MyLib
 
 
                 Log.Ani("Do ule Press Time " + attackAniName + "  " + pressAttack + " " + attackPressTime + " " + Time.time + " " + WindowTime);
-                yield return GetAttr().StartCoroutine(WaitForAttackAnimation(GetAttr().animation));
+                yield return GetAttr().StartCoroutine(WaitForAttackAnimation(GetAttr().GetComponent<Animation>()));
 
                 //stopAttack = false;
                 if (pressAttack && ((Time.time - attackPressTime) < WindowTime))

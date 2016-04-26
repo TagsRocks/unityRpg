@@ -38,12 +38,12 @@ public class AnimationController : MonoBehaviour
         trails = new List<WeaponTrail>();
         fadingStates = new List<AnimationState>();
         currentState = null;
-        animation.Stop();
+        GetComponent<Animation>().Stop();
         lastPosition = transform.position;
         lastEulerAngles = transform.eulerAngles;
         //
-        animation.playAutomatically = false; // ** The Animation component must not be conflicting with the AnimationController
-        animation.Stop(); 
+        GetComponent<Animation>().playAutomatically = false; // ** The Animation component must not be conflicting with the AnimationController
+        GetComponent<Animation>().Stop(); 
         SetAnimationSampleRate(30);
     }
 
@@ -85,7 +85,7 @@ public class AnimationController : MonoBehaviour
             curAniName = aniName;
         }
         */
-        animation.CrossFade(state.name);
+        GetComponent<Animation>().CrossFade(state.name);
     }
 
     public void CrossfadeAnimation(AnimationState state, float fadeTime)
@@ -100,7 +100,7 @@ public class AnimationController : MonoBehaviour
             //animation.CrossFade (state.name);
         }
         */
-        animation.CrossFade(state.name, fadeTime);
+        GetComponent<Animation>().CrossFade(state.name, fadeTime);
         return;
     }
 

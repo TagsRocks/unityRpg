@@ -24,7 +24,7 @@ namespace MyLib
         {
             //var box = Util.FindChildRecursive(transform, "boxColldier").gameObject;
             //rigid =  box.GetComponent<Rigidbody>();
-            rigid = this.rigidbody;
+            rigid = this.GetComponent<Rigidbody>();
             Physics.IgnoreLayerCollision((int)GameLayer.Npc, (int)GameLayer.Npc);
 
             rigid.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;

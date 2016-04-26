@@ -115,13 +115,13 @@ namespace MyLib
 
         protected bool CheckAni(string name)
         {
-            return GetAttr().animation.GetClip(name) != null;
+            return GetAttr().GetComponent<Animation>().GetClip(name) != null;
         }
 
         public virtual void PlayAni(string name, float speed, WrapMode wm)
         {
 			
-            var ani = GetAttr().animation;
+            var ani = GetAttr().GetComponent<Animation>();
 			
             ani [name].speed = speed;
             ani [name].wrapMode = wm;
@@ -131,7 +131,7 @@ namespace MyLib
 
         public virtual void SetAni(string name, float speed, WrapMode wm)
         {
-            var ani = GetAttr().animation;
+            var ani = GetAttr().GetComponent<Animation>();
 
             ani [name].speed = speed;
             ani [name].wrapMode = wm;

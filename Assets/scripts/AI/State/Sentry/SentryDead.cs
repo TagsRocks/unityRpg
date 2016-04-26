@@ -13,7 +13,7 @@ namespace MyLib
 		
 		public override IEnumerator RunLogic()
 		{
-			while(GetAttr().animation.isPlaying) {
+			while(GetAttr().GetComponent<Animation>().isPlaying) {
 				yield return null;
 			}
 			ObjectManager.objectManager.DestroyByLocalId (GetAttr().GetComponent<KBEngine.KBNetworkView>().GetLocalId());

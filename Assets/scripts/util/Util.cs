@@ -152,10 +152,10 @@ namespace MyLib
                 }
             }
 
-            Material[] mat = mesh.renderer.materials;
+            Material[] mat = mesh.GetComponent<Renderer>().materials;
 
             var shaderRes = Resources.Load<ShaderResource>("levelPublic/ShaderResource");
-            for (int i = 0; i < mesh.renderer.materials.Length; i++)
+            for (int i = 0; i < mesh.GetComponent<Renderer>().materials.Length; i++)
             {
                 mat [i].shader = Shader.Find("Custom/newBurnShader");
 
@@ -203,7 +203,7 @@ namespace MyLib
                 }
             }
 
-            Material[] mat = mesh.renderer.materials;
+            Material[] mat = mesh.GetComponent<Renderer>().materials;
             for (int i = 0; i < mat.Length; i++)
             {
                 UnityEngine.Object.Destroy(mat [i]);

@@ -30,7 +30,7 @@ namespace MyLib
 		void Awake ()
 		{
 			uiRoot = GameObject.FindGameObjectWithTag("UIRoot");
-			collider.isTrigger = true;
+			GetComponent<Collider>().isTrigger = true;
 		}
 		// Use this for initialization
 		void Start ()

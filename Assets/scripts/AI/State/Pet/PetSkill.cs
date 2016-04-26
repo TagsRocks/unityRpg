@@ -21,9 +21,9 @@ namespace MyLib
 
         public override IEnumerator RunLogic()
         {
-            Log.AI("Check Animation " + GetAttr().animation.IsPlaying(activeSkill.skillData.AnimationName));
+            Log.AI("Check Animation " + GetAttr().GetComponent<Animation>().IsPlaying(activeSkill.skillData.AnimationName));
             float passTime = 0;
-            var animation = GetAttr().animation;
+            var animation = GetAttr().GetComponent<Animation>();
             var attackAniName = activeSkill.skillData.AnimationName;
 
             while (!quit)

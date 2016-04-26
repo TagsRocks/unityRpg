@@ -589,7 +589,7 @@ MonoBehaviour:
   BirthSubEmitter: 
   CollisionSubEmitter: 
   DeathSubEmitter: 
-  AvailableNodeCount: 10
+  AvailableNodeCount: 1
   LastClientPos: {x: 4.0999999, y: 0, z: -12.6999998}
   MyCamera: {fileID: 0}
   Owner: {fileID: 11453004}
@@ -1004,7 +1004,7 @@ MonoBehaviour:
   BirthSubEmitter: 
   CollisionSubEmitter: 
   DeathSubEmitter: 
-  AvailableNodeCount: 10
+  AvailableNodeCount: 7
   LastClientPos: {x: 4.0999999, y: 0, z: -12.6999998}
   MyCamera: {fileID: 0}
   Owner: {fileID: 11453004}
@@ -1247,10 +1247,10 @@ MonoBehaviour:
   EmitUniform: 0
   LineLengthLeft: -1
   LineLengthRight: 1
-  MaxENodes: 8
+  MaxENodes: 20
   IsNodeLifeLoop: 0
-  NodeLifeMin: 6
-  NodeLifeMax: 8
+  NodeLifeMin: 2
+  NodeLifeMax: 3
   EmitWay: 0
   EmitterCurve:
     serializedVersion: 2
@@ -1273,7 +1273,7 @@ MonoBehaviour:
   IsBurstEmit: 0
   ChanceToEmit: 100
   EmitDuration: 1
-  EmitRate: 1
+  EmitRate: 5
   EmitLoop: -1
   EmitDelay: 0
   DirType: 1
@@ -1422,7 +1422,7 @@ MonoBehaviour:
   BirthSubEmitter: 
   CollisionSubEmitter: 
   DeathSubEmitter: 
-  AvailableNodeCount: 8
+  AvailableNodeCount: 10
   LastClientPos: {x: 4.0999999, y: 0, z: -12.6999998}
   MyCamera: {fileID: 0}
   Owner: {fileID: 11453004}

@@ -34,14 +34,14 @@ namespace MyLib
 		void Start ()
 		{
 			Transform lm = transform.Find ("lightMask");
-			float sz = camera.orthographicSize / 5;
+			float sz = GetComponent<Camera>().orthographicSize / 5;
 			lm.localScale = new Vector3 (sz, 1, sz);
 
 			//Adjust All Material's CameraPos according to Offset
 			foreach (var m in Materials) {
 				if(m != null) {
 					m.SetVector ("_CamPos", new Vector4 (Offset.x, Offset.y, Offset.z, 0));
-					m.SetFloat ("_CameraSize", camera.orthographicSize);
+					m.SetFloat ("_CameraSize", GetComponent<Camera>().orthographicSize);
 				}
 			}
 		}

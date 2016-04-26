@@ -13,7 +13,7 @@ namespace MyLib
         void Awake() {
             Instance = this;
 
-            camera.enabled = false;
+            GetComponent<Camera>().enabled = false;
             accumTex = GraphInit.Instance.accumTexture;
             var sh = Shader.Find("Custom/MotionBlur");
             material = new Material(sh);
@@ -25,7 +25,7 @@ namespace MyLib
         void Update() {
             if(nat != null) {
                 nat.SetMotionLayer(); 
-                camera.RenderWithShader(test, null);
+                GetComponent<Camera>().RenderWithShader(test, null);
                 nat.SetNormalLayer();
             }
         }

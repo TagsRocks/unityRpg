@@ -30,8 +30,8 @@ namespace MyLib {
 			attribute = GetComponent<NpcAttribute> ();
 			myAnimationEvent = GetComponent<MyAnimationEvent>();
 			//controller = GetComponent<CharacterController>();
-			animation.Play("idle");
-			animation ["idle"].wrapMode = WrapMode.Loop;
+			GetComponent<Animation>().Play("idle");
+			GetComponent<Animation>() ["idle"].wrapMode = WrapMode.Loop;
 			//GetComponent<ShadowComponent> ().CreateShadowPlane ();
 		}
 			
@@ -49,9 +49,9 @@ namespace MyLib {
 				yield return null;
 			}
 			attribute.IsDead = true;
-			animation.CrossFade("die");
-			animation ["die"].speed = 2;
-			animation ["die"].wrapMode = WrapMode.Once;
+			GetComponent<Animation>().CrossFade("die");
+			GetComponent<Animation>() ["die"].speed = 2;
+			GetComponent<Animation>() ["die"].wrapMode = WrapMode.Once;
 		}
 		
 		// Update is called once per frame

@@ -8,7 +8,7 @@ namespace MyLib
         public override void EnterState ()
         {
             base.EnterState ();
-            GetAttr().animation.CrossFade ("opening");
+            GetAttr().GetComponent<Animation>().CrossFade ("opening");
             GetAttr().IsDead = true;
             GetAttr().OnlyShowDeadEffect();
         }

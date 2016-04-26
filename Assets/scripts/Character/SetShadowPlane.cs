@@ -17,9 +17,9 @@ public class SetShadowPlane : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-		for(int i = 0; i < renderer.materials.Length; i++)
+		for(int i = 0; i < GetComponent<Renderer>().materials.Length; i++)
 		{
-			renderer.materials[i].SetMatrix("_World2Receiver", plane.renderer.worldToLocalMatrix);
+			GetComponent<Renderer>().materials[i].SetMatrix("_World2Receiver", plane.GetComponent<Renderer>().worldToLocalMatrix);
 		}
 	}
 }

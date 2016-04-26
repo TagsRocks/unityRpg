@@ -53,7 +53,7 @@ namespace MyLib
 
 			};
 			RegEvent ();
-            cullMask =  camera.cullingMask;
+            cullMask =  GetComponent<Camera>().cullingMask;
 		}
 		Vector3 shakeInitPos;
 		Vector3 shakeDir;
@@ -126,11 +126,11 @@ namespace MyLib
 		}
         public void SetBlack() {
             //camera.cullingMask = 0;
-            camera.enabled = false;
+            GetComponent<Camera>().enabled = false;
         }
         public void Reset() {
             //camera.cullingMask = cullMask;
-            camera.enabled = true;
+            GetComponent<Camera>().enabled = true;
         }
 	}
 

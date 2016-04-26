@@ -38,8 +38,8 @@ public class SimpleMakeScene : MonoBehaviour
             Debug.Log("file is " + file.Name + " " + file.Name);
 
             var ass = file.FullName.Replace(Application.dataPath, "Assets");
-            var res = Resources.LoadAssetAtPath<GameObject>(ass);
-            var shm = res.renderer.sharedMaterials;
+            var res = AssetDatabase.LoadAssetAtPath<GameObject>(ass);
+            var shm = res.GetComponent<Renderer>().sharedMaterials;
             foreach (var s in shm)
             {
                 s.shader = Shader.Find("Custom/lightMapEnv");
@@ -67,9 +67,9 @@ public class SimpleMakeScene : MonoBehaviour
             Debug.Log("file is " + file.Name + " " + file.Name);
 
             var ass = file.FullName.Replace(Application.dataPath, "Assets");
-            var res = Resources.LoadAssetAtPath<GameObject>(ass);
-            res.renderer.sharedMaterial.shader = Shader.Find("Custom/light");
-            EditorUtility.SetDirty(res.renderer.sharedMaterial);
+            var res = AssetDatabase.LoadAssetAtPath<GameObject>(ass);
+            res.GetComponent<Renderer>().sharedMaterial.shader = Shader.Find("Custom/light");
+            EditorUtility.SetDirty(res.GetComponent<Renderer>().sharedMaterial);
 
             Debug.Log("import change state ");
             AssetDatabase.WriteImportSettingsIfDirty(ass);
@@ -93,7 +93,7 @@ public class SimpleMakeScene : MonoBehaviour
             Debug.Log("file is " + file.Name + " " + file.Name);
 
             var ass = file.FullName.Replace(Application.dataPath, "Assets");
-            var res = Resources.LoadAssetAtPath<GameObject>(ass);
+            var res = AssetDatabase.LoadAssetAtPath<GameObject>(ass);
             //res.renderer.sharedMaterial.shader = Shader.Find("Custom/light");
             Util.SetLayer(res, GameLayer.Light);
             EditorUtility.SetDirty(res);
@@ -129,10 +129,10 @@ public class SimpleMakeScene : MonoBehaviour
 
             tar = Path.Combine(tar,  dirName + ".prefab");
 
-            var oldPrefab = Resources.LoadAssetAtPath<GameObject>(tar);
+            var oldPrefab = AssetDatabase.LoadAssetAtPath<GameObject>(tar);
             if (oldPrefab == null)
             {
-                var prefab = PrefabUtility.CreatePrefab(tar, Resources.LoadAssetAtPath<GameObject>(ass));
+                var prefab = PrefabUtility.CreatePrefab(tar, AssetDatabase.LoadAssetAtPath<GameObject>(ass));
             }
         }
 
@@ -222,7 +222,7 @@ public class SimpleMakeScene : MonoBehaviour
         }
 
         //aniFbx ["idle"]
-        var prefab = PrefabUtility.CreatePrefab(tar, Resources.LoadAssetAtPath<GameObject>(first.Value));
+        var prefab = PrefabUtility.CreatePrefab(tar, AssetDatabase.LoadAssetAtPath<GameObject>(first.Value));
 
         if (!npc)
         {
@@ -232,7 +232,7 @@ public class SimpleMakeScene : MonoBehaviour
         if (aniFbx.ContainsKey("collision"))
         {
             var meshCollider = prefab.AddComponent<MeshCollider>();
-            var colObj = Resources.LoadAssetAtPath<GameObject>(aniFbx ["collision"]);
+            var colObj = AssetDatabase.LoadAssetAtPath<GameObject>(aniFbx ["collision"]);
             meshCollider.sharedMesh = colObj.GetComponent<MeshFilter>().sharedMesh;
         }
 
@@ -241,8 +241,8 @@ public class SimpleMakeScene : MonoBehaviour
         {
             if (ani.Key != first.Key && ani.Key != "collision")
             {
-                var aniObj = Resources.LoadAssetAtPath<GameObject>(ani.Value);
-                var clip = aniObj.animation.clip;
+                var aniObj = AssetDatabase.LoadAssetAtPath<GameObject>(ani.Value);
+                var clip = aniObj.GetComponent<Animation>().clip;
                 aniPart.AddClip(clip, clip.name);
             }
         }
@@ -250,18 +250,18 @@ public class SimpleMakeScene : MonoBehaviour
         //AssetDatabase.StartAssetEditing();
         foreach (Transform t in prefab.transform)
         {
-            if (t.renderer != null)
+            if (t.GetComponent<Renderer>() != null)
             {
                 Debug.Log("render is " + t.name);
                 if (npc)
                 {
-                    t.renderer.sharedMaterial.shader = Shader.Find("Custom/npcShader");
-                    t.renderer.sharedMaterial.color = Color.white;
+                    t.GetComponent<Renderer>().sharedMaterial.shader = Shader.Find("Custom/npcShader");
+                    t.GetComponent<Renderer>().sharedMaterial.color = Color.white;
                 } else
                 {
-                    t.renderer.sharedMaterial.shader = Shader.Find("Custom/lightMapEnv");
+                    t.GetComponent<Renderer>().sharedMaterial.shader = Shader.Find("Custom/lightMapEnv");
                 }
-                EditorUtility.SetDirty(t.renderer.sharedMaterial);
+                EditorUtility.SetDirty(t.GetComponent<Renderer>().sharedMaterial);
             }
         }
 
@@ -304,7 +304,7 @@ public class SimpleMakeScene : MonoBehaviour
     /// </summary>
     void CombineFileAndCollisionToPrefab(string p)
     {
-        var mapJson = Resources.LoadAssetAtPath<TextAsset>("Assets/Config/map.json");
+        var mapJson = AssetDatabase.LoadAssetAtPath<TextAsset>("Assets/Config/map.json");
         var mapObj = JSON.Parse(mapJson.text).AsObject;
         AssetDatabase.StartAssetEditing();
         Debug.Log("path is " + p);
@@ -336,7 +336,7 @@ public class SimpleMakeScene : MonoBehaviour
         Debug.Log("CombineTwo " + f + " col " + col);
 
         var fpath = ConvertPath(f);
-        var g = Resources.LoadAssetAtPath<GameObject>(fpath);
+        var g = AssetDatabase.LoadAssetAtPath<GameObject>(fpath);
         if (g != null)
         {
             if (!g.name.Contains("@"))
@@ -348,7 +348,7 @@ public class SimpleMakeScene : MonoBehaviour
                 if (col != "")
                 {
                     var cp = ConvertPath(col);
-                    cg = Resources.LoadAssetAtPath<GameObject>(cp);
+                    cg = AssetDatabase.LoadAssetAtPath<GameObject>(cp);
                     if (cg != null)
                     {
                         //AdjustModelImport(cp);
@@ -357,7 +357,7 @@ public class SimpleMakeScene : MonoBehaviour
 
                 var fn = Path.GetFileName(fpath);
                 var prefab = fn.Replace(".fbx", ".prefab");
-                var oldPrefab = Resources.LoadAssetAtPath<GameObject>(prefab);
+                var oldPrefab = AssetDatabase.LoadAssetAtPath<GameObject>(prefab);
                 if (oldPrefab == null)
                 {
                     var tar = Path.Combine("Assets/prefabs", combinePath);
@@ -408,7 +408,7 @@ public class SimpleMakeScene : MonoBehaviour
 
     public void RemoveMapJsonMethod()
     {
-        var mapJson = Resources.LoadAssetAtPath<TextAsset>("Assets/Config/map.json");
+        var mapJson = AssetDatabase.LoadAssetAtPath<TextAsset>("Assets/Config/map.json");
         var mapObj = JSON.Parse(mapJson.text).AsObject;
         Debug.Log("path is ");
         foreach (KeyValuePair<string, JSONNode> n in mapObj)

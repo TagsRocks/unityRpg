@@ -54,14 +54,14 @@ namespace MyLib {
 
 			var ani = DialogCutScene.GetComponent<DialogCutScene> ().track;
 			//gameObject.AddComponent<Animation> ();
-			animation.AddClip(ani, "master");
-			animation.Play("master");
+			GetComponent<Animation>().AddClip(ani, "master");
+			GetComponent<Animation>().Play("master");
 
 			/*
 			 * Stop Player Control Move
 			 */
 			player.GetComponent<PlayerAIController> ().enabled = false;
-			player.animation.CrossFade("idle");
+			player.GetComponent<Animation>().CrossFade("idle");
 
 		}
 

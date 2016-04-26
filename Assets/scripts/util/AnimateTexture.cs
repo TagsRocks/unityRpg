@@ -21,7 +21,7 @@ public class AnimateTexture : MonoBehaviour {
 	float delta;
 	void Awake() {
 		var tname = string.Format(TextureName, 0);
-		renderer.material.SetTexture ("_AnimTex", Resources.Load<Texture>(tname));
+		GetComponent<Renderer>().material.SetTexture ("_AnimTex", Resources.Load<Texture>(tname));
 	}   
 	// Use this for initialization
 	void Start () {
@@ -37,6 +37,6 @@ public class AnimateTexture : MonoBehaviour {
         fn /= interval;
         fn *= interval;
 		var tname = string.Format (TextureName, fn);
-		renderer.material.SetTexture ("_AnimTex", Resources.Load<Texture> (tname));
+		GetComponent<Renderer>().material.SetTexture ("_AnimTex", Resources.Load<Texture> (tname));
 	}
 }

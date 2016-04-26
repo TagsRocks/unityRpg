@@ -6,9 +6,9 @@ public class LogicModel : LogicNode {
 
 	// Use this for initialization
 	protected override void Start () {
-        animation[ani].speed = 1;
-        animation[ani].wrapMode = WrapMode.Loop;
-        animation.CrossFade(ani);
+        GetComponent<Animation>()[ani].speed = 1;
+        GetComponent<Animation>()[ani].wrapMode = WrapMode.Loop;
+        GetComponent<Animation>().CrossFade(ani);
 	}
 	
 	// Update is called once per frame

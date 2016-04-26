@@ -206,13 +206,13 @@ namespace MyLib
 				size = Screen.width;
 			}
 			VJRvector = new Vector2 (0, 0);
-			joystick = gameObject.AddComponent ("GUITexture") as GUITexture;
+			joystick = gameObject.AddComponent <GUITexture>() as GUITexture;
 			joystick.texture = joystick2D;
 			joystick.color = inactiveColor;
 
 			backOBJ = new GameObject ("VJR-Joystick Back");
 			backOBJ.transform.localScale = new Vector3 (0, 0, 0);
-			background = backOBJ.AddComponent ("GUITexture") as GUITexture;
+			background = backOBJ.AddComponent <GUITexture>() as GUITexture;
 			background.texture = background2D;
 			background.color = inactiveColor;
 			var rsz = GetRealSize();

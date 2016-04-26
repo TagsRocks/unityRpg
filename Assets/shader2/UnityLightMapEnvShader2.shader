@@ -1,4 +1,8 @@
-﻿Shader "Custom/UnityLightMapEnvShader2" {
+﻿// Upgrade NOTE: commented out 'float4 unity_LightmapST', a built-in variable
+// Upgrade NOTE: commented out 'sampler2D unity_Lightmap', a built-in variable
+// Upgrade NOTE: replaced tex2D unity_Lightmap with UNITY_SAMPLE_TEX2D
+
+Shader "Custom/UnityLightMapEnvShader2" {
 	Properties {
 		_MainTex ("Base (RGB)", 2D) = "white" {}
 	}
@@ -31,12 +35,12 @@
 
 	      //unity光照贴图
 	      // These are prepopulated by Unity
-	      sampler2D unity_Lightmap;
+	      // sampler2D unity_Lightmap;
 	      //sampler2D _UnityLightMap;
 	      //sampler2D allWhite;
 
 	      //光照贴图的位置的缩放和偏移
-	      float4 unity_LightmapST;
+	      // float4 unity_LightmapST;
 
 	      //纹理动画需要ST
 	      sampler2D _MainTex;
@@ -71,7 +75,7 @@
 	        // #endif
 	        // }
 
-	        main_color.rgb *= DecodeLightmap(tex2D(unity_Lightmap, i.uv1));
+	        main_color.rgb *= DecodeLightmap(UNITY_SAMPLE_TEX2D(unity_Lightmap, i.uv1));
 	        //main_color.rgb = fixed3(i.uv1, 0);
 	        return main_color;
 	      }

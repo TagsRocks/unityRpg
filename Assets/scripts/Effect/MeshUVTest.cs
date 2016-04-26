@@ -18,7 +18,7 @@ namespace MyLib
             }
 
             Debug.LogError("uv1");
-            var uv1 = mf.sharedMesh.uv1;
+            var uv1 = mf.sharedMesh.uv2;
             foreach(var u1 in uv) {
                 Debug.Log(u1);
             }

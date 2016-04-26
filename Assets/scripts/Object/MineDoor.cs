@@ -35,7 +35,7 @@ namespace MyLib {
 					Debug.Log("hit who? " +hit.collider);
 					if (hit.collider == col) {
 						opend = true;
-						animation.CrossFade("closed");
+						GetComponent<Animation>().CrossFade("closed");
 						col.enabled = false;
 					}
 				}

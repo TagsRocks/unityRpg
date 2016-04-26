@@ -91,12 +91,12 @@ namespace MyLib
             g.transform.position = GetAttr().transform.position;
             if (CheckAni("die"))
             {
-                GetAttr().animation.CrossFade("die");
+                GetAttr().GetComponent<Animation>().CrossFade("die");
             }
 
             if (CheckAni("death"))
             {
-                GetAttr().animation.CrossFade("death");
+                GetAttr().GetComponent<Animation>().CrossFade("death");
             }
 
             yield return GetAttr().StartCoroutine(KnockDie());

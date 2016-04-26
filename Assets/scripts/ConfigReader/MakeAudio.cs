@@ -24,10 +24,18 @@ public class MakeAudio : MonoBehaviour {
             var import = AudioImporter.GetAtPath(ass) as AudioImporter ;
             //Debug.Log("import "+import);
 
-            import.format = AudioImporterFormat.Compressed;
-            import.compressionBitrate = 32000;
+            //import.format = AudioImporterFormat.Compressed;
+            var defSamp = new AudioImporterSampleSettings(){
+                compressionFormat = AudioCompressionFormat.Vorbis,
+                loadType = AudioClipLoadType.CompressedInMemory,
+                quality = 1,
+            };
+            import.defaultSampleSettings = defSamp;
+            //import.defaultSampleSettings.compressionFormat = AudioCompressionFormat.Vorbis;
+            //import.defaultSampleSettings.loadType = AudioClipLoadType.CompressedInMemory;
+            //import.compressionBitrate = 32000;
 
-            Debug.Log("import "+import.compressionBitrate);
+            //Debug.Log("import "+import.compressionBitrate);
             AssetDatabase.WriteImportSettingsIfDirty(ass);
         }
         AssetDatabase.StopAssetEditing();

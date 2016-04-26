@@ -23,7 +23,7 @@ public class MakeParticle : MonoBehaviour
     #if UNITY_EDITOR
     public void MakeMethod()
     {
-        var md = Resources.LoadAssetAtPath("Assets/Config/" + configFile + ".json", typeof(TextAsset)) as TextAsset;
+        var md = AssetDatabase.LoadAssetAtPath("Assets/Config/" + configFile + ".json", typeof(TextAsset)) as TextAsset;
         var jarr = SimpleJSON.JSON.Parse(md.text).AsArray;
         var xffectObj = DoCreateXffectObject();
         xffectObj.name = configFile.Split(char.Parse(".")) [0];
@@ -69,13 +69,13 @@ public class MakeParticle : MonoBehaviour
             var texName = texPath.Replace(".mat", ".png");
             Debug.Log("load Material " + texPath + "  " + texName);
 
-            var mat = Resources.LoadAssetAtPath(texPath, typeof(Material)) as Material;
+            var mat = AssetDatabase.LoadAssetAtPath(texPath, typeof(Material)) as Material;
             Debug.Log("load Material " + mat);
 
             if (mat == null)
             {
                 mat = new Material(useShader);
-                mat.SetTexture("_MainTex", Resources.LoadAssetAtPath(texName, typeof(Texture)) as Texture);
+                mat.SetTexture("_MainTex", AssetDatabase.LoadAssetAtPath(texName, typeof(Texture)) as Texture);
                 AssetDatabase.CreateAsset(mat, texPath);
                 AssetDatabase.ImportAsset(texPath);
             }
@@ -1161,7 +1161,7 @@ public class MakeParticle : MonoBehaviour
     static GameObject DoCreateLayer(GameObject go)
     {
         GameObject layer = new GameObject("EffectLayer");
-        EffectLayer efl = (EffectLayer)layer.AddComponent("EffectLayer");
+        EffectLayer efl = (EffectLayer)layer.AddComponent<EffectLayer>();
         layer.transform.parent = go.transform;
 
         efl.transform.localPosition = Vector3.zero;

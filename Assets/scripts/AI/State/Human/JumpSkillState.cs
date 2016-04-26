@@ -40,9 +40,9 @@ namespace MyLib
             activeSkill = GetAttr().GetComponent<SkillInfoComponent>().GetActiveSkill();
             var attackAniName = GetAttackAniName(); 
             var realAttackTime = activeSkill.skillData.AttackAniTime / GetAttr().GetSpeedCoff();
-            var rate = GetAttr().animation [attackAniName].length / realAttackTime;
+            var rate = GetAttr().GetComponent<Animation>() [attackAniName].length / realAttackTime;
             PlayAni(attackAniName, rate, WrapMode.Once);
-            yield return GetAttr().StartCoroutine(WaitForAttackAnimation(GetAttr().animation));
+            yield return GetAttr().StartCoroutine(WaitForAttackAnimation(GetAttr().GetComponent<Animation>()));
 
             aiCharacter.SetRun();
             //等动画彻底播放完成

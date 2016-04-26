@@ -28,13 +28,13 @@ namespace MyLib
         //向当前所面朝方向进行攻击
         public override IEnumerator RunLogic ()
         {
-            Log.AI ("Check Animation "+GetAttr().animation.IsPlaying(activeSkill.skillData.AnimationName));
+            Log.AI ("Check Animation "+GetAttr().GetComponent<Animation>().IsPlaying(activeSkill.skillData.AnimationName));
             float passTime = 0;
             //var realAttackTime = GetAttr ().ObjUnitData.AttackAniSpeed;
             var realAttackTime = activeSkill.skillData.AttackAniTime/GetAttr().GetSpeedCoff();
-            var animation = GetAttr ().animation;
+            var animation = GetAttr ().GetComponent<Animation>();
             var attackAniName = activeSkill.skillData.AnimationName;
-            var rate = GetAttr().animation[attackAniName].length/realAttackTime;
+            var rate = GetAttr().GetComponent<Animation>()[attackAniName].length/realAttackTime;
             Log.AI("AttackAniSpeed "+rate+" realAttackTime "+realAttackTime);
             PlayAni (activeSkill.skillData.AnimationName, rate, WrapMode.Once);
             

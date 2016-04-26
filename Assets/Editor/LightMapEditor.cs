@@ -42,15 +42,15 @@ namespace MyLib {
 				sh.Add(Shader.Find(s));
 			}
 
-			if (g.renderer != null) {
-				for(int i = 0; i < g.renderer.sharedMaterials.Length; i++) {
+			if (g.GetComponent<Renderer>() != null) {
+				for(int i = 0; i < g.GetComponent<Renderer>().sharedMaterials.Length; i++) {
 					Debug.Log("LightMapEditor::AdjustAllChildren set up lightMap "+g);
-					if(sh.Contains(g.renderer.sharedMaterials[i].shader)) {
+					if(sh.Contains(g.GetComponent<Renderer>().sharedMaterials[i].shader)) {
 					//if(g.renderer.sharedMaterials[i].shader == lm) {
-						g.renderer.sharedMaterials[i].SetTexture("_LightMap", rt);
-						lmMat.Add(g.renderer.sharedMaterials[i]);
-						if(tm != null && !tm.Materials.Contains(g.renderer.sharedMaterials[i])) {
-							tm.Materials.Add(g.renderer.sharedMaterials[i]);
+						g.GetComponent<Renderer>().sharedMaterials[i].SetTexture("_LightMap", rt);
+						lmMat.Add(g.GetComponent<Renderer>().sharedMaterials[i]);
+						if(tm != null && !tm.Materials.Contains(g.GetComponent<Renderer>().sharedMaterials[i])) {
+							tm.Materials.Add(g.GetComponent<Renderer>().sharedMaterials[i]);
 						}
 					}
 				}

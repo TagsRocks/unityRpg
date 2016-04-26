@@ -171,9 +171,9 @@ namespace MyLib
                             if (skins != null && tex != null)
                             {
                                 Log.Sys("Set Texture " + tex);
-                                var mat = new Material(skins.renderer.sharedMaterial);
+                                var mat = new Material(skins.GetComponent<Renderer>().sharedMaterial);
                                 mat.mainTexture = tex;
-                                skins.renderer.sharedMaterial = mat;
+                                skins.GetComponent<Renderer>().sharedMaterial = mat;
                             }
                         }
                     }

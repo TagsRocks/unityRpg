@@ -19,7 +19,7 @@ public class TestClientNet : MonoBehaviour {
     public string file;
     [ButtonCallFunc()] public bool ReadFile;
     public void ReadFileMethod(){
-        var f = Resources.LoadAssetAtPath<TextAsset>("Assets/Protobuffer/"+file);
+        var f = UnityEditor.AssetDatabase.LoadAssetAtPath<TextAsset>("Assets/Protobuffer/"+file);
         var data = f.bytes;
         try {
             var playerInfo = MyLib.PlayerInfo.CreateBuilder().MergeFrom(data);

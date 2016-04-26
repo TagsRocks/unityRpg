@@ -15,7 +15,7 @@ namespace MyLib
 		}
 		public override IEnumerator RunLogic ()
 		{
-			yield return GetAttr ().StartCoroutine (Util.WaitForAnimation(GetAttr().animation));
+			yield return GetAttr ().StartCoroutine (Util.WaitForAnimation(GetAttr().GetComponent<Animation>()));
 			var evt = new MyEvent (MyEvent.EventType.PlayerDead);
 			evt.localID = aiCharacter.GetLocalId ();
 			MyEventSystem.myEventSystem.PushEvent (evt);

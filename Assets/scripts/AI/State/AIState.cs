@@ -114,7 +114,7 @@ namespace MyLib
 
         protected bool CheckAni(string name)
         {
-            return aiCharacter.GetAttr().animation.GetClip(name) != null;
+            return aiCharacter.GetAttr().GetComponent<Animation>().GetClip(name) != null;
         }
 
         protected void SetAttrState(CharacterState s)

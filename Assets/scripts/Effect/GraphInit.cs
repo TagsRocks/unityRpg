@@ -52,7 +52,7 @@ namespace MyLib
         public Color lightDiffuseColor = new Color(223/255.0f, 248/255.0f, 255/255.0f, 1);
 
         void InitAll() {
-            var lc = Resources.Load<GameObject>("LightCamera").camera;
+            var lc = Resources.Load<GameObject>("LightCamera").GetComponent<Camera>();
             var lightCamera = lc.GetComponent<LightCamera>();
             var sc = Resources.Load<GameObject>("levelPublic/ShadowCamera").GetComponent<ShadowCamera>();
             //New Shader lightMapxxx need these Set
@@ -91,7 +91,7 @@ namespace MyLib
 
             Shader.SetGlobalTexture("_ShadowMap", shadowMap);
             Shader.SetGlobalVector("_ShadowCamPos", sc.CamPos);
-            Shader.SetGlobalFloat("_ShadowCameraSize", sc.camera.orthographicSize);
+            Shader.SetGlobalFloat("_ShadowCameraSize", sc.GetComponent<Camera>().orthographicSize);
 
             Shader.SetGlobalFloat("_Shinness", shinness);
             Shader.SetGlobalColor ("_SpecColor", specColor);

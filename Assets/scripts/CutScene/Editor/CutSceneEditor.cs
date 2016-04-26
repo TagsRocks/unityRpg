@@ -28,10 +28,10 @@ public class CutSceneEditor : Editor {
 		AnimationClip masterClip = new AnimationClip ();
 		newScene.masterClip = new AnimationClip ();
 		newScene.gameObject.AddComponent<Animation> ();
-		newScene.animation.AddClip(masterClip, "master");
+		newScene.GetComponent<Animation>().AddClip(masterClip, "master");
 		
-		newScene.animation.playAutomatically = false;
-		newScene.animation.wrapMode = WrapMode.Once;
+		newScene.GetComponent<Animation>().playAutomatically = false;
+		newScene.GetComponent<Animation>().wrapMode = WrapMode.Once;
 		
 	}
 

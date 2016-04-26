@@ -24,7 +24,7 @@ namespace MyLib
 		}
 
 		public override void PlayAni(string name, float speed, WrapMode wm) {
-			var ani = GetAttr ().animation;
+			var ani = GetAttr ().GetComponent<Animation>();
 			//Log.AI ("Set Ani "+GetAttr().gameObject.name+" "+name);
 			
 			ani[name].speed = speed;
@@ -35,7 +35,7 @@ namespace MyLib
 		public override void SetAni (string name, float speed, WrapMode wm)
 		{
 			Log.Ani ("SetAni "+name);
-			var ani = GetAttr ().animation;
+			var ani = GetAttr ().GetComponent<Animation>();
 			
 			ani[name].speed = speed;
 			ani[name].wrapMode = wm;

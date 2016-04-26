@@ -20,10 +20,10 @@ namespace MyLib
             Log.AI("Skill SetAni " + activeSkill.skillData.AnimationName);
 
             var realAttackTime = activeSkill.skillData.AttackAniTime / GetAttr().GetSpeedCoff();
-            var rate = GetAttr().animation [activeSkill.skillData.AnimationName].length / realAttackTime;
+            var rate = GetAttr().GetComponent<Animation>() [activeSkill.skillData.AnimationName].length / realAttackTime;
             SetAni(activeSkill.skillData.AnimationName, rate, WrapMode.Once);
             var physic = GetAttr().GetComponent<PhysicComponent>();
-            while (GetAttr().animation.isPlaying && !quit)
+            while (GetAttr().GetComponent<Animation>().isPlaying && !quit)
             {
                 if (CheckEvent())
                 {

@@ -19,17 +19,17 @@ public class ShadowComponent : MonoBehaviour {
 	void CreateShadowPlane() {
 		if (shadowPlane == null) {
 			GameObject p = GameObject.CreatePrimitive (PrimitiveType.Plane);
-            DestroyImmediate (p.collider);
+            DestroyImmediate (p.GetComponent<Collider>());
 			shadowPlane = p;
 			p.name = "shadowPlane";
 			p.transform.parent = transform;
 			p.transform.localScale = Vector3.one;
 			p.transform.localRotation = Quaternion.identity;
-			p.renderer.enabled = false;
+			p.GetComponent<Renderer>().enabled = false;
 			p.transform.localPosition = Vector3.zero;
 		
 			foreach (Transform c in transform) {
-				if (c.renderer != null) {
+				if (c.GetComponent<Renderer>() != null) {
 					SetShadowPlane sp = NGUITools.AddMissingComponent<SetShadowPlane> (c.gameObject);
 					sp.plane = p;
 				}

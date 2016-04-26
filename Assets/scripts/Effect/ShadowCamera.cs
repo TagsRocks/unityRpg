@@ -12,7 +12,7 @@ namespace MyLib
         void Awake()
         {
             DontDestroyOnLoad(gameObject);
-            camera.enabled = false;
+            GetComponent<Camera>().enabled = false;
             shader = Shader.Find("Custom/shadowMap2");
         }
 
@@ -31,7 +31,7 @@ namespace MyLib
 
                 }
 
-                camera.RenderWithShader(shader, null);
+                GetComponent<Camera>().RenderWithShader(shader, null);
 
                 allP = ObjectManager.objectManager.GetAllPlayer();
                 while (allP.MoveNext())

@@ -1,4 +1,7 @@
-﻿Shader "Custom/UnityLightMapEnvShader" {
+﻿// Upgrade NOTE: commented out 'sampler2D unity_Lightmap', a built-in variable
+// Upgrade NOTE: replaced tex2D unity_Lightmap with UNITY_SAMPLE_TEX2D
+
+Shader "Custom/UnityLightMapEnvShader" {
 	Properties {
 		_MainTex ("Base (RGB)", 2D) = "white" {}
 	}
@@ -31,7 +34,7 @@
 
 	      //unity光照贴图
 	      // These are prepopulated by Unity
-	      sampler2D unity_Lightmap;
+	      // sampler2D unity_Lightmap;
 	      //sampler2D _UnityLightMap;
 	      //float _LightMapScale;
 	      fixed4 _LightMapScaleAndOffset;
@@ -72,7 +75,7 @@
 	        // #endif
 	        // }
 
-	        main_color.rgb *= DecodeLightmap(tex2D(unity_Lightmap, i.uv1));
+	        main_color.rgb *= DecodeLightmap(UNITY_SAMPLE_TEX2D(unity_Lightmap, i.uv1));
 	        //main_color.rgb = fixed3(i.uv1, 0);
 	        return main_color;
 	      }

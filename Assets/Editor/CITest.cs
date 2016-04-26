@@ -22,7 +22,7 @@ public static class AutoBuilder {
 		PlayerSettings.bundleVersion = "1.0";
 		BuildOptions opt = BuildOptions.Development | BuildOptions.SymlinkLibraries ;
 		string targetDir = TARGET+"/ios";
-		string error = BuildPipeline.BuildPlayer (CollectScenePaths(), targetDir, BuildTarget.iPhone, opt );
+		string error = BuildPipeline.BuildPlayer (CollectScenePaths(), targetDir, BuildTarget.iOS, opt );
 		if (error != null && error.Length > 0) {
 			throw new IOException("Build Failed: "+error);
 		}

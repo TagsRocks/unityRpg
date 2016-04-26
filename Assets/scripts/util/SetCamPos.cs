@@ -24,6 +24,6 @@ public class SetCamPos : MonoBehaviour {
 		Vector3 pos = g.transform.position;
 		Vector3 diff = pos - Camera.main.transform.position;
 
-		renderer.material.SetVector("_CamPos", new Vector4(diff.x, diff.y, diff.z, 0));
+		GetComponent<Renderer>().material.SetVector("_CamPos", new Vector4(diff.x, diff.y, diff.z, 0));
 	}
 }

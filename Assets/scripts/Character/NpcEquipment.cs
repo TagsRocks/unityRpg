@@ -188,7 +188,7 @@ namespace MyLib
                     
                     defaultGloves = transform.Find("gloves").gameObject;
                     //原有mesh都Disable了则动画停止，需要设定总是动画
-                    animation.cullingType = AnimationCullingType.AlwaysAnimate;
+                    GetComponent<Animation>().cullingType = AnimationCullingType.AlwaysAnimate;
 
                     defaultTrousers.SetActive(false);
                     defaultChest.SetActive(false);
@@ -347,7 +347,7 @@ namespace MyLib
                             Scabbard.transform.localRotation = Quaternion.Euler(new Vector3(0, 0, 0));
                             foreach (Transform c in Scabbard.transform)
                             {
-                                if (c.renderer != null)
+                                if (c.GetComponent<Renderer>() != null)
                                 {
                                     GetComponent<ShadowComponent>().SetShadowPlane(c.gameObject);
                                 }
@@ -366,7 +366,7 @@ namespace MyLib
 
                             foreach (Transform c in Weapon.transform)
                             {
-                                if (c.renderer != null)
+                                if (c.GetComponent<Renderer>() != null)
                                 {
                                     GetComponent<ShadowComponent>().SetShadowPlane(c.gameObject);
                                 }
@@ -382,7 +382,7 @@ namespace MyLib
                                 Weapon.transform.localRotation = Quaternion.Euler(new Vector3(0, 0, 0));
                                 foreach (Transform c in Weapon.transform)
                                 {
-                                    if (c.renderer != null)
+                                    if (c.GetComponent<Renderer>() != null)
                                     {
                                         GetComponent<ShadowComponent>().SetShadowPlane(c.gameObject);
                                     }
@@ -410,14 +410,14 @@ namespace MyLib
                                 Weapon.transform.localScale = Vector3.one;
 
                                 Log.Sys("Set Weapon Transform " + inv.GetColumn(3));
-                                if (Weapon.renderer != null)
+                                if (Weapon.GetComponent<Renderer>() != null)
                                 {
                                     GetComponent<ShadowComponent>().SetShadowPlane(Weapon);
                                 }
 
                                 foreach (Transform c in Weapon.transform)
                                 {
-                                    if (c.renderer != null)
+                                    if (c.GetComponent<Renderer>() != null)
                                     {
                                         GetComponent<ShadowComponent>().SetShadowPlane(c.gameObject);
                                     }
@@ -436,14 +436,14 @@ namespace MyLib
                                 Weapon.transform.localRotation = Quaternion.identity;
                                 Weapon.transform.localScale = Vector3.one;
                                 //3dsmax 
-                                if (Weapon.renderer != null)
+                                if (Weapon.GetComponent<Renderer>() != null)
                                 {
                                     GetComponent<ShadowComponent>().SetShadowPlane(Weapon);
                                 }
 
                                 foreach (Transform c in Weapon.transform)
                                 {
-                                    if (c.renderer != null)
+                                    if (c.GetComponent<Renderer>() != null)
                                     {
                                         GetComponent<ShadowComponent>().SetShadowPlane(c.gameObject);
                                     }
