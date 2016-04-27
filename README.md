@@ -12,6 +12,10 @@ http://pan.baidu.com/s/1dEmj8q9
 
 链接: http://pan.baidu.com/s/1bnQqGer 密码: qwk6
 
+升级详细说明：
+
+####http://www.taikr.com/course/297/learn#lesson/6248
+
 
 ##unityRpg
 Demo 游戏下载地址：
