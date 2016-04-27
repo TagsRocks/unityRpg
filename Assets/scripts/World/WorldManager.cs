@@ -168,6 +168,8 @@ namespace MyLib
 			//ng.transform.parent = transform;
 			//vjoyController.transform.parent = transform;
 			Log.GUI ("Init virtual Joy stick "+vjoyController);
+
+            var rc = Object.Instantiate(Resources.Load<GameObject>("levelPublic/RightController"));
 		}
 
         /// <summary>
