@@ -17,6 +17,24 @@ namespace MyLib
                 first = false;
             }
 		}
+        private MyAnimationEvent.Message msg;
+        public override bool CheckNextState(AIStateEnum next)
+        {
+            if(next == AIStateEnum.COMBAT) {
+                msg = lastMsg;
+                GetAttr().StartCoroutine(UseSkill());
+                return false;
+            }
+            return base.CheckNextState(next); 
+        }
+
+        IEnumerator UseSkill() {
+            aiCharacter.ChangeState(AIStateEnum.MOVE);
+            //yield return null;
+            lastMsg = msg; 
+            aiCharacter.ChangeState(AIStateEnum.COMBAT);
+            yield break;
+        }
 
 		public override IEnumerator RunLogic ()
 		{
@@ -31,8 +49,8 @@ namespace MyLib
 				float v = 0;
 				float h = 0;
 				if (vcontroller != null) {
-					h = vcontroller.inputVector.x;//CameraRight 
-					v = vcontroller.inputVector.y;//CameraForward
+					h = vcontroller.inputVector.x;
+					v = vcontroller.inputVector.y;
 				}
 
 

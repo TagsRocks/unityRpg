@@ -250,7 +250,14 @@ namespace MyLib
             return false;
         }
 
-        protected MyAnimationEvent.Message lastMsg;
+        protected MyAnimationEvent.Message lastMsg{
+            get {
+                return aiCharacter.lastMsg;
+            }
+            set {
+                aiCharacter.lastMsg = value;
+            }
+        }
 
         protected void ClearEvent()
         {

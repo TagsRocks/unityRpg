@@ -38,7 +38,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: .0184910595, y: .725209057, z: -.115068316}
+  m_LocalPosition: {x: 0.01849106, y: 0.72520906, z: -0.11506832}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400002}
@@ -67,7 +67,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c70af40f3f97445ca041cc7199a632e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Position: {x: 0, y: .200000003, z: 3.45000005}
+  Position: {x: 0, y: 1.15, z: 0.92}
   count: 1
   duration: 0
   direction: 0
@@ -77,32 +77,34 @@ MonoBehaviour:
     serializedVersion: 2
     m_Curve:
     - time: 0
-      value: .496163785
+      value: 0.4961638
       inSlope: 0
       outSlope: 0
       tangentMode: 0
     - time: 1
-      value: .496163785
+      value: 0.4961638
       inSlope: 0
       outSlope: 0
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
+    m_RotationOrder: 4
   MinRadius:
     serializedVersion: 2
     m_Curve:
     - time: 0
-      value: .00511527061
+      value: 0.0051152706
       inSlope: 0
       outSlope: 0
       tangentMode: 0
     - time: 1
-      value: .00511527061
+      value: 0.0051152706
       inSlope: 0
       outSlope: 0
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
+    m_RotationOrder: 4
   UseMaxOnly: 0
   particle: {fileID: 0}
   Missile: {fileID: 11400000, guid: 8769d657c246b4d6e8c74f0d125ed08f, type: 2}
@@ -120,4 +122,3 @@ Prefab:
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 100000}
   m_IsPrefabParent: 1
-  m_IsExploded: 1

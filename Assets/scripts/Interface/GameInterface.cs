@@ -19,7 +19,9 @@ namespace MyLib
             //连击3招
             var skillId = ObjectManager.objectManager.GetMyPlayer ().GetComponent<SkillInfoComponent> ().GetDefaultSkillId ();
             var skillData = Util.GetSkillData(skillId, 1);
-            ObjectManager.objectManager.GetMyPlayer().GetComponent<MyAnimationEvent>().OnSkill(skillData);
+            if(!NetworkUtil.IsNet()) {
+                ObjectManager.objectManager.GetMyPlayer().GetComponent<MyAnimationEvent>().OnSkill(skillData);
+            }
 
             NetDateInterface.FastMoveAndPos();
             NetDateInterface.FastUseSkill(skillId, skillData.Level);

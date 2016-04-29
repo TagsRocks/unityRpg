@@ -23,7 +23,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: .0184910595, y: .725209057, z: -.115068316}
+  m_LocalPosition: {x: 0.01849106, y: 0.72520906, z: -0.11506832}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -40,7 +40,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   eventList:
-  - evt: 10001
+  - evt: 10000
     layout: {fileID: 100000, guid: 0bb1f56c44a954703a607162dcc51ec8, type: 2}
     affix:
       effectType: 0
@@ -76,4 +76,3 @@ Prefab:
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 100000}
   m_IsPrefabParent: 1
-  m_IsExploded: 1

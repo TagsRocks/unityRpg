@@ -167,6 +167,10 @@ namespace MyLib
             ExitShoot,
             Shoot,
             ShootDir,
+
+            EnterMove,
+            ExitMove,
+            MoveDir,
 		}
 
 

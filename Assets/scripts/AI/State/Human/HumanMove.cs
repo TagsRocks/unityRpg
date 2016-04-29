@@ -75,7 +75,7 @@ namespace MyLib
 				var movement = moveDirection * moveSpeed;
 
                 physics.MoveSpeed(movement);
-                physics.TurnTo(moveDirection);
+                //physics.TurnTo(moveDirection);
 				yield return null;
 			}
 		}

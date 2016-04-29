@@ -22,6 +22,7 @@ namespace MyLib
     [RequireComponent(typeof(MySelfAttributeSync))]
     [RequireComponent(typeof(PlayerSyncToServer))]
 	[RequireComponent(typeof(PhysicComponent))]
+    [RequireComponent(typeof(MoveAndShoot))]
     public class PlayerAIController : AIBase
     {
         void Awake()
@@ -31,10 +32,10 @@ namespace MyLib
 			ai = new HumanCharacter();
             ai.attribute = attribute;
             ai.AddState(new HumanIdle());
-            //ai.AddState(new TankMoveAndShoot());
-            ai.AddState(new HumanMove());
-            ai.AddState(new HumanCombat());
-            ai.AddState(new HumanSkill());
+            //ai.AddState(new HumanMove());
+            ai.AddState(new HumanMoveAndShoot());
+            //ai.AddState(new HumanCombat());
+            //ai.AddState(new HumanSkill());
 
             ai.AddState(new HumanDead());
             ai.AddState(new MonsterKnockBack());

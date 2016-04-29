@@ -45,8 +45,9 @@ namespace MyLib
 			}
 			float v = Input.GetAxisRaw ("Vertical");
 			float h = Input.GetAxisRaw ("Horizontal");
-			if (Mathf.Abs (v) < 0.1f && Mathf.Abs (h) < 0.1f && VirtualJoystickRegion.VJR != null) {
-				Vector2 vec = VirtualJoystickRegion.VJRnormals;
+            if (Mathf.Abs (v) < 0.1f && Mathf.Abs (h) < 0.1f && LeftController.Instance != null) {// && VirtualJoystickRegion.VJR != null) {
+				//Vector2 vec = VirtualJoystickRegion.VJRnormals;
+                var vec = LeftController.Instance.MoveDir;
 				h = vec.x;
 				v = vec.y;
 			}
@@ -55,7 +56,6 @@ namespace MyLib
 				var evt = new MyEvent (MyEvent.EventType.MovePlayer);
 				evt.localID = ObjectManager.objectManager.GetMyLocalId ();
 				evt.vec2 = new Vector2 (h, v);
-				//MyEventSystem.myEventSystem.PushEvent (evt);
 				MyEventSystem.myEventSystem.PushLocalEvent(evt.localID, evt);
 			}
 		}

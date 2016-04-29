@@ -100,6 +100,9 @@ public class TestMeca : MonoBehaviour
         }
 
 
+        if(Input.GetKey(KeyCode.B)) {
+            anim.SetInteger("Action", 2);
+        }
             
                 
     }

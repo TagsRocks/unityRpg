@@ -162,14 +162,15 @@ namespace MyLib
 			root.fitHeight = true;
 
 			//删除的对象不能放在Don'tDestroy 下面
-			var vjoyController = Resources.Load<GameObject> ("levelPublic/VirtualJoystick");
+			//var vjoyController = Resources.Load<GameObject> ("levelPublic/VirtualJoystick");
 			//var ng = 
-            GameObject.Instantiate (vjoyController);// as GameObject;
+            //GameObject.Instantiate (vjoyController);// as GameObject;
+
 			//ng.transform.parent = transform;
 			//vjoyController.transform.parent = transform;
-			Log.GUI ("Init virtual Joy stick "+vjoyController);
-
+			//Log.GUI ("Init virtual Joy stick "+vjoyController);
             var rc = Object.Instantiate(Resources.Load<GameObject>("levelPublic/RightController"));
+            var lf = Object.Instantiate(Resources.Load<GameObject>("levelPublic/LeftController"));
 		}
 
         /// <summary>

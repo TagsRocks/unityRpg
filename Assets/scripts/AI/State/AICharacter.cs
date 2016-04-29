@@ -92,6 +92,7 @@ namespace MyLib
             state.SetChar(this);
         }
 
+        public MyAnimationEvent.Message lastMsg;
         //增加临时状态
         public void AddTempState(AIState state)
         {
