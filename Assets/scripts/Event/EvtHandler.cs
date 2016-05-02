@@ -33,7 +33,7 @@ namespace MyLib
             happenedEvt.Remove(type);
         }
 
-        void OnDestory() {
+        void OnDestroy() {
             foreach(var e in regEvts) {
                 MyEventSystem.myEventSystem.dropListener(e.Key, e.Value);
             }

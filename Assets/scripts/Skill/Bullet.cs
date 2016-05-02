@@ -85,7 +85,8 @@ namespace MyLib
             {
                 return;
             }
-            Collider[] col = Physics.OverlapSphere(transform.position, missileData.Radius, SkillDamageCaculate.GetDamageLayer());
+            //Hit Everything
+            Collider[] col = Physics.OverlapSphere(transform.position, missileData.Radius);
             foreach (Collider c in col)
             {
                 //和多个不同的敌人目标碰撞
@@ -233,6 +234,8 @@ namespace MyLib
                 CreateHitParticle();
 
                 //计算随机的弹射 反射方向
+                //命中目标不再反弹
+                LeftRicochets = 0;
                 if (LeftRicochets > 0)
                 {
                     Log.AI("Generate new bullet " + LeftRicochets);
@@ -257,9 +260,7 @@ namespace MyLib
                     AOEDamage();
                 } else
                 {//只伤害一个目标
-                    //TODO:通过SkillDamageCaculate计算伤害 Level Information
                     DoDamage(other);
-
                 }
 
                 //非穿透性子弹
@@ -270,9 +271,8 @@ namespace MyLib
                     MyEventSystem.myEventSystem.PushLocalEvent(attacker.GetComponent<KBEngine.KBNetworkView>().GetLocalId(), evt);
                 }
                 //TODO::撞击其它玩家如何处理
-            } else if (other.tag == attacker.tag)
-            { 
-            } else
+            } 
+            else
             {//装到墙体 或者建筑物 等对象身上 则 反射  Not used
                 Log.AI("Bullet colldier with Wall " + gameObject.name);
                 if (missileData.HitParticle != null)
@@ -288,7 +288,25 @@ namespace MyLib
                     Log.AI("Generate new bullet " + LeftRicochets);
                     LeftRicochets--;
                     initPos = transform.position;
-                    transform.localRotation = Quaternion.Euler(new Vector3(0, transform.localRotation.eulerAngles.y + 180 + Random.Range(-missileData.RandomAngle, missileData.RandomAngle), 0));
+                    //transform.localRotation = Quaternion.Euler(new Vector3(0, transform.localRotation.eulerAngles.y + 180 + Random.Range(-missileData.RandomAngle, missileData.RandomAngle), 0));
+                    //根据碰撞的平面角度决定反弹角度
+                    //RayTrace 一下查看碰撞对象
+                    var ray = new Ray() {
+                        origin = transform.position,
+                        direction = transform.forward,
+                    };
+                    RaycastHit hitInfo;
+                    var hitWhat = Physics.Raycast(ray,out hitInfo, 15);
+                    var inDir = transform.forward;
+                    if(hitWhat) {
+                        //var p = hitInfo.point;
+                        Log.Sys("HitWhat: "+hitInfo.collider);
+                        var n = hitInfo.normal;
+                        var outDir = Vector3.Reflect(inDir, n);
+                        var qua = Quaternion.FromToRotation(Vector3.forward, outDir);
+                        transform.localRotation = Quaternion.Euler(new Vector3(0, qua.eulerAngles.y, 0));
+                    }
+
                     //sleepTime = IgnoreTime;
                 } else
                 {

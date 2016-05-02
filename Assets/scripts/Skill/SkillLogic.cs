@@ -155,7 +155,8 @@ namespace MyLib
         /// <summary>
         /// 子弹在网络模式下面
         /// 只伤害 敌方玩家
-        /// 不伤害 建筑物 和 我方玩家 
+        /// 不伤害 建筑物 和 我方玩家
+        /// 大乱斗 
         /// </summary>
         /// <returns><c>true</c> if is enemy for bullet the specified a b; otherwise, <c>false</c>.</returns>
         /// <param name="a">The alpha component.</param>

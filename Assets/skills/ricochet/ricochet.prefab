@@ -39,7 +39,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -25.3834572, y: -20.6072464, z: 368.30722}
+  m_LocalPosition: {x: -25.383457, y: -20.607246, z: 368.30722}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400002}
@@ -68,9 +68,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c70af40f3f97445ca041cc7199a632e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Position: {x: 0, y: .200000003, z: 3.45000005}
+  Position: {x: 0, y: 1.3, z: 1}
   count: 1
-  duration: .100000001
+  duration: 0.1
   direction: 0
   Angle: 0
   MaxMagnitude: 1
@@ -78,17 +78,18 @@ MonoBehaviour:
     serializedVersion: 2
     m_Curve:
     - time: 0
-      value: .100255914
+      value: 0.100255914
       inSlope: 0
       outSlope: 0
       tangentMode: 0
     - time: 1
-      value: .100255914
+      value: 0.100255914
       inSlope: 0
       outSlope: 0
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
+    m_RotationOrder: 4
   MinRadius:
     serializedVersion: 2
     m_Curve:
@@ -104,6 +105,7 @@ MonoBehaviour:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
+    m_RotationOrder: 4
   UseMaxOnly: 1
   particle: {fileID: 0}
   Missile: {fileID: 11400000, guid: bba11ec0292c745368d9fac5035d3ace, type: 2}
@@ -121,7 +123,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e033caffa2d174a929e84e191ce5945c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Position: {x: 0, y: .200000003, z: 3.45000005}
+  Position: {x: 0, y: 1.3, z: 1}
   particle: {fileID: 192944, guid: b66336d97fe294fbcbab3473b5ab27fd, type: 2}
   delayTime: 0
   boneName: 
@@ -136,4 +138,3 @@ Prefab:
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 100000}
   m_IsPrefabParent: 1
-  m_IsExploded: 1

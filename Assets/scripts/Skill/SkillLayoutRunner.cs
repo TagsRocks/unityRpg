@@ -81,6 +81,7 @@ namespace MyLib
                 //Wait To Show Particle Why?
                 xft.enabled = false;
                 NGUITools.AddMissingComponent<RemoveSelf>(g);
+                //var sp = NGUITools.AddMissingComponent<SyncPosWithTarget>(g);
                 
                 if (skillConfig.boneName != "")
                 {
@@ -125,10 +126,18 @@ namespace MyLib
                     }
                     else
                     {
+                        /*
                         g.transform.parent = transform;
                         g.transform.localPosition = skillConfig.Position;
                         g.transform.localRotation = Quaternion.identity;
                         g.transform.localScale = Vector3.one;
+                        */
+                        g.transform.localPosition = skillConfig.Position;
+                        g.transform.localRotation = Quaternion.identity;
+                        g.transform.localScale = Vector3.zero; 
+                        var sp = g.AddComponent<SyncPosWithTarget>();
+                        sp.target = this.gameObject;
+
                     }
                 }
 
