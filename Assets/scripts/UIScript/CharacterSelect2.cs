@@ -11,7 +11,8 @@ namespace MyLib
         UILabel namelevel;
         GameObject SelChar;
 
-        void Awake(){
+        void Awake()
+        {
             enterBut = GetName("enterGame");
             createBut = GetName("createChar");
             namelevel = GetLabel("Name");
@@ -20,41 +21,84 @@ namespace MyLib
             SelChar = GetName("SelChar");
             SelChar.SetActive(false);
 
-            regEvt = new List<MyEvent.EventType> (){
+            regEvt = new List<MyEvent.EventType>()
+            {
                 MyEvent.EventType.UpdateSelectChar,
+                MyEvent.EventType.CreateSuccess,
             };
-            RegEvent ();
+            RegEvent();
         }
-        void OnEnter(GameObject g){
+
+        void Start()
+        {
+            if (NetDebug.netDebug.JumpLogin)
+            {
+                if (!SelDefaultRole())
+                {
+                    CharSelectProgress.charSelectLogic.CreateChar("Test", 2);
+                }
+            }
+        }
+
+        bool SelDefaultRole()
+        {
+            var charInfo = GameInterface_Login.loginInterface.GetCharInfo();
+            if (charInfo != null)
+            {
+                if (charInfo.RolesInfosList.Count > 0)
+                {
+                    OnEnter(null);
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        void OnEnter(GameObject g)
+        {
             MyEventSystem.myEventSystem.PushEvent(MyEvent.EventType.MeshHide);
-            GameInterface_Login.loginInterface.StartGame (selectRoleInfo);
+            GameInterface_Login.loginInterface.StartGame(selectRoleInfo);
         }
-        void ShowCreate(){
-            Log.GUI ("Push View Create");
-            WindowMng.windowMng.ReplaceView ("UI/CharCreate", false, false);
+
+        void ShowCreate()
+        {
+            Log.GUI("Push View Create");
+            WindowMng.windowMng.ReplaceView("UI/CharCreate", false, false);
             MyEventSystem.myEventSystem.PushEvent(MyEvent.EventType.UpdateCharacterCreateUI);
         }
 
-        void OnCreate(GameObject g){
+        void OnCreate(GameObject g)
+        {
             ShowCreate();
         }
 
-        protected override void OnEvent (MyEvent evt)
+        protected override void OnEvent(MyEvent evt)
         {
-            UpdateFrame ();
+            UpdateFrame();
+            if (evt.type == MyEvent.EventType.CreateSuccess)
+            {
+                OnEnter(null);
+            }
         }
-        protected override void OnDestroy(){
+
+        protected override void OnDestroy()
+        {
             base.OnDestroy();
             //MyEventSystem.myEventSystem.PushEvent(MyEvent.EventType.MeshHide);
         }
+
         RolesInfo selectRoleInfo;
-        void UpdateFrame() {
-            var charInfo = GameInterface_Login.loginInterface.GetCharInfo ();
-            if (charInfo != null) {
-                if(charInfo.RolesInfosList.Count >0) {
+
+        void UpdateFrame()
+        {
+            var charInfo = GameInterface_Login.loginInterface.GetCharInfo();
+            if (charInfo != null)
+            {
+                if (charInfo.RolesInfosList.Count > 0)
+                {
                     enterBut.SetActive(true);
                     createBut.SetActive(false);
-                    var charI =  charInfo.RolesInfosList[0];
+                    var charI = charInfo.RolesInfosList [0];
                     selectRoleInfo = charI;
                     namelevel.text = string.Format("[d2691e]姓名:{0}[-]\n[a0522d]等级:{1}[-]", charI.Name, charI.Level);
                     namelevel.gameObject.SetActive(true);
@@ -65,7 +109,8 @@ namespace MyLib
                     evt.rolesInfo = charI;
 
                     MyEventSystem.myEventSystem.PushEvent(evt);
-                }else {
+                } else
+                {
                     SelChar.SetActive(false);
                     enterBut.SetActive(false);
                     createBut.SetActive(true);

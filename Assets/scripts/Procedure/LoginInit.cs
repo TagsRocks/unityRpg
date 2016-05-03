@@ -1,10 +1,4 @@
-﻿
-/*
-Author: liyonghelpme
-Email: 233242872@qq.com
-*/
-
-/*
+﻿/*
 Author: liyonghelpme
 Email: 233242872@qq.com
 */

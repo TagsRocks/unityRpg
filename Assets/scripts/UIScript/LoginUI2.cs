@@ -15,6 +15,11 @@ namespace MyLib
             SetCallback("StartServer", OnServer);
             sync = GetInput("SyncInput");
         }
+        void Start() {
+            if(NetDebug.netDebug.JumpLogin) {
+                OnStart(null);
+            }
+        }
         private bool serverYet = false;
         void OnServer() {
             var ca = ClientApp.Instance;

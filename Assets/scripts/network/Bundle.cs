@@ -281,11 +281,13 @@ namespace KBEngine
 		 * moduleId int8
 		 * messageId int16
 		 * protobuffer
+         * 0是Push的保留ID
 		 */ 
 		public uint writePB(byte[] v) {
 			uint fid = flowId++;
             if(fid == 0){
                 fid++;
+                flowId++;
             }
 
 			int bodyLength = 4 + 1 + 2 + v.Length;

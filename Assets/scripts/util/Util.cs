@@ -678,7 +678,7 @@ namespace MyLib
         {
             if (WorldManager.worldManager.GetActive().def.isCity)
             {
-                return "UI/MainUI";
+                return "UI/MainUI2";
             } else
             {
                 return "UI/GameUI2";

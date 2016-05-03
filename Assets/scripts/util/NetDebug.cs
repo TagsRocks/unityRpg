@@ -12,6 +12,7 @@ public class NetDebug : MonoBehaviour {
 	public static NetDebug netDebug;
 
     public bool IsWuDi = false;
+    public bool JumpLogin = false;
 
 	List<string> consoleDebug = new List<string>();
 	public void AddConsole(string msg) {

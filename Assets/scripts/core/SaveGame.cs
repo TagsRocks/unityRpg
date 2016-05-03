@@ -278,8 +278,10 @@ namespace MyLib
         {
 			CScene.InitStatic();
             var g = gameObject;
+            g.AddComponent<RemoteNetworkManager>();
+
             if (NotifyUIManager.Instance == null)
-            {
+            { 
                 g.AddComponent<NotifyUIManager>();
             }
             if (BackPack.backpack == null)

@@ -8,7 +8,7 @@ namespace MyLib
 {
 	public class ServerBundle 
 	{
-        static System.UInt32 serverPushFlowId = 0;
+        //static System.UInt32 serverPushFlowId = 0;
 
 		KBEngine.MemoryStream stream = new KBEngine.MemoryStream();
 		public int messageLength = 0;
@@ -97,7 +97,7 @@ namespace MyLib
             DemoServer.demoServer.GetThread().SendPacket(build, flow);
         }
         public static void SendImmediatePush(IBuilderLite build) {
-            DemoServer.demoServer.GetThread().SendPacket(build, serverPushFlowId++);
+            DemoServer.demoServer.GetThread().SendPacket(build, 0);
         }
 
 	}

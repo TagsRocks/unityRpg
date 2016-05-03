@@ -3,11 +3,11 @@ using System.Collections;
 using MyLib;
 using System.Text.RegularExpressions;
 
-//汉字 英文 字母 数字 符号 其它不允许
-public class EnterGame : MyLib.IUserInterface
+public class MainUI2 : IUserInterface
 {
     UIInput nameInput;
     Regex reg = new Regex("[a-zA-Z0-9]");
+
     void Awake()
     {
         nameInput = GetInput("NameInput");
@@ -16,6 +16,7 @@ public class EnterGame : MyLib.IUserInterface
 
     void OnEnter()
     {
+
         if (string.IsNullOrEmpty(nameInput.value))
         {
             Util.ShowMsg("名字不能为空");
@@ -32,8 +33,9 @@ public class EnterGame : MyLib.IUserInterface
                 return;
             }
         }
-
-        RemoteNetworkManager.Instance.StartGame(nameInput.value);
+        ServerData.Instance.playerInfo.Roles.Name = nameInput.value;
+        ServerData.Instance.playerInfo.Roles.Job = Job.ARMOURER;
+        WorldManager.worldManager.WorldChangeScene(6, false);
     }
 
     private bool IsChinese(char s)
@@ -44,13 +46,16 @@ public class EnterGame : MyLib.IUserInterface
         }
         return false;
     }
-    private bool IsAlpheNum(char s) {
+
+    private bool IsAlpheNum(char s)
+    {
         var st = "";
         st += s;
-        if(reg.IsMatch(st)) {
+        if (reg.IsMatch(st))
+        {
             return true;
         }
         return false;
+    
     }
-
 }
