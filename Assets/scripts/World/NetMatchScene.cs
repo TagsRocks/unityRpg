@@ -128,7 +128,8 @@ namespace MyLib
                 //初始化数据
                 yield return StartCoroutine(InitData());       
                 yield return StartCoroutine(StartMatch());
-                yield return StartCoroutine(WaitForTeamFull());
+                //yield return StartCoroutine(WaitForTeamFull());
+                yield return StartCoroutine(WaitForEnterRoom());
             } 
         }
 
@@ -273,6 +274,10 @@ namespace MyLib
                 var cmd = packet.protoBody as GCPlayerCmd;
                 roomInfo = cmd.RoomInfo;
             }));
+        }
+
+        IEnumerator WaitForEnterRoom() {
+            yield break;
         }
 
         IEnumerator WaitForTeamFull()
