@@ -161,6 +161,16 @@ namespace MyLib
             HitTarget, //击中目标一次
             TeamColor,
             IsMaster,
+
+            CancelShoot,
+            EnterShoot,
+            ExitShoot,
+            Shoot,
+            ShootDir,
+
+            EnterMove,
+            ExitMove,
+            MoveDir,
 		}
 
 

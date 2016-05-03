@@ -45,8 +45,9 @@ namespace MyLib
 			}
 			float v = Input.GetAxisRaw ("Vertical");
 			float h = Input.GetAxisRaw ("Horizontal");
-			if (Mathf.Abs (v) < 0.1f && Mathf.Abs (h) < 0.1f && VirtualJoystickRegion.VJR != null) {
-				Vector2 vec = VirtualJoystickRegion.VJRnormals;
+            if (Mathf.Abs (v) < 0.1f && Mathf.Abs (h) < 0.1f && LeftController.Instance != null ){//&& VirtualJoystickRegion.VJR != null) {
+                var vec = LeftController.Instance.MoveDir;
+				//Vector2 vec = VirtualJoystickRegion.VJRnormals;
 				h = vec.x;
 				v = vec.y;
 			}
