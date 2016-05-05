@@ -37,6 +37,9 @@ namespace MyLib
    
             RegEvent();
             SetCallback("Close", OnQuit);
+
+            GetName("RightMid").SetActive(false);
+            GetName("LowRight_Panel").SetActive(false);
         }
         void OnQuit(GameObject g){
             WindowMng.windowMng.ShowDialog(delegate(bool ret){

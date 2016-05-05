@@ -33,7 +33,7 @@ public class EnterGame : MyLib.IUserInterface
             }
         }
 
-        RemoteNetworkManager.Instance.StartGame(nameInput.value);
+        //RemoteNetworkManager.Instance.StartGame(nameInput.value);
     }
 
     private bool IsChinese(char s)

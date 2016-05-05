@@ -2,13 +2,13 @@
 using System.Collections;
 using MyLib;
 
-#if UNITY_EDITOR
 public class RemoveMonsterInZone : MonoBehaviour
 {
     [ButtonCallFunc()]public bool Show;
 
     public void ShowMethod()
     {
+        #if UNITY_EDITOR
         var pro = transform.Find("properties");
         foreach (Transform t in pro)
         {
@@ -18,12 +18,14 @@ public class RemoveMonsterInZone : MonoBehaviour
                 spawnChest.UpdateEditor();
             }
         }
+        #endif
     }
 
     [ButtonCallFunc()]
     public bool Remove;
     public void RemoveMethod()
     {
+        #if UNITY_EDITOR
         var pro = transform.Find("properties");
         foreach (Transform t in pro)
         {
@@ -69,14 +71,15 @@ public class RemoveMonsterInZone : MonoBehaviour
                 }
             }
         }
+        #endif
     }
 
     [ButtonCallFunc()]
-    public bool
-        Reset;
+    public bool Reset;
 
     public void ResetMethod()
     {
+        #if UNITY_EDITOR
         var pro = transform.Find("properties");
         foreach (Transform t in pro)
         {
@@ -88,19 +91,7 @@ public class RemoveMonsterInZone : MonoBehaviour
                 trigger.UpdateEditor();
             }
         }
-    }
-
-    // Use this for initialization
-    void Start()
-    {
-    
-    }
-    
-    // Update is called once per frame
-    void Update()
-    {
-    
+        #endif
     }
 }
 
-#endif

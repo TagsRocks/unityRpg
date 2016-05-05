@@ -168,7 +168,14 @@ namespace MyLib
                     if (sync != null)
                     {
                         sync.NetworkAttack(sk);
+                    }else {
+                        var sync2 = player.GetComponent<MySelfAttributeSync>();
+                        if(sync2 != null) 
+                        {
+                            sync2.NetworkAttack(sk);
+                        }
                     }
+
                 }
             } else if (cmds [0] == "Buff")
             {
@@ -265,7 +272,7 @@ namespace MyLib
                 }
             } else if (cmds [0] == "GameOver")
             {
-                if (!NetworkUtil.IsNetMaster())
+                //if (!NetworkUtil.IsNetMaster())
                 {
                     ScoreManager.Instance.NetworkGameOver();
                 }

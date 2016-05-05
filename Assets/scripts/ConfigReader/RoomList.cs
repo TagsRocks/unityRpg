@@ -45,6 +45,7 @@ public class RoomList : MonoBehaviour
             "N",
             "TOWN",
             "JD",
+            "CITY",
         };
 
         nameToObj = new Dictionary<string, Dictionary<string, GameObject>>();
@@ -96,6 +97,8 @@ public class RoomList : MonoBehaviour
 
     public void LoadAllRoomsMethod()
     {
+
+        #if UNITY_EDITOR
         //roomPieces.Clear();
         typeParts.Clear();
 
@@ -127,6 +130,7 @@ public class RoomList : MonoBehaviour
             }
         }
 		Debug.Log("RoomListLength "+typeParts.Count);
+        #endif
 #if UNITY_EDITOR
         //EditorUtility.SetDirty(gameObject);
         EditorUtility.SetDirty(this);

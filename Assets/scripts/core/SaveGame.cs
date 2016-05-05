@@ -278,7 +278,7 @@ namespace MyLib
         {
 			CScene.InitStatic();
             var g = gameObject;
-            g.AddComponent<RemoteNetworkManager>();
+            //g.AddComponent<RemoteNetworkManager>();
 
             if (NotifyUIManager.Instance == null)
             { 

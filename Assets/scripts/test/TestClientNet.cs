@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+#if UNITY_EDITOR
 public class TestClientNet : MonoBehaviour {
 
     [ButtonCallFunc()]public bool CloseNet;
@@ -43,3 +44,5 @@ public class TestClientNet : MonoBehaviour {
         MyLib.StoryDialog.Ignore = true;
     }
 }
+
+#endif

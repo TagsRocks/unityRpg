@@ -22,6 +22,9 @@ namespace MyLib
             }
 
             allPlayerStart = transform.Find("AllPlayerStart");
+            if(allPlayerStart == null) {
+                allPlayerStart = transform.Find("PlayerStart");
+            }
         }
 
         public Vector3 GetRandomStartPos(int id) {

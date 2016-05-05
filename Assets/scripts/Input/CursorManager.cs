@@ -51,6 +51,12 @@ namespace MyLib
 				h = vec.x;
 				v = vec.y;
 			}
+            var vec2 = new Vector2(v, h);
+            if(vec2.sqrMagnitude > 1) {
+                var l = vec2.magnitude;
+                v /= l;
+                h /= l;
+            }
 
 			if (ObjectManager.objectManager != null) {
 				var evt = new MyEvent (MyEvent.EventType.MovePlayer);

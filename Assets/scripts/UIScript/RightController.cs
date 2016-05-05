@@ -256,78 +256,103 @@ public class RightController : MonoBehaviour
 
     private int fingerId = -1;
 
-    void Update()
+    private void HandleIdle()
     {
-        if (state == RightState.Idle)
+        #if UNITY_EDITOR
+        if (Input.GetMouseButtonDown(0))
         {
-            if (Input.GetMouseButtonDown(0))
+            var mousePos = Input.mousePosition;
+            if (mousePos.x > Screen.width / 2)
             {
-                var mousePos = Input.mousePosition;
-                if (mousePos.x > Screen.width / 2)
-                {
-                    state = RightState.Move;
-                    rb.EnterMove();
-                    rf.EnterMove();
-                    useMouse = true;
+                state = RightState.Move;
+                rb.EnterMove();
+                rf.EnterMove();
+                useMouse = true;
 
-                    rb.SetFingerPos(mousePos);
-                    rf.SetFingerPos(mousePos);
+                rb.SetFingerPos(mousePos);
+                rf.SetFingerPos(mousePos);
 
-                    CalculateShootDir();
-                    MyEventSystem.myEventSystem.PushEvent(MyEvent.EventType.EnterShoot);
-                }
-            } else
+                CalculateShootDir();
+                MyEventSystem.myEventSystem.PushEvent(MyEvent.EventType.EnterShoot);
+            }
+        } else
+        #endif
+        {
+            foreach (var touch in Input.touches)
             {
-                foreach (var touch in Input.touches)
+                fingerId = touch.fingerId;
+                var phase = touch.phase;
+                if (phase == TouchPhase.Began)
                 {
-                    fingerId = touch.fingerId;
-                    if (fingerId > 0 && fingerId < Input.touchCount)
+                    if (touch.position.x > Screen.width / 2)
                     {
-                        if (Input.GetTouch(fingerId).position.x > Screen.width / 2)
-                        {
-                            state = RightState.Move;
+                        state = RightState.Move;
 
-                            var fp = Input.GetTouch(fingerId).position;
-                            rb.EnterMove();
-                            rf.EnterMove();
-                            useMouse = false;
-                            rb.SetFingerPos(fp);
-                            rf.SetFingerPos(fp);
-                            CalculateShootDir();
-                            MyEventSystem.myEventSystem.PushEvent(MyEvent.EventType.EnterShoot);
-                            break;
-                        }
+                        var fp = touch.position;
+                        rb.EnterMove();
+                        rf.EnterMove();
+                        useMouse = false;
+                        rb.SetFingerPos(fp);
+                        rf.SetFingerPos(fp);
+                        CalculateShootDir();
+                        MyEventSystem.myEventSystem.PushEvent(MyEvent.EventType.EnterShoot);
+                        break;
                     }
                 }
             }
-        } else
-        {
-            if (useMouse)
-            {
-                if (!Input.GetMouseButton(0))
-                {
-                    state = RightState.Idle;
-                    rb.ExitMove();
-                    rf.ExitMove();
-                    useMouse = false;
-                    MyEventSystem.PushEventStatic(MyEvent.EventType.ExitShoot);
-                    if (!rb.IsCancel())
-                    {
-                        //MyEventSystem.PushEventStatic (MyEvent.EventType.Shoot);
-                        GameInterface.gameInterface.PlayerAttack();
-                    }
+        }
+    }
 
-                } else
+    void HandleMove()
+    {
+        #if UNITY_EDITOR
+        if (useMouse)
+        {
+            if (!Input.GetMouseButton(0))
+            {
+                state = RightState.Idle;
+                rb.ExitMove();
+                rf.ExitMove();
+                useMouse = false;
+                MyEventSystem.PushEventStatic(MyEvent.EventType.ExitShoot);
+                if (!rb.IsCancel())
                 {
-                    var mousePos = Input.mousePosition;
-                    rb.SetFingerPos(mousePos);
-                    rf.SetFingerPos(mousePos);
-                    CalculateShootDir();
+                    //MyEventSystem.PushEventStatic (MyEvent.EventType.Shoot);
+                    GameInterface.gameInterface.PlayerAttack();
                 }
+
             } else
             {
+                var mousePos = Input.mousePosition;
+                rb.SetFingerPos(mousePos);
+                rf.SetFingerPos(mousePos);
+                CalculateShootDir();
+            }
+        } else
+        #endif
+        {
 
-                var find = false;
+            var find = false;
+            Touch touch = new Touch();
+            var getTouch = false;
+            foreach (var t in Input.touches)
+            {
+                if (t.fingerId == fingerId)
+                {
+                    touch = t;
+                    getTouch = true;
+                    break;
+                }
+            }   
+            if (getTouch)
+            {
+                var phase = touch.phase; 
+                find = phase == TouchPhase.Ended || phase == TouchPhase.Canceled; 
+            } else
+            {
+                find = true;
+            }
+            /*
                 if (fingerId < Input.touchCount)
                 {
                     var touch = Input.GetTouch(fingerId);
@@ -337,26 +362,37 @@ public class RightController : MonoBehaviour
                 {
                     find = true;
                 }
-                if (find)
+                */
+            if (find)
+            {
+                state = RightState.Idle;
+                rb.ExitMove();
+                rf.ExitMove();
+                MyEventSystem.PushEventStatic(MyEvent.EventType.ExitShoot);
+                if (!rb.IsCancel())
                 {
-                    state = RightState.Idle;
-                    rb.ExitMove();
-                    rf.ExitMove();
-                    MyEventSystem.PushEventStatic(MyEvent.EventType.ExitShoot);
-                    if (!rb.IsCancel())
-                    {
-                        //MyEventSystem.PushEventStatic (MyEvent.EventType.Shoot);
-                        GameInterface.gameInterface.PlayerAttack();
-                    }
-                } else
-                {
-                    var touch = Input.GetTouch(fingerId);
-                    var pos = touch.position;
-                    rb.SetFingerPos(pos);
-                    rf.SetFingerPos(pos);
-                    CalculateShootDir();
+                    //MyEventSystem.PushEventStatic (MyEvent.EventType.Shoot);
+                    GameInterface.gameInterface.PlayerAttack();
                 }
+            } else
+            {
+                //var touch = Input.GetTouch(fingerId);
+                var pos = touch.position;
+                rb.SetFingerPos(pos);
+                rf.SetFingerPos(pos);
+                CalculateShootDir();
             }
+        }
+    }
+
+    void Update()
+    {
+        if (state == RightState.Idle)
+        {
+            HandleIdle(); 
+        } else
+        {
+            HandleMove();
         }
     }
 

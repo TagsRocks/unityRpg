@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+#if UNITY_EDITOR
 namespace MyLib
 {
 	public class TestChat : MonoBehaviour
@@ -31,3 +32,4 @@ namespace MyLib
 	}
 
 }
+#endif

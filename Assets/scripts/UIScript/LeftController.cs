@@ -85,47 +85,51 @@ public class LeftFinger : MonoBehaviour
     public LeftController con;
     public GUITexture tex;
 
-    public enum LeftFingerState 
+    public enum LeftFingerState
     {
         Idle,
         Move,
     }
+
     private LeftFingerState state = LeftFingerState.Idle;
     private Vector2 fingerPos = Vector2.zero;
 
 
-    void Update ()
+    void Update()
     {
-        if (state == LeftFingerState.Idle) {
-            var pos = new Vector2 ((Screen.width / 3) / 2, Screen.height / 6);
-            SetPos (pos);
-        } else {
-            SetPos (fingerPos);
+        if (state == LeftFingerState.Idle)
+        {
+            var pos = new Vector2((Screen.width / 3) / 2, Screen.height / 6);
+            SetPos(pos);
+        } else
+        {
+            SetPos(fingerPos);
         }
     }
-    void SetPos (Vector2 p)
+
+    void SetPos(Vector2 p)
     {
-        var rsz = this.con.GetFingerSize ();
-        tex.pixelInset = new Rect (p.x - rsz.x / 2, p.y - rsz.y / 2, rsz.x, rsz.y);
+        var rsz = this.con.GetFingerSize();
+        tex.pixelInset = new Rect(p.x - rsz.x / 2, p.y - rsz.y / 2, rsz.x, rsz.y);
     }
 
 
-    public void EnterMove ()
+    public void EnterMove()
     {
         state = LeftFingerState.Move;
     }
 
-    public void ExitMove ()
+    public void ExitMove()
     {
         state = LeftFingerState.Idle;
     }
 
-    public void SetFingerPos (Vector2 pos)
+    public void SetFingerPos(Vector2 pos)
     {
         fingerPos = pos;
     }
 
-    public Vector2 GetPos ()
+    public Vector2 GetPos()
     {
         return fingerPos;
     }
@@ -228,74 +232,100 @@ public class LeftController : MonoBehaviour
 
     private int fingerId = -1;
 
-    void Update()
+    void HandleIdle()
     {
-        if (state == LeftState.Idle)
+        MoveDir = Vector3.zero;
+        #if UNITY_EDITOR
+        if (Input.GetMouseButtonDown(0))
         {
-            MoveDir = Vector3.zero;
-            if (Input.GetMouseButtonDown(0))
+            var mousePos = Input.mousePosition;
+            if (mousePos.x < Screen.width / 2)
             {
-                var mousePos = Input.mousePosition;
-                if (mousePos.x < Screen.width / 2)
-                {
-                    state = LeftState.Move;
-                    rb.EnterMove();
-                    rf.EnterMove();
-                    useMouse = true;
+                state = LeftState.Move;
+                rb.EnterMove();
+                rf.EnterMove();
+                useMouse = true;
 
-                    rb.SetFingerPos(mousePos);
-                    rf.SetFingerPos(mousePos);
+                rb.SetFingerPos(mousePos);
+                rf.SetFingerPos(mousePos);
 
-                    CalculateShootDir();
-                    MyEventSystem.myEventSystem.PushEvent(MyEvent.EventType.EnterMove);
-                }
-            } else
+                CalculateShootDir();
+                MyEventSystem.myEventSystem.PushEvent(MyEvent.EventType.EnterMove);
+            }
+        } else
+        #endif
+        {
+            foreach (var touch in Input.touches)
             {
-                foreach (var touch in Input.touches)
+                fingerId = touch.fingerId;
+                var phase = touch.phase;
+                if (phase == TouchPhase.Began)
                 {
-                    fingerId = touch.fingerId;
-                    if (fingerId > 0 && fingerId < Input.touchCount)
+                    if (touch.position.x < Screen.width / 2)
                     {
-                        if (Input.GetTouch(fingerId).position.x < Screen.width / 2)
-                        {
-                            state = LeftState.Move;
+                        state = LeftState.Move;
 
-                            var fp = Input.GetTouch(fingerId).position;
-                            rb.EnterMove();
-                            rf.EnterMove();
-                            useMouse = false;
-                            rb.SetFingerPos(fp);
-                            rf.SetFingerPos(fp);
-                            CalculateShootDir();
-                            MyEventSystem.myEventSystem.PushEvent(MyEvent.EventType.EnterMove);
-                            break;
-                        }
+                        var fp = touch.position;
+                        rb.EnterMove();
+                        rf.EnterMove();
+                        useMouse = false;
+                        rb.SetFingerPos(fp);
+                        rf.SetFingerPos(fp);
+                        CalculateShootDir();
+                        MyEventSystem.myEventSystem.PushEvent(MyEvent.EventType.EnterMove);
+                        break;
                     }
                 }
             }
-        } else
-        {
-            if (useMouse)
-            {
-                if (!Input.GetMouseButton(0))
-                {
-                    state = LeftState.Idle;
-                    rb.ExitMove();
-                    rf.ExitMove();
-                    useMouse = false;
-                    MyEventSystem.PushEventStatic(MyEvent.EventType.ExitMove);
+        }
+    }
 
-                } else
-                {
-                    var mousePos = Input.mousePosition;
-                    rb.SetFingerPos(mousePos);
-                    rf.SetFingerPos(mousePos);
-                    CalculateShootDir();
-                }
+    void HandleMove()
+    {
+        #if UNITY_EDITOR
+        if (useMouse)
+        {
+            if (!Input.GetMouseButton(0))
+            {
+                state = LeftState.Idle;
+                rb.ExitMove();
+                rf.ExitMove();
+                useMouse = false;
+                MyEventSystem.PushEventStatic(MyEvent.EventType.ExitMove);
+
             } else
             {
+                var mousePos = Input.mousePosition;
+                rb.SetFingerPos(mousePos);
+                rf.SetFingerPos(mousePos);
+                CalculateShootDir();
+            }
+        } else
+        #endif
+        {
 
-                var find = false;
+            var find = false;
+            Touch touch = new Touch();
+            var getTouch = false;
+            foreach (var t in Input.touches)
+            {
+                if (t.fingerId == fingerId)
+                {
+                    touch = t;
+                    getTouch = true;
+                    break;
+                }
+            }
+            if (getTouch)
+            {
+                var phase = touch.phase;
+                find = phase == TouchPhase.Ended || phase == TouchPhase.Canceled; 
+            } else
+            {
+                find = true;
+            }
+
+            /*
                 if (fingerId < Input.touchCount)
                 {
                     var touch = Input.GetTouch(fingerId);
@@ -305,21 +335,33 @@ public class LeftController : MonoBehaviour
                 {
                     find = true;
                 }
-                if (find)
-                {
-                    state = LeftState.Idle;
-                    rb.ExitMove();
-                    rf.ExitMove();
-                    MyEventSystem.PushEventStatic(MyEvent.EventType.ExitMove);
-                } else
-                {
-                    var touch = Input.GetTouch(fingerId);
-                    var pos = touch.position;
-                    rb.SetFingerPos(pos);
-                    rf.SetFingerPos(pos);
-                    CalculateShootDir();
-                }
+                */
+
+            if (find)
+            {
+                state = LeftState.Idle;
+                rb.ExitMove();
+                rf.ExitMove();
+                MyEventSystem.PushEventStatic(MyEvent.EventType.ExitMove);
+            } else
+            {
+                //var touch = Input.GetTouch(fingerId);
+                var pos = touch.position;
+                rb.SetFingerPos(pos);
+                rf.SetFingerPos(pos);
+                CalculateShootDir();
             }
+        }
+    }
+
+    void Update()
+    {
+        if (state == LeftState.Idle)
+        {
+            HandleIdle();
+        } else
+        {
+            HandleMove();
         }
     }
 
@@ -328,8 +370,9 @@ public class LeftController : MonoBehaviour
         var dir = rf.GetPos() - rb.GetPos();
         var mag = dir.magnitude;
 
-        MoveDir = new Vector2(dir.x/CancelRadius, dir.y/CancelRadius);
-        if(mag > CancelRadius) {
+        MoveDir = new Vector2(dir.x / CancelRadius, dir.y / CancelRadius);
+        if (mag > CancelRadius)
+        {
             MoveDir.Normalize();
         }
 

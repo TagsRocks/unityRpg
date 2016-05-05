@@ -149,6 +149,7 @@ namespace MyLib
             GameObject.DestroyImmediate(g);
 
             Debug.LogError("请刷新RoomList 将该房间加入到RoomList中： " + resName);
+            Resources.Load<GameObject>("RoomList").GetComponent<RoomList>().LoadAllRoomsMethod();
         }
 
         void TranverseSingleTree(GameObject root, GameObject saveData, GameObjectDelegate del)

@@ -312,6 +312,11 @@ namespace MyLib
 
         }
 
+        public static string FormatTime(int timeSec) {
+            var sec = timeSec%60;
+            var min = timeSec/60;
+            return string.Format("{0:D2}:{1:D2}", min, sec);
+        }
 
         // 将时间戳转为字符串
         public static string GetTimer(string _time)
@@ -553,7 +558,7 @@ namespace MyLib
 
         public static void SetIcon(UISprite icon, int sheet, string iconName)
         {
-            Log.Important("Why Altas Lost?" + icon + " " + sheet + " " + iconName);
+            //Log.Important("Why Altas Lost?" + icon + " " + sheet + " " + iconName);
             var atlas = Resources.Load<UIAtlas>("UI/itemicons/itemicons" + sheet);
             if (icon.atlas == atlas && icon.spriteName == iconName)
             {

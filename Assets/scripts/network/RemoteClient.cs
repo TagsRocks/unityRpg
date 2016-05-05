@@ -254,8 +254,16 @@ namespace MyLib
                 ret = true;
             });
             Send(data);
+            var passTime = 0.0f;
             while(!ret) {
                 yield return null;
+                passTime += Time.deltaTime;
+                if(passTime >= 5) {
+                    break;
+                }
+            }
+            if(!ret) {
+                Debug.LogError("SendWaitResponseError: "+fid);
             }
         }
 

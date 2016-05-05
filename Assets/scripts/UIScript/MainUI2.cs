@@ -40,7 +40,8 @@ public class MainUI2 : IUserInterface
 
     private bool IsChinese(char s)
     {
-        if (s >= 0x20000 && s <= 0xFA2D)
+        Log.GUI("ChineseCode: "+(int)s);
+        if (s >= 0x4E00 && s <= 0x2FA1F)
         {
             return true;
         }

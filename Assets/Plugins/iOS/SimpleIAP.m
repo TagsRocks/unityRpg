@@ -26,7 +26,6 @@ static char * OnEvent = "OnEvent";
     self.productIds = nil;
     self.products = nil;
     self.request = nil;
-    [super dealloc];
 }
 
 - (id)init {
@@ -41,7 +40,7 @@ static char * OnEvent = "OnEvent";
 - (void)requestProducts:(NSArray *)productIdentifiers{
     self.productIds = productIdentifiers;
     id set = [NSSet setWithArray:productIdentifiers];
-    self.request = [[[SKProductsRequest alloc] initWithProductIdentifiers:set] autorelease];
+    self.request = [[SKProductsRequest alloc] initWithProductIdentifiers:set];
     _request.delegate = self;
     [_request start];
 }
@@ -67,7 +66,7 @@ static char * OnEvent = "OnEvent";
     
     id str = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
     id ret = [NSString stringWithFormat:@"productList %@", str];
-    [str release];
+    
     UnitySendMessage(StoreEvents, OnEvent, [ret UTF8String]);
 }
 

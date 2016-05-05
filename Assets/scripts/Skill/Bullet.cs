@@ -13,7 +13,13 @@ namespace MyLib
         public SkillLayoutRunner runner;
         bool isDie = false;
         public SkillData skillData;
-        public GameObject attacker;
+        public GameObject attacker{
+            get {
+                return runner.stateMachine.attacker;
+            }
+            set {
+            }
+        }
         public MissileData missileData;
         public int LeftRicochets = 0;
         float velocity;
@@ -90,6 +96,13 @@ namespace MyLib
             foreach (Collider c in col)
             {
                 //和多个不同的敌人目标碰撞
+                var cobj = NetworkUtil.GetAttr(c.gameObject);
+                if(cobj != null) {
+                    if(cobj.gameObject == attacker) {
+                        continue;
+                    }
+                }
+
                 if (c != lastColobj)
                 {
                     lastColobj = c;

@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+#if UNITY_EDITOR
 public class TestDisable : MonoBehaviour
 {
     void OnEnable()
@@ -13,3 +14,5 @@ public class TestDisable : MonoBehaviour
         Debug.LogError("Disable");
     }
 }
+
+#endif
