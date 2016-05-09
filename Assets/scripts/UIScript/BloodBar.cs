@@ -25,6 +25,7 @@ namespace MyLib
         UISlider fill;
         UILabel label;
         UILabel masterLabel;
+        UILabel NameLabel;
 
         void Awake()
         {
@@ -35,10 +36,12 @@ namespace MyLib
             label = barUI.GetLabel("Label");
             masterLabel = barUI.GetLabel("MasterLabel");
             fill = bar.GetComponent<UISlider>();
+            NameLabel = barUI.GetLabel("NameLabel");
         }
 
         void SetMaster()
         {
+            /*
             var attr = GetComponent<NpcAttribute>();
             if (attr.IsMaster)
             {
@@ -48,6 +51,7 @@ namespace MyLib
             {
                 masterLabel.gameObject.SetActive(false);
             }
+            */
         }
 
         public void HideBar() {
@@ -66,6 +70,8 @@ namespace MyLib
             if (WorldManager.worldManager.GetActive().ShowTeamColor && attr.GetNetView().IsPlayer)
             {
                 label.gameObject.SetActive(true);
+                label.text = attr.TeamColor.ToString();
+                /*
                 if (attr.TeamColor == GameConst.TEAM_RED)
                 {
                     label.gradientTop = GameConst.teamRed;
@@ -75,9 +81,13 @@ namespace MyLib
                     label.gradientTop = GameConst.teamBlue;
                     label.text = "蓝方";
                 }
+                */
             } else
             {
                 label.gameObject.SetActive(false);
+            }
+            if(WorldManager.worldManager.GetActive().ShowName && attr.GetNetView().IsPlayer) {
+                NameLabel.text = attr.userName;
             }
         }
         // Use this for initialization
@@ -89,6 +99,7 @@ namespace MyLib
                 MyEvent.EventType.UnitHP,
                 MyEvent.EventType.TeamColor,
                 MyEvent.EventType.IsMaster,
+                MyEvent.EventType.UserName,
             };
             RegEvent(true); 
 
@@ -112,6 +123,8 @@ namespace MyLib
                 SetTeamColor();
             } else if(evt.type == MyEvent.EventType.IsMaster) {
                 SetMaster();
+            }else if(evt.type == MyEvent.EventType.UserName) {
+                SetTeamColor();
             }
         }
 

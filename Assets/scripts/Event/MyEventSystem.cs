@@ -171,6 +171,8 @@ namespace MyLib
             EnterMove,
             ExitMove,
             MoveDir,
+
+            UserName,
 		}
 
 

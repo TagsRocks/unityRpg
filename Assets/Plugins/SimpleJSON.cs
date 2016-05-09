@@ -655,14 +655,14 @@ namespace SimpleJSON
         }
         public override string ToString()
         {
-            string result = "[ ";
+            string result = "[\n";
             foreach (JSONNode N in m_List)
             {
                 if (result.Length > 2)
-                    result += ", ";
+                    result += ",\n";
                 result += N.ToString();
             }
-            result += " ]";
+            result += " ]\n";
             return result;
         }
         public override string ToString(string aPrefix)
@@ -790,14 +790,14 @@ namespace SimpleJSON
         }
         public override string ToString()
         {
-            string result = "{";
+            string result = "{\n";
             foreach (KeyValuePair<string, JSONNode> N in m_Dict)
             {
                 if (result.Length > 2)
-                    result += ", ";
+                    result += ",\n";
                 result += "\"" + Escape(N.Key) + "\":" + N.Value.ToString();
             }
-            result += "}";
+            result += "\n}";
             return result;
         }
         public override string ToString(string aPrefix)

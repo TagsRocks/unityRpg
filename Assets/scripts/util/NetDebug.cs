@@ -14,6 +14,8 @@ public class NetDebug : MonoBehaviour {
     public bool IsWuDi = false;
     public bool JumpLogin = false;
 
+    public bool IsTest = false;
+
 	List<string> consoleDebug = new List<string>();
 	public void AddConsole(string msg) {
 		consoleDebug.Add (msg);
@@ -24,6 +26,7 @@ public class NetDebug : MonoBehaviour {
 
 	void Awake() {
 		netDebug = this;
+        Localization.language = "English";
 	}
 	// Use this for initialization
 	void Start () {

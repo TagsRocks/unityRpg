@@ -85,7 +85,12 @@ public class RightBack : MonoBehaviour
                 //手指在圆环外面 跟随手指移动
             } else if (mag > external)
             {
-                initPos += dir;
+                //手指当前位置 pos
+                //背景当前位置 initPos
+                var fingerDir = pos-initPos;
+                //保守力
+                var ex = fingerDir.normalized*external;
+                initPos = pos-ex;
                 SetPos(initPos);
             }
             if (mag < this.con.CancelRadius * RightController.GetRate())

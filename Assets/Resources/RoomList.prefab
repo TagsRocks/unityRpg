@@ -45,7 +45,7 @@ MonoBehaviour:
   - type: tank
     parts:
     - {fileID: 170650, guid: 0fedc6553796f4c92aab992a287b7448, type: 2}
-    - {fileID: 133176, guid: 3a3fb354a57604447b06d5096196f7d2, type: 2}
+    - {fileID: 168580, guid: 3a3fb354a57604447b06d5096196f7d2, type: 2}
   LoadAllRooms: 0
 --- !u!1001 &100100000
 Prefab:

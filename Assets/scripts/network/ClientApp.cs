@@ -74,12 +74,12 @@ public class ClientApp : UnityEngine.MonoBehaviour
                 var ret = KBEngine.KBEngineApp.app.login_loginapp();
                 if (!ret)
                 {
-                    MyLib.WindowMng.windowMng.ShowNotifyLog("网络连接失败");
+                    MyLib.WindowMng.windowMng.ShowNotifyLog(Localization.Get("NetFail"));
                     Debug.LogError("FirstConnect Error");
                     //WaitTry
                     yield return new WaitForSeconds(1);
                 }else {
-                    MyLib.WindowMng.windowMng.ShowNotifyLog("网络连接成功");
+                    MyLib.WindowMng.windowMng.ShowNotifyLog(Localization.Get("NetSuc"));
                     conSuc = true;
                 }
                 yield return new WaitForSeconds(1);
@@ -88,7 +88,7 @@ public class ClientApp : UnityEngine.MonoBehaviour
             //Check Net not connect then reconnect
             while(true) {
                 if(!KBEngine.KBEngineApp.app.networkInterface().valid()){
-                    MyLib.WindowMng.windowMng.ShowNotifyLog("网络中断");
+                    MyLib.WindowMng.windowMng.ShowNotifyLog(Localization.Get("NetLost"));
                     break;
                 }
                 yield return new WaitForSeconds(1);

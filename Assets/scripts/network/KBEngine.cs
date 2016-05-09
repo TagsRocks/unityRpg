@@ -36,6 +36,7 @@ namespace KBEngine
             this.app_ = app;
         }
 
+        /*
         public void run()
         {
 			Dbg.INFO_MSG("KBEThread::run()");
@@ -61,6 +62,7 @@ START_RUN:
 			over = true;
 			Dbg.INFO_MSG("KBEThread::end()");
         }
+        */
     }
 
 	public class KBEngineApp : IMainLoop
@@ -145,11 +147,10 @@ START_RUN:
 			client = c;
 			app = this;
 
-
         	networkInterface_ = new NetworkInterface(this);
             kbethread = new KBEThread(this);
-            t_ = new Thread(new ThreadStart(kbethread.run));
-            t_.Start();
+            //t_ = new Thread(new ThreadStart(kbethread.run));
+            //t_.Start();
             
 			//networkPeer = new NetworkPeer ();
             // 注册事件
@@ -208,6 +209,7 @@ START_RUN:
 			networkInterface_.reset();
 		}
 		
+        /*
 		public void process()
 		{
 			while(!isbreak)
@@ -217,12 +219,14 @@ START_RUN:
 			
 			Dbg.WARNING_MSG("KBEngine::process(): break!");
 		}
+        */
 
 		/*
 		 * Connect to login Server 
 		 */ 
 		public bool login_loginapp()
 		{
+            /*
 			reset();
 			if(!networkInterface_.connect(ip, port))
 			{
@@ -231,6 +235,7 @@ START_RUN:
 			}
 			
 			Dbg.DEBUG_MSG(string.Format("KBEngine::login_loginapp(): connect {0}:{1} is successfylly!", ip, port));
+            */
 			return true;
 		}
 	
@@ -252,7 +257,7 @@ START_RUN:
 				}
 				pendingCallbacks.Clear();
 			}
-
+            networkInterface_.process();
 		}
 
 

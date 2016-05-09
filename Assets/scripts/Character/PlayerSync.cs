@@ -115,6 +115,7 @@ namespace MyLib
             }
             if(info.HasName) {
                 attr.userName = info.Name;
+                MyEventSystem.PushLocalEventStatic(attr.GetNetView().GetLocalId(), MyEvent.EventType.UserName);
             }
             if(info.HasJob) {
                 attr.job = info.Job;

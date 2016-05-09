@@ -1,0 +1,13 @@
+KEY,English,Chinese
+StartGame,Start,开始游戏
+Enter,Enter,进入游戏
+Create,Create,创建角色
+GameName,ShootHero,射击英雄
+Name,Name,昵称
+Attend,EnterGame,加入游戏
+NetFail,Net Connection Fail!,网络连接失败
+NetSuc,Net Connection Success!,网络连接成功
+NetLost,Net Connection Fail!,网络中断
+NameNotEmpty,Name Is Empty!,名字不能为空
+NameTooLong,Name Is Too Long! No More Than 20 character!,名字太长，不能超过30个英文，10个汉字 
+NameNoSpecial,Name Not Support Special Character!,名字只支持中文和英文以及数字，其它字符不支持！ 

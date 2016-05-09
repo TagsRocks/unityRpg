@@ -12,6 +12,7 @@ public class MainUI2 : IUserInterface
     {
         nameInput = GetInput("NameInput");
         SetCallback("createChar", OnEnter);
+        nameInput.value = ServerData.Instance.playerInfo.Roles.Name;
     }
 
     void OnEnter()
@@ -19,17 +20,17 @@ public class MainUI2 : IUserInterface
 
         if (string.IsNullOrEmpty(nameInput.value))
         {
-            Util.ShowMsg("名字不能为空");
+            Util.ShowMsg(Localization.Get("NameNotEmpty"));
             return;
         }
         if (nameInput.value.Length > 30)
         {
-            Util.ShowMsg("名字太长，不能超过30个英文，10个汉字");
+            Util.ShowMsg(Localization.Get("NameTooLong"));
         }
         foreach (var s in nameInput.value)
         {
             if(!IsChinese(s) && !IsAlpheNum(s)) {
-                Util.ShowMsg("名字只支持中文和英文以及数字，其它字符不支持！");
+                Util.ShowMsg(Localization.Get("NameNoSpecial"));
                 return;
             }
         }

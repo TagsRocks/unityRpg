@@ -422,6 +422,10 @@ Prefab:
       propertyPath: JumpLogin
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 11400004, guid: 189faaf6d4b0a4095af9b023112d150c, type: 2}
+      propertyPath: IsTest
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 11400000, guid: 189faaf6d4b0a4095af9b023112d150c, type: 2}
     - {fileID: 11476092, guid: 189faaf6d4b0a4095af9b023112d150c, type: 2}

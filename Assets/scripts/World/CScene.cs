@@ -59,6 +59,11 @@ namespace MyLib
                 return false;
             }
         }
+        public virtual bool ShowName{
+            get {
+                return true;
+            }
+        }
 
         public virtual bool IsRevive
         {
