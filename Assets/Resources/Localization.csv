@@ -11,3 +11,16 @@ NetLost,Net Connection Fail!,网络中断
 NameNotEmpty,Name Is Empty!,名字不能为空
 NameTooLong,Name Is Too Long! No More Than 20 character!,名字太长，不能超过30个英文，10个汉字 
 NameNoSpecial,Name Not Support Special Character!,名字只支持中文和英文以及数字，其它字符不支持！ 
+Name,Name,姓名
+Level,Level,等级
+CoolTime,Skill in Cooling,冷却时间未到 
+PlayerEnter,"Player {0} Enter, Current {1} Players",玩家{0}加入游戏，当前{1}玩家
+PlayerExit,"Player {0} Quit Game, Current {1} Players",玩家{0}离开游戏，当前{1}玩家
+GameStart,Now Game Start!,玩家足够开始游戏 
+AllReady,All Player Is Ready!,所有客户端准备完成 
+InitConfig,"Configuer Init Fail, Wait For Init",服务器配置未初始化成功 
+Loading,Loading...,加载中...
+job1,Warrior,战士
+job2,Shooter,射手
+job3,Magic,魔法师
+CreateChar,Create,确定创建

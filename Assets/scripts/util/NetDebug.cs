@@ -7,45 +7,62 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
-public class NetDebug : MonoBehaviour {
-	public bool debug;
-	public static NetDebug netDebug;
+public class NetDebug : MonoBehaviour
+{
+    public bool debug;
+    public static NetDebug netDebug;
 
     public bool IsWuDi = false;
     public bool JumpLogin = false;
 
     public bool IsTest = false;
 
-	List<string> consoleDebug = new List<string>();
-	public void AddConsole(string msg) {
-		consoleDebug.Add (msg);
-		if (consoleDebug.Count > 20) {
-			consoleDebug.RemoveAt(0);
-		}
-	}
+    List<string> consoleDebug = new List<string>();
 
-	void Awake() {
-		netDebug = this;
-        Localization.language = "English";
-	}
-	// Use this for initialization
-	void Start () {
+    public void AddConsole(string msg)
+    {
+        consoleDebug.Add(msg);
+        if (consoleDebug.Count > 20)
+        {
+            consoleDebug.RemoveAt(0);
+        }
+    }
+
+    void Awake()
+    {
+        netDebug = this;
+        var l = Application.systemLanguage;
+        if (l == SystemLanguage.Chinese)
+        {
+            Localization.language = "Chinese";
+        } else
+        {
+            Localization.language = "English";
+        }
+    }
+    // Use this for initialization
+    void Start()
+    {
 	
-	}
-	void OnGUI() {
-		if (debug) {
-			GUILayout.BeginVertical();
-			GUILayout.TextField(string.Join("\n", KBEngine.Bundle.sendMsg.ToArray()));
+    }
 
-			GUILayout.EndVertical();
+    void OnGUI()
+    {
+        if (debug)
+        {
+            GUILayout.BeginVertical();
+            GUILayout.TextField(string.Join("\n", KBEngine.Bundle.sendMsg.ToArray()));
 
-			GUI.TextField(new Rect(Screen.width*3.0f/4, 0, Screen.width/4, Screen.height/2),string.Join("\n", KBEngine.Bundle.recvMsg.ToArray()));
-			GUI.TextField(new Rect(0, Screen.height*3/4.0f, Screen.width/4, Screen.height/4), string.Join("\n", consoleDebug.ToArray()));
-		}
+            GUILayout.EndVertical();
 
-	}
-	// Update is called once per frame
-	void Update () {
+            GUI.TextField(new Rect(Screen.width * 3.0f / 4, 0, Screen.width / 4, Screen.height / 2), string.Join("\n", KBEngine.Bundle.recvMsg.ToArray()));
+            GUI.TextField(new Rect(0, Screen.height * 3 / 4.0f, Screen.width / 4, Screen.height / 4), string.Join("\n", consoleDebug.ToArray()));
+        }
 
-	}
+    }
+    // Update is called once per frame
+    void Update()
+    {
+
+    }
 }

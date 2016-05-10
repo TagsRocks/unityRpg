@@ -240,6 +240,9 @@ namespace MyLib
          */
         void HitSomething(Collider other)
         {
+            if(other.isTrigger) {
+                return;
+            }
             Log.AI("Bullet collider enemy " + other.name + " " + other.tag);
             if (SkillLogic.IsEnemyForBullet(attacker, other.gameObject))
             {

@@ -100,7 +100,7 @@ namespace MyLib
                     createBut.SetActive(false);
                     var charI = charInfo.RolesInfosList [0];
                     selectRoleInfo = charI;
-                    namelevel.text = string.Format("[d2691e]姓名:{0}[-]\n[a0522d]等级:{1}[-]", charI.Name, charI.Level);
+                    namelevel.text = string.Format("[d2691e]"+Localization.Get("Name")+":{0}[-]\n[a0522d]"+Localization.Get("Level")+":{1}[-]", charI.Name, charI.Level);
                     namelevel.gameObject.SetActive(true);
 
                     SelChar.SetActive(true);

@@ -22,7 +22,7 @@ namespace MyLib
         {
             while (true)
             {
-                var w = new WWW("www.52unity.info:8080/server.json");
+                var w = new WWW("http://www.52unity.info:8080/server.json");
                 yield return w;
                 if (!string.IsNullOrEmpty(w.error))
                 {
@@ -74,7 +74,7 @@ namespace MyLib
         {
             if (!loadIp)
             {
-                Util.ShowMsg("服务器配置未初始化成功");
+                Util.ShowMsg(Localization.Get("InitConfig"));
                 return;
             }
             if (!serverYet)

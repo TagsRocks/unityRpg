@@ -75,7 +75,7 @@ namespace MyLib
             lastEvt = evt;
             if (lastEvt == RemoteClientEvent.Close)
             {
-                WindowMng.windowMng.ShowNotifyLog("和服务器断开连接：" + state);
+                WindowMng.windowMng.ShowNotifyLog(Localization.Get("NetFail") + state);
                 if (state != WorldState.Closed)
                 {
                     Debug.LogError("ConnectionClosed But WorldNotClosed");
@@ -84,7 +84,7 @@ namespace MyLib
                 }
             } else if (lastEvt == RemoteClientEvent.Connected)
             {
-                WindowMng.windowMng.ShowNotifyLog("连接服务器成功：" + state);
+                WindowMng.windowMng.ShowNotifyLog(Localization.Get("NetSuc") + state);
             }
         }
 
@@ -278,7 +278,7 @@ namespace MyLib
                 }
             } else if (cmds [0] == "AllReady")
             {
-                Util.ShowMsg("所有客户端准备完成");
+                Util.ShowMsg(Localization.Get("AllReady"));
                 //当所有客户端准备好之后 服务器推送Entity给所有客户端
                 NetMatchScene.Instance.SetAllReady();
 

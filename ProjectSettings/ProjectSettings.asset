@@ -5,15 +5,15 @@ PlayerSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 8
   AndroidProfiler: 0
-  defaultScreenOrientation: 2
+  defaultScreenOrientation: 3
   targetDevice: 2
   useOnDemandResources: 0
   accelerometerFrequency: 0
-  companyName: DefaultCompany
-  productName: "\u7206\u70B8\u5802"
+  companyName: liyonghelpme
+  productName: ShootHero
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
-  m_ShowUnitySplashScreen: 1
+  m_ShowUnitySplashScreen: 0
   m_VirtualRealitySplashScreen: {fileID: 0}
   defaultScreenWidth: 1024
   defaultScreenHeight: 768
@@ -89,8 +89,8 @@ PlayerSettings:
     16:10: 1
     16:9: 1
     Others: 1
-  bundleIdentifier: com.chumeng.test
-  bundleVersion: 3.7
+  bundleIdentifier: com.chumeng.shootHero
+  bundleVersion: 1.0
   preloadedAssets: []
   metroEnableIndependentInputSource: 0
   metroEnableLowLatencyPresentationAPI: 0
@@ -123,24 +123,24 @@ PlayerSettings:
   uIStatusBarHidden: 1
   uIExitOnSuspend: 0
   uIStatusBarStyle: 0
-  iPhoneSplashScreen: {fileID: 2800000, guid: 02867cc9cbc5f41b08445de7b3c99009, type: 3}
-  iPhoneHighResSplashScreen: {fileID: 2800000, guid: 02867cc9cbc5f41b08445de7b3c99009,
+  iPhoneSplashScreen: {fileID: 2800000, guid: 650e8b61460884735aac5e1dc43eb25c, type: 3}
+  iPhoneHighResSplashScreen: {fileID: 2800000, guid: 650e8b61460884735aac5e1dc43eb25c,
     type: 3}
-  iPhoneTallHighResSplashScreen: {fileID: 2800000, guid: 02867cc9cbc5f41b08445de7b3c99009,
+  iPhoneTallHighResSplashScreen: {fileID: 2800000, guid: 650e8b61460884735aac5e1dc43eb25c,
     type: 3}
-  iPhone47inSplashScreen: {fileID: 2800000, guid: 02867cc9cbc5f41b08445de7b3c99009,
+  iPhone47inSplashScreen: {fileID: 2800000, guid: 650e8b61460884735aac5e1dc43eb25c,
     type: 3}
-  iPhone55inPortraitSplashScreen: {fileID: 2800000, guid: 02867cc9cbc5f41b08445de7b3c99009,
+  iPhone55inPortraitSplashScreen: {fileID: 2800000, guid: 650e8b61460884735aac5e1dc43eb25c,
     type: 3}
-  iPhone55inLandscapeSplashScreen: {fileID: 2800000, guid: 02867cc9cbc5f41b08445de7b3c99009,
+  iPhone55inLandscapeSplashScreen: {fileID: 2800000, guid: 650e8b61460884735aac5e1dc43eb25c,
     type: 3}
-  iPadPortraitSplashScreen: {fileID: 2800000, guid: 02867cc9cbc5f41b08445de7b3c99009,
+  iPadPortraitSplashScreen: {fileID: 2800000, guid: 650e8b61460884735aac5e1dc43eb25c,
     type: 3}
-  iPadHighResPortraitSplashScreen: {fileID: 2800000, guid: 02867cc9cbc5f41b08445de7b3c99009,
+  iPadHighResPortraitSplashScreen: {fileID: 2800000, guid: 650e8b61460884735aac5e1dc43eb25c,
     type: 3}
-  iPadLandscapeSplashScreen: {fileID: 2800000, guid: 02867cc9cbc5f41b08445de7b3c99009,
+  iPadLandscapeSplashScreen: {fileID: 2800000, guid: 650e8b61460884735aac5e1dc43eb25c,
     type: 3}
-  iPadHighResLandscapeSplashScreen: {fileID: 2800000, guid: 02867cc9cbc5f41b08445de7b3c99009,
+  iPadHighResLandscapeSplashScreen: {fileID: 2800000, guid: 650e8b61460884735aac5e1dc43eb25c,
     type: 3}
   appleTVSplashScreen: {fileID: 0}
   tvOSSmallIconLayers: []
@@ -182,7 +182,7 @@ PlayerSettings:
   - m_BuildTarget: 
     m_Icons:
     - serializedVersion: 2
-      m_Icon: {fileID: 2800000, guid: 9a8dd2b21232647cd9da9dea668d75a0, type: 3}
+      m_Icon: {fileID: 2800000, guid: db05e8e275e5544098d6df3b9861d8dd, type: 3}
       m_Width: 128
       m_Height: 128
   m_BuildTargetBatching:

@@ -135,7 +135,7 @@ namespace MyLib
                 var cd = SkillDataController.skillDataController.CheckCoolDown(skIndex);
                 if (!cd)
                 {
-                    WindowMng.windowMng.ShowNotifyLog("冷却时间未到");
+                    WindowMng.windowMng.ShowNotifyLog(Localization.Get("CoolTime"));
                     return;
                 }
                 SkillDataController.skillDataController.SetCoolDown(skIndex);

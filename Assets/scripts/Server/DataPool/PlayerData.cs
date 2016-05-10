@@ -413,6 +413,7 @@ namespace MyLib
         public static void  SendNotify(string str)
         {
             Log.Sys("SendNotify: "+str);
+            return;
             var no = GCPushNotify.CreateBuilder();
             no.Notify = str;
             ServerBundle.SendImmediatePush(no);

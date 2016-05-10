@@ -142,7 +142,7 @@ namespace MyLib
             lastEvt = evt;
             if (lastEvt == RemoteClientEvent.Close)
             {
-                WindowMng.windowMng.ShowNotifyLog("和服务器断开连接：" + state);
+                WindowMng.windowMng.ShowNotifyLog(Localization.Get("NetFail")+":" + state);
                 if (state != WorldState.Closed)
                 {
                     Debug.LogError("ConnectionClosed But WorldNotClosed");
@@ -151,7 +151,7 @@ namespace MyLib
                 }
             } else if (lastEvt == RemoteClientEvent.Connected)
             {
-                WindowMng.windowMng.ShowNotifyLog("连接服务器成功：" + state);
+                WindowMng.windowMng.ShowNotifyLog(Localization.Get("NetSuc")+":" + state);
             }
         }
 
@@ -164,7 +164,7 @@ namespace MyLib
             if (c0 == "Add")
             {
                 roomInfo.PlayersList.Add(proto.AvatarInfo);
-                Util.ShowMsg("玩家:"+proto.AvatarInfo.Name+" 加入游戏，当前人数:"+matchRoom.GetPlayerNum());
+                Util.ShowMsg(string.Format(Localization.Get("PlayerEnter"), proto.AvatarInfo.Name, matchRoom.GetPlayerNum()) );
             } else if (c0 == "Update")
             {
                 foreach (var p in roomInfo.PlayersList)
@@ -186,7 +186,8 @@ namespace MyLib
                         break;
                     }
                 }
-                Util.ShowMsg("玩家:"+proto.AvatarInfo.Name+" 离开游戏，当前人数:"+matchRoom.GetPlayerNum());
+                //Util.ShowMsg("玩家:"+proto.AvatarInfo.Name+" 离开游戏，当前人数:"+matchRoom.GetPlayerNum());
+                Util.ShowMsg(string.Format(Localization.Get("PlayerExit"), proto.AvatarInfo.Name, matchRoom.GetPlayerNum()) );
             } else if (c0 == "StartGame")
             {
                 //进入Map5场景开始游戏
@@ -194,7 +195,7 @@ namespace MyLib
                 //等待所有玩家进入场景成功
                 //EnterSuc 
                 //然后将所有玩家状态重新刷新一遍
-                Util.ShowMsg("玩家足够开始游戏："+matchRoom.GetPlayerNum());
+                Util.ShowMsg(Localization.Get("GameStart")+matchRoom.GetPlayerNum());
                 Log.Net("StartGame");
                 roomState = RoomState.InGame;
                 WorldManager.worldManager.WorldChangeScene(5, false);
