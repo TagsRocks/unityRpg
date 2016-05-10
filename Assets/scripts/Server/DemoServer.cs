@@ -172,8 +172,8 @@ namespace MyLib
                 retPb = au;
             } else if (className == "CGPlayerMove")
             {
-                var au = GCPlayerMove.CreateBuilder();
-                retPb = au;
+                //var au = GCPlayerMove.CreateBuilder();
+                //retPb = au;
             } else
             {
                 var fullName = packet.protoBody.GetType().FullName;

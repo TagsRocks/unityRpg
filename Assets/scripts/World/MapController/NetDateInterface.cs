@@ -61,6 +61,15 @@ namespace MyLib
                 skInfo.Who = ObjectManager.objectManager.GetMyServerID(); 
                 skInfo.SkillId = skillId;
                 skInfo.SkillLevel = skillLevel;
+
+                var me = ObjectManager.objectManager.GetMyPlayer();
+                var dir = (int)me.transform.eulerAngles.y;
+                var intPos = NetworkUtil.ConvertPos(me.transform.position);
+                skInfo.X = intPos[0];
+                skInfo.Y = intPos[1];
+                skInfo.Z = intPos[2];
+                skInfo.Dir = dir;
+
                 cg.SkillAction = skInfo.Build();
                 cg.Cmd = "Skill";
                 sc.BroadcastMsg(cg);

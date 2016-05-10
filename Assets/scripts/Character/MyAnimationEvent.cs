@@ -48,6 +48,7 @@ namespace MyLib
 			public MsgType type;
 
 			public SkillData skillData;
+            public ObjectCommand ocCmd;
 			public Message(MsgType t) {
 				type = t;
 			}

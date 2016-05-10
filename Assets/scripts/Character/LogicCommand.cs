@@ -31,6 +31,7 @@ namespace MyLib
 
         public int skillId;
         public int skillLevel;
+        public SkillAction act;
 
         public ENUM_OBJECT_COMMAND commandID;
         public int logicCount;
@@ -68,7 +69,7 @@ namespace MyLib
         MoveController mvController;
 
         List<ObjectCommand> commandList = new List<ObjectCommand>();
-        ObjectCommand currentLogicCommand = null;
+        ObjectCommand currentMoveCommand = null;
         float logicSpeed = 1;
 
         /*
@@ -76,20 +77,24 @@ namespace MyLib
 		 */
         public void PushCommand(ObjectCommand cmd)
         {
-            Log.Important("Push Command What " + cmd.commandID+" target "+cmd.targetPos+" dir "+cmd.dir);
+            Log.Important("Push Command What " + cmd.commandID + " target " + cmd.targetPos + " dir " + cmd.dir);
             commandList.Add(cmd);
         }
 
         bool DoLogicCommand(ObjectCommand cmd)
         {
             Log.AI("DoLogicCommad " + cmd.commandID);
-            currentLogicCommand = cmd;
 
             bool ret = false;
             switch (cmd.commandID)
             {
                 case ObjectCommand.ENUM_OBJECT_COMMAND.OC_MOVE:
-                    StartCoroutine(Move());
+                    var oldCmd = currentMoveCommand;
+                    currentMoveCommand = cmd;
+                    if (oldCmd == null)
+                    {
+                        StartCoroutine(Move());
+                    }
                     break;
                 case ObjectCommand.ENUM_OBJECT_COMMAND.OC_USE_SKILL:
                     EnterUseSkill(cmd);
@@ -107,8 +112,9 @@ namespace MyLib
             //判断是否可以使用技能
             var msg = new MyAnimationEvent.Message(MyAnimationEvent.MsgType.DoSkill);
             msg.skillData = Util.GetSkillData(cmd.skillId, cmd.skillLevel);
+            msg.ocCmd = cmd;
             GetComponent<MyAnimationEvent>().InsertMsg(msg);
-            currentLogicCommand = null;
+            //currentMoveCommand = null;
         }
 
 
@@ -120,7 +126,7 @@ namespace MyLib
         {
             var samplePos = transform.position; //new List<Vector3>(){transform.position};
             var lastSameTime = 0f;
-            while (currentLogicCommand != null)
+            while (currentMoveCommand != null)
             {
                 Vector3 mypos = transform.position;
 
@@ -128,7 +134,8 @@ namespace MyLib
                 var diff = Util.XZSqrMagnitude(lastOne, mypos);
                 if (diff < 1)
                 {
-                    if(lastSameTime == 0) {
+                    if (lastSameTime == 0)
+                    {
                         lastSameTime = Time.time;
                     }
                 } else
@@ -138,11 +145,12 @@ namespace MyLib
                 }
 
 
-                Vector3 tarPos = currentLogicCommand.targetPos;
+                Vector3 tarPos = currentMoveCommand.targetPos;
                 float dx = tarPos.x - mypos.x;
                 float dz = tarPos.z - mypos.z;
-                var dy = tarPos.y-mypos.y;
-                if(Mathf.Abs(dy) > 0.5f) {
+                var dy = tarPos.y - mypos.y;
+                if (Mathf.Abs(dy) > 0.5f)
+                {
                     transform.position = tarPos;
                 }
 
@@ -175,11 +183,12 @@ namespace MyLib
             }
 
             //简单实现
-            if(currentLogicCommand != null) {
-                transform.localRotation = Quaternion.Euler(new Vector3(0, currentLogicCommand.dir, 0));
+            if (currentMoveCommand != null)
+            {
+                transform.localRotation = Quaternion.Euler(new Vector3(0, currentMoveCommand.dir, 0));
             }
             //再次检测Move位置状态，如果不正常则重新开始
-            currentLogicCommand = null;
+            currentMoveCommand = null;
         }
 
 
@@ -195,16 +204,19 @@ namespace MyLib
                 if (commandList.Count > 0)
                 {
                     var peekCmd = commandList [0];
+                    commandList.RemoveAt(0);
+                    DoLogicCommand(peekCmd);
+                    /*
                     if (peekCmd.commandID == ObjectCommand.ENUM_OBJECT_COMMAND.OC_MOVE)
                     {
-                        if (currentLogicCommand != null && currentLogicCommand.commandID == ObjectCommand.ENUM_OBJECT_COMMAND.OC_MOVE)
+                        if (currentMoveCommand != null && currentMoveCommand.commandID == ObjectCommand.ENUM_OBJECT_COMMAND.OC_MOVE)
                         {
-                            currentLogicCommand = peekCmd;
+                            currentMoveCommand = peekCmd;
                             commandList.RemoveAt(0);
                         }
                     }
 
-                    if (currentLogicCommand == null)
+                    if (currentMoveCommand == null)
                     {
                         var cmd = commandList [0];
                         commandList.RemoveAt(0);
@@ -213,6 +225,8 @@ namespace MyLib
                         logicSpeed = logicCommandCount * 0.5f + 1.0f;
                         DoLogicCommand(cmd);
                     }
+                    */
+
                 }
                 yield return null;
             }
@@ -222,7 +236,6 @@ namespace MyLib
         {
             attribute = GetComponent<NpcAttribute>();
             mvController = GetComponent<MoveController>();
-            //mvController.vcontroller = new VirtualController();
 
             StartCoroutine(CommandHandle());
         }

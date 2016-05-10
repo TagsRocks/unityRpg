@@ -34,33 +34,13 @@ public partial class Util {
 		return retMsg;
 	}	
 
-	static IMessageLite GetGCPickUpLootReward(ByteString buf) {
-		var retMsg = MyLib.GCPickUpLootReward.ParseFrom(buf);
-		return retMsg;
-	}	
-
-	static IMessageLite GetGCSaveGuideStep(ByteString buf) {
-		var retMsg = MyLib.GCSaveGuideStep.ParseFrom(buf);
-		return retMsg;
-	}	
-
 	static IMessageLite GetCGForgotPassword(ByteString buf) {
 		var retMsg = MyLib.CGForgotPassword.ParseFrom(buf);
 		return retMsg;
 	}	
 
-	static IMessageLite GetCGPropsRevive(ByteString buf) {
-		var retMsg = MyLib.CGPropsRevive.ParseFrom(buf);
-		return retMsg;
-	}	
-
-	static IMessageLite GetCGChangeScreen4Point(ByteString buf) {
-		var retMsg = MyLib.CGChangeScreen4Point.ParseFrom(buf);
-		return retMsg;
-	}	
-
-	static IMessageLite GetCGChangeFightMode(ByteString buf) {
-		var retMsg = MyLib.CGChangeFightMode.ParseFrom(buf);
+	static IMessageLite GetGCPushNotice2Kick(ByteString buf) {
+		var retMsg = MyLib.GCPushNotice2Kick.ParseFrom(buf);
 		return retMsg;
 	}	
 
@@ -124,18 +104,8 @@ public partial class Util {
 		return retMsg;
 	}	
 
-	static IMessageLite GetGCPushNotice2Kick(ByteString buf) {
-		var retMsg = MyLib.GCPushNotice2Kick.ParseFrom(buf);
-		return retMsg;
-	}	
-
 	static IMessageLite GetGCPushLevelUpgrade(ByteString buf) {
 		var retMsg = MyLib.GCPushLevelUpgrade.ParseFrom(buf);
-		return retMsg;
-	}	
-
-	static IMessageLite GetCGHeartBeat(ByteString buf) {
-		var retMsg = MyLib.CGHeartBeat.ParseFrom(buf);
 		return retMsg;
 	}	
 
@@ -151,21 +121,6 @@ public partial class Util {
 
 	static IMessageLite GetCGBindingSession(ByteString buf) {
 		var retMsg = MyLib.CGBindingSession.ParseFrom(buf);
-		return retMsg;
-	}	
-
-	static IMessageLite GetGCPropsRevive(ByteString buf) {
-		var retMsg = MyLib.GCPropsRevive.ParseFrom(buf);
-		return retMsg;
-	}	
-
-	static IMessageLite GetGCChangeFightMode(ByteString buf) {
-		var retMsg = MyLib.GCChangeFightMode.ParseFrom(buf);
-		return retMsg;
-	}	
-
-	static IMessageLite GetCGModifyPlayerName(ByteString buf) {
-		var retMsg = MyLib.CGModifyPlayerName.ParseFrom(buf);
 		return retMsg;
 	}	
 
@@ -209,13 +164,8 @@ public partial class Util {
 		return retMsg;
 	}	
 
-	static IMessageLite GetGCPushExpChange(ByteString buf) {
-		var retMsg = MyLib.GCPushExpChange.ParseFrom(buf);
-		return retMsg;
-	}	
-
-	static IMessageLite GetCGPlayerMove(ByteString buf) {
-		var retMsg = MyLib.CGPlayerMove.ParseFrom(buf);
+	static IMessageLite GetCGEnterScene(ByteString buf) {
+		var retMsg = MyLib.CGEnterScene.ParseFrom(buf);
 		return retMsg;
 	}	
 
@@ -229,16 +179,6 @@ public partial class Util {
 		return retMsg;
 	}	
 
-	static IMessageLite GetCGSaveGuideStep(ByteString buf) {
-		var retMsg = MyLib.CGSaveGuideStep.ParseFrom(buf);
-		return retMsg;
-	}	
-
-	static IMessageLite GetGCSettingClothShow(ByteString buf) {
-		var retMsg = MyLib.GCSettingClothShow.ParseFrom(buf);
-		return retMsg;
-	}	
-
 	static IMessageLite GetCGAddProp(ByteString buf) {
 		var retMsg = MyLib.CGAddProp.ParseFrom(buf);
 		return retMsg;
@@ -249,18 +189,8 @@ public partial class Util {
 		return retMsg;
 	}	
 
-	static IMessageLite GetGCChangeScreen4Point(ByteString buf) {
-		var retMsg = MyLib.GCChangeScreen4Point.ParseFrom(buf);
-		return retMsg;
-	}	
-
-	static IMessageLite GetCGEnterScene(ByteString buf) {
-		var retMsg = MyLib.CGEnterScene.ParseFrom(buf);
-		return retMsg;
-	}	
-
-	static IMessageLite GetCGSettingClothShow(ByteString buf) {
-		var retMsg = MyLib.CGSettingClothShow.ParseFrom(buf);
+	static IMessageLite GetGCPushExpChange(ByteString buf) {
+		var retMsg = MyLib.GCPushExpChange.ParseFrom(buf);
 		return retMsg;
 	}	
 
@@ -289,28 +219,18 @@ public partial class Util {
 		return retMsg;
 	}	
 
-	static IMessageLite GetGCPlayerMove(ByteString buf) {
-		var retMsg = MyLib.GCPlayerMove.ParseFrom(buf);
-		return retMsg;
-	}	
-
 	static IMessageLite GetGCPlayerCmd(ByteString buf) {
 		var retMsg = MyLib.GCPlayerCmd.ParseFrom(buf);
 		return retMsg;
 	}	
 
-	static IMessageLite GetGCModifyPlayerName(ByteString buf) {
-		var retMsg = MyLib.GCModifyPlayerName.ParseFrom(buf);
+	static IMessageLite GetGCLoginAccount(ByteString buf) {
+		var retMsg = MyLib.GCLoginAccount.ParseFrom(buf);
 		return retMsg;
 	}	
 
 	static IMessageLite GetCGSelectCharacter(ByteString buf) {
 		var retMsg = MyLib.CGSelectCharacter.ParseFrom(buf);
-		return retMsg;
-	}	
-
-	static IMessageLite GetCGPickUpLootReward(ByteString buf) {
-		var retMsg = MyLib.CGPickUpLootReward.ParseFrom(buf);
 		return retMsg;
 	}	
 
@@ -321,11 +241,6 @@ public partial class Util {
 
 	static IMessageLite GetGCPushPlayerDressAttributeChanges(ByteString buf) {
 		var retMsg = MyLib.GCPushPlayerDressAttributeChanges.ParseFrom(buf);
-		return retMsg;
-	}	
-
-	static IMessageLite GetGCLoginAccount(ByteString buf) {
-		var retMsg = MyLib.GCLoginAccount.ParseFrom(buf);
 		return retMsg;
 	}	
 
@@ -707,17 +622,9 @@ public partial class Util {
 
 	{"GCPushFightModeChangeWithMap", GetGCPushFightModeChangeWithMap},
 
-	{"GCPickUpLootReward", GetGCPickUpLootReward},
-
-	{"GCSaveGuideStep", GetGCSaveGuideStep},
-
 	{"CGForgotPassword", GetCGForgotPassword},
 
-	{"CGPropsRevive", GetCGPropsRevive},
-
-	{"CGChangeScreen4Point", GetCGChangeScreen4Point},
-
-	{"CGChangeFightMode", GetCGChangeFightMode},
+	{"GCPushNotice2Kick", GetGCPushNotice2Kick},
 
 	{"GCBindingSession", GetGCBindingSession},
 
@@ -743,23 +650,13 @@ public partial class Util {
 
 	{"CGModifyPassword", GetCGModifyPassword},
 
-	{"GCPushNotice2Kick", GetGCPushNotice2Kick},
-
 	{"GCPushLevelUpgrade", GetGCPushLevelUpgrade},
-
-	{"CGHeartBeat", GetCGHeartBeat},
 
 	{"CGPlayerCmd", GetCGPlayerCmd},
 
 	{"GCPushLootReward", GetGCPushLootReward},
 
 	{"CGBindingSession", GetCGBindingSession},
-
-	{"GCPropsRevive", GetGCPropsRevive},
-
-	{"GCChangeFightMode", GetGCChangeFightMode},
-
-	{"CGModifyPlayerName", GetCGModifyPlayerName},
 
 	{"CGCreateCharacter", GetCGCreateCharacter},
 
@@ -777,27 +674,17 @@ public partial class Util {
 
 	{"CGPickItem", GetCGPickItem},
 
-	{"GCPushExpChange", GetGCPushExpChange},
-
-	{"CGPlayerMove", GetCGPlayerMove},
+	{"CGEnterScene", GetCGEnterScene},
 
 	{"GCPushPlayerPower", GetGCPushPlayerPower},
 
 	{"CGDelCharacter", GetCGDelCharacter},
 
-	{"CGSaveGuideStep", GetCGSaveGuideStep},
-
-	{"GCSettingClothShow", GetGCSettingClothShow},
-
 	{"CGAddProp", GetCGAddProp},
 
 	{"GCRegisterAccount", GetGCRegisterAccount},
 
-	{"GCChangeScreen4Point", GetGCChangeScreen4Point},
-
-	{"CGEnterScene", GetCGEnterScene},
-
-	{"CGSettingClothShow", GetCGSettingClothShow},
+	{"GCPushExpChange", GetGCPushExpChange},
 
 	{"GCDelCharacter", GetGCDelCharacter},
 
@@ -809,21 +696,15 @@ public partial class Util {
 
 	{"GCPushPlayerResurrect", GetGCPushPlayerResurrect},
 
-	{"GCPlayerMove", GetGCPlayerMove},
-
 	{"GCPlayerCmd", GetGCPlayerCmd},
 
-	{"GCModifyPlayerName", GetGCModifyPlayerName},
+	{"GCLoginAccount", GetGCLoginAccount},
 
 	{"CGSelectCharacter", GetCGSelectCharacter},
-
-	{"CGPickUpLootReward", GetCGPickUpLootReward},
 
 	{"CGSetProp", GetCGSetProp},
 
 	{"GCPushPlayerDressAttributeChanges", GetGCPushPlayerDressAttributeChanges},
-
-	{"GCLoginAccount", GetGCLoginAccount},
 
 	{"GCCopyInfo", GetGCCopyInfo},
 

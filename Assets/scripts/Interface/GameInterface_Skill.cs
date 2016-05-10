@@ -90,7 +90,10 @@ namespace MyLib
         static void UseSkill(SkillData skillData)
         {
             Log.Sys("UseSkill: " + skillData.SkillName + " lev " + skillData.Level);
-            ObjectManager.objectManager.GetMyPlayer().GetComponent<MyAnimationEvent>().OnSkill(skillData);
+            if (!NetworkUtil.IsNet())
+            {
+                ObjectManager.objectManager.GetMyPlayer().GetComponent<MyAnimationEvent>().OnSkill(skillData);
+            }
 
             NetDateInterface.FastMoveAndPos();
             NetDateInterface.FastUseSkill(skillData.Id, skillData.Level);
@@ -167,6 +170,7 @@ namespace MyLib
             var ret = who.GetComponent<BuffComponent>().AddBuff(evt.affix, pos);
             return ret;
         }
+
         public static void RemoveSkillBuff(GameObject who, int skillId)
         {
             var skill = Util.GetSkillData(skillId, 1);

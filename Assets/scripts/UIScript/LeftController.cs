@@ -71,7 +71,11 @@ public class LeftBack : MonoBehaviour
             //手指在圆环外面 跟随手指移动
             if (mag > external)
             {
-                initPos += dir;
+                //initPos += dir;
+                var fingerDir = pos-initPos;
+                //保守力
+                var ex = fingerDir.normalized*external;
+                initPos = pos-ex;
                 SetPos(initPos);
             }
 

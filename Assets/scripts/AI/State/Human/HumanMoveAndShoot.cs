@@ -50,7 +50,9 @@ namespace MyLib
             }
             inSkill = true;
             //var sd = msg.skillData;
+            var skillAction = msg.ocCmd.act;
             var st = new HumanShoot();
+            st.skillAction = skillAction;
             aiCharacter.AddTempState(st);
             yield return GetAttr().StartCoroutine(st.RunLogic());
             yield return new WaitForSeconds(0.1f);

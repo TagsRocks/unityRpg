@@ -24,6 +24,7 @@ namespace MyLib
             var cmd = new ObjectCommand(ObjectCommand.ENUM_OBJECT_COMMAND.OC_USE_SKILL);
             cmd.skillId = sk.SkillId;
             cmd.skillLevel = sk.SkillLevel;
+            cmd.act = sk;
             Log.GUI("Other Player Attack LogicCommand");
             gameObject.GetComponent<LogicCommand>().PushCommand(cmd);
         }

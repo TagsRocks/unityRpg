@@ -5,6 +5,7 @@ using MyLib;
 public class HumanShoot : AIState
 {
     private SkillFullInfo activeSkill;
+    public SkillAction skillAction;
 
     public override IEnumerator RunLogic()
     {
@@ -13,7 +14,12 @@ public class HumanShoot : AIState
         activeSkill = skillPart.GetActiveSkill();
         Log.Sys("HumanShoot: "+activeSkill.skillData.SkillName);
 
-        var skillStateMachine = SkillLogic.CreateSkillStateMachine(GetAttr().gameObject, activeSkill.skillData, GetAttr().transform.position);
+        var pos = NetworkUtil.FloatPos(skillAction.X, skillAction.Y, skillAction.Z);
+        var dir = skillAction.Dir;
+        var forward = Quaternion.Euler(new Vector3(0, dir, 0)) * Vector3.forward;
+
+        var skillStateMachine = SkillLogic.CreateSkillStateMachine(GetAttr().gameObject, activeSkill.skillData, pos);
+        skillStateMachine.SetForwardDirection(forward);
 
         var attackAniName = "rslash_1"; 
 
