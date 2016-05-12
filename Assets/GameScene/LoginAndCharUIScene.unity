@@ -416,11 +416,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11400002, guid: 189faaf6d4b0a4095af9b023112d150c, type: 2}
       propertyPath: testAI
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 11400004, guid: 189faaf6d4b0a4095af9b023112d150c, type: 2}
       propertyPath: JumpLogin
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 11400004, guid: 189faaf6d4b0a4095af9b023112d150c, type: 2}
       propertyPath: IsTest

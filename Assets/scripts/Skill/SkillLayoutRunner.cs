@@ -133,8 +133,10 @@ namespace MyLib
                         g.transform.localScale = Vector3.one;
                         */
                         g.transform.localPosition = skillConfig.Position;
+                        //g.transform.position = this.gameObject.transform.position+skillConfig.Position;
+                        //g.transform.rotation = this.gameObject.transform.rotation;
                         g.transform.localRotation = Quaternion.identity;
-                        g.transform.localScale = Vector3.zero; 
+                        g.transform.localScale = Vector3.one; 
                         var sp = g.AddComponent<SyncPosWithTarget>();
                         sp.target = this.gameObject;
 

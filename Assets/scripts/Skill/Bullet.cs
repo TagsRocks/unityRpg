@@ -51,6 +51,7 @@ namespace MyLib
                     par.transform.parent = ObjectManager.objectManager.transform;
                     par.transform.localPosition = runner.transform.localPosition + playerForward * OffsetPos;
                     par.transform.localRotation = playerForward;
+
                 } else
                 {
                     var playerForward = Quaternion.Euler(new Vector3(0, 0 + attacker.transform.rotation.eulerAngles.y, 0));

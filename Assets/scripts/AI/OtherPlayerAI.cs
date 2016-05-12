@@ -19,9 +19,10 @@ namespace MyLib
             ai = new HumanCharacter();
             ai.attribute = attribute;
             ai.AddState(new HumanIdle());
-            ai.AddState(new OtherPlayerMove());
-            ai.AddState(new HumanCombat());
-            ai.AddState(new HumanSkill());
+            //ai.AddState(new OtherPlayerMove());
+            ai.AddState(new HumanMoveAndShoot());
+            //ai.AddState(new HumanCombat());
+            //ai.AddState(new HumanSkill());
             ai.AddState(new HumanDead());
             ai.AddState(new MonsterKnockBack());
             ai.AddState(new HumanStunned());

@@ -123,25 +123,17 @@ PlayerSettings:
   uIStatusBarHidden: 1
   uIExitOnSuspend: 0
   uIStatusBarStyle: 0
-  iPhoneSplashScreen: {fileID: 2800000, guid: 650e8b61460884735aac5e1dc43eb25c, type: 3}
-  iPhoneHighResSplashScreen: {fileID: 2800000, guid: 650e8b61460884735aac5e1dc43eb25c,
+  iPhoneSplashScreen: {fileID: 0}
+  iPhoneHighResSplashScreen: {fileID: 0}
+  iPhoneTallHighResSplashScreen: {fileID: 0}
+  iPhone47inSplashScreen: {fileID: 0}
+  iPhone55inPortraitSplashScreen: {fileID: 0}
+  iPhone55inLandscapeSplashScreen: {fileID: 0}
+  iPadPortraitSplashScreen: {fileID: 0}
+  iPadHighResPortraitSplashScreen: {fileID: 0}
+  iPadLandscapeSplashScreen: {fileID: 2800000, guid: 39371715e69e8421eba348179aa1d6ab,
     type: 3}
-  iPhoneTallHighResSplashScreen: {fileID: 2800000, guid: 650e8b61460884735aac5e1dc43eb25c,
-    type: 3}
-  iPhone47inSplashScreen: {fileID: 2800000, guid: 650e8b61460884735aac5e1dc43eb25c,
-    type: 3}
-  iPhone55inPortraitSplashScreen: {fileID: 2800000, guid: 650e8b61460884735aac5e1dc43eb25c,
-    type: 3}
-  iPhone55inLandscapeSplashScreen: {fileID: 2800000, guid: 650e8b61460884735aac5e1dc43eb25c,
-    type: 3}
-  iPadPortraitSplashScreen: {fileID: 2800000, guid: 650e8b61460884735aac5e1dc43eb25c,
-    type: 3}
-  iPadHighResPortraitSplashScreen: {fileID: 2800000, guid: 650e8b61460884735aac5e1dc43eb25c,
-    type: 3}
-  iPadLandscapeSplashScreen: {fileID: 2800000, guid: 650e8b61460884735aac5e1dc43eb25c,
-    type: 3}
-  iPadHighResLandscapeSplashScreen: {fileID: 2800000, guid: 650e8b61460884735aac5e1dc43eb25c,
-    type: 3}
+  iPadHighResLandscapeSplashScreen: {fileID: 0}
   appleTVSplashScreen: {fileID: 0}
   tvOSSmallIconLayers: []
   tvOSLargeIconLayers: []

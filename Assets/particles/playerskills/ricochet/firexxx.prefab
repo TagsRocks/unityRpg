@@ -73,8 +73,9 @@ GameObject:
   m_Component:
   - 4: {fileID: 400008}
   - 114: {fileID: 11400008}
+  - 114: {fileID: 11454276}
   m_Layer: 0
-  m_Name: fire
+  m_Name: firexxx
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -135,7 +136,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100008}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.26384163, y: 0, z: 3.26442981}
+  m_LocalPosition: {x: 4.2638416, y: 0, z: 3.2644298}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400006}
@@ -157,7 +158,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   VersionIdentifier1: 222
   ClientTransform: {fileID: 400000}
-  SyncClient: 0
+  SyncClient: 1
   Material: {fileID: 2100000, guid: eb71e5f2bbae24164be7f5feaccb3304, type: 2}
   RenderType: 0
   StartTime: 0
@@ -192,6 +193,7 @@ MonoBehaviour:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
+    m_RotationOrder: 4
   RotateCurveWrap: 0
   RotateCurveTime: 1
   RotateCurveMaxValue: 1
@@ -210,12 +212,14 @@ MonoBehaviour:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
+    m_RotationOrder: 4
   RotateSpeedMin: 0
   RotateSpeedMax: 0
   OriScaleXMin: 1
   OriScaleXMax: 1
   OriScaleYMin: 1
   OriScaleYMax: 1
+  OriScaleZ: 1
   ScaleAffectorEnable: 1
   ScaleType: 3
   DeltaScaleX: 0
@@ -236,6 +240,7 @@ MonoBehaviour:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
+    m_RotationOrder: 4
   ScaleXCurve:
     serializedVersion: 2
     m_Curve:
@@ -251,6 +256,7 @@ MonoBehaviour:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
+    m_RotationOrder: 4
   ScaleYCurve:
     serializedVersion: 2
     m_Curve:
@@ -266,6 +272,7 @@ MonoBehaviour:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
+    m_RotationOrder: 4
   ScaleWrapMode: 0
   ScaleCurveTime: -1
   MaxScaleCalue: 5
@@ -274,21 +281,22 @@ MonoBehaviour:
     m_Curve:
     - time: 0
       value: 0
-      inSlope: 3.9949851
-      outSlope: 3.9949851
+      inSlope: 3.994985
+      outSlope: 3.994985
       tangentMode: 10
-    - time: .102383822
-      value: .409021854
-      inSlope: 1.88415825
-      outSlope: -.295900136
+    - time: 0.10238382
+      value: 0.40902185
+      inSlope: 1.8841583
+      outSlope: -0.29590014
       tangentMode: 1
-    - time: .992937863
-      value: .207161248
-      inSlope: -.226668552
-      outSlope: -.226668552
+    - time: 0.99293786
+      value: 0.20716125
+      inSlope: -0.22666855
+      outSlope: -0.22666855
       tangentMode: 10
     m_PreInfinity: 2
     m_PostInfinity: 2
+    m_RotationOrder: 0
   ScaleYCurveNew:
     serializedVersion: 2
     m_Curve:
@@ -304,6 +312,7 @@ MonoBehaviour:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
+    m_RotationOrder: 4
   UseSameScaleCurve: 1
   DeltaScaleXMax: 0
   DeltaScaleYMax: 0
@@ -321,13 +330,13 @@ MonoBehaviour:
     Colors:
     - t: 0
       Color: {r: 0, g: 0, b: 0, a: 1}
-    - t: .118303575
+    - t: 0.118303575
       Color: {r: 1, g: 1, b: 1, a: 1}
-    - t: .283482134
-      Color: {r: .721568644, g: .721568644, b: 1, a: 1}
-    - t: .540178597
-      Color: {r: .0274509806, g: .701960802, b: .713725507, a: 1}
-    - t: .975446403
+    - t: 0.28348213
+      Color: {r: 0.72156864, g: 0.72156864, b: 1, a: 1}
+    - t: 0.5401786
+      Color: {r: 0.02745098, g: 0.7019608, b: 0.7137255, a: 1}
+    - t: 0.9754464
       Color: {r: 0, g: 0, b: 0, a: 1}
   ColorGradualCurve:
     serializedVersion: 2
@@ -344,6 +353,7 @@ MonoBehaviour:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
+    m_RotationOrder: 4
   RibbonWidth: 1
   MaxRibbonElements: 8
   RibbonLen: 15
@@ -377,9 +387,10 @@ MonoBehaviour:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
+    m_RotationOrder: 4
   CMesh: {fileID: 0}
   EmitType: 1
-  BoxSize: {x: .100000001, y: .100000001, z: .100000001}
+  BoxSize: {x: 0.1, y: 0.1, z: 0.1}
   EmitPoint: {x: 0, y: 0, z: 0}
   Radius: 0
   UseRandomCircle: 0
@@ -391,8 +402,8 @@ MonoBehaviour:
   LineLengthRight: 1
   MaxENodes: 1
   IsNodeLifeLoop: 0
-  NodeLifeMin: .25
-  NodeLifeMax: .300000012
+  NodeLifeMin: 0.25
+  NodeLifeMax: 0.3
   EmitWay: 0
   EmitterCurve:
     serializedVersion: 2
@@ -409,7 +420,8 @@ MonoBehaviour:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-  DiffDistance: .100000001
+    m_RotationOrder: 4
+  DiffDistance: 0.1
   EmitMesh: {fileID: 0}
   EmitMeshType: 0
   IsBurstEmit: 1
@@ -437,16 +449,19 @@ MonoBehaviour:
     m_Curve: []
     m_PreInfinity: 2
     m_PostInfinity: 2
+    m_RotationOrder: 4
   JetMin: 0
   JetMax: 0
   VortexAffectorEnable: 0
   VortexMagType: 0
   VortexMag: 1
+  VortexMagMax: 1
   VortexCurve:
     serializedVersion: 2
     m_Curve: []
     m_PreInfinity: 2
     m_PostInfinity: 2
+    m_RotationOrder: 4
   VortexDirection: {x: 0, y: 1, z: 0}
   VortexInheritRotation: 1
   VortexObj: {fileID: 400000}
@@ -472,11 +487,17 @@ MonoBehaviour:
     m_Curve: []
     m_PreInfinity: 2
     m_PostInfinity: 2
+    m_RotationOrder: 4
   GravityDirection: {x: 0, y: 1, z: 0}
   GravityObject: {fileID: 400000}
   IsGravityAccelerate: 1
   IsSine: 0
   SineFreq: 1
+  SineAffectorEnable: 0
+  SineForce: {x: 0, y: 1, z: 0}
+  ModifyPos: 1
+  SineMaxFreq: 5
+  SineMinFreq: 1
   AirAffectorEnable: 0
   AirObject: {fileID: 400000}
   AirMagType: 0
@@ -486,6 +507,7 @@ MonoBehaviour:
     m_Curve: []
     m_PreInfinity: 2
     m_PostInfinity: 2
+    m_RotationOrder: 4
   AirDirection: {x: 0, y: 0, z: 0}
   AirAttenuation: 0
   AirUseMaxDistance: 0
@@ -505,6 +527,7 @@ MonoBehaviour:
     m_Curve: []
     m_PreInfinity: 2
     m_PostInfinity: 2
+    m_RotationOrder: 4
   BombAxis: {x: 0, y: 0, z: 0}
   BombDecay: 0
   TurbulenceAffectorEnable: 0
@@ -516,6 +539,7 @@ MonoBehaviour:
     m_Curve: []
     m_PreInfinity: 2
     m_PostInfinity: 2
+    m_RotationOrder: 4
   TurbulenceAttenuation: 0
   TurbulenceUseMaxDistance: 0
   TurbulenceMaxDistance: 0
@@ -549,7 +573,7 @@ MonoBehaviour:
   CollisionLayer:
     serializedVersion: 2
     m_Bits: 0
-  JumpHeight: .300000012
+  JumpHeight: 0.3
   CollisionOffset: 0
   PlaneDir: {x: 0, y: 1, z: 0}
   PlaneOffset: {x: 0, y: 0, z: 0}
@@ -559,7 +583,7 @@ MonoBehaviour:
   CollisionSubEmitter: 
   DeathSubEmitter: 
   AvailableNodeCount: 0
-  LastClientPos: {x: 4.26384163, y: 0, z: 3.26442981}
+  LastClientPos: {x: 4.2638416, y: 0, z: 3.2644298}
   MyCamera: {fileID: 0}
   Owner: {fileID: 11400008}
   mStopped: 0
@@ -576,7 +600,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   VersionIdentifier1: 222
   ClientTransform: {fileID: 400002}
-  SyncClient: 0
+  SyncClient: 1
   Material: {fileID: 2100000, guid: b6296fde83b6a4345864e499f992e733, type: 2}
   RenderType: 0
   StartTime: 0
@@ -611,6 +635,7 @@ MonoBehaviour:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
+    m_RotationOrder: 4
   RotateCurveWrap: 0
   RotateCurveTime: 1
   RotateCurveMaxValue: 1
@@ -629,12 +654,14 @@ MonoBehaviour:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
+    m_RotationOrder: 4
   RotateSpeedMin: 0
   RotateSpeedMax: 0
   OriScaleXMin: 1
   OriScaleXMax: 1
   OriScaleYMin: 1
   OriScaleYMax: 1
+  OriScaleZ: 1
   ScaleAffectorEnable: 1
   ScaleType: 3
   DeltaScaleX: 0
@@ -655,6 +682,7 @@ MonoBehaviour:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
+    m_RotationOrder: 4
   ScaleXCurve:
     serializedVersion: 2
     m_Curve:
@@ -670,6 +698,7 @@ MonoBehaviour:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
+    m_RotationOrder: 4
   ScaleYCurve:
     serializedVersion: 2
     m_Curve:
@@ -685,6 +714,7 @@ MonoBehaviour:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
+    m_RotationOrder: 4
   ScaleWrapMode: 0
   ScaleCurveTime: -1
   MaxScaleCalue: 8
@@ -692,17 +722,18 @@ MonoBehaviour:
     serializedVersion: 2
     m_Curve:
     - time: 0
-      value: .107416861
-      inSlope: .388746917
-      outSlope: .388746917
+      value: 0.10741686
+      inSlope: 0.38874692
+      outSlope: 0.38874692
       tangentMode: 10
     - time: 1
-      value: .496163785
-      inSlope: .388746917
-      outSlope: .388746917
+      value: 0.4961638
+      inSlope: 0.38874692
+      outSlope: 0.38874692
       tangentMode: 10
     m_PreInfinity: 2
     m_PostInfinity: 2
+    m_RotationOrder: 0
   ScaleYCurveNew:
     serializedVersion: 2
     m_Curve:
@@ -718,6 +749,7 @@ MonoBehaviour:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
+    m_RotationOrder: 4
   UseSameScaleCurve: 1
   DeltaScaleXMax: 0
   DeltaScaleYMax: 0
@@ -725,7 +757,7 @@ MonoBehaviour:
   ColorAffectType: 0
   ColorGradualTimeLength: -1
   ColorGradualType: 0
-  Color1: {r: 1, g: .549019635, b: .549019635, a: 1}
+  Color1: {r: 1, g: 0.54901963, b: 0.54901963, a: 1}
   Color2: {r: 0, g: 0, b: 0, a: 0}
   Color3: {r: 0, g: 0, b: 0, a: 0}
   Color4: {r: 0, g: 0, b: 0, a: 0}
@@ -750,6 +782,7 @@ MonoBehaviour:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
+    m_RotationOrder: 4
   RibbonWidth: 1
   MaxRibbonElements: 8
   RibbonLen: 15
@@ -783,6 +816,7 @@ MonoBehaviour:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
+    m_RotationOrder: 4
   CMesh: {fileID: 0}
   EmitType: 0
   BoxSize: {x: 0, y: 0, z: 0}
@@ -797,8 +831,8 @@ MonoBehaviour:
   LineLengthRight: 1
   MaxENodes: 2
   IsNodeLifeLoop: 0
-  NodeLifeMin: .200000003
-  NodeLifeMax: .200000003
+  NodeLifeMin: 0.2
+  NodeLifeMax: 0.2
   EmitWay: 0
   EmitterCurve:
     serializedVersion: 2
@@ -815,7 +849,8 @@ MonoBehaviour:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-  DiffDistance: .100000001
+    m_RotationOrder: 4
+  DiffDistance: 0.1
   EmitMesh: {fileID: 0}
   EmitMeshType: 0
   IsBurstEmit: 1
@@ -843,16 +878,19 @@ MonoBehaviour:
     m_Curve: []
     m_PreInfinity: 2
     m_PostInfinity: 2
+    m_RotationOrder: 4
   JetMin: 0
   JetMax: 0
   VortexAffectorEnable: 0
   VortexMagType: 0
   VortexMag: 1
+  VortexMagMax: 1
   VortexCurve:
     serializedVersion: 2
     m_Curve: []
     m_PreInfinity: 2
     m_PostInfinity: 2
+    m_RotationOrder: 4
   VortexDirection: {x: 0, y: 1, z: 0}
   VortexInheritRotation: 1
   VortexObj: {fileID: 400002}
@@ -878,11 +916,17 @@ MonoBehaviour:
     m_Curve: []
     m_PreInfinity: 2
     m_PostInfinity: 2
+    m_RotationOrder: 4
   GravityDirection: {x: 0, y: 1, z: 0}
   GravityObject: {fileID: 400002}
   IsGravityAccelerate: 1
   IsSine: 0
   SineFreq: 1
+  SineAffectorEnable: 0
+  SineForce: {x: 0, y: 1, z: 0}
+  ModifyPos: 1
+  SineMaxFreq: 5
+  SineMinFreq: 1
   AirAffectorEnable: 0
   AirObject: {fileID: 400002}
   AirMagType: 0
@@ -892,6 +936,7 @@ MonoBehaviour:
     m_Curve: []
     m_PreInfinity: 2
     m_PostInfinity: 2
+    m_RotationOrder: 4
   AirDirection: {x: 0, y: 0, z: 0}
   AirAttenuation: 0
   AirUseMaxDistance: 0
@@ -911,6 +956,7 @@ MonoBehaviour:
     m_Curve: []
     m_PreInfinity: 2
     m_PostInfinity: 2
+    m_RotationOrder: 4
   BombAxis: {x: 0, y: 0, z: 0}
   BombDecay: 0
   TurbulenceAffectorEnable: 0
@@ -922,6 +968,7 @@ MonoBehaviour:
     m_Curve: []
     m_PreInfinity: 2
     m_PostInfinity: 2
+    m_RotationOrder: 4
   TurbulenceAttenuation: 0
   TurbulenceUseMaxDistance: 0
   TurbulenceMaxDistance: 0
@@ -955,7 +1002,7 @@ MonoBehaviour:
   CollisionLayer:
     serializedVersion: 2
     m_Bits: 0
-  JumpHeight: .300000012
+  JumpHeight: 0.3
   CollisionOffset: 0
   PlaneDir: {x: 0, y: 1, z: 0}
   PlaneOffset: {x: 0, y: 0, z: 0}
@@ -965,7 +1012,7 @@ MonoBehaviour:
   CollisionSubEmitter: 
   DeathSubEmitter: 
   AvailableNodeCount: 2
-  LastClientPos: {x: 4.26384163, y: 0, z: 3.26442981}
+  LastClientPos: {x: 4.2638416, y: 0, z: 3.2644298}
   MyCamera: {fileID: 0}
   Owner: {fileID: 11400008}
   mStopped: 0
@@ -982,7 +1029,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   VersionIdentifier1: 222
   ClientTransform: {fileID: 400004}
-  SyncClient: 0
+  SyncClient: 1
   Material: {fileID: 2100000, guid: a356213413d494e079714ce04b9dc5a3, type: 2}
   RenderType: 0
   StartTime: 0
@@ -1017,6 +1064,7 @@ MonoBehaviour:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
+    m_RotationOrder: 4
   RotateCurveWrap: 0
   RotateCurveTime: 1
   RotateCurveMaxValue: 1
@@ -1035,12 +1083,14 @@ MonoBehaviour:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
+    m_RotationOrder: 4
   RotateSpeedMin: -20
   RotateSpeedMax: 20
   OriScaleXMin: 1
   OriScaleXMax: 1
   OriScaleYMin: 1
   OriScaleYMax: 1
+  OriScaleZ: 1
   ScaleAffectorEnable: 1
   ScaleType: 3
   DeltaScaleX: 0
@@ -1061,6 +1111,7 @@ MonoBehaviour:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
+    m_RotationOrder: 4
   ScaleXCurve:
     serializedVersion: 2
     m_Curve:
@@ -1076,6 +1127,7 @@ MonoBehaviour:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
+    m_RotationOrder: 4
   ScaleYCurve:
     serializedVersion: 2
     m_Curve:
@@ -1091,6 +1143,7 @@ MonoBehaviour:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
+    m_RotationOrder: 4
   ScaleWrapMode: 0
   ScaleCurveTime: -1
   MaxScaleCalue: 3
@@ -1102,18 +1155,19 @@ MonoBehaviour:
       inSlope: 2
       outSlope: 2
       tangentMode: 0
-    - time: .29694277
-      value: .404815346
-      inSlope: .921015739
-      outSlope: .921015739
+    - time: 0.29694277
+      value: 0.40481535
+      inSlope: 0.92101574
+      outSlope: 0.92101574
       tangentMode: 0
-    - time: .994350255
-      value: .626598537
+    - time: 0.99435025
+      value: 0.62659854
       inSlope: 0
       outSlope: 0
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
+    m_RotationOrder: 0
   ScaleYCurveNew:
     serializedVersion: 2
     m_Curve:
@@ -1129,6 +1183,7 @@ MonoBehaviour:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
+    m_RotationOrder: 4
   UseSameScaleCurve: 1
   DeltaScaleXMax: 0
   DeltaScaleYMax: 0
@@ -1146,17 +1201,17 @@ MonoBehaviour:
     Colors:
     - t: 0
       Color: {r: 0, g: 0, b: 0, a: 1}
-    - t: .104910716
-      Color: {r: .58431375, g: 0, b: 0, a: 1}
-    - t: .229910716
-      Color: {r: .666666687, g: .541176498, b: .274509817, a: 1}
-    - t: .399553567
-      Color: {r: .701960802, g: .713725507, b: 1, a: 1}
-    - t: .59375
-      Color: {r: .866666675, g: .894117653, b: 1, a: 1}
-    - t: .799107134
-      Color: {r: .43921569, g: .0509803928, b: 0, a: 1}
-    - t: .979910731
+    - t: 0.10491072
+      Color: {r: 0.58431375, g: 0, b: 0, a: 1}
+    - t: 0.22991072
+      Color: {r: 0.6666667, g: 0.5411765, b: 0.27450982, a: 1}
+    - t: 0.39955357
+      Color: {r: 0.7019608, g: 0.7137255, b: 1, a: 1}
+    - t: 0.59375
+      Color: {r: 0.8666667, g: 0.89411765, b: 1, a: 1}
+    - t: 0.79910713
+      Color: {r: 0.4392157, g: 0.050980393, b: 0, a: 1}
+    - t: 0.97991073
       Color: {r: 0, g: 0, b: 0, a: 1}
   ColorGradualCurve:
     serializedVersion: 2
@@ -1173,6 +1228,7 @@ MonoBehaviour:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
+    m_RotationOrder: 4
   RibbonWidth: 1
   MaxRibbonElements: 8
   RibbonLen: 15
@@ -1206,9 +1262,10 @@ MonoBehaviour:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
+    m_RotationOrder: 4
   CMesh: {fileID: 0}
   EmitType: 1
-  BoxSize: {x: .100000001, y: .100000001, z: .100000001}
+  BoxSize: {x: 0.1, y: 0.1, z: 0.1}
   EmitPoint: {x: 0, y: 0, z: 0}
   Radius: 0
   UseRandomCircle: 0
@@ -1220,8 +1277,8 @@ MonoBehaviour:
   LineLengthRight: 1
   MaxENodes: 5
   IsNodeLifeLoop: 0
-  NodeLifeMin: .25
-  NodeLifeMax: .300000012
+  NodeLifeMin: 0.25
+  NodeLifeMax: 0.3
   EmitWay: 0
   EmitterCurve:
     serializedVersion: 2
@@ -1238,7 +1295,8 @@ MonoBehaviour:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-  DiffDistance: .100000001
+    m_RotationOrder: 4
+  DiffDistance: 0.1
   EmitMesh: {fileID: 0}
   EmitMeshType: 0
   IsBurstEmit: 1
@@ -1266,16 +1324,19 @@ MonoBehaviour:
     m_Curve: []
     m_PreInfinity: 2
     m_PostInfinity: 2
+    m_RotationOrder: 4
   JetMin: 0
   JetMax: 0
   VortexAffectorEnable: 0
   VortexMagType: 0
   VortexMag: 1
+  VortexMagMax: 1
   VortexCurve:
     serializedVersion: 2
     m_Curve: []
     m_PreInfinity: 2
     m_PostInfinity: 2
+    m_RotationOrder: 4
   VortexDirection: {x: 0, y: 1, z: 0}
   VortexInheritRotation: 1
   VortexObj: {fileID: 400004}
@@ -1301,11 +1362,17 @@ MonoBehaviour:
     m_Curve: []
     m_PreInfinity: 2
     m_PostInfinity: 2
+    m_RotationOrder: 4
   GravityDirection: {x: 0, y: 1, z: 0}
   GravityObject: {fileID: 400004}
   IsGravityAccelerate: 1
   IsSine: 0
   SineFreq: 1
+  SineAffectorEnable: 0
+  SineForce: {x: 0, y: 1, z: 0}
+  ModifyPos: 1
+  SineMaxFreq: 5
+  SineMinFreq: 1
   AirAffectorEnable: 0
   AirObject: {fileID: 400004}
   AirMagType: 0
@@ -1315,6 +1382,7 @@ MonoBehaviour:
     m_Curve: []
     m_PreInfinity: 2
     m_PostInfinity: 2
+    m_RotationOrder: 4
   AirDirection: {x: 0, y: 0, z: 0}
   AirAttenuation: 0
   AirUseMaxDistance: 0
@@ -1334,6 +1402,7 @@ MonoBehaviour:
     m_Curve: []
     m_PreInfinity: 2
     m_PostInfinity: 2
+    m_RotationOrder: 4
   BombAxis: {x: 0, y: 0, z: 0}
   BombDecay: 0
   TurbulenceAffectorEnable: 0
@@ -1345,6 +1414,7 @@ MonoBehaviour:
     m_Curve: []
     m_PreInfinity: 2
     m_PostInfinity: 2
+    m_RotationOrder: 4
   TurbulenceAttenuation: 0
   TurbulenceUseMaxDistance: 0
   TurbulenceMaxDistance: 0
@@ -1378,7 +1448,7 @@ MonoBehaviour:
   CollisionLayer:
     serializedVersion: 2
     m_Bits: 0
-  JumpHeight: .300000012
+  JumpHeight: 0.3
   CollisionOffset: 0
   PlaneDir: {x: 0, y: 1, z: 0}
   PlaneOffset: {x: 0, y: 0, z: 0}
@@ -1388,7 +1458,7 @@ MonoBehaviour:
   CollisionSubEmitter: 
   DeathSubEmitter: 
   AvailableNodeCount: 0
-  LastClientPos: {x: 4.26384163, y: 0, z: 3.26442981}
+  LastClientPos: {x: 4.2638416, y: 0, z: 3.2644298}
   MyCamera: {fileID: 0}
   Owner: {fileID: 11400008}
   mStopped: 0
@@ -1405,7 +1475,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   VersionIdentifier1: 222
   ClientTransform: {fileID: 400006}
-  SyncClient: 0
+  SyncClient: 1
   Material: {fileID: 2100000, guid: ff78993d6faa54f54b1fd555b406aa9e, type: 2}
   RenderType: 0
   StartTime: 0
@@ -1440,6 +1510,7 @@ MonoBehaviour:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
+    m_RotationOrder: 4
   RotateCurveWrap: 0
   RotateCurveTime: 1
   RotateCurveMaxValue: 1
@@ -1458,12 +1529,14 @@ MonoBehaviour:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
+    m_RotationOrder: 4
   RotateSpeedMin: 0
   RotateSpeedMax: 0
-  OriScaleXMin: .150000006
-  OriScaleXMax: .150000006
+  OriScaleXMin: 0.15
+  OriScaleXMax: 0.15
   OriScaleYMin: 1
   OriScaleYMax: 1
+  OriScaleZ: 1
   ScaleAffectorEnable: 1
   ScaleType: 3
   DeltaScaleX: 0
@@ -1484,6 +1557,7 @@ MonoBehaviour:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
+    m_RotationOrder: 4
   ScaleXCurve:
     serializedVersion: 2
     m_Curve:
@@ -1499,6 +1573,7 @@ MonoBehaviour:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
+    m_RotationOrder: 4
   ScaleYCurve:
     serializedVersion: 2
     m_Curve:
@@ -1514,6 +1589,7 @@ MonoBehaviour:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
+    m_RotationOrder: 4
   ScaleWrapMode: 0
   ScaleCurveTime: -1
   MaxScaleCalue: 6
@@ -1521,37 +1597,39 @@ MonoBehaviour:
     serializedVersion: 2
     m_Curve:
     - time: 0
-      value: .0946292877
-      inSlope: .890526831
-      outSlope: .890526831
+      value: 0.09462929
+      inSlope: 0.89052683
+      outSlope: 0.89052683
       tangentMode: 0
-    - time: .50118643
-      value: .605831206
-      inSlope: .0049185669
-      outSlope: .0049185669
+    - time: 0.50118643
+      value: 0.6058312
+      inSlope: 0.004918567
+      outSlope: 0.004918567
       tangentMode: 0
-    - time: .998587549
-      value: .391304433
-      inSlope: -.221721426
-      outSlope: -.221721426
+    - time: 0.99858755
+      value: 0.39130443
+      inSlope: -0.22172143
+      outSlope: -0.22172143
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
+    m_RotationOrder: 0
   ScaleYCurveNew:
     serializedVersion: 2
     m_Curve:
     - time: 0
-      value: .0537084304
-      inSlope: .578822732
-      outSlope: .578822732
+      value: 0.05370843
+      inSlope: 0.57882273
+      outSlope: 0.57882273
       tangentMode: 10
-    - time: .998587549
-      value: .631713629
-      inSlope: .578822732
-      outSlope: .578822732
+    - time: 0.99858755
+      value: 0.6317136
+      inSlope: 0.57882273
+      outSlope: 0.57882273
       tangentMode: 10
     m_PreInfinity: 2
     m_PostInfinity: 2
+    m_RotationOrder: 0
   UseSameScaleCurve: 0
   DeltaScaleXMax: 0
   DeltaScaleYMax: 0
@@ -1567,15 +1645,15 @@ MonoBehaviour:
   ColorChangeType: 1
   ColorParam:
     Colors:
-    - t: .0223214291
+    - t: 0.02232143
       Color: {r: 0, g: 0, b: 0, a: 1}
-    - t: .149553567
-      Color: {r: .792156875, g: .258823544, b: .819607854, a: 1}
-    - t: .25
-      Color: {r: .65882355, g: 1, b: 1, a: 1}
-    - t: .535714269
-      Color: {r: .192156866, g: .647058845, b: 1, a: 1}
-    - t: .988839269
+    - t: 0.14955357
+      Color: {r: 0.7921569, g: 0.25882354, b: 0.81960785, a: 1}
+    - t: 0.25
+      Color: {r: 0.65882355, g: 1, b: 1, a: 1}
+    - t: 0.53571427
+      Color: {r: 0.19215687, g: 0.64705884, b: 1, a: 1}
+    - t: 0.98883927
       Color: {r: 0, g: 0, b: 0, a: 1}
   ColorGradualCurve:
     serializedVersion: 2
@@ -1592,6 +1670,7 @@ MonoBehaviour:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
+    m_RotationOrder: 4
   RibbonWidth: 1
   MaxRibbonElements: 8
   RibbonLen: 15
@@ -1625,9 +1704,10 @@ MonoBehaviour:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
+    m_RotationOrder: 4
   CMesh: {fileID: 0}
   EmitType: 1
-  BoxSize: {x: .5, y: .100000001, z: .100000001}
+  BoxSize: {x: 0.5, y: 0.1, z: 0.1}
   EmitPoint: {x: 0, y: 0, z: 0}
   Radius: 0
   UseRandomCircle: 0
@@ -1639,8 +1719,8 @@ MonoBehaviour:
   LineLengthRight: 1
   MaxENodes: 6
   IsNodeLifeLoop: 0
-  NodeLifeMin: .300000012
-  NodeLifeMax: .400000006
+  NodeLifeMin: 0.3
+  NodeLifeMax: 0.4
   EmitWay: 0
   EmitterCurve:
     serializedVersion: 2
@@ -1657,7 +1737,8 @@ MonoBehaviour:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-  DiffDistance: .100000001
+    m_RotationOrder: 4
+  DiffDistance: 0.1
   EmitMesh: {fileID: 0}
   EmitMeshType: 0
   IsBurstEmit: 1
@@ -1672,7 +1753,7 @@ MonoBehaviour:
   AngleAroundAxis: 0
   UseRandomDirAngle: 1
   AngleAroundAxisMax: 15
-  OriSpeed: .100000001
+  OriSpeed: 0.1
   AlwaysSyncRotation: 0
   IsRandomSpeed: 0
   SpeedMin: 0
@@ -1685,16 +1766,19 @@ MonoBehaviour:
     m_Curve: []
     m_PreInfinity: 2
     m_PostInfinity: 2
+    m_RotationOrder: 4
   JetMin: 0
   JetMax: 0
   VortexAffectorEnable: 0
   VortexMagType: 0
   VortexMag: 1
+  VortexMagMax: 1
   VortexCurve:
     serializedVersion: 2
     m_Curve: []
     m_PreInfinity: 2
     m_PostInfinity: 2
+    m_RotationOrder: 4
   VortexDirection: {x: 0, y: 1, z: 0}
   VortexInheritRotation: 1
   VortexObj: {fileID: 400006}
@@ -1720,11 +1804,17 @@ MonoBehaviour:
     m_Curve: []
     m_PreInfinity: 2
     m_PostInfinity: 2
+    m_RotationOrder: 4
   GravityDirection: {x: 0, y: 1, z: 0}
   GravityObject: {fileID: 400006}
   IsGravityAccelerate: 1
   IsSine: 0
   SineFreq: 1
+  SineAffectorEnable: 0
+  SineForce: {x: 0, y: 1, z: 0}
+  ModifyPos: 1
+  SineMaxFreq: 5
+  SineMinFreq: 1
   AirAffectorEnable: 0
   AirObject: {fileID: 400006}
   AirMagType: 0
@@ -1734,6 +1824,7 @@ MonoBehaviour:
     m_Curve: []
     m_PreInfinity: 2
     m_PostInfinity: 2
+    m_RotationOrder: 4
   AirDirection: {x: 0, y: 0, z: 0}
   AirAttenuation: 0
   AirUseMaxDistance: 0
@@ -1753,6 +1844,7 @@ MonoBehaviour:
     m_Curve: []
     m_PreInfinity: 2
     m_PostInfinity: 2
+    m_RotationOrder: 4
   BombAxis: {x: 0, y: 0, z: 0}
   BombDecay: 0
   TurbulenceAffectorEnable: 0
@@ -1764,6 +1856,7 @@ MonoBehaviour:
     m_Curve: []
     m_PreInfinity: 2
     m_PostInfinity: 2
+    m_RotationOrder: 4
   TurbulenceAttenuation: 0
   TurbulenceUseMaxDistance: 0
   TurbulenceMaxDistance: 0
@@ -1797,7 +1890,7 @@ MonoBehaviour:
   CollisionLayer:
     serializedVersion: 2
     m_Bits: 0
-  JumpHeight: .300000012
+  JumpHeight: 0.3
   CollisionOffset: 0
   PlaneDir: {x: 0, y: 1, z: 0}
   PlaneOffset: {x: 0, y: 0, z: 0}
@@ -1807,7 +1900,7 @@ MonoBehaviour:
   CollisionSubEmitter: 
   DeathSubEmitter: 
   AvailableNodeCount: 0
-  LastClientPos: {x: 4.26384163, y: 0, z: 3.26442981}
+  LastClientPos: {x: 4.2638416, y: 0, z: 3.2644298}
   MyCamera: {fileID: 0}
   Owner: {fileID: 11400008}
   mStopped: 0
@@ -1822,10 +1915,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31e31838b0476f14ea97697da6957b42, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LifeTime: -1
+  LifeTime: 5
   IgnoreTimeScale: 0
   EditView: 0
   Scale: 1
+--- !u!114 &11454276
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100008}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc06412bb9a9d40fe9279c46439a8350, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
@@ -1837,4 +1941,3 @@ Prefab:
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 100008}
   m_IsPrefabParent: 1
-  m_IsExploded: 1

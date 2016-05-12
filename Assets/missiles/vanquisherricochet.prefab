@@ -42,7 +42,7 @@ MonoBehaviour:
   ActiveParticle: {fileID: 100010, guid: 2e858a2b66d26427a8f2e0f8770d93b7, type: 2}
   DieParticle: {fileID: 100008, guid: 49cf3e65d85944b07a467c0585a6aed6, type: 2}
   HitParticle: {fileID: 100000, guid: 3c09a6347aefd4cde8f2a40221039650, type: 2}
-  ReleaseParticle: {fileID: 100008, guid: a0af3a4708c784299a295814378aa617, type: 2}
+  ReleaseParticle: {fileID: 0}
   Velocity: 20
   Radius: 0.8
   MaxDistance: 30

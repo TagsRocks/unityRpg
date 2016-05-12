@@ -19,6 +19,7 @@ namespace MyLib
             if (target != null)
             {
                 transform.position = target.transform.position + target.transform.rotation*localPos;
+                transform.rotation = target.transform.rotation;
             }
         }
     }

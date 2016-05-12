@@ -32,7 +32,8 @@ public class NetDebug : MonoBehaviour
     {
         netDebug = this;
         var l = Application.systemLanguage;
-        if (l == SystemLanguage.Chinese)
+        Debug.LogError("Language: "+l);
+        if (l == SystemLanguage.Chinese || l == SystemLanguage.ChineseSimplified || l == SystemLanguage.ChineseTraditional)
         {
             Localization.language = "Chinese";
         } else
