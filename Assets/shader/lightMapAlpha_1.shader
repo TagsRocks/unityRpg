@@ -1,4 +1,6 @@
-﻿Shader "Custom/lightMapAlpha_1" {
+﻿// Upgrade NOTE: replaced '_Object2World' with 'unity_ObjectToWorld'
+
+Shader "Custom/lightMapAlpha_1" {
 	//rubble
 	Properties {
 		_MainTex ("Base (RGB)", 2D) = "white" {}
@@ -49,7 +51,7 @@
 				o.pos = mul(UNITY_MATRIX_MVP, v.vertex);
 				o.uv = MultiplyUV(UNITY_MATRIX_TEXTURE0, v.texcoord);
 
-				fixed3 worldPos = mul(_Object2World, v.vertex).xyz;
+				fixed3 worldPos = mul(unity_ObjectToWorld, v.vertex).xyz;
 				o.offPos = worldPos-(_WorldSpaceCameraPos+_CamPos);
 				o.shadowPos = worldPos-(_WorldSpaceCameraPos+_ShadowCamPos);
 				return o;

@@ -1,4 +1,7 @@
-﻿#warning Upgrade NOTE: unity_Scale shader variable was removed; replaced 'unity_Scale.w' with '1.0'
+﻿// Upgrade NOTE: replaced '_Object2World' with 'unity_ObjectToWorld'
+// Upgrade NOTE: replaced '_World2Object' with 'unity_WorldToObject'
+
+#warning Upgrade NOTE: unity_Scale shader variable was removed; replaced 'unity_Scale.w' with '1.0'
 
 Shader "Custom/gelShader" {
 	Properties {
@@ -91,9 +94,9 @@ Shader "Custom/gelShader" {
 	 
 	         float4 vert(float4 vertexPos : POSITION) : SV_POSITION
 	         {
-	            float4x4 modelMatrix = _Object2World;
+	            float4x4 modelMatrix = unity_ObjectToWorld;
 	            float4x4 modelMatrixInverse = 
-	               _World2Object * 1.0;
+	               unity_WorldToObject * 1.0;
 	            modelMatrixInverse[3][3] = 1.0; 
 	            float4x4 viewMatrix = 
 	               mul(UNITY_MATRIX_MV, modelMatrixInverse);

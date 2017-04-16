@@ -1,4 +1,6 @@
-﻿Shader "Custom/shadowMap" {
+﻿// Upgrade NOTE: replaced '_Object2World' with 'unity_ObjectToWorld'
+
+Shader "Custom/shadowMap" {
 	Properties {
 	}
 	SubShader {
@@ -28,7 +30,7 @@
 				fixed4 mvPos = mul(UNITY_MATRIX_MV, v.vertex);
 				//o.pos = mul(UNITY_MATRIX_MVP, v.vertex);
 				//使用MainCamera的配置MVP来将这个数据直接和MainCamera对应起来
-				fixed4 worldPos = mul(_Object2World, v.vertex);
+				fixed4 worldPos = mul(unity_ObjectToWorld, v.vertex);
 				o.pos = mul(_MainCameraWorldToProj, worldPos);
 
 				o.screen = ComputeScreenPos(o.pos);

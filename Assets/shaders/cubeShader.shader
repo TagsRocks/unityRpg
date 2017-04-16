@@ -1,4 +1,7 @@
-﻿/*
+﻿// Upgrade NOTE: replaced '_Object2World' with 'unity_ObjectToWorld'
+// Upgrade NOTE: replaced '_World2Object' with 'unity_WorldToObject'
+
+/*
 Shader "Custom/cubeShader" {
 	Properties {
 		_Cube ("EnvMap (RGB)", Cube) = "" {}
@@ -91,8 +94,8 @@ Shader "Custom/cubeShader" {
          {
             vertexOutput output;
  
-            float4x4 modelMatrix = _Object2World;
-            float4x4 modelMatrixInverse = _World2Object; 
+            float4x4 modelMatrix = unity_ObjectToWorld;
+            float4x4 modelMatrixInverse = unity_WorldToObject; 
  
             float3 viewDir = mul(modelMatrix, input.vertex).xyz 
                - _WorldSpaceCameraPos;

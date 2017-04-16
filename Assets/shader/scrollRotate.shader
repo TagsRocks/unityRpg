@@ -1,4 +1,6 @@
-﻿Shader "Custom/scrollRotate" {
+﻿// Upgrade NOTE: replaced '_Object2World' with 'unity_ObjectToWorld'
+
+Shader "Custom/scrollRotate" {
 	Properties {
 		_MainTex ("Base (RGB)", 2D) = "white" {}
 		_IllumMap ("Illum Map", 2D) = "white" {}
@@ -87,7 +89,7 @@
 				//rotationMatrix2 += 0.5f;
 				o.uv2 = mul(o.uv2, rotationMatrix2);
 				
-				o.offPos = mul(_Object2World, v.vertex).xyz-(_WorldSpaceCameraPos+_CamPos);
+				o.offPos = mul(unity_ObjectToWorld, v.vertex).xyz-(_WorldSpaceCameraPos+_CamPos);
 				return o;
 			}
 			

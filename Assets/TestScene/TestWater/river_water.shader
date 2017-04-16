@@ -1,4 +1,6 @@
-﻿Shader "Custom/river_water" {
+﻿// Upgrade NOTE: replaced '_Object2World' with 'unity_ObjectToWorld'
+
+Shader "Custom/river_water" {
 	Properties {
 		_MainTex ("Base (RGB)", 2D) = "white" {}
 		_Freq_X("wave x freq", float) = 0.07
@@ -90,7 +92,7 @@
 				
 				o.vertColor = v.color; 
 
-				o.offPos = mul(_Object2World, v.vertex).xyz-(_WorldSpaceCameraPos+_CamPos);
+				o.offPos = mul(unity_ObjectToWorld, v.vertex).xyz-(_WorldSpaceCameraPos+_CamPos);
 				return o;
 			}
 			
@@ -175,7 +177,7 @@
 				o.uv += fixed2(t1, t2);
 
 				o.vertColor = v.color; 
-				o.offPos = mul(_Object2World, v.vertex).xyz-(_WorldSpaceCameraPos+_CamPos);
+				o.offPos = mul(unity_ObjectToWorld, v.vertex).xyz-(_WorldSpaceCameraPos+_CamPos);
 				return o;
 			}
 			

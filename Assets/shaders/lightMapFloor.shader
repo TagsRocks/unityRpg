@@ -1,4 +1,6 @@
-﻿Shader "Custom/lightMapFloor" {
+﻿// Upgrade NOTE: replaced '_Object2World' with 'unity_ObjectToWorld'
+
+Shader "Custom/lightMapFloor" {
 	Properties {
 		_Color ("Main Color", Color) = (1,1,1,1)
 		_MainTex ("Base (RGB) Gloss (A)", 2D) = "white" {}
@@ -34,7 +36,7 @@
 				o.pos = mul(UNITY_MATRIX_MVP, v.vertex);
 				o.uv = MultiplyUV(UNITY_MATRIX_TEXTURE0, v.texcoord);
 				
-				o.offPos = mul(_Object2World, v.vertex).xyz-(_WorldSpaceCameraPos+_CamPos);//_CamPos;//_WorldSpaceCameraPos;
+				o.offPos = mul(unity_ObjectToWorld, v.vertex).xyz-(_WorldSpaceCameraPos+_CamPos);//_CamPos;//_WorldSpaceCameraPos;
 						
 				return o;
 			}    

@@ -1,4 +1,6 @@
-﻿Shader "Custom/playerShader" {
+﻿// Upgrade NOTE: replaced '_Object2World' with 'unity_ObjectToWorld'
+
+Shader "Custom/playerShader" {
 	Properties {
 		_Color ("Main Color", Color) = (1,1,1,1)
 		_Ambient ("Ambient Color", Color) = (0.588, 0.588, 0.588, 1)
@@ -74,7 +76,7 @@
 				v2f o;
 				o.pos = mul(UNITY_MATRIX_MVP, v.vertex);
 				o.uv = MultiplyUV(UNITY_MATRIX_TEXTURE0, v.texcoord);
-				fixed3 viewNor = normalize(mul((float3x3)_Object2World, v.normal));
+				fixed3 viewNor = normalize(mul((float3x3)unity_ObjectToWorld, v.normal));
 				fixed3 lightDir = -normalize(_HighLightDir);
 				
 	          	o.colour = _Ambient*_Color+ _Color*saturate(dot(lightDir, viewNor))*_LightDiffuseColor;

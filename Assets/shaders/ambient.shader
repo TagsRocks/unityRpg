@@ -1,4 +1,8 @@
-﻿Shader "Custom/ambient" {
+﻿// Upgrade NOTE: replaced '_LightMatrix0' with 'unity_WorldToLight'
+// Upgrade NOTE: replaced '_Object2World' with 'unity_ObjectToWorld'
+// Upgrade NOTE: replaced '_World2Object' with 'unity_WorldToObject'
+
+Shader "Custom/ambient" {
 
 Properties {
 	_MainTex ("Base (RGB)", 2D) = "white" {}
@@ -73,16 +77,16 @@ SubShader {
 	        uniform fixed4 _LightColor0;
 	        
 	        uniform sampler2D _LightTexture0;
-			uniform float4x4 _LightMatrix0;
+			uniform float4x4 unity_WorldToLight;
 
 	        v2f vert(appdata_base v) 
 			{
 				v2f o;
 				o.pos = mul(UNITY_MATRIX_MVP, v.vertex);
 				o.uv = MultiplyUV(UNITY_MATRIX_TEXTURE0, v.texcoord);
-				o.normalDir = mul(float4(v.normal,0), _World2Object).xyz;
-				o.posWorld = mul(_Object2World, v.vertex);
-	          	o._LightCoord = mul(_LightMatrix0, mul(_Object2World, v.vertex)).xyz;
+				o.normalDir = mul(float4(v.normal,0), unity_WorldToObject).xyz;
+				o.posWorld = mul(unity_ObjectToWorld, v.vertex);
+	          	o._LightCoord = mul(unity_WorldToLight, mul(unity_ObjectToWorld, v.vertex)).xyz;
 				return o;
 			}
 			

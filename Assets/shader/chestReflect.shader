@@ -1,4 +1,7 @@
-﻿Shader "Custom/chestReflect" {
+﻿// Upgrade NOTE: replaced '_Object2World' with 'unity_ObjectToWorld'
+// Upgrade NOTE: replaced '_World2Object' with 'unity_WorldToObject'
+
+Shader "Custom/chestReflect" {
 	Properties {
 		_MainTex ("Base (RGB)", 2D) = "white" {}
 		_Cube ("EnvMap (RGB)", Cube) = "" { TexGen CubeReflect }
@@ -39,7 +42,7 @@
 				v2f o;
 				o.pos = mul(UNITY_MATRIX_MVP, v.vertex);
 				o.uv = MultiplyUV(UNITY_MATRIX_TEXTURE0, v.texcoord);
-				o.offPos = mul(_Object2World, v.vertex).xyz-(_WorldSpaceCameraPos+_CamPos);
+				o.offPos = mul(unity_ObjectToWorld, v.vertex).xyz-(_WorldSpaceCameraPos+_CamPos);
 				return o;
 			}
 			fixed4 frag(v2f i) : Color {
@@ -86,8 +89,8 @@
 				o.pos = mul(UNITY_MATRIX_MVP, v.vertex);
 				o.uv = MultiplyUV(UNITY_MATRIX_TEXTURE0, v.texcoord);
 
-				float4x4 modelMatrix = _Object2World;
-            	float4x4 modelMatrixInverse = _World2Object;
+				float4x4 modelMatrix = unity_ObjectToWorld;
+            	float4x4 modelMatrixInverse = unity_WorldToObject;
 				o.viewDir = normalize(_WorldSpaceCameraPos - mul(modelMatrix, v.vertex).xyz);	
 				o.normalDir = normalize(mul(float4(v.normal, 0.0), modelMatrixInverse).xyz);
 				return o;

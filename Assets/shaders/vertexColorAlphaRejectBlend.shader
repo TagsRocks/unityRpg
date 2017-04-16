@@ -1,4 +1,6 @@
-﻿Shader "Custom/vertexColorAlphaRejectBlend" {
+﻿// Upgrade NOTE: replaced '_Object2World' with 'unity_ObjectToWorld'
+
+Shader "Custom/vertexColorAlphaRejectBlend" {
 	Properties {
 		_MainTex ("Base (RGB)", 2D) = "white" {}
 		_Color ("Ambient Color", Color) = (0.588, 0.588, 0.588, 1)
@@ -51,7 +53,7 @@
 				o.uv = MultiplyUV(UNITY_MATRIX_TEXTURE0, v.texcoord);
 				
 				o.vertColor = v.color; 
-				o.offPos = mul(_Object2World, v.vertex).xyz-(_WorldSpaceCameraPos+_CamPos);
+				o.offPos = mul(unity_ObjectToWorld, v.vertex).xyz-(_WorldSpaceCameraPos+_CamPos);
 				return o;
 			}
 			

@@ -1,3 +1,5 @@
+// Upgrade NOTE: replaced '_Object2World' with 'unity_ObjectToWorld'
+
 //http://forum.unity3d.com/threads/142245-Xffect-Editor-Pro-powerful-tool-to-create-amazing-effects!
 Shader "Xffect/volume_fog" {
 Properties {
@@ -74,7 +76,7 @@ struct v2f {
 v2f vert (appdata_base v)
 {
     v2f o;
-	float4 wPos = mul (_Object2World, v.vertex);
+	float4 wPos = mul (unity_ObjectToWorld, v.vertex);
     o.pos = mul (UNITY_MATRIX_MVP, v.vertex);
 	o.view = wPos.xyz - _WorldSpaceCameraPos;
 	o.projPos = ComputeScreenPos (o.pos);
