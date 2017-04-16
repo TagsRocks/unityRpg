@@ -8,6 +8,7 @@
 		Tags { "Queue"="Transparent" 
 				"IgnoreProjector"="True"
 				"RenderType"="Transparent" }
+
 				
 		Pass {
 			LOD 200
@@ -29,7 +30,7 @@
 	        struct v2f {
 	        	fixed4 pos : SV_POSITION;
 	        	fixed2 uv : TEXCOORD0;
-	   			fixed4 vertColor;
+	   			fixed4 vertColor : TEXCOORD1;
 	        };
 	        
 	        uniform sampler2D _MainTex;  
@@ -38,7 +39,6 @@
 	         
 	         
 	        v2f vert(VertIn v) 
-
 			{
 				v2f o;
 				o.pos = mul(UNITY_MATRIX_MVP, v.vertex);

@@ -62,7 +62,7 @@
 
 				float t3 = _Time.y*_UVAnimX1;
 				float t4 = _Time.y*_UVAnimY1;
-				o.uv1 += fixed2(t3, t4);
+				o.uv1 = uv + fixed2(t3, t4);
 
 				o.uv2 = uv;
 				return o;
