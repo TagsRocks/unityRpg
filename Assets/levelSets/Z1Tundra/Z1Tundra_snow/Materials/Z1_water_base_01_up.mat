@@ -1,0 +1,67 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: Z1_water_base_01_up
+  m_Shader: {fileID: 4800000, guid: fc409c240dcfe2b4d93986e6f617423c, type: 3}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 5
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  m_SavedProperties:
+    serializedVersion: 2
+    m_TexEnvs:
+    - first:
+        name: _EnvSpec
+      second:
+        m_Texture: {fileID: 2800000, guid: 14c3ae2b1d07df34ca0a32cbcca50730, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - first:
+        name: _MainTex
+      second:
+        m_Texture: {fileID: 2800000, guid: 6f135f7a1ca724e03af823b1b91953e9, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - first:
+        name: _RippleTex
+      second:
+        m_Texture: {fileID: 2800000, guid: 435cfd6dfc2dd1e4ea717498b53db73c, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - first:
+        name: _Amplitude_X
+      second: -0.1
+    - first:
+        name: _Amplitude_Y
+      second: -0.23
+    - first:
+        name: _Freq_X
+      second: 0.07
+    - first:
+        name: _Freq_Y
+      second: 0.06
+    - first:
+        name: _UVAnimX
+      second: -0.053
+    - first:
+        name: _UVAnimX1
+      second: 0.011
+    - first:
+        name: _UVAnimY
+      second: -0.037
+    - first:
+        name: _UVAnimY1
+      second: 0.017
+    - first:
+        name: _rotate
+      second: 180
+    m_Colors:
+    - first:
+        name: _Color
+      second: {r: 0.588, g: 0.588, b: 0.588, a: 1}

@@ -756,6 +756,11 @@ namespace MyLib
             //重置CollisionPlane
             //xft.Reset();
         }
+
+        public static string GetSystemApplicationDataPath()
+        {
+            return Application.dataPath.Replace('/', System.IO.Path.DirectorySeparatorChar);
+        }
     }
 
 

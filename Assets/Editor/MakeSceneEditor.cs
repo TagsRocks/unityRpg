@@ -61,7 +61,8 @@ public class MakeSceneEditor : Editor
         if (bestMatch != null)
         {
             Debug.Log("Find File " + fname);
-            var assPath = bestMatch.FullName.Replace(Application.dataPath, "Assets");
+            var assPath = bestMatch.FullName.Replace(Util.GetSystemApplicationDataPath(), "Assets");
+            Debug.Log("AssetPath:" + assPath);
             var g = PrefabUtility.InstantiatePrefab(AssetDatabase.LoadAssetAtPath<GameObject>(assPath)) as GameObject;
             g.transform.parent = root.transform;
             g.transform.position = new Vector3(-px, py, pz) + parPos;
@@ -129,7 +130,7 @@ public class MakeSceneEditor : Editor
         if (bestMatch != null)
         {
             Debug.Log("Find File " + fname);
-            var assPath = bestMatch.FullName.Replace(Application.dataPath, "Assets");
+            var assPath = bestMatch.FullName.Replace(Util.GetSystemApplicationDataPath(), "Assets");
             var g = PrefabUtility.InstantiatePrefab(AssetDatabase.LoadAssetAtPath<GameObject>(assPath)) as GameObject;
             g.transform.parent = root.transform;
             g.transform.position = new Vector3(-px, py, pz)+parPos;
@@ -375,7 +376,7 @@ public class MakeSceneEditor : Editor
         {
             Debug.Log("fileName " + f.FullName);
             Debug.Log("DataPath " + Application.dataPath);
-            var pa = f.FullName.Replace(Application.dataPath, "Assets");
+            var pa = f.FullName.Replace(Util.GetSystemApplicationDataPath(), "Assets");
             
             var pre = AssetDatabase.LoadAssetAtPath<GameObject>(pa);
             
@@ -425,7 +426,8 @@ public class MakeSceneEditor : Editor
     {
         var guid = jobj ["GUID"].Value;
         var fileInfo = mapObj [guid].AsObject;
-        var fn = fileInfo ["FILE"].Value;
+        //var fn = fileInfo ["FILE"].Value;
+        var fn = fileInfo["NAME"].Value;
         if (fn == "")
         {
             Debug.Log("NotFindRoomPiece " + jobj ["NAME"] + " guid " + jobj ["GUID"]);
@@ -522,11 +524,16 @@ public class MakeSceneEditor : Editor
                 }
             }
         }
+        //Debug.Log("BestMatch:"+bestMatch+":"+name);
+        //return null;
         if (bestMatch != null)
         {
-            var assPath = bestMatch.FullName.Replace(Application.dataPath, "Assets");
+            var assPath = bestMatch.FullName.Replace(Util.GetSystemApplicationDataPath(), "Assets");
             var g = PrefabUtility.InstantiatePrefab(AssetDatabase.LoadAssetAtPath<GameObject>(assPath)) as GameObject;
             return g;
+        }else
+        {
+            Debug.Log("NotFindBestMatch:" + name);
         }
         return null;
     }
@@ -579,7 +586,13 @@ public class MakeSceneEditor : Editor
         var resPath = Path.Combine(Application.dataPath, "prefabs");
         var dir = new DirectoryInfo(resPath);
         var propsPrefab = dir.GetFiles("*.prefab", SearchOption.AllDirectories);
+        System.Array.Sort<FileInfo>(propsPrefab, (a, b) =>
+        {
+            return a.FullName.CompareTo(b.FullName);
+        });
 
+        Debug.LogError("PrefabsNumber:"+propsPrefab.Length);
+        
 
         GameObjectDelegate gg = delegate (string name)
         {
@@ -1138,7 +1151,7 @@ public class MakeSceneEditor : Editor
             {
                 Debug.Log("file is " + file.Name + " " + file.Name);
                 
-                var ass = file.FullName.Replace(Application.dataPath, "Assets");
+                var ass = file.FullName.Replace(Util.GetSystemApplicationDataPath(), "Assets");
                 var res = AssetDatabase.LoadAssetAtPath<GameObject>(ass);
                 res.GetComponent<Renderer>().sharedMaterial.shader = Shader.Find("Custom/lightMapEnv");
                 EditorUtility.SetDirty(res.GetComponent<Renderer>().sharedMaterial);
@@ -1162,7 +1175,7 @@ public class MakeSceneEditor : Editor
             {
                 Debug.Log("file is " + file.Name + " " + file.Name);
                 
-                var ass = file.FullName.Replace(Application.dataPath, "Assets");
+                var ass = file.FullName.Replace(Util.GetSystemApplicationDataPath(), "Assets");
                 var res = AssetDatabase.LoadAssetAtPath<Material>(ass);
 
                 res.shader = Shader.Find("Custom/lightMapEnv");
@@ -1231,7 +1244,7 @@ public class MakeSceneEditor : Editor
         foreach (FileInfo file in fileInfo)
         {
             Debug.Log("file is " + file.Name + " " + file.Name);
-            var ass = file.FullName.Replace(Application.dataPath, "Assets");
+            var ass = file.FullName.Replace(Util.GetSystemApplicationDataPath(), "Assets");
             var import = ModelImporter.GetAtPath(ass) as ModelImporter;
             Debug.Log("import is " + import);
             import.globalScale = 1;
@@ -1264,7 +1277,7 @@ public class MakeSceneEditor : Editor
             Debug.Log("file is " + file.Name + " " + file.Name);
             
             //var ass = Path.Combine("Assets/" + modelStr.stringValue, file.Name);
-            var ass = file.FullName.Replace(Application.dataPath, "Assets");
+            var ass = file.FullName.Replace(Util.GetSystemApplicationDataPath(), "Assets");
             var import = ModelImporter.GetAtPath(ass) as ModelImporter;
             Debug.Log("import is " + import);
             import.globalScale = 1;
@@ -1321,7 +1334,7 @@ public class MakeSceneEditor : Editor
             {
                 npc = true;
             }
-            var path = f.FullName.Replace(Application.dataPath, "Assets");
+            var path = f.FullName.Replace(Util.GetSystemApplicationDataPath(), "Assets");
             var import = ModelImporter.GetAtPath(path) as ModelImporter;
             if (path.Contains("@"))
             {
@@ -1449,7 +1462,7 @@ public class MakeSceneEditor : Editor
                 {
                     if (f.Name.Contains(model))
                     {
-                        prefab = AssetDatabase.LoadAssetAtPath<GameObject>(f.FullName.Replace(Application.dataPath, "Assets"));
+                        prefab = AssetDatabase.LoadAssetAtPath<GameObject>(f.FullName.Replace(Util.GetSystemApplicationDataPath(), "Assets"));
                         break;
                     }
                 }

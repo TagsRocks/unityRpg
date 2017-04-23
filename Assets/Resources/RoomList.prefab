@@ -25,6 +25,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -77,7 +78,12 @@ MonoBehaviour:
     - {fileID: 198480, guid: 471d5b1fbd5cd47379c784b6f93c5b92, type: 2}
     - {fileID: 171456, guid: b5eee892235bb4d24915bf1dd944685d, type: 2}
   - type: snow
-    parts: []
+    parts:
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 1000013332534616, guid: 92087521360dc4d4d90eb49917825306, type: 2}
+    - {fileID: 1000012469879224, guid: f6f10b3ad5a4186428814d471188925b, type: 2}
   - type: suntemple
     parts:
     - {fileID: 172638, guid: 43926b90e4a20495291e68f34549cd1e, type: 2}
@@ -110,4 +116,3 @@ Prefab:
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 144778}
   m_IsPrefabParent: 1
-  m_IsExploded: 1

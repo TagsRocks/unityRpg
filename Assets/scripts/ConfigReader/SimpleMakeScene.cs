@@ -311,18 +311,25 @@ public class SimpleMakeScene : MonoBehaviour
         var plow = p.ToLower();
         foreach (KeyValuePair<string, JSONNode> n in mapObj)
         {
+            var prefabName = n.Value["NAME"].Value;
             var f = n.Value ["FILE"].Value;
             var col = n.Value ["COLLISIONFILE"].Value;
 
             var fpath = ConvertPath(f);
             fpath = fpath.Replace("levelsets", "levelSets");
             var flow = fpath.ToLower();
-
-            Debug.Log("filePath is " + flow);
+            flow = flow.Replace('\\', '/');
+            //Debug.Log("filePath is " + flow);
+            //Debug.Log("PathLow: "+plow);
+            Log.Important("filePath is " + flow);
+            Log.Important("PathLow: " + plow);
             if (flow.Contains(plow))
             {
-                CombineTwo(f, col);
+                CombineTwo(f, col, prefabName);
                 //break;
+            }else
+            {
+                Log.Important("NotFindFilePath:" + flow);
             }
 
         }
@@ -331,11 +338,13 @@ public class SimpleMakeScene : MonoBehaviour
     }
 
     //With Animation
-    GameObject CombineTwo(string f, string col)
+    GameObject CombineTwo(string f, string col, string prefabName)
     {
         Debug.Log("CombineTwo " + f + " col " + col);
 
         var fpath = ConvertPath(f);
+        fpath = fpath.Replace('\\', '/');
+        Debug.Log("FilePath:" + fpath);
         var g = AssetDatabase.LoadAssetAtPath<GameObject>(fpath);
         if (g != null)
         {
@@ -348,6 +357,7 @@ public class SimpleMakeScene : MonoBehaviour
                 if (col != "")
                 {
                     var cp = ConvertPath(col);
+                    Debug.Log("CollisionFile:"+cp);
                     cg = AssetDatabase.LoadAssetAtPath<GameObject>(cp);
                     if (cg != null)
                     {
@@ -355,28 +365,37 @@ public class SimpleMakeScene : MonoBehaviour
                     }
                 }
 
-                var fn = Path.GetFileName(fpath);
-                var prefab = fn.Replace(".fbx", ".prefab");
+                // var fn = Path.GetFileName(fpath);
+                //var prefab = fn.Replace(".fbx", ".prefab");
+                //prefab = prefab.Replace('\\', '/');
+               
+                var prefab = Path.Combine(Path.Combine("Assets/prefabs", combinePath), prefabName + ".prefab");
+               
+                Debug.Log("OldPrefabPath:" + prefab);
                 var oldPrefab = AssetDatabase.LoadAssetAtPath<GameObject>(prefab);
                 if (oldPrefab == null)
                 {
                     var tar = Path.Combine("Assets/prefabs", combinePath);
+                    tar = tar.Replace('\\', '/');
 
                     var tarDir = Path.Combine(Application.dataPath, "prefabs/" + combinePath);
+                    tarDir.Replace('\\', '/');
                     if (!File.Exists(tarDir))
                     {
                         Directory.CreateDirectory(tarDir);
                     }
 
 
-                    tar = Path.Combine(tar, prefab);
+                    //tar = Path.Combine(tar, prefab);
+                    tar = prefab;
+                    tar = tar.Replace('\\', '/');
                     var tg = PrefabUtility.CreatePrefab(tar, g);
                     if (cg != null)
                     {
                         var meshCollider = tg.AddComponent<MeshCollider>();
                         meshCollider.sharedMesh = cg.GetComponent<MeshFilter>().sharedMesh;
                     }
-
+                    Debug.Log("CreatePrefab:" + tar);
                     return tg;
                 } else
                 {
@@ -398,7 +417,7 @@ public class SimpleMakeScene : MonoBehaviour
     string ConvertPath(string f)
     {
         var fpath = Path.Combine("Assets", f.Replace("media/", ""));
-        fpath = fpath.Replace(".mesh", ".fbx");
+        fpath = fpath.Replace(".mesh", ".fbx").Replace('\\', '/');
         return fpath;
     }
 
