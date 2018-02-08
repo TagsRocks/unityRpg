@@ -1,20 +1,15 @@
-##交流qq群
+##Moba版本 
+新开发的Moba版本游戏
 
-390313628
+https://gitee.com/liyonghelpme/MobaKeHuDuan
 
-##unity5 支持
+Moba系统设计视频
 
-点击上面newMaster 旁边的箭头，选择unity5， 下载unity5 分支的代码，这个分支的代码支持unity5 版本
+http://www.taikr.com/course/967
 
-也可以从百度网盘下载
+Moba版本游戏视频
 
-http://pan.baidu.com/s/1dEmj8q9
-
-链接: http://pan.baidu.com/s/1bnQqGer 密码: qwk6
-
-升级详细说明：
-
-####http://www.taikr.com/course/297/learn#lesson/6248
+https://v.qq.com/x/page/w0523vg401v.html
 
 
 ##unityRpg
