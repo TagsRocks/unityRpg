@@ -1,24 +1,7 @@
-##交流qq群
-
-390313628
-
-##unity5 支持
-
-点击上面newMaster 旁边的箭头，选择unity5， 下载unity5 分支的代码，这个分支的代码支持unity5 版本
-
-也可以从百度网盘下载
-
-http://pan.baidu.com/s/1dEmj8q9
-
-链接: http://pan.baidu.com/s/1bnQqGer 密码: qwk6
-
-升级详细说明：
-
-####http://www.taikr.com/course/297/learn#lesson/6248
-
-
 ##unityRpg
+
 Demo 游戏下载地址：
+
 https://itunes.apple.com/cn/app/id1016771030?mt=8
 
 常见报错：
